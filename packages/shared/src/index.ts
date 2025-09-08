@@ -4,6 +4,8 @@ export * from './types';
 // Utils
 export * from './utils/date';
 export * from './utils/export';
+export * from './utils/trip';
+export * from './utils/validation';
 
 // Storage
 export * from './storage/interface';
