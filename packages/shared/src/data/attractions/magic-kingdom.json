@@ -1,0 +1,1746 @@
+[
+  {
+    "id": "space-mountain",
+    "parkId": "magic-kingdom",
+    "name": "Space Mountain",
+    "description": "Blast off on a thrilling indoor roller coaster through space in complete darkness, with only stars and cosmic projections lighting your way.",
+    "duration": 3,
+    "heightRequirement": 44,
+    "location": "Tomorrowland",
+    "type": "ride",
+    "intensity": "high",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "serviceAnimalsAllowed": false,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "space-mountain-tip-1",
+        "content": "Best time to ride is during parades or fireworks when crowds are elsewhere",
+        "category": "best_time",
+        "priority": 5
+      },
+      {
+        "id": "space-mountain-tip-2",
+        "content": "Right side of the rocket tends to be smoother than left side",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "space-mountain-tip-3",
+        "content": "Keep your head back against the headrest to avoid neck strain",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": ["thrill", "dark", "indoor", "classic", "popular"]
+  },
+  {
+    "id": "haunted-mansion",
+    "parkId": "magic-kingdom",
+    "name": "Haunted Mansion",
+    "description": "Tour a ghost-filled mansion in your Doom Buggy and discover 999 happy haunts in this classic Disney dark ride.",
+    "duration": 9,
+    "location": "Liberty Square",
+    "type": "ride",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "haunted-mansion-tip-1",
+        "content": "Look for hidden Mickeys throughout the attraction, especially in the ballroom scene",
+        "category": "photo",
+        "priority": 3
+      },
+      {
+        "id": "haunted-mansion-tip-2",
+        "content": "The stretching room works differently - don't look up too early",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "haunted-mansion-tip-3",
+        "content": "Great alternative during busy times since it has high capacity",
+        "category": "strategy",
+        "priority": 5
+      }
+    ],
+    "tags": ["dark-ride", "family-friendly", "classic", "spooky", "high-capacity"]
+  },
+  {
+    "id": "pirates-of-the-caribbean",
+    "parkId": "magic-kingdom",
+    "name": "Pirates of the Caribbean",
+    "description": "Set sail through a world of swashbuckling pirates and treasure-filled adventures in this immersive boat ride.",
+    "duration": 8,
+    "location": "Adventureland",
+    "type": "ride",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "pirates-tip-1",
+        "content": "Sit on the right side for better views of the auction scene",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "pirates-tip-2",
+        "content": "Watch for the talking skull and crossbones - they give warnings",
+        "category": "general",
+        "priority": 3
+      },
+      {
+        "id": "pirates-tip-3",
+        "content": "Great choice during hot weather - it's air conditioned and cool inside",
+        "category": "best_time",
+        "priority": 4
+      }
+    ],
+    "tags": ["boat-ride", "family-friendly", "classic", "air-conditioned", "immersive"]
+  },
+  {
+    "id": "big-thunder-mountain",
+    "parkId": "magic-kingdom",
+    "name": "Big Thunder Mountain Railroad",
+    "description": "Race through a mining cavern aboard a runaway mine train in the wildest ride in the wilderness.",
+    "duration": 3,
+    "heightRequirement": 40,
+    "location": "Frontierland",
+    "type": "ride",
+    "intensity": "moderate",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "serviceAnimalsAllowed": false,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "big-thunder-tip-1",
+        "content": "Back row provides the best experience with more airtime",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "big-thunder-tip-2",
+        "content": "Look for the goat on the ledges - he's been there since opening day",
+        "category": "photo",
+        "priority": 2
+      },
+      {
+        "id": "big-thunder-tip-3",
+        "content": "Great first coaster for kids - smooth and not too intense",
+        "category": "general",
+        "priority": 4
+      }
+    ],
+    "tags": ["coaster", "family-friendly", "outdoor", "scenic", "moderate-thrill"]
+  },
+  {
+    "id": "jungle-cruise",
+    "parkId": "magic-kingdom",
+    "name": "Jungle Cruise",
+    "description": "Navigate dangerous waters and encounter exotic animals on this classic boat tour with your wise-cracking skipper.",
+    "duration": 10,
+    "location": "Adventureland",
+    "type": "ride",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "jungle-cruise-tip-1",
+        "content": "Each skipper has different jokes - multiple rides can be very different",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "jungle-cruise-tip-2",
+        "content": "Back of the boat gives best views but middle seats are most comfortable",
+        "category": "strategy",
+        "priority": 3
+      },
+      {
+        "id": "jungle-cruise-tip-3",
+        "content": "Skip during busy times - wait can be long for a 10-minute ride",
+        "category": "best_time",
+        "priority": 5
+      }
+    ],
+    "tags": ["boat-ride", "family-friendly", "comedy", "classic", "outdoor"]
+  },
+  {
+    "id": "its-a-small-world",
+    "parkId": "magic-kingdom",
+    "name": "\"it's a small world\"",
+    "description": "Cruise through different countries and cultures while listening to the famous song performed by audio-animatronic dolls.",
+    "duration": 11,
+    "location": "Fantasyland",
+    "type": "ride",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "small-world-tip-1",
+        "content": "Look for hidden Disney characters throughout the ride",
+        "category": "photo",
+        "priority": 3
+      },
+      {
+        "id": "small-world-tip-2",
+        "content": "Great for hot days - fully air conditioned and relaxing",
+        "category": "best_time",
+        "priority": 4
+      },
+      {
+        "id": "small-world-tip-3",
+        "content": "Perfect for all ages and a good rest break",
+        "category": "general",
+        "priority": 4
+      }
+    ],
+    "tags": ["boat-ride", "family-friendly", "classic", "air-conditioned", "relaxing"]
+  },
+  {
+    "id": "seven-dwarfs-mine-train",
+    "parkId": "magic-kingdom",
+    "name": "Seven Dwarfs Mine Train",
+    "description": "Join the Seven Dwarfs on a swaying, musical mine car adventure through the diamond mine from Snow White.",
+    "duration": 3,
+    "heightRequirement": 38,
+    "location": "Fantasyland",
+    "type": "ride",
+    "intensity": "moderate",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "serviceAnimalsAllowed": false,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "seven-dwarfs-tip-1",
+        "content": "Most popular ride in park - get Lightning Lane or rope drop",
+        "category": "best_time",
+        "priority": 5
+      },
+      {
+        "id": "seven-dwarfs-tip-2",
+        "content": "Cars sway side to side - unique experience among Disney coasters",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "seven-dwarfs-tip-3",
+        "content": "Beautiful at night with all the lighting effects",
+        "category": "photo",
+        "priority": 4
+      }
+    ],
+    "tags": ["coaster", "family-friendly", "new", "popular", "immersive"]
+  },
+  {
+    "id": "peter-pans-flight",
+    "parkId": "magic-kingdom",
+    "name": "Peter Pan's Flight",
+    "description": "Soar over London and Neverland in a flying pirate ship on this beloved dark ride through the Peter Pan story.",
+    "duration": 3,
+    "location": "Fantasyland",
+    "type": "ride",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "serviceAnimalsAllowed": false,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "peter-pan-tip-1",
+        "content": "Always has long waits despite being short - use Lightning Lane",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "peter-pan-tip-2",
+        "content": "Flying over London is magical - one of Disney's best dark ride moments",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "peter-pan-tip-3",
+        "content": "Try to ride early morning or during parades",
+        "category": "best_time",
+        "priority": 4
+      }
+    ],
+    "tags": ["dark-ride", "family-friendly", "classic", "popular", "short"]
+  },
+  {
+    "id": "buzz-lightyear",
+    "parkId": "magic-kingdom",
+    "name": "Buzz Lightyear's Space Ranger Spin",
+    "description": "Help Buzz Lightyear defeat Emperor Zurg by shooting targets with laser cannons in this interactive dark ride.",
+    "duration": 4,
+    "location": "Tomorrowland",
+    "type": "ride",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "buzz-tip-1",
+        "content": "Aim for triangular targets for highest points - they're worth 100,000",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "buzz-tip-2",
+        "content": "Car spins 360 degrees - make sure to look everywhere",
+        "category": "general",
+        "priority": 3
+      },
+      {
+        "id": "buzz-tip-3",
+        "content": "Great for competitive families - everyone gets a score",
+        "category": "general",
+        "priority": 4
+      }
+    ],
+    "tags": ["interactive", "family-friendly", "shooting", "competitive", "toy-story"]
+  },
+  {
+    "id": "splash-mountain",
+    "parkId": "magic-kingdom",
+    "name": "Splash Mountain",
+    "description": "Follow Br'er Rabbit on a log flume adventure that ends with a thrilling 5-story drop into the briar patch.",
+    "duration": 11,
+    "heightRequirement": 40,
+    "location": "Frontierland",
+    "type": "ride",
+    "intensity": "moderate",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "serviceAnimalsAllowed": false,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "splash-tip-1",
+        "content": "You will get wet - front seats get wettest, back stays driest",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "splash-tip-2",
+        "content": "Perfect on hot days but avoid when it's cold",
+        "category": "best_time",
+        "priority": 5
+      },
+      {
+        "id": "splash-tip-3",
+        "content": "Photo taken right before the big drop - make it count!",
+        "category": "photo",
+        "priority": 4
+      }
+    ],
+    "tags": ["log-flume", "water-ride", "thrill", "classic", "photo-op"]
+  },
+  {
+    "id": "monsters-inc-laugh-floor",
+    "parkId": "magic-kingdom",
+    "name": "Monsters, Inc. Laugh Floor",
+    "description": "Help Mike Wazowski and the monsters generate laugh power in this interactive comedy show.",
+    "duration": 18,
+    "location": "Tomorrowland",
+    "type": "show",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "laugh-floor-tip-1",
+        "content": "Sit in the middle for best chance of monster interaction",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "laugh-floor-tip-2",
+        "content": "Perfect air-conditioned break during hot days",
+        "category": "best_time",
+        "priority": 4
+      },
+      {
+        "id": "laugh-floor-tip-3",
+        "content": "Text jokes to the number shown before the show starts",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": ["show", "interactive", "air-conditioned", "family-friendly", "comedy"]
+  },
+  {
+    "id": "hall-of-presidents",
+    "parkId": "magic-kingdom",
+    "name": "The Hall of Presidents",
+    "description": "Watch all 45 U.S. Presidents come to life in this inspiring audio-animatronic presentation of American history.",
+    "duration": 23,
+    "location": "Liberty Square",
+    "type": "show",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "hall-presidents-tip-1",
+        "content": "Great way to cool off and rest your feet",
+        "category": "best_time",
+        "priority": 5
+      },
+      {
+        "id": "hall-presidents-tip-2",
+        "content": "May not hold young children's attention - consider skipping with toddlers",
+        "category": "general",
+        "priority": 3
+      },
+      {
+        "id": "hall-presidents-tip-3",
+        "content": "Look for small movements from all the presidents throughout the show",
+        "category": "general",
+        "priority": 2
+      }
+    ],
+    "tags": ["show", "educational", "air-conditioned", "historical", "audio-animatronics"]
+  },
+  {
+    "id": "carousel-of-progress",
+    "parkId": "magic-kingdom",
+    "name": "Walt Disney's Carousel of Progress",
+    "description": "Experience American progress through the 20th century with an audio-animatronic family in this rotating theater show.",
+    "duration": 21,
+    "location": "Tomorrowland",
+    "type": "show",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "carousel-tip-1",
+        "content": "Classic Walt Disney attraction - a piece of Disney history",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "carousel-tip-2",
+        "content": "Rarely has a wait - great anytime you need a break",
+        "category": "best_time",
+        "priority": 5
+      },
+      {
+        "id": "carousel-tip-3",
+        "content": "Listen carefully to the theme song 'There's a Great Big Beautiful Tomorrow'",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": ["show", "classic", "air-conditioned", "historical", "rotating-theater"]
+  },
+  {
+    "id": "mad-tea-party",
+    "parkId": "magic-kingdom",
+    "name": "Mad Tea Party",
+    "description": "Spin around in colorful teacups at this whimsical attraction inspired by Alice in Wonderland.",
+    "duration": 2,
+    "location": "Fantasyland",
+    "type": "ride",
+    "intensity": "moderate",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "serviceAnimalsAllowed": false,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "tea-party-tip-1",
+        "content": "You control how fast you spin - turn the wheel in the center",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "tea-party-tip-2",
+        "content": "Skip if you're prone to motion sickness",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "tea-party-tip-3",
+        "content": "Great for kids but can have long waits for a short ride",
+        "category": "best_time",
+        "priority": 3
+      }
+    ],
+    "tags": ["spinning", "family-friendly", "outdoor", "classic", "alice"]
+  },
+  {
+    "id": "dumbo",
+    "parkId": "magic-kingdom",
+    "name": "Dumbo the Flying Elephant",
+    "description": "Soar through the sky on the back of everyone's favorite flying elephant in this classic kiddie ride.",
+    "duration": 2,
+    "location": "Fantasyland",
+    "type": "ride",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "serviceAnimalsAllowed": false,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "dumbo-tip-1",
+        "content": "Use the pager system - grab a pager instead of standing in line",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "dumbo-tip-2",
+        "content": "You control how high you fly with the joystick",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "dumbo-tip-3",
+        "content": "Great views of Fantasyland from the top",
+        "category": "photo",
+        "priority": 3
+      }
+    ],
+    "tags": ["kiddie-ride", "family-friendly", "outdoor", "classic", "views"]
+  },
+  {
+    "id": "astro-orbitor",
+    "parkId": "magic-kingdom",
+    "name": "Astro Orbitor",
+    "description": "Pilot your own rocket ship high above Tomorrowland in this spinning ride with great views.",
+    "duration": 2,
+    "location": "Tomorrowland",
+    "type": "ride",
+    "intensity": "moderate",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "serviceAnimalsAllowed": false,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "astro-tip-1",
+        "content": "Best views in Magic Kingdom from the highest position",
+        "category": "photo",
+        "priority": 4
+      },
+      {
+        "id": "astro-tip-2",
+        "content": "Can be scary for young kids due to height",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "astro-tip-3",
+        "content": "Long load time - usually not worth the wait",
+        "category": "best_time",
+        "priority": 3
+      }
+    ],
+    "tags": ["spinning", "family-friendly", "outdoor", "views", "height"]
+  },
+  {
+    "id": "magic-carpets",
+    "parkId": "magic-kingdom",
+    "name": "The Magic Carpets of Aladdin",
+    "description": "Take flight on a colorful magic carpet while avoiding the spitting camels below.",
+    "duration": 2,
+    "location": "Adventureland",
+    "type": "ride",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "serviceAnimalsAllowed": false,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "carpets-tip-1",
+        "content": "Watch out for the spitting camels - they really spray water!",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "carpets-tip-2",
+        "content": "Similar to Dumbo but with water effects",
+        "category": "strategy",
+        "priority": 3
+      },
+      {
+        "id": "carpets-tip-3",
+        "content": "Front seat controls up/down, back seat controls tilt",
+        "category": "strategy",
+        "priority": 4
+      }
+    ],
+    "tags": ["kiddie-ride", "family-friendly", "outdoor", "water-effects", "aladdin"]
+  },
+  {
+    "id": "tomorrowland-peoplemover",
+    "parkId": "magic-kingdom",
+    "name": "Tomorrowland Transit Authority PeopleMover",
+    "description": "Take a relaxing elevated tour of Tomorrowland on this slow-moving transportation system.",
+    "duration": 10,
+    "location": "Tomorrowland",
+    "type": "ride",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "peoplemover-tip-1",
+        "content": "Perfect for rest breaks - rarely has a wait and fully air-conditioned",
+        "category": "best_time",
+        "priority": 5
+      },
+      {
+        "id": "peoplemover-tip-2",
+        "content": "Great views inside Space Mountain and other Tomorrowland attractions",
+        "category": "photo",
+        "priority": 4
+      },
+      {
+        "id": "peoplemover-tip-3",
+        "content": "Walt Disney originally envisioned this as transportation for EPCOT",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": ["transportation", "relaxing", "air-conditioned", "classic", "views"]
+  },
+  {
+    "id": "tomorrowland-speedway",
+    "parkId": "magic-kingdom",
+    "name": "Tomorrowland Speedway",
+    "description": "Race around a track in your own gas-powered Indy-style race car on this classic attraction.",
+    "duration": 4,
+    "heightRequirement": 32,
+    "location": "Tomorrowland",
+    "type": "ride",
+    "intensity": "moderate",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "serviceAnimalsAllowed": false,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "speedway-tip-1",
+        "content": "Cars are on rails but you can make them go faster by pressing the pedal harder",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "speedway-tip-2",
+        "content": "Can be very loud and smelly - not ideal for sensitive guests",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "speedway-tip-3",
+        "content": "Often has long waits for what it offers - consider Lightning Lane",
+        "category": "best_time",
+        "priority": 3
+      }
+    ],
+    "tags": ["driving", "outdoor", "classic", "loud", "gas-powered"]
+  },
+  {
+    "id": "under-the-sea",
+    "parkId": "magic-kingdom",
+    "name": "Under the Sea ~ Journey of The Little Mermaid",
+    "description": "Join Ariel and friends in a musical adventure through the story of The Little Mermaid.",
+    "duration": 6,
+    "location": "Fantasyland",
+    "type": "ride",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "little-mermaid-tip-1",
+        "content": "High capacity ride with typically short waits",
+        "category": "best_time",
+        "priority": 5
+      },
+      {
+        "id": "little-mermaid-tip-2",
+        "content": "Look for Sebastian and Flounder throughout the underwater scenes",
+        "category": "photo",
+        "priority": 3
+      },
+      {
+        "id": "little-mermaid-tip-3",
+        "content": "Great for all ages and perfect introduction to Disney dark rides",
+        "category": "general",
+        "priority": 4
+      }
+    ],
+    "tags": ["dark-ride", "family-friendly", "musical", "little-mermaid", "high-capacity"]
+  },
+  {
+    "id": "enchanted-tales-with-belle",
+    "parkId": "magic-kingdom",
+    "name": "Enchanted Tales with Belle",
+    "description": "Help Belle tell the story of Beauty and the Beast in this interactive storytelling experience.",
+    "duration": 20,
+    "location": "Fantasyland",
+    "type": "show",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "belle-tip-1",
+        "content": "Kids get to participate as characters in the story",
+        "category": "general",
+        "priority": 5
+      },
+      {
+        "id": "belle-tip-2",
+        "content": "Beautiful detailed queue with interactive elements",
+        "category": "photo",
+        "priority": 4
+      },
+      {
+        "id": "belle-tip-3",
+        "content": "Great for toddlers and preschoolers who love Belle",
+        "category": "strategy",
+        "priority": 4
+      }
+    ],
+    "tags": ["interactive", "character-meet", "beauty-beast", "family-friendly", "storytelling"]
+  },
+  {
+    "id": "be-our-guest",
+    "parkId": "magic-kingdom",
+    "name": "Be Our Guest Restaurant",
+    "description": "Dine in the Beast's enchanted castle in this popular table service restaurant with three themed rooms.",
+    "duration": 90,
+    "location": "Fantasyland",
+    "type": "dining",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "be-our-guest-tip-1",
+        "content": "Advance dining reservations required - book 60 days ahead",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "be-our-guest-tip-2",
+        "content": "West Wing has the rose and Beast's portrait - most atmospheric",
+        "category": "photo",
+        "priority": 4
+      },
+      {
+        "id": "be-our-guest-tip-3",
+        "content": "Try the grey stuff - it's delicious (don't believe them? Ask the dishes)",
+        "category": "dining",
+        "priority": 5
+      }
+    ],
+    "tags": ["table-service", "beauty-beast", "reservations", "upscale", "themed"]
+  },
+  {
+    "id": "cinderella-royal-table",
+    "parkId": "magic-kingdom",
+    "name": "Cinderella's Royal Table",
+    "description": "Dine with Disney Princesses inside Cinderella Castle in this premium character dining experience.",
+    "duration": 90,
+    "location": "Fantasyland",
+    "type": "dining",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "royal-table-tip-1",
+        "content": "Most expensive character meal at Disney - book early, it fills fast",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "royal-table-tip-2",
+        "content": "Each guest gets a photo with Cinderella before being seated",
+        "category": "photo",
+        "priority": 5
+      },
+      {
+        "id": "royal-table-tip-3",
+        "content": "Multiple princesses visit each table throughout the meal",
+        "category": "general",
+        "priority": 4
+      }
+    ],
+    "tags": ["character-dining", "princesses", "castle", "upscale", "premium"]
+  },
+  {
+    "id": "crystal-palace",
+    "parkId": "magic-kingdom",
+    "name": "The Crystal Palace",
+    "description": "Buffet character dining with Winnie the Pooh and friends in this beautiful Victorian conservatory.",
+    "duration": 75,
+    "location": "Main Street U.S.A.",
+    "type": "dining",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "crystal-palace-tip-1",
+        "content": "Great for families with picky eaters - lots of buffet options",
+        "category": "dining",
+        "priority": 4
+      },
+      {
+        "id": "crystal-palace-tip-2",
+        "content": "Pooh, Tigger, Piglet, and Eeyore all visit tables",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "crystal-palace-tip-3",
+        "content": "Beautiful natural lighting - great for photos",
+        "category": "photo",
+        "priority": 3
+      }
+    ],
+    "tags": ["character-dining", "buffet", "winnie-pooh", "family-friendly", "main-street"]
+  },
+  {
+    "id": "main-street-vehicles",
+    "parkId": "magic-kingdom",
+    "name": "Main Street Vehicles",
+    "description": "Take a one-way trip down Main Street U.S.A. in vintage vehicles including trolleys, omnibuses, and fire engines.",
+    "duration": 5,
+    "location": "Main Street U.S.A.",
+    "type": "transportation",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "main-street-vehicles-tip-1",
+        "content": "Only run during less busy times and may close due to crowds",
+        "category": "best_time",
+        "priority": 4
+      },
+      {
+        "id": "main-street-vehicles-tip-2",
+        "content": "Great photo opportunity and vintage Disney charm",
+        "category": "photo",
+        "priority": 4
+      },
+      {
+        "id": "main-street-vehicles-tip-3",
+        "content": "One-way only from Town Square to Central Plaza",
+        "category": "strategy",
+        "priority": 3
+      }
+    ],
+    "tags": ["transportation", "vintage", "main-street", "photo-op", "classic"]
+  },
+  {
+    "id": "walt-disney-railroad",
+    "parkId": "magic-kingdom",
+    "name": "Walt Disney World Railroad",
+    "description": "Take a scenic train ride around Magic Kingdom with stops at Main Street, Frontierland, and Fantasyland.",
+    "duration": 20,
+    "location": "Main Street U.S.A.",
+    "type": "transportation",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "railroad-tip-1",
+        "content": "Great way to rest your feet and see the park from different angles",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "railroad-tip-2",
+        "content": "Full loop takes 20 minutes, or hop off at any of the three stations",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "railroad-tip-3",
+        "content": "Best views of the park's backstage areas during the ride",
+        "category": "photo",
+        "priority": 3
+      }
+    ],
+    "tags": ["transportation", "scenic", "relaxing", "classic", "multi-station"]
+  },
+  {
+    "id": "country-bear-jamboree",
+    "parkId": "magic-kingdom",
+    "name": "Country Bear Jamboree",
+    "description": "Enjoy a toe-tapping musical revue featuring 18 audio-animatronic bears and their country music show.",
+    "duration": 16,
+    "location": "Frontierland",
+    "type": "show",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "country-bears-tip-1",
+        "content": "Classic Disney attraction with old-school animatronics charm",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "country-bears-tip-2",
+        "content": "Great air-conditioned break during hot days",
+        "category": "best_time",
+        "priority": 5
+      },
+      {
+        "id": "country-bears-tip-3",
+        "content": "Watch for Max, Buff, and Melvin - the heads mounted on the wall",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": ["show", "audio-animatronics", "country-music", "air-conditioned", "classic"]
+  },
+  {
+    "id": "tom-sawyer-island",
+    "parkId": "magic-kingdom",
+    "name": "Tom Sawyer Island",
+    "description": "Explore caves, bridges, and Fort Langhorn on this interactive playground island accessible only by raft.",
+    "duration": 45,
+    "location": "Frontierland",
+    "type": "experience",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "tom-sawyer-tip-1",
+        "content": "Great place to let kids burn energy and explore freely",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "tom-sawyer-tip-2",
+        "content": "Closes at sunset - plan accordingly",
+        "category": "best_time",
+        "priority": 4
+      },
+      {
+        "id": "tom-sawyer-tip-3",
+        "content": "Bring water - lots of walking and climbing with limited shade",
+        "category": "general",
+        "priority": 4
+      }
+    ],
+    "tags": ["playground", "interactive", "outdoor", "adventure", "kids"]
+  },
+  {
+    "id": "liberty-square-riverboat",
+    "parkId": "magic-kingdom",
+    "name": "Liberty Square Riverboat",
+    "description": "Take a peaceful cruise around Tom Sawyer Island aboard an authentic steam-powered riverboat.",
+    "duration": 17,
+    "location": "Liberty Square",
+    "type": "ride",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "riverboat-tip-1",
+        "content": "Upper deck offers better views but can be hot in summer",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "riverboat-tip-2",
+        "content": "Great for relaxing and seeing the park from the water",
+        "category": "best_time",
+        "priority": 4
+      },
+      {
+        "id": "riverboat-tip-3",
+        "content": "Real steam engine - one of the few authentic steamboats in operation",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": ["boat-ride", "scenic", "relaxing", "historic", "steam-powered"]
+  },
+  {
+    "id": "mickeys-philharmagic",
+    "parkId": "magic-kingdom",
+    "name": "Mickey's PhilharMagic",
+    "description": "Experience a 4D musical adventure with Mickey Mouse and classic Disney characters in this 3D film attraction.",
+    "duration": 12,
+    "location": "Fantasyland",
+    "type": "show",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "philharmagic-tip-1",
+        "content": "Features classic Disney songs and beloved characters",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "philharmagic-tip-2",
+        "content": "Perfect air-conditioned break with rarely long waits",
+        "category": "best_time",
+        "priority": 5
+      },
+      {
+        "id": "philharmagic-tip-3",
+        "content": "Includes 4D effects like scents and water sprays",
+        "category": "general",
+        "priority": 4
+      }
+    ],
+    "tags": ["3d-show", "air-conditioned", "musical", "mickey-mouse", "4d-effects"]
+  },
+  {
+    "id": "meet-mickey-town-square",
+    "parkId": "magic-kingdom",
+    "name": "Town Square Theater - Meet Mickey Mouse",
+    "description": "Meet Mickey Mouse in his magician outfit in an air-conditioned theater on Main Street.",
+    "duration": 5,
+    "location": "Main Street U.S.A.",
+    "type": "character-meet",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "meet-mickey-tip-1",
+        "content": "Only place to meet Mickey Mouse at Magic Kingdom",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "meet-mickey-tip-2",
+        "content": "Air-conditioned with comfortable waiting area",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "meet-mickey-tip-3",
+        "content": "PhotoPass photographers available for professional photos",
+        "category": "photo",
+        "priority": 4
+      }
+    ],
+    "tags": ["character-meet", "mickey-mouse", "air-conditioned", "photo-op", "must-do"]
+  },
+  {
+    "id": "meet-tinker-bell",
+    "parkId": "magic-kingdom",
+    "name": "Meet Tinker Bell at Town Square Theater",
+    "description": "Meet Tinker Bell in her pixie hollow setting at Town Square Theater.",
+    "duration": 5,
+    "location": "Main Street U.S.A.",
+    "type": "character-meet",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "meet-tinkerbell-tip-1",
+        "content": "Shares the theater with Mickey - check operating schedule",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "meet-tinkerbell-tip-2",
+        "content": "Beautiful pixie hollow backdrop for photos",
+        "category": "photo",
+        "priority": 4
+      },
+      {
+        "id": "meet-tinkerbell-tip-3",
+        "content": "She may sprinkle pixie dust on young guests",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": ["character-meet", "tinker-bell", "air-conditioned", "pixie-dust", "fairy"]
+  },
+  {
+    "id": "meet-princess-fairytale-hall",
+    "parkId": "magic-kingdom",
+    "name": "Princess Fairytale Hall",
+    "description": "Meet Disney Princesses in their royal reception room in Fantasyland.",
+    "duration": 5,
+    "location": "Fantasyland",
+    "type": "character-meet",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "princess-hall-tip-1",
+        "content": "Rotating roster of princesses - check app for current lineup",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "princess-hall-tip-2",
+        "content": "Two separate lines for different princess pairs",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "princess-hall-tip-3",
+        "content": "Beautiful throne room settings for photos",
+        "category": "photo",
+        "priority": 4
+      }
+    ],
+    "tags": ["character-meet", "princesses", "air-conditioned", "rotating", "throne-room"]
+  },
+  {
+    "id": "meet-rapunzel-flynn",
+    "parkId": "magic-kingdom",
+    "name": "Meet Rapunzel and Flynn Rider",
+    "description": "Meet Rapunzel and Flynn Rider in their tower setting in Fantasyland.",
+    "duration": 5,
+    "location": "Fantasyland",
+    "type": "character-meet",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "rapunzel-tip-1",
+        "content": "Both characters meet together in the same location",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "rapunzel-tip-2",
+        "content": "Tower setting matches the movie perfectly",
+        "category": "photo",
+        "priority": 4
+      },
+      {
+        "id": "rapunzel-tip-3",
+        "content": "Flynn often has funny interactions with guests",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": ["character-meet", "rapunzel", "tangled", "couples", "tower"]
+  },
+  {
+    "id": "meet-ariel",
+    "parkId": "magic-kingdom",
+    "name": "Ariel's Grotto",
+    "description": "Meet Princess Ariel in her underwater grotto in Fantasyland.",
+    "duration": 5,
+    "location": "Fantasyland",
+    "type": "character-meet",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "ariel-tip-1",
+        "content": "Ariel sits on a rock and can't walk around like other princesses",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "ariel-tip-2",
+        "content": "Beautiful underwater grotto theming",
+        "category": "photo",
+        "priority": 4
+      },
+      {
+        "id": "ariel-tip-3",
+        "content": "Usually shorter waits than other princess meets",
+        "category": "best_time",
+        "priority": 3
+      }
+    ],
+    "tags": ["character-meet", "ariel", "little-mermaid", "grotto", "underwater"]
+  },
+  {
+    "id": "meet-gaston",
+    "parkId": "magic-kingdom",
+    "name": "Meet Gaston",
+    "description": "Meet the boastful Gaston outside his tavern in the Beast's village in Fantasyland.",
+    "duration": 5,
+    "location": "Fantasyland",
+    "type": "character-meet",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "gaston-tip-1",
+        "content": "Gaston is hilarious and stays in character perfectly",
+        "category": "general",
+        "priority": 5
+      },
+      {
+        "id": "gaston-tip-2",
+        "content": "Great for arm wrestling photos and flexing contests",
+        "category": "photo",
+        "priority": 4
+      },
+      {
+        "id": "gaston-tip-3",
+        "content": "Outdoor meet - can be hot in summer",
+        "category": "best_time",
+        "priority": 3
+      }
+    ],
+    "tags": ["character-meet", "gaston", "beauty-beast", "funny", "outdoor"]
+  },
+  {
+    "id": "dole-whip",
+    "parkId": "magic-kingdom",
+    "name": "Aloha Isle - Dole Whip",
+    "description": "Get the famous pineapple Dole Whip soft serve treat at this Adventureland snack stand.",
+    "duration": 5,
+    "location": "Adventureland",
+    "type": "dining",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "dole-whip-tip-1",
+        "content": "Perfect treat for hot Florida days - refreshing and dairy-free",
+        "category": "dining",
+        "priority": 5
+      },
+      {
+        "id": "dole-whip-tip-2",
+        "content": "Try the float version with pineapple juice",
+        "category": "dining",
+        "priority": 4
+      },
+      {
+        "id": "dole-whip-tip-3",
+        "content": "Often has long lines - consider mobile ordering",
+        "category": "strategy",
+        "priority": 4
+      }
+    ],
+    "tags": ["snack", "dole-whip", "refreshing", "dairy-free", "iconic"]
+  },
+  {
+    "id": "swiss-family-treehouse",
+    "parkId": "magic-kingdom",
+    "name": "Swiss Family Treehouse",
+    "description": "Explore the Robinson family's treehouse home with multiple levels, rooms, and ingenious inventions.",
+    "duration": 15,
+    "location": "Adventureland",
+    "type": "walkthrough",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": false,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "treehouse-tip-1",
+        "content": "Lots of stairs and climbing - not suitable for mobility issues",
+        "category": "accessibility",
+        "priority": 5
+      },
+      {
+        "id": "treehouse-tip-2",
+        "content": "Great details throughout - look for the ingenious water system",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "treehouse-tip-3",
+        "content": "Usually no wait and great way to escape crowds",
+        "category": "best_time",
+        "priority": 4
+      }
+    ],
+    "tags": ["walkthrough", "treehouse", "self-paced", "detailed", "stairs"]
+  },
+  {
+    "id": "barnstormer",
+    "parkId": "magic-kingdom",
+    "name": "The Barnstormer",
+    "description": "Take flight with Goofy on this kid-friendly roller coaster in the Storybook Circus area.",
+    "duration": 1,
+    "heightRequirement": 35,
+    "location": "Fantasyland",
+    "type": "ride",
+    "intensity": "moderate",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "serviceAnimalsAllowed": false,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "barnstormer-tip-1",
+        "content": "Perfect first roller coaster for young kids",
+        "category": "general",
+        "priority": 5
+      },
+      {
+        "id": "barnstormer-tip-2",
+        "content": "Very short ride - often not worth long waits",
+        "category": "best_time",
+        "priority": 4
+      },
+      {
+        "id": "barnstormer-tip-3",
+        "content": "Great views of Fantasyland from the top",
+        "category": "photo",
+        "priority": 3
+      }
+    ],
+    "tags": ["kiddie-coaster", "goofy", "short", "family-friendly", "first-coaster"]
+  },
+  {
+    "id": "meet-donald-pete",
+    "parkId": "magic-kingdom",
+    "name": "Meet Donald and Pete's Silly Sideshow",
+    "description": "Meet Donald Duck and Pete in their circus performer outfits in the Storybook Circus area.",
+    "duration": 5,
+    "location": "Fantasyland",
+    "type": "character-meet",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "silly-sideshow-tip-1",
+        "content": "Two separate lines - one for Donald, one for other characters",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "silly-sideshow-tip-2",
+        "content": "Air-conditioned tent - comfortable waiting",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "silly-sideshow-tip-3",
+        "content": "Characters rotate throughout the day",
+        "category": "strategy",
+        "priority": 3
+      }
+    ],
+    "tags": ["character-meet", "donald-duck", "circus", "air-conditioned", "rotating"]
+  },
+  {
+    "id": "haunted-mansion-queue",
+    "parkId": "magic-kingdom",
+    "name": "Haunted Mansion Interactive Queue",
+    "description": "Experience spooky interactive elements in the Haunted Mansion's extended outdoor queue area.",
+    "duration": 10,
+    "location": "Liberty Square",
+    "type": "experience",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "hm-queue-tip-1",
+        "content": "Interactive tombstones and crypts respond to touch",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "hm-queue-tip-2",
+        "content": "Look for the sea captain's tomb - it has a great effect",
+        "category": "photo",
+        "priority": 3
+      },
+      {
+        "id": "hm-queue-tip-3",
+        "content": "Only active when wait times are long enough",
+        "category": "strategy",
+        "priority": 3
+      }
+    ],
+    "tags": ["interactive", "queue", "spooky", "haunted-mansion", "touchscreen"]
+  },
+  {
+    "id": "main-street-trolley-show",
+    "parkId": "magic-kingdom",
+    "name": "Main Street Trolley Show",
+    "description": "Catch impromptu musical performances on Main Street featuring Disney characters.",
+    "duration": 10,
+    "location": "Main Street U.S.A.",
+    "type": "entertainment",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "trolley-show-tip-1",
+        "content": "Spontaneous performances - check Times Guide for schedule",
+        "category": "best_time",
+        "priority": 4
+      },
+      {
+        "id": "trolley-show-tip-2",
+        "content": "Great spot to see characters without formal meet and greets",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "trolley-show-tip-3",
+        "content": "Usually happens near the train station",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": ["entertainment", "characters", "spontaneous", "main-street", "musical"]
+  },
+  {
+    "id": "fireworks-castle",
+    "parkId": "magic-kingdom",
+    "name": "Disney Enchantment Fireworks",
+    "description": "Spectacular fireworks show with projections on Cinderella Castle featuring Disney music and stories.",
+    "duration": 15,
+    "location": "Central Plaza",
+    "type": "entertainment",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "fireworks-tip-1",
+        "content": "Best viewing is in Central Plaza or Main Street - arrive 60+ minutes early",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "fireworks-tip-2",
+        "content": "FastPass+ viewing areas available for reserved spots",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "fireworks-tip-3",
+        "content": "Stay for the kiss goodnight - additional brief show after fireworks",
+        "category": "general",
+        "priority": 4
+      }
+    ],
+    "tags": ["fireworks", "castle", "nighttime", "spectacular", "must-see"]
+  },
+  {
+    "id": "electric-parade",
+    "parkId": "magic-kingdom",
+    "name": "Disney's Electrical Parade",
+    "description": "Classic nighttime parade featuring Disney characters on illuminated floats with the famous Baroque Hoedown music.",
+    "duration": 20,
+    "location": "Main Street U.S.A.",
+    "type": "entertainment",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "electrical-parade-tip-1",
+        "content": "Find viewing spots 45+ minutes early for best spots",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "electrical-parade-tip-2",
+        "content": "Parade route goes from Frontierland to Main Street",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "electrical-parade-tip-3",
+        "content": "Classic Disney experience - been running since 1977",
+        "category": "general",
+        "priority": 4
+      }
+    ],
+    "tags": ["parade", "nighttime", "classic", "electrical", "iconic"]
+  },
+  {
+    "id": "festival-of-fantasy",
+    "parkId": "magic-kingdom",
+    "name": "Disney Festival of Fantasy Parade",
+    "description": "Daytime parade celebrating Disney stories with elaborate floats, costumes, and music.",
+    "duration": 12,
+    "location": "Main Street U.S.A.",
+    "type": "entertainment",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "fantasy-parade-tip-1",
+        "content": "Maleficent dragon float breathes real fire - spectacular finale",
+        "category": "photo",
+        "priority": 5
+      },
+      {
+        "id": "fantasy-parade-tip-2",
+        "content": "Find spots 30 minutes early for front row viewing",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "fantasy-parade-tip-3",
+        "content": "Features characters from many different Disney movies",
+        "category": "general",
+        "priority": 4
+      }
+    ],
+    "tags": ["parade", "daytime", "elaborate", "maleficent", "dragon"]
+  },
+  {
+    "id": "plaza-restaurant",
+    "parkId": "magic-kingdom",
+    "name": "The Plaza Restaurant",
+    "description": "Victorian-style restaurant on Main Street serving sandwiches, salads, and classic American fare.",
+    "duration": 60,
+    "location": "Main Street U.S.A.",
+    "type": "dining",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "plaza-tip-1",
+        "content": "Great central location with air conditioning",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "plaza-tip-2",
+        "content": "Famous for their sandwiches and milkshakes",
+        "category": "dining",
+        "priority": 4
+      },
+      {
+        "id": "plaza-tip-3",
+        "content": "Advance reservations recommended",
+        "category": "strategy",
+        "priority": 3
+      }
+    ],
+    "tags": ["table-service", "american", "main-street", "classic", "air-conditioned"]
+  },
+  {
+    "id": "liberty-tree-tavern",
+    "parkId": "magic-kingdom",
+    "name": "Liberty Tree Tavern",
+    "description": "Colonial-themed restaurant in Liberty Square serving traditional American cuisine.",
+    "duration": 75,
+    "location": "Liberty Square",
+    "type": "dining",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "liberty-tree-tip-1",
+        "content": "Dinner is all-you-can-eat family style with turkey, stuffing, and sides",
+        "category": "dining",
+        "priority": 5
+      },
+      {
+        "id": "liberty-tree-tip-2",
+        "content": "Lunch is à la carte with sandwiches and salads",
+        "category": "dining",
+        "priority": 4
+      },
+      {
+        "id": "liberty-tree-tip-3",
+        "content": "Beautiful colonial theming and historical decor",
+        "category": "photo",
+        "priority": 3
+      }
+    ],
+    "tags": ["table-service", "colonial", "family-style", "turkey", "historical"]
+  }]

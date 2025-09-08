@@ -10,6 +10,9 @@ export * from './utils/validation';
 // Storage
 export * from './storage/interface';
 
+// Static Content Data
+export * from './data';
+
 // Constants
 export const APP_NAME = 'Waylight';
 export const APP_VERSION = '1.0.0';

@@ -1,0 +1,9 @@
+{
+  "id": "magic-kingdom",
+  "name": "Magic Kingdom",
+  "abbreviation": "MK",
+  "location": "Walt Disney World Resort, Orlando, FL",
+  "description": "The most magical place on earth, featuring classic Disney attractions, beloved characters, and timeless stories brought to life across six themed lands.",
+  "openingTime": "09:00",
+  "closingTime": "22:00"
+}
