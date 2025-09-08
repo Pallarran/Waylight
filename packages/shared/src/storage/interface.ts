@@ -1,0 +1,58 @@
+import type { Trip, Attraction, Park, Settings } from '../types';
+
+export interface StorageAdapter {
+  // Trips
+  getTrips(): Promise<Trip[]>;
+  getTrip(id: string): Promise<Trip | null>;
+  saveTrip(trip: Trip): Promise<void>;
+  deleteTrip(id: string): Promise<void>;
+  
+  // Parks
+  getParks(): Promise<Park[]>;
+  getPark(id: string): Promise<Park | null>;
+  
+  // Attractions
+  getAttractions(parkId?: string): Promise<Attraction[]>;
+  getAttraction(id: string): Promise<Attraction | null>;
+  searchAttractions(query: string, parkId?: string): Promise<Attraction[]>;
+  
+  // Settings
+  getSettings(): Promise<Settings>;
+  saveSettings(settings: Settings): Promise<void>;
+  
+  // Utility
+  clear(): Promise<void>;
+  export(): Promise<string>;
+  import(data: string): Promise<void>;
+}
+
+export abstract class BaseStorageAdapter implements StorageAdapter {
+  abstract getTrips(): Promise<Trip[]>;
+  abstract getTrip(id: string): Promise<Trip | null>;
+  abstract saveTrip(trip: Trip): Promise<void>;
+  abstract deleteTrip(id: string): Promise<void>;
+  
+  abstract getParks(): Promise<Park[]>;
+  abstract getPark(id: string): Promise<Park | null>;
+  
+  abstract getAttractions(parkId?: string): Promise<Attraction[]>;
+  abstract getAttraction(id: string): Promise<Attraction | null>;
+  
+  abstract getSettings(): Promise<Settings>;
+  abstract saveSettings(settings: Settings): Promise<void>;
+  
+  abstract clear(): Promise<void>;
+  abstract export(): Promise<string>;
+  abstract import(data: string): Promise<void>;
+  
+  async searchAttractions(query: string, parkId?: string): Promise<Attraction[]> {
+    const attractions = await this.getAttractions(parkId);
+    const searchTerm = query.toLowerCase();
+    
+    return attractions.filter(attraction => 
+      attraction.name.toLowerCase().includes(searchTerm) ||
+      attraction.description.toLowerCase().includes(searchTerm) ||
+      attraction.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+    );
+  }
+}

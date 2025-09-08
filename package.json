@@ -1,0 +1,64 @@
+{
+  "name": "waylight",
+  "version": "1.0.0",
+  "description": "A theme park planning app that helps visitors plan and manage their days with clarity and calm",
+  "private": true,
+  "packageManager": "pnpm@8.15.0",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "type-check": "turbo type-check",
+    "clean": "turbo clean",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "shared:build": "pnpm --filter @waylight/shared build",
+    "shared:dev": "pnpm --filter @waylight/shared dev",
+    "web:dev": "pnpm --filter @waylight/web dev",
+    "web:build": "pnpm --filter @waylight/web build",
+    "web:preview": "pnpm --filter @waylight/web preview",
+    "mobile:start": "pnpm --filter @waylight/mobile start",
+    "mobile:ios": "pnpm --filter @waylight/mobile ios",
+    "mobile:android": "pnpm --filter @waylight/mobile android",
+    "install:all": "pnpm install",
+    "reset": "pnpm clean && rm -rf node_modules && rm -rf packages/*/node_modules && pnpm install"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "prettier": "^3.2.4",
+    "prettier-plugin-tailwindcss": "^0.5.11",
+    "turbo": "^1.12.1",
+    "typescript": "^5.3.3"
+  },
+  "keywords": [
+    "theme-park",
+    "travel",
+    "planning",
+    "disney",
+    "mobile-app",
+    "web-app",
+    "react",
+    "react-native",
+    "offline-first"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pallarran/Waylight.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Pallarran/Waylight/issues"
+  },
+  "homepage": "https://github.com/Pallarran/Waylight#readme",
+  "license": "MIT",
+  "author": "Waylight Team"
+}
