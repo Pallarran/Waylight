@@ -9,7 +9,8 @@
     "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "strict": true
+    "strict": true,
+    "tsBuildInfoFile": ".tsc-cache/mobile.tsbuildinfo"
   },
   "include": ["src"],
   "references": [{ "path": "../shared" }]
