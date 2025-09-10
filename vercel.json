@@ -1,9 +1,7 @@
 {
-  "version": 2,
   "buildCommand": "pnpm --filter @waylight/shared build && pnpm --filter @waylight/web build",
-  "devCommand": "cd packages/web && pnpm dev",
+  "outputDirectory": "packages/web/dist", 
   "installCommand": "pnpm install",
-  "outputDirectory": "packages/web/dist",
   "framework": null,
   "routes": [
     {
