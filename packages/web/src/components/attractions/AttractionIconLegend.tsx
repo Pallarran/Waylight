@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Info, X } from 'lucide-react';
 import { ATTRACTION_ICONS } from '../../utils/attractionIcons';
 
@@ -11,8 +10,8 @@ export default function AttractionIconLegend({ isOpen, onClose }: AttractionIcon
   if (!isOpen) return null;
 
   // Separate icons by tier
-  const tier1Icons = Object.entries(ATTRACTION_ICONS).filter(([_, icon]) => icon.tier === 1);
-  const tier2IconsRaw = Object.entries(ATTRACTION_ICONS).filter(([_, icon]) => icon.tier === 2);
+  const tier1Icons = Object.entries(ATTRACTION_ICONS).filter(([, icon]) => icon.tier === 1);
+  const tier2IconsRaw = Object.entries(ATTRACTION_ICONS).filter(([, icon]) => icon.tier === 2);
   
   // Sort tier 2 icons to prioritize Lightning Lane icons (Single Pass first, then Multi Pass)
   const lightningLaneOrder = ['hasIndividualLL', 'hasLightningLane'];

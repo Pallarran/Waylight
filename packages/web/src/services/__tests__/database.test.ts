@@ -300,7 +300,7 @@ describe('Database Integration Tests', () => {
           // This should fail and rollback the transaction
           throw new Error('Simulated error');
         });
-      } catch (error) {
+      } catch {
         // Transaction should have rolled back
       }
       

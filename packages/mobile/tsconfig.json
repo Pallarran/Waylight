@@ -12,6 +12,6 @@
     "strict": true,
     "tsBuildInfoFile": ".tsc-cache/mobile.tsbuildinfo"
   },
-  "include": ["src"],
+  "include": ["src", "App.tsx"],
   "references": [{ "path": "../shared" }]
 }

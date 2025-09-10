@@ -10,7 +10,9 @@ interface AttractionCardProps {
   showTips?: boolean;
 }
 
-export default function AttractionCard({ attraction, showAddToTrip = true, showTips = true }: AttractionCardProps) {
+export default function AttractionCard({ attraction, showAddToTrip: _showAddToTrip = true, showTips = true }: AttractionCardProps) {
+  // Suppress unused variable warning for future implementation
+  void _showAddToTrip;
   const [showDetailModal, setShowDetailModal] = useState(false);
 
   const getIntensityColor = (intensity: string) => {

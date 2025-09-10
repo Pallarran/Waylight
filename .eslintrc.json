@@ -70,6 +70,10 @@
     "coverage",
     "*.config.js",
     "*.config.ts",
-    ".turbo"
+    ".turbo",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx"
   ]
 }
