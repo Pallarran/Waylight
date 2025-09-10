@@ -4,10 +4,11 @@ import { useTripStore } from '../stores';
 import CreateTripModal from '../components/trip/CreateTripModal';
 import TripCard from '../components/trip/TripCard';
 import TripDayPlanner from '../components/trip/TripDayPlanner';
+import SuccessFeedback from '../components/common/SuccessFeedback';
 
 export default function TripBuilderWorking() {
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const { trips, activeTrip, isLoading, error, loadTrips, clearError, createNewTrip, setActiveTrip } = useTripStore();
+  const { trips, activeTrip, isLoading, error, successMessage, loadTrips, clearError, clearSuccess, createNewTrip, setActiveTrip } = useTripStore();
 
   useEffect(() => {
     loadTrips();
@@ -23,7 +24,16 @@ export default function TripBuilderWorking() {
 
   const handleQuickCreate = async () => {
     try {
-      await createNewTrip('My Disney Trip', '2024-12-01', '2024-12-07');
+      const today = new Date();
+      const nextMonth = new Date(today);
+      nextMonth.setMonth(today.getMonth() + 1);
+      
+      const startDate = nextMonth.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+      const endDateObj = new Date(nextMonth);
+      endDateObj.setDate(nextMonth.getDate() + 6);
+      const endDate = endDateObj.toISOString().split('T')[0];
+      
+      await createNewTrip('My Disney Trip', startDate, endDate);
     } catch (error) {
       console.error('Failed to create trip:', error);
     }
@@ -75,13 +85,13 @@ export default function TripBuilderWorking() {
         </div>
       ) : trips.length === 0 ? (
         // Empty state
-        <div className="card p-12 text-center">
+        <div className="card p-12 text-center animate-fade-in">
           <div className="w-16 h-16 bg-sea/10 rounded-xl flex items-center justify-center mx-auto mb-6">
             <MapPin className="w-8 h-8 text-sea" />
           </div>
-          <h2 className="text-2xl font-semibold text-ink mb-4">Start Your Disney Adventure</h2>
+          <h2 className="text-2xl font-semibold text-ink mb-4">Let's light the way</h2>
           <p className="text-ink-light mb-8 max-w-md mx-auto">
-            Create your first trip to Walt Disney World and begin planning the perfect magical vacation.
+            Add your first park day and start planning your magical adventure.
           </p>
           <div className="space-x-4">
             <button
@@ -133,6 +143,14 @@ export default function TripBuilderWorking() {
       <CreateTripModal 
         isOpen={showCreateModal}
         onClose={() => setShowCreateModal(false)}
+      />
+
+      {/* Success Feedback */}
+      <SuccessFeedback 
+        show={!!successMessage}
+        message={successMessage || undefined}
+        onHide={clearSuccess}
+        variant="sparkle"
       />
     </div>
   );

@@ -15,8 +15,8 @@ export default function TripCard({ trip, isActive = false, onClick }: TripCardPr
   const [showMenu, setShowMenu] = useState(false);
   const { setActiveTrip, deleteTripById } = useTripStore();
 
-  const startDate = new Date(trip.startDate);
-  const endDate = new Date(trip.endDate);
+  const startDate = new Date(trip.startDate + 'T00:00:00');
+  const endDate = new Date(trip.endDate + 'T00:00:00');
   const today = new Date();
   const duration = differenceInDays(endDate, startDate) + 1;
 
@@ -56,7 +56,7 @@ export default function TripCard({ trip, isActive = false, onClick }: TripCardPr
 
   return (
     <div 
-      className={`card-interactive p-6 relative ${isActive ? 'ring-2 ring-sea/20 border-sea/20' : ''}`}
+      className={`card-interactive p-6 relative transition-all duration-200 ease-out hover:shadow-medium hover:-translate-y-0.5 ${isActive ? 'ring-2 ring-sea/20 border-sea/20' : ''}`}
       onClick={handleSetActive}
     >
       <div className="flex items-start justify-between mb-4">
@@ -71,20 +71,20 @@ export default function TripCard({ trip, isActive = false, onClick }: TripCardPr
               e.stopPropagation();
               setShowMenu(!showMenu);
             }}
-            className="p-2 rounded-lg hover:bg-surface-dark/50 transition-colors"
+            className="p-2 rounded-lg hover:bg-surface-dark/50 transition-all duration-150 ease-out hover:scale-105"
           >
             <MoreVertical className="w-4 h-4 text-ink-light" />
           </button>
           
           {showMenu && (
-            <div className="absolute right-0 top-10 bg-white rounded-lg shadow-medium border border-surface-dark/50 py-2 z-10 min-w-[120px]">
+            <div className="absolute right-0 top-10 bg-white rounded-lg shadow-medium border border-surface-dark/50 py-2 z-10 min-w-[120px] animate-slide-down">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   handleSetActive();
                   setShowMenu(false);
                 }}
-                className="block w-full px-4 py-2 text-left text-sm text-ink hover:bg-surface-dark/50 transition-colors"
+                className="block w-full px-4 py-2 text-left text-sm text-ink hover:bg-surface-dark/50 transition-colors duration-150"
               >
                 Set Active
               </button>
@@ -93,7 +93,7 @@ export default function TripCard({ trip, isActive = false, onClick }: TripCardPr
                   e.stopPropagation();
                   handleDelete();
                 }}
-                className="block w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 transition-colors"
+                className="block w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 transition-colors duration-150"
               >
                 Delete
               </button>
@@ -132,8 +132,8 @@ export default function TripCard({ trip, isActive = false, onClick }: TripCardPr
       )}
 
       {isActive && (
-        <div className="absolute top-4 left-4">
-          <div className="w-3 h-3 bg-sea rounded-full"></div>
+        <div className="absolute top-4 left-4 animate-scale-in">
+          <div className="w-3 h-3 bg-sea rounded-full animate-pulse-soft"></div>
         </div>
       )}
     </div>
