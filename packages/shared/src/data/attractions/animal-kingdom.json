@@ -1,0 +1,856 @@
+[
+  {
+    "id": "ak-avatar-flight-passage",
+    "parkId": "animal-kingdom",
+    "name": "Avatar Flight of Passage",
+    "description": "Soar on the back of a mountain banshee through Pandora's floating mountains and bioluminescent forests in this breathtaking 3D flight experience.",
+    "duration": 5,
+    "heightRequirement": 44,
+    "location": "Pandora - The World of Avatar",
+    "type": "ride",
+    "intensity": "high",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true
+    },
+    "tips": [
+      {
+        "id": "afp-tip-1",
+        "content": "Most popular attraction at Animal Kingdom. Purchase Individual Lightning Lane or arrive at park opening.",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "afp-tip-2",
+        "content": "Motion simulator experience - those prone to motion sickness should use caution.",
+        "category": "accessibility",
+        "priority": 4
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isDarkRide": true,
+      "isInteractive": true,
+      "hasStrobes": true,
+      "hasAirConditioning": true,
+      "hasPhotos": true,
+      "hasIndividualLL": true,
+      "hasRiderSwitch": true
+    }
+  },
+  {
+    "id": "ak-navi-river-journey",
+    "parkId": "animal-kingdom",
+    "name": "Na'vi River Journey",
+    "description": "Navigate through a mystical bioluminescent rainforest aboard reed boats in search of the Na'vi Shaman of Songs.",
+    "duration": 5,
+    "location": "Pandora - The World of Avatar",
+    "type": "ride",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true
+    },
+    "tips": [
+      {
+        "id": "nrj-tip-1",
+        "content": "Stunning visual effects and animatronics. Perfect for all ages and Pandora fans.",
+        "category": "general",
+        "priority": 3
+      },
+      {
+        "id": "nrj-tip-2",
+        "content": "Transfer device available to assist with wheelchair accessibility.",
+        "category": "accessibility",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isDarkRide": true,
+      "isWaterRide": true,
+      "getsWet": true,
+      "isInteractive": true,
+      "hasAirConditioning": true,
+      "isRainSafe": true,
+      "hasPhotos": true,
+      "hasLightningLane": true,
+      "hasRiderSwitch": true
+    }
+  },
+  {
+    "id": "ak-kilimanjaro-safaris",
+    "parkId": "animal-kingdom",
+    "name": "Kilimanjaro Safaris",
+    "description": "Embark on an 18-minute African safari adventure to see live lions, elephants, giraffes, and other magnificent animals in their habitats.",
+    "duration": 20,
+    "location": "Africa - Harambe",
+    "type": "ride",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "ks-tip-1",
+        "content": "Animals are most active in early morning and late afternoon. Multiple rides recommended!",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "ks-tip-2",
+        "content": "Each safari is different depending on animal activity. Bring a camera with zoom lens.",
+        "category": "photo",
+        "priority": 4
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isInteractive": true,
+      "hasPhotos": true,
+      "hasLightningLane": true,
+      "hasRiderSwitch": true
+    }
+  },
+  {
+    "id": "ak-festival-lion-king",
+    "parkId": "animal-kingdom",
+    "name": "Festival of the Lion King",
+    "description": "Experience the magic of Disney's The Lion King through this Broadway-style show featuring acrobatics, fire dancing, and beloved songs.",
+    "duration": 30,
+    "location": "Africa - Harambe Theater",
+    "type": "show",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "flk-tip-1",
+        "content": "One of Disney's best shows! Arrive 15 minutes early for better seating.",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "flk-tip-2",
+        "content": "Theater-in-the-round format means every seat has a good view. Very popular with all ages.",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "hasAirConditioning": true,
+      "isLoud": true,
+      "isRainSafe": true,
+      "hasPhotos": true,
+      "hasLightningLane": true
+    }
+  },
+  {
+    "id": "ak-expedition-everest",
+    "parkId": "animal-kingdom",
+    "name": "Expedition Everest - Legend of the Forbidden Mountain",
+    "description": "Race through the Himalayas on this thrilling roller coaster and come face-to-face with the legendary Yeti on Mount Everest.",
+    "duration": 3,
+    "heightRequirement": 44,
+    "location": "Asia - Anandapur",
+    "type": "ride",
+    "intensity": "high",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true
+    },
+    "tips": [
+      {
+        "id": "ee-tip-1",
+        "content": "Features both forward and backward sections. The 80-foot drop is thrilling!",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "ee-tip-2",
+        "content": "Single rider line available for shorter waits. Mountain views during climb are spectacular.",
+        "category": "strategy",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isDarkRide": true,
+      "hasBigDrops": true,
+      "hasLaunch": true,
+      "isScary": true,
+      "hasPhotos": true,
+      "hasLightningLane": true,
+      "hasRiderSwitch": true
+    }
+  },
+  {
+    "id": "ak-kali-river-rapids",
+    "parkId": "animal-kingdom",
+    "name": "Kali River Rapids",
+    "description": "Navigate churning rapids on this white-water adventure through an Asian rainforest while learning about environmental conservation.",
+    "duration": 6,
+    "heightRequirement": 38,
+    "location": "Asia - Anandapur",
+    "type": "ride",
+    "intensity": "high",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true
+    },
+    "tips": [
+      {
+        "id": "krr-tip-1",
+        "content": "You WILL get soaked! Bring waterproof bags for phones and valuables.",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "krr-tip-2",
+        "content": "Other guests can spray you with water cannons from the bridge - beware!",
+        "category": "general",
+        "priority": 4
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isWaterRide": true,
+      "getsWet": true,
+      "isSpinning": true,
+      "isInteractive": true,
+      "hasBigDrops": true,
+      "hasPhotos": true,
+      "hasLightningLane": true,
+      "hasRiderSwitch": true
+    }
+  },
+  {
+    "id": "ak-dinosaur",
+    "parkId": "animal-kingdom",
+    "name": "DINOSAUR",
+    "description": "Travel back 65 million years to rescue an iguanodon from extinction while dodging meteors and carnivorous dinosaurs.",
+    "duration": 4,
+    "heightRequirement": 40,
+    "location": "DinoLand U.S.A.",
+    "type": "ride",
+    "intensity": "high",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true
+    },
+    "tips": [
+      {
+        "id": "dino-tip-1",
+        "content": "Attraction closing in 2026 for Tropical Americas development. Experience it while you can!",
+        "category": "general",
+        "priority": 5
+      },
+      {
+        "id": "dino-tip-2",
+        "content": "Very dark and intense with realistic dinosaur encounters. Not recommended for young children.",
+        "category": "accessibility",
+        "priority": 4
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isDarkRide": true,
+      "isScary": true,
+      "isLoud": true,
+      "hasStrobes": true,
+      "hasPhotos": true,
+      "hasLightningLane": true,
+      "hasRiderSwitch": true
+    }
+  },
+  {
+    "id": "ak-zootopia-better-zoogether",
+    "parkId": "animal-kingdom",
+    "name": "Zootopia: Better Zoogether!",
+    "description": "Join Judy Hopps and Nick Wilde on a 3D adventure through different biomes of Zootopia in this immersive film experience.",
+    "duration": 18,
+    "location": "Discovery Island - Tree of Life Theater",
+    "type": "show",
+    "intensity": "moderate",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "zoo-tip-1",
+        "content": "Brand new attraction opening November 7, 2025! Replaces It's Tough to be a Bug.",
+        "category": "general",
+        "priority": 5
+      },
+      {
+        "id": "zoo-tip-2",
+        "content": "3D film with sensory effects. Great for all ages and Zootopia fans.",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isDarkRide": true,
+      "isInteractive": true,
+      "hasAirConditioning": true,
+      "isRainSafe": true,
+      "hasLightningLane": true
+    }
+  },
+  {
+    "id": "ak-finding-nemo-show",
+    "parkId": "animal-kingdom",
+    "name": "Finding Nemo: The Big Blue... and Beyond",
+    "description": "Dive into the underwater world with Marlin, Dory, and Nemo in this spectacular musical featuring puppetry and beloved songs.",
+    "duration": 40,
+    "location": "DinoLand U.S.A. - Theater in the Wild",
+    "type": "show",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "nemo-tip-1",
+        "content": "Longest show at Animal Kingdom with impressive puppetry and effects. Arrive early for good seats.",
+        "category": "strategy",
+        "priority": 3
+      },
+      {
+        "id": "nemo-tip-2",
+        "content": "Great air-conditioned break during hot days. Perfect for Finding Nemo fans.",
+        "category": "strategy",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": true,
+      "isRainSafe": true,
+      "hasLightningLane": true
+    }
+  },
+  {
+    "id": "ak-feathered-friends-flight",
+    "parkId": "animal-kingdom",
+    "name": "Feathered Friends in Flight",
+    "description": "Watch magnificent live birds demonstrate their natural abilities in this educational and entertaining outdoor show.",
+    "duration": 20,
+    "location": "Asia - Caravan Stage",
+    "type": "show",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "fff-tip-1",
+        "content": "Live bird demonstrations with exotic species. Weather dependent - check show times.",
+        "category": "strategy",
+        "priority": 3
+      },
+      {
+        "id": "fff-tip-2",
+        "content": "Educational and entertaining for bird lovers and families. Outdoor covered theater.",
+        "category": "general",
+        "priority": 2
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isInteractive": true,
+      "hasPhotos": true,
+      "hasLightningLane": true
+    }
+  },
+  {
+    "id": "ak-wildlife-express-train",
+    "parkId": "animal-kingdom",
+    "name": "Wildlife Express Train",
+    "description": "Take a scenic 1.2-mile train journey to Rafiki's Planet Watch with behind-the-scenes views of animal care areas.",
+    "duration": 7,
+    "location": "Africa to Rafiki's Planet Watch",
+    "type": "ride",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "wet-tip-1",
+        "content": "Only way to reach Rafiki's Planet Watch. Great for families with young children.",
+        "category": "strategy",
+        "priority": 3
+      },
+      {
+        "id": "wet-tip-2",
+        "content": "Behind-the-scenes views during the journey. Round-trip transportation included.",
+        "category": "general",
+        "priority": 2
+      }
+    ],
+    "tags": [],
+    "features": {
+      "hasAirConditioning": true,
+      "hasPhotos": true,
+      "isRainSafe": true,
+      "hasLightningLane": true
+    }
+  },
+  {
+    "id": "ak-gorilla-falls-trail",
+    "parkId": "animal-kingdom",
+    "name": "Gorilla Falls Exploration Trail",
+    "description": "Walk through lush habitats to observe gorillas, hippos, and other African animals in naturalistic environments.",
+    "duration": 25,
+    "location": "Africa",
+    "type": "attraction",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "gft-tip-1",
+        "content": "Self-paced walking trail. Animals are most active in cooler parts of the day.",
+        "category": "strategy",
+        "priority": 3
+      },
+      {
+        "id": "gft-tip-2",
+        "content": "Spectacular gorilla habitat viewing. Bring a camera and take your time.",
+        "category": "photo",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isInteractive": true,
+      "hasPhotos": true
+    }
+  },
+  {
+    "id": "ak-maharajah-jungle-trek",
+    "parkId": "animal-kingdom",
+    "name": "Maharajah Jungle Trek",
+    "description": "Explore Asian temple ruins while observing magnificent tigers, fruit bats, and exotic birds in their habitats.",
+    "duration": 25,
+    "location": "Asia - Anandapur",
+    "type": "attraction",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "mjt-tip-1",
+        "content": "Amazing tiger viewing opportunities. Visit multiple times as animals move throughout habitats.",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "mjt-tip-2",
+        "content": "Don't miss the fruit bat exhibit - they fly all around you in an aviary setting.",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isInteractive": true,
+      "hasPhotos": true
+    }
+  },
+  {
+    "id": "ak-discovery-island-trails",
+    "parkId": "animal-kingdom",
+    "name": "Discovery Island Trails",
+    "description": "Wander peaceful paths around the Tree of Life to see flamingos, kangaroos, lemurs, and other animals.",
+    "duration": 20,
+    "location": "Discovery Island",
+    "type": "attraction",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "dit-tip-1",
+        "content": "Great way to see the intricate Tree of Life carvings up close. Over 300 animal carvings!",
+        "category": "photo",
+        "priority": 3
+      },
+      {
+        "id": "dit-tip-2",
+        "content": "Peaceful walking experience with multiple animal viewing opportunities.",
+        "category": "general",
+        "priority": 2
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isInteractive": true,
+      "hasPhotos": true
+    }
+  },
+  {
+    "id": "ak-adventurers-outpost",
+    "parkId": "animal-kingdom",
+    "name": "Adventurers Outpost",
+    "description": "Meet Mickey Mouse and Minnie Mouse dressed in their safari exploration gear for photos and autographs.",
+    "duration": 3,
+    "location": "Discovery Island",
+    "type": "meet_greet",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "ao-tip-1",
+        "content": "Only place to meet Mickey and Minnie at Animal Kingdom. They're in adorable safari outfits!",
+        "category": "photo",
+        "priority": 4
+      },
+      {
+        "id": "ao-tip-2",
+        "content": "Air-conditioned meet & greet location. Great for families and character collectors.",
+        "category": "strategy",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isInteractive": true,
+      "hasAirConditioning": true,
+      "hasPhotos": true,
+      "isRainSafe": true,
+      "hasLightningLane": true,
+      "hasCharacters": true
+    }
+  },
+  {
+    "id": "ak-conservation-station",
+    "parkId": "animal-kingdom",
+    "name": "Conservation Station",
+    "description": "Get a behind-the-scenes look at Disney's animal care, veterinary operations, and conservation efforts.",
+    "duration": 15,
+    "location": "Rafiki's Planet Watch",
+    "type": "attraction",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "cs-tip-1",
+        "content": "Educational experience about Disney's animal care. Often see veterinary procedures through windows.",
+        "category": "general",
+        "priority": 3
+      },
+      {
+        "id": "cs-tip-2",
+        "content": "Must take Wildlife Express Train to reach this area. Combine with other Planet Watch activities.",
+        "category": "strategy",
+        "priority": 2
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isInteractive": true,
+      "hasAirConditioning": true,
+      "hasPhotos": true,
+      "isRainSafe": true
+    }
+  },
+  {
+    "id": "ak-affection-section",
+    "parkId": "animal-kingdom",
+    "name": "Affection Section",
+    "description": "Pet and interact with friendly farm animals including goats, sheep, and other domesticated creatures.",
+    "duration": 15,
+    "location": "Rafiki's Planet Watch",
+    "type": "attraction",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "as-tip-1",
+        "content": "Perfect for young children who want to pet animals. Hand sanitizing stations available.",
+        "category": "general",
+        "priority": 3
+      },
+      {
+        "id": "as-tip-2",
+        "content": "Only petting zoo experience at Walt Disney World. Great family photo opportunities.",
+        "category": "photo",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isInteractive": true,
+      "hasPhotos": true
+    }
+  },
+  {
+    "id": "ak-wilderness-explorers",
+    "parkId": "animal-kingdom",
+    "name": "Wilderness Explorers",
+    "description": "Embark on an all-day interactive adventure earning merit badges through challenges and activities throughout the park.",
+    "duration": 480,
+    "location": "Throughout Animal Kingdom",
+    "type": "attraction",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "we-tip-1",
+        "content": "Free activity inspired by Russell from UP. Pick up your handbook at park entrance or Discovery Island.",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "we-tip-2",
+        "content": "Great way to explore the park with purpose. Perfect for families with children ages 7-14.",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isInteractive": true,
+      "hasPhotos": true
+    }
+  },
+  {
+    "id": "ak-tiffins",
+    "parkId": "animal-kingdom",
+    "name": "Tiffins",
+    "description": "Signature dining restaurant featuring globally-inspired cuisine with dishes inspired by the adventures of Disney Imagineers and their travels.",
+    "location": "Discovery Island",
+    "type": "dining",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "tiff-tip-1",
+        "content": "Disney's most upscale restaurant at Animal Kingdom. Award-winning cuisine with global influences.",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "tiff-tip-2",
+        "content": "Artwork throughout restaurant tells stories of Disney Imagineers' adventures. Perfect for special occasions.",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": ["signature-dining", "fine-dining"],
+    "features": {
+      "hasAirConditioning": true,
+      "isRainSafe": true
+    }
+  },
+  {
+    "id": "ak-sanaa",
+    "parkId": "animal-kingdom",
+    "name": "Sanaa",
+    "description": "African- and Indian-inspired cuisine with stunning views of giraffes, zebras, and other animals on the savanna at Animal Kingdom Lodge.",
+    "location": "Animal Kingdom Lodge - Kidani Village",
+    "type": "dining",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "sanaa-tip-1",
+        "content": "Famous bread service with unique dipping sauces. Watch animals from your table!",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "sanaa-tip-2",
+        "content": "Located at Animal Kingdom Lodge but accessible to all guests. Bring binoculars for animal viewing.",
+        "category": "strategy",
+        "priority": 3
+      }
+    ],
+    "tags": ["table-service"],
+    "features": {
+      "hasAirConditioning": true,
+      "isRainSafe": true,
+      "hasPhotos": true
+    }
+  },
+  {
+    "id": "ak-boma",
+    "parkId": "animal-kingdom",
+    "name": "Boma - Flavors of Africa",
+    "description": "African-inspired buffet featuring over 50 different dishes from across the continent in a vibrant marketplace setting.",
+    "location": "Animal Kingdom Lodge - Jambo House",
+    "type": "dining",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "boma-tip-1",
+        "content": "Extensive African-inspired buffet with unique flavors. Great way to try new cuisines.",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "boma-tip-2",
+        "content": "Breakfast and dinner service available. Popular with both adventurous eaters and families.",
+        "category": "strategy",
+        "priority": 3
+      }
+    ],
+    "tags": ["table-service"],
+    "features": {
+      "hasAirConditioning": true,
+      "isRainSafe": true
+    }
+  },
+  {
+    "id": "ak-tusker-house",
+    "parkId": "animal-kingdom",
+    "name": "Tusker House Restaurant",
+    "description": "Character dining buffet featuring Donald Duck and friends in safari outfits with African-inspired cuisine and American favorites.",
+    "location": "Africa - Harambe",
+    "type": "dining",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "th-tip-1",
+        "content": "Only character dining in Animal Kingdom. Donald Duck, Mickey, Goofy, and Daisy in safari gear.",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "th-tip-2",
+        "content": "Buffet service with African-inspired dishes and kid-friendly options. Popular breakfast spot.",
+        "category": "strategy",
+        "priority": 3
+      }
+    ],
+    "tags": ["character-dining", "table-service"],
+    "features": {
+      "hasAirConditioning": true,
+      "isRainSafe": true,
+      "hasPhotos": true,
+      "hasCharacters": true
+    }
+  },
+  {
+    "id": "ak-yak-yeti",
+    "parkId": "animal-kingdom",
+    "name": "Yak & Yeti Restaurant",
+    "description": "Pan-Asian cuisine featuring dishes from across Asia in a Nepalese-themed restaurant with intricate decor and artifacts.",
+    "location": "Asia - Anandapur",
+    "type": "dining",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "yy-tip-1",
+        "content": "Pan-Asian menu with dishes from Thailand, China, Japan, and more. Beautiful themed interior.",
+        "category": "general",
+        "priority": 3
+      },
+      {
+        "id": "yy-tip-2",
+        "content": "Operated by Landry's Restaurants. Often easier to get reservations than Disney-operated restaurants.",
+        "category": "strategy",
+        "priority": 3
+      }
+    ],
+    "tags": ["table-service"],
+    "features": {
+      "hasAirConditioning": true,
+      "isRainSafe": true
+    }
+  },
+  {
+    "id": "ak-rainforest-cafe",
+    "parkId": "animal-kingdom",
+    "name": "Rainforest Cafe",
+    "description": "Themed restaurant simulating a rainforest environment with animatronic animals, thunderstorms, and jungle sounds.",
+    "location": "Oasis - Park Entrance",
+    "type": "dining",
+    "intensity": "moderate",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "rc-tip-1",
+        "content": "Immersive rainforest theming with animatronic animals and periodic thunderstorms.",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "rc-tip-2",
+        "content": "Can be loud and overwhelming for some guests. Great for kids who love animals and adventure.",
+        "category": "accessibility",
+        "priority": 3
+      }
+    ],
+    "tags": ["themed-dining", "table-service"],
+    "features": {
+      "hasAirConditioning": true,
+      "isRainSafe": true,
+      "isLoud": true,
+      "isInteractive": true
+    }
+  },
+  {
+    "id": "ak-satuli-canteen",
+    "parkId": "animal-kingdom",
+    "name": "Satu'li Canteen",
+    "description": "Pandora-themed quick service restaurant offering customizable bowls with unique Na'vi-inspired flavors and ingredients.",
+    "location": "Pandora - The World of Avatar",
+    "type": "dining",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "sc-tip-1",
+        "content": "Build-your-own bowls with unique Pandoran ingredients. Very popular, use mobile order.",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "sc-tip-2",
+        "content": "Themed to Pandora with bioluminescent decor. Healthy and flavorful options available.",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": ["quick-service", "themed-dining"],
+    "features": {
+      "hasAirConditioning": true,
+      "isRainSafe": true
+    }
+  }
+]

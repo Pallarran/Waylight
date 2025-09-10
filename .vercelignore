@@ -1,0 +1,42 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Development
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build artifacts (keep only web dist)
+packages/shared/dist
+packages/mobile/dist
+packages/mobile/.expo
+packages/mobile/android
+packages/mobile/ios
+
+# Development files
+.turbo
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage
+test-results
+
+# Documentation (optional - you may want to include these)
+Development documents
+concepts
+Testing_Checklist.md

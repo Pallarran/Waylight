@@ -21,6 +21,31 @@ export interface Attraction {
   accessibility?: AccessibilityInfo;
   tips: Tip[];
   tags: string[];
+  // Icon-based feature flags
+  features?: AttractionFeatures;
+}
+
+export interface AttractionFeatures {
+  // Tier 1: Core Icons
+  isDarkRide?: boolean;           // 🌑 Dark rides
+  getsWet?: boolean;              // 💦 Gets you wet
+  isScary?: boolean;              // 👻 Scary/spooky
+  isInteractive?: boolean;        // 🎯 Interactive elements
+  isSpinning?: boolean;           // 🌀 Spinning motion
+  isWaterRide?: boolean;          // 🛶 Water/boat ride
+  hasPhotos?: boolean;            // 📸 Photo opportunities
+  hasCharacters?: boolean;        // 🐭 Disney characters present
+  
+  // Tier 2: Enhanced Icons
+  hasLightningLane?: boolean;     // 🎟️ Lightning Lane available
+  isRainSafe?: boolean;           // 🌧️ Rain safe operations
+  hasAirConditioning?: boolean;   // ❄️ Air conditioning
+  isLoud?: boolean;               // 🔊 Loud attraction
+  hasBigDrops?: boolean;          // ⛰️ Big drops
+  hasLaunch?: boolean;            // 🏁 Launch/high speed
+  hasStrobes?: boolean;           // 💡 Strobe lights
+  hasRiderSwitch?: boolean;       // 🔁 Rider Switch available
+  hasIndividualLL?: boolean;      // 💠 Individual Lightning Lane
 }
 
 export enum AttractionType {
