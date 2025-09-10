@@ -1,11 +1,14 @@
 import { useState } from 'react';
-import { Sun, Download, Upload, Trash2, Bell, MapPin } from 'lucide-react';
+import { Sun, Download, Upload, Trash2, Bell, MapPin, Eye } from 'lucide-react';
+import useUserPreferencesStore from '../stores/useUserPreferencesStore';
 
 export default function Settings() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [notifications, setNotifications] = useState(true);
   const [defaultPark, setDefaultPark] = useState('magic-kingdom');
   const [timeFormat, setTimeFormat] = useState('12h');
+  
+  const { displaySettings, updatePreferences } = useUserPreferencesStore();
 
   const handleExportData = () => {
     // This would export user data in the future
@@ -32,6 +35,40 @@ export default function Settings() {
       </div>
 
       <div className="space-y-6">
+        {/* Display Settings */}
+        <div className="card p-6">
+          <div className="flex items-center mb-4">
+            <Eye className="w-5 h-5 text-glow mr-2" />
+            <h2 className="text-lg font-semibold text-ink">Display Settings</h2>
+          </div>
+          
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <label className="text-ink font-medium">Show Tips</label>
+                <p className="text-sm text-ink-light">Display helpful tips and recommendations for attractions</p>
+              </div>
+              <button
+                onClick={() => updatePreferences({ 
+                  displaySettings: { 
+                    ...displaySettings, 
+                    showTips: !displaySettings.showTips 
+                  } 
+                })}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                  displaySettings.showTips ? 'bg-sea' : 'bg-surface-dark'
+                }`}
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    displaySettings.showTips ? 'translate-x-6' : 'translate-x-1'
+                  }`}
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+
         {/* Appearance Settings */}
         <div className="card p-6">
           <div className="flex items-center mb-4">

@@ -1,9 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unsafe-enum-comparison */
 import type { Attraction } from '../../types';
 import magicKingdomAttractions from './magic-kingdom.json';
+import epcotAttractions from './epcot.json';
+import hollywoodStudiosAttractions from './hollywood-studios.json';
+import animalKingdomAttractions from './animal-kingdom.json';
 
 const allAttractions: Attraction[] = [
   ...(magicKingdomAttractions as Attraction[]),
+  ...(epcotAttractions as Attraction[]),
+  ...(hollywoodStudiosAttractions as Attraction[]),
+  ...(animalKingdomAttractions as Attraction[]),
 ];
 
 export const getAttractions = (parkId?: string): Attraction[] => {

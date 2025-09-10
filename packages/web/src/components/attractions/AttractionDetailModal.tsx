@@ -1,6 +1,5 @@
-import { X, Clock, MapPin, Users, Star, Heart, Plus } from 'lucide-react';
+import { X, Clock, MapPin, Users, Star, Plus } from 'lucide-react';
 import type { Attraction } from '../../types';
-import { useAttractionStore } from '../../stores';
 
 interface AttractionDetailModalProps {
   attraction: Attraction;
@@ -15,11 +14,7 @@ export default function AttractionDetailModal({
   onClose,
   onAddToTrip 
 }: AttractionDetailModalProps) {
-  const { isFavorite, toggleFavorite } = useAttractionStore();
-  
   if (!isOpen) return null;
-
-  const isAttractionFavorite = isFavorite(attraction.id);
 
   const getIntensityColor = (intensity: string) => {
     switch (intensity) {
@@ -42,10 +37,6 @@ export default function AttractionDetailModal({
     }
   };
 
-  const handleFavoriteToggle = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    toggleFavorite(attraction.id);
-  };
 
   const handleAddToTrip = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -68,16 +59,6 @@ export default function AttractionDetailModal({
             </div>
           </div>
           <div className="flex items-center space-x-2">
-            <button
-              onClick={handleFavoriteToggle}
-              className={`p-2 rounded-lg transition-colors ${
-                isAttractionFavorite 
-                  ? 'text-red-500 hover:bg-red-50' 
-                  : 'text-ink-light hover:text-red-500 hover:bg-red-50'
-              }`}
-            >
-              <Heart className={`w-5 h-5 ${isAttractionFavorite ? 'fill-current' : ''}`} />
-            </button>
             <button
               onClick={onClose}
               className="p-2 rounded-lg text-ink-light hover:text-ink hover:bg-surface/50 transition-colors"

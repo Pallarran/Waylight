@@ -49,7 +49,7 @@
   }
 
   .btn-primary {
-    @apply btn bg-sea text-white hover:bg-sea-dark;
+    @apply btn bg-sea-dark text-white hover:bg-sea-darker;
     @apply focus:ring-sea/50 shadow-soft hover:shadow-medium;
   }
 
@@ -104,7 +104,7 @@
   }
 
   .badge-primary {
-    @apply badge bg-sea/10 text-sea-dark;
+    @apply badge bg-sea/10 text-sea-darker;
   }
 
   .badge-secondary {
@@ -121,7 +121,7 @@
   }
 
   .section-padding {
-    @apply py-12 md:py-16 lg:py-20;
+    @apply pt-8 pb-12 md:pt-12 md:pb-16 lg:pt-16 lg:pb-20;
   }
 
   /* Animation Utilities */

@@ -15,6 +15,7 @@ import Card from '../components/common/Card';
 import Button from '../components/common/Button';
 import VirtualizedList from '../components/optimized/VirtualizedList';
 import { Ionicons } from '@expo/vector-icons';
+import { Icons } from '../components/common/Icons';
 import type { Attraction } from '@waylight/shared';
 
 export default function AttractionsScreen() {
@@ -137,10 +138,10 @@ export default function AttractionsScreen() {
 
   const renderEmptyState = () => (
     <View style={styles.emptyState}>
-      <Ionicons name="search-outline" size={64} color="#CBD5E1" />
-      <Text style={styles.emptyTitle}>No attractions found</Text>
+      <Icons.Sparkles size={64} color="#4ECDC4" strokeWidth={1.5} />
+      <Text style={styles.emptyTitle}>Your path awaits</Text>
       <Text style={styles.emptySubtitle}>
-        Try adjusting your search or filter settings
+        Try adjusting your search filters to discover new adventures
       </Text>
     </View>
   );

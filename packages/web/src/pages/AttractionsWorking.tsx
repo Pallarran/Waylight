@@ -1,24 +1,24 @@
 import { useEffect, useState } from 'react';
-import { Star, Grid, List, Heart } from 'lucide-react';
+import { Grid, List, Star, Info } from 'lucide-react';
 import { useAttractionStore } from '../stores';
+import useUserPreferencesStore from '../stores/useUserPreferencesStore';
 import AttractionCard from '../components/attractions/AttractionCard';
 import AttractionFilters from '../components/attractions/AttractionFilters';
+import AttractionIconLegend from '../components/attractions/AttractionIconLegend';
 
 export default function AttractionsWorking() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [showTips, setShowTips] = useState(true);
+  const [showIconLegend, setShowIconLegend] = useState(false);
+  const { displaySettings } = useUserPreferencesStore();
   const { 
     filteredAttractions, 
     isLoading, 
-    loadAttractions,
-    getFavoriteAttractions 
+    loadAttractions
   } = useAttractionStore();
 
   useEffect(() => {
     loadAttractions();
   }, [loadAttractions]);
-
-  const favoriteAttractions = getFavoriteAttractions();
 
   if (isLoading) {
     return (
@@ -44,26 +44,6 @@ export default function AttractionsWorking() {
         <AttractionFilters />
       </div>
 
-      {/* Favorites Section */}
-      {favoriteAttractions.length > 0 && (
-        <div className="mb-8">
-          <div className="flex items-center mb-6">
-            <Heart className="w-5 h-5 text-red-500 mr-2" />
-            <h2 className="text-xl font-semibold text-ink">Your Favorites</h2>
-            <span className="ml-2 badge badge-secondary">{favoriteAttractions.length}</span>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            {favoriteAttractions.slice(0, 3).map(attraction => (
-              <AttractionCard 
-                key={attraction.id} 
-                attraction={attraction}
-                showAddToTrip={false}
-                showTips={showTips}
-              />
-            ))}
-          </div>
-        </div>
-      )}
 
       {/* Results Header */}
       <div className="flex items-center justify-between mb-6">
@@ -77,15 +57,14 @@ export default function AttractionsWorking() {
         </div>
 
         <div className="flex items-center space-x-4">
-          {/* Tips Toggle */}
+          {/* Icon Legend Button */}
           <button
-            onClick={() => setShowTips(!showTips)}
-            className={`btn-ghost btn-sm flex items-center ${
-              showTips ? 'text-glow-dark' : 'text-ink-light'
-            }`}
+            onClick={() => setShowIconLegend(true)}
+            className="btn-ghost btn-sm flex items-center hover:bg-surface-dark/10"
+            title="View icon meanings"
           >
-            <Star className={`w-4 h-4 mr-1 ${showTips ? 'fill-current' : ''}`} />
-            Tips
+            <Info className="w-4 h-4 mr-1" />
+            <span className="hidden sm:inline">Icon Guide</span>
           </button>
 
           {/* View Mode Toggle */}
@@ -118,23 +97,23 @@ export default function AttractionsWorking() {
       {filteredAttractions.length > 0 ? (
         <div className={
           viewMode === 'grid' 
-            ? 'grid sm:grid-cols-2 lg:grid-cols-3 gap-6'
+            ? 'grid sm:grid-cols-2 lg:grid-cols-4 gap-6'
             : 'space-y-4'
         }>
           {filteredAttractions.map(attraction => (
             <AttractionCard 
               key={attraction.id} 
               attraction={attraction}
-              showTips={showTips}
+              showTips={displaySettings.showTips}
             />
           ))}
         </div>
       ) : (
-        <div className="card p-12 text-center">
-          <Star className="w-16 h-16 text-ink-light mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-ink mb-2">No Attractions Found</h3>
+        <div className="card p-12 text-center animate-fade-in">
+          <Star className="w-16 h-16 text-sea mx-auto mb-4" />
+          <h3 className="text-xl font-semibold text-ink mb-2">Your path awaits</h3>
           <p className="text-ink-light mb-6">
-            Try adjusting your filters or search terms to find more attractions.
+            We couldn't find attractions matching your search. Try adjusting your filters to discover new adventures.
           </p>
           <button 
             onClick={() => useAttractionStore.getState().resetFilters()}
@@ -144,6 +123,12 @@ export default function AttractionsWorking() {
           </button>
         </div>
       )}
+
+      {/* Icon Legend Modal */}
+      <AttractionIconLegend 
+        isOpen={showIconLegend}
+        onClose={() => setShowIconLegend(false)}
+      />
     </div>
   );
 }

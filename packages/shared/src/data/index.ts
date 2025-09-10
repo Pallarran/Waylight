@@ -12,8 +12,8 @@ export interface ContentManifest {
 }
 
 export const getContentManifest = (): ContentManifest => {
-  const parks = 1; // Magic Kingdom
-  const attractions = 50; // Total attractions
+  const parks = 4; // Magic Kingdom, EPCOT, Hollywood Studios, Animal Kingdom
+  const attractions = 65; // Total attractions (rides, shows, dining, entertainment)
   const tips = attractions * 3; // Each attraction has ~3 tips
   
   return {

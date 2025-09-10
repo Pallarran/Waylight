@@ -8,6 +8,7 @@ interface SimpleTripState {
   activeTrip: Trip | null;
   isLoading: boolean;
   error: string | null;
+  successMessage: string | null;
   
   // Trip management
   loadTrips: () => Promise<void>;
@@ -30,6 +31,8 @@ interface SimpleTripState {
   // Utility
   getTripById: (tripId: string) => Trip | undefined;
   clearError: () => void;
+  clearSuccess: () => void;
+  showSuccess: (message: string) => void;
 }
 
 const useSimpleTripStore = create<SimpleTripState>((set, get) => ({
@@ -37,6 +40,7 @@ const useSimpleTripStore = create<SimpleTripState>((set, get) => ({
   activeTrip: null,
   isLoading: false,
   error: null,
+  successMessage: null,
   
   loadTrips: async () => {
     set({ isLoading: true, error: null });
@@ -60,7 +64,8 @@ const useSimpleTripStore = create<SimpleTripState>((set, get) => ({
       set((state) => ({
         trips: [newTrip, ...state.trips],
         activeTrip: newTrip,
-        isLoading: false
+        isLoading: false,
+        successMessage: "Trip created — you're glowing!"
       }));
       
       return newTrip;
@@ -342,6 +347,18 @@ const useSimpleTripStore = create<SimpleTripState>((set, get) => ({
   
   clearError: () => {
     set({ error: null });
+  },
+  
+  clearSuccess: () => {
+    set({ successMessage: null });
+  },
+  
+  showSuccess: (message) => {
+    set({ successMessage: message });
+    // Auto-clear success message after 3 seconds
+    setTimeout(() => {
+      set({ successMessage: null });
+    }, 3000);
   }
 }));
 

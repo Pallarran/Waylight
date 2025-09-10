@@ -521,19 +521,10 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
         {/* Day Overview */}
         <div className="md:col-span-1">
           <div className="card p-6">
-            <div className="flex items-center justify-between mb-4">
+            <div className="mb-4">
               <h3 className="text-lg font-semibold text-ink">
                 {format(selectedDate, 'EEEE, MMMM d')}
               </h3>
-              {!selectedDay && (
-                <button
-                  onClick={() => handleAddDay(selectedDate)}
-                  className="btn-primary btn-sm"
-                >
-                  <Plus className="w-4 h-4 mr-1" />
-                  Plan Day
-                </button>
-              )}
             </div>
 
             {selectedDay ? (

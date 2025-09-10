@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Heart, Clock, MapPin, Users, Info, Star, Plus } from 'lucide-react';
+import { Clock, MapPin, Users, Star } from 'lucide-react';
 import type { Attraction } from '../../types';
-import { useAttractionStore } from '../../stores';
 import AttractionDetailModal from './AttractionDetailModal';
+import { getAttractionIcons } from '../../utils/attractionIcons';
 
 interface AttractionCardProps {
   attraction: Attraction;
@@ -11,11 +11,7 @@ interface AttractionCardProps {
 }
 
 export default function AttractionCard({ attraction, showAddToTrip = true, showTips = true }: AttractionCardProps) {
-  const [showDetails, setShowDetails] = useState(false);
   const [showDetailModal, setShowDetailModal] = useState(false);
-  const { isFavorite, toggleFavorite } = useAttractionStore();
-  
-  const isAttractionFavorite = isFavorite(attraction.id);
 
   const getIntensityColor = (intensity: string) => {
     switch (intensity) {
@@ -38,15 +34,7 @@ export default function AttractionCard({ attraction, showAddToTrip = true, showT
     }
   };
 
-  const handleToggleFavorite = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    toggleFavorite(attraction.id);
-  };
 
-  const handleAddToTrip = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    alert(`${attraction.name} add to trip functionality coming soon!`);
-  };
 
 
   const handleCardClick = () => {
@@ -56,34 +44,32 @@ export default function AttractionCard({ attraction, showAddToTrip = true, showT
   return (
     <>
       <div 
-        className="card-hover p-6 cursor-pointer" 
+        className="card-hover p-6 cursor-pointer transition-all duration-200 ease-out hover:shadow-medium hover:-translate-y-0.5" 
         onClick={handleCardClick}
       >
       <div className="flex items-start justify-between mb-4">
-        <div className="flex items-center space-x-3">
-          <span className="text-2xl">{getTypeIcon(attraction.type)}</span>
-          <div>
+        <div className="flex items-center space-x-3 flex-1">
+          <span className="text-2xl flex-shrink-0">{getTypeIcon(attraction.type)}</span>
+          <div className="flex-1 min-w-0">
             <h3 className="text-lg font-semibold text-ink">{attraction.name}</h3>
-            <div className="flex items-center space-x-2 text-sm text-ink-light">
-              <MapPin className="w-4 h-4" />
-              <span>{attraction.location}</span>
+            <div className="flex items-start space-x-2 text-xs text-ink-light">
+              <MapPin className="w-3 h-3 flex-shrink-0 mt-0.5" />
+              <span className="break-words line-clamp-2 flex-1 min-w-0">{attraction.location}</span>
             </div>
           </div>
         </div>
-        
-        <button
-          onClick={handleToggleFavorite}
-          className={`p-2 rounded-lg transition-colors ${
-            isAttractionFavorite 
-              ? 'text-red-500 hover:bg-red-50' 
-              : 'text-ink-light hover:text-red-500 hover:bg-red-50'
-          }`}
-        >
-          <Heart className={`w-5 h-5 ${isAttractionFavorite ? 'fill-current' : ''}`} />
-        </button>
       </div>
 
-      <p className="text-ink-light text-sm mb-4 line-clamp-2">{attraction.description}</p>
+      {/* Closure Status */}
+      {attraction.tags?.includes('temporarily-closed') && (
+        <div className="mb-3">
+          <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800 border border-orange-200">
+            🚧 Temporarily Closed
+          </span>
+        </div>
+      )}
+
+      <p className="text-ink-light text-sm mb-4 line-clamp-3">{attraction.description}</p>
 
       <div className="flex flex-wrap gap-2 mb-4">
         <span className={`badge ${getIntensityColor(attraction.intensity)}`}>
@@ -104,6 +90,24 @@ export default function AttractionCard({ attraction, showAddToTrip = true, showT
         )}
       </div>
 
+      {/* Attraction Feature Icons */}
+      {attraction.features && (
+        <div className="mb-4">
+          <div className="flex flex-wrap gap-1">
+            {/* All Icons - Prioritized Order */}
+            {getAttractionIcons(attraction.features).map((icon, index) => (
+              <span
+                key={index}
+                className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-surface border border-surface-dark/20 hover:bg-surface-dark/30 transition-colors cursor-help"
+                title={`${icon.label}: ${icon.description}`}
+              >
+                <span className="text-sm">{icon.emoji}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
       {showTips && attraction.tips.length > 0 && (
         <div className="mb-4">
           <div className="flex items-center text-glow-dark mb-2">
@@ -116,75 +120,7 @@ export default function AttractionCard({ attraction, showAddToTrip = true, showT
         </div>
       )}
 
-      <div className="flex items-center justify-between">
-        <button
-          onClick={() => setShowDetails(!showDetails)}
-          className="btn-ghost btn-sm"
-        >
-          <Info className="w-4 h-4 mr-1" />
-          {showDetails ? 'Hide' : 'Show'} Details
-        </button>
-        
-        {showAddToTrip && (
-          <button 
-            onClick={handleAddToTrip}
-            className="btn-primary btn-sm flex items-center"
-          >
-            <Plus className="w-4 h-4 mr-1" />
-            Add to Trip
-          </button>
-        )}
-      </div>
 
-      {showDetails && (
-        <div className="mt-4 pt-4 border-t border-surface-dark/50 animate-in">
-          <div className="space-y-3">
-            <div>
-              <h4 className="font-medium text-ink mb-2">Tags</h4>
-              <div className="flex flex-wrap gap-1">
-                {attraction.tags.map(tag => (
-                  <span key={tag} className="badge badge-secondary text-xs">
-                    {tag.replace('-', ' ')}
-                  </span>
-                ))}
-              </div>
-            </div>
-            
-            {attraction.tips.length > 1 && (
-              <div>
-                <h4 className="font-medium text-ink mb-2">More Tips</h4>
-                <div className="space-y-2">
-                  {attraction.tips.slice(1).map(tip => (
-                    <p key={tip.id} className="text-sm text-ink-light bg-surface rounded-lg p-3">
-                      {tip.content}
-                    </p>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {attraction.accessibility && (
-              <div>
-                <h4 className="font-medium text-ink mb-2">Accessibility</h4>
-                <div className="text-sm text-ink-light space-y-1">
-                  <div className="flex items-center">
-                    <span className={attraction.accessibility.wheelchairAccessible ? 'text-green-600' : 'text-red-600'}>
-                      {attraction.accessibility.wheelchairAccessible ? '✓' : '✗'}
-                    </span>
-                    <span className="ml-2">Wheelchair Accessible</span>
-                  </div>
-                  {attraction.accessibility.transferRequired && (
-                    <div className="flex items-center text-yellow-600">
-                      <span>⚠</span>
-                      <span className="ml-2">Transfer Required</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
 
       </div>
 

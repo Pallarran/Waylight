@@ -14,7 +14,7 @@ import { useTripStore } from '../stores/useTripStore';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card';
 import DatePicker from '../components/common/DatePicker';
-import { Ionicons } from '@expo/vector-icons';
+import { Icons, iconProps } from '../components/common/Icons';
 import type { Trip } from '@waylight/shared';
 
 interface TripsScreenProps {
@@ -137,7 +137,7 @@ export default function TripsScreen({ navigation }: TripsScreenProps) {
               </Text>
               {isActive && (
                 <View style={styles.activeIndicator}>
-                  <Ionicons name="checkmark-circle" size={18} color="#0EA5A8" />
+                  <Icons.Check size={18} color="#4ECDC4" strokeWidth={2} />
                   <Text style={styles.activeText}>Planning</Text>
                 </View>
               )}
@@ -156,7 +156,7 @@ export default function TripsScreen({ navigation }: TripsScreenProps) {
             }}
             style={styles.deleteButton}
           >
-            <Ionicons name="trash-outline" size={20} color="#EF4444" />
+            <Icons.Trash2 size={20} color="#EF4444" strokeWidth={2} />
           </TouchableOpacity>
         </View>
       </Card>
@@ -165,10 +165,10 @@ export default function TripsScreen({ navigation }: TripsScreenProps) {
 
   const renderEmptyState = () => (
     <View style={styles.emptyState}>
-      <Ionicons name="map-outline" size={64} color="#CBD5E1" />
-      <Text style={styles.emptyTitle}>No trips yet</Text>
+      <Icons.Compass size={64} color="#4ECDC4" strokeWidth={1.5} />
+      <Text style={styles.emptyTitle}>Let's light the way</Text>
       <Text style={styles.emptySubtitle}>
-        Create your first trip to start planning your magical Disney World adventure
+        Add your first park day and start planning your magical adventure
       </Text>
     </View>
   );
@@ -248,7 +248,7 @@ export default function TripsScreen({ navigation }: TripsScreenProps) {
                 ]}>
                   {startDate ? formatDateForDisplay(startDate) : 'Select start date'}
                 </Text>
-                <Ionicons name="calendar-outline" size={20} color="#64748B" />
+                <Icons.Calendar size={20} color="#64748B" strokeWidth={2} />
               </TouchableOpacity>
             </View>
 
@@ -266,7 +266,7 @@ export default function TripsScreen({ navigation }: TripsScreenProps) {
                 ]}>
                   {endDate ? formatDateForDisplay(endDate) : !startDate ? 'Select start date first' : 'Select end date'}
                 </Text>
-                <Ionicons name="calendar-outline" size={20} color={!startDate ? '#CBD5E1' : '#64748B'} />
+                <Icons.Calendar size={20} color={!startDate ? '#CBD5E1' : '#64748B'} strokeWidth={2} />
               </TouchableOpacity>
             </View>
           </View>

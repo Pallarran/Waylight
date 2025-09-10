@@ -35,7 +35,23 @@
         "priority": 3
       }
     ],
-    "tags": ["thrill", "dark", "indoor", "classic", "popular"]
+    "tags": [
+      "thrill",
+      "dark",
+      "indoor",
+      "classic",
+      "popular"
+    ],
+    "features": {
+      "isDarkRide": true,
+      "hasPhotos": true,
+      "hasLightningLane": true,
+      "isRainSafe": true,
+      "hasAirConditioning": true,
+      "hasBigDrops": false,
+      "hasLaunch": true,
+      "hasStrobes": true
+    }
   },
   {
     "id": "haunted-mansion",
@@ -72,7 +88,22 @@
         "priority": 5
       }
     ],
-    "tags": ["dark-ride", "family-friendly", "classic", "spooky", "high-capacity"]
+    "tags": [
+      "dark-ride",
+      "family-friendly",
+      "classic",
+      "spooky",
+      "high-capacity"
+    ],
+    "features": {
+      "isDarkRide": true,
+      "isScary": true,
+      "hasPhotos": true,
+      "hasLightningLane": true,
+      "isRainSafe": true,
+      "hasAirConditioning": true,
+      "hasRiderSwitch": true
+    }
   },
   {
     "id": "pirates-of-the-caribbean",
@@ -109,13 +140,29 @@
         "priority": 4
       }
     ],
-    "tags": ["boat-ride", "family-friendly", "classic", "air-conditioned", "immersive"]
+    "tags": [
+      "boat-ride",
+      "family-friendly",
+      "classic",
+      "air-conditioned",
+      "immersive"
+    ],
+    "features": {
+      "isDarkRide": true,
+      "isWaterRide": true,
+      "hasPhotos": true,
+      "hasLightningLane": true,
+      "isRainSafe": true,
+      "hasAirConditioning": true,
+      "isScary": false,
+      "hasRiderSwitch": true
+    }
   },
   {
     "id": "big-thunder-mountain",
     "parkId": "magic-kingdom",
     "name": "Big Thunder Mountain Railroad",
-    "description": "Race through a mining cavern aboard a runaway mine train in the wildest ride in the wilderness.",
+    "description": "Race through a mining cavern aboard a runaway mine train in the wildest ride in the wilderness. CURRENTLY CLOSED for refurbishment until 2026.",
     "duration": 3,
     "heightRequirement": 40,
     "location": "Frontierland",
@@ -130,15 +177,15 @@
     "tips": [
       {
         "id": "big-thunder-tip-1",
-        "content": "Back row provides the best experience with more airtime",
+        "content": "ATTRACTION CLOSED: Closed January 6, 2025 for lengthy refurbishment, reopening in 2026",
         "category": "strategy",
         "priority": 5
       },
       {
         "id": "big-thunder-tip-2",
-        "content": "Look for the goat on the ledges - he's been there since opening day",
-        "category": "photo",
-        "priority": 2
+        "content": "Back row provides the best experience with more airtime (when operational)",
+        "category": "strategy",
+        "priority": 4
       },
       {
         "id": "big-thunder-tip-3",
@@ -147,7 +194,21 @@
         "priority": 4
       }
     ],
-    "tags": ["coaster", "family-friendly", "outdoor", "scenic", "moderate-thrill"]
+    "tags": [
+      "coaster",
+      "family-friendly",
+      "outdoor",
+      "scenic",
+      "moderate-thrill",
+      "temporarily-closed"
+    ],
+    "features": {
+      "hasBigDrops": false,
+      "hasPhotos": true,
+      "isRainSafe": false,
+      "hasLightningLane": false,
+      "hasRiderSwitch": true
+    }
   },
   {
     "id": "jungle-cruise",
@@ -184,7 +245,21 @@
         "priority": 5
       }
     ],
-    "tags": ["boat-ride", "family-friendly", "comedy", "classic", "outdoor"]
+    "tags": [
+      "boat-ride",
+      "family-friendly",
+      "comedy",
+      "classic",
+      "outdoor"
+    ],
+    "features": {
+      "isWaterRide": true,
+      "hasPhotos": false,
+      "hasLightningLane": true,
+      "isRainSafe": false,
+      "hasRiderSwitch": true,
+      "isInteractive": false
+    }
   },
   {
     "id": "its-a-small-world",
@@ -221,7 +296,23 @@
         "priority": 4
       }
     ],
-    "tags": ["boat-ride", "family-friendly", "classic", "air-conditioned", "relaxing"]
+    "tags": [
+      "boat-ride",
+      "family-friendly",
+      "classic",
+      "air-conditioned",
+      "relaxing"
+    ],
+    "features": {
+      "isDarkRide": false,
+      "isWaterRide": true,
+      "hasPhotos": false,
+      "hasLightningLane": true,
+      "isRainSafe": true,
+      "hasAirConditioning": true,
+      "hasRiderSwitch": false,
+      "isLoud": true
+    }
   },
   {
     "id": "seven-dwarfs-mine-train",
@@ -259,7 +350,22 @@
         "priority": 4
       }
     ],
-    "tags": ["coaster", "family-friendly", "new", "popular", "immersive"]
+    "tags": [
+      "coaster",
+      "family-friendly",
+      "new",
+      "popular",
+      "immersive"
+    ],
+    "features": {
+      "isDarkRide": false,
+      "hasPhotos": true,
+      "hasIndividualLL": true,
+      "isRainSafe": false,
+      "isSpinning": true,
+      "hasRiderSwitch": true,
+      "hasBigDrops": false
+    }
   },
   {
     "id": "peter-pans-flight",
@@ -296,13 +402,27 @@
         "priority": 4
       }
     ],
-    "tags": ["dark-ride", "family-friendly", "classic", "popular", "short"]
+    "tags": [
+      "dark-ride",
+      "family-friendly",
+      "classic",
+      "popular",
+      "short"
+    ],
+    "features": {
+      "isDarkRide": true,
+      "hasPhotos": false,
+      "hasLightningLane": true,
+      "isRainSafe": true,
+      "hasAirConditioning": true,
+      "hasRiderSwitch": true
+    }
   },
   {
     "id": "buzz-lightyear",
     "parkId": "magic-kingdom",
     "name": "Buzz Lightyear's Space Ranger Spin",
-    "description": "Help Buzz Lightyear defeat Emperor Zurg by shooting targets with laser cannons in this interactive dark ride.",
+    "description": "Help Buzz Lightyear defeat Emperor Zurg by shooting targets with laser cannons in this interactive dark ride. CURRENTLY CLOSED for refurbishment until 2026.",
     "duration": 4,
     "location": "Tomorrowland",
     "type": "ride",
@@ -316,15 +436,15 @@
     "tips": [
       {
         "id": "buzz-tip-1",
-        "content": "Aim for triangular targets for highest points - they're worth 100,000",
+        "content": "ATTRACTION CLOSED: Closed August 4, 2025 for refurbishment, reopening in 2026",
         "category": "strategy",
         "priority": 5
       },
       {
         "id": "buzz-tip-2",
-        "content": "Car spins 360 degrees - make sure to look everywhere",
-        "category": "general",
-        "priority": 3
+        "content": "Aim for triangular targets for highest points - they're worth 100,000 (when operational)",
+        "category": "strategy",
+        "priority": 4
       },
       {
         "id": "buzz-tip-3",
@@ -333,13 +453,30 @@
         "priority": 4
       }
     ],
-    "tags": ["interactive", "family-friendly", "shooting", "competitive", "toy-story"]
+    "tags": [
+      "interactive",
+      "family-friendly",
+      "shooting",
+      "competitive",
+      "toy-story",
+      "temporarily-closed"
+    ],
+    "features": {
+      "isDarkRide": true,
+      "isInteractive": true,
+      "isSpinning": true,
+      "hasPhotos": true,
+      "hasLightningLane": false,
+      "isRainSafe": true,
+      "hasAirConditioning": true,
+      "hasRiderSwitch": true
+    }
   },
   {
-    "id": "splash-mountain",
+    "id": "tianas-bayou-adventure",
     "parkId": "magic-kingdom",
-    "name": "Splash Mountain",
-    "description": "Follow Br'er Rabbit on a log flume adventure that ends with a thrilling 5-story drop into the briar patch.",
+    "name": "Tiana's Bayou Adventure",
+    "description": "Join Princess Tiana and Louis on a musical log flume adventure through the bayou as they prepare for a Mardi Gras celebration, ending with a thrilling drop.",
     "duration": 11,
     "heightRequirement": 40,
     "location": "Frontierland",
@@ -353,25 +490,47 @@
     },
     "tips": [
       {
-        "id": "splash-tip-1",
+        "id": "tiana-tip-1",
         "content": "You will get wet - front seats get wettest, back stays driest",
         "category": "strategy",
         "priority": 5
       },
       {
-        "id": "splash-tip-2",
+        "id": "tiana-tip-2",
         "content": "Perfect on hot days but avoid when it's cold",
         "category": "best_time",
         "priority": 5
       },
       {
-        "id": "splash-tip-3",
+        "id": "tiana-tip-3",
         "content": "Photo taken right before the big drop - make it count!",
         "category": "photo",
         "priority": 4
+      },
+      {
+        "id": "tiana-tip-4",
+        "content": "Brand new attraction - extremely popular, use Lightning Lane or arrive early",
+        "category": "strategy",
+        "priority": 5
       }
     ],
-    "tags": ["log-flume", "water-ride", "thrill", "classic", "photo-op"]
+    "tags": [
+      "log-flume",
+      "water-ride",
+      "thrill",
+      "new",
+      "photo-op",
+      "princess-tiana"
+    ],
+    "features": {
+      "getsWet": true,
+      "isWaterRide": true,
+      "hasPhotos": true,
+      "hasLightningLane": true,
+      "hasBigDrops": true,
+      "hasRiderSwitch": true,
+      "isRainSafe": false
+    }
   },
   {
     "id": "monsters-inc-laugh-floor",
@@ -408,7 +567,13 @@
         "priority": 3
       }
     ],
-    "tags": ["show", "interactive", "air-conditioned", "family-friendly", "comedy"]
+    "tags": [
+      "show",
+      "interactive",
+      "air-conditioned",
+      "family-friendly",
+      "comedy"
+    ]
   },
   {
     "id": "hall-of-presidents",
@@ -445,7 +610,13 @@
         "priority": 2
       }
     ],
-    "tags": ["show", "educational", "air-conditioned", "historical", "audio-animatronics"]
+    "tags": [
+      "show",
+      "educational",
+      "air-conditioned",
+      "historical",
+      "audio-animatronics"
+    ]
   },
   {
     "id": "carousel-of-progress",
@@ -482,7 +653,13 @@
         "priority": 3
       }
     ],
-    "tags": ["show", "classic", "air-conditioned", "historical", "rotating-theater"]
+    "tags": [
+      "show",
+      "classic",
+      "air-conditioned",
+      "historical",
+      "rotating-theater"
+    ]
   },
   {
     "id": "mad-tea-party",
@@ -519,7 +696,13 @@
         "priority": 3
       }
     ],
-    "tags": ["spinning", "family-friendly", "outdoor", "classic", "alice"]
+    "tags": [
+      "spinning",
+      "family-friendly",
+      "outdoor",
+      "classic",
+      "alice"
+    ]
   },
   {
     "id": "dumbo",
@@ -556,7 +739,13 @@
         "priority": 3
       }
     ],
-    "tags": ["kiddie-ride", "family-friendly", "outdoor", "classic", "views"]
+    "tags": [
+      "kiddie-ride",
+      "family-friendly",
+      "outdoor",
+      "classic",
+      "views"
+    ]
   },
   {
     "id": "astro-orbitor",
@@ -593,7 +782,13 @@
         "priority": 3
       }
     ],
-    "tags": ["spinning", "family-friendly", "outdoor", "views", "height"]
+    "tags": [
+      "spinning",
+      "family-friendly",
+      "outdoor",
+      "views",
+      "height"
+    ]
   },
   {
     "id": "magic-carpets",
@@ -630,7 +825,13 @@
         "priority": 4
       }
     ],
-    "tags": ["kiddie-ride", "family-friendly", "outdoor", "water-effects", "aladdin"]
+    "tags": [
+      "kiddie-ride",
+      "family-friendly",
+      "outdoor",
+      "water-effects",
+      "aladdin"
+    ]
   },
   {
     "id": "tomorrowland-peoplemover",
@@ -667,7 +868,13 @@
         "priority": 3
       }
     ],
-    "tags": ["transportation", "relaxing", "air-conditioned", "classic", "views"]
+    "tags": [
+      "transportation",
+      "relaxing",
+      "air-conditioned",
+      "classic",
+      "views"
+    ]
   },
   {
     "id": "tomorrowland-speedway",
@@ -705,7 +912,13 @@
         "priority": 3
       }
     ],
-    "tags": ["driving", "outdoor", "classic", "loud", "gas-powered"]
+    "tags": [
+      "driving",
+      "outdoor",
+      "classic",
+      "loud",
+      "gas-powered"
+    ]
   },
   {
     "id": "under-the-sea",
@@ -742,7 +955,13 @@
         "priority": 4
       }
     ],
-    "tags": ["dark-ride", "family-friendly", "musical", "little-mermaid", "high-capacity"]
+    "tags": [
+      "dark-ride",
+      "family-friendly",
+      "musical",
+      "little-mermaid",
+      "high-capacity"
+    ]
   },
   {
     "id": "enchanted-tales-with-belle",
@@ -779,7 +998,13 @@
         "priority": 4
       }
     ],
-    "tags": ["interactive", "character-meet", "beauty-beast", "family-friendly", "storytelling"]
+    "tags": [
+      "interactive",
+      "character-meet",
+      "beauty-beast",
+      "family-friendly",
+      "storytelling"
+    ]
   },
   {
     "id": "be-our-guest",
@@ -816,7 +1041,13 @@
         "priority": 5
       }
     ],
-    "tags": ["table-service", "beauty-beast", "reservations", "upscale", "themed"]
+    "tags": [
+      "table-service",
+      "beauty-beast",
+      "reservations",
+      "upscale",
+      "themed"
+    ]
   },
   {
     "id": "cinderella-royal-table",
@@ -853,7 +1084,13 @@
         "priority": 4
       }
     ],
-    "tags": ["character-dining", "princesses", "castle", "upscale", "premium"]
+    "tags": [
+      "character-dining",
+      "princesses",
+      "castle",
+      "upscale",
+      "premium"
+    ]
   },
   {
     "id": "crystal-palace",
@@ -890,7 +1127,13 @@
         "priority": 3
       }
     ],
-    "tags": ["character-dining", "buffet", "winnie-pooh", "family-friendly", "main-street"]
+    "tags": [
+      "character-dining",
+      "buffet",
+      "winnie-pooh",
+      "family-friendly",
+      "main-street"
+    ]
   },
   {
     "id": "main-street-vehicles",
@@ -927,7 +1170,13 @@
         "priority": 3
       }
     ],
-    "tags": ["transportation", "vintage", "main-street", "photo-op", "classic"]
+    "tags": [
+      "transportation",
+      "vintage",
+      "main-street",
+      "photo-op",
+      "classic"
+    ]
   },
   {
     "id": "walt-disney-railroad",
@@ -964,7 +1213,13 @@
         "priority": 3
       }
     ],
-    "tags": ["transportation", "scenic", "relaxing", "classic", "multi-station"]
+    "tags": [
+      "transportation",
+      "scenic",
+      "relaxing",
+      "classic",
+      "multi-station"
+    ]
   },
   {
     "id": "country-bear-jamboree",
@@ -1001,81 +1256,13 @@
         "priority": 3
       }
     ],
-    "tags": ["show", "audio-animatronics", "country-music", "air-conditioned", "classic"]
-  },
-  {
-    "id": "tom-sawyer-island",
-    "parkId": "magic-kingdom",
-    "name": "Tom Sawyer Island",
-    "description": "Explore caves, bridges, and Fort Langhorn on this interactive playground island accessible only by raft.",
-    "duration": 45,
-    "location": "Frontierland",
-    "type": "experience",
-    "intensity": "low",
-    "accessibility": {
-      "wheelchairAccessible": false,
-      "transferRequired": false,
-      "serviceAnimalsAllowed": true,
-      "signLanguageAvailable": false
-    },
-    "tips": [
-      {
-        "id": "tom-sawyer-tip-1",
-        "content": "Great place to let kids burn energy and explore freely",
-        "category": "strategy",
-        "priority": 5
-      },
-      {
-        "id": "tom-sawyer-tip-2",
-        "content": "Closes at sunset - plan accordingly",
-        "category": "best_time",
-        "priority": 4
-      },
-      {
-        "id": "tom-sawyer-tip-3",
-        "content": "Bring water - lots of walking and climbing with limited shade",
-        "category": "general",
-        "priority": 4
-      }
-    ],
-    "tags": ["playground", "interactive", "outdoor", "adventure", "kids"]
-  },
-  {
-    "id": "liberty-square-riverboat",
-    "parkId": "magic-kingdom",
-    "name": "Liberty Square Riverboat",
-    "description": "Take a peaceful cruise around Tom Sawyer Island aboard an authentic steam-powered riverboat.",
-    "duration": 17,
-    "location": "Liberty Square",
-    "type": "ride",
-    "intensity": "low",
-    "accessibility": {
-      "wheelchairAccessible": true,
-      "transferRequired": false,
-      "serviceAnimalsAllowed": true,
-      "signLanguageAvailable": false
-    },
-    "tips": [
-      {
-        "id": "riverboat-tip-1",
-        "content": "Upper deck offers better views but can be hot in summer",
-        "category": "strategy",
-        "priority": 4
-      },
-      {
-        "id": "riverboat-tip-2",
-        "content": "Great for relaxing and seeing the park from the water",
-        "category": "best_time",
-        "priority": 4
-      },
-      {
-        "id": "riverboat-tip-3",
-        "content": "Real steam engine - one of the few authentic steamboats in operation",
-        "category": "general",
-        "priority": 3
-      }
-    ],
-    "tags": ["boat-ride", "scenic", "relaxing", "historic", "steam-powered"]
+    "tags": [
+      "show",
+      "audio-animatronics",
+      "country-music",
+      "air-conditioned",
+      "classic"
+    ]
   },
   {
     "id": "mickeys-philharmagic",
@@ -1112,7 +1299,13 @@
         "priority": 4
       }
     ],
-    "tags": ["3d-show", "air-conditioned", "musical", "mickey-mouse", "4d-effects"]
+    "tags": [
+      "3d-show",
+      "air-conditioned",
+      "musical",
+      "mickey-mouse",
+      "4d-effects"
+    ]
   },
   {
     "id": "meet-mickey-town-square",
@@ -1149,7 +1342,13 @@
         "priority": 4
       }
     ],
-    "tags": ["character-meet", "mickey-mouse", "air-conditioned", "photo-op", "must-do"]
+    "tags": [
+      "character-meet",
+      "mickey-mouse",
+      "air-conditioned",
+      "photo-op",
+      "must-do"
+    ]
   },
   {
     "id": "meet-tinker-bell",
@@ -1186,7 +1385,13 @@
         "priority": 3
       }
     ],
-    "tags": ["character-meet", "tinker-bell", "air-conditioned", "pixie-dust", "fairy"]
+    "tags": [
+      "character-meet",
+      "tinker-bell",
+      "air-conditioned",
+      "pixie-dust",
+      "fairy"
+    ]
   },
   {
     "id": "meet-princess-fairytale-hall",
@@ -1223,7 +1428,13 @@
         "priority": 4
       }
     ],
-    "tags": ["character-meet", "princesses", "air-conditioned", "rotating", "throne-room"]
+    "tags": [
+      "character-meet",
+      "princesses",
+      "air-conditioned",
+      "rotating",
+      "throne-room"
+    ]
   },
   {
     "id": "meet-rapunzel-flynn",
@@ -1260,7 +1471,13 @@
         "priority": 3
       }
     ],
-    "tags": ["character-meet", "rapunzel", "tangled", "couples", "tower"]
+    "tags": [
+      "character-meet",
+      "rapunzel",
+      "tangled",
+      "couples",
+      "tower"
+    ]
   },
   {
     "id": "meet-ariel",
@@ -1297,7 +1514,13 @@
         "priority": 3
       }
     ],
-    "tags": ["character-meet", "ariel", "little-mermaid", "grotto", "underwater"]
+    "tags": [
+      "character-meet",
+      "ariel",
+      "little-mermaid",
+      "grotto",
+      "underwater"
+    ]
   },
   {
     "id": "meet-gaston",
@@ -1334,7 +1557,13 @@
         "priority": 3
       }
     ],
-    "tags": ["character-meet", "gaston", "beauty-beast", "funny", "outdoor"]
+    "tags": [
+      "character-meet",
+      "gaston",
+      "beauty-beast",
+      "funny",
+      "outdoor"
+    ]
   },
   {
     "id": "dole-whip",
@@ -1371,7 +1600,13 @@
         "priority": 4
       }
     ],
-    "tags": ["snack", "dole-whip", "refreshing", "dairy-free", "iconic"]
+    "tags": [
+      "snack",
+      "dole-whip",
+      "refreshing",
+      "dairy-free",
+      "iconic"
+    ]
   },
   {
     "id": "swiss-family-treehouse",
@@ -1408,7 +1643,13 @@
         "priority": 4
       }
     ],
-    "tags": ["walkthrough", "treehouse", "self-paced", "detailed", "stairs"]
+    "tags": [
+      "walkthrough",
+      "treehouse",
+      "self-paced",
+      "detailed",
+      "stairs"
+    ]
   },
   {
     "id": "barnstormer",
@@ -1446,7 +1687,13 @@
         "priority": 3
       }
     ],
-    "tags": ["kiddie-coaster", "goofy", "short", "family-friendly", "first-coaster"]
+    "tags": [
+      "kiddie-coaster",
+      "goofy",
+      "short",
+      "family-friendly",
+      "first-coaster"
+    ]
   },
   {
     "id": "meet-donald-pete",
@@ -1483,7 +1730,13 @@
         "priority": 3
       }
     ],
-    "tags": ["character-meet", "donald-duck", "circus", "air-conditioned", "rotating"]
+    "tags": [
+      "character-meet",
+      "donald-duck",
+      "circus",
+      "air-conditioned",
+      "rotating"
+    ]
   },
   {
     "id": "haunted-mansion-queue",
@@ -1520,7 +1773,13 @@
         "priority": 3
       }
     ],
-    "tags": ["interactive", "queue", "spooky", "haunted-mansion", "touchscreen"]
+    "tags": [
+      "interactive",
+      "queue",
+      "spooky",
+      "haunted-mansion",
+      "touchscreen"
+    ]
   },
   {
     "id": "main-street-trolley-show",
@@ -1557,7 +1816,13 @@
         "priority": 3
       }
     ],
-    "tags": ["entertainment", "characters", "spontaneous", "main-street", "musical"]
+    "tags": [
+      "entertainment",
+      "characters",
+      "spontaneous",
+      "main-street",
+      "musical"
+    ]
   },
   {
     "id": "fireworks-castle",
@@ -1594,7 +1859,13 @@
         "priority": 4
       }
     ],
-    "tags": ["fireworks", "castle", "nighttime", "spectacular", "must-see"]
+    "tags": [
+      "fireworks",
+      "castle",
+      "nighttime",
+      "spectacular",
+      "must-see"
+    ]
   },
   {
     "id": "electric-parade",
@@ -1631,7 +1902,13 @@
         "priority": 4
       }
     ],
-    "tags": ["parade", "nighttime", "classic", "electrical", "iconic"]
+    "tags": [
+      "parade",
+      "nighttime",
+      "classic",
+      "electrical",
+      "iconic"
+    ]
   },
   {
     "id": "festival-of-fantasy",
@@ -1668,7 +1945,13 @@
         "priority": 4
       }
     ],
-    "tags": ["parade", "daytime", "elaborate", "maleficent", "dragon"]
+    "tags": [
+      "parade",
+      "daytime",
+      "elaborate",
+      "maleficent",
+      "dragon"
+    ]
   },
   {
     "id": "plaza-restaurant",
@@ -1705,7 +1988,13 @@
         "priority": 3
       }
     ],
-    "tags": ["table-service", "american", "main-street", "classic", "air-conditioned"]
+    "tags": [
+      "table-service",
+      "american",
+      "main-street",
+      "classic",
+      "air-conditioned"
+    ]
   },
   {
     "id": "liberty-tree-tavern",
@@ -1742,5 +2031,792 @@
         "priority": 3
       }
     ],
-    "tags": ["table-service", "colonial", "family-style", "turkey", "historical"]
-  }]
+    "tags": [
+      "table-service",
+      "colonial",
+      "family-style",
+      "turkey",
+      "historical"
+    ]
+  },
+  {
+    "id": "tron-lightcycle-run",
+    "parkId": "magic-kingdom",
+    "name": "TRON Lightcycle / Run",
+    "description": "Board a lightcycle and launch into the Grid for a high-speed adventure through the digital frontier inspired by Disney's TRON films.",
+    "duration": 2,
+    "heightRequirement": 48,
+    "location": "Tomorrowland",
+    "type": "ride",
+    "intensity": "high",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "serviceAnimalsAllowed": false,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "tron-tip-1",
+        "content": "Virtual queue required - join at park opening or 1pm",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "tron-tip-2",
+        "content": "Store loose items in lockers before riding - they're free for the ride duration",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "tron-tip-3",
+        "content": "Individual Lightning Lane available for purchase",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "tron-tip-4",
+        "content": "Incredible at night with the canopy lit up",
+        "category": "photo",
+        "priority": 4
+      }
+    ],
+    "tags": [
+      "virtual-queue",
+      "newest",
+      "indoor-outdoor",
+      "futuristic",
+      "high-speed"
+    ],
+    "features": {
+      "isDarkRide": true,
+      "hasPhotos": true,
+      "hasIndividualLL": true,
+      "isRainSafe": true,
+      "hasAirConditioning": true,
+      "hasLaunch": true,
+      "hasStrobes": true,
+      "isLoud": true,
+      "hasRiderSwitch": true
+    }
+  },
+  {
+    "id": "prince-charming-carrousel",
+    "parkId": "magic-kingdom",
+    "name": "Prince Charming Regal Carrousel",
+    "description": "Take a spin on Cinderella's royal carrousel featuring 90 hand-painted horses in the shadow of Cinderella Castle.",
+    "duration": 2,
+    "location": "Fantasyland",
+    "type": "ride",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "carrousel-tip-1",
+        "content": "Look for Cinderella's horse - it has a golden ribbon in its tail",
+        "category": "photo",
+        "priority": 4
+      },
+      {
+        "id": "carrousel-tip-2",
+        "content": "Great views of Cinderella Castle while riding",
+        "category": "photo",
+        "priority": 3
+      },
+      {
+        "id": "carrousel-tip-3",
+        "content": "Perfect for all ages - very gentle ride",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "classic",
+      "cinderella",
+      "gentle",
+      "all-ages",
+      "historic"
+    ]
+  },
+  {
+    "id": "enchanted-tales-belle",
+    "parkId": "magic-kingdom",
+    "name": "Enchanted Tales with Belle",
+    "description": "Join Belle and help tell the story of Beauty and the Beast in this interactive storytelling experience.",
+    "duration": 20,
+    "location": "Fantasyland",
+    "type": "show",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "belle-tip-1",
+        "content": "Kids can volunteer to act out parts of the story",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "belle-tip-2",
+        "content": "Meet Belle after the show for photos",
+        "category": "photo",
+        "priority": 4
+      },
+      {
+        "id": "belle-tip-3",
+        "content": "Experience includes a magical mirror and moving bookcase",
+        "category": "general",
+        "priority": 4
+      }
+    ],
+    "tags": [
+      "interactive",
+      "belle",
+      "beauty-beast",
+      "storytelling",
+      "kids"
+    ]
+  },
+  {
+    "id": "walt-disney-world-railroad",
+    "parkId": "magic-kingdom",
+    "name": "Walt Disney World Railroad",
+    "description": "Take a grand circle tour of Magic Kingdom aboard an authentic steam-powered train.",
+    "duration": 20,
+    "location": "Main Street U.S.A.",
+    "type": "attraction",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "railroad-tip-1",
+        "content": "Great way to travel between lands and rest your feet",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "railroad-tip-2",
+        "content": "Stops at Main Street, Frontierland, and Fantasyland",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "railroad-tip-3",
+        "content": "Unique views of TRON canopy and park behind-the-scenes",
+        "category": "photo",
+        "priority": 4
+      },
+      {
+        "id": "railroad-tip-4",
+        "content": "Train whistle signals are authentic railroad codes",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "transportation",
+      "steam-train",
+      "scenic",
+      "relaxing",
+      "historic"
+    ]
+  },
+  {
+    "id": "happily-ever-after",
+    "parkId": "magic-kingdom",
+    "name": "Happily Ever After",
+    "description": "Magic Kingdom's spectacular fireworks show featuring Disney stories projected on Cinderella Castle.",
+    "duration": 18,
+    "location": "Central Hub",
+    "type": "show",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "happily-tip-1",
+        "content": "Arrive 60-90 minutes early for best viewing spots",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "happily-tip-2",
+        "content": "Main Street is best for castle projections, hub for fireworks",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "happily-tip-3",
+        "content": "Download the My Disney Experience app to sync music",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "happily-tip-4",
+        "content": "Consider watching from Narcoossee's or Grand Floridian for different view",
+        "category": "strategy",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "fireworks",
+      "nighttime",
+      "castle-projections",
+      "must-see",
+      "finale"
+    ]
+  },
+  {
+    "id": "disney-festival-fantasy",
+    "parkId": "magic-kingdom",
+    "name": "Disney Festival of Fantasy Parade",
+    "description": "A grand parade featuring floats and characters celebrating Disney stories with music and pageantry.",
+    "duration": 12,
+    "location": "Parade Route",
+    "type": "show",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "parade-tip-1",
+        "content": "Best viewing from Frontierland or Main Street for photos",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "parade-tip-2",
+        "content": "Arrives at different times each day - check app for schedule",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "parade-tip-3",
+        "content": "Great time to ride popular attractions while crowds watch parade",
+        "category": "strategy",
+        "priority": 4
+      }
+    ],
+    "tags": [
+      "parade",
+      "characters",
+      "music",
+      "floats",
+      "afternoon"
+    ]
+  },
+  {
+    "id": "cosmic-rays-starlight-cafe",
+    "parkId": "magic-kingdom",
+    "name": "Cosmic Ray's Starlight Cafe",
+    "description": "Quick-service restaurant in Tomorrowland featuring burgers, chicken, and entertainment by Sonny Eclipse.",
+    "duration": 30,
+    "location": "Tomorrowland",
+    "type": "dining",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "cosmic-rays-tip-1",
+        "content": "Largest quick-service restaurant in Magic Kingdom",
+        "category": "general",
+        "priority": 3
+      },
+      {
+        "id": "cosmic-rays-tip-2",
+        "content": "Sonny Eclipse performs regularly - check for showtimes",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "cosmic-rays-tip-3",
+        "content": "Mobile order ahead to skip the line",
+        "category": "strategy",
+        "priority": 4
+      }
+    ],
+    "tags": [
+      "quick-service",
+      "burgers",
+      "entertainment",
+      "large",
+      "convenient"
+    ]
+  },
+  {
+    "id": "casey-corner",
+    "parkId": "magic-kingdom",
+    "name": "Casey's Corner",
+    "description": "Baseball-themed quick service restaurant famous for its hot dogs and baseball atmosphere.",
+    "duration": 20,
+    "location": "Main Street U.S.A.",
+    "type": "dining",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "casey-tip-1",
+        "content": "Great spot to watch the hub activity while eating",
+        "category": "strategy",
+        "priority": 3
+      },
+      {
+        "id": "casey-tip-2",
+        "content": "Try the corn dog nuggets - they're a fan favorite",
+        "category": "dining",
+        "priority": 4
+      },
+      {
+        "id": "casey-tip-3",
+        "content": "Baseball memorabilia and vintage atmosphere throughout",
+        "category": "photo",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "quick-service",
+      "hot-dogs",
+      "baseball",
+      "main-street",
+      "americana"
+    ]
+  },
+  {
+    "id": "enchanted-tiki-room",
+    "parkId": "magic-kingdom",
+    "name": "Walt Disney's Enchanted Tiki Room",
+    "description": "Join José, Michael, Pierre and Fritz in this classic Audio-Animatronics show featuring tropical birds and Polynesian music.",
+    "duration": 15,
+    "location": "Adventureland",
+    "type": "show",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "tiki-tip-1",
+        "content": "Original Disney attraction - opened in 1963 at Disneyland",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "tiki-tip-2",
+        "content": "Great air conditioning break in Adventureland",
+        "category": "strategy",
+        "priority": 3
+      },
+      {
+        "id": "tiki-tip-3",
+        "content": "Look for over 225 Audio-Animatronic birds and flowers",
+        "category": "general",
+        "priority": 3
+      },
+      {
+        "id": "tiki-tip-4",
+        "content": "Classic Sherman Brothers music - sing along!",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "classic",
+      "audio-animatronics",
+      "polynesian",
+      "indoor",
+      "historic"
+    ]
+  },
+  {
+    "id": "pirates-adventure",
+    "parkId": "magic-kingdom",
+    "name": "A Pirate's Adventure: Treasures of the Seven Seas",
+    "description": "Interactive quest game where you help Captain Jack Sparrow find treasure using magical maps throughout Adventureland.",
+    "duration": 30,
+    "location": "Adventureland",
+    "type": "attraction",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "pirates-adventure-tip-1",
+        "content": "Pick up maps at Golden Oak Outpost near Pirates of the Caribbean",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "pirates-adventure-tip-2",
+        "content": "Great activity while waiting for FastPass times or cooling down",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "pirates-adventure-tip-3",
+        "content": "Kids get a reward after completing each treasure hunt",
+        "category": "general",
+        "priority": 4
+      }
+    ],
+    "tags": [
+      "interactive",
+      "treasure-hunt",
+      "kids",
+      "jack-sparrow",
+      "free-activity"
+    ]
+  },
+  {
+    "id": "sorcerers-mk",
+    "parkId": "magic-kingdom",
+    "name": "Sorcerers of the Magic Kingdom",
+    "description": "Interactive card game where guests help Merlin defeat Disney villains throughout the park using spell cards.",
+    "duration": 45,
+    "location": "Multiple Locations",
+    "type": "attraction",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "sorcerers-tip-1",
+        "content": "Start at Firehouse on Main Street to get your first spell cards",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "sorcerers-tip-2",
+        "content": "Collect different spell cards throughout your visit - they're free",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "sorcerers-tip-3",
+        "content": "Great activity for the whole family between attractions",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "interactive",
+      "card-game",
+      "disney-villains",
+      "merlin",
+      "park-wide"
+    ]
+  },
+  {
+    "id": "pecos-bill-tall-tale-inn",
+    "parkId": "magic-kingdom",
+    "name": "Pecos Bill Tall Tale Inn & Cafe",
+    "description": "Wild West-themed quick service restaurant in Frontierland serving burgers, chicken, and Tex-Mex favorites.",
+    "duration": 25,
+    "location": "Frontierland",
+    "type": "dining",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "pecos-bill-tip-1",
+        "content": "Great toppings bar with unlimited condiments and fixings",
+        "category": "dining",
+        "priority": 4
+      },
+      {
+        "id": "pecos-bill-tip-2",
+        "content": "Outdoor seating has great views of Tom Sawyer Island",
+        "category": "strategy",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "quick-service",
+      "burgers",
+      "tex-mex",
+      "outdoor-seating",
+      "frontierland"
+    ]
+  },
+  {
+    "id": "skipper-canteen",
+    "parkId": "magic-kingdom",
+    "name": "Jungle Navigation Co. Ltd. Skipper Canteen",
+    "description": "Table service restaurant inspired by the Jungle Cruise, serving pan-Asian cuisine with a side of skipper humor.",
+    "duration": 75,
+    "location": "Adventureland",
+    "type": "dining",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "skipper-canteen-tip-1",
+        "content": "Reservations highly recommended - book 60 days in advance",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "skipper-canteen-tip-2",
+        "content": "Try the famous 'Tastes like Chicken' for a fun skipper experience",
+        "category": "dining",
+        "priority": 4
+      },
+      {
+        "id": "skipper-canteen-tip-3",
+        "content": "Air-conditioned with great atmosphere and theming",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "table-service",
+      "jungle-cruise",
+      "pan-asian",
+      "air-conditioning",
+      "reservations"
+    ]
+  },
+  {
+    "id": "pinocchio-village-haus",
+    "parkId": "magic-kingdom",
+    "name": "Pinocchio Village Haus",
+    "description": "Quick service restaurant in Fantasyland serving flatbreads, salads, and kids' meals with views of 'it's a small world'.",
+    "duration": 20,
+    "location": "Fantasyland",
+    "type": "dining",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "pinocchio-tip-1",
+        "content": "Upstairs seating offers great views of 'it's a small world' queue",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "pinocchio-tip-2",
+        "content": "Good spot for a quick bite while in Fantasyland",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "quick-service",
+      "flatbreads",
+      "fantasyland",
+      "kids-meals",
+      "views"
+    ]
+  },
+  {
+    "id": "gaston-tavern",
+    "parkId": "magic-kingdom",
+    "name": "Gaston's Tavern",
+    "description": "Beast-themed quick service location famous for its cinnamon rolls and LeFou's Brew in the Beauty and the Beast area.",
+    "duration": 15,
+    "location": "Fantasyland",
+    "type": "dining",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "gaston-tavern-tip-1",
+        "content": "Famous cinnamon roll is huge and perfect for sharing",
+        "category": "dining",
+        "priority": 5
+      },
+      {
+        "id": "gaston-tavern-tip-2",
+        "content": "LeFou's Brew is a unique frozen apple juice drink",
+        "category": "dining",
+        "priority": 4
+      },
+      {
+        "id": "gaston-tavern-tip-3",
+        "content": "Great atmosphere with Beauty and the Beast theming",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "cinnamon-roll",
+      "lefous-brew",
+      "beauty-beast",
+      "snacks",
+      "themed"
+    ]
+  },
+  {
+    "id": "tortuga-tavern",
+    "parkId": "magic-kingdom",
+    "name": "Tortuga Tavern",
+    "description": "Pirate-themed quick service restaurant serving Mexican and Caribbean-inspired dishes near Pirates of the Caribbean.",
+    "duration": 25,
+    "location": "Adventureland",
+    "type": "dining",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "tortuga-tip-1",
+        "content": "Seasonal operation - often closed during slower periods",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "tortuga-tip-2",
+        "content": "Great pirate theming matches nearby Pirates attraction",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "seasonal",
+      "mexican",
+      "caribbean",
+      "pirates",
+      "quick-service"
+    ]
+  },
+  {
+    "id": "sleepy-hollow",
+    "parkId": "magic-kingdom",
+    "name": "Sleepy Hollow",
+    "description": "Liberty Square snack location famous for its fresh funnel cakes and sweet treats.",
+    "duration": 10,
+    "location": "Liberty Square",
+    "type": "dining",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "sleepy-hollow-tip-1",
+        "content": "Funnel cakes are made fresh and perfect for sharing",
+        "category": "dining",
+        "priority": 5
+      },
+      {
+        "id": "sleepy-hollow-tip-2",
+        "content": "Great location between Haunted Mansion and Hall of Presidents",
+        "category": "strategy",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "funnel-cake",
+      "snacks",
+      "fresh",
+      "liberty-square",
+      "sweet"
+    ]
+  },
+  {
+    "id": "tomorrowland-terrace",
+    "parkId": "magic-kingdom",
+    "name": "Tomorrowland Terrace Restaurant",
+    "description": "Seasonal quick service restaurant with burgers, hot dogs, and a great view of Cinderella Castle.",
+    "duration": 30,
+    "location": "Tomorrowland",
+    "type": "dining",
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "tomorrowland-terrace-tip-1",
+        "content": "Seasonal operation - typically busy seasons only",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "tomorrowland-terrace-tip-2",
+        "content": "Outdoor seating with great castle views",
+        "category": "photo",
+        "priority": 4
+      }
+    ],
+    "tags": [
+      "seasonal",
+      "burgers",
+      "castle-views",
+      "outdoor",
+      "quick-service"
+    ]
+  }
+]

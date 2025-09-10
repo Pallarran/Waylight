@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import type { Attraction, AttractionType } from '../types';
-import { getAttractions } from '../data/attractions';
+import { getAttractions } from '../data/attractions'; // Now uses shared package data
 
 interface AttractionFilters {
   parkIds: string[];
@@ -15,7 +15,6 @@ interface AttractionState {
   attractions: Attraction[];
   filteredAttractions: Attraction[];
   filters: AttractionFilters;
-  favorites: string[]; // attraction IDs
   isLoading: boolean;
   
   // Data loading
@@ -27,11 +26,6 @@ interface AttractionState {
   resetFilters: () => void;
   applyFilters: () => void;
   searchForAttractions: (query: string) => void;
-  
-  // Favorites
-  toggleFavorite: (attractionId: string) => void;
-  isFavorite: (attractionId: string) => boolean;
-  getFavoriteAttractions: () => Attraction[];
   
   // Utility
   getAttractionById: (id: string) => Attraction | undefined;
@@ -51,7 +45,6 @@ const useAttractionStore = create<AttractionState>((set, get) => ({
   attractions: [],
   filteredAttractions: [],
   filters: defaultFilters,
-  favorites: [],
   isLoading: false,
   
   loadAttractions: () => {
@@ -60,9 +53,9 @@ const useAttractionStore = create<AttractionState>((set, get) => ({
       const allAttractions = getAttractions();
       set({ 
         attractions: allAttractions,
-        filteredAttractions: allAttractions,
         isLoading: false 
       });
+      get().applyFilters(); // Apply sorting
     } catch (error) {
       console.error('Failed to load attractions:', error);
       set({ isLoading: false });
@@ -134,6 +127,9 @@ const useAttractionStore = create<AttractionState>((set, get) => ({
       );
     }
     
+    // Sort alphabetically by name
+    filtered.sort((a, b) => a.name.localeCompare(b.name));
+    
     set({ filteredAttractions: filtered });
   },
   
@@ -142,26 +138,6 @@ const useAttractionStore = create<AttractionState>((set, get) => ({
       filters: { ...state.filters, searchQuery: query }
     }));
     get().applyFilters();
-  },
-  
-  toggleFavorite: (attractionId) => {
-    set((state) => {
-      const isFav = state.favorites.includes(attractionId);
-      return {
-        favorites: isFav
-          ? state.favorites.filter(id => id !== attractionId)
-          : [...state.favorites, attractionId]
-      };
-    });
-  },
-  
-  isFavorite: (attractionId) => {
-    return get().favorites.includes(attractionId);
-  },
-  
-  getFavoriteAttractions: () => {
-    const { attractions, favorites } = get();
-    return attractions.filter(a => favorites.includes(a.id));
   },
   
   getAttractionById: (id) => {

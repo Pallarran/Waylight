@@ -1,20 +1,28 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home';
-import TripBuilderWorking from './pages/TripBuilderWorking';
-import Settings from './pages/Settings';
-import AttractionsWorking from './pages/AttractionsWorking';
+
+const TripBuilderWorking = lazy(() => import('./pages/TripBuilderWorking'));
+const Settings = lazy(() => import('./pages/Settings'));
+const AttractionsWorking = lazy(() => import('./pages/AttractionsWorking'));
 
 function App() {
   return (
     <Router>
       <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/trip-builder" element={<TripBuilderWorking />} />
-          <Route path="/attractions" element={<AttractionsWorking />} />
-          <Route path="/settings" element={<Settings />} />
-        </Routes>
+        <Suspense fallback={
+          <div className="flex items-center justify-center min-h-screen">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sea"></div>
+          </div>
+        }>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/trip-builder" element={<TripBuilderWorking />} />
+            <Route path="/attractions" element={<AttractionsWorking />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </Suspense>
       </Layout>
     </Router>
   );

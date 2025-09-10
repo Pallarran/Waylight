@@ -1,0 +1,9 @@
+{
+  "id": "animal-kingdom",
+  "name": "Animal Kingdom",
+  "abbreviation": "AK",
+  "location": "Walt Disney World Resort, Orlando, FL",
+  "description": "Discover the magic of nature in this zoological theme park featuring real animals, thrilling attractions, and immersive lands including Pandora - The World of Avatar.",
+  "openingTime": "08:00",
+  "closingTime": "20:00"
+}

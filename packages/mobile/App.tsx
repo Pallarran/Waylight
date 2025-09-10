@@ -5,6 +5,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+// import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold } from '@expo-google-fonts/inter';
+// import { Manrope_400Regular, Manrope_500Medium, Manrope_600SemiBold, Manrope_700Bold } from '@expo-google-fonts/manrope';
+// import * as SplashScreen from 'expo-splash-screen';
+import { useEffect } from 'react';
 
 // Screens
 import HomeScreen from './src/screens/HomeScreen';
@@ -51,7 +55,31 @@ function TripsStack() {
   );
 }
 
+// Keep the splash screen visible while we fetch resources
+// SplashScreen.preventAutoHideAsync();
+
 export default function App() {
+  // const [fontsLoaded] = useFonts({
+  //   Inter_400Regular,
+  //   Inter_500Medium,
+  //   Inter_600SemiBold,
+  //   Inter_700Bold,
+  //   Manrope_400Regular,
+  //   Manrope_500Medium,
+  //   Manrope_600SemiBold,
+  //   Manrope_700Bold,
+  // });
+
+  // useEffect(() => {
+  //   if (fontsLoaded) {
+  //     SplashScreen.hideAsync();
+  //   }
+  // }, [fontsLoaded]);
+
+  // if (!fontsLoaded) {
+  //   return null;
+  // }
+
   return (
     <SafeAreaProvider>
       <NavigationContainer>
@@ -74,7 +102,7 @@ export default function App() {
 
               return <Ionicons name={iconName} size={size} color={color} />;
             },
-            tabBarActiveTintColor: '#0EA5A8',
+            tabBarActiveTintColor: '#4ECDC4',
             tabBarInactiveTintColor: '#64748B',
             headerStyle: {
               backgroundColor: '#F8FAFC',

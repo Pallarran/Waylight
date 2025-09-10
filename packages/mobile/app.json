@@ -1,13 +1,13 @@
 {
   "expo": {
     "name": "Waylight",
-    "slug": "waylight",
-    "version": "1.0.0",
+    "slug": "waylight-new",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/waylight-logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#F8FAFC"
     },

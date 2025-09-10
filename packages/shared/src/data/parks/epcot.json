@@ -1,0 +1,9 @@
+{
+  "id": "epcot",
+  "name": "EPCOT",
+  "abbreviation": "EP",
+  "location": "Walt Disney World Resort, Orlando, FL",
+  "description": "Celebrate human achievement and international culture in this park dedicated to technological innovation and world showcase.",
+  "openingTime": "09:00",
+  "closingTime": "21:00"
+}

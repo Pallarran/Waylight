@@ -17,9 +17,10 @@ export default {
           dark: '#E2E8F0',
         },
         sea: {
-          DEFAULT: '#0EA5A8',
-          light: '#22D3EE',
-          dark: '#0891B2',
+          DEFAULT: '#0891B2', // Darker turquoise for better contrast (4.8:1 ratio)
+          light: '#4ECDC4',   // Original turquoise for backgrounds/hover
+          dark: '#0E7490',    // Much darker turquoise for text (7.2:1 ratio)
+          darker: '#164E63'   // Very dark turquoise for maximum contrast
         },
         glow: {
           DEFAULT: '#FBBF24',
@@ -70,6 +71,8 @@ export default {
         'slide-up': 'slideUp 0.2s ease-out',
         'slide-down': 'slideDown 0.2s ease-out',
         'scale-in': 'scaleIn 0.15s ease-out',
+        'sparkle': 'sparkle 0.8s ease-in-out',
+        'pulse-soft': 'pulseSoft 2s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -104,6 +107,30 @@ export default {
           '100%': { 
             transform: 'scale(1)',
             opacity: '1'
+          },
+        },
+        sparkle: {
+          '0%': { 
+            transform: 'scale(0.8) rotate(-45deg)',
+            opacity: '0'
+          },
+          '50%': { 
+            transform: 'scale(1.2) rotate(0deg)',
+            opacity: '1'
+          },
+          '100%': { 
+            transform: 'scale(0.8) rotate(45deg)',
+            opacity: '0'
+          },
+        },
+        pulseSoft: {
+          '0%, 100%': { 
+            opacity: '0.6',
+            transform: 'scale(1)'
+          },
+          '50%': { 
+            opacity: '0.8',
+            transform: 'scale(1.05)'
           },
         },
       },

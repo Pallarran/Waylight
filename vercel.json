@@ -1,8 +1,14 @@
 {
-  "buildCommand": "pnpm --filter @waylight/shared build && pnpm --filter @waylight/web build",
-  "outputDirectory": "packages/web/dist", 
-  "installCommand": "pnpm install",
-  "framework": null,
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "packages/web/dist"
+      }
+    }
+  ],
   "routes": [
     {
       "handle": "filesystem"
@@ -11,5 +17,7 @@
       "src": "/(.*)",
       "dest": "/index.html"
     }
-  ]
+  ],
+  "buildCommand": "pnpm --filter @waylight/shared build && pnpm --filter @waylight/web build",
+  "installCommand": "pnpm install"
 }

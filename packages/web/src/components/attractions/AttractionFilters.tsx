@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { Search, X, Sliders } from 'lucide-react';
 import { useAttractionStore } from '../../stores';
 import { AttractionType, IntensityLevel } from '../../types';
+import { getParks } from '@waylight/shared';
 
 export default function AttractionFilters() {
   const [showAdvanced, setShowAdvanced] = useState(false);
   const { filters, setFilters, resetFilters } = useAttractionStore();
+  const parks = getParks();
 
   const handleSearchChange = (query: string) => {
     setFilters({ searchQuery: query });
@@ -16,6 +18,13 @@ export default function AttractionFilters() {
       ? filters.types.filter(t => t !== type)
       : [...filters.types, type];
     setFilters({ types: newTypes });
+  };
+
+  const handleParkToggle = (parkId: string) => {
+    const newParkIds = filters.parkIds.includes(parkId)
+      ? filters.parkIds.filter(id => id !== parkId)
+      : [...filters.parkIds, parkId];
+    setFilters({ parkIds: newParkIds });
   };
 
   const handleIntensityChange = (intensity: string) => {
@@ -80,6 +89,55 @@ export default function AttractionFilters() {
         </button>
 
         <button
+          onClick={() => handleTypeToggle(AttractionType.DINING)}
+          className={`btn-secondary btn-sm ${
+            filters.types.includes(AttractionType.DINING) ? 'bg-sea/10 text-sea-dark' : ''
+          }`}
+        >
+          🍽️ Dining
+        </button>
+
+        {parks.length > 1 && (
+          <>
+            <button
+              onClick={() => handleParkToggle('magic-kingdom')}
+              className={`btn-secondary btn-sm ${
+                filters.parkIds.includes('magic-kingdom') ? 'bg-sea/10 text-sea-dark' : ''
+              }`}
+            >
+              🏰 Magic Kingdom
+            </button>
+            
+            <button
+              onClick={() => handleParkToggle('epcot')}
+              className={`btn-secondary btn-sm ${
+                filters.parkIds.includes('epcot') ? 'bg-sea/10 text-sea-dark' : ''
+              }`}
+            >
+              🌐 EPCOT
+            </button>
+            
+            <button
+              onClick={() => handleParkToggle('hollywood-studios')}
+              className={`btn-secondary btn-sm ${
+                filters.parkIds.includes('hollywood-studios') ? 'bg-sea/10 text-sea-dark' : ''
+              }`}
+            >
+              🎬 Hollywood Studios
+            </button>
+            
+            <button
+              onClick={() => handleParkToggle('animal-kingdom')}
+              className={`btn-secondary btn-sm ${
+                filters.parkIds.includes('animal-kingdom') ? 'bg-sea/10 text-sea-dark' : ''
+              }`}
+            >
+              🦁 Animal Kingdom
+            </button>
+          </>
+        )}
+
+        <button
           onClick={() => setFilters({ wheelchairAccessible: !filters.wheelchairAccessible })}
           className={`btn-secondary btn-sm ${
             filters.wheelchairAccessible ? 'bg-sea/10 text-sea-dark' : ''
@@ -102,8 +160,28 @@ export default function AttractionFilters() {
       {/* Advanced Filters */}
       {showAdvanced && (
         <div className="card p-6 animate-in">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             
+            {/* Parks */}
+            <div>
+              <h3 className="font-medium text-ink mb-3">Parks</h3>
+              <div className="space-y-2">
+                {parks.map(park => (
+                  <label key={park.id} className="flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={filters.parkIds.includes(park.id)}
+                      onChange={() => handleParkToggle(park.id)}
+                      className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                    />
+                    <span className="text-sm text-ink">
+                      {park.name}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
             {/* Attraction Type */}
             <div>
               <h3 className="font-medium text-ink mb-3">Attraction Type</h3>

@@ -1,9 +1,17 @@
 import { Link } from 'react-router-dom';
+import WaylightLogo from '../assets/waylight-logo.png';
 
 export default function Home() {
   return (
-    <div className="container-waylight section-padding">
+    <div className="container-waylight pt-4 pb-8 md:pt-6 md:pb-12 lg:pt-8 lg:pb-16">
       <div className="text-center">
+        <div className="flex justify-center mb-8">
+          <img 
+            src={WaylightLogo} 
+            alt="Waylight" 
+            className="w-24 h-24 rounded-2xl shadow-medium"
+          />
+        </div>
         <h1 className="text-4xl font-bold text-ink mb-6">
           Welcome to <span className="gradient-sea bg-clip-text text-transparent">Waylight</span>
         </h1>
@@ -21,7 +29,9 @@ export default function Home() {
           </Link>
         </div>
         
-        <div className="mt-16 grid md:grid-cols-3 gap-8">
+        <div className="mt-16">
+          <h2 className="text-2xl font-semibold text-ink text-center mb-12">Key Features</h2>
+          <div className="grid md:grid-cols-3 gap-8">
           <div className="card p-6 text-center">
             <div className="w-12 h-12 bg-sea/10 rounded-xl flex items-center justify-center mx-auto mb-4">
               <svg className="w-6 h-6 text-sea" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -51,6 +61,7 @@ export default function Home() {
             </div>
             <h3 className="text-xl font-semibold text-ink mb-2">Personalized</h3>
             <p className="text-ink-light">Tailored recommendations based on your preferences and interests.</p>
+          </div>
           </div>
         </div>
       </div>

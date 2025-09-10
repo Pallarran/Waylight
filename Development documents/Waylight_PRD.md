@@ -41,7 +41,7 @@ Waylight is a mobile + web application that helps theme park visitors plan and m
 **Color palette** (accessible + neutral):
 - **Ink**: `#0F172A` (primary text/icons)
 - **Surface**: `#F8FAFC` (background)
-- **Accent – Sea**: `#0EA5A8`
+- **Accent – Sea**: `#4ECDC4` (updated to match logo turquoise)
 - **Glow – Light**: `#FBBF24`
 
 **Typography**:

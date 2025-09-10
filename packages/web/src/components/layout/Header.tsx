@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import WaylightLogo from '../../assets/waylight-logo.png?w=32&h=32&format=webp';
 
 export default function Header() {
   const location = useLocation();
@@ -19,14 +20,21 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-sea rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">W</span>
-              </div>
+              <img 
+                src={WaylightLogo} 
+                alt="" 
+                className="w-8 h-8 rounded-lg"
+                loading="eager"
+                decoding="sync"
+                width="32"
+                height="32"
+                role="presentation"
+              />
               <span className="text-xl font-bold text-ink">Waylight</span>
             </Link>
           </div>
 
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-8" aria-label="Main navigation">
             {navigation.map((item) => (
               <Link
                 key={item.name}
@@ -45,6 +53,8 @@ export default function Header() {
           <button
             className="md:hidden p-2 rounded-lg hover:bg-surface-dark/50"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileMenuOpen}
           >
             {isMobileMenuOpen ? (
               <X className="w-5 h-5 text-ink" />
@@ -56,7 +66,7 @@ export default function Header() {
 
         {isMobileMenuOpen && (
           <div className="md:hidden border-t border-surface-dark/50 py-4">
-            <nav className="flex flex-col space-y-2">
+            <nav className="flex flex-col space-y-2" aria-label="Mobile navigation">
               {navigation.map((item) => (
                 <Link
                   key={item.name}

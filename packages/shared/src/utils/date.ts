@@ -11,7 +11,7 @@ export const formatTime = (time: string): string => {
   const hours = Number(hoursStr);
   const minutes = Number(minutesStr);
   
-  if (isNaN(hours) || isNaN(minutes)) {
+  if (isNaN(hours) || isNaN(minutes) || hours > 23 || hours < 0 || minutes > 59 || minutes < 0) {
     return time; // Return original if invalid format
   }
   
