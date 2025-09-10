@@ -118,8 +118,8 @@ Desktop.ini
 *.backup
 *.bak
 
-# Lock files (keep package-lock.json for npm, but ignore others)
+# Lock files (keep package-lock.json for npm and pnpm-lock.yaml for pnpm)
 yarn.lock
-pnpm-lock.yaml
 !package-lock.json
+!pnpm-lock.yaml
 .vercel
