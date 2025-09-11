@@ -6,6 +6,9 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "description": "Your magical Disney World trip planner. Plan your days with clarity and calm.",
+    "keywords": ["disney", "theme-park", "trip-planner", "walt-disney-world", "travel"],
+    "privacy": "public",
     "splash": {
       "image": "./assets/waylight-logo.png",
       "resizeMode": "contain",
@@ -16,23 +19,30 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.waylight.app"
+      "bundleIdentifier": "com.waylight.app",
+      "buildNumber": "1",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Waylight helps you plan your Disney World trip with location-aware recommendations.",
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#F8FAFC"
       },
-      "package": "com.waylight.app"
+      "package": "com.waylight.app",
+      "versionCode": 1,
+      "permissions": [
+        "android.permission.INTERNET"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "scheme": "waylight",
     "extra": {
-      "eas": {
-        "projectId": "waylight-mobile"
-      }
+      "eas": {}
     }
   }
 }

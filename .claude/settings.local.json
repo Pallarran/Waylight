@@ -47,7 +47,10 @@
       "WebFetch(domain:www.mousehacking.com)",
       "Bash(cp:*)",
       "Bash(vercel:*)",
-      "Bash(git reset:*)"
+      "Bash(git reset:*)",
+      "Bash(npx eas build:*)",
+      "Bash(eas build:configure)",
+      "Bash(eas:*)"
     ],
     "deny": [],
     "ask": []
