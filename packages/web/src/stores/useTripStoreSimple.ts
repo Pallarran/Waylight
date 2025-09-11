@@ -2,8 +2,7 @@ import { create } from 'zustand';
 import type { Trip, TripDay, ItineraryItem } from '../types';
 import { DatabaseService } from '../services/database';
 import { createTrip } from '../utils/trip';
-import { syncService } from '@waylight/shared/services/sync';
-import { authService } from '@waylight/shared/services/auth';
+import { syncService, authService } from '@waylight/shared';
 
 interface SimpleTripState {
   trips: Trip[];
