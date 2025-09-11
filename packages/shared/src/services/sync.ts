@@ -70,8 +70,8 @@ export class SyncService {
 
   async syncTrips(): Promise<void> {
     const user = authService.getState().user;
-    if (!user || !this.syncStatus.online) {
-      return;
+    if (!user || !this.syncStatus.online || this.syncStatus.syncing) {
+      return; // Don't start a new sync if one is already in progress
     }
 
     this.updateStatus({ syncing: true, error: null });

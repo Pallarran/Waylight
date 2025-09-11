@@ -13,7 +13,7 @@ interface SimpleTripState {
   isSyncing: boolean;
   
   // Trip management
-  loadTrips: () => Promise<void>;
+  loadTrips: (skipSync?: boolean) => Promise<void>;
   createNewTrip: (name: string, startDate: string, endDate: string) => Promise<Trip>;
   setActiveTrip: (tripId: string | null) => void;
   deleteTripById: (tripId: string) => Promise<void>;
@@ -72,7 +72,7 @@ const useSimpleTripStore = create<SimpleTripState>((set, get) => ({
         for (const trip of trips) {
           await DatabaseService.createTrip(trip);
         }
-        // Update the store with synced trips
+        // Update the store with synced trips without triggering more syncs
         set({ trips });
       }
     );
@@ -96,8 +96,8 @@ const useSimpleTripStore = create<SimpleTripState>((set, get) => ({
   syncTrips: async () => {
     try {
       await syncService.syncTrips();
-      // Reload trips after sync to get latest data
-      await get().loadTrips();
+      // Don't reload trips here to avoid infinite loop
+      // The sync service callback will update the store with synced trips
     } catch (error) {
       set({ 
         error: error instanceof Error ? error.message : 'Sync failed',
@@ -105,17 +105,19 @@ const useSimpleTripStore = create<SimpleTripState>((set, get) => ({
     }
   },
 
-  loadTrips: async () => {
+  loadTrips: async (skipSync = false) => {
     set({ isLoading: true, error: null });
     try {
       const trips = await DatabaseService.getTrips();
       set({ trips, isLoading: false });
       
-      // Auto-sync if user is authenticated and online
-      const authState = authService.getState();
-      if (authState.user && !authState.loading && navigator.onLine) {
-        // Don't await sync to avoid blocking the UI
-        get().syncTrips().catch(console.error);
+      // Only auto-sync on initial load, not on subsequent loads
+      if (!skipSync) {
+        const authState = authService.getState();
+        if (authState.user && !authState.loading && navigator.onLine) {
+          // Don't await sync to avoid blocking the UI
+          get().syncTrips().catch(console.error);
+        }
       }
     } catch (error) {
       set({ 
