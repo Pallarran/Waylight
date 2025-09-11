@@ -101,14 +101,3 @@ export const validateContent = async (): Promise<{
   };
 };
 
-// Legacy compatibility functions
-export const getAttractions = () => {
-  const { getAllDoItems } = require('./do');
-  const { getAllEatItems } = require('./eat');
-  return [...getAllDoItems(), ...getAllEatItems()];
-};
-
-export const getAttraction = (id: string) => {
-  const allItems = getAttractions();
-  return allItems.find((item: any) => item.id === id);
-};

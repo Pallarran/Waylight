@@ -25,7 +25,7 @@ import Card from '../components/common/Card';
 import Button from '../components/common/Button';
 import { Ionicons } from '@expo/vector-icons';
 import type { Trip, TripDay, ItineraryItem, Park, Attraction } from '@waylight/shared';
-import { getParks, getAttractions } from '@waylight/shared';
+import { getParks, getAllDoItems, getAllEatItems } from '@waylight/shared';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 const SWIPE_THRESHOLD = 100;
@@ -86,7 +86,7 @@ export default function TripDetailScreen({ route, navigation }: TripDetailScreen
     if (selectedDay?.parkId) {
       const loadAttractions = async () => {
         try {
-          const allAttractions = getAttractions();
+          const allAttractions = [...getAllDoItems(), ...getAllEatItems()];
           const parkAttractions = allAttractions.filter(a => a.parkId === selectedDay.parkId);
           setDayAttractions(parkAttractions);
         } catch (error) {

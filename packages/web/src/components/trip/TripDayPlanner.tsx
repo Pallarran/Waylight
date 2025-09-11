@@ -6,7 +6,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useTripStore } from '../../stores';
 import { PARKS, getParkName } from '../../data/parks';
 import { getCategoryIcon, getCategoryColor, getCategoryInfo } from '../../data/activityCategories';
-import { getAttractions } from '../../data/attractions';
+import { getAllDoItems, getAllEatItems } from '@waylight/shared';
 // import QuickAddBar from './QuickAddBar'; // Temporarily disabled due to syntax error
 import TripOverview from './TripOverview';
 import CheatSheetView from './CheatSheetView';
@@ -31,7 +31,8 @@ const DraggableItem = ({ item, index, tripId, dayId, moveItem }: DraggableItemPr
   const [isEditing, setIsEditing] = useState(false);
   
   // Get attraction data if this item references an attraction
-  const attraction = item.attractionId ? getAttractions().find(a => a.id === item.attractionId) : null;
+  const allItems = [...getAllDoItems(), ...getAllEatItems()];
+  const attraction = item.attractionId ? allItems.find(a => a.id === item.attractionId) : null;
   const [editData, setEditData] = useState({
     name: item.name,
     startTime: item.startTime || '',
@@ -604,7 +605,8 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
     
     if (attractionId) {
       // Adding a specific attraction
-      const attraction = getAttractions().find(a => a.id === attractionId);
+      const allAttractions = [...getAllDoItems(), ...getAllEatItems()];
+      const attraction = allAttractions.find(a => a.id === attractionId);
       if (!attraction) return;
       
       const newItem = {

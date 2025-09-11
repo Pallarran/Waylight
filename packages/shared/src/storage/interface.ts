@@ -11,10 +11,10 @@ export interface StorageAdapter {
   getParks(): Promise<Park[]>;
   getPark(id: string): Promise<Park | null>;
   
-  // Attractions
-  getAttractions(parkId?: string): Promise<Attraction[]>;
-  getAttraction(id: string): Promise<Attraction | null>;
-  searchAttractions(query: string, parkId?: string): Promise<Attraction[]>;
+  // Waypoints (DO/EAT items)
+  getWaypoints(parkId?: string): Promise<Attraction[]>;
+  getWaypoint(id: string): Promise<Attraction | null>;
+  searchWaypoints(query: string, parkId?: string): Promise<Attraction[]>;
   
   // Settings
   getSettings(): Promise<Settings>;
@@ -35,8 +35,8 @@ export abstract class BaseStorageAdapter implements StorageAdapter {
   abstract getParks(): Promise<Park[]>;
   abstract getPark(id: string): Promise<Park | null>;
   
-  abstract getAttractions(parkId?: string): Promise<Attraction[]>;
-  abstract getAttraction(id: string): Promise<Attraction | null>;
+  abstract getWaypoints(parkId?: string): Promise<Attraction[]>;
+  abstract getWaypoint(id: string): Promise<Attraction | null>;
   
   abstract getSettings(): Promise<Settings>;
   abstract saveSettings(settings: Settings): Promise<void>;
@@ -45,8 +45,8 @@ export abstract class BaseStorageAdapter implements StorageAdapter {
   abstract export(): Promise<string>;
   abstract import(data: string): Promise<void>;
   
-  async searchAttractions(query: string, parkId?: string): Promise<Attraction[]> {
-    const attractions = await this.getAttractions(parkId);
+  async searchWaypoints(query: string, parkId?: string): Promise<Attraction[]> {
+    const attractions = await this.getWaypoints(parkId);
     const searchTerm = query.toLowerCase();
     
     return attractions.filter(attraction => 
