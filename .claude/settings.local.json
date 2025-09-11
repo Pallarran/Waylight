@@ -12,7 +12,8 @@
       "Bash(pnpm --filter @waylight/web type-check)",
       "Bash(pnpm --filter @waylight/shared build)",
       "Bash(for file in packages/shared/src/data/eat/$category/*.json)",
-      "Bash(else echo \"$file: empty\")"
+      "Bash(else echo \"$file: empty\")",
+      "Bash(pnpm --filter @waylight/web build)"
     ],
     "deny": [],
     "ask": []
