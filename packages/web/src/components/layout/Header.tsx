@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import WaylightLogo from '../../assets/waylight-logo.png?w=32&h=32&format=webp';
+import AuthStatus from '../auth/AuthStatus';
 
 export default function Header() {
   const location = useLocation();
@@ -50,6 +51,11 @@ export default function Header() {
             ))}
           </nav>
 
+          {/* Desktop Auth Status */}
+          <div className="hidden md:flex">
+            <AuthStatus />
+          </div>
+
           <button
             className="md:hidden p-2 rounded-lg hover:bg-surface-dark/50"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -82,6 +88,11 @@ export default function Header() {
                 </Link>
               ))}
             </nav>
+            
+            {/* Mobile Auth Status */}
+            <div className="pt-4 border-t border-surface-dark/50 mt-4">
+              <AuthStatus />
+            </div>
           </div>
         )}
       </div>
