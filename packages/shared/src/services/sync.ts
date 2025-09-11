@@ -18,6 +18,7 @@ export class SyncService {
     error: null
   };
   private listeners: ((status: SyncStatus) => void)[] = [];
+  private syncInterval: NodeJS.Timeout | null = null;
 
   static getInstance(): SyncService {
     if (!SyncService.instance) {
@@ -128,6 +129,24 @@ export class SyncService {
   ) {
     this.getLocalTripsCallback = getLocalTrips;
     this.saveLocalTripsCallback = saveLocalTrips;
+  }
+
+  startPeriodicSync(intervalMinutes: number = 5): void {
+    this.stopPeriodicSync(); // Clear any existing interval
+    
+    this.syncInterval = setInterval(() => {
+      const authState = authService.getState();
+      if (authState.user && !authState.loading && this.syncStatus.online && !this.syncStatus.syncing) {
+        this.syncTrips().catch(console.error);
+      }
+    }, intervalMinutes * 60 * 1000);
+  }
+
+  stopPeriodicSync(): void {
+    if (this.syncInterval) {
+      clearInterval(this.syncInterval);
+      this.syncInterval = null;
+    }
   }
 
   private mergeTrips(localTrips: Trip[], remoteTrips: any[]): Trip[] {

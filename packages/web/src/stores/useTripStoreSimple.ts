@@ -22,6 +22,8 @@ interface SimpleTripState {
   // Sync management
   syncTrips: () => Promise<void>;
   initializeSync: () => void;
+  startPeriodicSync: () => void;
+  stopPeriodicSync: () => void;
   
   // Day management
   addDay: (tripId: string, date: string) => Promise<TripDay>;
@@ -85,12 +87,23 @@ const useSimpleTripStore = create<SimpleTripState>((set, get) => ({
       }
     });
 
-    // Auto-sync when user authenticates
+    // Auto-sync when user authenticates and start periodic sync
     authService.subscribe((authState) => {
       if (authState.user && !authState.loading) {
         get().syncTrips();
+        get().startPeriodicSync();
+      } else {
+        get().stopPeriodicSync();
       }
     });
+  },
+
+  startPeriodicSync: () => {
+    syncService.startPeriodicSync(30); // Sync every 30 minutes
+  },
+
+  stopPeriodicSync: () => {
+    syncService.stopPeriodicSync();
   },
 
   syncTrips: async () => {

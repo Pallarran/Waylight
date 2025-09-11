@@ -8,11 +8,12 @@ import SuccessFeedback from '../components/common/SuccessFeedback';
 
 export default function TripBuilderWorking() {
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const { trips, activeTrip, isLoading, error, successMessage, isSyncing, loadTrips, clearError, clearSuccess, createNewTrip, setActiveTrip, initializeSync } = useTripStore();
+  const { trips, activeTrip, isLoading, error, successMessage, isSyncing, loadTrips, clearError, clearSuccess, createNewTrip, setActiveTrip, initializeSync, syncTrips } = useTripStore();
 
   useEffect(() => {
     // Initialize sync before loading trips
     initializeSync();
+    // Load trips with sync enabled on app start
     loadTrips();
   }, [loadTrips, initializeSync]);
 
@@ -52,12 +53,21 @@ export default function TripBuilderWorking() {
               <p className="text-ink-light">Create and manage your Walt Disney World vacation plans.</p>
             </div>
             <div className="flex items-center gap-3">
-              {isSyncing && (
-                <div className="flex items-center text-sea text-sm">
-                  <Cloud className="w-4 h-4 mr-1 animate-pulse" />
-                  Syncing...
-                </div>
-              )}
+              {/* Sync Status/Button */}
+              <button
+                onClick={() => syncTrips()}
+                className={`flex items-center text-sm px-3 py-2 rounded-lg transition-colors ${
+                  isSyncing 
+                    ? 'text-sea bg-sea/10 cursor-not-allowed' 
+                    : 'text-ink-light hover:text-sea hover:bg-sea/10'
+                }`}
+                disabled={isSyncing}
+                title={isSyncing ? 'Syncing...' : 'Click to sync now'}
+              >
+                <Cloud className={`w-4 h-4 mr-1 ${isSyncing ? 'animate-pulse' : ''}`} />
+                {isSyncing ? 'Syncing...' : 'Sync'}
+              </button>
+              
               <button
                 onClick={handleCreateTrip}
                 className="btn-primary"
