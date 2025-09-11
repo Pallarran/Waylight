@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Plus, MapPin, Loader2, AlertCircle } from 'lucide-react';
+import { Plus, MapPin, Loader2, AlertCircle, Cloud, CloudOff } from 'lucide-react';
 import { useTripStore } from '../stores';
 import CreateTripModal from '../components/trip/CreateTripModal';
 import TripCard from '../components/trip/TripCard';
@@ -8,11 +8,13 @@ import SuccessFeedback from '../components/common/SuccessFeedback';
 
 export default function TripBuilderWorking() {
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const { trips, activeTrip, isLoading, error, successMessage, loadTrips, clearError, clearSuccess, createNewTrip, setActiveTrip } = useTripStore();
+  const { trips, activeTrip, isLoading, error, successMessage, isSyncing, loadTrips, clearError, clearSuccess, createNewTrip, setActiveTrip, initializeSync } = useTripStore();
 
   useEffect(() => {
+    // Initialize sync before loading trips
+    initializeSync();
     loadTrips();
-  }, [loadTrips]);
+  }, [loadTrips, initializeSync]);
 
   const handleCreateTrip = () => {
     setShowCreateModal(true);
@@ -49,14 +51,22 @@ export default function TripBuilderWorking() {
               <h1 className="text-3xl font-bold text-ink mb-4">Trip Builder</h1>
               <p className="text-ink-light">Create and manage your Walt Disney World vacation plans.</p>
             </div>
-            <button
-              onClick={handleCreateTrip}
-              className="btn-primary"
-              disabled={isLoading}
-            >
-              <Plus className="w-5 h-5 mr-2" />
-              New Trip
-            </button>
+            <div className="flex items-center gap-3">
+              {isSyncing && (
+                <div className="flex items-center text-sea text-sm">
+                  <Cloud className="w-4 h-4 mr-1 animate-pulse" />
+                  Syncing...
+                </div>
+              )}
+              <button
+                onClick={handleCreateTrip}
+                className="btn-primary"
+                disabled={isLoading}
+              >
+                <Plus className="w-5 h-5 mr-2" />
+                New Trip
+              </button>
+            </div>
           </div>
         </div>
       )}

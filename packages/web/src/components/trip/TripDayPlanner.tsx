@@ -7,7 +7,7 @@ import { useTripStore } from '../../stores';
 import { PARKS, getParkName } from '../../data/parks';
 import { getCategoryIcon, getCategoryColor, getCategoryInfo } from '../../data/activityCategories';
 import { getAttractions } from '../../data/attractions';
-import QuickAddBar from './QuickAddBar';
+// import QuickAddBar from './QuickAddBar'; // Temporarily disabled due to syntax error
 import TripOverview from './TripOverview';
 import CheatSheetView from './CheatSheetView';
 
@@ -1033,10 +1033,9 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
                         <Plus className="w-4 h-4 mr-2 text-sea" />
                         Quick Add Activity
                       </div>
-                      <QuickAddBar
-                        selectedParkId={selectedDay.parkId}
-                        onAddActivity={handleQuickAdd}
-                      />
+                      <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                        <p className="text-xs text-yellow-800">QuickAddBar temporarily disabled</p>
+                      </div>
                     </div>
 
                     {/* Quick Actions */}

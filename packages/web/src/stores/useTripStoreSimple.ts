@@ -2,6 +2,8 @@ import { create } from 'zustand';
 import type { Trip, TripDay, ItineraryItem } from '../types';
 import { DatabaseService } from '../services/database';
 import { createTrip } from '../utils/trip';
+import { syncService } from '@waylight/shared/services/sync';
+import { authService } from '@waylight/shared/services/auth';
 
 interface SimpleTripState {
   trips: Trip[];
@@ -9,6 +11,7 @@ interface SimpleTripState {
   isLoading: boolean;
   error: string | null;
   successMessage: string | null;
+  isSyncing: boolean;
   
   // Trip management
   loadTrips: () => Promise<void>;
@@ -16,6 +19,10 @@ interface SimpleTripState {
   setActiveTrip: (tripId: string | null) => void;
   deleteTripById: (tripId: string) => Promise<void>;
   updateTrip: (tripId: string, updates: Partial<Trip>) => Promise<void>;
+  
+  // Sync management
+  syncTrips: () => Promise<void>;
+  initializeSync: () => void;
   
   // Day management
   addDay: (tripId: string, date: string) => Promise<TripDay>;
@@ -35,18 +42,82 @@ interface SimpleTripState {
   showSuccess: (message: string) => void;
 }
 
+// Helper function to sync a trip after local update
+const syncTripAfterUpdate = (tripId: string) => {
+  const authState = authService.getState();
+  if (authState.user && !authState.loading) {
+    // Get the store instance
+    const store = useSimpleTripStore.getState();
+    const updatedTrip = store.getTripById(tripId);
+    if (updatedTrip) {
+      syncService.uploadTrip(updatedTrip).catch(console.error);
+    }
+  }
+};
+
 const useSimpleTripStore = create<SimpleTripState>((set, get) => ({
   trips: [],
   activeTrip: null,
   isLoading: false,
   error: null,
   successMessage: null,
+  isSyncing: false,
   
+  initializeSync: () => {
+    // Set up sync service callbacks
+    syncService.setLocalDataCallbacks(
+      () => DatabaseService.getTrips(),
+      async (trips) => {
+        // Update local trips when sync occurs
+        await DatabaseService.clearAllData();
+        for (const trip of trips) {
+          await DatabaseService.createTrip(trip);
+        }
+        // Update the store with synced trips
+        set({ trips });
+      }
+    );
+
+    // Listen for sync status changes
+    syncService.subscribe((status) => {
+      set({ isSyncing: status.syncing });
+      if (status.error) {
+        set({ error: status.error });
+      }
+    });
+
+    // Auto-sync when user authenticates
+    authService.subscribe((authState) => {
+      if (authState.user && !authState.loading) {
+        get().syncTrips();
+      }
+    });
+  },
+
+  syncTrips: async () => {
+    try {
+      await syncService.syncTrips();
+      // Reload trips after sync to get latest data
+      await get().loadTrips();
+    } catch (error) {
+      set({ 
+        error: error instanceof Error ? error.message : 'Sync failed',
+      });
+    }
+  },
+
   loadTrips: async () => {
     set({ isLoading: true, error: null });
     try {
       const trips = await DatabaseService.getTrips();
       set({ trips, isLoading: false });
+      
+      // Auto-sync if user is authenticated and online
+      const authState = authService.getState();
+      if (authState.user && !authState.loading && navigator.onLine) {
+        // Don't await sync to avoid blocking the UI
+        get().syncTrips().catch(console.error);
+      }
     } catch (error) {
       set({ 
         error: error instanceof Error ? error.message : 'Failed to load trips',
@@ -67,6 +138,12 @@ const useSimpleTripStore = create<SimpleTripState>((set, get) => ({
         isLoading: false,
         successMessage: "Trip created — you're glowing!"
       }));
+      
+      // Sync to cloud
+      const authState = authService.getState();
+      if (authState.user && !authState.loading) {
+        syncService.uploadTrip(newTrip).catch(console.error);
+      }
       
       return newTrip;
     } catch (error) {
@@ -91,6 +168,12 @@ const useSimpleTripStore = create<SimpleTripState>((set, get) => ({
         trips: state.trips.filter(trip => trip.id !== tripId),
         activeTrip: state.activeTrip?.id === tripId ? null : state.activeTrip
       }));
+      
+      // Sync deletion to cloud
+      const authState = authService.getState();
+      if (authState.user && !authState.loading) {
+        syncService.deleteTrip(tripId).catch(console.error);
+      }
     } catch (error) {
       set({ error: error instanceof Error ? error.message : 'Failed to delete trip' });
     }
@@ -99,15 +182,25 @@ const useSimpleTripStore = create<SimpleTripState>((set, get) => ({
   updateTrip: async (tripId, updates) => {
     set({ error: null });
     try {
-      await DatabaseService.updateTrip(tripId, updates);
+      const updatedData = { ...updates, updatedAt: new Date().toISOString() };
+      await DatabaseService.updateTrip(tripId, updatedData);
       set((state) => ({
         trips: state.trips.map(trip => 
-          trip.id === tripId ? { ...trip, ...updates } : trip
+          trip.id === tripId ? { ...trip, ...updatedData } : trip
         ),
         activeTrip: state.activeTrip?.id === tripId 
-          ? { ...state.activeTrip, ...updates } 
+          ? { ...state.activeTrip, ...updatedData } 
           : state.activeTrip
       }));
+      
+      // Sync update to cloud
+      const authState = authService.getState();
+      if (authState.user && !authState.loading) {
+        const updatedTrip = get().getTripById(tripId);
+        if (updatedTrip) {
+          syncService.uploadTrip(updatedTrip).catch(console.error);
+        }
+      }
     } catch (error) {
       set({ error: error instanceof Error ? error.message : 'Failed to update trip' });
     }
@@ -121,13 +214,23 @@ const useSimpleTripStore = create<SimpleTripState>((set, get) => ({
       set((state) => ({
         trips: state.trips.map(trip => 
           trip.id === tripId 
-            ? { ...trip, days: [...trip.days, newDay] }
+            ? { ...trip, days: [...trip.days, newDay], updatedAt: new Date().toISOString() }
             : trip
         ),
         activeTrip: state.activeTrip?.id === tripId
-          ? { ...state.activeTrip, days: [...state.activeTrip.days, newDay] }
+          ? { ...state.activeTrip, days: [...state.activeTrip.days, newDay], updatedAt: new Date().toISOString() }
           : state.activeTrip
       }));
+      
+      // Sync update to cloud
+      const authState = authService.getState();
+      if (authState.user && !authState.loading) {
+        const updatedTrip = get().getTripById(tripId);
+        if (updatedTrip) {
+          syncService.uploadTrip(updatedTrip).catch(console.error);
+        }
+      }
+      
       return newDay;
     } catch (error) {
       set({ error: error instanceof Error ? error.message : 'Failed to add day' });

@@ -112,8 +112,22 @@ export class SyncService {
 
   private async getLocalTrips(): Promise<Trip[]> {
     // This will be implemented by the consuming app
-    // For now, return empty array
+    // The app should provide this via a callback or dependency injection
+    if (this.getLocalTripsCallback) {
+      return await this.getLocalTripsCallback();
+    }
     return [];
+  }
+
+  private getLocalTripsCallback?: () => Promise<Trip[]>;
+  private saveLocalTripsCallback?: (trips: Trip[]) => Promise<void>;
+
+  setLocalDataCallbacks(
+    getLocalTrips: () => Promise<Trip[]>,
+    saveLocalTrips: (trips: Trip[]) => Promise<void>
+  ) {
+    this.getLocalTripsCallback = getLocalTrips;
+    this.saveLocalTripsCallback = saveLocalTrips;
   }
 
   private mergeTrips(localTrips: Trip[], remoteTrips: any[]): Trip[] {
@@ -173,8 +187,10 @@ export class SyncService {
 
     if (error) throw error;
 
-    // Save locally (this will be handled by the app)
-    // The app should implement this to save to IndexedDB/AsyncStorage
+    // Save locally using callback
+    if (this.saveLocalTripsCallback) {
+      await this.saveLocalTripsCallback(trips);
+    }
   }
 
   async uploadTrip(trip: Trip): Promise<void> {

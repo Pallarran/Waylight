@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react'; 
 import { Search, Plus, Clock } from 'lucide-react';
 import { ACTIVITY_CATEGORIES, getCategoryIcon, getCategoryColor } from '../../data/activityCategories';
 import { getAttractionsByType } from '../../data/attractions';
