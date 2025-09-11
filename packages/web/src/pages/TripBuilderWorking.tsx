@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Plus, MapPin, Loader2, AlertCircle, Cloud, CloudOff } from 'lucide-react';
 import { useTripStore } from '../stores';
 import CreateTripModal from '../components/trip/CreateTripModal';
@@ -8,6 +9,7 @@ import SuccessFeedback from '../components/common/SuccessFeedback';
 
 export default function TripBuilderWorking() {
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const location = useLocation();
   const { trips, activeTrip, isLoading, error, successMessage, isSyncing, loadTrips, clearError, clearSuccess, createNewTrip, setActiveTrip, initializeSync, syncTrips } = useTripStore();
 
   useEffect(() => {
@@ -16,6 +18,24 @@ export default function TripBuilderWorking() {
     // Load trips with sync enabled on app start
     loadTrips();
   }, [loadTrips, initializeSync]);
+
+  useEffect(() => {
+    // Clear active trip except when continuing planning with an existing trip
+    if (!location.state?.fromContinuePlanning) {
+      setActiveTrip('');
+    }
+    // Clear navigation state after processing to prevent issues on refresh
+    if (location.state && (location.state.fromContinuePlanning || location.state.openCreateModal)) {
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.pathname, location.state, setActiveTrip]);
+
+  useEffect(() => {
+    // Check if we should open create modal from navigation state
+    if (location.state?.openCreateModal) {
+      setShowCreateModal(true);
+    }
+  }, [location.state]);
 
   const handleCreateTrip = () => {
     setShowCreateModal(true);
@@ -47,11 +67,10 @@ export default function TripBuilderWorking() {
     <div className="container-waylight section-padding">
       {!activeTrip && (
         <div className="mb-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-ink mb-4">Trip Builder</h1>
-              <p className="text-ink-light">Create and manage your Walt Disney World vacation plans.</p>
-            </div>
+          <div className="mb-4">
+            <p className="text-ink-light">Create and manage your Walt Disney World vacation plans.</p>
+          </div>
+          <div className="flex items-center justify-end">
             <div className="flex items-center gap-3">
               {/* Sync Status/Button */}
               <button

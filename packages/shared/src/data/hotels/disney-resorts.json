@@ -6,13 +6,40 @@
     "type": "disney",
     "priceLevel": "deluxe",
     "description": "Victorian elegance with monorail access to Magic Kingdom",
-    "amenities": ["Monorail", "Spa", "Multiple Dining", "Beach", "Marina"],
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 5, "description": "Garden or lagoon view" },
       { "id": "club-level", "name": "Club Level Room", "sleeps": 5, "description": "Concierge level with lounge access" },
       { "id": "suite", "name": "Suite", "sleeps": 5, "description": "Spacious suite with separate living area" },
       { "id": "presidential", "name": "Presidential Suite", "sleeps": 8, "description": "Luxury multi-room suite" }
-    ]
+    ],
+    "features": {
+      "transportation": {
+        "monorail": true,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "spa": true,
+        "multipleDining": true,
+        "beach": true,
+        "marina": true,
+        "pool": true,
+        "waterSlide": false,
+        "lazyRiver": false,
+        "fitnessCenter": true,
+        "businessCenter": true,
+        "golf": false
+      },
+      "accommodations": {
+        "dvc": false,
+        "bungalows": false,
+        "suites": true,
+        "cabins": false,
+        "villas": false
+      }
+    }
   },
   {
     "id": "polynesian",
@@ -142,75 +169,6 @@
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "River or garden view" },
       { "id": "royal", "name": "Royal Guest Room", "sleeps": 4, "description": "Princess and the Frog themed room" }
-    ]
-  },
-  {
-    "id": "caribbean-beach",
-    "name": "Disney's Caribbean Beach Resort",
-    "address": "900 Cayman Way, Bay Lake, FL 32830",
-    "type": "disney",
-    "priceLevel": "moderate",
-    "description": "Caribbean island theming with Skyliner transportation",
-    "amenities": ["Skyliner", "Multiple Pools", "Food Court", "Dining"],
-    "rooms": [
-      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Garden, water, or pool view" },
-      { "id": "pirate", "name": "Pirate Room", "sleeps": 4, "description": "Pirates of the Caribbean themed room" }
-    ]
-  },
-  {
-    "id": "coronado-springs",
-    "name": "Disney's Coronado Springs Resort",
-    "address": "1000 W Buena Vista Dr, Bay Lake, FL 32830",
-    "type": "disney",
-    "priceLevel": "moderate",
-    "description": "Spanish colonial theming with conference facilities",
-    "amenities": ["Convention Center", "Multiple Pools", "Food Court", "Multiple Dining", "Gran Destino Tower"],
-    "rooms": [
-      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Water or garden view" },
-      { "id": "preferred", "name": "Preferred Room", "sleeps": 4, "description": "Close to amenities" },
-      { "id": "tower-standard", "name": "Gran Destino Tower - Standard", "sleeps": 4, "description": "Tower standard room" },
-      { "id": "tower-suite", "name": "Gran Destino Tower - Suite", "sleeps": 8, "description": "Tower suite with separate living area" }
-    ]
-  },
-  {
-    "id": "art-of-animation",
-    "name": "Disney's Art of Animation Resort",
-    "address": "1850 Century Dr, Bay Lake, FL 32830",
-    "type": "disney",
-    "priceLevel": "value",
-    "description": "Disney animation theming with family suites and Skyliner access",
-    "amenities": ["Skyliner", "Multiple Pools", "Food Court", "Family Suites"],
-    "rooms": [
-      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Little Mermaid themed standard room" },
-      { "id": "family-suite-cars", "name": "Family Suite - Cars", "sleeps": 6, "description": "Cars themed family suite" },
-      { "id": "family-suite-nemo", "name": "Family Suite - Finding Nemo", "sleeps": 6, "description": "Finding Nemo themed family suite" },
-      { "id": "family-suite-lion-king", "name": "Family Suite - Lion King", "sleeps": 6, "description": "Lion King themed family suite" }
-    ]
-  },
-  {
-    "id": "pop-century",
-    "name": "Disney's Pop Century Resort",
-    "address": "1050 Century Dr, Bay Lake, FL 32830",
-    "type": "disney",
-    "priceLevel": "value",
-    "description": "Pop culture theming from 1950s-1990s with Skyliner access",
-    "amenities": ["Skyliner", "Multiple Pools", "Food Court"],
-    "rooms": [
-      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Pop culture themed standard room" },
-      { "id": "preferred", "name": "Preferred Room", "sleeps": 4, "description": "Close to amenities" }
-    ]
-  },
-  {
-    "id": "all-star-movies",
-    "name": "Disney's All-Star Movies Resort",
-    "address": "1901 W Buena Vista Dr, Bay Lake, FL 32830",
-    "type": "disney",
-    "priceLevel": "value",
-    "description": "Disney movie theming with larger-than-life decorations",
-    "amenities": ["Pool", "Food Court", "Gift Shop"],
-    "rooms": [
-      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Movie themed standard room" },
-      { "id": "preferred", "name": "Preferred Room", "sleeps": 4, "description": "Close to amenities" }
     ]
   },
   {
@@ -401,5 +359,249 @@
       { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
       { "id": "2br-villa", "name": "Two Bedroom Villa", "sleeps": 8, "description": "Two-bedroom villa with full kitchen" }
     ]
+  },
+  {
+    "id": "coronado-springs",
+    "name": "Disney's Coronado Springs Resort",
+    "address": "1000 W Buena Vista Dr, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "moderate",
+    "description": "Southwest and Mexican theming with convention center and Dig Site Pool",
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Casitas, Ranchos, or Cabanas room" },
+      { "id": "preferred", "name": "Preferred Room", "sleeps": 4, "description": "Closer to amenities" },
+      { "id": "tower-room", "name": "Gran Destino Tower Room", "sleeps": 4, "description": "New tower with upgraded amenities" },
+      { "id": "suite", "name": "Suite", "sleeps": 6, "description": "Junior or presidential suite in tower" }
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": false,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "spa": false,
+        "multipleDining": true,
+        "beach": false,
+        "marina": false,
+        "pool": true,
+        "waterSlide": true,
+        "lazyRiver": false,
+        "fitnessCenter": true,
+        "businessCenter": true,
+        "golf": false
+      },
+      "accommodations": {
+        "dvc": false,
+        "bungalows": false,
+        "suites": true,
+        "cabins": false,
+        "villas": false
+      }
+    }
+  },
+  {
+    "id": "caribbean-beach",
+    "name": "Disney's Caribbean Beach Resort",
+    "address": "900 Cayman Way, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "moderate",
+    "description": "Caribbean theming with Skyliner transportation to Epcot and Hollywood Studios",
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Island-themed room in various villages" },
+      { "id": "preferred", "name": "Preferred Room", "sleeps": 4, "description": "Closer to amenities and transportation" },
+      { "id": "pirate-room", "name": "Pirate Room", "sleeps": 4, "description": "Pirates of the Caribbean themed room" }
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": true,
+        "boat": false,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "spa": false,
+        "multipleDining": true,
+        "beach": true,
+        "marina": true,
+        "pool": true,
+        "waterSlide": true,
+        "lazyRiver": false,
+        "fitnessCenter": true,
+        "businessCenter": false,
+        "golf": false
+      },
+      "accommodations": {
+        "dvc": true,
+        "bungalows": false,
+        "suites": false,
+        "cabins": false,
+        "villas": true
+      }
+    }
+  },
+  {
+    "id": "port-orleans-french-quarter",
+    "name": "Disney's Port Orleans Resort - French Quarter",
+    "address": "2201 Orleans Dr, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "moderate",
+    "description": "New Orleans French Quarter theming with boat transportation to Disney Springs",
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "French Quarter themed room" },
+      { "id": "preferred", "name": "Preferred Room", "sleeps": 4, "description": "Closer to amenities and transportation" }
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "spa": false,
+        "multipleDining": true,
+        "beach": false,
+        "marina": true,
+        "pool": true,
+        "waterSlide": true,
+        "lazyRiver": false,
+        "fitnessCenter": true,
+        "businessCenter": false,
+        "golf": false
+      },
+      "accommodations": {
+        "dvc": false,
+        "bungalows": false,
+        "suites": false,
+        "cabins": false,
+        "villas": false
+      }
+    }
+  },
+  {
+    "id": "pop-century",
+    "name": "Disney's Pop Century Resort",
+    "address": "1050 Century Dr, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "value",
+    "description": "Pop culture theming from different decades with Skyliner transportation",
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Pop culture themed room" },
+      { "id": "preferred", "name": "Preferred Room", "sleeps": 4, "description": "Closer to amenities and transportation" }
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": true,
+        "boat": false,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "spa": false,
+        "multipleDining": false,
+        "beach": false,
+        "marina": false,
+        "pool": true,
+        "waterSlide": false,
+        "lazyRiver": false,
+        "fitnessCenter": true,
+        "businessCenter": false,
+        "golf": false
+      },
+      "accommodations": {
+        "dvc": false,
+        "bungalows": false,
+        "suites": false,
+        "cabins": false,
+        "villas": false
+      }
+    }
+  },
+  {
+    "id": "all-star-movies",
+    "name": "Disney's All-Star Movies Resort",
+    "address": "1901 W Buena Vista Dr, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "value",
+    "description": "Movie-themed value resort with larger-than-life decorations",
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Movie-themed room" },
+      { "id": "preferred", "name": "Preferred Room", "sleeps": 4, "description": "Closer to amenities and transportation" },
+      { "id": "family-suite", "name": "Family Suite", "sleeps": 6, "description": "Two-room family suite with kitchenette" }
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": false,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "spa": false,
+        "multipleDining": false,
+        "beach": false,
+        "marina": false,
+        "pool": true,
+        "waterSlide": false,
+        "lazyRiver": false,
+        "fitnessCenter": false,
+        "businessCenter": false,
+        "golf": false
+      },
+      "accommodations": {
+        "dvc": false,
+        "bungalows": false,
+        "suites": true,
+        "cabins": false,
+        "villas": false
+      }
+    }
+  },
+  {
+    "id": "art-of-animation",
+    "name": "Disney's Art of Animation Resort",
+    "address": "1850 Century Dr, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "value",
+    "description": "Disney animation theming with family suites and Skyliner transportation",
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Little Mermaid themed room" },
+      { "id": "family-suite", "name": "Family Suite", "sleeps": 6, "description": "Cars, Lion King, or Finding Nemo themed suite" }
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": true,
+        "boat": false,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "spa": false,
+        "multipleDining": false,
+        "beach": false,
+        "marina": false,
+        "pool": true,
+        "waterSlide": false,
+        "lazyRiver": false,
+        "fitnessCenter": true,
+        "businessCenter": false,
+        "golf": false
+      },
+      "accommodations": {
+        "dvc": false,
+        "bungalows": false,
+        "suites": true,
+        "cabins": false,
+        "villas": false
+      }
+    }
   }
 ]

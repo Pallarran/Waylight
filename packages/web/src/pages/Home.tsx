@@ -1,7 +1,42 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useTripStore } from '../stores';
 import WaylightLogo from '../assets/waylight-logo.png';
 
 export default function Home() {
+  const { trips, activeTrip, loadTrips, setActiveTrip } = useTripStore();
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    loadTrips();
+  }, [loadTrips]);
+
+  const getTargetTrip = () => {
+    if (activeTrip) {
+      return activeTrip;
+    } else if (trips.length > 0) {
+      // Return the most recently updated trip
+      return trips.sort((a, b) => 
+        new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+      )[0];
+    }
+    return null;
+  };
+
+  const handleContinuePlanning = () => {
+    const targetTrip = getTargetTrip();
+    if (targetTrip) {
+      setActiveTrip(targetTrip.id);
+    }
+    navigate('/trip-builder', { state: { fromContinuePlanning: true } });
+  };
+
+  const handleStartNewTrip = () => {
+    // Clear active trip and navigate to trip builder with create modal
+    setActiveTrip(null);
+    navigate('/trip-builder', { state: { openCreateModal: true } });
+  };
+
   return (
     <div className="container-waylight pt-4 pb-8 md:pt-6 md:pb-12 lg:pt-8 lg:pb-16">
       <div className="text-center">
@@ -21,12 +56,25 @@ export default function Home() {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/trip-builder" className="btn-primary btn-lg">
-            Start Planning Your Trip
-          </Link>
-          <Link to="/attractions" className="btn-secondary btn-lg">
-            Browse Attractions
-          </Link>
+          {trips.length === 0 ? (
+            <Link to="/trip-builder" className="btn-primary btn-lg">
+              Start Planning Your Trip
+            </Link>
+          ) : (
+            <>
+              <button onClick={handleStartNewTrip} className="btn-secondary btn-lg">
+                Start Planning a New Trip
+              </button>
+              <button onClick={handleContinuePlanning} className="btn-primary btn-lg flex flex-col items-center">
+                <span>Continue Planning</span>
+                {getTargetTrip() && (
+                  <span className="text-sm opacity-75 font-normal mt-1">
+                    {getTargetTrip()?.name}
+                  </span>
+                )}
+              </button>
+            </>
+          )}
         </div>
         
         <div className="mt-16">

@@ -5,7 +5,7 @@ import Home from './pages/Home';
 
 const TripBuilderWorking = lazy(() => import('./pages/TripBuilderWorking'));
 const Settings = lazy(() => import('./pages/Settings'));
-const AttractionsWorking = lazy(() => import('./pages/AttractionsWorking'));
+const WaypointsWorking = lazy(() => import('./pages/WaypointsWorking'));
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/trip-builder" element={<TripBuilderWorking />} />
-            <Route path="/attractions" element={<AttractionsWorking />} />
+            <Route path="/waypoints" element={<WaypointsWorking />} />
             <Route path="/settings" element={<Settings />} />
           </Routes>
         </Suspense>

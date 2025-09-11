@@ -11,7 +11,7 @@ export default function Header() {
   const navigation = [
     { name: 'Home', href: '/', current: location.pathname === '/' },
     { name: 'Trip Builder', href: '/trip-builder', current: location.pathname === '/trip-builder' },
-    { name: 'Attractions', href: '/attractions', current: location.pathname === '/attractions' },
+    { name: 'Waypoints', href: '/waypoints', current: location.pathname === '/waypoints' },
     { name: 'Settings', href: '/settings', current: location.pathname === '/settings' },
   ];
 

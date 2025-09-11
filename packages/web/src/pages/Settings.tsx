@@ -29,11 +29,10 @@ export default function Settings() {
 
   return (
     <div className="container-waylight section-padding">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-ink mb-4">Settings</h1>
+      <div className="mb-6">
         <p className="text-ink-light">Customize your Waylight experience.</p>
       </div>
-
+      
       <div className="space-y-6">
         {/* Display Settings */}
         <div className="card p-6">

@@ -1,4 +1,4 @@
 export { default as useTripStore } from './useTripStoreSimple';
 export { default as useUserPreferencesStore } from './useUserPreferencesStore';
-export { useAttractionStore } from './useAttractionStore';
+export { useWaypointStore } from './useWaypointStore';
 export { default as useAppStore } from './useAppStore';
