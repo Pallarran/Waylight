@@ -1,0 +1,128 @@
+[
+  {
+    "id": "school-bread-norway",
+    "parkId": "epcot",
+    "name": "Kringla Bakeri Og Kafe - School Bread",
+    "description": "Traditional Norwegian pastry filled with custard, topped with coconut and icing - a must-try EPCOT treat.",
+    "location": "World Showcase - Norway",
+    "type": "snack",
+    "serviceType": "snack", 
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "school-bread-tip-1",
+        "category": "general",
+        "content": "Iconic EPCOT snack! Sweet custard-filled pastry that's perfect for sharing",
+        "priority": 1
+      },
+      {
+        "id": "school-bread-tip-2",
+        "category": "strategy",
+        "content": "Often sells out later in the day - try to get one earlier during World Showcase touring",
+        "priority": 1
+      }
+    ],
+    "tags": ["iconic", "norwegian", "pastry", "custard", "coconut"],
+    "cuisineType": "Norwegian Pastry",
+    "kidFriendly": true,
+    "operatingHours": {
+      "lunch": "11:00 AM - 6:00 PM"
+    },
+    "reservationWindow": 0,
+    "features": {
+      "mobileOrder": true,
+      "indoorSeating": false,
+      "entertainment": false,
+      "adrRequired": false,
+      "alcoholServed": false,
+      "vegetarianOptions": true,
+      "veganOptions": false,
+      "glutenFreeOptions": false,
+      "characterDining": false
+    }
+  },
+  {
+    "id": "kakigori-japan",
+    "parkId": "epcot",
+    "name": "Kabuki Cafe - Kakigori Shaved Ice",
+    "description": "Japanese-style shaved ice with unique flavors like cherry blossom, melon, and strawberry in the Japan Pavilion.",
+    "location": "World Showcase - Japan",
+    "type": "snack",
+    "serviceType": "snack",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "kakigori-tip-1",
+        "category": "general",
+        "content": "Refreshing Japanese shaved ice perfect for hot Florida days. Try the cherry blossom flavor!",
+        "priority": 2
+      },
+      {
+        "id": "kakigori-tip-2",
+        "category": "general",
+        "content": "Beautiful presentation and authentic Japanese experience",
+        "priority": 2
+      }
+    ],
+    "tags": ["japanese", "shaved-ice", "refreshing", "authentic", "cherry-blossom"],
+    "cuisineType": "Japanese Treats",
+    "kidFriendly": true,
+    "operatingHours": {
+      "lunch": "11:00 AM - 6:00 PM"
+    },
+    "reservationWindow": 0,
+    "features": {
+      "mobileOrder": false,
+      "indoorSeating": false,
+      "entertainment": false,
+      "adrRequired": false,
+      "alcoholServed": false,
+      "vegetarianOptions": true,
+      "veganOptions": true,
+      "glutenFreeOptions": true,
+      "characterDining": false
+    }
+  },
+  {
+    "id": "figment-popcorn",
+    "parkId": "epcot",
+    "name": "Figment Popcorn",
+    "description": "Rainbow-colored Figment-themed popcorn available from specialty carts around the park.",
+    "location": "Various Locations",
+    "type": "snack",
+    "serviceType": "snack",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "figment-popcorn-tip-1",
+        "category": "general",
+        "content": "Instagram-worthy rainbow popcorn that tastes like cotton candy. Kids love the bright colors!",
+        "priority": 2
+      },
+      {
+        "id": "figment-popcorn-tip-2",
+        "category": "strategy",
+        "content": "Available from various popcorn carts throughout EPCOT",
+        "priority": 3
+      }
+    ],
+    "tags": ["figment", "rainbow", "popcorn", "instagram", "colorful"],
+    "cuisineType": "Specialty Snacks",
+    "kidFriendly": true,
+    "operatingHours": {
+      "lunch": "10:00 AM - 8:00 PM"
+    },
+    "reservationWindow": 0,
+    "features": {
+      "mobileOrder": false,
+      "indoorSeating": false,
+      "entertainment": false,
+      "adrRequired": false,
+      "alcoholServed": false,
+      "vegetarianOptions": true,
+      "veganOptions": true,
+      "glutenFreeOptions": true,
+      "characterDining": false
+    }
+  }
+]

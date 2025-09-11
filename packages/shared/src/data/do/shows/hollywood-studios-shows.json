@@ -1,0 +1,86 @@
+[
+  {
+    "id": "hs-frozen-sing-along",
+    "parkId": "hollywood-studios",
+    "name": "For the First Time in Forever: A Frozen Sing-Along Celebration",
+    "description": "Join Anna, Elsa, and the kingdom of Arendelle for a fun, interactive sing-along celebration featuring songs from the hit film Frozen.",
+    "location": "Echo Lake",
+    "type": "show",
+    "duration": 30,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "frozen-tip-1",
+        "category": "best_time",
+        "content": "Shows can fill up quickly, especially during peak seasons. Arrive 15-20 minutes early.",
+        "priority": 1
+      }
+    ],
+    "tags": ["interactive", "family-friendly", "music", "air-conditioned", "frozen"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": true,
+      "hasLightningLane": false,
+      "isRainSafe": true,
+      "hasPhotos": true,
+      "hasCharacters": true,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false,
+    "showTimes": ["11:00 AM", "12:30 PM", "2:00 PM", "3:30 PM", "5:00 PM", "6:30 PM"]
+  },
+  {
+    "id": "hs-indiana-jones-stunt",
+    "parkId": "hollywood-studios",
+    "name": "Indiana Jones Epic Stunt Spectacular!",
+    "description": "Experience the thrills and excitement of movie-making magic as stunt performers recreate famous scenes from Raiders of the Lost Ark.",
+    "location": "Echo Lake",
+    "type": "show",
+    "duration": 30,
+    "intensity": "moderate",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "indy-tip-1",
+        "category": "general",
+        "content": "Sit in the center sections for the best view of all the action sequences.",
+        "priority": 2
+      }
+    ],
+    "tags": ["stunts", "action", "loud", "special-effects"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": false,
+      "hasLightningLane": false,
+      "isRainSafe": false,
+      "hasPhotos": true,
+      "hasCharacters": false,
+      "isLoud": true,
+      "hasStrobes": true,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false,
+    "showTimes": ["12:00 PM", "2:30 PM", "4:00 PM", "5:30 PM"]
+  }
+]

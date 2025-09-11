@@ -1,0 +1,84 @@
+[
+  {
+    "id": "epcot-living-seas-exploration",
+    "parkId": "epcot",
+    "name": "The Seas with Nemo & Friends Pavilion Exploration",
+    "description": "Explore the massive aquarium and marine exhibits in one of the world's largest man-made ocean environments.",
+    "location": "Future World",
+    "type": "experience",
+    "duration": 45,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "living-seas-tip-1",
+        "category": "general",
+        "content": "Great for all ages. Take time to read the educational displays and watch for manatees and sea turtles.",
+        "priority": 2
+      }
+    ],
+    "tags": ["aquarium", "marine-life", "educational", "family-friendly", "exploration"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": true,
+      "hasLightningLane": false,
+      "isRainSafe": true,
+      "hasPhotos": true,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false
+  },
+  {
+    "id": "epcot-world-showcase-promenade",
+    "parkId": "epcot",
+    "name": "World Showcase Promenade Walk",
+    "description": "Take a leisurely walk around the World Showcase lagoon, exploring 11 country pavilions with unique architecture, food, and culture.",
+    "location": "World Showcase",
+    "type": "experience",
+    "duration": 120,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "world-showcase-tip-1",
+        "category": "general",
+        "content": "Perfect for a relaxing afternoon. Try snacks from different countries and check out the unique shops.",
+        "priority": 2
+      }
+    ],
+    "tags": ["cultural", "walking", "international", "shopping", "dining"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": true,
+      "hasLightningLane": false,
+      "isRainSafe": false,
+      "hasPhotos": true,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false
+  }
+]

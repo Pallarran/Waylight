@@ -1,0 +1,123 @@
+[
+  {
+    "id": "dole-whip-aloha-isle",
+    "parkId": "magic-kingdom",
+    "name": "Aloha Isle - Dole Whip",
+    "description": "Get the famous pineapple Dole Whip soft serve treat at this Adventureland snack stand.",
+    "location": "Adventureland",
+    "type": "snack",
+    "serviceType": "snack",
+    "priceLevel": 1,
+    "tips": [
+      {
+        "id": "dole-whip-tip-1",
+        "category": "general",
+        "content": "Perfect treat for hot Florida days - refreshing and dairy-free",
+        "priority": 5
+      },
+      {
+        "id": "dole-whip-tip-2",
+        "category": "general",
+        "content": "Try the float version with pineapple juice",
+        "priority": 4
+      },
+      {
+        "id": "dole-whip-tip-3",
+        "category": "strategy",
+        "content": "Often has long lines - consider mobile ordering",
+        "priority": 4
+      }
+    ],
+    "tags": ["snack", "dole-whip", "refreshing", "dairy-free", "iconic"],
+    "features": ["mobile-order", "outdoor-service"],
+    "cuisineType": "Snacks & Treats",
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": ["dairy-free", "vegan"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "operatingHours": {
+      "lunch": "11:00 AM - 6:00 PM"
+    },
+    "reservationWindow": 0
+  },
+  {
+    "id": "gaston-tavern",
+    "parkId": "magic-kingdom",
+    "name": "Gaston's Tavern",
+    "description": "Beast-themed quick service location famous for its cinnamon rolls and LeFou's Brew in the Beauty and the Beast area.",
+    "location": "Fantasyland",
+    "type": "snack",
+    "serviceType": "snack",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "gaston-tavern-tip-1",
+        "category": "general",
+        "content": "Famous cinnamon roll is huge and perfect for sharing",
+        "priority": 5
+      },
+      {
+        "id": "gaston-tavern-tip-2",
+        "category": "general",
+        "content": "LeFou's Brew is a unique frozen apple juice drink",
+        "priority": 4
+      },
+      {
+        "id": "gaston-tavern-tip-3",
+        "category": "general",
+        "content": "Great atmosphere with Beauty and the Beast theming",
+        "priority": 3
+      }
+    ],
+    "tags": ["cinnamon-roll", "lefous-brew", "beauty-beast", "snacks", "themed"],
+    "features": ["mobile-order", "themed-location"],
+    "cuisineType": "Snacks & Treats",
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": [],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "operatingHours": {
+      "breakfast": "8:00 AM - 11:00 AM",
+      "lunch": "11:00 AM - 6:00 PM"
+    },
+    "reservationWindow": 0
+  },
+  {
+    "id": "sleepy-hollow",
+    "parkId": "magic-kingdom",
+    "name": "Sleepy Hollow",
+    "description": "Liberty Square snack location famous for its fresh funnel cakes and sweet treats.",
+    "location": "Liberty Square",
+    "type": "snack",
+    "serviceType": "snack",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "sleepy-hollow-tip-1",
+        "category": "general",
+        "content": "Funnel cakes are made fresh and perfect for sharing",
+        "priority": 5
+      },
+      {
+        "id": "sleepy-hollow-tip-2",
+        "category": "strategy",
+        "content": "Great location between Haunted Mansion and Hall of Presidents",
+        "priority": 3
+      }
+    ],
+    "tags": ["funnel-cake", "snacks", "fresh", "liberty-square", "sweet"],
+    "features": ["outdoor-service", "fresh-made"],
+    "cuisineType": "Snacks & Treats",
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": [],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "operatingHours": {
+      "lunch": "11:00 AM - 6:00 PM"
+    },
+    "reservationWindow": 0
+  }
+]

@@ -1,0 +1,128 @@
+[
+  {
+    "id": "ak-festival-of-lion-king",
+    "parkId": "animal-kingdom",
+    "name": "Festival of the Lion King",
+    "description": "A spectacular live musical celebrating the story of The Lion King with acrobatics, puppetry, and audience participation.",
+    "location": "Theater in the Wild, Africa",
+    "type": "show",
+    "duration": 30,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "lion-king-tip-1",
+        "category": "strategy",
+        "content": "This is a must-do show! Get FastPass+ or arrive 30 minutes early. Sit in the center sections for best view.",
+        "priority": 1
+      }
+    ],
+    "tags": ["lion-king", "musical", "acrobatics", "puppetry", "interactive"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": true,
+      "hasLightningLane": true,
+      "isRainSafe": true,
+      "hasPhotos": true,
+      "hasCharacters": true,
+      "isLoud": true,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": true,
+    "singleRider": false,
+    "photoService": true,
+    "showTimes": ["Multiple times daily"]
+  },
+  {
+    "id": "ak-finding-nemo-musical",
+    "parkId": "animal-kingdom",
+    "name": "Finding Nemo - The Big Blue... and Beyond!",
+    "description": "A colorful musical retelling the story of Finding Nemo with puppetry, music, and underwater magic.",
+    "location": "Theater in the Wild, DinoLand U.S.A.",
+    "type": "show",
+    "duration": 40,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "nemo-musical-tip-1",
+        "category": "general",
+        "content": "Great for families with young children. The puppetry and music are outstanding!",
+        "priority": 2
+      }
+    ],
+    "tags": ["finding-nemo", "musical", "puppetry", "family-friendly", "underwater"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": false,
+      "hasLightningLane": true,
+      "isRainSafe": true,
+      "hasPhotos": true,
+      "hasCharacters": true,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": true,
+    "singleRider": false,
+    "photoService": true,
+    "showTimes": ["Multiple times daily"]
+  },
+  {
+    "id": "ak-its-tough-to-be-bug",
+    "parkId": "animal-kingdom",
+    "name": "It's Tough to be a Bug!",
+    "description": "A 3D film featuring the cast of A Bug's Life with special in-theater effects that bring the bug world to life.",
+    "location": "Tree of Life Theater",
+    "type": "show",
+    "duration": 8,
+    "intensity": "moderate",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": false,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "bugs-life-tip-1",
+        "category": "general",
+        "content": "Warning: Features sudden loud sounds, water sprays, and air jets. May frighten young children.",
+        "priority": 1
+      }
+    ],
+    "tags": ["3D", "bugs-life", "sensory-effects", "tree-of-life", "loud"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": false,
+      "hasLightningLane": false,
+      "isRainSafe": true,
+      "hasPhotos": false,
+      "hasCharacters": true,
+      "isLoud": true,
+      "hasStrobes": true,
+      "isDarkRide": true,
+      "getsWet": true,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false,
+    "showTimes": ["Every 15 minutes"]
+  }
+]

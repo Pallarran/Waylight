@@ -1,0 +1,132 @@
+[
+  {
+    "id": "sunshine-seasons",
+    "parkId": "epcot",
+    "name": "Sunshine Seasons",
+    "description": "Large food court in The Land Pavilion offering diverse cuisines from different stations including Asian, American, and bakery items.",
+    "location": "World Nature - The Land Pavilion",
+    "type": "quick_service",
+    "serviceType": "quick",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "sunshine-tip-1",
+        "category": "general",
+        "content": "Multiple food stations with different cuisines - something for everyone in your group",
+        "priority": 1
+      },
+      {
+        "id": "sunshine-tip-2",
+        "category": "strategy",
+        "content": "Large seating area with air conditioning. Great place to escape crowds and heat",
+        "priority": 2
+      }
+    ],
+    "tags": ["food-court", "diverse-options", "air-conditioned", "family-friendly", "large"],
+    "cuisineType": "International Food Court",
+    "kidFriendly": true,
+    "operatingHours": {
+      "breakfast": "8:00 AM - 11:00 AM",
+      "lunch": "11:00 AM - 4:00 PM",
+      "dinner": "4:00 PM - 8:00 PM"
+    },
+    "reservationWindow": 0,
+    "features": {
+      "mobileOrder": true,
+      "indoorSeating": true,
+      "entertainment": false,
+      "adrRequired": false,
+      "alcoholServed": false,
+      "vegetarianOptions": true,
+      "veganOptions": true,
+      "glutenFreeOptions": true,
+      "characterDining": false
+    }
+  },
+  {
+    "id": "connections-eatery",
+    "parkId": "epcot",
+    "name": "Connections Eatery",
+    "description": "Modern quick-service restaurant with globally-inspired bowls, burgers, and plant-based options near the front of the park.",
+    "location": "World Celebration",
+    "type": "quick_service",
+    "serviceType": "quick",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "connections-tip-1",
+        "category": "general",
+        "content": "Great plant-based options and customizable bowls with fresh ingredients",
+        "priority": 2
+      },
+      {
+        "id": "connections-tip-2",
+        "category": "strategy",
+        "content": "Convenient location near park entrance. Good for arrival or departure meals",
+        "priority": 2
+      }
+    ],
+    "tags": ["modern", "plant-based", "bowls", "customizable", "convenient"],
+    "cuisineType": "Contemporary Global",
+    "kidFriendly": true,
+    "operatingHours": {
+      "lunch": "11:00 AM - 4:00 PM",
+      "dinner": "4:00 PM - 8:00 PM"
+    },
+    "reservationWindow": 0,
+    "features": {
+      "mobileOrder": true,
+      "indoorSeating": true,
+      "entertainment": false,
+      "adrRequired": false,
+      "alcoholServed": false,
+      "vegetarianOptions": true,
+      "veganOptions": true,
+      "glutenFreeOptions": true,
+      "characterDining": false
+    }
+  },
+  {
+    "id": "les-halles-boulangerie",
+    "parkId": "epcot",
+    "name": "Les Halles Boulangerie-Patisserie",
+    "description": "Authentic French bakery in the France Pavilion serving croissants, quiches, sandwiches, and French pastries.",
+    "location": "World Showcase - France",
+    "type": "quick_service",
+    "serviceType": "quick",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "les-halles-tip-1",
+        "category": "general",
+        "content": "Authentic French pastries and baked goods. Try the Napoleon or éclair!",
+        "priority": 1
+      },
+      {
+        "id": "les-halles-tip-2",
+        "category": "strategy",
+        "content": "Great for breakfast pastries or afternoon snacks while exploring World Showcase",
+        "priority": 2
+      }
+    ],
+    "tags": ["french", "bakery", "pastries", "authentic", "breakfast"],
+    "cuisineType": "French Bakery",
+    "kidFriendly": true,
+    "operatingHours": {
+      "breakfast": "8:00 AM - 11:00 AM", 
+      "lunch": "11:00 AM - 6:00 PM"
+    },
+    "reservationWindow": 0,
+    "features": {
+      "mobileOrder": true,
+      "indoorSeating": true,
+      "entertainment": false,
+      "adrRequired": false,
+      "alcoholServed": false,
+      "vegetarianOptions": true,
+      "veganOptions": false,
+      "glutenFreeOptions": false,
+      "characterDining": false
+    }
+  }
+]

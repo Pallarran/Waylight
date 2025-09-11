@@ -1,0 +1,331 @@
+[
+  {
+    "id": "dhs-rise-of-resistance",
+    "parkId": "hollywood-studios",
+    "name": "Star Wars: Rise of the Resistance",
+    "description": "Join the Resistance in an epic battle against the First Order in this immersive, multi-stage experience featuring trackless vehicles and life-size AT-ATs.",
+    "location": "Star Wars: Galaxy's Edge",
+    "type": "ride",
+    "duration": 20,
+    "heightRequirement": 40,
+    "intensity": "high",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true
+    },
+    "tips": [
+      {
+        "id": "ror-tip-1",
+        "content": "Most popular attraction in the park. Purchase Individual Lightning Lane or arrive at rope drop.",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "ror-tip-2",
+        "content": "Multi-stage experience includes walking, so allow extra time for the full experience.",
+        "category": "general",
+        "priority": 4
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isDarkRide": true,
+      "isInteractive": true,
+      "hasAirConditioning": true,
+      "hasStrobes": true,
+      "hasIndividualLL": true,
+      "hasRiderSwitch": true,
+      "hasPhotos": true,
+      "hasLightningLane": true
+    }
+  },
+  {
+    "id": "dhs-millennium-falcon",
+    "parkId": "hollywood-studios",
+    "name": "Millennium Falcon: Smugglers Run",
+    "description": "Take the controls of the famous Millennium Falcon on a customized smuggling mission where your actions determine the outcome.",
+    "location": "Star Wars: Galaxy's Edge",
+    "type": "ride",
+    "duration": 7,
+    "heightRequirement": 38,
+    "intensity": "moderate",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true
+    },
+    "tips": [
+      {
+        "id": "mf-tip-1",
+        "content": "Pilot positions provide the most interactive experience, but all roles are fun and important.",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "mf-tip-2",
+        "content": "Your performance affects the ship's condition - work as a team!",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isInteractive": true,
+      "hasAirConditioning": true,
+      "hasLightningLane": true,
+      "hasRiderSwitch": true
+    }
+  },
+  {
+    "id": "dhs-tower-of-terror",
+    "parkId": "hollywood-studios",
+    "name": "The Twilight Zone Tower of Terror",
+    "description": "Step into a haunted hotel elevator for a spine-tingling 13-story drop experience through the Twilight Zone.",
+    "location": "Sunset Boulevard",
+    "type": "ride",
+    "duration": 10,
+    "heightRequirement": 40,
+    "intensity": "high",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "serviceAnimalsAllowed": false
+    },
+    "tips": [
+      {
+        "id": "tot-tip-1",
+        "content": "Multiple drop sequences make each ride unique. The elevator actually pulls you down faster than gravity!",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "tot-tip-2",
+        "content": "On-ride photo taken during the drop sequence - keep your eyes open!",
+        "category": "photo",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isDarkRide": true,
+      "isScary": true,
+      "hasBigDrops": true,
+      "hasAirConditioning": true,
+      "hasPhotos": true,
+      "hasLightningLane": true,
+      "hasRiderSwitch": true
+    }
+  },
+  {
+    "id": "dhs-rock-n-roller-coaster",
+    "parkId": "hollywood-studios",
+    "name": "Rock 'n' Roller Coaster Starring Aerosmith",
+    "description": "Launch from 0 to 60 mph in 2.8 seconds on this indoor roller coaster featuring Aerosmith's greatest hits in the dark.",
+    "location": "Sunset Boulevard",
+    "type": "ride",
+    "duration": 3,
+    "heightRequirement": 48,
+    "intensity": "extreme",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "serviceAnimalsAllowed": false
+    },
+    "tips": [
+      {
+        "id": "rnr-tip-1",
+        "content": "Will be re-themed to The Muppets in 2026. Experience the Aerosmith version while you can!",
+        "category": "general",
+        "priority": 5
+      },
+      {
+        "id": "rnr-tip-2",
+        "content": "Synchronized soundtrack makes each seat have a slightly different musical experience.",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isDarkRide": true,
+      "hasLaunch": true,
+      "isLoud": true,
+      "hasAirConditioning": true,
+      "hasStrobes": true,
+      "hasLightningLane": true,
+      "hasRiderSwitch": true
+    }
+  },
+  {
+    "id": "dhs-mickey-minnie-railway",
+    "parkId": "hollywood-studios",
+    "name": "Mickey & Minnie's Runaway Railway",
+    "description": "Join Mickey and Minnie on a zany adventure through a cartoon world in Disney's first Mickey Mouse ride-through attraction.",
+    "location": "Hollywood Boulevard",
+    "type": "ride",
+    "duration": 5,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "mm-tip-1",
+        "content": "First Mickey Mouse-themed ride ever! Perfect for all ages and very popular with families.",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "mm-tip-2",
+        "content": "Trackless technology means each ride can be slightly different - multiple rides recommended!",
+        "category": "strategy",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isDarkRide": true,
+      "hasAirConditioning": true,
+      "hasPhotos": true,
+      "hasLightningLane": true
+    }
+  },
+  {
+    "id": "dhs-slinky-dog-dash",
+    "parkId": "hollywood-studios",
+    "name": "Slinky Dog Dash",
+    "description": "Andy has built a roller coaster in his backyard using his Slinky Dog toy. Enjoy gentle thrills with great views of Toy Story Land.",
+    "location": "Toy Story Land",
+    "type": "ride",
+    "duration": 2,
+    "heightRequirement": 38,
+    "intensity": "moderate",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "serviceAnimalsAllowed": false
+    },
+    "tips": [
+      {
+        "id": "sdd-tip-1",
+        "content": "Very popular family coaster. Use Lightning Lane or rope drop strategy for shorter waits.",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "sdd-tip-2",
+        "content": "Great views of the entire Toy Story Land from the coaster's high points.",
+        "category": "photo",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "hasPhotos": true,
+      "hasLightningLane": true,
+      "hasRiderSwitch": true
+    }
+  },
+  {
+    "id": "dhs-star-tours",
+    "parkId": "hollywood-studios",
+    "name": "Star Tours – The Adventures Continue",
+    "description": "Experience a 3D space adventure with multiple storylines and destinations across the Star Wars galaxy.",
+    "location": "Echo Lake",
+    "type": "ride",
+    "duration": 7,
+    "heightRequirement": 40,
+    "intensity": "moderate",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true
+    },
+    "tips": [
+      {
+        "id": "st-tip-1",
+        "content": "Over 70 possible combinations of scenes! Multiple rides for different experiences.",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "st-tip-2",
+        "content": "3D glasses required - those with vision issues should inform Cast Members.",
+        "category": "accessibility",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "hasAirConditioning": true,
+      "hasLightningLane": true,
+      "hasRiderSwitch": true
+    }
+  },
+  {
+    "id": "dhs-toy-story-mania",
+    "parkId": "hollywood-studios",
+    "name": "Toy Story Mania!",
+    "description": "Pull the string on a virtual cannon and compete in 4D carnival games alongside your favorite Toy Story characters.",
+    "location": "Toy Story Land",
+    "type": "ride",
+    "duration": 8,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "tsm-tip-1",
+        "content": "Competitive shooting gallery - practice your aim and try to beat your family's scores!",
+        "category": "strategy",
+        "priority": 3
+      },
+      {
+        "id": "tsm-tip-2",
+        "content": "4D effects include scents and air bursts that enhance the carnival game experience.",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isInteractive": true,
+      "hasAirConditioning": true,
+      "hasLightningLane": true
+    }
+  },
+  {
+    "id": "dhs-alien-swirling-saucers",
+    "parkId": "hollywood-studios",
+    "name": "Alien Swirling Saucers",
+    "description": "The aliens have powered up their flying saucers for a spinning adventure set to energetic space music.",
+    "location": "Toy Story Land",
+    "type": "ride",
+    "duration": 2,
+    "heightRequirement": 32,
+    "intensity": "moderate",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true
+    },
+    "tips": [
+      {
+        "id": "ass-tip-1",
+        "content": "Similar to Mad Tea Party but with Toy Story theming. Control your spin level with the wheel.",
+        "category": "strategy",
+        "priority": 3
+      },
+      {
+        "id": "ass-tip-2",
+        "content": "Outdoor ride - can close due to weather. Plan accordingly.",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isSpinning": true,
+      "hasLightningLane": true,
+      "hasRiderSwitch": true
+    }
+  }
+]

@@ -1,0 +1,298 @@
+[
+  {
+    "id": "epcot-monsieur-paul",
+    "parkId": "epcot",
+    "name": "Monsieur Paul",
+    "description": "Upscale French fine dining restaurant offering exquisite cuisine and wine pairings on the second floor of the France Pavilion.",
+    "location": "World Showcase - France",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 4,
+    "tips": [
+      {
+        "id": "mp-tip-1",
+        "category": "strategy",
+        "content": "Signature dining experience requiring advance reservations. Dress code enforced.",
+        "priority": 4
+      },
+      {
+        "id": "mp-tip-2",
+        "category": "general",
+        "content": "Perfect for special occasions with beautiful views of World Showcase Lagoon.",
+        "priority": 3
+      }
+    ],
+    "tags": ["signature-dining", "fine-dining", "french", "upscale", "world-showcase"],
+    "features": ["signature-dining", "dress-code", "lagoon-views"],
+    "cuisineType": "French Fine Dining",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": false,
+    "alcoholServed": true,
+    "operatingHours": {
+      "dinner": "5:30 PM - 9:00 PM"
+    },
+    "reservationWindow": 60
+  },
+  {
+    "id": "epcot-space-220",
+    "parkId": "epcot",
+    "name": "Space 220",
+    "description": "Unique dining experience that simulates eating in a space station 220 miles above Earth with stunning views of our planet.",
+    "location": "World Discovery",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 4,
+    "tips": [
+      {
+        "id": "s220-tip-1",
+        "category": "strategy",
+        "content": "Most popular dining reservation at EPCOT. Book exactly 60 days in advance.",
+        "priority": 5
+      },
+      {
+        "id": "s220-tip-2",
+        "category": "general",
+        "content": "Elevator experience to 'space' before dining. Views of Earth change throughout meal.",
+        "priority": 4
+      }
+    ],
+    "tags": ["signature-dining", "themed-dining", "space", "unique", "immersive"],
+    "features": ["space-theming", "elevator-experience", "changing-views"],
+    "cuisineType": "Contemporary American",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "operatingHours": {
+      "lunch": "11:30 AM - 3:55 PM",
+      "dinner": "4:00 PM - 9:00 PM"
+    },
+    "reservationWindow": 60
+  },
+  {
+    "id": "epcot-le-cellier",
+    "parkId": "epcot",
+    "name": "Le Cellier Steakhouse",
+    "description": "Canadian-inspired steakhouse known for excellent steaks, seafood, and the famous cheddar cheese soup.",
+    "location": "World Showcase - Canada",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "lc-tip-1",
+        "category": "general",
+        "content": "Famous for their cheddar cheese soup and Canadian favorites. Very popular reservation.",
+        "priority": 4
+      },
+      {
+        "id": "lc-tip-2",
+        "category": "general",
+        "content": "Located below ground level in Canada pavilion. Cozy, intimate atmosphere.",
+        "priority": 3
+      }
+    ],
+    "tags": ["steakhouse", "canadian", "cheddar-soup", "cozy", "popular"],
+    "features": ["underground-location", "intimate-atmosphere"],
+    "cuisineType": "Canadian Steakhouse",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "operatingHours": {
+      "lunch": "11:30 AM - 3:00 PM",
+      "dinner": "4:00 PM - 9:00 PM"
+    },
+    "reservationWindow": 60
+  },
+  {
+    "id": "epcot-akershus",
+    "parkId": "epcot",
+    "name": "Akershus Royal Banquet Hall",
+    "description": "Character dining experience with Disney Princesses serving Norwegian-inspired cuisine in a medieval castle setting.",
+    "location": "World Showcase - Norway",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "ak-dining-tip-1",
+        "category": "general",
+        "content": "Meet multiple Disney Princesses during your meal. Great for princess fans of all ages.",
+        "priority": 4
+      },
+      {
+        "id": "ak-dining-tip-2",
+        "category": "strategy",
+        "content": "Buffet-style service with Norwegian and American options. Breakfast is most popular.",
+        "priority": 3
+      }
+    ],
+    "tags": ["character-dining", "princesses", "norwegian", "buffet", "castle"],
+    "features": ["character-dining", "buffet-style", "castle-setting"],
+    "cuisineType": "Norwegian & American",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "operatingHours": {
+      "breakfast": "8:00 AM - 11:15 AM",
+      "lunch": "11:45 AM - 3:00 PM",
+      "dinner": "4:00 PM - 8:30 PM"
+    },
+    "reservationWindow": 60
+  },
+  {
+    "id": "epcot-garden-grill",
+    "parkId": "epcot",
+    "name": "Garden Grill Restaurant",
+    "description": "Rotating restaurant offering character dining with Chip 'n' Dale and friends while overlooking Living with the Land attraction.",
+    "location": "World Nature",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "gg-tip-1",
+        "category": "general",
+        "content": "Unique rotating restaurant with views into Living with the Land. Characters visit every table.",
+        "priority": 4
+      },
+      {
+        "id": "gg-tip-2",
+        "category": "general",
+        "content": "Farm-fresh ingredients, many from EPCOT's own gardens. Family-style service.",
+        "priority": 3
+      }
+    ],
+    "tags": ["character-dining", "rotating", "farm-fresh", "family-style", "unique"],
+    "features": ["rotating-restaurant", "character-dining", "garden-views"],
+    "cuisineType": "American Farm-to-Table",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "operatingHours": {
+      "lunch": "11:30 AM - 3:00 PM",
+      "dinner": "4:30 PM - 8:00 PM"
+    },
+    "reservationWindow": 60
+  },
+  {
+    "id": "epcot-via-napoli",
+    "parkId": "epcot",
+    "name": "Via Napoli Ristorante e Pizzeria",
+    "description": "Authentic Neapolitan pizzeria featuring wood-fired ovens imported from Italy and traditional Italian cuisine.",
+    "location": "World Showcase - Italy",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "vn-tip-1",
+        "category": "general",
+        "content": "Authentic Neapolitan pizza from wood-fired ovens. Large pizzas great for sharing.",
+        "priority": 3
+      },
+      {
+        "id": "vn-tip-2",
+        "category": "strategy",
+        "content": "Located in Italy pavilion with outdoor seating available. Popular with families.",
+        "priority": 2
+      }
+    ],
+    "tags": ["italian", "pizza", "wood-fired", "neapolitan", "family"],
+    "features": ["wood-fired-ovens", "outdoor-seating", "authentic-italian"],
+    "cuisineType": "Italian",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "operatingHours": {
+      "lunch": "11:30 AM - 3:30 PM",
+      "dinner": "4:00 PM - 9:00 PM"
+    },
+    "reservationWindow": 60
+  },
+  {
+    "id": "epcot-rose-crown",
+    "parkId": "epcot",
+    "name": "Rose & Crown Dining Room",
+    "description": "Traditional British pub offering fish and chips, bangers and mash, and other UK favorites with World Showcase Lagoon views.",
+    "location": "World Showcase - United Kingdom",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "rc-dining-tip-1",
+        "category": "strategy",
+        "content": "Great views of EPCOT fireworks from outdoor seating. Traditional British pub atmosphere.",
+        "priority": 4
+      },
+      {
+        "id": "rc-dining-tip-2",
+        "category": "general",
+        "content": "Try the fish and chips or shepherd's pie. British beers and ales available.",
+        "priority": 3
+      }
+    ],
+    "tags": ["british", "pub", "fish-chips", "fireworks-view", "traditional"],
+    "features": ["outdoor-seating", "fireworks-views", "pub-atmosphere"],
+    "cuisineType": "British Pub",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "operatingHours": {
+      "lunch": "11:30 AM - 3:30 PM",
+      "dinner": "4:00 PM - 9:00 PM"
+    },
+    "reservationWindow": 60
+  },
+  {
+    "id": "epcot-biergarten",
+    "parkId": "epcot",
+    "name": "Biergarten Restaurant",
+    "description": "Authentic German buffet with live entertainment including traditional folk music and dancing in an Oktoberfest-style hall.",
+    "location": "World Showcase - Germany",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "bg-tip-1",
+        "category": "general",
+        "content": "Authentic German buffet with live oompah band entertainment. Community seating at large tables.",
+        "priority": 4
+      },
+      {
+        "id": "bg-tip-2",
+        "category": "strategy",
+        "content": "Great for groups and families. German beers and traditional dishes available.",
+        "priority": 3
+      }
+    ],
+    "tags": ["german", "buffet", "entertainment", "oktoberfest", "community-seating"],
+    "features": ["live-entertainment", "buffet-style", "community-seating"],
+    "cuisineType": "German",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "operatingHours": {
+      "lunch": "12:00 PM - 3:30 PM",
+      "dinner": "4:00 PM - 8:30 PM"
+    },
+    "reservationWindow": 60
+  }
+]

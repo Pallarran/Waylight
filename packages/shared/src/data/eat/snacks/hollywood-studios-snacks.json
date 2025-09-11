@@ -1,0 +1,224 @@
+[
+  {
+    "id": "dhs-milk-stand",
+    "parkId": "hollywood-studios",
+    "name": "Milk Stand",
+    "description": "Star Wars-themed snack location in Galaxy's Edge serving the famous Blue Milk and Green Milk beverages from the films, both available with alcoholic versions.",
+    "location": "Star Wars: Galaxy's Edge",
+    "type": "snack",
+    "serviceType": "snack",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "milk-stand-tip-1",
+        "category": "general",
+        "content": "Home to the iconic Blue and Green Milk from Star Wars - a must-try Galaxy's Edge experience",
+        "priority": 4
+      },
+      {
+        "id": "milk-stand-tip-2",
+        "category": "strategy",
+        "content": "Both alcoholic (rum/tequila) and non-alcoholic versions available",
+        "priority": 3
+      }
+    ],
+    "tags": ["galaxy's-edge", "star-wars", "blue-milk", "green-milk", "iconic"],
+    "features": {
+      "mobileOrder": false,
+      "indoorSeating": false,
+      "entertainment": false,
+      "adrRequired": false,
+      "alcoholServed": true,
+      "vegetarianOptions": true,
+      "veganOptions": true,
+      "glutenFreeOptions": false,
+      "characterDining": false
+    },
+    "cuisineType": "Star Wars Specialty Beverages",
+    "kidFriendly": true,
+    "allergyFriendly": ["vegetarian", "vegan"],
+    "mobileOrderAvailable": false,
+    "operatingHours": {
+      "lunch": "11:00 AM - 4:00 PM",
+      "dinner": "4:00 PM - 8:00 PM"
+    }
+  },
+  {
+    "id": "dhs-kat-sakas-kettle",
+    "parkId": "hollywood-studios",
+    "name": "Kat Saka's Kettle",
+    "description": "Galaxy's Edge popcorn and specialty snack location featuring the unique Outpost Popcorn Mix and Cold Brew Black Caf with Star Wars theming.",
+    "location": "Star Wars: Galaxy's Edge",
+    "type": "snack",
+    "serviceType": "snack",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "kat-sakas-tip-1",
+        "category": "general",
+        "content": "Famous for Outpost Popcorn Mix with sweet purple and spicy red kernels",
+        "priority": 4
+      },
+      {
+        "id": "kat-sakas-tip-2",
+        "category": "strategy",
+        "content": "Try the Cold Brew Black Caf with sweet cream cheese and chocolate puffs",
+        "priority": 3
+      }
+    ],
+    "tags": ["galaxy's-edge", "popcorn", "coffee", "unique-flavors", "star-wars"],
+    "features": {
+      "mobileOrder": false,
+      "indoorSeating": false,
+      "entertainment": false,
+      "adrRequired": false,
+      "alcoholServed": false,
+      "vegetarianOptions": true,
+      "veganOptions": false,
+      "glutenFreeOptions": false,
+      "characterDining": false
+    },
+    "cuisineType": "Specialty Snacks & Coffee",
+    "kidFriendly": true,
+    "allergyFriendly": ["vegetarian"],
+    "mobileOrderAvailable": false,
+    "operatingHours": {
+      "breakfast": "8:00 AM - 11:00 AM",
+      "lunch": "11:00 AM - 4:00 PM",
+      "dinner": "4:00 PM - 8:00 PM"
+    }
+  },
+  {
+    "id": "dhs-baseline-tap-house",
+    "parkId": "hollywood-studios",
+    "name": "BaseLine Tap House",
+    "description": "California-inspired lounge and snack spot on Grand Avenue featuring craft beer, wine, and gourmet snacks including the famous Bavarian Pretzel with beer cheese.",
+    "location": "Grand Avenue",
+    "type": "snack",
+    "serviceType": "snack",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "baseline-tip-1",
+        "category": "general",
+        "content": "Home to the best Bavarian Pretzel in Disney World with beer cheese fondue",
+        "priority": 4
+      },
+      {
+        "id": "baseline-tip-2",
+        "category": "strategy",
+        "content": "Great spot for adult beverages and gourmet snacking away from crowds",
+        "priority": 3
+      }
+    ],
+    "tags": ["grand-avenue", "craft-beer", "bavarian-pretzel", "adult-friendly", "gourmet"],
+    "features": {
+      "mobileOrder": false,
+      "indoorSeating": true,
+      "entertainment": false,
+      "adrRequired": false,
+      "alcoholServed": true,
+      "vegetarianOptions": true,
+      "veganOptions": false,
+      "glutenFreeOptions": true,
+      "characterDining": false
+    },
+    "cuisineType": "California-Inspired",
+    "kidFriendly": true,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "mobileOrderAvailable": false,
+    "operatingHours": {
+      "lunch": "11:00 AM - 4:00 PM",
+      "dinner": "4:00 PM - 10:00 PM"
+    }
+  },
+  {
+    "id": "dhs-the-market",
+    "parkId": "hollywood-studios",
+    "name": "The Market",
+    "description": "Pixar-themed snack location featuring Jack-Jack's Num Num Cookies from The Incredibles - large, warm, gooey cookies perfect for sharing.",
+    "location": "Pixar Place",
+    "type": "snack",
+    "serviceType": "snack",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "market-tip-1",
+        "category": "general",
+        "content": "Home to Jack-Jack's Num Num Cookie - contender for best cookie in Disney World",
+        "priority": 4
+      },
+      {
+        "id": "market-tip-2",
+        "category": "strategy",
+        "content": "Cookies are served warm and are huge - perfect for sharing",
+        "priority": 3
+      }
+    ],
+    "tags": ["pixar", "incredibles", "num-num-cookie", "warm-cookies", "sharing"],
+    "features": {
+      "mobileOrder": false,
+      "indoorSeating": false,
+      "entertainment": false,
+      "adrRequired": false,
+      "alcoholServed": false,
+      "vegetarianOptions": true,
+      "veganOptions": false,
+      "glutenFreeOptions": false,
+      "characterDining": false
+    },
+    "cuisineType": "American Bakery",
+    "kidFriendly": true,
+    "allergyFriendly": ["vegetarian"],
+    "mobileOrderAvailable": false,
+    "operatingHours": {
+      "breakfast": "8:00 AM - 11:00 AM",
+      "lunch": "11:00 AM - 4:00 PM",
+      "dinner": "4:00 PM - 8:00 PM"
+    }
+  },
+  {
+    "id": "dhs-backlot-express-snacks",
+    "parkId": "hollywood-studios",
+    "name": "Backlot Express",
+    "description": "Quick service location that also offers specialty snacks including the Wookie Cookie - two oatmeal cookies with vanilla cream inspired by Chewbacca's bandolier.",
+    "location": "Echo Lake",
+    "type": "snack",
+    "serviceType": "snack",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "backlot-snacks-tip-1",
+        "category": "general",
+        "content": "Features the Wookie Cookie with vanilla cream and chocolate sash inspired by Chewbacca",
+        "priority": 3
+      },
+      {
+        "id": "backlot-snacks-tip-2",
+        "category": "strategy",
+        "content": "Good option for both meals and specialty Star Wars-themed cookies",
+        "priority": 2
+      }
+    ],
+    "tags": ["star-wars", "wookie-cookie", "chewbacca", "oatmeal-cookies", "echo-lake"],
+    "features": {
+      "mobileOrder": true,
+      "indoorSeating": true,
+      "entertainment": false,
+      "adrRequired": false,
+      "alcoholServed": false,
+      "vegetarianOptions": true,
+      "veganOptions": false,
+      "glutenFreeOptions": false,
+      "characterDining": false
+    },
+    "cuisineType": "American",
+    "kidFriendly": true,
+    "allergyFriendly": ["vegetarian"],
+    "mobileOrderAvailable": true,
+    "operatingHours": {
+      "lunch": "11:00 AM - 4:00 PM",
+      "dinner": "4:00 PM - 8:00 PM"
+    }
+  }
+]

@@ -1,0 +1,225 @@
+[
+  {
+    "id": "ak-tiffins",
+    "parkId": "animal-kingdom",
+    "name": "Tiffins",
+    "description": "Signature dining restaurant featuring globally-inspired cuisine with dishes inspired by the adventures of Disney Imagineers and their travels.",
+    "location": "Discovery Island",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 4,
+    "tips": [
+      {
+        "id": "tiff-tip-1",
+        "category": "general",
+        "content": "Disney's most upscale restaurant at Animal Kingdom. Award-winning cuisine with global influences.",
+        "priority": 4
+      },
+      {
+        "id": "tiff-tip-2",
+        "category": "general",
+        "content": "Artwork throughout restaurant tells stories of Disney Imagineers' adventures. Perfect for special occasions.",
+        "priority": 3
+      }
+    ],
+    "tags": ["signature-dining", "fine-dining", "global-cuisine", "imagineers", "upscale"],
+    "features": ["signature-dining", "global-cuisine", "imagineering-artwork"],
+    "cuisineType": "Global Fine Dining",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "operatingHours": {
+      "lunch": "11:30 AM - 3:30 PM",
+      "dinner": "4:00 PM - 8:00 PM"
+    },
+    "reservationWindow": 60
+  },
+  {
+    "id": "ak-sanaa",
+    "resortId": "animal-kingdom-lodge-kidani",
+    "name": "Sanaa",
+    "description": "African- and Indian-inspired cuisine with stunning views of giraffes, zebras, and other animals on the savanna at Animal Kingdom Lodge.",
+    "location": "Animal Kingdom Lodge - Kidani Village",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "sanaa-tip-1",
+        "category": "general",
+        "content": "Famous bread service with unique dipping sauces. Watch animals from your table!",
+        "priority": 4
+      },
+      {
+        "id": "sanaa-tip-2",
+        "category": "strategy",
+        "content": "Located at Animal Kingdom Lodge but accessible to all guests. Bring binoculars for animal viewing.",
+        "priority": 3
+      }
+    ],
+    "tags": ["african", "indian", "animal-views", "bread-service", "savanna"],
+    "features": ["animal-views", "bread-service", "savanna-views"],
+    "cuisineType": "African & Indian",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "operatingHours": {
+      "lunch": "11:30 AM - 3:00 PM",
+      "dinner": "5:00 PM - 9:00 PM"
+    },
+    "reservationWindow": 60
+  },
+  {
+    "id": "ak-boma",
+    "resortId": "animal-kingdom-lodge-jambo",
+    "name": "Boma - Flavors of Africa",
+    "description": "African-inspired buffet featuring over 50 different dishes from across the continent in a vibrant marketplace setting.",
+    "location": "Animal Kingdom Lodge - Jambo House",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "boma-tip-1",
+        "category": "general",
+        "content": "Extensive African-inspired buffet with unique flavors. Great way to try new cuisines.",
+        "priority": 4
+      },
+      {
+        "id": "boma-tip-2",
+        "category": "strategy",
+        "content": "Breakfast and dinner service available. Popular with both adventurous eaters and families.",
+        "priority": 3
+      }
+    ],
+    "tags": ["african", "buffet", "marketplace", "50-dishes", "unique-flavors"],
+    "features": ["buffet-style", "african-cuisine", "marketplace-setting"],
+    "cuisineType": "African",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "operatingHours": {
+      "breakfast": "7:00 AM - 11:00 AM",
+      "dinner": "4:30 PM - 9:00 PM"
+    },
+    "reservationWindow": 60
+  },
+  {
+    "id": "ak-tusker-house",
+    "parkId": "animal-kingdom",
+    "name": "Tusker House Restaurant",
+    "description": "Character dining buffet featuring Donald Duck and friends in safari outfits with African-inspired cuisine and American favorites.",
+    "location": "Africa - Harambe",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "th-tip-1",
+        "category": "general",
+        "content": "Only character dining in Animal Kingdom. Donald Duck, Mickey, Goofy, and Daisy in safari gear.",
+        "priority": 4
+      },
+      {
+        "id": "th-tip-2",
+        "category": "strategy",
+        "content": "Buffet service with African-inspired dishes and kid-friendly options. Popular breakfast spot.",
+        "priority": 3
+      }
+    ],
+    "tags": ["character-dining", "safari", "donald-duck", "african-inspired", "buffet"],
+    "features": ["character-dining", "buffet-style", "safari-themed"],
+    "cuisineType": "African & American",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "operatingHours": {
+      "breakfast": "8:00 AM - 10:15 AM",
+      "lunch": "11:30 AM - 3:30 PM",
+      "dinner": "4:00 PM - 8:00 PM"
+    },
+    "reservationWindow": 60
+  },
+  {
+    "id": "ak-yak-yeti",
+    "parkId": "animal-kingdom",
+    "name": "Yak & Yeti Restaurant",
+    "description": "Pan-Asian cuisine featuring dishes from across Asia in a Nepalese-themed restaurant with intricate decor and artifacts.",
+    "location": "Asia - Anandapur",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "yy-tip-1",
+        "category": "general",
+        "content": "Pan-Asian menu with dishes from Thailand, China, Japan, and more. Beautiful themed interior.",
+        "priority": 3
+      },
+      {
+        "id": "yy-tip-2",
+        "category": "strategy",
+        "content": "Operated by Landry's Restaurants. Often easier to get reservations than Disney-operated restaurants.",
+        "priority": 3
+      }
+    ],
+    "tags": ["pan-asian", "nepalese", "artifacts", "landry's", "intricate-decor"],
+    "features": ["pan-asian-cuisine", "nepalese-theming", "landry's-operated"],
+    "cuisineType": "Pan-Asian",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "operatingHours": {
+      "lunch": "11:00 AM - 3:30 PM",
+      "dinner": "4:00 PM - 8:00 PM"
+    },
+    "reservationWindow": 60
+  },
+  {
+    "id": "ak-rainforest-cafe",
+    "parkId": "animal-kingdom",
+    "name": "Rainforest Cafe",
+    "description": "Themed restaurant simulating a rainforest environment with animatronic animals, thunderstorms, and jungle sounds.",
+    "location": "Oasis - Park Entrance",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "rc-tip-1",
+        "category": "general",
+        "content": "Immersive rainforest theming with animatronic animals and periodic thunderstorms.",
+        "priority": 4
+      },
+      {
+        "id": "rc-tip-2",
+        "category": "general",
+        "content": "Can be loud and overwhelming for some guests. Great for kids who love animals and adventure.",
+        "priority": 3
+      }
+    ],
+    "tags": ["rainforest", "animatronic", "thunderstorms", "immersive", "loud"],
+    "features": ["rainforest-theming", "animatronic-animals", "thunderstorms"],
+    "cuisineType": "American",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "operatingHours": {
+      "lunch": "11:00 AM - 3:30 PM",
+      "dinner": "4:00 PM - 8:00 PM"
+    },
+    "reservationWindow": 60
+  }
+]

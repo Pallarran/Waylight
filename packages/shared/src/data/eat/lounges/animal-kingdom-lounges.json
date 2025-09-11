@@ -1,0 +1,140 @@
+[
+  {
+    "id": "ak-nomad-lounge",
+    "parkId": "animal-kingdom",
+    "name": "Nomad Lounge",
+    "description": "Sophisticated lounge adjacent to Tiffins restaurant featuring creative cocktails, small plates, and a quieter atmosphere perfect for adults seeking refuge from the park crowds.",
+    "location": "Discovery Island",
+    "type": "lounge",
+    "serviceType": "lounge",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "nomad-tip-1",
+        "category": "general",
+        "content": "Hidden gem for adults - sophisticated cocktails and small plates in a quieter park setting",
+        "priority": 4
+      },
+      {
+        "id": "nomad-tip-2",
+        "category": "strategy",
+        "content": "Perfect spot for a mid-day break with air conditioning and comfortable seating",
+        "priority": 3
+      },
+      {
+        "id": "nomad-tip-3",
+        "category": "menu",
+        "content": "Try the Tempting Tigress cocktail or the Mustang Spring Roll for unique flavors",
+        "priority": 3
+      }
+    ],
+    "tags": ["sophisticated", "cocktails", "adults", "quiet", "discovery-island"],
+    "features": {
+      "mobileOrder": false,
+      "indoorSeating": true,
+      "entertainment": false,
+      "adrRequired": false,
+      "alcoholServed": true,
+      "vegetarianOptions": true,
+      "veganOptions": false,
+      "glutenFreeOptions": true,
+      "characterDining": false
+    },
+    "cuisineType": "Creative Cocktails & Small Plates",
+    "kidFriendly": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "mobileOrderAvailable": false,
+    "operatingHours": {
+      "lunch": "11:30 AM - 3:30 PM",
+      "dinner": "3:30 PM - 8:00 PM"
+    }
+  },
+  {
+    "id": "ak-dawa-bar",
+    "parkId": "animal-kingdom",
+    "name": "Dawa Bar",
+    "description": "Outdoor African-themed bar located near Tusker House offering beer, cocktails, and light snacks with authentic African atmosphere and live entertainment.",
+    "location": "Africa - Harambe",
+    "type": "lounge",
+    "serviceType": "lounge",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "dawa-tip-1",
+        "category": "general",
+        "content": "Authentic African atmosphere with outdoor seating and occasional live entertainment",
+        "priority": 3
+      },
+      {
+        "id": "dawa-tip-2",
+        "category": "strategy",
+        "content": "Great spot for drinks while waiting for Tusker House reservations or exploring Africa",
+        "priority": 2
+      }
+    ],
+    "tags": ["africa", "outdoor", "authentic", "harambe", "entertainment"],
+    "features": {
+      "mobileOrder": false,
+      "indoorSeating": false,
+      "entertainment": true,
+      "adrRequired": false,
+      "alcoholServed": true,
+      "vegetarianOptions": true,
+      "veganOptions": false,
+      "glutenFreeOptions": false,
+      "characterDining": false
+    },
+    "cuisineType": "African-Inspired Beverages",
+    "kidFriendly": true,
+    "allergyFriendly": ["vegetarian"],
+    "mobileOrderAvailable": false,
+    "operatingHours": {
+      "lunch": "11:00 AM - 4:00 PM",
+      "dinner": "4:00 PM - 8:00 PM"
+    }
+  },
+  {
+    "id": "ak-thirsty-river-bar",
+    "parkId": "animal-kingdom",
+    "name": "Thirsty River Bar & Trek Snacks",
+    "description": "Poolside-style bar near Kali River Rapids offering frozen drinks, beer, and light snacks with a casual riverside atmosphere perfect for cooling down.",
+    "location": "Asia - Anandapur",
+    "type": "lounge",
+    "serviceType": "lounge",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "thirsty-river-tip-1",
+        "category": "general",
+        "content": "Perfect spot for frozen drinks after getting soaked on Kali River Rapids",
+        "priority": 3
+      },
+      {
+        "id": "thirsty-river-tip-2",
+        "category": "strategy",
+        "content": "Casual outdoor bar with poolside vibe - great for hot Florida days",
+        "priority": 2
+      }
+    ],
+    "tags": ["asia", "frozen-drinks", "casual", "outdoor", "kali-river"],
+    "features": {
+      "mobileOrder": false,
+      "indoorSeating": false,
+      "entertainment": false,
+      "adrRequired": false,
+      "alcoholServed": true,
+      "vegetarianOptions": true,
+      "veganOptions": false,
+      "glutenFreeOptions": false,
+      "characterDining": false
+    },
+    "cuisineType": "Frozen Cocktails & Light Snacks",
+    "kidFriendly": true,
+    "allergyFriendly": ["vegetarian"],
+    "mobileOrderAvailable": false,
+    "operatingHours": {
+      "lunch": "11:00 AM - 4:00 PM",
+      "dinner": "4:00 PM - 7:00 PM"
+    }
+  }
+]

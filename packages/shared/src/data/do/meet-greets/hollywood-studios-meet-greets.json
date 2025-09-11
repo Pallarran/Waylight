@@ -1,0 +1,128 @@
+[
+  {
+    "id": "hs-star-wars-characters",
+    "parkId": "hollywood-studios",
+    "name": "Star Wars Characters at Launch Bay",
+    "description": "Meet iconic Star Wars characters including Kylo Ren, Chewbacca, and BB-8 in the Star Wars Launch Bay.",
+    "location": "Star Wars Launch Bay",
+    "type": "meet_greet",
+    "duration": 5,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "star-wars-tip-1",
+        "category": "strategy",
+        "content": "Characters rotate throughout the day. Check the My Disney Experience app for current character schedules.",
+        "priority": 1
+      }
+    ],
+    "tags": ["star-wars", "kylo-ren", "chewbacca", "bb-8", "launch-bay"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": true,
+      "hasLightningLane": false,
+      "isRainSafe": true,
+      "hasPhotos": true,
+      "hasCharacters": true,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": true,
+    "characters": ["Kylo Ren", "Chewbacca", "BB-8"]
+  },
+  {
+    "id": "hs-woody-buzz",
+    "parkId": "hollywood-studios",
+    "name": "Meet Woody and Buzz at Toy Story Land",
+    "description": "Meet the iconic Toy Story duo Woody and Buzz Lightyear in Andy's backyard at Toy Story Land.",
+    "location": "Toy Story Land",
+    "type": "meet_greet",
+    "duration": 5,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "woody-buzz-tip-1",
+        "category": "strategy",
+        "content": "Very popular meet & greet. Visit early in the morning or use Lightning Lane for shorter waits.",
+        "priority": 1
+      }
+    ],
+    "tags": ["toy-story", "woody", "buzz-lightyear", "pixar", "popular"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": true,
+      "hasLightningLane": true,
+      "isRainSafe": false,
+      "hasPhotos": true,
+      "hasCharacters": true,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": true,
+    "singleRider": false,
+    "photoService": true,
+    "characters": ["Woody", "Buzz Lightyear"]
+  },
+  {
+    "id": "hs-mickey-minnie-runaway-railway",
+    "parkId": "hollywood-studios",
+    "name": "Meet Mickey and Minnie at Red Carpet Dreams",
+    "description": "Meet Mickey and Minnie Mouse in their Hollywood glamour outfits at this special character greeting.",
+    "location": "Grand Avenue",
+    "type": "meet_greet",
+    "duration": 5,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "mickey-minnie-hollywood-tip-1",
+        "category": "general",
+        "content": "Mickey and Minnie are in their special Hollywood outfits here - great for unique photos!",
+        "priority": 2
+      }
+    ],
+    "tags": ["mickey-mouse", "minnie-mouse", "hollywood", "classic", "glamour"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": true,
+      "hasLightningLane": false,
+      "isRainSafe": false,
+      "hasPhotos": true,
+      "hasCharacters": true,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": true,
+    "characters": ["Mickey Mouse", "Minnie Mouse"]
+  }
+]

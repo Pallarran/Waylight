@@ -1,0 +1,263 @@
+[
+  {
+    "id": "be-our-guest-restaurant",
+    "parkId": "magic-kingdom",
+    "name": "Be Our Guest Restaurant",
+    "description": "Dine in the Beast's enchanted castle in this popular table service restaurant with three themed rooms.",
+    "location": "Fantasyland",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "be-our-guest-tip-1",
+        "category": "strategy",
+        "content": "Advance dining reservations required - book 60 days ahead",
+        "priority": 5
+      },
+      {
+        "id": "be-our-guest-tip-2",
+        "category": "general",
+        "content": "West Wing has the rose and Beast's portrait - most atmospheric",
+        "priority": 4
+      },
+      {
+        "id": "be-our-guest-tip-3",
+        "category": "general",
+        "content": "Try the grey stuff - it's delicious (don't believe them? Ask the dishes)",
+        "priority": 5
+      }
+    ],
+    "tags": ["table-service", "beauty-beast", "reservations", "upscale", "themed"],
+    "features": ["themed-rooms", "reservations-required", "upscale"],
+    "cuisineType": "French",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["gluten-free", "vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "operatingHours": {
+      "breakfast": "8:00 AM - 10:30 AM",
+      "lunch": "11:30 AM - 2:30 PM",
+      "dinner": "5:00 PM - 9:00 PM"
+    },
+    "reservationWindow": 60
+  },
+  {
+    "id": "cinderella-royal-table",
+    "parkId": "magic-kingdom",
+    "name": "Cinderella's Royal Table",
+    "description": "Dine with Disney Princesses inside Cinderella Castle in this premium character dining experience.",
+    "location": "Fantasyland",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 4,
+    "tips": [
+      {
+        "id": "royal-table-tip-1",
+        "category": "strategy",
+        "content": "Most expensive character meal at Disney - book early, it fills fast",
+        "priority": 5
+      },
+      {
+        "id": "royal-table-tip-2",
+        "category": "general",
+        "content": "Each guest gets a photo with Cinderella before being seated",
+        "priority": 5
+      },
+      {
+        "id": "royal-table-tip-3",
+        "category": "general",
+        "content": "Multiple princesses visit each table throughout the meal",
+        "priority": 4
+      }
+    ],
+    "tags": ["character-dining", "princesses", "castle", "upscale", "premium"],
+    "features": ["character-dining", "photo-package", "castle-dining"],
+    "cuisineType": "American Fine Dining",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["gluten-free", "vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "operatingHours": {
+      "breakfast": "8:00 AM - 11:50 AM",
+      "lunch": "12:00 PM - 2:50 PM",
+      "dinner": "3:55 PM - 9:00 PM"
+    },
+    "reservationWindow": 60
+  },
+  {
+    "id": "crystal-palace",
+    "parkId": "magic-kingdom",
+    "name": "The Crystal Palace",
+    "description": "Buffet character dining with Winnie the Pooh and friends in this beautiful Victorian conservatory.",
+    "location": "Main Street U.S.A.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "crystal-palace-tip-1",
+        "category": "general",
+        "content": "Great for families with picky eaters - lots of buffet options",
+        "priority": 4
+      },
+      {
+        "id": "crystal-palace-tip-2",
+        "category": "general",
+        "content": "Pooh, Tigger, Piglet, and Eeyore all visit tables",
+        "priority": 4
+      },
+      {
+        "id": "crystal-palace-tip-3",
+        "category": "general",
+        "content": "Beautiful natural lighting - great for photos",
+        "priority": 3
+      }
+    ],
+    "tags": ["character-dining", "buffet", "winnie-pooh", "family-friendly", "main-street"],
+    "features": ["character-dining", "buffet-style", "natural-lighting"],
+    "cuisineType": "American Buffet",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "operatingHours": {
+      "breakfast": "8:00 AM - 10:30 AM",
+      "lunch": "11:30 AM - 2:30 PM",
+      "dinner": "3:00 PM - 9:00 PM"
+    },
+    "reservationWindow": 60
+  },
+  {
+    "id": "plaza-restaurant",
+    "parkId": "magic-kingdom",
+    "name": "The Plaza Restaurant",
+    "description": "Victorian-style restaurant on Main Street serving sandwiches, salads, and classic American fare.",
+    "location": "Main Street U.S.A.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "plaza-tip-1",
+        "category": "strategy",
+        "content": "Great central location with air conditioning",
+        "priority": 4
+      },
+      {
+        "id": "plaza-tip-2",
+        "category": "general",
+        "content": "Famous for their sandwiches and milkshakes",
+        "priority": 4
+      },
+      {
+        "id": "plaza-tip-3",
+        "category": "strategy",
+        "content": "Advance reservations recommended",
+        "priority": 3
+      }
+    ],
+    "tags": ["table-service", "american", "main-street", "classic", "air-conditioned"],
+    "features": ["air-conditioning", "central-location"],
+    "cuisineType": "American",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "operatingHours": {
+      "lunch": "11:00 AM - 4:00 PM",
+      "dinner": "4:00 PM - 9:00 PM"
+    },
+    "reservationWindow": 60
+  },
+  {
+    "id": "liberty-tree-tavern",
+    "parkId": "magic-kingdom",
+    "name": "Liberty Tree Tavern",
+    "description": "Colonial-themed restaurant in Liberty Square serving traditional American cuisine.",
+    "location": "Liberty Square",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "liberty-tree-tip-1",
+        "category": "general",
+        "content": "Dinner is all-you-can-eat family style with turkey, stuffing, and sides",
+        "priority": 5
+      },
+      {
+        "id": "liberty-tree-tip-2",
+        "category": "general",
+        "content": "Lunch is à la carte with sandwiches and salads",
+        "priority": 4
+      },
+      {
+        "id": "liberty-tree-tip-3",
+        "category": "general",
+        "content": "Beautiful colonial theming and historical decor",
+        "priority": 3
+      }
+    ],
+    "tags": ["table-service", "colonial", "family-style", "turkey", "historical"],
+    "features": ["family-style-dinner", "historical-theming"],
+    "cuisineType": "American Colonial",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "operatingHours": {
+      "lunch": "11:30 AM - 3:00 PM",
+      "dinner": "4:00 PM - 9:00 PM"
+    },
+    "reservationWindow": 60
+  },
+  {
+    "id": "skipper-canteen",
+    "parkId": "magic-kingdom",
+    "name": "Jungle Navigation Co. Ltd. Skipper Canteen",
+    "description": "Table service restaurant inspired by the Jungle Cruise, serving pan-Asian cuisine with a side of skipper humor.",
+    "location": "Adventureland",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "skipper-canteen-tip-1",
+        "category": "strategy",
+        "content": "Reservations highly recommended - book 60 days in advance",
+        "priority": 5
+      },
+      {
+        "id": "skipper-canteen-tip-2",
+        "category": "general",
+        "content": "Try the famous 'Tastes like Chicken' for a fun skipper experience",
+        "priority": 4
+      },
+      {
+        "id": "skipper-canteen-tip-3",
+        "category": "general",
+        "content": "Air-conditioned with great atmosphere and theming",
+        "priority": 3
+      }
+    ],
+    "tags": ["table-service", "jungle-cruise", "pan-asian", "air-conditioning", "reservations"],
+    "features": ["jungle-cruise-themed", "air-conditioning", "unique-atmosphere"],
+    "cuisineType": "Pan-Asian",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "operatingHours": {
+      "lunch": "11:30 AM - 3:30 PM",
+      "dinner": "4:00 PM - 9:00 PM"
+    },
+    "reservationWindow": 60
+  }
+]

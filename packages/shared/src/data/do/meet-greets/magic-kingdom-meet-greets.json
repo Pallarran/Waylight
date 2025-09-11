@@ -1,0 +1,86 @@
+[
+  {
+    "id": "mk-mickey-townhall",
+    "parkId": "magic-kingdom",
+    "name": "Meet Mickey Mouse at Town Square Theater",
+    "description": "Meet the one and only Mickey Mouse in his dressing room backstage at the Town Square Theater for photos and autographs.",
+    "location": "Main Street U.S.A.",
+    "type": "meet_greet",
+    "duration": 5,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "mickey-tip-1",
+        "category": "strategy",
+        "content": "Get a FastPass+ or arrive early in the morning for shorter wait times.",
+        "priority": 1
+      }
+    ],
+    "tags": ["classic", "must-do", "photos", "autographs"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": true,
+      "hasLightningLane": true,
+      "isRainSafe": true,
+      "hasPhotos": true,
+      "hasCharacters": true,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": true,
+    "singleRider": false,
+    "photoService": true,
+    "characters": ["Mickey Mouse"]
+  },
+  {
+    "id": "mk-princess-fairytale-hall",
+    "parkId": "magic-kingdom",
+    "name": "Princess Fairytale Hall",
+    "description": "Meet Disney Princesses in their royal reception hall in Fantasyland for photos and magical moments.",
+    "location": "Fantasyland",
+    "type": "meet_greet", 
+    "duration": 5,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "princess-tip-1",
+        "category": "best_time",
+        "content": "Princesses rotate throughout the day - check the app for current lineup.",
+        "priority": 2
+      }
+    ],
+    "tags": ["princesses", "photos", "autographs", "magical"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": true,
+      "hasLightningLane": true,
+      "isRainSafe": true,
+      "hasPhotos": true,
+      "hasCharacters": true,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": true,
+    "singleRider": false,
+    "photoService": true,
+    "characters": ["Cinderella", "Rapunzel", "Tiana", "Elena"]
+  }
+]

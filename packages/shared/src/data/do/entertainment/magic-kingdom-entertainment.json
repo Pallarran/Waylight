@@ -1,0 +1,128 @@
+[
+  {
+    "id": "mk-festival-fantasy-parade",
+    "parkId": "magic-kingdom",
+    "name": "Festival of Fantasy Parade",
+    "description": "A spectacular daytime parade featuring beloved Disney characters, elaborate floats, and the dragon from Sleeping Beauty.",
+    "location": "Main Street U.S.A. to Frontierland",
+    "type": "entertainment",
+    "duration": 12,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "parade-tip-1",
+        "category": "best_time",
+        "content": "Arrive 30-45 minutes early for good viewing spots along Main Street or Frontierland.",
+        "priority": 1
+      }
+    ],
+    "tags": ["parade", "characters", "music", "outdoor", "family-friendly"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": false,
+      "hasLightningLane": false,
+      "isRainSafe": false,
+      "hasPhotos": true,
+      "hasCharacters": true,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": true,
+    "showTimes": ["3:00 PM"]
+  },
+  {
+    "id": "mk-happily-ever-after",
+    "parkId": "magic-kingdom",
+    "name": "Happily Ever After",
+    "description": "A spectacular nighttime fireworks spectacular featuring projection mapping on Cinderella Castle with Disney's most beloved songs.",
+    "location": "Cinderella Castle",
+    "type": "entertainment",
+    "duration": 18,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "hea-tip-1",
+        "category": "best_time",
+        "content": "Arrive 60-90 minutes early for prime viewing spots on Main Street or in front of the castle.",
+        "priority": 1
+      }
+    ],
+    "tags": ["fireworks", "nighttime", "castle", "projection", "music"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": false,
+      "hasLightningLane": false,
+      "isRainSafe": false,
+      "hasPhotos": true,
+      "hasCharacters": false,
+      "isLoud": true,
+      "hasStrobes": true,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": true,
+    "showTimes": ["9:00 PM"]
+  },
+  {
+    "id": "mk-dapper-dans",
+    "parkId": "magic-kingdom",
+    "name": "The Dapper Dans",
+    "description": "A barbershop quartet that performs classic Disney songs and popular tunes throughout Main Street U.S.A.",
+    "location": "Main Street U.S.A.",
+    "type": "entertainment",
+    "duration": 10,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "dapper-tip-1",
+        "category": "general",
+        "content": "Check the My Disney Experience app for performance times - they move around Main Street throughout the day.",
+        "priority": 2
+      }
+    ],
+    "tags": ["music", "street-performers", "barbershop", "classic"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": true,
+      "hasLightningLane": false,
+      "isRainSafe": false,
+      "hasPhotos": true,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false,
+    "showTimes": ["Multiple times daily"]
+  }
+]

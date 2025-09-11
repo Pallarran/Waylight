@@ -1,0 +1,135 @@
+[
+  {
+    "id": "ak-pongu-pongu",
+    "parkId": "animal-kingdom",
+    "name": "Pongu Pongu",
+    "description": "Pandora's signature snack location serving the famous Night Blossom beverage, Pongu Lumpia spring rolls, and other specialty treats themed to the Avatar world.",
+    "location": "Pandora - The World of Avatar",
+    "type": "snack",
+    "serviceType": "snack",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "pongu-pongu-tip-1",
+        "category": "general",
+        "content": "Home to the famous Night Blossom with passion fruit boba - a must-try Animal Kingdom treat",
+        "priority": 4
+      },
+      {
+        "id": "pongu-pongu-tip-2",
+        "category": "strategy",
+        "content": "Try the Pongu Lumpia sweet spring roll paired with Night Blossom for the full Pandora experience",
+        "priority": 3
+      }
+    ],
+    "tags": ["pandora", "avatar", "night-blossom", "signature", "must-try"],
+    "features": {
+      "mobileOrder": false,
+      "indoorSeating": false,
+      "entertainment": false,
+      "adrRequired": false,
+      "alcoholServed": true,
+      "vegetarianOptions": true,
+      "veganOptions": false,
+      "glutenFreeOptions": false,
+      "characterDining": false
+    },
+    "cuisineType": "Specialty Beverages & Snacks",
+    "kidFriendly": true,
+    "allergyFriendly": ["vegetarian"],
+    "mobileOrderAvailable": false,
+    "operatingHours": {
+      "breakfast": "8:00 AM - 11:00 AM",
+      "lunch": "11:00 AM - 4:00 PM",
+      "dinner": "4:00 PM - 9:00 PM"
+    }
+  },
+  {
+    "id": "ak-kusafiri-coffee-shop",
+    "parkId": "animal-kingdom",
+    "name": "Kusafiri Coffee Shop & Bakery",
+    "description": "Africa-themed coffee shop famous for the Colossal Cinnamon Roll made from three rolls combined into Mickey Mouse shape, plus coffee and light breakfast items.",
+    "location": "Africa - Harambe",
+    "type": "snack",
+    "serviceType": "snack",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "kusafiri-tip-1",
+        "category": "general",
+        "content": "Home to the iconic Colossal Cinnamon Roll - perfect for sharing and Instagram photos",
+        "priority": 4
+      },
+      {
+        "id": "kusafiri-tip-2",
+        "category": "best_time",
+        "content": "Great breakfast spot before starting your Animal Kingdom day",
+        "priority": 3
+      }
+    ],
+    "tags": ["africa", "coffee", "colossal-cinnamon-roll", "breakfast", "mickey-shaped"],
+    "features": {
+      "mobileOrder": false,
+      "indoorSeating": true,
+      "entertainment": false,
+      "adrRequired": false,
+      "alcoholServed": false,
+      "vegetarianOptions": true,
+      "veganOptions": false,
+      "glutenFreeOptions": false,
+      "characterDining": false
+    },
+    "cuisineType": "Coffee & Bakery",
+    "kidFriendly": true,
+    "allergyFriendly": ["vegetarian"],
+    "mobileOrderAvailable": false,
+    "operatingHours": {
+      "breakfast": "7:30 AM - 11:00 AM",
+      "lunch": "11:00 AM - 4:00 PM"
+    }
+  },
+  {
+    "id": "ak-harambe-market",
+    "parkId": "animal-kingdom",
+    "name": "Harambe Market",
+    "description": "Africa-themed marketplace offering both quick service meals and specialty snacks including the new Mango Vanilla-Mousse and other tropical treats.",
+    "location": "Africa - Harambe",
+    "type": "snack",
+    "serviceType": "snack",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "harambe-market-tip-1",
+        "category": "general",
+        "content": "Features new 2024 tropical desserts like Mango Vanilla-Mousse with passion fruit",
+        "priority": 3
+      },
+      {
+        "id": "harambe-market-tip-2",
+        "category": "strategy",
+        "content": "Good option for both meals and snacks with outdoor seating in Africa section",
+        "priority": 2
+      }
+    ],
+    "tags": ["africa", "marketplace", "tropical-desserts", "new-2024", "outdoor-seating"],
+    "features": {
+      "mobileOrder": true,
+      "indoorSeating": false,
+      "entertainment": false,
+      "adrRequired": false,
+      "alcoholServed": false,
+      "vegetarianOptions": true,
+      "veganOptions": true,
+      "glutenFreeOptions": true,
+      "characterDining": false
+    },
+    "cuisineType": "African-Inspired",
+    "kidFriendly": true,
+    "allergyFriendly": ["vegetarian", "vegan", "gluten-free"],
+    "mobileOrderAvailable": true,
+    "operatingHours": {
+      "lunch": "11:00 AM - 4:00 PM",
+      "dinner": "4:00 PM - 8:00 PM"
+    }
+  }
+]

@@ -1,0 +1,128 @@
+[
+  {
+    "id": "ak-tree-of-life-awakenings",
+    "parkId": "animal-kingdom",
+    "name": "Tree of Life Awakenings",
+    "description": "Magical projections bring the Tree of Life to life with stories of animals and nature after dark.",
+    "location": "Discovery Island",
+    "type": "entertainment",
+    "duration": 3,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "tree-awakenings-tip-1",
+        "category": "general",
+        "content": "Shows run every 10 minutes after dark. Best viewing is from the bridge or walkways around Discovery Island.",
+        "priority": 2
+      }
+    ],
+    "tags": ["tree-of-life", "projections", "nighttime", "animals", "nature"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": false,
+      "hasLightningLane": false,
+      "isRainSafe": false,
+      "hasPhotos": true,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": true,
+    "showTimes": ["Every 10 minutes after dark"]
+  },
+  {
+    "id": "ak-drummers-burudika",
+    "parkId": "animal-kingdom",
+    "name": "Burudika",
+    "description": "High-energy African drumming and dancing performances celebrating the music and culture of Africa.",
+    "location": "Harambe Village",
+    "type": "entertainment",
+    "duration": 15,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "burudika-tip-1",
+        "category": "general",
+        "content": "Performances are interactive - don't be shy about participating in the dancing and drumming!",
+        "priority": 2
+      }
+    ],
+    "tags": ["african", "drumming", "dancing", "cultural", "interactive"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": true,
+      "hasLightningLane": false,
+      "isRainSafe": false,
+      "hasPhotos": true,
+      "hasCharacters": false,
+      "isLoud": true,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false,
+    "showTimes": ["Multiple times daily"]
+  },
+  {
+    "id": "ak-rivers-of-light",
+    "parkId": "animal-kingdom",
+    "name": "Rivers of Light",
+    "description": "A nighttime show on the Discovery River featuring floating lotus flowers, water screens, and animal spirits.",
+    "location": "Discovery River",
+    "type": "entertainment",
+    "duration": 15,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "rivers-light-tip-1",
+        "category": "strategy",
+        "content": "FastPass+ recommended. Arrive 45-60 minutes early for good seats in the DinoLand amphitheater.",
+        "priority": 1
+      }
+    ],
+    "tags": ["nighttime", "water-show", "floating", "animal-spirits", "discovery-river"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": false,
+      "hasLightningLane": true,
+      "isRainSafe": false,
+      "hasPhotos": true,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": true,
+    "singleRider": false,
+    "photoService": true,
+    "showTimes": ["8:15 PM"]
+  }
+]

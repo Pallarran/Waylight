@@ -1,0 +1,188 @@
+[
+  {
+    "id": "dhs-brown-derby",
+    "parkId": "hollywood-studios",
+    "name": "The Hollywood Brown Derby",
+    "description": "Signature dining restaurant recreating the famous 1940s Hollywood hotspot, known for the original Cobb salad and elegant atmosphere.",
+    "location": "Hollywood Boulevard",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 4,
+    "tips": [
+      {
+        "id": "hbd-tip-1",
+        "category": "general",
+        "content": "Famous for the original Cobb salad and grapefruit cake. Classic Hollywood glamour atmosphere.",
+        "priority": 4
+      },
+      {
+        "id": "hbd-tip-2",
+        "category": "general",
+        "content": "Caricatures of Hollywood stars line the walls. Perfect for special occasions.",
+        "priority": 3
+      }
+    ],
+    "tags": ["signature-dining", "hollywood", "cobb-salad", "elegant", "classic"],
+    "features": ["signature-dining", "hollywood-theming", "celebrity-caricatures"],
+    "cuisineType": "American Fine Dining",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "operatingHours": {
+      "lunch": "11:30 AM - 3:30 PM",
+      "dinner": "4:00 PM - 9:00 PM"
+    },
+    "reservationWindow": 60
+  },
+  {
+    "id": "dhs-sci-fi-dine-in",
+    "parkId": "hollywood-studios",
+    "name": "Sci-Fi Dine-In Theater Restaurant",
+    "description": "Unique dining experience in car-shaped booths watching classic sci-fi movie clips in a drive-in theater setting.",
+    "location": "Commissary Lane",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "sfd-tip-1",
+        "category": "general",
+        "content": "Themed like a 1950s drive-in theater with car booths. Classic B-movie clips play continuously.",
+        "priority": 4
+      },
+      {
+        "id": "sfd-tip-2",
+        "category": "strategy",
+        "content": "Popular for the unique atmosphere - food is decent but theming is the main attraction.",
+        "priority": 3
+      }
+    ],
+    "tags": ["themed-dining", "drive-in", "sci-fi", "unique", "1950s"],
+    "features": ["car-booths", "movie-clips", "drive-in-theming"],
+    "cuisineType": "American",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "operatingHours": {
+      "lunch": "11:00 AM - 3:45 PM",
+      "dinner": "4:00 PM - 9:00 PM"
+    },
+    "reservationWindow": 60
+  },
+  {
+    "id": "dhs-50s-prime-time",
+    "parkId": "hollywood-studios",
+    "name": "50's Prime Time Café",
+    "description": "Step into Mom's kitchen circa 1950s where servers act like family members and scold you for not eating your vegetables.",
+    "location": "Echo Lake",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "ptc-tip-1",
+        "category": "general",
+        "content": "Servers stay in character as 1950s family members. They may scold you - it's all part of the fun!",
+        "priority": 4
+      },
+      {
+        "id": "ptc-tip-2",
+        "category": "general",
+        "content": "Classic comfort food menu. Great for families who enjoy interactive dining experiences.",
+        "priority": 3
+      }
+    ],
+    "tags": ["themed-dining", "1950s", "interactive", "comfort-food", "family"],
+    "features": ["interactive-service", "1950s-theming", "character-servers"],
+    "cuisineType": "American Comfort Food",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "operatingHours": {
+      "lunch": "11:00 AM - 3:45 PM",
+      "dinner": "4:00 PM - 9:00 PM"
+    },
+    "reservationWindow": 60
+  },
+  {
+    "id": "dhs-mama-melrose",
+    "parkId": "hollywood-studios",
+    "name": "Mama Melrose's Ristorante Italiano",
+    "description": "Family-owned Italian restaurant serving wood-fired pizzas, pasta, and Italian specialties in a cozy trattoria setting.",
+    "location": "Streets of America",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "mm-tip-1",
+        "category": "strategy",
+        "content": "Wood-fired pizzas and Italian classics. Often easier to get reservations than other table service options.",
+        "priority": 3
+      },
+      {
+        "id": "mm-tip-2",
+        "category": "strategy",
+        "content": "Fantasmic! dinner package available for preferred show seating.",
+        "priority": 4
+      }
+    ],
+    "tags": ["italian", "wood-fired-pizza", "pasta", "trattoria", "fantasmic-package"],
+    "features": ["wood-fired-ovens", "fantasmic-package", "cozy-atmosphere"],
+    "cuisineType": "Italian",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "operatingHours": {
+      "lunch": "11:30 AM - 3:30 PM",
+      "dinner": "4:00 PM - 9:00 PM"
+    },
+    "reservationWindow": 60
+  },
+  {
+    "id": "dhs-hollywood-vine",
+    "parkId": "hollywood-studios",
+    "name": "Hollywood & Vine",
+    "description": "Art Deco-styled buffet restaurant featuring character dining with Disney Junior characters during breakfast and lunch.",
+    "location": "Echo Lake",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "hv-tip-1",
+        "category": "general",
+        "content": "Disney Junior character dining during breakfast and lunch. Seasonal character dining at dinner.",
+        "priority": 4
+      },
+      {
+        "id": "hv-tip-2",
+        "category": "strategy",
+        "content": "Buffet-style service with variety of options. Great for families with young children.",
+        "priority": 3
+      }
+    ],
+    "tags": ["character-dining", "buffet", "disney-junior", "art-deco", "family"],
+    "features": ["character-dining", "buffet-style", "art-deco-styling"],
+    "cuisineType": "American Buffet",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "operatingHours": {
+      "breakfast": "8:00 AM - 11:15 AM",
+      "lunch": "11:45 AM - 2:30 PM",
+      "dinner": "3:00 PM - 8:00 PM"
+    },
+    "reservationWindow": 60
+  }
+]

@@ -1,0 +1,240 @@
+[
+  {
+    "id": "cosmic-rays-starlight-cafe",
+    "parkId": "magic-kingdom",
+    "name": "Cosmic Ray's Starlight Cafe",
+    "description": "Quick-service restaurant in Tomorrowland featuring burgers, chicken, and entertainment by Sonny Eclipse.",
+    "location": "Tomorrowland",
+    "type": "quick_service",
+    "serviceType": "quick",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "cosmic-rays-tip-1",
+        "category": "general",
+        "content": "Largest quick-service restaurant in Magic Kingdom",
+        "priority": 3
+      },
+      {
+        "id": "cosmic-rays-tip-2",
+        "category": "general",
+        "content": "Sonny Eclipse performs regularly - check for showtimes",
+        "priority": 4
+      },
+      {
+        "id": "cosmic-rays-tip-3",
+        "category": "strategy",
+        "content": "Mobile order ahead to skip the line",
+        "priority": 4
+      }
+    ],
+    "tags": ["burgers", "large", "convenient"],
+    "cuisineType": "American",
+    "kidFriendly": true,
+    "operatingHours": {
+      "lunch": "11:00 AM - 4:00 PM",
+      "dinner": "4:00 PM - 9:00 PM"
+    },
+    "reservationWindow": 0,
+    "features": {
+      "mobileOrder": true,
+      "indoorSeating": true,
+      "entertainment": true,
+      "adrRequired": false,
+      "alcoholServed": false,
+      "vegetarianOptions": true,
+      "veganOptions": false,
+      "glutenFreeOptions": false,
+      "characterDining": false
+    }
+  },
+  {
+    "id": "casey-corner",
+    "parkId": "magic-kingdom",
+    "name": "Casey's Corner",
+    "description": "Baseball-themed quick service restaurant famous for its hot dogs and baseball atmosphere.",
+    "location": "Main Street U.S.A.",
+    "type": "quick_service",
+    "serviceType": "quick",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "casey-tip-1",
+        "category": "strategy",
+        "content": "Great spot to watch the hub activity while eating",
+        "priority": 3
+      },
+      {
+        "id": "casey-tip-2",
+        "category": "general",
+        "content": "Try the corn dog nuggets - they're a fan favorite",
+        "priority": 4
+      },
+      {
+        "id": "casey-tip-3",
+        "category": "general",
+        "content": "Baseball memorabilia and vintage atmosphere throughout",
+        "priority": 3
+      }
+    ],
+    "tags": ["hot-dogs", "baseball", "main-street", "americana"],
+    "features": ["outdoor-seating", "mobile-order"],
+    "cuisineType": "American",
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": [],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "operatingHours": {
+      "lunch": "11:00 AM - 6:00 PM"
+    },
+    "reservationWindow": 0
+  },
+  {
+    "id": "pecos-bill-tall-tale-inn",
+    "parkId": "magic-kingdom",
+    "name": "Pecos Bill Tall Tale Inn & Cafe",
+    "description": "Wild West-themed quick service restaurant in Frontierland serving burgers, chicken, and Tex-Mex favorites.",
+    "location": "Frontierland",
+    "type": "quick_service",
+    "serviceType": "quick",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "pecos-bill-tip-1",
+        "category": "general",
+        "content": "Great toppings bar with unlimited condiments and fixings",
+        "priority": 4
+      },
+      {
+        "id": "pecos-bill-tip-2",
+        "category": "strategy",
+        "content": "Outdoor seating has great views of Tom Sawyer Island",
+        "priority": 3
+      }
+    ],
+    "tags": ["burgers", "tex-mex", "outdoor-seating", "frontierland"],
+    "features": ["mobile-order", "toppings-bar", "outdoor-seating"],
+    "cuisineType": "Mexican & Southwestern",
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "operatingHours": {
+      "lunch": "11:00 AM - 4:00 PM",
+      "dinner": "4:00 PM - 9:00 PM"
+    },
+    "reservationWindow": 0
+  },
+  {
+    "id": "pinocchio-village-haus",
+    "parkId": "magic-kingdom",
+    "name": "Pinocchio Village Haus",
+    "description": "Quick service restaurant in Fantasyland serving flatbreads, salads, and kids' meals with views of 'it's a small world'.",
+    "location": "Fantasyland",
+    "type": "quick_service",
+    "serviceType": "quick",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "pinocchio-tip-1",
+        "category": "strategy",
+        "content": "Upstairs seating offers great views of 'it's a small world' queue",
+        "priority": 4
+      },
+      {
+        "id": "pinocchio-tip-2",
+        "category": "general",
+        "content": "Good spot for a quick bite while in Fantasyland",
+        "priority": 3
+      }
+    ],
+    "tags": ["flatbreads", "fantasyland", "kids-meals", "views"],
+    "features": ["mobile-order", "indoor-seating", "upstairs-dining"],
+    "cuisineType": "Italian",
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "operatingHours": {
+      "lunch": "11:00 AM - 6:00 PM"
+    },
+    "reservationWindow": 0
+  },
+  {
+    "id": "tortuga-tavern",
+    "parkId": "magic-kingdom",
+    "name": "Tortuga Tavern",
+    "description": "Pirate-themed quick service restaurant serving Mexican and Caribbean-inspired dishes near Pirates of the Caribbean.",
+    "location": "Adventureland",
+    "type": "quick_service",
+    "serviceType": "quick",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "tortuga-tip-1",
+        "category": "strategy",
+        "content": "Seasonal operation - often closed during slower periods",
+        "priority": 5
+      },
+      {
+        "id": "tortuga-tip-2",
+        "category": "general",
+        "content": "Great pirate theming matches nearby Pirates attraction",
+        "priority": 3
+      }
+    ],
+    "tags": ["seasonal", "mexican", "caribbean", "pirates"],
+    "features": ["mobile-order", "outdoor-seating", "themed"],
+    "cuisineType": "Mexican & Caribbean",
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "operatingHours": {
+      "lunch": "11:00 AM - 4:00 PM",
+      "dinner": "4:00 PM - 7:00 PM"
+    },
+    "reservationWindow": 0
+  },
+  {
+    "id": "tomorrowland-terrace",
+    "parkId": "magic-kingdom",
+    "name": "Tomorrowland Terrace Restaurant",
+    "description": "Seasonal quick service restaurant with burgers, hot dogs, and a great view of Cinderella Castle.",
+    "location": "Tomorrowland",
+    "type": "quick_service",
+    "serviceType": "quick",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "tomorrowland-terrace-tip-1",
+        "category": "strategy",
+        "content": "Seasonal operation - typically busy seasons only",
+        "priority": 4
+      },
+      {
+        "id": "tomorrowland-terrace-tip-2",
+        "category": "strategy",
+        "content": "Outdoor seating with great castle views",
+        "priority": 4
+      }
+    ],
+    "tags": ["seasonal", "burgers", "castle-views", "outdoor"],
+    "features": ["mobile-order", "outdoor-seating", "castle-views"],
+    "cuisineType": "American",
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": [],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "operatingHours": {
+      "lunch": "11:00 AM - 4:00 PM",
+      "dinner": "4:00 PM - 8:00 PM"
+    },
+    "reservationWindow": 0
+  }
+]

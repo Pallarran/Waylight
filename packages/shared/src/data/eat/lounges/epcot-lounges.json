@@ -1,0 +1,86 @@
+[
+  {
+    "id": "rose-crown-pub",
+    "parkId": "epcot",
+    "name": "Rose & Crown Pub",
+    "description": "Traditional British pub in the UK Pavilion offering a wide selection of beers, ales, and pub fare with outdoor seating.",
+    "location": "World Showcase - United Kingdom",
+    "type": "lounge",
+    "serviceType": "lounge",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "rose-crown-pub-tip-1",
+        "category": "strategy",
+        "content": "Great spot to watch EPCOT fireworks from outdoor seating area",
+        "priority": 1
+      },
+      {
+        "id": "rose-crown-pub-tip-2",
+        "category": "general",
+        "content": "Try a flight of British beers and the fish & chips",
+        "priority": 2
+      }
+    ],
+    "tags": ["british", "pub", "beer", "fireworks-view", "outdoor-seating"],
+    "cuisineType": "British Pub",
+    "kidFriendly": true,
+    "operatingHours": {
+      "afternoon": "2:00 PM - 9:00 PM"
+    },
+    "reservationWindow": 0,
+    "features": {
+      "mobileOrder": false,
+      "indoorSeating": true,
+      "entertainment": false,
+      "adrRequired": false,
+      "alcoholServed": true,
+      "vegetarianOptions": true,
+      "veganOptions": false,
+      "glutenFreeOptions": true,
+      "characterDining": false
+    }
+  },
+  {
+    "id": "la-cava-del-tequila",
+    "parkId": "epcot",
+    "name": "La Cava del Tequila",
+    "description": "Tequila and mezcal bar in the Mexico Pavilion with over 200 varieties plus Mexican-inspired appetizers.",
+    "location": "World Showcase - Mexico",
+    "type": "lounge",
+    "serviceType": "lounge", 
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "la-cava-tip-1",
+        "category": "general",
+        "content": "Over 200 tequilas and mezcals to choose from. Try a flight to compare different varieties",
+        "priority": 1
+      },
+      {
+        "id": "la-cava-tip-2",
+        "category": "general",
+        "content": "Small intimate space that fills up quickly. Go early for best selection",
+        "priority": 2
+      }
+    ],
+    "tags": ["tequila", "mezcal", "mexican", "intimate", "specialty"],
+    "cuisineType": "Mexican Cocktails",
+    "kidFriendly": false,
+    "operatingHours": {
+      "afternoon": "12:00 PM - 9:00 PM"
+    },
+    "reservationWindow": 0,
+    "features": {
+      "mobileOrder": false,
+      "indoorSeating": true,
+      "entertainment": false,
+      "adrRequired": false,
+      "alcoholServed": true,
+      "vegetarianOptions": true,
+      "veganOptions": false,
+      "glutenFreeOptions": false,
+      "characterDining": false
+    }
+  }
+]

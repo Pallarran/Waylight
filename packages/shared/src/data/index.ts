@@ -1,7 +1,8 @@
 // Data exports
 export * from './parks';
-export * from './attractions';
 export * from './hotels';
+export * from './do';
+export * from './eat';
 
 // Content validation and loading
 export interface ContentManifest {
@@ -36,55 +37,54 @@ export const validateContent = async (): Promise<{
   
   try {
     const { getParks } = await import('./parks');
-    const { getAttractions } = await import('./attractions');
+    const { getAllDoItems } = await import('./do');
+    const { getAllEatItems } = await import('./eat');
     
     const parks = getParks();
-    const attractions = getAttractions();
+    const doItems = getAllDoItems();
+    const eatItems = getAllEatItems();
+    const allItems = [...doItems, ...eatItems];
     
     // Validate parks
     if (parks.length === 0) {
       errors.push('No parks found in database');
     }
     
-    // Validate attractions
-    if (attractions.length === 0) {
-      errors.push('No attractions found in database');
+    // Validate items
+    if (allItems.length === 0) {
+      errors.push('No items found in database');
     }
     
-    // Check for orphaned attractions (attractions without valid park)
+    // Check for orphaned items (items without valid park)
     const parkIds = new Set(parks.map(p => p.id));
-    const orphanedAttractions = attractions.filter(a => !parkIds.has(a.parkId));
-    if (orphanedAttractions.length > 0) {
-      errors.push(`${orphanedAttractions.length} attractions reference non-existent parks`);
+    const orphanedItems = allItems.filter(item => item.parkId && !parkIds.has(item.parkId));
+    if (orphanedItems.length > 0) {
+      errors.push(`${orphanedItems.length} items reference non-existent parks`);
     }
     
-    // Check for duplicate attraction IDs
-    const attractionIds = attractions.map(a => a.id);
-    const duplicates = attractionIds.filter((id, index) => attractionIds.indexOf(id) !== index);
+    // Check for duplicate item IDs
+    const itemIds = allItems.map(item => item.id);
+    const duplicates = itemIds.filter((id, index) => itemIds.indexOf(id) !== index);
     if (duplicates.length > 0) {
-      errors.push(`Duplicate attraction IDs found: ${duplicates.join(', ')}`);
+      errors.push(`Duplicate item IDs found: ${duplicates.join(', ')}`);
     }
     
-    // Validate attraction data quality
-    attractions.forEach(attraction => {
-      if (!attraction.name || attraction.name.trim().length === 0) {
-        errors.push(`Attraction ${attraction.id} has empty name`);
+    // Validate item data quality
+    allItems.forEach(item => {
+      if (!item.name || item.name.trim().length === 0) {
+        errors.push(`Item ${item.id} has empty name`);
       }
       
-      if (!attraction.description || attraction.description.length < 10) {
-        warnings.push(`Attraction ${attraction.id} has very short description`);
+      if (!item.description || item.description.length < 10) {
+        warnings.push(`Item ${item.id} has very short description`);
       }
       
-      if (attraction.duration <= 0) {
-        errors.push(`Attraction ${attraction.id} has invalid duration`);
+      if (item.tips && item.tips.length === 0) {
+        warnings.push(`Item ${item.id} has no tips`);
       }
       
-      if (attraction.tips.length === 0) {
-        warnings.push(`Attraction ${attraction.id} has no tips`);
-      }
-      
-      if (attraction.tags.length === 0) {
-        warnings.push(`Attraction ${attraction.id} has no tags`);
+      if (item.tags && item.tags.length === 0) {
+        warnings.push(`Item ${item.id} has no tags`);
       }
     });
     

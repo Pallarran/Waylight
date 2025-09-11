@@ -1,0 +1,125 @@
+[
+  {
+    "id": "ak-satuli-canteen",
+    "parkId": "animal-kingdom",
+    "name": "Satu'li Canteen",
+    "description": "Pandora-themed quick service restaurant offering customizable bowls with unique Na'vi-inspired flavors and ingredients.",
+    "location": "Pandora - The World of Avatar",
+    "type": "quick_service",
+    "serviceType": "quick",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "sc-tip-1",
+        "category": "strategy",
+        "content": "Build-your-own bowls with unique Pandoran ingredients. Very popular, use mobile order.",
+        "priority": 4
+      },
+      {
+        "id": "sc-tip-2",
+        "category": "general",
+        "content": "Themed to Pandora with bioluminescent decor. Healthy and flavorful options available.",
+        "priority": 3
+      }
+    ],
+    "tags": ["pandora", "bowls", "navi", "bioluminescent", "healthy"],
+    "features": ["mobile-order", "customizable-bowls", "pandora-theming"],
+    "cuisineType": "Healthy Bowls",
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": ["vegetarian", "vegan", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "operatingHours": {
+      "lunch": "11:00 AM - 4:00 PM",
+      "dinner": "4:00 PM - 8:00 PM"
+    },
+    "reservationWindow": 0
+  },
+  {
+    "id": "ak-flame-tree-barbecue",
+    "parkId": "animal-kingdom",
+    "name": "Flame Tree Barbecue",
+    "description": "Popular barbecue restaurant offering ribs, pulled pork, and chicken with waterfront seating overlooking Discovery River.",
+    "location": "Discovery Island",
+    "type": "quick_service",
+    "serviceType": "quick",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "ftb-tip-1",
+        "category": "general",
+        "content": "Some of the best barbecue at Disney World! Try the ribs or pulled pork sandwich",
+        "priority": 1
+      },
+      {
+        "id": "ftb-tip-2",
+        "category": "strategy",
+        "content": "Beautiful waterfront seating with views of Expedition Everest. Great for photos!",
+        "priority": 2
+      }
+    ],
+    "tags": ["barbecue", "ribs", "waterfront", "popular", "views"],
+    "cuisineType": "American Barbecue",
+    "kidFriendly": true,
+    "operatingHours": {
+      "lunch": "11:00 AM - 4:00 PM",
+      "dinner": "4:00 PM - 8:00 PM"
+    },
+    "reservationWindow": 0,
+    "features": {
+      "mobileOrder": true,
+      "indoorSeating": false,
+      "entertainment": false,
+      "adrRequired": false,
+      "alcoholServed": false,
+      "vegetarianOptions": false,
+      "veganOptions": false,
+      "glutenFreeOptions": false,
+      "characterDining": false
+    }
+  },
+  {
+    "id": "ak-yak-yeti-local-food",
+    "parkId": "animal-kingdom",
+    "name": "Yak & Yeti Local Food Cafes",
+    "description": "Quick-service version of the popular Asian restaurant serving teriyaki bowls, fried rice, and Asian-inspired dishes.",
+    "location": "Asia",
+    "type": "quick_service",
+    "serviceType": "quick", 
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "yylfc-tip-1",
+        "category": "general",
+        "content": "Great Asian flavors with teriyaki bowls and fried rice. Lighter options than typical theme park fare",
+        "priority": 2
+      },
+      {
+        "id": "yylfc-tip-2",
+        "category": "strategy",
+        "content": "Located in Asia section near Expedition Everest. Good for sharing different dishes",
+        "priority": 2
+      }
+    ],
+    "tags": ["asian", "teriyaki", "bowls", "lighter-options", "expedition-everest"],
+    "cuisineType": "Asian",
+    "kidFriendly": true,
+    "operatingHours": {
+      "lunch": "11:00 AM - 4:00 PM",
+      "dinner": "4:00 PM - 8:00 PM"
+    },
+    "reservationWindow": 0,
+    "features": {
+      "mobileOrder": true,
+      "indoorSeating": true,
+      "entertainment": false,
+      "adrRequired": false,
+      "alcoholServed": false,
+      "vegetarianOptions": true,
+      "veganOptions": false,
+      "glutenFreeOptions": false,
+      "characterDining": false
+    }
+  }
+]

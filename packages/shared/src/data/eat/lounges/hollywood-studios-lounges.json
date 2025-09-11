@@ -1,0 +1,39 @@
+[
+  {
+    "id": "dhs-oga-cantina",
+    "parkId": "hollywood-studios",
+    "name": "Oga's Cantina",
+    "description": "Immersive Star Wars bar experience with specialty cocktails, music by DJ R-3X, and authentic cantina atmosphere from Galaxy's Edge.",
+    "location": "Star Wars: Galaxy's Edge",
+    "type": "lounge",
+    "serviceType": "lounge",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "oc-tip-1",
+        "category": "strategy",
+        "content": "Most popular bar at Disney World. Reservations essential and limited to 45 minutes.",
+        "priority": 5
+      },
+      {
+        "id": "oc-tip-2",
+        "category": "general",
+        "content": "Specialty cocktails and unique atmosphere. DJ R-3X provides entertainment.",
+        "priority": 4
+      }
+    ],
+    "tags": ["star-wars", "cantina", "specialty-cocktails", "dj", "immersive"],
+    "features": ["star-wars-theming", "specialty-cocktails", "dj-entertainment"],
+    "cuisineType": "Bar & Cocktails",
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": [],
+    "kidFriendly": false,
+    "alcoholServed": true,
+    "operatingHours": {
+      "lunch": "11:00 AM - 4:00 PM",
+      "dinner": "4:00 PM - 9:00 PM"
+    },
+    "reservationWindow": 60
+  }
+]

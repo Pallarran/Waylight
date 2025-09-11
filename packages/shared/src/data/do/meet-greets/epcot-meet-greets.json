@@ -1,0 +1,86 @@
+[
+  {
+    "id": "epcot-anna-elsa",
+    "parkId": "epcot",
+    "name": "Meet Anna and Elsa at Royal Sommerhus",
+    "description": "Meet the royal sisters from Frozen in their Norwegian summer home in the Norway Pavilion.",
+    "location": "Norway Pavilion",
+    "type": "meet_greet",
+    "duration": 5,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "anna-elsa-tip-1",
+        "category": "strategy",
+        "content": "Very popular meet & greet. Get Lightning Lane or arrive at park opening for shorter waits.",
+        "priority": 1
+      }
+    ],
+    "tags": ["frozen", "princesses", "norway", "sisters", "popular"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": true,
+      "hasLightningLane": true,
+      "isRainSafe": true,
+      "hasPhotos": true,
+      "hasCharacters": true,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": true,
+    "singleRider": false,
+    "photoService": true,
+    "characters": ["Anna", "Elsa"]
+  },
+  {
+    "id": "epcot-joy-sadness",
+    "parkId": "epcot",
+    "name": "Meet Joy and Sadness from Inside Out",
+    "description": "Meet the colorful emotions Joy and Sadness from Disney•Pixar's Inside Out.",
+    "location": "The Imagination! Pavilion",
+    "type": "meet_greet",
+    "duration": 5,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "joy-sadness-tip-1",
+        "category": "general",
+        "content": "Great character interaction with lots of fun photo opportunities and emotional conversations!",
+        "priority": 2
+      }
+    ],
+    "tags": ["inside-out", "emotions", "pixar", "colorful", "interactive"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": true,
+      "hasLightningLane": false,
+      "isRainSafe": true,
+      "hasPhotos": true,
+      "hasCharacters": true,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": true,
+    "characters": ["Joy", "Sadness"]
+  }
+]

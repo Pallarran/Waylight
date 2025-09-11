@@ -1,0 +1,391 @@
+[
+  {
+    "id": "epcot-spaceship-earth",
+    "parkId": "epcot",
+    "name": "Spaceship Earth",
+    "description": "Journey through the history of human communication in EPCOT's iconic geodesic sphere, from cave paintings to the digital age.",
+    "location": "World Celebration",
+    "type": "ride",
+    "duration": 15,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "se-tip-1",
+        "content": "Currently closed for refurbishment until Thanksgiving 2025. Check official Disney app for reopening updates.",
+        "category": "general",
+        "priority": 5
+      }
+    ],
+    "tags": [
+      "temporarily-closed"
+    ],
+    "features": {
+      "isDarkRide": true,
+      "hasAirConditioning": true,
+      "isRainSafe": true,
+      "hasPhotos": true,
+      "hasLightningLane": true
+    }
+  },
+  {
+    "id": "epcot-test-track",
+    "parkId": "epcot",
+    "name": "Test Track 3.0",
+    "description": "Design your own vehicle and put it through high-speed automotive testing on this reimagined attraction with World of Motion inspiration.",
+    "location": "World Discovery",
+    "type": "ride",
+    "duration": 5,
+    "heightRequirement": 40,
+    "intensity": "high",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true
+    },
+    "tips": [
+      {
+        "id": "tt-tip-1",
+        "content": "Newly reimagined attraction reopened July 2025. Single rider line available for shorter waits.",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "tt-tip-2",
+        "content": "Design phase can take time - have your group discuss preferences beforehand.",
+        "category": "strategy",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "hasLaunch": true,
+      "isInteractive": true,
+      "hasPhotos": true,
+      "hasLightningLane": true,
+      "hasRiderSwitch": true
+    }
+  },
+  {
+    "id": "epcot-guardians-cosmic-rewind",
+    "parkId": "epcot",
+    "name": "Guardians of the Galaxy: Cosmic Rewind",
+    "description": "Join the Guardians on a time-traveling adventure through space on this reverse-launch spinning coaster with a rocking soundtrack.",
+    "location": "World Discovery",
+    "type": "ride",
+    "duration": 3,
+    "heightRequirement": 42,
+    "intensity": "extreme",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true
+    },
+    "tips": [
+      {
+        "id": "gc-tip-1",
+        "content": "No longer requires virtual queue as of February 2025. Standby line now available!",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "gc-tip-2",
+        "content": "Each ride features a different soundtrack. Multiple rides for different songs!",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "hasLaunch": true,
+      "isSpinning": true,
+      "hasStrobes": true,
+      "isLoud": true,
+      "hasAirConditioning": true,
+      "isDarkRide": true,
+      "hasIndividualLL": true,
+      "hasRiderSwitch": true,
+      "hasLightningLane": true
+    }
+  },
+  {
+    "id": "epcot-mission-space",
+    "parkId": "epcot",
+    "name": "Mission: SPACE",
+    "description": "Experience the thrill of space exploration with this intense centrifugal simulator mission to Mars. Choose Orange (intense) or Green (less intense).",
+    "location": "World Discovery",
+    "type": "ride",
+    "duration": 5,
+    "heightRequirement": 40,
+    "intensity": "high",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true
+    },
+    "tips": [
+      {
+        "id": "ms-tip-1",
+        "content": "Orange version is very intense with spinning. Green version has no spinning motion.",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "ms-tip-2",
+        "content": "Don't eat a heavy meal before riding. Motion sickness is common on Orange.",
+        "category": "general",
+        "priority": 4
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isSpinning": true,
+      "hasAirConditioning": true,
+      "isInteractive": true,
+      "hasLightningLane": true,
+      "hasRiderSwitch": true
+    }
+  },
+  {
+    "id": "epcot-soarin",
+    "parkId": "epcot",
+    "name": "Soarin' Around the World",
+    "description": "Soar over breathtaking landscapes and iconic landmarks from around the world in this immersive flight experience.",
+    "location": "World Nature",
+    "type": "ride",
+    "duration": 5,
+    "heightRequirement": 40,
+    "intensity": "moderate",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true
+    },
+    "tips": [
+      {
+        "id": "so-tip-1",
+        "content": "Center seats in theaters A and B provide the best experience with less distortion.",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "so-tip-2",
+        "content": "Experience includes scent effects - notice the orange groves and ocean air!",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "hasAirConditioning": true,
+      "hasPhotos": true,
+      "hasLightningLane": true,
+      "hasRiderSwitch": true
+    }
+  },
+  {
+    "id": "epcot-living-with-land",
+    "parkId": "epcot",
+    "name": "Living with the Land",
+    "description": "Take a peaceful boat tour through innovative greenhouses and agricultural research labs showcasing sustainable farming techniques.",
+    "location": "World Nature",
+    "type": "ride",
+    "duration": 14,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "lw-tip-1",
+        "content": "Behind the Seeds tour available for deeper dive into the greenhouse research.",
+        "category": "general",
+        "priority": 3
+      },
+      {
+        "id": "lw-tip-2",
+        "content": "Great attraction for all ages and perfect air-conditioned break from Florida heat.",
+        "category": "strategy",
+        "priority": 2
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isWaterRide": true,
+      "hasAirConditioning": true,
+      "isRainSafe": true,
+      "hasLightningLane": true
+    }
+  },
+  {
+    "id": "epcot-seas-nemo",
+    "parkId": "epcot",
+    "name": "The Seas with Nemo & Friends",
+    "description": "Join Nemo, Dory, and friends on an underwater adventure that ends with viewing real marine life in one of the world's largest aquariums.",
+    "location": "World Nature",
+    "type": "ride",
+    "duration": 5,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "sn-tip-1",
+        "content": "Don't miss the massive aquarium after the ride - spend time exploring the marine exhibits.",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "sn-tip-2",
+        "content": "Look for Turtle Talk with Crush nearby for more underwater fun.",
+        "category": "strategy",
+        "priority": 2
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isDarkRide": true,
+      "hasAirConditioning": true,
+      "isRainSafe": true,
+      "hasLightningLane": true
+    }
+  },
+  {
+    "id": "epcot-imagination-figment",
+    "parkId": "epcot",
+    "name": "Journey Into Imagination with Figment",
+    "description": "Follow the mischievous Figment through Dr. Nigel Channing's sensory labs for a wild ride that engages all five senses.",
+    "location": "World Nature",
+    "type": "ride",
+    "duration": 6,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "ji-tip-1",
+        "content": "Don't miss ImageWorks playground upstairs after the ride for hands-on experiments.",
+        "category": "general",
+        "priority": 3
+      },
+      {
+        "id": "ji-tip-2",
+        "content": "Strong scents and loud noises throughout - be prepared for sensory overload!",
+        "category": "accessibility",
+        "priority": 4
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isDarkRide": true,
+      "hasAirConditioning": true,
+      "isRainSafe": true,
+      "isLoud": true,
+      "hasLightningLane": true
+    }
+  },
+  {
+    "id": "epcot-frozen-ever-after",
+    "parkId": "epcot",
+    "name": "Frozen Ever After",
+    "description": "Join Anna, Elsa, and Olaf for a magical boat journey through Arendelle during the Summer Snow Day celebration.",
+    "location": "World Showcase - Norway",
+    "type": "ride",
+    "duration": 5,
+    "intensity": "moderate",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "fe-tip-1",
+        "content": "One of the most popular attractions at EPCOT. Use Lightning Lane or rope drop strategy.",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "fe-tip-2",
+        "content": "Small drops and backward sections may surprise some guests.",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isWaterRide": true,
+      "getsWet": true,
+      "isDarkRide": true,
+      "hasAirConditioning": true,
+      "hasLightningLane": true
+    }
+  },
+  {
+    "id": "epcot-gran-fiesta-tour",
+    "parkId": "epcot",
+    "name": "Gran Fiesta Tour Starring The Three Caballeros",
+    "description": "Take a colorful boat ride through Mexico with Donald Duck, José Carioca, and Panchito as they prepare for their concert.",
+    "location": "World Showcase - Mexico",
+    "type": "ride",
+    "duration": 7,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "gf-tip-1",
+        "content": "Hidden gem with usually short waits. Great for families with young children.",
+        "category": "strategy",
+        "priority": 3
+      },
+      {
+        "id": "gf-tip-2",
+        "content": "Explore the Mexico pavilion marketplace before or after riding.",
+        "category": "general",
+        "priority": 2
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isWaterRide": true,
+      "isDarkRide": true,
+      "hasAirConditioning": true,
+      "isRainSafe": true,
+      "hasLightningLane": true
+    }
+  },
+  {
+    "id": "epcot-remy-ratatouille",
+    "parkId": "epcot",
+    "name": "Remy's Ratatouille Adventure",
+    "description": "Shrink down to Remy's size and scurry through Gusteau's restaurant kitchen in this immersive trackless adventure.",
+    "location": "World Showcase - France",
+    "type": "ride",
+    "duration": 5,
+    "intensity": "moderate",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "rr-tip-1",
+        "content": "No height requirement makes this perfect for families. Very popular, so use Lightning Lane.",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "rr-tip-2",
+        "content": "4D effects include water, air, and scent - you'll feel like you're really in the kitchen!",
+        "category": "general",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isDarkRide": true,
+      "hasAirConditioning": true,
+      "getsWet": true,
+      "hasLightningLane": true
+    }
+  }
+]

@@ -1,0 +1,196 @@
+[
+  {
+    "id": "hs-skyliner",
+    "parkId": "hollywood-studios",
+    "name": "Disney Skyliner from Hollywood Studios",
+    "description": "Gondola transportation system connecting Hollywood Studios to EPCOT via Caribbean Beach Resort, and to Art of Animation, Pop Century, and Riviera resorts.",
+    "location": "Hollywood Studios to EPCOT and Skyliner Resort Hotels",
+    "type": "transportation",
+    "duration": 17,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "hs-skyliner-tip-1",
+        "category": "strategy",
+        "content": "Transfer required at Caribbean Beach Resort for EPCOT connection",
+        "priority": 4
+      },
+      {
+        "id": "hs-skyliner-tip-2",
+        "category": "best_time",
+        "content": "Starts 60 minutes before park opening, runs 90 minutes after closing",
+        "priority": 3
+      },
+      {
+        "id": "hs-skyliner-tip-3",
+        "category": "general",
+        "content": "Shuts down during severe weather with bus backup provided",
+        "priority": 3
+      }
+    ],
+    "tags": ["skyliner", "gondola", "epcot", "caribbean-beach"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": false,
+      "isRainSafe": false,
+      "hasPhotos": false,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false,
+      "isSpinning": false,
+      "hasRiderSwitch": false,
+      "hasIndividualLL": false,
+      "hasLaunch": false
+    }
+  },
+  {
+    "id": "hs-bus-transportation",
+    "parkId": "hollywood-studios",
+    "name": "Disney Bus Service from Hollywood Studios",
+    "description": "Complimentary bus transportation from Hollywood Studios to Disney resort hotels and other theme parks, running from 6:30-7:00 AM until 2 hours after park closing.",
+    "location": "Hollywood Studios to Disney Resort Hotels and Other Parks",
+    "type": "transportation",
+    "duration": 25,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "hs-bus-tip-1",
+        "category": "best_time",
+        "content": "Service runs from early morning until 2 hours after park closing",
+        "priority": 4
+      },
+      {
+        "id": "hs-bus-tip-2",
+        "category": "strategy",
+        "content": "Primary option for resorts not on Skyliner or boat routes",
+        "priority": 3
+      }
+    ],
+    "tags": ["bus", "resort", "theme-parks", "backup"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": false,
+      "isRainSafe": true,
+      "hasPhotos": false,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false,
+      "isSpinning": false,
+      "hasRiderSwitch": false,
+      "hasIndividualLL": false,
+      "hasLaunch": false
+    }
+  },
+  {
+    "id": "hs-friendship-boats",
+    "parkId": "hollywood-studios",
+    "name": "Friendship Boats from Hollywood Studios",
+    "description": "Boat transportation connecting Hollywood Studios to BoardWalk area resorts including Swan, Dolphin, Yacht Club, Beach Club, and BoardWalk Inn.",
+    "location": "Hollywood Studios to BoardWalk Area Resorts and EPCOT",
+    "type": "transportation",
+    "duration": 20,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "hs-friendship-tip-1",
+        "category": "best_time",
+        "content": "Operates 8:30 AM until 60 minutes after park closing",
+        "priority": 3
+      },
+      {
+        "id": "hs-friendship-tip-2",
+        "category": "general",
+        "content": "Scenic boat ride connecting to EPCOT International Gateway",
+        "priority": 3
+      }
+    ],
+    "tags": ["friendship-boats", "boardwalk", "epcot", "scenic"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": false,
+      "isRainSafe": false,
+      "hasPhotos": false,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": true,
+      "isSpinning": false,
+      "hasRiderSwitch": false,
+      "hasIndividualLL": false,
+      "hasLaunch": false
+    }
+  },
+  {
+    "id": "hs-walking-paths",
+    "parkId": "hollywood-studios",
+    "name": "Walking Paths from Hollywood Studios",
+    "description": "Pedestrian walkways connecting Hollywood Studios to nearby BoardWalk area resorts for guests preferring to walk.",
+    "location": "Hollywood Studios to BoardWalk, Beach Club, Yacht Club, Swan & Dolphin",
+    "type": "transportation",
+    "duration": 15,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "hs-walking-tip-1",
+        "category": "strategy",
+        "content": "Pleasant walk to BoardWalk area resorts, about 10-15 minutes",
+        "priority": 3
+      },
+      {
+        "id": "hs-walking-tip-2",
+        "category": "general",
+        "content": "Available 24/7 and not affected by weather like boats or Skyliner",
+        "priority": 2
+      }
+    ],
+    "tags": ["walking", "pedestrian", "boardwalk", "exercise"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": false,
+      "isRainSafe": false,
+      "hasPhotos": false,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false,
+      "isSpinning": false,
+      "hasRiderSwitch": false,
+      "hasIndividualLL": false,
+      "hasLaunch": false
+    }
+  }
+]

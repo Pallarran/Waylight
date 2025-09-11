@@ -1,0 +1,126 @@
+[
+  {
+    "id": "dhs-docking-bay-7",
+    "parkId": "hollywood-studios",
+    "name": "Docking Bay 7 Food and Cargo",
+    "description": "Star Wars-themed quick service restaurant in Galaxy's Edge serving galactic cuisine with unique out-of-this-world flavors.",
+    "location": "Star Wars: Galaxy's Edge",
+    "type": "quick_service",
+    "serviceType": "quick",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "db7-tip-1",
+        "category": "general",
+        "content": "Immersive Star Wars theming with galactic food names. Try the Fried Endorian Tip-Yip!",
+        "priority": 4
+      },
+      {
+        "id": "db7-tip-2",
+        "category": "strategy",
+        "content": "Mobile order recommended during peak times. Great for Star Wars fans.",
+        "priority": 3
+      }
+    ],
+    "tags": ["star-wars", "galactic", "themed-dining", "immersive", "unique"],
+    "features": ["mobile-order", "star-wars-theming", "unique-menu"],
+    "cuisineType": "Galactic",
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "operatingHours": {
+      "lunch": "11:00 AM - 4:00 PM",
+      "dinner": "4:00 PM - 8:00 PM"
+    },
+    "reservationWindow": 0
+  },
+  {
+    "id": "dhs-woodys-lunchbox",
+    "parkId": "hollywood-studios",
+    "name": "Woody's Lunch Box",
+    "description": "Toy Story Land quick-service restaurant serving nostalgic lunch box treats like totchos, grilled cheese, and s'mores French toast.",
+    "location": "Toy Story Land",
+    "type": "quick_service",
+    "serviceType": "quick",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "wlb-tip-1",
+        "category": "general",
+        "content": "Famous for totchos (tater tot nachos) and unique s'mores French toast. Instagram-worthy presentation!",
+        "priority": 1
+      },
+      {
+        "id": "wlb-tip-2",
+        "category": "strategy",
+        "content": "Gets very hot in Toy Story Land - try to eat during cooler parts of the day",
+        "priority": 2
+      }
+    ],
+    "tags": ["toy-story", "totchos", "nostalgic", "instagram", "unique"],
+    "cuisineType": "American Comfort Food",
+    "kidFriendly": true,
+    "operatingHours": {
+      "breakfast": "8:00 AM - 10:30 AM",
+      "lunch": "10:30 AM - 4:00 PM",
+      "dinner": "4:00 PM - 8:00 PM"
+    },
+    "reservationWindow": 0,
+    "features": {
+      "mobileOrder": true,
+      "indoorSeating": false,
+      "entertainment": false,
+      "adrRequired": false,
+      "alcoholServed": false,
+      "vegetarianOptions": true,
+      "veganOptions": false,
+      "glutenFreeOptions": false,
+      "characterDining": false
+    }
+  },
+  {
+    "id": "dhs-backlot-express",
+    "parkId": "hollywood-studios",
+    "name": "Backlot Express",
+    "description": "Movie studio-themed quick-service restaurant featuring burgers, sandwiches, and salads in a Hollywood backlot setting.",
+    "location": "Echo Lake",
+    "type": "quick_service",
+    "serviceType": "quick",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "be-tip-1",
+        "category": "general",
+        "content": "Large seating area with air conditioning. Good central location in the park",
+        "priority": 2
+      },
+      {
+        "id": "be-tip-2",
+        "category": "strategy",
+        "content": "Less crowded than other quick-service spots. Good for families with different tastes",
+        "priority": 2
+      }
+    ],
+    "tags": ["movie-studio", "burgers", "air-conditioned", "central", "family-friendly"],
+    "cuisineType": "American",
+    "kidFriendly": true,
+    "operatingHours": {
+      "lunch": "11:00 AM - 4:00 PM",
+      "dinner": "4:00 PM - 8:00 PM"
+    },
+    "reservationWindow": 0,
+    "features": {
+      "mobileOrder": true,
+      "indoorSeating": true,
+      "entertainment": false,
+      "adrRequired": false,
+      "alcoholServed": false,
+      "vegetarianOptions": true,
+      "veganOptions": false,
+      "glutenFreeOptions": false,
+      "characterDining": false
+    }
+  }
+]

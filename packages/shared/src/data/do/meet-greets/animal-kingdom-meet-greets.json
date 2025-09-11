@@ -1,0 +1,128 @@
+[
+  {
+    "id": "ak-russell-dug",
+    "parkId": "animal-kingdom",
+    "name": "Meet Russell and Dug from Up",
+    "description": "Meet the adventurous Wilderness Explorer Russell and the lovable talking dog Dug from Disney•Pixar's Up.",
+    "location": "Discovery Island Trails",
+    "type": "meet_greet",
+    "duration": 5,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "russell-dug-tip-1",
+        "category": "general",
+        "content": "Great character interaction! Russell loves to talk about earning badges and Dug is always excited to meet new friends.",
+        "priority": 2
+      }
+    ],
+    "tags": ["up", "russell", "dug", "pixar", "wilderness-explorer"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": true,
+      "hasLightningLane": false,
+      "isRainSafe": false,
+      "hasPhotos": true,
+      "hasCharacters": true,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": true,
+    "characters": ["Russell", "Dug"]
+  },
+  {
+    "id": "ak-pocahontas",
+    "parkId": "animal-kingdom",
+    "name": "Meet Pocahontas at Character Landing",
+    "description": "Meet the brave and free-spirited Pocahontas in her natural forest setting, perfect for the Animal Kingdom atmosphere.",
+    "location": "Discovery Island",
+    "type": "meet_greet",
+    "duration": 5,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "pocahontas-tip-1",
+        "category": "general",
+        "content": "Pocahontas loves to talk about nature and animals - perfect for the Animal Kingdom setting!",
+        "priority": 2
+      }
+    ],
+    "tags": ["pocahontas", "nature", "princess", "forest", "animal-kingdom-exclusive"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": true,
+      "hasLightningLane": false,
+      "isRainSafe": false,
+      "hasPhotos": true,
+      "hasCharacters": true,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": true,
+    "characters": ["Pocahontas"]
+  },
+  {
+    "id": "ak-mickey-minnie-adventurers-outpost",
+    "parkId": "animal-kingdom",
+    "name": "Meet Mickey and Minnie at Adventurers Outpost",
+    "description": "Meet Mickey and Minnie Mouse in their safari adventure gear at the Adventurers Outpost on Discovery Island.",
+    "location": "Discovery Island - Adventurers Outpost",
+    "type": "meet_greet",
+    "duration": 5,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "mickey-minnie-safari-tip-1",
+        "category": "strategy",
+        "content": "One of the most popular meet & greets in Animal Kingdom. Get Lightning Lane or visit early for shorter waits.",
+        "priority": 1
+      }
+    ],
+    "tags": ["mickey-mouse", "minnie-mouse", "safari", "adventure", "popular"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": true,
+      "hasLightningLane": true,
+      "isRainSafe": true,
+      "hasPhotos": true,
+      "hasCharacters": true,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": true,
+    "singleRider": false,
+    "photoService": true,
+    "characters": ["Mickey Mouse", "Minnie Mouse"]
+  }
+]

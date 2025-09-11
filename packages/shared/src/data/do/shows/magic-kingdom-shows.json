@@ -1,0 +1,86 @@
+[
+  {
+    "id": "mk-country-bear-jamboree",
+    "parkId": "magic-kingdom",
+    "name": "Country Bear Jamboree",
+    "description": "A classic Disney attraction featuring an entertaining cast of audio-animatronic bears performing country and western songs.",
+    "location": "Frontierland",
+    "type": "show",
+    "duration": 15,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "cbj-tip-1",
+        "category": "general",
+        "content": "Great air-conditioned break from the Florida heat with classic Disney charm.",
+        "priority": 2
+      }
+    ],
+    "tags": ["classic", "family-friendly", "air-conditioned", "nostalgic"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": false,
+      "hasLightningLane": false,
+      "isRainSafe": true,
+      "hasPhotos": false,
+      "hasCharacters": true,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false,
+    "showTimes": ["10:00 AM", "11:30 AM", "1:00 PM", "2:30 PM", "4:00 PM", "5:30 PM", "7:00 PM"]
+  },
+  {
+    "id": "mk-philharmagic",
+    "parkId": "magic-kingdom",
+    "name": "Mickey's PhilharMagic",
+    "description": "A 3D film starring Donald Duck and featuring classic Disney songs and characters in a magical musical adventure.",
+    "location": "Fantasyland",
+    "type": "show",
+    "duration": 12,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "philhar-tip-1",
+        "category": "general",
+        "content": "Sit in the center for the best 3D effects and don't miss the special scents and wind effects!",
+        "priority": 1
+      }
+    ],
+    "tags": ["3D", "music", "family-friendly", "air-conditioned"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": true,
+      "hasLightningLane": false,
+      "isRainSafe": true,
+      "hasPhotos": false,
+      "hasCharacters": true,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": true,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false,
+    "showTimes": ["Continuous showings every 20 minutes"]
+  }
+]

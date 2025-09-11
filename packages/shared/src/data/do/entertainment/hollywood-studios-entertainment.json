@@ -1,0 +1,86 @@
+[
+  {
+    "id": "hs-fantasmic",
+    "parkId": "hollywood-studios",
+    "name": "Fantasmic!",
+    "description": "Mickey Mouse's imagination creates a magical nighttime spectacular with water effects, fireworks, and classic Disney villains.",
+    "location": "Hollywood Hills Amphitheater",
+    "type": "entertainment",
+    "duration": 25,
+    "intensity": "moderate",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "fantasmic-tip-1",
+        "category": "strategy",
+        "content": "Book a Fantasmic! dining package for guaranteed seating, or arrive 90+ minutes early for standby.",
+        "priority": 1
+      }
+    ],
+    "tags": ["nighttime", "water-show", "fireworks", "mickey", "villains"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": false,
+      "hasLightningLane": false,
+      "isRainSafe": false,
+      "hasPhotos": true,
+      "hasCharacters": true,
+      "isLoud": true,
+      "hasStrobes": true,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": true,
+    "showTimes": ["8:30 PM", "10:00 PM"]
+  },
+  {
+    "id": "hs-star-wars-march",
+    "parkId": "hollywood-studios",
+    "name": "Star Wars: A Galaxy Far, Far Away",
+    "description": "A live stage show featuring Star Wars characters, music, and special effects in front of the Chinese Theatre.",
+    "location": "Center Stage",
+    "type": "entertainment",
+    "duration": 15,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "sw-show-tip-1",
+        "category": "best_time",
+        "content": "Check the My Disney Experience app for show times - they vary seasonally.",
+        "priority": 2
+      }
+    ],
+    "tags": ["star-wars", "live-show", "characters", "special-effects"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": false,
+      "hasLightningLane": false,
+      "isRainSafe": false,
+      "hasPhotos": true,
+      "hasCharacters": true,
+      "isLoud": true,
+      "hasStrobes": true,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": true,
+    "showTimes": ["Multiple times daily"]
+  }
+]

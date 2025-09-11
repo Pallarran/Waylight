@@ -1,0 +1,86 @@
+[
+  {
+    "id": "enchanted-rose-lounge",
+    "parkId": "magic-kingdom",
+    "name": "Enchanted Rose",
+    "description": "Elegant lounge in Disney's Grand Floridian Resort featuring Belle and Beast-inspired cocktails and small plates.",
+    "location": "Disney's Grand Floridian Resort & Spa",
+    "type": "lounge",
+    "serviceType": "lounge",
+    "priceLevel": 4,
+    "tips": [
+      {
+        "id": "enchanted-rose-tip-1",
+        "category": "strategy",
+        "content": "Reservations highly recommended - this popular lounge fills up quickly",
+        "priority": 1
+      },
+      {
+        "id": "enchanted-rose-tip-2",
+        "category": "general",
+        "content": "Try the 'Be Our Guest' cocktail - it changes color as you drink it",
+        "priority": 1
+      }
+    ],
+    "tags": ["upscale", "cocktails", "beauty-beast", "grand-floridian", "reservations"],
+    "cuisineType": "Cocktails & Small Plates",
+    "kidFriendly": false,
+    "operatingHours": {
+      "evening": "5:00 PM - 12:00 AM"
+    },
+    "reservationWindow": 60,
+    "features": {
+      "mobileOrder": false,
+      "indoorSeating": true,
+      "entertainment": false,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "vegetarianOptions": true,
+      "veganOptions": false,
+      "glutenFreeOptions": true,
+      "characterDining": false
+    }
+  },
+  {
+    "id": "outer-rim-lounge",
+    "parkId": "magic-kingdom",
+    "name": "Outer Rim",
+    "description": "Star Wars-themed lounge at Disney's Contemporary Resort with galactic cocktails and views of the Magic Kingdom.",
+    "location": "Disney's Contemporary Resort",
+    "type": "lounge",
+    "serviceType": "lounge",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "outer-rim-tip-1",
+        "category": "general",
+        "content": "Great views of Magic Kingdom fireworks from the outdoor seating area",
+        "priority": 2
+      },
+      {
+        "id": "outer-rim-tip-2",
+        "category": "general",
+        "content": "Try the Fuzzy Tauntaun - it creates a numbing sensation on your tongue",
+        "priority": 1
+      }
+    ],
+    "tags": ["star-wars", "contemporary", "views", "cocktails", "outdoor-seating"],
+    "cuisineType": "Cocktails & Light Bites",
+    "kidFriendly": false,
+    "operatingHours": {
+      "evening": "4:00 PM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "features": {
+      "mobileOrder": false,
+      "indoorSeating": true,
+      "entertainment": false,
+      "adrRequired": false,
+      "alcoholServed": true,
+      "vegetarianOptions": true,
+      "veganOptions": false,
+      "glutenFreeOptions": false,
+      "characterDining": false
+    }
+  }
+]

@@ -1,0 +1,237 @@
+[
+  {
+    "id": "epcot-monorail",
+    "parkId": "epcot",
+    "name": "EPCOT Monorail Line",
+    "description": "Monorail system connecting EPCOT to Magic Kingdom via TTC, with track passing through World Celebration and around Spaceship Earth.",
+    "location": "EPCOT Main Entrance to TTC and Magic Kingdom",
+    "type": "transportation",
+    "duration": 15,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "epcot-monorail-tip-1",
+        "category": "general",
+        "content": "Track loops around World Celebration and Spaceship Earth for scenic views",
+        "priority": 3
+      },
+      {
+        "id": "epcot-monorail-tip-2",
+        "category": "strategy",
+        "content": "Most direct route to Magic Kingdom from EPCOT",
+        "priority": 4
+      }
+    ],
+    "tags": ["monorail", "magic-kingdom", "ttc", "scenic"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": false,
+      "isRainSafe": true,
+      "hasPhotos": false,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false,
+      "isSpinning": false,
+      "hasRiderSwitch": false,
+      "hasIndividualLL": false,
+      "hasLaunch": false
+    }
+  },
+  {
+    "id": "epcot-skyliner",
+    "parkId": "epcot",
+    "name": "Disney Skyliner from EPCOT",
+    "description": "Gondola transportation system connecting EPCOT International Gateway to Hollywood Studios via Caribbean Beach Resort hub.",
+    "location": "EPCOT International Gateway to Hollywood Studios",
+    "type": "transportation",
+    "duration": 20,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "epcot-skyliner-tip-1",
+        "category": "strategy",
+        "content": "Access from International Gateway, not main EPCOT entrance",
+        "priority": 4
+      },
+      {
+        "id": "epcot-skyliner-tip-2",
+        "category": "general",
+        "content": "Provides aerial views and connects to Riviera, Caribbean Beach, Art of Animation, and Pop Century resorts",
+        "priority": 3
+      }
+    ],
+    "tags": ["skyliner", "gondola", "international-gateway", "hollywood-studios"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": false,
+      "isRainSafe": false,
+      "hasPhotos": false,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false,
+      "isSpinning": false,
+      "hasRiderSwitch": false,
+      "hasIndividualLL": false,
+      "hasLaunch": false
+    }
+  },
+  {
+    "id": "epcot-bus-transportation",
+    "parkId": "epcot",
+    "name": "Disney Bus Service to EPCOT",
+    "description": "Complimentary bus transportation from Disney resort hotels to EPCOT, with wait times available in My Disney Experience app.",
+    "location": "Various Disney Resort Hotels to EPCOT",
+    "type": "transportation",
+    "duration": 25,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "epcot-bus-tip-1",
+        "category": "strategy",
+        "content": "Check My Disney Experience app for real-time bus wait times",
+        "priority": 4
+      },
+      {
+        "id": "epcot-bus-tip-2",
+        "category": "general",
+        "content": "Available from most Disney resort hotels throughout the day",
+        "priority": 3
+      }
+    ],
+    "tags": ["bus", "resort", "my-disney-experience", "wait-times"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": false,
+      "isRainSafe": true,
+      "hasPhotos": false,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false,
+      "isSpinning": false,
+      "hasRiderSwitch": false,
+      "hasIndividualLL": false,
+      "hasLaunch": false
+    }
+  },
+  {
+    "id": "epcot-friendship-boats",
+    "parkId": "epcot",
+    "name": "Friendship Boats from EPCOT",
+    "description": "Boat transportation connecting EPCOT International Gateway to nearby resorts including BoardWalk, Beach Club, Yacht Club, and Swan & Dolphin.",
+    "location": "EPCOT International Gateway to BoardWalk Area Resorts",
+    "type": "transportation",
+    "duration": 15,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "epcot-friendship-tip-1",
+        "category": "general",
+        "content": "Scenic boat ride along Crescent Lake to BoardWalk area resorts",
+        "priority": 3
+      },
+      {
+        "id": "epcot-friendship-tip-2",
+        "category": "strategy",
+        "content": "Access from International Gateway, connects to Hollywood Studios",
+        "priority": 4
+      }
+    ],
+    "tags": ["friendship-boats", "international-gateway", "boardwalk", "scenic"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": false,
+      "isRainSafe": false,
+      "hasPhotos": false,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": true,
+      "isSpinning": false,
+      "hasRiderSwitch": false,
+      "hasIndividualLL": false,
+      "hasLaunch": false
+    }
+  },
+  {
+    "id": "epcot-world-showcase-water-taxi",
+    "parkId": "epcot",
+    "name": "World Showcase Water Taxi",
+    "description": "Internal water transportation across World Showcase Lagoon, operating on two routes within EPCOT.",
+    "location": "World Showcase Lagoon (within EPCOT)",
+    "type": "transportation",
+    "duration": 10,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "epcot-water-taxi-tip-1",
+        "category": "strategy",
+        "content": "Saves walking time around World Showcase Lagoon",
+        "priority": 4
+      },
+      {
+        "id": "epcot-water-taxi-tip-2",
+        "category": "best_time",
+        "content": "Hours vary based on weather and water conditions",
+        "priority": 3
+      }
+    ],
+    "tags": ["water-taxi", "world-showcase", "lagoon", "internal"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": false,
+      "isRainSafe": false,
+      "hasPhotos": false,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": true,
+      "isSpinning": false,
+      "hasRiderSwitch": false,
+      "hasIndividualLL": false,
+      "hasLaunch": false
+    }
+  }
+]

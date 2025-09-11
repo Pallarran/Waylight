@@ -1,0 +1,86 @@
+[
+  {
+    "id": "epcot-american-adventure",
+    "parkId": "epcot",
+    "name": "The American Adventure",
+    "description": "An inspiring Audio-Animatronics show chronicling American history with Mark Twain and Benjamin Franklin as hosts.",
+    "location": "American Adventure Pavilion",
+    "type": "show",
+    "duration": 29,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "american-adventure-tip-1",
+        "category": "general",
+        "content": "The Voices of Liberty often perform in the rotunda before shows. A great patriotic experience.",
+        "priority": 2
+      }
+    ],
+    "tags": ["american-history", "audio-animatronics", "educational", "patriotic"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": false,
+      "hasLightningLane": false,
+      "isRainSafe": true,
+      "hasPhotos": false,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false,
+    "showTimes": ["Every 30 minutes"]
+  },
+  {
+    "id": "epcot-awesome-planet",
+    "parkId": "epcot",
+    "name": "Awesome Planet",
+    "description": "A breathtaking film showcasing the beauty and diversity of our planet, narrated by Ty Burrell.",
+    "location": "The Land Pavilion",
+    "type": "show",
+    "duration": 18,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "awesome-planet-tip-1",
+        "category": "general",
+        "content": "Great air-conditioned break with beautiful nature cinematography. Perfect for all ages.",
+        "priority": 2
+      }
+    ],
+    "tags": ["nature", "documentary", "educational", "family-friendly"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": false,
+      "hasLightningLane": false,
+      "isRainSafe": true,
+      "hasPhotos": false,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false,
+    "showTimes": ["Every 20 minutes"]
+  }
+]

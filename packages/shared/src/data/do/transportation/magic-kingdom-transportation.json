@@ -1,0 +1,237 @@
+[
+  {
+    "id": "mk-monorail-express",
+    "parkId": "magic-kingdom",
+    "name": "Magic Kingdom Express Monorail",
+    "description": "Direct monorail line from Transportation and Ticket Center (TTC) to Magic Kingdom entrance, offering the fastest route to the park.",
+    "location": "Transportation and Ticket Center to Magic Kingdom",
+    "type": "transportation",
+    "duration": 10,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "mk-monorail-tip-1",
+        "category": "strategy",
+        "content": "Monorail is typically faster than ferry boats, especially during busy periods",
+        "priority": 4
+      },
+      {
+        "id": "mk-monorail-tip-2",
+        "category": "best_time", 
+        "content": "Operates 30 minutes before park opening to 1 hour after closing",
+        "priority": 3
+      }
+    ],
+    "tags": ["monorail", "express", "ttc", "fast"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": false,
+      "isRainSafe": true,
+      "hasPhotos": false,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false,
+      "isSpinning": false,
+      "hasRiderSwitch": false,
+      "hasIndividualLL": false,
+      "hasLaunch": false
+    }
+  },
+  {
+    "id": "mk-ferry-boat",
+    "parkId": "magic-kingdom",
+    "name": "Magic Kingdom Ferry Boats",
+    "description": "Large ferry boats crossing Seven Seas Lagoon between TTC and Magic Kingdom, carrying up to 600 guests per boat with scenic lagoon views.",
+    "location": "Transportation and Ticket Center to Magic Kingdom",
+    "type": "transportation",
+    "duration": 12,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "mk-ferry-tip-1",
+        "category": "general",
+        "content": "Offers beautiful views of Magic Kingdom, Grand Floridian, and Polynesian resorts",
+        "priority": 3
+      },
+      {
+        "id": "mk-ferry-tip-2",
+        "category": "strategy",
+        "content": "6-minute crossing, but total trip time 10-12 minutes with loading/unloading",
+        "priority": 4
+      }
+    ],
+    "tags": ["ferry", "boat", "scenic", "lagoon"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": false,
+      "isRainSafe": false,
+      "hasPhotos": false,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": true,
+      "isSpinning": false,
+      "hasRiderSwitch": false,
+      "hasIndividualLL": false,
+      "hasLaunch": false
+    }
+  },
+  {
+    "id": "mk-resort-monorail",
+    "parkId": "magic-kingdom",
+    "name": "Resort Monorail Loop",
+    "description": "Monorail loop connecting Magic Kingdom with Grand Floridian, Polynesian, and TTC, providing transportation to resort areas.",
+    "location": "Magic Kingdom - Grand Floridian - Polynesian - TTC Loop",
+    "type": "transportation", 
+    "duration": 20,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "mk-resort-monorail-tip-1",
+        "category": "strategy",
+        "content": "Use this line to visit resort hotels for dining or shopping",
+        "priority": 3
+      },
+      {
+        "id": "mk-resort-monorail-tip-2",
+        "category": "general",
+        "content": "Longer route than Express Monorail but offers resort access",
+        "priority": 2
+      }
+    ],
+    "tags": ["monorail", "resort", "loop", "hotels"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": false,
+      "isRainSafe": true,
+      "hasPhotos": false,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false,
+      "isSpinning": false,
+      "hasRiderSwitch": false,
+      "hasIndividualLL": false,
+      "hasLaunch": false
+    }
+  },
+  {
+    "id": "mk-bus-transportation",
+    "parkId": "magic-kingdom",
+    "name": "Disney Bus Service to Magic Kingdom",
+    "description": "Complimentary bus transportation from Disney resort hotels to Magic Kingdom, with real-time arrival information available.",
+    "location": "Various Disney Resort Hotels to Magic Kingdom",
+    "type": "transportation",
+    "duration": 25,
+    "intensity": "low", 
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "mk-bus-tip-1",
+        "category": "best_time",
+        "content": "Buses run 45 minutes before park opening to 1 hour after closing",
+        "priority": 4
+      },
+      {
+        "id": "mk-bus-tip-2",
+        "category": "strategy",
+        "content": "Check real-time arrival displays at resort bus stops for wait times",
+        "priority": 3
+      }
+    ],
+    "tags": ["bus", "resort", "complimentary", "real-time"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": false,
+      "isRainSafe": true,
+      "hasPhotos": false,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false,
+      "isSpinning": false,
+      "hasRiderSwitch": false,
+      "hasIndividualLL": false,
+      "hasLaunch": false
+    }
+  },
+  {
+    "id": "mk-water-taxi-gold-flag",
+    "parkId": "magic-kingdom", 
+    "name": "Gold Flag Water Taxi",
+    "description": "Water transportation connecting Magic Kingdom with Grand Floridian and Polynesian resorts via Seven Seas Lagoon.",
+    "location": "Magic Kingdom - Grand Floridian - Polynesian Loop",
+    "type": "transportation",
+    "duration": 15,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "mk-water-taxi-tip-1",
+        "category": "general",
+        "content": "Scenic boat ride with views of lagoon and resort hotels",
+        "priority": 3
+      },
+      {
+        "id": "mk-water-taxi-tip-2", 
+        "category": "strategy",
+        "content": "Colored flags indicate different routes - look for Gold Flag",
+        "priority": 2
+      }
+    ],
+    "tags": ["water-taxi", "boat", "gold-flag", "scenic"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": false,
+      "isRainSafe": false,
+      "hasPhotos": false,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": true,
+      "isSpinning": false,
+      "hasRiderSwitch": false,
+      "hasIndividualLL": false,
+      "hasLaunch": false
+    }
+  }
+]

@@ -1,0 +1,125 @@
+[
+  {
+    "id": "hs-star-wars-launch-bay",
+    "parkId": "hollywood-studios",
+    "name": "Star Wars Launch Bay Exploration",
+    "description": "Explore Star Wars exhibits, props, and artifacts while waiting to meet characters. A must-visit for Star Wars fans.",
+    "location": "Animation Courtyard",
+    "type": "experience",
+    "duration": 30,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "launch-bay-tip-1",
+        "category": "general",
+        "content": "Great air-conditioned break with amazing Star Wars memorabilia. Don't miss the model ships and costumes.",
+        "priority": 2
+      }
+    ],
+    "tags": ["star-wars", "exhibits", "props", "air-conditioned", "memorabilia"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": true,
+      "hasLightningLane": false,
+      "isRainSafe": true,
+      "hasPhotos": true,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false
+  },
+  {
+    "id": "hs-toy-story-land-playground",
+    "parkId": "hollywood-studios",
+    "name": "Toy Story Land Exploration",
+    "description": "Explore Andy's backyard as if you've been shrunk down to toy size. Great for photos and soaking in the Toy Story atmosphere.",
+    "location": "Toy Story Land",
+    "type": "experience",
+    "duration": 20,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "toy-story-land-tip-1",
+        "category": "general",
+        "content": "Best during cooler parts of the day. Great for Instagram photos with the oversized toys and decorations.",
+        "priority": 2
+      }
+    ],
+    "tags": ["toy-story", "pixar", "photo-opportunities", "themed-area", "family-friendly"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": true,
+      "hasLightningLane": false,
+      "isRainSafe": false,
+      "hasPhotos": true,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false
+  },
+  {
+    "id": "hs-galaxy-edge-exploration",
+    "parkId": "hollywood-studios",
+    "name": "Star Wars: Galaxy's Edge Exploration",
+    "description": "Explore the planet Batuu, browse unique shops, and immerse yourself in the Star Wars universe beyond the main attractions.",
+    "location": "Star Wars: Galaxy's Edge",
+    "type": "experience",
+    "duration": 60,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "galaxys-edge-tip-1",
+        "category": "general",
+        "content": "Try blue milk, build a lightsaber at Savi's Workshop, or create a droid at Droid Depot for the full experience.",
+        "priority": 1
+      }
+    ],
+    "tags": ["star-wars", "batuu", "shopping", "immersive", "themed-area"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": true,
+      "hasLightningLane": false,
+      "isRainSafe": false,
+      "hasPhotos": true,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false
+  }
+]

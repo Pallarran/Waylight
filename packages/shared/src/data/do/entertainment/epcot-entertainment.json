@@ -1,0 +1,128 @@
+[
+  {
+    "id": "epcot-luminous",
+    "parkId": "epcot",
+    "name": "EPCOT Forever",
+    "description": "A nighttime spectacular celebrating the spirit of EPCOT with fireworks, lasers, and music over World Showcase Lagoon.",
+    "location": "World Showcase Lagoon",
+    "type": "entertainment",
+    "duration": 12,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "epcot-forever-tip-1",
+        "category": "best_time",
+        "content": "Best viewing spots are along the World Showcase Promenade. Arrive 45-60 minutes early.",
+        "priority": 1
+      }
+    ],
+    "tags": ["fireworks", "nighttime", "lagoon", "lasers", "world-showcase"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": false,
+      "hasLightningLane": false,
+      "isRainSafe": false,
+      "hasPhotos": true,
+      "hasCharacters": false,
+      "isLoud": true,
+      "hasStrobes": true,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": true,
+    "showTimes": ["9:00 PM"]
+  },
+  {
+    "id": "epcot-mariachi-cobre",
+    "parkId": "epcot",
+    "name": "Mariachi Cobre",
+    "description": "Authentic mariachi music performances at the Mexico Pavilion in World Showcase.",
+    "location": "Mexico Pavilion",
+    "type": "entertainment",
+    "duration": 15,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "mariachi-tip-1",
+        "category": "general",
+        "content": "Performances typically happen multiple times throughout the day near the Mexico Pavilion entrance.",
+        "priority": 2
+      }
+    ],
+    "tags": ["music", "world-showcase", "cultural", "mexico", "live-performance"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": false,
+      "hasLightningLane": false,
+      "isRainSafe": false,
+      "hasPhotos": true,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false,
+    "showTimes": ["Multiple times daily"]
+  },
+  {
+    "id": "epcot-voices-of-liberty",
+    "parkId": "epcot",
+    "name": "Voices of Liberty",
+    "description": "An a cappella group performing American folk songs and patriotic music at the American Adventure pavilion.",
+    "location": "American Adventure Pavilion",
+    "type": "entertainment",
+    "duration": 12,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "voices-tip-1",
+        "category": "general",
+        "content": "Performances usually take place in the rotunda before American Adventure shows.",
+        "priority": 2
+      }
+    ],
+    "tags": ["music", "american", "a-cappella", "patriotic", "world-showcase"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": false,
+      "hasLightningLane": false,
+      "isRainSafe": true,
+      "hasPhotos": true,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false,
+    "showTimes": ["Multiple times daily"]
+  }
+]

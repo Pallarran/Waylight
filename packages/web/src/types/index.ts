@@ -162,19 +162,53 @@ export interface Attraction {
   heightRequirement?: number;
   location: string;
   type: AttractionType;
+  category: WaypointCategory;
   intensity: IntensityLevel;
   accessibility?: AccessibilityInfo;
   tips: Tip[];
   tags: string[];
+  // Category-specific fields
+  features?: string[]; // For all types
+  // Eat-specific
+  cuisineType?: string;
+  serviceType?: 'quick' | 'table' | 'snack' | 'lounge';
+  adrRequired?: boolean;
+  mobileOrderAvailable?: boolean;
+  priceLevel?: 1 | 2 | 3 | 4; // $ to $$$$
+  // Stay-specific
+  resortTier?: 'value' | 'moderate' | 'deluxe' | 'deluxe-villa' | 'other';
+  transportation?: string[];
+  distanceInfo?: {
+    walkTime?: string;
+    driveTime?: string;
+    transitTime?: string;
+  };
+}
+
+export enum WaypointCategory {
+  DO = 'do',
+  EAT = 'eat',
+  STAY = 'stay',
 }
 
 export enum AttractionType {
+  // Do category
   RIDE = 'ride',
   SHOW = 'show',
   MEET_GREET = 'meet_greet',
   ATTRACTION = 'attraction',
-  DINING = 'dining',
+  PARADE = 'parade',
+  EXPERIENCE = 'experience',
   SHOPPING = 'shopping',
+  // Eat category  
+  QUICK_SERVICE = 'quick_service',
+  TABLE_SERVICE = 'table_service',
+  SNACK = 'snack',
+  LOUNGE = 'lounge',
+  DINING = 'dining', // Legacy - will map to appropriate subcategory
+  // Stay category
+  RESORT = 'resort',
+  HOTEL = 'hotel',
 }
 
 export enum IntensityLevel {
@@ -196,4 +230,89 @@ export interface Tip {
   category: 'best_time' | 'strategy' | 'general';
   content: string;
   priority: number;
+}
+
+// New category-specific interfaces
+
+export enum DoType {
+  RIDE = 'ride',
+  SHOW = 'show',
+  EXPERIENCE = 'experience',
+  MEET_GREET = 'meet_greet',
+  WALKTHROUGH = 'walkthrough',
+  ENTERTAINMENT = 'entertainment',
+  TRANSPORTATION = 'transportation',
+}
+
+export interface DoItem {
+  id: string;
+  parkId: string;
+  name: string;
+  description: string;
+  location: string;
+  type: DoType;
+  duration: number; // minutes
+  heightRequirement?: number; // inches
+  intensity: IntensityLevel;
+  accessibility?: AccessibilityInfo;
+  tips: Tip[];
+  tags: string[];
+  features?: string[];
+  // Do-specific fields
+  lightningLane?: boolean;
+  singleRider?: boolean;
+  photoService?: boolean;
+  characters?: string[]; // for meet & greets
+  showTimes?: string[]; // for shows and entertainment
+}
+
+export enum EatType {
+  QUICK_SERVICE = 'quick_service',
+  TABLE_SERVICE = 'table_service',
+  SNACK = 'snack',
+  LOUNGE = 'lounge',
+  FOOD_CART = 'food_cart',
+}
+
+export enum ServiceType {
+  QUICK = 'quick',
+  TABLE = 'table',
+  SNACK = 'snack',
+  LOUNGE = 'lounge',
+  CART = 'cart',
+}
+
+export enum PriceLevel {
+  BUDGET = 1,      // $
+  MODERATE = 2,    // $$
+  EXPENSIVE = 3,   // $$$
+  LUXURY = 4,      // $$$$
+}
+
+export interface EatItem {
+  id: string;
+  parkId?: string; // Optional since some restaurants are in resorts
+  resortId?: string; // For resort dining
+  name: string;
+  description: string;
+  location: string;
+  type: EatType;
+  serviceType: ServiceType;
+  priceLevel: PriceLevel;
+  tips: Tip[];
+  tags: string[];
+  features?: string[];
+  // Eat-specific fields
+  cuisineType: string;
+  adrRequired: boolean;
+  mobileOrderAvailable?: boolean;
+  allergyFriendly?: string[]; // e.g., ['gluten-free', 'vegetarian', 'vegan']
+  kidFriendly: boolean;
+  alcoholServed?: boolean;
+  operatingHours?: {
+    breakfast?: string;
+    lunch?: string;
+    dinner?: string;
+  };
+  reservationWindow?: number; // days in advance
 }

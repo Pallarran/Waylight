@@ -1,0 +1,108 @@
+[
+  {
+    "id": "ak-bus-transportation",
+    "parkId": "animal-kingdom",
+    "name": "Disney Bus Service from Animal Kingdom",
+    "description": "Complimentary bus transportation from Animal Kingdom to all Disney resort hotels and theme parks, running approximately every 20-30 minutes with GPS tracking.",
+    "location": "Animal Kingdom to Disney Resort Hotels and Other Parks",
+    "type": "transportation",
+    "duration": 25,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "ak-bus-tip-1",
+        "category": "strategy",
+        "content": "GPS tracking provides real-time wait times, buses arrive every 20 minutes or less",
+        "priority": 4
+      },
+      {
+        "id": "ak-bus-tip-2",
+        "category": "general",
+        "content": "Primary transportation option - Animal Kingdom has no monorail or Skyliner access",
+        "priority": 3
+      },
+      {
+        "id": "ak-bus-tip-3",
+        "category": "general",
+        "content": "Bus stop divided into three sections with deluxe resorts at gates 10-26",
+        "priority": 2
+      }
+    ],
+    "tags": ["bus", "primary", "gps-tracking", "resort-hotels"],
+    "features": {
+      "hasAirConditioning": true,
+      "isInteractive": false,
+      "isRainSafe": true,
+      "hasPhotos": false,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false,
+      "isSpinning": false,
+      "hasRiderSwitch": false,
+      "hasIndividualLL": false,
+      "hasLaunch": false
+    }
+  },
+  {
+    "id": "ak-parking-trams",
+    "parkId": "animal-kingdom",
+    "name": "Animal Kingdom Parking Lot Trams",
+    "description": "Complimentary tram service from Animal Kingdom parking lots (Unicorn, Dinosaur, Giraffe, Yeti) to park entrance, returning after hiatus.",
+    "location": "Animal Kingdom Parking Lots to Park Entrance",
+    "type": "transportation",
+    "duration": 8,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "ak-tram-tip-1",
+        "category": "strategy",
+        "content": "Highly recommended for distant lots like Dinosaur, Giraffe, and Yeti",
+        "priority": 4
+      },
+      {
+        "id": "ak-tram-tip-2",
+        "category": "general",
+        "content": "Trams have returned to service - save your walking energy for inside the park",
+        "priority": 3
+      },
+      {
+        "id": "ak-tram-tip-3",
+        "category": "general",
+        "content": "Does not service disability/preferred parking lots, which are closer to entrance",
+        "priority": 2
+      }
+    ],
+    "tags": ["tram", "parking", "returned", "energy-saving"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": false,
+      "isRainSafe": false,
+      "hasPhotos": false,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false,
+      "isSpinning": false,
+      "hasRiderSwitch": false,
+      "hasIndividualLL": false,
+      "hasLaunch": false
+    }
+  }
+]

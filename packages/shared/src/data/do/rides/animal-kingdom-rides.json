@@ -1,0 +1,268 @@
+[
+  {
+    "id": "ak-avatar-flight-passage",
+    "parkId": "animal-kingdom",
+    "name": "Avatar Flight of Passage",
+    "description": "Soar on the back of a mountain banshee through Pandora's floating mountains and bioluminescent forests in this breathtaking 3D flight experience.",
+    "location": "Pandora - The World of Avatar",
+    "type": "ride",
+    "duration": 5,
+    "heightRequirement": 44,
+    "intensity": "high",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true
+    },
+    "tips": [
+      {
+        "id": "afp-tip-1",
+        "content": "Most popular attraction at Animal Kingdom. Purchase Individual Lightning Lane or arrive at park opening.",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "afp-tip-2",
+        "content": "Motion simulator experience - those prone to motion sickness should use caution.",
+        "category": "accessibility",
+        "priority": 4
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isDarkRide": true,
+      "isInteractive": true,
+      "hasStrobes": true,
+      "hasAirConditioning": true,
+      "hasPhotos": true,
+      "hasIndividualLL": true,
+      "hasRiderSwitch": true,
+      "hasLightningLane": true
+    }
+  },
+  {
+    "id": "ak-navi-river-journey",
+    "parkId": "animal-kingdom",
+    "name": "Na'vi River Journey",
+    "description": "Navigate through a mystical bioluminescent rainforest aboard reed boats in search of the Na'vi Shaman of Songs.",
+    "location": "Pandora - The World of Avatar",
+    "type": "ride",
+    "duration": 5,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true
+    },
+    "tips": [
+      {
+        "id": "nrj-tip-1",
+        "content": "Stunning visual effects and animatronics. Perfect for all ages and Pandora fans.",
+        "category": "general",
+        "priority": 3
+      },
+      {
+        "id": "nrj-tip-2",
+        "content": "Transfer device available to assist with wheelchair accessibility.",
+        "category": "accessibility",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isDarkRide": true,
+      "isWaterRide": true,
+      "getsWet": true,
+      "isInteractive": true,
+      "hasAirConditioning": true,
+      "isRainSafe": true,
+      "hasPhotos": true,
+      "hasLightningLane": true,
+      "hasRiderSwitch": true
+    }
+  },
+  {
+    "id": "ak-kilimanjaro-safaris",
+    "parkId": "animal-kingdom",
+    "name": "Kilimanjaro Safaris",
+    "description": "Embark on an 18-minute African safari adventure to see live lions, elephants, giraffes, and other magnificent animals in their habitats.",
+    "location": "Africa - Harambe",
+    "type": "ride",
+    "duration": 20,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "ks-tip-1",
+        "content": "Animals are most active in early morning and late afternoon. Multiple rides recommended!",
+        "category": "strategy",
+        "priority": 4
+      },
+      {
+        "id": "ks-tip-2",
+        "content": "Each safari is different depending on animal activity. Bring a camera with zoom lens.",
+        "category": "photo",
+        "priority": 4
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isInteractive": true,
+      "hasPhotos": true,
+      "hasLightningLane": true,
+      "hasRiderSwitch": true
+    }
+  },
+  {
+    "id": "ak-expedition-everest",
+    "parkId": "animal-kingdom",
+    "name": "Expedition Everest - Legend of the Forbidden Mountain",
+    "description": "Race through the Himalayas on this thrilling roller coaster and come face-to-face with the legendary Yeti on Mount Everest.",
+    "location": "Asia - Anandapur",
+    "type": "ride",
+    "duration": 3,
+    "heightRequirement": 44,
+    "intensity": "high",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true
+    },
+    "tips": [
+      {
+        "id": "ee-tip-1",
+        "content": "Features both forward and backward sections. The 80-foot drop is thrilling!",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "ee-tip-2",
+        "content": "Single rider line available for shorter waits. Mountain views during climb are spectacular.",
+        "category": "strategy",
+        "priority": 3
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isDarkRide": true,
+      "hasBigDrops": true,
+      "hasLaunch": true,
+      "isScary": true,
+      "hasPhotos": true,
+      "hasLightningLane": true,
+      "hasRiderSwitch": true
+    }
+  },
+  {
+    "id": "ak-kali-river-rapids",
+    "parkId": "animal-kingdom",
+    "name": "Kali River Rapids",
+    "description": "Navigate churning rapids on this white-water adventure through an Asian rainforest while learning about environmental conservation.",
+    "location": "Asia - Anandapur",
+    "type": "ride",
+    "duration": 6,
+    "heightRequirement": 38,
+    "intensity": "high",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true
+    },
+    "tips": [
+      {
+        "id": "krr-tip-1",
+        "content": "You WILL get soaked! Bring waterproof bags for phones and valuables.",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "krr-tip-2",
+        "content": "Other guests can spray you with water cannons from the bridge - beware!",
+        "category": "general",
+        "priority": 4
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isWaterRide": true,
+      "getsWet": true,
+      "isSpinning": true,
+      "isInteractive": true,
+      "hasBigDrops": true,
+      "hasPhotos": true,
+      "hasLightningLane": true,
+      "hasRiderSwitch": true
+    }
+  },
+  {
+    "id": "ak-dinosaur",
+    "parkId": "animal-kingdom",
+    "name": "DINOSAUR",
+    "description": "Travel back 65 million years to rescue an iguanodon from extinction while dodging meteors and carnivorous dinosaurs.",
+    "location": "DinoLand U.S.A.",
+    "type": "ride",
+    "duration": 4,
+    "heightRequirement": 40,
+    "intensity": "high",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true
+    },
+    "tips": [
+      {
+        "id": "dino-tip-1",
+        "content": "Attraction closing in 2026 for Tropical Americas development. Experience it while you can!",
+        "category": "general",
+        "priority": 5
+      },
+      {
+        "id": "dino-tip-2",
+        "content": "Very dark and intense with realistic dinosaur encounters. Not recommended for young children.",
+        "category": "accessibility",
+        "priority": 4
+      }
+    ],
+    "tags": [],
+    "features": {
+      "isDarkRide": true,
+      "isScary": true,
+      "isLoud": true,
+      "hasStrobes": true,
+      "hasPhotos": true,
+      "hasLightningLane": true,
+      "hasRiderSwitch": true
+    }
+  },
+  {
+    "id": "ak-wildlife-express-train",
+    "parkId": "animal-kingdom",
+    "name": "Wildlife Express Train",
+    "description": "Take a scenic 1.2-mile train journey to Rafiki's Planet Watch with behind-the-scenes views of animal care areas.",
+    "location": "Africa to Rafiki's Planet Watch",
+    "type": "transportation",
+    "duration": 7,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true
+    },
+    "tips": [
+      {
+        "id": "wet-tip-1",
+        "content": "Only way to reach Rafiki's Planet Watch. Great for families with young children.",
+        "category": "strategy",
+        "priority": 3
+      },
+      {
+        "id": "wet-tip-2",
+        "content": "Behind-the-scenes views during the journey. Round-trip transportation included.",
+        "category": "general",
+        "priority": 2
+      }
+    ],
+    "tags": [],
+    "features": {
+      "hasAirConditioning": true,
+      "hasPhotos": true,
+      "isRainSafe": true,
+      "hasLightningLane": true
+    }
+  }
+]

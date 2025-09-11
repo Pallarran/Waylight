@@ -1,0 +1,125 @@
+[
+  {
+    "id": "ak-discovery-island-trails",
+    "parkId": "animal-kingdom",
+    "name": "Discovery Island Trails",
+    "description": "Explore winding trails around the Tree of Life with animal exhibits, gardens, and peaceful walkways.",
+    "location": "Discovery Island",
+    "type": "experience",
+    "duration": 30,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "discovery-trails-tip-1",
+        "category": "general",
+        "content": "Perfect for a peaceful walk. Look closely at the Tree of Life carvings - there are over 300 animals depicted!",
+        "priority": 2
+      }
+    ],
+    "tags": ["walking", "nature", "tree-of-life", "peaceful", "animals"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": true,
+      "hasLightningLane": false,
+      "isRainSafe": false,
+      "hasPhotos": true,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false
+  },
+  {
+    "id": "ak-maharajah-jungle-trek",
+    "parkId": "animal-kingdom",
+    "name": "Maharajah Jungle Trek",
+    "description": "Walk through lush Asian forests and ruins while observing Malayan tapirs, Komodo dragons, tigers, and exotic birds.",
+    "location": "Asia",
+    "type": "experience",
+    "duration": 20,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "jungle-trek-tip-1",
+        "category": "strategy",
+        "content": "Best in morning or late afternoon when animals are more active. Bring water and take your time.",
+        "priority": 1
+      }
+    ],
+    "tags": ["animals", "tigers", "walking-trail", "asia", "nature"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": true,
+      "hasLightningLane": false,
+      "isRainSafe": false,
+      "hasPhotos": true,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false
+  },
+  {
+    "id": "ak-gorilla-falls-exploration",
+    "parkId": "animal-kingdom",
+    "name": "Gorilla Falls Exploration Trail",
+    "description": "Walk through African research station exhibits and observe hippos, crocodiles, meerkats, and other African wildlife.",
+    "location": "Africa",
+    "type": "experience",
+    "duration": 25,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "gorilla-falls-tip-1",
+        "category": "general",
+        "content": "Don't miss the underwater hippo viewing area - it's amazing when they're swimming!",
+        "priority": 2
+      }
+    ],
+    "tags": ["animals", "africa", "hippos", "gorillas", "walking-trail"],
+    "features": {
+      "hasAirConditioning": false,
+      "isInteractive": true,
+      "hasLightningLane": false,
+      "isRainSafe": false,
+      "hasPhotos": true,
+      "hasCharacters": false,
+      "isLoud": false,
+      "hasStrobes": false,
+      "isDarkRide": false,
+      "getsWet": false,
+      "isWaterRide": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false
+  }
+]
