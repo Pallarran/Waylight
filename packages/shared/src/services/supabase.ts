@@ -52,6 +52,8 @@ export interface Database {
           start_date: string;
           end_date: string;
           notes: string | null;
+          accommodation: any | null; // JSONB for AccommodationDetails
+          traveling_party: any | null; // JSONB for TravelingPartyMember[]
           days: any; // JSONB
           created_at: string;
           updated_at: string;
@@ -63,6 +65,8 @@ export interface Database {
           start_date: string;
           end_date: string;
           notes?: string | null;
+          accommodation?: any | null;
+          traveling_party?: any | null;
           days?: any;
           created_at?: string;
           updated_at?: string;
@@ -74,6 +78,8 @@ export interface Database {
           start_date?: string;
           end_date?: string;
           notes?: string | null;
+          accommodation?: any | null;
+          traveling_party?: any | null;
           days?: any;
           created_at?: string;
           updated_at?: string;

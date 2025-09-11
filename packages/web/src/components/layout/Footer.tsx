@@ -10,9 +10,6 @@ export default function Footer() {
           <p className="text-xs text-ink-light mt-1">
             Not affiliated with The Walt Disney Company.
           </p>
-          <p className="text-xs text-ink-light mt-1">
-            ⚡ Deployed via Vercel
-          </p>
         </div>
       </div>
     </footer>

@@ -1,0 +1,111 @@
+[
+  {
+    "id": "portofino-bay",
+    "name": "Universal's Portofino Bay Hotel",
+    "address": "5601 Universal Blvd, Orlando, FL 32819",
+    "type": "universal",
+    "priceLevel": "deluxe",
+    "description": "Italian Riviera theming with Express Pass included",
+    "amenities": ["Express Pass", "Water Taxi", "Multiple Pools", "Spa", "Multiple Dining"],
+    "rooms": [
+      { "id": "garden-view", "name": "Garden View Room", "sleeps": 5, "description": "Garden view with Italian décor" },
+      { "id": "bay-view", "name": "Bay View Room", "sleeps": 5, "description": "Portofino Bay view" },
+      { "id": "club-level", "name": "Club Level Room", "sleeps": 5, "description": "Concierge level with lounge access" },
+      { "id": "suite", "name": "Suite", "sleeps": 6, "description": "Villa or presidential suite" }
+    ]
+  },
+  {
+    "id": "hard-rock",
+    "name": "Universal's Hard Rock Hotel",
+    "address": "5800 Universal Blvd, Orlando, FL 32819",
+    "type": "universal",
+    "priceLevel": "deluxe",
+    "description": "Rock and roll theming with Express Pass included",
+    "amenities": ["Express Pass", "Water Taxi", "Pool with Underwater Music", "Multiple Dining", "Live Entertainment"],
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 5, "description": "Pool or garden view" },
+      { "id": "deluxe", "name": "Deluxe Room", "sleeps": 5, "description": "Upgraded room with better views" },
+      { "id": "club-level", "name": "Club Level Room", "sleeps": 5, "description": "Concierge level with lounge access" },
+      { "id": "suite", "name": "Suite", "sleeps": 8, "description": "Rock royalty or presidential suite" }
+    ]
+  },
+  {
+    "id": "royal-pacific",
+    "name": "Universal's Royal Pacific Resort",
+    "address": "6300 Hollywood Way, Orlando, FL 32819",
+    "type": "universal",
+    "priceLevel": "deluxe",
+    "description": "South Pacific theming with Express Pass included",
+    "amenities": ["Express Pass", "Water Taxi", "Lagoon Pool", "Multiple Dining", "Torch Lighting Ceremony"],
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 5, "description": "Garden or water view" },
+      { "id": "club-level", "name": "Club Level Room", "sleeps": 5, "description": "Concierge level with lounge access" },
+      { "id": "suite", "name": "Suite", "sleeps": 6, "description": "Junior or royal suite" }
+    ]
+  },
+  {
+    "id": "sapphire-falls",
+    "name": "Universal's Sapphire Falls Resort",
+    "address": "6601 Adventure Way, Orlando, FL 32819",
+    "type": "universal",
+    "priceLevel": "moderate",
+    "description": "Caribbean theming with early park admission",
+    "amenities": ["Early Park Admission", "Water Taxi", "Pool with Sand Beach", "Multiple Dining"],
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 5, "description": "Garden or water view" },
+      { "id": "suite", "name": "Suite", "sleeps": 6, "description": "Junior or one-bedroom suite" }
+    ]
+  },
+  {
+    "id": "aventura",
+    "name": "Universal's Aventura Hotel",
+    "address": "6725 Adventure Way, Orlando, FL 32819",
+    "type": "universal",
+    "priceLevel": "moderate",
+    "description": "Modern glass tower with early park admission",
+    "amenities": ["Early Park Admission", "Rooftop Bar", "Food Hall", "Virtual Reality Experience"],
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "City or theme park view" },
+      { "id": "suite", "name": "Suite", "sleeps": 6, "description": "Two-bedroom suite with kitchenette" }
+    ]
+  },
+  {
+    "id": "cabana-bay",
+    "name": "Universal's Cabana Bay Beach Resort",
+    "address": "6550 Adventure Way, Orlando, FL 32819",
+    "type": "universal",
+    "priceLevel": "value",
+    "description": "1950s beach resort theming with early park admission",
+    "amenities": ["Early Park Admission", "Lazy River", "Multiple Pools", "Food Court", "Bowling Alley"],
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Pool or courtyard view" },
+      { "id": "family-suite", "name": "Family Suite", "sleeps": 6, "description": "Suite with kitchenette" }
+    ]
+  },
+  {
+    "id": "endless-summer-surfside",
+    "name": "Universal's Endless Summer Resort - Surfside Inn",
+    "address": "7000 Universal Blvd, Orlando, FL 32819",
+    "type": "universal",
+    "priceLevel": "value",
+    "description": "Surf theming with early park admission and shuttle",
+    "amenities": ["Early Park Admission", "Shuttle Transportation", "Pool", "Food Court"],
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Surf themed standard room" },
+      { "id": "suite", "name": "Suite", "sleeps": 6, "description": "Two-bedroom suite" }
+    ]
+  },
+  {
+    "id": "endless-summer-dockside",
+    "name": "Universal's Endless Summer Resort - Dockside Inn",
+    "address": "7125 Universal Blvd, Orlando, FL 32819",
+    "type": "universal",
+    "priceLevel": "value",
+    "description": "Beach theming with early park admission and shuttle",
+    "amenities": ["Early Park Admission", "Shuttle Transportation", "Pool", "Food Court"],
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Beach themed standard room" },
+      { "id": "suite", "name": "Suite", "sleeps": 6, "description": "Two-bedroom suite" }
+    ]
+  }
+]

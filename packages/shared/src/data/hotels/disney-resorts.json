@@ -1,0 +1,405 @@
+[
+  {
+    "id": "grand-floridian",
+    "name": "Disney's Grand Floridian Resort & Spa",
+    "address": "4401 Floridian Way, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "deluxe",
+    "description": "Victorian elegance with monorail access to Magic Kingdom",
+    "amenities": ["Monorail", "Spa", "Multiple Dining", "Beach", "Marina"],
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 5, "description": "Garden or lagoon view" },
+      { "id": "club-level", "name": "Club Level Room", "sleeps": 5, "description": "Concierge level with lounge access" },
+      { "id": "suite", "name": "Suite", "sleeps": 5, "description": "Spacious suite with separate living area" },
+      { "id": "presidential", "name": "Presidential Suite", "sleeps": 8, "description": "Luxury multi-room suite" }
+    ]
+  },
+  {
+    "id": "polynesian",
+    "name": "Disney's Polynesian Village Resort",
+    "address": "1600 Seven Seas Dr, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "deluxe",
+    "description": "South Pacific theming with monorail access and new Island Tower",
+    "amenities": ["Monorail", "Beach", "Marina", "Multiple Dining", "Bungalows", "Island Tower", "DVC"],
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 5, "description": "Garden, lagoon, or theme park view" },
+      { "id": "club-level", "name": "Club Level Room", "sleeps": 5, "description": "Concierge level with lounge access" },
+      { "id": "suite", "name": "Suite", "sleeps": 6, "description": "One or two-bedroom suite" },
+      { "id": "bungalow", "name": "Bungalow", "sleeps": 8, "description": "Over-the-water bungalow" },
+      { "id": "island-tower-duo", "name": "Island Tower - Duo Studio", "sleeps": 3, "description": "Island Tower duo studio with kitchenette" },
+      { "id": "island-tower-1br", "name": "Island Tower - 1 Bedroom Villa", "sleeps": 5, "description": "Island Tower one-bedroom villa with full kitchen" },
+      { "id": "island-tower-2br", "name": "Island Tower - 2 Bedroom Villa", "sleeps": 9, "description": "Island Tower two-bedroom villa with full kitchen" }
+    ]
+  },
+  {
+    "id": "contemporary",
+    "name": "Disney's Contemporary Resort",
+    "address": "4600 N World Dr, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "deluxe",
+    "description": "Modern resort with monorail running through the building",
+    "amenities": ["Monorail", "Beach", "Marina", "Multiple Dining", "DVC"],
+    "rooms": [
+      { "id": "standard-garden", "name": "Standard Room - Garden Wing", "sleeps": 5, "description": "Garden wing with resort views" },
+      { "id": "standard-tower", "name": "Standard Room - Tower", "sleeps": 5, "description": "Main tower with Magic Kingdom views" },
+      { "id": "club-level", "name": "Club Level Room", "sleeps": 5, "description": "Concierge level in main tower" },
+      { "id": "suite", "name": "Suite", "sleeps": 6, "description": "Bay Lake Tower suite" }
+    ]
+  },
+  {
+    "id": "wilderness-lodge",
+    "name": "Disney's Wilderness Lodge",
+    "address": "901 Timberline Dr, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "deluxe",
+    "description": "Pacific Northwest lodge theming with boat transportation",
+    "amenities": ["Boat Transportation", "Multiple Dining", "Geyser", "DVC", "Beach"],
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Woods or courtyard view" },
+      { "id": "club-level", "name": "Club Level Room", "sleeps": 4, "description": "Concierge level with lounge access" },
+      { "id": "suite", "name": "Suite", "sleeps": 6, "description": "Junior or presidential suite" }
+    ]
+  },
+  {
+    "id": "boardwalk",
+    "name": "Disney's BoardWalk Inn",
+    "address": "2101 Epcot Resorts Blvd, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "deluxe",
+    "description": "1940s Atlantic City boardwalk theming with walking access to Epcot",
+    "amenities": ["Walking to Epcot", "Boat to Hollywood Studios", "BoardWalk Entertainment", "Multiple Dining", "DVC"],
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 5, "description": "Garden or BoardWalk view" },
+      { "id": "club-level", "name": "Club Level Room", "sleeps": 5, "description": "Concierge level with lounge access" },
+      { "id": "suite", "name": "Suite", "sleeps": 6, "description": "Garden or BoardWalk view suite" }
+    ]
+  },
+  {
+    "id": "yacht-club",
+    "name": "Disney's Yacht Club Resort",
+    "address": "1700 Epcot Resorts Blvd, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "deluxe",
+    "description": "New England yacht club theming with Stormalong Bay",
+    "amenities": ["Walking to Epcot", "Boat to Hollywood Studios", "Stormalong Bay", "Multiple Dining"],
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 5, "description": "Garden or water view" },
+      { "id": "club-level", "name": "Club Level Room", "sleeps": 5, "description": "Concierge level with lounge access" },
+      { "id": "suite", "name": "Suite", "sleeps": 6, "description": "Garden or water view suite" }
+    ]
+  },
+  {
+    "id": "beach-club",
+    "name": "Disney's Beach Club Resort",
+    "address": "1800 Epcot Resorts Blvd, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "deluxe",
+    "description": "New England beach resort theming with Stormalong Bay",
+    "amenities": ["Walking to Epcot", "Boat to Hollywood Studios", "Stormalong Bay", "Multiple Dining", "DVC"],
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 5, "description": "Garden or water view" },
+      { "id": "club-level", "name": "Club Level Room", "sleeps": 5, "description": "Concierge level with lounge access" },
+      { "id": "suite", "name": "Suite", "sleeps": 6, "description": "Garden or water view suite" }
+    ]
+  },
+  {
+    "id": "animal-kingdom-lodge",
+    "name": "Disney's Animal Kingdom Lodge",
+    "address": "2901 Osceola Pkwy, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "deluxe",
+    "description": "African lodge theming with live animals on savannas",
+    "amenities": ["Animal Savannas", "Multiple Dining", "Cultural Activities", "DVC"],
+    "rooms": [
+      { "id": "standard-value", "name": "Standard Room - Value View", "sleeps": 4, "description": "Standard view room" },
+      { "id": "standard-savanna", "name": "Standard Room - Savanna View", "sleeps": 4, "description": "Savanna view with animals" },
+      { "id": "club-level", "name": "Club Level Room", "sleeps": 4, "description": "Concierge level with lounge access" },
+      { "id": "suite", "name": "Suite", "sleeps": 6, "description": "Vice presidential or presidential suite" }
+    ]
+  },
+  {
+    "id": "port-orleans-french",
+    "name": "Disney's Port Orleans Resort - French Quarter",
+    "address": "2201 Orleans Dr, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "moderate",
+    "description": "French Quarter theming with boat transportation to Disney Springs",
+    "amenities": ["Boat to Disney Springs", "Pool with Slide", "Food Court", "Dining"],
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "River or garden view" },
+      { "id": "royal", "name": "Royal Guest Room", "sleeps": 4, "description": "Princess and the Frog themed room" }
+    ]
+  },
+  {
+    "id": "port-orleans-riverside",
+    "name": "Disney's Port Orleans Resort - Riverside",
+    "address": "1251 Riverside Dr, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "moderate",
+    "description": "Southern plantation and bayou theming with boat transportation",
+    "amenities": ["Boat to Disney Springs", "Multiple Pools", "Food Court", "Dining", "Horse Carriage Rides"],
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "River or garden view" },
+      { "id": "royal", "name": "Royal Guest Room", "sleeps": 4, "description": "Princess and the Frog themed room" }
+    ]
+  },
+  {
+    "id": "caribbean-beach",
+    "name": "Disney's Caribbean Beach Resort",
+    "address": "900 Cayman Way, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "moderate",
+    "description": "Caribbean island theming with Skyliner transportation",
+    "amenities": ["Skyliner", "Multiple Pools", "Food Court", "Dining"],
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Garden, water, or pool view" },
+      { "id": "pirate", "name": "Pirate Room", "sleeps": 4, "description": "Pirates of the Caribbean themed room" }
+    ]
+  },
+  {
+    "id": "coronado-springs",
+    "name": "Disney's Coronado Springs Resort",
+    "address": "1000 W Buena Vista Dr, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "moderate",
+    "description": "Spanish colonial theming with conference facilities",
+    "amenities": ["Convention Center", "Multiple Pools", "Food Court", "Multiple Dining", "Gran Destino Tower"],
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Water or garden view" },
+      { "id": "preferred", "name": "Preferred Room", "sleeps": 4, "description": "Close to amenities" },
+      { "id": "tower-standard", "name": "Gran Destino Tower - Standard", "sleeps": 4, "description": "Tower standard room" },
+      { "id": "tower-suite", "name": "Gran Destino Tower - Suite", "sleeps": 8, "description": "Tower suite with separate living area" }
+    ]
+  },
+  {
+    "id": "art-of-animation",
+    "name": "Disney's Art of Animation Resort",
+    "address": "1850 Century Dr, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "value",
+    "description": "Disney animation theming with family suites and Skyliner access",
+    "amenities": ["Skyliner", "Multiple Pools", "Food Court", "Family Suites"],
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Little Mermaid themed standard room" },
+      { "id": "family-suite-cars", "name": "Family Suite - Cars", "sleeps": 6, "description": "Cars themed family suite" },
+      { "id": "family-suite-nemo", "name": "Family Suite - Finding Nemo", "sleeps": 6, "description": "Finding Nemo themed family suite" },
+      { "id": "family-suite-lion-king", "name": "Family Suite - Lion King", "sleeps": 6, "description": "Lion King themed family suite" }
+    ]
+  },
+  {
+    "id": "pop-century",
+    "name": "Disney's Pop Century Resort",
+    "address": "1050 Century Dr, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "value",
+    "description": "Pop culture theming from 1950s-1990s with Skyliner access",
+    "amenities": ["Skyliner", "Multiple Pools", "Food Court"],
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Pop culture themed standard room" },
+      { "id": "preferred", "name": "Preferred Room", "sleeps": 4, "description": "Close to amenities" }
+    ]
+  },
+  {
+    "id": "all-star-movies",
+    "name": "Disney's All-Star Movies Resort",
+    "address": "1901 W Buena Vista Dr, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "value",
+    "description": "Disney movie theming with larger-than-life decorations",
+    "amenities": ["Pool", "Food Court", "Gift Shop"],
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Movie themed standard room" },
+      { "id": "preferred", "name": "Preferred Room", "sleeps": 4, "description": "Close to amenities" }
+    ]
+  },
+  {
+    "id": "all-star-music",
+    "name": "Disney's All-Star Music Resort",
+    "address": "1801 W Buena Vista Dr, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "value",
+    "description": "Music theming with giant musical instruments",
+    "amenities": ["Pool", "Food Court", "Family Suites"],
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Music themed standard room" },
+      { "id": "family-suite", "name": "Family Suite", "sleeps": 6, "description": "Suite with kitchenette" }
+    ]
+  },
+  {
+    "id": "all-star-sports",
+    "name": "Disney's All-Star Sports Resort",
+    "address": "1701 W Buena Vista Dr, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "value",
+    "description": "Sports theming with giant sports equipment decorations",
+    "amenities": ["Pool", "Food Court", "Sports Activities"],
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Sports themed standard room" },
+      { "id": "preferred", "name": "Preferred Room", "sleeps": 4, "description": "Close to amenities" }
+    ]
+  },
+  {
+    "id": "riviera",
+    "name": "Disney's Riviera Resort",
+    "address": "1080 Esplanade Ave, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "deluxe_villa",
+    "description": "European-inspired Disney Vacation Club resort with Skyliner access",
+    "amenities": ["Skyliner", "Multiple Dining", "Rooftop Dining", "Pool", "Spa", "DVC"],
+    "rooms": [
+      { "id": "tower-studio", "name": "Tower Studio", "sleeps": 2, "description": "Compact studio with kitchenette" },
+      { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 5, "description": "Studio villa with kitchenette" },
+      { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 5, "description": "One-bedroom villa with full kitchen" },
+      { "id": "2br-villa", "name": "Two Bedroom Villa", "sleeps": 9, "description": "Two-bedroom villa with full kitchen" },
+      { "id": "3br-villa", "name": "Three Bedroom Grand Villa", "sleeps": 12, "description": "Three-bedroom grand villa with full kitchen" }
+    ]
+  },
+  {
+    "id": "saratoga-springs",
+    "name": "Disney's Saratoga Springs Resort & Spa",
+    "address": "1960 Broadway, Lake Buena Vista, FL 32830",
+    "type": "disney",
+    "priceLevel": "deluxe_villa",
+    "description": "Victorian elegance inspired by Saratoga Springs, New York with boat access to Disney Springs",
+    "amenities": ["Boat to Disney Springs", "Spa", "Golf Course", "Multiple Pools", "Multiple Dining", "DVC"],
+    "rooms": [
+      { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 4, "description": "Studio villa with kitchenette" },
+      { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
+      { "id": "2br-villa", "name": "Two Bedroom Villa", "sleeps": 8, "description": "Two-bedroom villa with full kitchen" },
+      { "id": "3br-villa", "name": "Three Bedroom Grand Villa", "sleeps": 12, "description": "Three-bedroom grand villa with full kitchen" },
+      { "id": "treehouse-villa", "name": "Treehouse Villa", "sleeps": 6, "description": "Secluded cabin-style villa in wooded setting" }
+    ]
+  },
+  {
+    "id": "old-key-west",
+    "name": "Disney's Old Key West Resort",
+    "address": "1510 North Cove Rd, Lake Buena Vista, FL 32830",
+    "type": "disney",
+    "priceLevel": "deluxe_villa",
+    "description": "Key West island theming, Disney's original Disney Vacation Club resort",
+    "amenities": ["Boat to Disney Springs", "Golf Course", "Multiple Pools", "Marina", "DVC"],
+    "rooms": [
+      { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 4, "description": "Studio villa with kitchenette" },
+      { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
+      { "id": "2br-villa", "name": "Two Bedroom Villa", "sleeps": 8, "description": "Two-bedroom villa with full kitchen" },
+      { "id": "3br-villa", "name": "Three Bedroom Grand Villa", "sleeps": 12, "description": "Three-bedroom grand villa with full kitchen" }
+    ]
+  },
+  {
+    "id": "fort-wilderness-cabins",
+    "name": "The Cabins at Disney's Fort Wilderness Resort",
+    "address": "4510 N Fort Wilderness Trail, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "moderate",
+    "description": "Rustic cabins in a wooded campground setting with boat access to Magic Kingdom",
+    "amenities": ["Boat Transportation", "Campfire Activities", "Horse Trails", "Beach", "Multiple Pools", "Dining"],
+    "rooms": [
+      { "id": "cabin", "name": "Wilderness Cabin", "sleeps": 6, "description": "Rustic cabin with full kitchen and deck" }
+    ]
+  },
+  {
+    "id": "grand-floridian-villas",
+    "name": "The Villas at Disney's Grand Floridian Resort & Spa",
+    "address": "4401 Floridian Way, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "deluxe_villa",
+    "description": "Victorian elegance with monorail access and DVC accommodations at Grand Floridian",
+    "amenities": ["Monorail", "Spa", "Multiple Dining", "Beach", "Marina", "DVC"],
+    "rooms": [
+      { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 5, "description": "Studio villa with kitchenette" },
+      { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 5, "description": "One-bedroom villa with full kitchen" },
+      { "id": "2br-villa", "name": "Two Bedroom Villa", "sleeps": 9, "description": "Two-bedroom villa with full kitchen" },
+      { "id": "3br-villa", "name": "Three Bedroom Grand Villa", "sleeps": 12, "description": "Three-bedroom grand villa with full kitchen" }
+    ]
+  },
+  {
+    "id": "bay-lake-tower",
+    "name": "Bay Lake Tower at Disney's Contemporary Resort",
+    "address": "4600 N World Dr, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "deluxe_villa",
+    "description": "Modern DVC resort adjacent to Contemporary Resort with monorail access",
+    "amenities": ["Monorail", "Beach", "Marina", "Multiple Dining", "Contemporary Resort Access", "DVC"],
+    "rooms": [
+      { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 4, "description": "Studio villa with kitchenette" },
+      { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
+      { "id": "2br-villa", "name": "Two Bedroom Villa", "sleeps": 8, "description": "Two-bedroom villa with full kitchen" },
+      { "id": "3br-villa", "name": "Three Bedroom Grand Villa", "sleeps": 12, "description": "Three-bedroom grand villa with full kitchen" }
+    ]
+  },
+  {
+    "id": "beach-club-villas",
+    "name": "Disney's Beach Club Villas",
+    "address": "1800 Epcot Resorts Blvd, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "deluxe_villa",
+    "description": "New England beach resort DVC villas with Stormalong Bay access",
+    "amenities": ["Walking to Epcot", "Boat to Hollywood Studios", "Stormalong Bay", "Multiple Dining", "DVC"],
+    "rooms": [
+      { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 5, "description": "Studio villa with kitchenette" },
+      { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
+      { "id": "2br-villa", "name": "Two Bedroom Villa", "sleeps": 8, "description": "Two-bedroom villa with full kitchen" },
+      { "id": "3br-villa", "name": "Three Bedroom Grand Villa", "sleeps": 12, "description": "Three-bedroom grand villa with full kitchen" }
+    ]
+  },
+  {
+    "id": "boardwalk-villas",
+    "name": "Disney's BoardWalk Villas",
+    "address": "2101 Epcot Resorts Blvd, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "deluxe_villa",
+    "description": "1940s Atlantic City boardwalk themed DVC villas with walking access to Epcot",
+    "amenities": ["Walking to Epcot", "Boat to Hollywood Studios", "BoardWalk Entertainment", "Multiple Dining", "DVC"],
+    "rooms": [
+      { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 4, "description": "Studio villa with kitchenette" },
+      { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
+      { "id": "2br-villa", "name": "Two Bedroom Villa", "sleeps": 8, "description": "Two-bedroom villa with full kitchen" },
+      { "id": "3br-villa", "name": "Three Bedroom Grand Villa", "sleeps": 12, "description": "Three-bedroom grand villa with full kitchen" }
+    ]
+  },
+  {
+    "id": "animal-kingdom-kidani",
+    "name": "Disney's Animal Kingdom Lodge - Kidani Village",
+    "address": "3701 Osceola Pkwy, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "deluxe_villa",
+    "description": "African lodge themed DVC villas with animal savannas and cultural activities",
+    "amenities": ["Animal Savannas", "Multiple Dining", "Cultural Activities", "Pool", "DVC"],
+    "rooms": [
+      { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 4, "description": "Studio villa with kitchenette and savanna views" },
+      { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
+      { "id": "2br-villa", "name": "Two Bedroom Villa", "sleeps": 8, "description": "Two-bedroom villa with full kitchen" },
+      { "id": "3br-villa", "name": "Three Bedroom Grand Villa", "sleeps": 12, "description": "Three-bedroom grand villa with full kitchen" }
+    ]
+  },
+  {
+    "id": "wilderness-lodge-copper-creek",
+    "name": "Copper Creek Villas & Cabins at Disney's Wilderness Lodge",
+    "address": "901 Timberline Dr, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "deluxe_villa",
+    "description": "Pacific Northwest lodge themed DVC villas and cabins with boat transportation",
+    "amenities": ["Boat Transportation", "Multiple Dining", "Geyser", "Beach", "DVC"],
+    "rooms": [
+      { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 4, "description": "Studio villa with kitchenette" },
+      { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
+      { "id": "2br-villa", "name": "Two Bedroom Villa", "sleeps": 8, "description": "Two-bedroom villa with full kitchen" },
+      { "id": "cabin", "name": "Cascade Cabin", "sleeps": 8, "description": "Secluded cabin with full kitchen and outdoor space" }
+    ]
+  },
+  {
+    "id": "wilderness-lodge-boulder-ridge",
+    "name": "Boulder Ridge Villas at Disney's Wilderness Lodge",
+    "address": "901 Timberline Dr, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "deluxe_villa",
+    "description": "Original DVC villas at Wilderness Lodge with Pacific Northwest theming",
+    "amenities": ["Boat Transportation", "Multiple Dining", "Geyser", "Beach", "Wilderness Lodge Access", "DVC"],
+    "rooms": [
+      { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 4, "description": "Studio villa with kitchenette" },
+      { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
+      { "id": "2br-villa", "name": "Two Bedroom Villa", "sleeps": 8, "description": "Two-bedroom villa with full kitchen" }
+    ]
+  }
+]

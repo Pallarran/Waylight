@@ -87,6 +87,25 @@ export enum TipCategory {
   GENERAL = 'general',
 }
 
+export interface TravelingPartyMember {
+  id: string;
+  name: string;
+  age?: number;
+  relationship?: string; // e.g., "spouse", "child", "friend"
+  specialNeeds?: string; // accessibility needs, dietary restrictions, etc.
+  isPlanner?: boolean; // identifies the trip planner/organizer
+}
+
+export interface AccommodationDetails {
+  hotelName?: string;
+  checkInDate?: string; // ISO date string
+  checkOutDate?: string; // ISO date string
+  roomType?: string;
+  confirmationNumber?: string;
+  address?: string;
+  notes?: string;
+}
+
 export interface Trip {
   id: string;
   name: string;
@@ -94,6 +113,8 @@ export interface Trip {
   endDate: string; // ISO date string
   days: TripDay[];
   notes?: string;
+  accommodation?: AccommodationDetails;
+  travelingParty?: TravelingPartyMember[];
   createdAt: string;
   updatedAt: string;
 }

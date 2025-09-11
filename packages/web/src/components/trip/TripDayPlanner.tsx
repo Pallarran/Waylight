@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import { format, addDays } from 'date-fns';
-import { Plus, Calendar, Clock, MapPin, ChevronDown, GripVertical, Edit2, Save, X, Download, Share, ArrowLeft } from 'lucide-react';
+import { Plus, Calendar, Clock, MapPin, ChevronDown, GripVertical, Edit2, Save, X, Download, Share, ArrowLeft, Info, Users } from 'lucide-react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useTripStore } from '../../stores';
 import { PARKS, getParkName } from '../../data/parks';
+import { getCategoryIcon, getCategoryColor, getCategoryInfo } from '../../data/activityCategories';
+import { getAttractions } from '../../data/attractions';
+import QuickAddBar from './QuickAddBar';
+import TripOverview from './TripOverview';
+import CheatSheetView from './CheatSheetView';
 
-import type { Trip, ItineraryItem } from '../../types';
+import type { Trip, ItineraryItem, ActivityCategory, TripDay } from '../../types';
 
 interface TripDayPlannerProps {
   trip: Trip;
@@ -24,11 +29,24 @@ interface DraggableItemProps {
 const DraggableItem = ({ item, index, tripId, dayId, moveItem }: DraggableItemProps) => {
   const { deleteItem, updateItem } = useTripStore();
   const [isEditing, setIsEditing] = useState(false);
+  
+  // Get attraction data if this item references an attraction
+  const attraction = item.attractionId ? getAttractions().find(a => a.id === item.attractionId) : null;
   const [editData, setEditData] = useState({
     name: item.name,
     startTime: item.startTime || '',
-    duration: item.duration || 60,
-    notes: item.notes || ''
+    attractionId: item.attractionId || '',
+    notes: item.notes || '',
+    location: item.location || '',
+    reservationNumber: item.reservationNumber || '',
+    fastPassTime: item.fastPassTime || '',
+    partySize: item.partySize || undefined,
+    characters: item.characters?.join(', ') || '',
+    tourGuide: item.tourGuide || '',
+    eventType: item.eventType || '',
+    isMustDo: item.isMustDo || false,
+    isRopeDropTarget: item.isRopeDropTarget || false,
+    priorityLevel: item.priorityLevel || undefined
   });
 
   const [{ isDragging }, drag] = useDrag({
@@ -62,8 +80,18 @@ const DraggableItem = ({ item, index, tripId, dayId, moveItem }: DraggableItemPr
       await updateItem(tripId, dayId, item.id, {
         name: editData.name,
         startTime: editData.startTime || undefined,
-        duration: editData.duration,
-        notes: editData.notes || undefined
+        attractionId: editData.attractionId || undefined,
+        notes: editData.notes || undefined,
+        location: editData.location || undefined,
+        reservationNumber: editData.reservationNumber || undefined,
+        fastPassTime: editData.fastPassTime || undefined,
+        partySize: editData.partySize || undefined,
+        characters: editData.characters ? editData.characters.split(',').map(c => c.trim()).filter(c => c) : undefined,
+        tourGuide: editData.tourGuide || undefined,
+        eventType: editData.eventType || undefined,
+        isMustDo: editData.isMustDo,
+        isRopeDropTarget: editData.isRopeDropTarget,
+        priorityLevel: editData.priorityLevel
       });
       setIsEditing(false);
     } catch (error) {
@@ -75,23 +103,236 @@ const DraggableItem = ({ item, index, tripId, dayId, moveItem }: DraggableItemPr
     setEditData({
       name: item.name,
       startTime: item.startTime || '',
-      duration: item.duration || 60,
-      notes: item.notes || ''
+      attractionId: item.attractionId || '',
+      notes: item.notes || '',
+      location: item.location || '',
+      reservationNumber: item.reservationNumber || '',
+      fastPassTime: item.fastPassTime || '',
+      partySize: item.partySize || undefined,
+      characters: item.characters?.join(', ') || '',
+      tourGuide: item.tourGuide || '',
+      eventType: item.eventType || '',
+      isMustDo: item.isMustDo || false,
+      isRopeDropTarget: item.isRopeDropTarget || false,
+      priorityLevel: item.priorityLevel || undefined
     });
     setIsEditing(false);
+  };
+
+  const renderCategorySpecificFields = () => {
+    switch (item.type) {
+      case 'dining':
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-ink mb-1">Location</label>
+              <input
+                type="text"
+                value={editData.location}
+                onChange={(e) => setEditData({ ...editData, location: e.target.value })}
+                className="w-full px-3 py-2 bg-surface-dark border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                placeholder="Restaurant location"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-ink mb-1">Reservation #</label>
+              <input
+                type="text"
+                value={editData.reservationNumber}
+                onChange={(e) => setEditData({ ...editData, reservationNumber: e.target.value })}
+                className="w-full px-3 py-2 bg-surface-dark border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                placeholder="Confirmation number"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-ink mb-1">Party Size</label>
+              <input
+                type="number"
+                value={editData.partySize || ''}
+                onChange={(e) => setEditData({ ...editData, partySize: e.target.value ? parseInt(e.target.value) : undefined })}
+                className="w-full px-3 py-2 bg-surface-dark border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                placeholder="Number of people"
+                min="1"
+                max="20"
+              />
+            </div>
+          </>
+        );
+      case 'ride':
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-ink mb-1">Location Override</label>
+              <input
+                type="text"
+                value={editData.location}
+                onChange={(e) => setEditData({ ...editData, location: e.target.value })}
+                className="w-full px-3 py-2 bg-surface-dark border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                placeholder="Override attraction location"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-ink mb-1">Lightning Lane Time</label>
+              <input
+                type="time"
+                value={editData.fastPassTime}
+                onChange={(e) => setEditData({ ...editData, fastPassTime: e.target.value })}
+                className="w-full px-3 py-2 bg-surface-dark border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+              />
+            </div>
+          </>
+        );
+      case 'meet_greet':
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-ink mb-1">Location</label>
+              <input
+                type="text"
+                value={editData.location}
+                onChange={(e) => setEditData({ ...editData, location: e.target.value })}
+                className="w-full px-3 py-2 bg-surface-dark border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                placeholder="Meet & greet location"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-ink mb-1">Characters</label>
+              <input
+                type="text"
+                value={editData.characters}
+                onChange={(e) => setEditData({ ...editData, characters: e.target.value })}
+                className="w-full px-3 py-2 bg-surface-dark border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                placeholder="Mickey, Minnie, etc. (comma separated)"
+              />
+            </div>
+          </>
+        );
+      case 'tours':
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-ink mb-1">Meeting Location</label>
+              <input
+                type="text"
+                value={editData.location}
+                onChange={(e) => setEditData({ ...editData, location: e.target.value })}
+                className="w-full px-3 py-2 bg-surface-dark border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                placeholder="Tour meeting point"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-ink mb-1">Tour Guide</label>
+              <input
+                type="text"
+                value={editData.tourGuide}
+                onChange={(e) => setEditData({ ...editData, tourGuide: e.target.value })}
+                className="w-full px-3 py-2 bg-surface-dark border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                placeholder="Guide name or contact"
+              />
+            </div>
+          </>
+        );
+      case 'special_events':
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-ink mb-1">Event Type</label>
+              <input
+                type="text"
+                value={editData.eventType}
+                onChange={(e) => setEditData({ ...editData, eventType: e.target.value })}
+                className="w-full px-3 py-2 bg-surface-dark border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                placeholder="Party, parade, etc."
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-ink mb-1">Location</label>
+              <input
+                type="text"
+                value={editData.location}
+                onChange={(e) => setEditData({ ...editData, location: e.target.value })}
+                className="w-full px-3 py-2 bg-surface-dark border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                placeholder="Event location"
+              />
+            </div>
+          </>
+        );
+      case 'show':
+      case 'attraction':
+      case 'waterpark':
+      case 'shopping':
+        return (
+          <div>
+            <label className="block text-xs font-medium text-ink mb-1">Location</label>
+            <input
+              type="text"
+              value={editData.location}
+              onChange={(e) => setEditData({ ...editData, location: e.target.value })}
+              className="w-full px-3 py-2 bg-surface-dark border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+              placeholder="Location/area"
+            />
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
+  const getPriorityBadge = () => {
+    if (item.isMustDo) {
+      return (
+        <div className="flex items-center bg-glow/20 text-glow px-2 py-1 rounded-md text-xs font-medium border border-glow/30">
+          ⭐ Must-Do
+        </div>
+      );
+    }
+    if (item.isRopeDropTarget) {
+      return (
+        <div className="flex items-center bg-orange-500/20 text-orange-400 px-2 py-1 rounded-md text-xs font-medium border border-orange-500/30">
+          🌅 Rope Drop
+        </div>
+      );
+    }
+    if (item.priorityLevel && item.priorityLevel <= 2) {
+      return (
+        <div className="flex items-center bg-red-500/20 text-red-400 px-2 py-1 rounded-md text-xs font-medium border border-red-500/30">
+          🔥 High Priority
+        </div>
+      );
+    }
+    return null;
+  };
+
+  const getItemBorderStyle = () => {
+    if (item.isMustDo) return 'border-glow/50 bg-glow/5';
+    if (item.isRopeDropTarget) return 'border-orange-500/50 bg-orange-500/5';
+    if (item.priorityLevel && item.priorityLevel <= 2) return 'border-red-500/50 bg-red-500/5';
+    if (item.fastPassTime) return 'border-sea/50 bg-sea/5';
+    return 'border-surface-dark/50 bg-surface';
   };
 
   return (
     <div
       ref={(node) => drag(drop(node))}
-      className={`flex items-center p-4 bg-surface rounded-lg border border-surface-dark/50 transition-opacity ${
-        isDragging ? 'opacity-50' : 'opacity-100'
-      }`}
+      className={`relative flex items-start p-4 rounded-xl border transition-all duration-200 ${
+        isDragging ? 'opacity-50 scale-95' : 'opacity-100 hover:shadow-md'
+      } ${getItemBorderStyle()}`}
     >
-      <div className="flex items-center justify-center w-8 h-8 bg-sea/10 text-sea-dark rounded-full mr-4 text-sm font-medium">
-        {index + 1}
+      {/* Priority indicator line */}
+      {(item.isMustDo || item.isRopeDropTarget || (item.priorityLevel && item.priorityLevel <= 2)) && (
+        <div className={`absolute left-0 top-0 bottom-0 w-1 rounded-l-xl ${
+          item.isMustDo ? 'bg-glow' :
+          item.isRopeDropTarget ? 'bg-orange-500' :
+          'bg-red-500'
+        }`} />
+      )}
+      
+      {/* Category icon with enhanced styling */}
+      <div className={`flex items-center justify-center w-10 h-10 rounded-xl mr-4 text-lg font-medium shadow-sm ${getCategoryColor(item.type).replace('text-', 'bg-')}/20 ${getCategoryColor(item.type)} border border-current/20`}>
+        {getCategoryIcon(item.type)}
       </div>
-      <GripVertical className="w-4 h-4 text-ink-light mr-3 cursor-grab active:cursor-grabbing" />
+      
+      <GripVertical className="w-4 h-4 text-ink-light mr-3 cursor-grab active:cursor-grabbing hover:text-ink transition-colors" />
       <div className="flex-1">
         {isEditing ? (
           <div className="space-y-3">
@@ -110,32 +351,69 @@ const DraggableItem = ({ item, index, tripId, dayId, moveItem }: DraggableItemPr
                 className="px-3 py-2 bg-surface-dark border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
               />
             </div>
-            <div className="grid grid-cols-2 gap-3">
-              <input
-                type="number"
-                value={editData.duration}
-                onChange={(e) => setEditData({ ...editData, duration: parseInt(e.target.value) || 60 })}
-                className="px-3 py-2 bg-surface-dark border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
-                placeholder="Duration (minutes)"
-                min="5"
-                max="480"
-              />
-              <div className="flex items-center space-x-2">
-                <button
-                  onClick={handleSave}
-                  className="btn-primary btn-sm flex items-center"
-                >
-                  <Save className="w-3 h-3 mr-1" />
-                  Save
-                </button>
-                <button
-                  onClick={handleCancel}
-                  className="btn-secondary btn-sm flex items-center"
-                >
-                  <X className="w-3 h-3 mr-1" />
-                  Cancel
-                </button>
+            
+            {/* Category-specific fields */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {renderCategorySpecificFields()}
+            </div>
+            
+            {/* Priority and planning fields */}
+            <div className="border-t border-surface-dark pt-3">
+              <h5 className="text-sm font-medium text-ink mb-2">Priority & Planning</h5>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={editData.isMustDo}
+                    onChange={(e) => setEditData({ ...editData, isMustDo: e.target.checked })}
+                    className="rounded border-surface-dark bg-surface-dark text-sea focus:border-sea focus:ring-0"
+                  />
+                  <span className="text-sm text-ink">⭐ Must-Do Priority</span>
+                </label>
+                
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={editData.isRopeDropTarget}
+                    onChange={(e) => setEditData({ ...editData, isRopeDropTarget: e.target.checked })}
+                    className="rounded border-surface-dark bg-surface-dark text-sea focus:border-sea focus:ring-0"
+                  />
+                  <span className="text-sm text-ink">🌅 Rope Drop Target</span>
+                </label>
+                
+                <div>
+                  <label className="block text-sm font-medium text-ink mb-1">Priority Level</label>
+                  <select
+                    value={editData.priorityLevel || ''}
+                    onChange={(e) => setEditData({ ...editData, priorityLevel: e.target.value ? parseInt(e.target.value) : undefined })}
+                    className="w-full px-3 py-2 bg-surface-dark border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                  >
+                    <option value="">No priority set</option>
+                    <option value="1">1 - Highest</option>
+                    <option value="2">2 - High</option>
+                    <option value="3">3 - Medium</option>
+                    <option value="4">4 - Low</option>
+                    <option value="5">5 - Lowest</option>
+                  </select>
+                </div>
               </div>
+            </div>
+            
+            <div className="flex items-center space-x-2">
+              <button
+                onClick={handleSave}
+                className="btn-primary btn-sm flex items-center"
+              >
+                <Save className="w-3 h-3 mr-1" />
+                Save
+              </button>
+              <button
+                onClick={handleCancel}
+                className="btn-secondary btn-sm flex items-center"
+              >
+                <X className="w-3 h-3 mr-1" />
+                Cancel
+              </button>
             </div>
             <textarea
               value={editData.notes}
@@ -147,35 +425,121 @@ const DraggableItem = ({ item, index, tripId, dayId, moveItem }: DraggableItemPr
           </div>
         ) : (
           <>
-            <div className="flex items-center justify-between mb-1">
-              <h4 className="font-medium text-ink">{item.name}</h4>
-              <div className="flex items-center space-x-2">
-                {item.startTime && (
-                  <span className="text-sm text-ink-light">{item.startTime}</span>
-                )}
+            <div className="flex items-start justify-between mb-3">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center space-x-3 mb-2">
+                  <h4 className="font-semibold text-ink text-base">{item.name}</h4>
+                  {item.startTime && (
+                    <div className="flex items-center bg-surface-dark/50 px-2 py-1 rounded-md text-xs text-ink-light">
+                      <Clock className="w-3 h-3 mr-1" />
+                      {item.startTime}
+                    </div>
+                  )}
+                </div>
+                
+                {/* Priority badges */}
+                <div className="flex items-center space-x-2 mb-2">
+                  {getPriorityBadge()}
+                  {item.fastPassTime && (
+                    <div className="flex items-center bg-sea/20 text-sea px-2 py-1 rounded-md text-xs font-medium border border-sea/30">
+                      ⚡ {item.fastPassTime}
+                    </div>
+                  )}
+                </div>
+              </div>
+              
+              <div className="flex items-center space-x-1 ml-3">
                 <button
                   onClick={() => setIsEditing(true)}
-                  className="text-xs text-ink-light hover:text-ink px-2 py-1 rounded hover:bg-surface-dark/50 transition-colors flex items-center"
+                  className="text-xs text-ink-light hover:text-ink px-2 py-1 rounded-md hover:bg-surface-dark/50 transition-colors flex items-center"
                 >
                   <Edit2 className="w-3 h-3 mr-1" />
                   Edit
                 </button>
                 <button
                   onClick={handleDelete}
-                  className="text-xs text-red-400 hover:text-red-300 px-2 py-1 rounded hover:bg-red-500/10 transition-colors"
+                  className="text-xs text-red-400 hover:text-red-300 px-2 py-1 rounded-md hover:bg-red-500/10 transition-colors"
                 >
-                  Delete
+                  <X className="w-3 h-3" />
                 </button>
               </div>
             </div>
-            <div className="flex items-center space-x-4 text-sm text-ink-light">
-              <span className="capitalize">{item.type}</span>
-              {item.duration && (
-                <span>{item.duration} minutes</span>
+            {/* Activity metadata */}
+            <div className="flex items-center space-x-3 text-sm">
+              <div className={`px-2 py-1 rounded-md ${getCategoryColor(item.type).replace('text-', 'bg-')}/20 ${getCategoryColor(item.type)} font-medium`}>
+                {getCategoryInfo(item.type)?.name || item.type}
+              </div>
+              
+              {attraction && (
+                <>
+                  <div className="flex items-center text-ink-light">
+                    <Clock className="w-3 h-3 mr-1" />
+                    <span>{attraction.duration} min</span>
+                  </div>
+                  
+                  {attraction.heightRequirement && (
+                    <div className="flex items-center text-ink-light">
+                      <Users className="w-3 h-3 mr-1" />
+                      <span>{attraction.heightRequirement}"</span>
+                    </div>
+                  )}
+                  
+                  <div className={`px-2 py-1 rounded-md text-xs font-medium ${
+                    attraction.intensity === 'low' ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 
+                    attraction.intensity === 'moderate' ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30' : 
+                    'bg-red-500/20 text-red-400 border border-red-500/30'
+                  }`}>
+                    {attraction.intensity}
+                  </div>
+                </>
               )}
             </div>
+            
+            {/* Category-specific display info */}
+            <div className="mt-3 flex flex-wrap gap-2">
+              {(attraction?.location || item.location) && (
+                <div className="flex items-center bg-surface-dark/30 px-2 py-1 rounded-md text-xs text-ink-light">
+                  <MapPin className="w-3 h-3 mr-1" />
+                  <span>{attraction?.location || item.location}</span>
+                </div>
+              )}
+              
+              {item.reservationNumber && (
+                <div className="flex items-center bg-surface-dark/30 px-2 py-1 rounded-md text-xs text-ink-light">
+                  <span className="font-mono">#{item.reservationNumber}</span>
+                </div>
+              )}
+              
+              {item.partySize && (
+                <div className="flex items-center bg-surface-dark/30 px-2 py-1 rounded-md text-xs text-ink-light">
+                  <Users className="w-3 h-3 mr-1" />
+                  <span>{item.partySize} people</span>
+                </div>
+              )}
+              
+              {item.characters && item.characters.length > 0 && (
+                <div className="flex items-center bg-surface-dark/30 px-2 py-1 rounded-md text-xs text-ink-light">
+                  <span>🐭 {item.characters.join(', ')}</span>
+                </div>
+              )}
+              
+              {item.tourGuide && (
+                <div className="flex items-center bg-surface-dark/30 px-2 py-1 rounded-md text-xs text-ink-light">
+                  <span>👨‍🏫 {item.tourGuide}</span>
+                </div>
+              )}
+              
+              {item.eventType && (
+                <div className="flex items-center bg-surface-dark/30 px-2 py-1 rounded-md text-xs text-ink-light">
+                  <span>🎉 {item.eventType}</span>
+                </div>
+              )}
+            </div>
+            
             {item.notes && (
-              <p className="text-sm text-ink-light mt-2">{item.notes}</p>
+              <div className="mt-3 p-3 bg-surface-dark/20 rounded-lg border-l-2 border-ink-light/30">
+                <p className="text-sm text-ink-light italic">{item.notes}</p>
+              </div>
             )}
           </>
         )}
@@ -185,15 +549,25 @@ const DraggableItem = ({ item, index, tripId, dayId, moveItem }: DraggableItemPr
 };
 
 export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerProps) {
-  const [selectedDayIndex, setSelectedDayIndex] = useState(0);
+  const [currentView, setCurrentView] = useState<'overview' | number>('overview');
   const [showParkSelector, setShowParkSelector] = useState(false);
   const [isEditingTrip, setIsEditingTrip] = useState(false);
+  const [showCheatSheet, setShowCheatSheet] = useState(false);
   const [tripEditData, setTripEditData] = useState({
     name: trip.name,
     startDate: trip.startDate,
     endDate: trip.endDate
   });
   const { addDay, updateDay, addItem, reorderItems, updateTrip } = useTripStore();
+
+  // Helper function to update day data
+  const updateDayData = async (dayId: string, updates: Partial<TripDay>) => {
+    try {
+      await updateDay(trip.id, dayId, updates);
+    } catch (error) {
+      console.error('Failed to update day:', error);
+    }
+  };
 
   // Parse dates as local dates to avoid timezone issues
   const startDate = new Date(trip.startDate + 'T00:00:00');
@@ -207,10 +581,12 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
     currentDate = addDays(currentDate, 1);
   }
 
+  const selectedDayIndex = typeof currentView === 'number' ? currentView : 0;
   const selectedDay = trip.days?.[selectedDayIndex];
   const selectedDate = tripDays[selectedDayIndex];
   
-  if (!selectedDate) {
+  // If showing overview, we don't need a selectedDate
+  if (currentView !== 'overview' && !selectedDate) {
     return <div className="text-center text-ink-light">No valid date selected</div>;
   }
 
@@ -223,21 +599,41 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
     }
   };
 
-  const handleAddItem = async () => {
+  const handleQuickAdd = async (type: ActivityCategory, attractionId?: string, customName?: string) => {
     if (!selectedDay) return;
     
-    const newItem = {
-      type: 'attraction' as const,
-      name: 'New Activity',
-      startTime: '09:00',
-      duration: 60,
-      notes: ''
-    };
-    
-    try {
-      await addItem(trip.id, selectedDay.id, newItem);
-    } catch (error) {
-      console.error('Failed to add item:', error);
+    if (attractionId) {
+      // Adding a specific attraction
+      const attraction = getAttractions().find(a => a.id === attractionId);
+      if (!attraction) return;
+      
+      const newItem = {
+        type: attraction.type as ActivityCategory,
+        name: attraction.name,
+        attractionId: attraction.id,
+        startTime: '09:00',
+        notes: ''
+      };
+      
+      try {
+        await addItem(trip.id, selectedDay.id, newItem);
+      } catch (error) {
+        console.error('Failed to add attraction:', error);
+      }
+    } else {
+      // Adding a custom activity of a category
+      const newItem = {
+        type: type,
+        name: customName || 'New Activity',
+        startTime: '09:00',
+        notes: ''
+      };
+      
+      try {
+        await addItem(trip.id, selectedDay.id, newItem);
+      } catch (error) {
+        console.error('Failed to add custom item:', error);
+      }
     }
   };
 
@@ -376,287 +772,592 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="space-y-6">
-      {/* Trip Header */}
-      <div className="space-y-4">
-        {isEditingTrip ? (
-          <div className="card p-6">
-            <h3 className="text-lg font-semibold text-ink mb-4">Edit Trip Details</h3>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-ink mb-2">Trip Name</label>
-                <input
-                  type="text"
-                  value={tripEditData.name}
-                  onChange={(e) => setTripEditData({ ...tripEditData, name: e.target.value })}
-                  className="w-full px-4 py-3 bg-surface border border-surface-dark rounded-lg text-ink focus:outline-none focus:border-sea"
-                  placeholder="Enter trip name"
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-ink mb-2">Start Date</label>
-                  <input
-                    type="date"
-                    value={tripEditData.startDate}
-                    onChange={(e) => setTripEditData({ ...tripEditData, startDate: e.target.value })}
-                    className="w-full px-4 py-3 bg-surface border border-surface-dark rounded-lg text-ink focus:outline-none focus:border-sea"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-ink mb-2">End Date</label>
-                  <input
-                    type="date"
-                    value={tripEditData.endDate}
-                    onChange={(e) => setTripEditData({ ...tripEditData, endDate: e.target.value })}
-                    className="w-full px-4 py-3 bg-surface border border-surface-dark rounded-lg text-ink focus:outline-none focus:border-sea"
-                  />
-                </div>
-              </div>
-              <div className="flex items-center space-x-3">
-                <button
-                  onClick={handleTripSave}
-                  className="btn-primary flex items-center"
-                >
-                  <Save className="w-4 h-4 mr-2" />
-                  Save Changes
-                </button>
-                <button
-                  onClick={handleTripCancel}
-                  className="btn-secondary flex items-center"
-                >
-                  <X className="w-4 h-4 mr-2" />
-                  Cancel
-                </button>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              {onBackToTrips && (
-                <button
-                  onClick={onBackToTrips}
-                  className="btn-secondary btn-sm"
-                >
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back to Trips
-                </button>
-              )}
-              <h2 className="text-xl font-semibold text-ink">{trip.name}</h2>
-              <button
-                onClick={() => setIsEditingTrip(true)}
-                className="p-2 text-ink-light hover:text-ink hover:bg-surface-dark/50 rounded-lg transition-colors"
-                title="Edit trip details"
-              >
-                <Edit2 className="w-4 h-4" />
-              </button>
-            </div>
-            <div className="flex items-center space-x-2">
-              <button
-                onClick={shareTrip}
-                className="btn-secondary btn-sm flex items-center"
-              >
-                <Share className="w-4 h-4 mr-1" />
-                Share
-              </button>
-              <button
-                onClick={exportTripAsText}
-                className="btn-secondary btn-sm flex items-center"
-              >
-                <Download className="w-4 h-4 mr-1" />
-                Export Text
-              </button>
-              <button
-                onClick={exportTripAsJSON}
-                className="btn-secondary btn-sm flex items-center"
-              >
-                <Download className="w-4 h-4 mr-1" />
-                Export JSON
-              </button>
-            </div>
-          </div>
-        )}
-
-        {!isEditingTrip && (
-          <div className="text-sm text-ink-light">
-            {format(startDate, 'MMMM d, yyyy')} - {format(endDate, 'MMMM d, yyyy')}
-          </div>
-        )}
-      </div>
-
-      {/* Day Tabs */}
-      <div className="border-b border-surface-dark/50">
-        <div className="flex space-x-1 overflow-x-auto pb-1">
-          {tripDays.map((date, index) => {
-            const dayData = trip.days?.find(d => d.date === format(date, 'yyyy-MM-dd'));
-            const isSelected = index === selectedDayIndex;
-            
-            return (
-              <button
-                key={format(date, 'yyyy-MM-dd')}
-                onClick={() => setSelectedDayIndex(index)}
-                className={`flex flex-col items-center px-4 py-3 rounded-t-lg whitespace-nowrap transition-colors ${
-                  isSelected
-                    ? 'bg-sea/10 text-sea-dark border-b-2 border-sea'
-                    : 'text-ink-light hover:text-ink hover:bg-surface-dark/50'
-                }`}
-              >
-                <span className="text-sm font-medium">
-                  {format(date, 'EEE')}
-                </span>
-                <span className="text-xs">
-                  {format(date, 'MMM d')}
-                </span>
-                {dayData && (
-                  <div className="w-2 h-2 bg-glow rounded-full mt-1"></div>
-                )}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Selected Day Content */}
-      <div className="grid md:grid-cols-3 gap-6">
-        {/* Day Overview */}
-        <div className="md:col-span-1">
-          <div className="card p-6">
-            <div className="mb-4">
-              <h3 className="text-lg font-semibold text-ink">
-                {format(selectedDate, 'EEEE, MMMM d')}
-              </h3>
-            </div>
-
-            {selectedDay ? (
+        {/* Trip Header */}
+        <div className="space-y-4">
+          {isEditingTrip ? (
+            <div className="card p-6">
+              <h3 className="text-lg font-semibold text-ink mb-4">Edit Trip Details</h3>
               <div className="space-y-4">
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center text-ink-light">
-                      <MapPin className="w-4 h-4 mr-2" />
-                      <span className="text-sm">
-                        {selectedDay.parkId ? getParkName(selectedDay.parkId) : 'No park selected'}
-                      </span>
+                <div>
+                  <label className="block text-sm font-medium text-ink mb-2">Trip Name</label>
+                  <input
+                    type="text"
+                    value={tripEditData.name}
+                    onChange={(e) => setTripEditData({ ...tripEditData, name: e.target.value })}
+                    className="w-full px-4 py-3 bg-surface border border-surface-dark rounded-lg text-ink focus:outline-none focus:border-sea"
+                    placeholder="Enter trip name"
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-ink mb-2">Start Date</label>
+                    <input
+                      type="date"
+                      value={tripEditData.startDate}
+                      onChange={(e) => setTripEditData({ ...tripEditData, startDate: e.target.value })}
+                      className="w-full px-4 py-3 bg-surface border border-surface-dark rounded-lg text-ink focus:outline-none focus:border-sea"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-ink mb-2">End Date</label>
+                    <input
+                      type="date"
+                      value={tripEditData.endDate}
+                      onChange={(e) => setTripEditData({ ...tripEditData, endDate: e.target.value })}
+                      className="w-full px-4 py-3 bg-surface border border-surface-dark rounded-lg text-ink focus:outline-none focus:border-sea"
+                    />
+                  </div>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <button
+                    onClick={handleTripSave}
+                    className="btn-primary flex items-center"
+                  >
+                    <Save className="w-4 h-4 mr-2" />
+                    Save Changes
+                  </button>
+                  <button
+                    onClick={handleTripCancel}
+                    className="btn-secondary flex items-center"
+                  >
+                    <X className="w-4 h-4 mr-2" />
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                {onBackToTrips && (
+                  <button
+                    onClick={onBackToTrips}
+                    className="btn-secondary btn-sm"
+                  >
+                    <ArrowLeft className="w-4 h-4 mr-2" />
+                    Back to Trips
+                  </button>
+                )}
+                <h2 className="text-xl font-semibold text-ink">{trip.name}</h2>
+                <button
+                  onClick={() => setIsEditingTrip(true)}
+                  className="p-2 text-ink-light hover:text-ink hover:bg-surface-dark/50 rounded-lg transition-colors"
+                  title="Edit trip details"
+                >
+                  <Edit2 className="w-4 h-4" />
+                </button>
+              </div>
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={shareTrip}
+                  className="btn-secondary btn-sm flex items-center"
+                >
+                  <Share className="w-4 h-4 mr-1" />
+                  Share
+                </button>
+                <button
+                  onClick={exportTripAsText}
+                  className="btn-secondary btn-sm flex items-center"
+                >
+                  <Download className="w-4 h-4 mr-1" />
+                  Export Text
+                </button>
+                <button
+                  onClick={exportTripAsJSON}
+                  className="btn-secondary btn-sm flex items-center"
+                >
+                  <Download className="w-4 h-4 mr-1" />
+                  Export JSON
+                </button>
+              </div>
+            </div>
+          )}
+
+          {!isEditingTrip && (
+            <div className="flex items-center space-x-6 text-sm text-ink-light">
+              <div className="flex items-center">
+                <Calendar className="w-4 h-4 mr-2" />
+                <span>{format(startDate, 'MMMM d, yyyy')} - {format(endDate, 'MMMM d, yyyy')}</span>
+              </div>
+              <div className="flex items-center">
+                <Users className="w-4 h-4 mr-2" />
+                <span>
+                  {trip.travelingParty && trip.travelingParty.length > 0 
+                    ? `${trip.travelingParty.length} traveler${trip.travelingParty.length !== 1 ? 's' : ''}`
+                    : 'No travelers'
+                  }
+                </span>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Navigation Tabs */}
+        <div className="border-b border-surface-dark/50">
+          <div className="flex space-x-1 overflow-x-auto pb-1">
+            {/* Trip Overview Tab */}
+            <button
+              onClick={() => setCurrentView('overview')}
+              className={`flex flex-col items-center px-4 py-3 rounded-t-lg whitespace-nowrap transition-colors ${
+                currentView === 'overview'
+                  ? 'bg-sea/10 text-sea-dark border-b-2 border-sea'
+                  : 'text-ink-light hover:text-ink hover:bg-surface-dark/50'
+              }`}
+            >
+              <Info className="w-4 h-4" />
+              <span className="text-xs mt-1">Overview</span>
+            </button>
+
+            {/* Day Tabs */}
+            {tripDays.map((date, index) => {
+              const dayData = trip.days?.find(d => d.date === format(date, 'yyyy-MM-dd'));
+              const isSelected = currentView === index;
+              
+              return (
+                <button
+                  key={format(date, 'yyyy-MM-dd')}
+                  onClick={() => setCurrentView(index)}
+                  className={`flex flex-col items-center px-4 py-3 rounded-t-lg whitespace-nowrap transition-colors ${
+                    isSelected
+                      ? 'bg-sea/10 text-sea-dark border-b-2 border-sea'
+                      : 'text-ink-light hover:text-ink hover:bg-surface-dark/50'
+                  }`}
+                >
+                  <span className="text-sm font-medium">
+                    {format(date, 'EEE')}
+                  </span>
+                  <span className="text-xs">
+                    {format(date, 'MMM d')}
+                  </span>
+                  {dayData && (
+                    <div className="w-2 h-2 bg-glow rounded-full mt-1"></div>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Content */}
+        {currentView === 'overview' ? (
+          <TripOverview trip={trip} />
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[calc(100vh-200px)]">
+            {/* Left Panel: Day Context & Quick Actions */}
+            <div className="lg:col-span-3">
+              <div className="bg-surface rounded-xl border border-surface-dark/30 p-5 h-full overflow-y-auto">
+                {/* Day Header */}
+                <div className="mb-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-xl font-semibold text-ink">
+                      {selectedDate && format(selectedDate, 'EEE, MMM d')}
+                    </h3>
+                    <div className="text-sm text-ink-light bg-surface-dark/50 px-3 py-1 rounded-full">
+                      Day {selectedDayIndex + 1}
                     </div>
-                    <button
-                      onClick={() => setShowParkSelector(!showParkSelector)}
-                      className="btn-secondary btn-sm"
-                    >
-                      <ChevronDown className={`w-4 h-4 transition-transform ${showParkSelector ? 'rotate-180' : ''}`} />
-                    </button>
                   </div>
                   
-                  {showParkSelector && (
-                    <div className="space-y-2 p-3 bg-surface-dark/50 rounded-lg">
-                      <p className="text-sm font-medium text-ink">Select a park:</p>
-                      <div className="grid grid-cols-2 gap-2">
-                        {PARKS.map((park) => (
-                          <button
-                            key={park.id}
-                            onClick={() => handleParkSelection(park.id)}
-                            className={`p-3 rounded-lg border text-left transition-colors ${
-                              selectedDay.parkId === park.id
-                                ? 'border-sea bg-sea/10 text-sea-dark'
-                                : 'border-surface-dark text-ink-light hover:border-sea/50 hover:bg-surface-dark/50'
-                            }`}
-                          >
-                            <div className="flex items-center space-x-2">
-                              <span className="text-lg">{park.icon}</span>
-                              <div>
-                                <div className="font-medium text-sm">{park.abbreviation}</div>
-                                <div className="text-xs opacity-75">{park.name}</div>
-                              </div>
-                            </div>
-                          </button>
-                        ))}
-                      </div>
-                      {selectedDay.parkId && (
+                  {/* Park Selection */}
+                  <div className="space-y-2">
+                    <div className="flex items-center text-ink-light">
+                      <MapPin className="w-4 h-4 mr-2" />
+                      <span className="text-sm font-medium">
+                        {selectedDay?.parkId ? getParkName(selectedDay.parkId) : 'No park selected'}
+                      </span>
+                      <button
+                        onClick={() => setShowParkSelector(!showParkSelector)}
+                        className="ml-auto p-1 text-ink-light hover:text-ink rounded transition-colors"
+                      >
+                        <ChevronDown className={`w-4 h-4 transition-transform ${showParkSelector ? 'rotate-180' : ''}`} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Park Selector */}
+                {showParkSelector && (
+                  <div className="mb-6 space-y-3 p-4 bg-surface-dark/30 rounded-lg border border-surface-dark/50">
+                    <div className="text-sm font-medium text-ink mb-3">Select a park:</div>
+                    <div className="space-y-2">
+                      {PARKS.map((park) => (
                         <button
-                          onClick={() => handleParkSelection('')}
-                          className="w-full p-2 text-sm text-ink-light hover:text-ink border border-surface-dark rounded-lg hover:bg-surface-dark/50 transition-colors"
+                          key={park.id}
+                          onClick={() => handleParkSelection(park.id)}
+                          className={`w-full p-3 rounded-lg border text-left transition-all hover:scale-[0.98] ${
+                            selectedDay?.parkId === park.id
+                              ? 'border-sea bg-sea/10 text-sea shadow-sm'
+                              : 'border-surface-dark text-ink-light hover:border-sea/50 hover:bg-surface-dark/50'
+                          }`}
                         >
-                          Clear selection
+                          <div className="flex items-center space-x-3">
+                            <span className="text-lg">{park.icon}</span>
+                            <div>
+                              <div className="font-medium text-sm">{park.abbreviation}</div>
+                              <div className="text-xs opacity-75">{park.name}</div>
+                            </div>
+                          </div>
                         </button>
-                      )}
+                      ))}
+                    </div>
+                    {selectedDay?.parkId && (
+                      <button
+                        onClick={() => handleParkSelection('')}
+                        className="w-full p-2 text-sm text-ink-light hover:text-ink border border-surface-dark rounded-lg hover:bg-surface-dark/50 transition-colors"
+                      >
+                        Clear selection
+                      </button>
+                    )}
+                  </div>
+                )}
+
+                {selectedDay && (
+                  <div className="space-y-6">
+                    {/* Day Stats */}
+                    <div className="bg-surface-dark/20 rounded-lg p-4">
+                      <div className="text-sm font-medium text-ink mb-3">Day Overview</div>
+                      <div className="grid grid-cols-2 gap-3 text-sm">
+                        <div className="flex items-center text-ink-light">
+                          <Clock className="w-4 h-4 mr-2 text-sea" />
+                          <span>{selectedDay.items?.length || 0} activities</span>
+                        </div>
+                        <div className="flex items-center text-ink-light">
+                          <Users className="w-4 h-4 mr-2 text-glow" />
+                          <span>{selectedDay.items?.filter(item => item.isMustDo).length || 0} must-do</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Quick Add Section */}
+                    <div>
+                      <div className="text-sm font-medium text-ink mb-3 flex items-center">
+                        <Plus className="w-4 h-4 mr-2 text-sea" />
+                        Quick Add Activity
+                      </div>
+                      <QuickAddBar
+                        selectedParkId={selectedDay.parkId}
+                        onAddActivity={handleQuickAdd}
+                      />
+                    </div>
+
+                    {/* Quick Actions */}
+                    <div className="space-y-2">
+                      <div className="text-sm font-medium text-ink mb-3">Quick Actions</div>
+                      <button
+                        onClick={() => setShowCheatSheet(true)}
+                        className="w-full btn-secondary btn-sm flex items-center justify-center text-sm"
+                      >
+                        📄 Generate Cheat Sheet
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {!selectedDay && (
+                  <div className="text-center py-12">
+                    <Calendar className="w-16 h-16 text-ink-light/50 mx-auto mb-4" />
+                    <h4 className="text-lg font-medium text-ink mb-2">Plan This Day</h4>
+                    <p className="text-ink-light mb-6 text-sm">Start building your schedule</p>
+                    <button
+                      onClick={() => selectedDate && handleAddDay(selectedDate)}
+                      className="btn-primary"
+                    >
+                      Start Planning
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Center Panel: Main Itinerary */}
+            <div className="lg:col-span-6">
+              <div className="bg-surface rounded-xl border border-surface-dark/30 h-full flex flex-col">
+                {/* Header */}
+                <div className="flex items-center justify-between p-6 border-b border-surface-dark/30">
+                  <div>
+                    <h3 className="text-xl font-semibold text-ink">Day Schedule</h3>
+                    {selectedDay && (
+                      <p className="text-sm text-ink-light mt-1">
+                        {selectedDay.items?.length || 0} activities planned
+                      </p>
+                    )}
+                  </div>
+                  {selectedDay && selectedDay.items?.length > 0 && (
+                    <div className="text-xs text-ink-light bg-surface-dark/50 px-3 py-1 rounded-full">
+                      Drag to reorder
                     </div>
                   )}
                 </div>
-                
-                <div className="flex items-center text-ink-light">
-                  <Clock className="w-4 h-4 mr-2" />
-                  <span className="text-sm">
-                    {selectedDay.items?.length || 0} activities planned
-                  </span>
-                </div>
 
-                {selectedDay.notes && (
-                  <div className="p-3 bg-surface-dark/50 rounded-lg">
-                    <p className="text-sm text-ink-light">{selectedDay.notes}</p>
+                {/* Content */}
+                <div className="flex-1 overflow-y-auto p-6">
+                  {selectedDay?.items?.length ? (
+                    <div className="space-y-3">
+                      {selectedDay.items.map((item, index) => (
+                        <DraggableItem
+                          key={item.id}
+                          item={item}
+                          index={index}
+                          tripId={trip.id}
+                          dayId={selectedDay.id}
+                          moveItem={moveItem}
+                        />
+                      ))}
+                    </div>
+                  ) : selectedDay ? (
+                    <div className="text-center py-16">
+                      <div className="max-w-sm mx-auto">
+                        <Clock className="w-20 h-20 text-ink-light/30 mx-auto mb-6" />
+                        <h4 className="text-lg font-medium text-ink mb-2">Start Your Day</h4>
+                        <p className="text-ink-light mb-6">No activities planned yet. Add your first activity using the Quick Add bar.</p>
+                        <div className="text-sm text-ink-light/70 bg-surface-dark/20 p-3 rounded-lg">
+                          💡 Tip: Start with must-do attractions and work around meal times
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="text-center py-16">
+                      <div className="max-w-sm mx-auto">
+                        <Calendar className="w-20 h-20 text-ink-light/30 mx-auto mb-6" />
+                        <h4 className="text-lg font-medium text-ink mb-2">Plan This Day</h4>
+                        <p className="text-ink-light">Start building your schedule by clicking "Start Planning"</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Right Panel: Planning Tools */}
+            <div className="lg:col-span-3">
+              <div className="bg-surface rounded-xl border border-surface-dark/30 p-5 h-full overflow-y-auto">
+                <div className="mb-6">
+                  <h3 className="text-xl font-semibold text-ink mb-2">Planning Tools</h3>
+                  <p className="text-sm text-ink-light">Organize your day details</p>
+                </div>
+                
+                {selectedDay ? (
+                  <div className="space-y-6">
+                    {/* Arrival Plan */}
+                    <div className="bg-surface-dark/20 rounded-lg p-4">
+                      <div className="flex items-center justify-between mb-3">
+                        <h4 className="text-sm font-medium text-ink flex items-center">
+                          🚗 Arrival Plan
+                        </h4>
+                        <div className="text-xs text-ink-light/50">Click to edit</div>
+                      </div>
+                      
+                      <div className="space-y-3">
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <label className="block text-xs text-ink-light mb-1">Departure</label>
+                            <input
+                              type="time"
+                              value={selectedDay.arrivalPlan?.departureTime || ''}
+                              onChange={(e) => {
+                                updateDayData(selectedDay.id, {
+                                  arrivalPlan: {
+                                    ...selectedDay.arrivalPlan,
+                                    departureTime: e.target.value
+                                  }
+                                });
+                              }}
+                              className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea focus:ring-1 focus:ring-sea/20 transition-colors"
+                              placeholder="--:--"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-xs text-ink-light mb-1">Park Entry</label>
+                            <input
+                              type="time"
+                              value={selectedDay.arrivalPlan?.tapInTime || ''}
+                              onChange={(e) => {
+                                updateDayData(selectedDay.id, {
+                                  arrivalPlan: {
+                                    ...selectedDay.arrivalPlan,
+                                    tapInTime: e.target.value
+                                  }
+                                });
+                              }}
+                              className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea focus:ring-1 focus:ring-sea/20 transition-colors"
+                              placeholder="--:--"
+                            />
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <label className="block text-xs text-ink-light mb-1">Transportation</label>
+                          <select
+                            value={selectedDay.arrivalPlan?.transportMethod || ''}
+                            onChange={(e) => {
+                              updateDayData(selectedDay.id, {
+                                arrivalPlan: {
+                                  ...selectedDay.arrivalPlan,
+                                  transportMethod: e.target.value as 'car' | 'monorail' | 'bus' | 'boat' | 'rideshare' | 'walk'
+                                }
+                              });
+                            }}
+                            className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea focus:ring-1 focus:ring-sea/20 transition-colors"
+                          >
+                            <option value="">Choose transportation...</option>
+                            <option value="car">🚗 Car</option>
+                            <option value="monorail">🚝 Monorail</option>
+                            <option value="bus">🚌 Bus</option>
+                            <option value="boat">⛵ Boat</option>
+                            <option value="rideshare">🚙 Rideshare</option>
+                            <option value="walk">🚶 Walk</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Lightning Lane Plan */}
+                    <div className="bg-surface-dark/20 rounded-lg p-4">
+                      <div className="flex items-center justify-between mb-3">
+                        <h4 className="text-sm font-medium text-ink flex items-center">
+                          ⚡ Lightning Lane
+                        </h4>
+                        <div className="text-xs text-ink-light/50">Auto-saves</div>
+                      </div>
+                      
+                      <div className="space-y-3">
+                        <div>
+                          <label className="block text-xs text-ink-light mb-1">Multi Pass Pre-selected</label>
+                          <textarea
+                            value={selectedDay.lightningLanePlan?.multiPassSelections?.join(', ') || ''}
+                            onChange={(e) => {
+                              const selections = e.target.value.split(',').map(s => s.trim()).filter(s => s);
+                              updateDayData(selectedDay.id, {
+                                lightningLanePlan: {
+                                  ...selectedDay.lightningLanePlan,
+                                  multiPassSelections: selections
+                                }
+                              });
+                            }}
+                            placeholder="Peter Pan, Big Thunder Mountain, etc."
+                            className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea focus:ring-1 focus:ring-sea/20 transition-colors resize-none"
+                            rows={2}
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="block text-xs text-ink-light mb-1">Refill Strategy</label>
+                          <input
+                            type="text"
+                            value={selectedDay.lightningLanePlan?.refillStrategy || ''}
+                            onChange={(e) => {
+                              updateDayData(selectedDay.id, {
+                                lightningLanePlan: {
+                                  ...selectedDay.lightningLanePlan,
+                                  refillStrategy: e.target.value
+                                }
+                              });
+                            }}
+                            placeholder="Prioritize family must-dos nearby"
+                            className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea focus:ring-1 focus:ring-sea/20 transition-colors"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Backup Plan */}
+                    <div className="bg-surface-dark/20 rounded-lg p-4">
+                      <div className="flex items-center justify-between mb-3">
+                        <h4 className="text-sm font-medium text-ink flex items-center">
+                          ☂️ Backup Plan
+                        </h4>
+                        <div className="text-xs text-ink-light/50">Auto-saves</div>
+                      </div>
+                      
+                      <div className="space-y-3">
+                        <div>
+                          <label className="block text-xs text-ink-light mb-1">If it rains</label>
+                          <input
+                            type="text"
+                            value={selectedDay.backupPlan?.rainPlan || ''}
+                            onChange={(e) => {
+                              updateDayData(selectedDay.id, {
+                                backupPlan: {
+                                  ...selectedDay.backupPlan,
+                                  rainPlan: e.target.value
+                                }
+                              });
+                            }}
+                            className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea focus:ring-1 focus:ring-sea/20 transition-colors"
+                            placeholder="Indoor shows, shopping, covered areas..."
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="block text-xs text-ink-light mb-1">If waits are high</label>
+                          <input
+                            type="text"
+                            value={selectedDay.backupPlan?.highWaitsPlan || ''}
+                            onChange={(e) => {
+                              updateDayData(selectedDay.id, {
+                                backupPlan: {
+                                  ...selectedDay.backupPlan,
+                                  highWaitsPlan: e.target.value
+                                }
+                              });
+                            }}
+                            className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea focus:ring-1 focus:ring-sea/20 transition-colors"
+                            placeholder="Character meets, PhotoPass, explore shops..."
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Family Priorities */}
+                    <div className="bg-surface-dark/20 rounded-lg p-4">
+                      <h4 className="text-sm font-medium text-ink mb-3">📝 Family Priorities</h4>
+                      <div className="text-sm text-ink-light">
+                        {selectedDay.familyPriorities?.length ? (
+                          <div className="space-y-2">
+                            {selectedDay.familyPriorities.slice(0, 3).map((priority, index) => (
+                              <div key={priority.id} className="flex items-center p-2 bg-surface-dark/30 rounded">
+                                <span className="mr-3 text-xs font-medium bg-glow/20 text-glow px-2 py-1 rounded-full">{index + 1}</span>
+                                <span className={priority.type === 'must-do' ? 'font-medium text-ink' : 'text-ink-light'}>
+                                  {priority.name}
+                                </span>
+                              </div>
+                            ))}
+                            {selectedDay.familyPriorities.length > 3 && (
+                              <div className="text-xs text-ink-light/60 text-center mt-2">
+                                +{selectedDay.familyPriorities.length - 3} more priorities...
+                              </div>
+                            )}
+                          </div>
+                        ) : (
+                          <div className="text-center py-6">
+                            <p className="text-ink-light/50 text-sm">Mark activities as priorities in your schedule</p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center py-16">
+                    <div className="max-w-sm mx-auto">
+                      <div className="w-16 h-16 bg-surface-dark/30 rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <span className="text-2xl">🛠️</span>
+                      </div>
+                      <h4 className="text-lg font-medium text-ink mb-2">Planning Tools</h4>
+                      <p className="text-ink-light/70 text-sm">Select a day to access arrival plans, Lightning Lane strategy, and backup options</p>
+                    </div>
                   </div>
                 )}
               </div>
-            ) : (
-              <div className="text-center py-8">
-                <Calendar className="w-12 h-12 text-ink-light mx-auto mb-4" />
-                <p className="text-ink-light mb-4">This day hasn't been planned yet</p>
-                <button
-                  onClick={() => handleAddDay(selectedDate)}
-                  className="btn-primary"
-                >
-                  Start Planning
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Day Schedule */}
-        <div className="md:col-span-2">
-          <div className="card p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-semibold text-ink">Day Schedule</h3>
-              {selectedDay && (
-                <button
-                  onClick={handleAddItem}
-                  className="btn-primary btn-sm"
-                >
-                  <Plus className="w-4 h-4 mr-1" />
-                  Add Activity
-                </button>
-              )}
             </div>
-
-            {selectedDay?.items?.length ? (
-              <div className="space-y-3">
-                {selectedDay.items.map((item, index) => (
-                  <DraggableItem
-                    key={item.id}
-                    item={item}
-                    index={index}
-                    tripId={trip.id}
-                    dayId={selectedDay.id}
-                    moveItem={moveItem}
-                  />
-                ))}
-              </div>
-            ) : selectedDay ? (
-              <div className="text-center py-8">
-                <Clock className="w-12 h-12 text-ink-light mx-auto mb-4" />
-                <p className="text-ink-light mb-4">No activities planned for this day</p>
-                <button
-                  onClick={handleAddItem}
-                  className="btn-primary"
-                >
-                  Add First Activity
-                </button>
-              </div>
-            ) : (
-              <div className="text-center py-8">
-                <p className="text-ink-light">Plan this day to start building your schedule</p>
-              </div>
-            )}
           </div>
-        </div>
-      </div>
+        )}
+
+        {/* Cheat Sheet Modal */}
+        {showCheatSheet && selectedDay && (
+          <CheatSheetView
+            tripDay={selectedDay}
+            onClose={() => setShowCheatSheet(false)}
+          />
+        )}
       </div>
     </DndProvider>
   );

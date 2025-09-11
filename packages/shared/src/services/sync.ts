@@ -136,6 +136,8 @@ export class SyncService {
           startDate: remoteTrip.start_date,
           endDate: remoteTrip.end_date,
           notes: remoteTrip.notes || '',
+          accommodation: remoteTrip.accommodation || undefined,
+          travelingParty: remoteTrip.traveling_party || undefined,
           days: remoteTrip.days || [],
           createdAt: remoteTrip.created_at,
           updatedAt: remoteTrip.updated_at
@@ -158,6 +160,8 @@ export class SyncService {
       start_date: trip.startDate,
       end_date: trip.endDate,
       notes: trip.notes || null,
+      accommodation: trip.accommodation || null,
+      traveling_party: trip.travelingParty || null,
       days: trip.days,
       created_at: trip.createdAt,
       updated_at: trip.updatedAt
@@ -189,6 +193,8 @@ export class SyncService {
         start_date: trip.startDate,
         end_date: trip.endDate,
         notes: trip.notes || null,
+        accommodation: trip.accommodation || null,
+        traveling_party: trip.travelingParty || null,
         days: trip.days,
         created_at: trip.createdAt,
         updated_at: new Date().toISOString()

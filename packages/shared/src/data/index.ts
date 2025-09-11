@@ -1,6 +1,7 @@
 // Data exports
 export * from './parks';
 export * from './attractions';
+export * from './hotels';
 
 // Content validation and loading
 export interface ContentManifest {
