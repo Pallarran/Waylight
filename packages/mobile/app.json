@@ -7,7 +7,13 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "description": "Your magical Disney World trip planner. Plan your days with clarity and calm.",
-    "keywords": ["disney", "theme-park", "trip-planner", "walt-disney-world", "travel"],
+    "keywords": [
+      "disney",
+      "theme-park",
+      "trip-planner",
+      "walt-disney-world",
+      "travel"
+    ],
     "privacy": "public",
     "splash": {
       "image": "./assets/waylight-logo.png",
@@ -42,7 +48,10 @@
     },
     "scheme": "waylight",
     "extra": {
-      "eas": {}
-    }
+      "eas": {
+        "projectId": "f4c0bfb2-9d98-48e7-9d14-60bc193c8d37"
+      }
+    },
+    "owner": "palarran"
   }
 }
