@@ -360,6 +360,132 @@ export default function WaypointCard({ attraction, showAddToTrip: _showAddToTrip
               ) : null;
             })()}
           </div>
+        ) : isDoCategory ? (
+          <div className="space-y-2">
+            {/* Access & Services */}
+            {attraction.features && (() => {
+              const skipLinesFeatures = ['multiPass', 'singlePass', 'singleRider', 'riderSwitch', 'mobileCheckin', 'photoPass'];
+              const hasSkipLinesFeatures = skipLinesFeatures.some(key => attraction.features?.[key]);
+              
+              const icons = getWaypointIcons({
+                category: attraction.category,
+                features: attraction.features
+              });
+              
+              return hasSkipLinesFeatures ? (
+                <div className="flex items-center flex-wrap gap-1">
+                  <span className="text-xs font-medium text-ink mr-2">Access:</span>
+                  {skipLinesFeatures.map(key => {
+                    if (!attraction.features?.[key]) return null;
+                    const labelMap: Record<string, string> = {
+                      'multiPass': 'Multi Pass',
+                      'singlePass': 'Single Pass',
+                      'singleRider': 'Single Rider',
+                      'riderSwitch': 'Rider Switch',
+                      'mobileCheckin': 'Mobile Check-in',
+                      'photoPass': 'PhotoPass'
+                    };
+                    const label = labelMap[key];
+                    const icon = icons.find(icon => icon.label === label);
+                    return icon ? (
+                      <span
+                        key={key}
+                        className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-surface border border-surface-dark/20 hover:bg-surface-dark/30 transition-colors cursor-help"
+                        title={`${icon.label}: ${icon.description}`}
+                      >
+                        <span className="text-sm">{icon.emoji}</span>
+                      </span>
+                    ) : null;
+                  })}
+                </div>
+              ) : null;
+            })()}
+
+            {/* Experience */}
+            {attraction.features && (() => {
+              const whatToExpectFeatures = ['darkRide', 'getsWet', 'spinningMotion', 'loudSounds', 'strobeEffects', 'interactiveElements', 'characterMeet', 'livePerformance', 'airConditioning', 'outdoorExperience', 'scary', 'bigDrops', 'launchSpeed'];
+              const hasWhatToExpectFeatures = whatToExpectFeatures.some(key => attraction.features?.[key]);
+              
+              const icons = getWaypointIcons({
+                category: attraction.category,
+                features: attraction.features
+              });
+              
+              return hasWhatToExpectFeatures ? (
+                <div className="flex items-center flex-wrap gap-1">
+                  <span className="text-xs font-medium text-ink mr-2">Experience:</span>
+                  {whatToExpectFeatures.map(key => {
+                    if (!attraction.features?.[key]) return null;
+                    const labelMap: Record<string, string> = {
+                      'darkRide': 'Dark Ride',
+                      'getsWet': 'Gets Wet',
+                      'spinningMotion': 'Spinning Motion',
+                      'loudSounds': 'Loud Sounds',
+                      'strobeEffects': 'Strobe Effects',
+                      'interactiveElements': 'Interactive Elements',
+                      'characterMeet': 'Character Meet',
+                      'livePerformance': 'Live Performance',
+                      'airConditioning': 'Air Conditioning',
+                      'outdoorExperience': 'Outdoor Experience',
+                      'scary': 'Scary',
+                      'bigDrops': 'Big Drops',
+                      'launchSpeed': 'Launch/Speed'
+                    };
+                    const label = labelMap[key];
+                    const icon = icons.find(icon => icon.label === label);
+                    return icon ? (
+                      <span
+                        key={key}
+                        className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-surface border border-surface-dark/20 hover:bg-surface-dark/30 transition-colors cursor-help"
+                        title={`${icon.label}: ${icon.description}`}
+                      >
+                        <span className="text-sm">{icon.emoji}</span>
+                      </span>
+                    ) : null;
+                  })}
+                </div>
+              ) : null;
+            })()}
+
+            {/* Important Notes */}
+            {attraction.features && (() => {
+              const importantNotesFeatures = ['heightRequirement', 'motionSensitivity', 'pregnancyAdvisory', 'wheelchairAccessible', 'transferRequired', 'rainSafe'];
+              const hasImportantNotesFeatures = importantNotesFeatures.some(key => attraction.features?.[key]);
+              
+              const icons = getWaypointIcons({
+                category: attraction.category,
+                features: attraction.features
+              });
+              
+              return hasImportantNotesFeatures ? (
+                <div className="flex items-center flex-wrap gap-1">
+                  <span className="text-xs font-medium text-ink mr-2">Notes:</span>
+                  {importantNotesFeatures.map(key => {
+                    if (!attraction.features?.[key]) return null;
+                    const labelMap: Record<string, string> = {
+                      'heightRequirement': 'Height Requirement',
+                      'motionSensitivity': 'Motion Sensitivity',
+                      'pregnancyAdvisory': 'Pregnancy Advisory',
+                      'wheelchairAccessible': 'Wheelchair Accessible',
+                      'transferRequired': 'Transfer Required',
+                      'rainSafe': 'Rain Safe'
+                    };
+                    const label = labelMap[key];
+                    const icon = icons.find(icon => icon.label === label);
+                    return icon ? (
+                      <span
+                        key={key}
+                        className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-surface border border-surface-dark/20 hover:bg-surface-dark/30 transition-colors cursor-help"
+                        title={`${icon.label}: ${icon.description}`}
+                      >
+                        <span className="text-sm">{icon.emoji}</span>
+                      </span>
+                    ) : null;
+                  })}
+                </div>
+              ) : null;
+            })()}
+          </div>
         ) : (
           <div className="flex flex-wrap gap-1">
             {getWaypointIcons({

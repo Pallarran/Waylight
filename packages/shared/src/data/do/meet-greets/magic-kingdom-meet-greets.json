@@ -22,24 +22,42 @@
         "priority": 1
       }
     ],
-    "tags": ["classic", "must-do", "photos", "autographs"],
+    "tags": [
+      "classic",
+      "must-do",
+      "photos",
+      "autographs"
+    ],
     "features": {
-      "hasAirConditioning": true,
-      "isInteractive": true,
-      "hasLightningLane": true,
-      "isRainSafe": true,
-      "hasPhotos": true,
-      "hasCharacters": true,
-      "isLoud": false,
-      "hasStrobes": false,
-      "isDarkRide": false,
+      "multiPass": true,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
       "getsWet": false,
-      "isWaterRide": false
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": true,
+      "livePerformance": true,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
     },
     "lightningLane": true,
     "singleRider": false,
     "photoService": true,
-    "characters": ["Mickey Mouse"]
+    "characters": [
+      "Mickey Mouse"
+    ]
   },
   {
     "id": "mk-princess-fairytale-hall",
@@ -47,7 +65,7 @@
     "name": "Princess Fairytale Hall",
     "description": "Meet Disney Princesses in their royal reception hall in Fantasyland for photos and magical moments.",
     "location": "Fantasyland",
-    "type": "meet_greet", 
+    "type": "meet_greet",
     "duration": 5,
     "intensity": "low",
     "accessibility": {
@@ -64,23 +82,44 @@
         "priority": 2
       }
     ],
-    "tags": ["princesses", "photos", "autographs", "magical"],
+    "tags": [
+      "princesses",
+      "photos",
+      "autographs",
+      "magical"
+    ],
     "features": {
-      "hasAirConditioning": true,
-      "isInteractive": true,
-      "hasLightningLane": true,
-      "isRainSafe": true,
-      "hasPhotos": true,
-      "hasCharacters": true,
-      "isLoud": false,
-      "hasStrobes": false,
-      "isDarkRide": false,
+      "multiPass": true,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
       "getsWet": false,
-      "isWaterRide": false
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": true,
+      "livePerformance": true,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
     },
     "lightningLane": true,
     "singleRider": false,
     "photoService": true,
-    "characters": ["Cinderella", "Rapunzel", "Tiana", "Elena"]
+    "characters": [
+      "Cinderella",
+      "Rapunzel",
+      "Tiana",
+      "Elena"
+    ]
   }
 ]

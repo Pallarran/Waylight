@@ -22,24 +22,44 @@
         "priority": 1
       }
     ],
-    "tags": ["frozen", "princesses", "norway", "sisters", "popular"],
+    "tags": [
+      "frozen",
+      "princesses",
+      "norway",
+      "sisters",
+      "popular"
+    ],
     "features": {
-      "hasAirConditioning": true,
-      "isInteractive": true,
-      "hasLightningLane": true,
-      "isRainSafe": true,
-      "hasPhotos": true,
-      "hasCharacters": true,
-      "isLoud": false,
-      "hasStrobes": false,
-      "isDarkRide": false,
+      "multiPass": true,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
       "getsWet": false,
-      "isWaterRide": false
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": true,
+      "livePerformance": true,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
     },
     "lightningLane": true,
     "singleRider": false,
     "photoService": true,
-    "characters": ["Anna", "Elsa"]
+    "characters": [
+      "Anna",
+      "Elsa"
+    ]
   },
   {
     "id": "epcot-joy-sadness",
@@ -64,23 +84,43 @@
         "priority": 2
       }
     ],
-    "tags": ["inside-out", "emotions", "pixar", "colorful", "interactive"],
+    "tags": [
+      "inside-out",
+      "emotions",
+      "pixar",
+      "colorful",
+      "interactive"
+    ],
     "features": {
-      "hasAirConditioning": true,
-      "isInteractive": true,
-      "hasLightningLane": false,
-      "isRainSafe": true,
-      "hasPhotos": true,
-      "hasCharacters": true,
-      "isLoud": false,
-      "hasStrobes": false,
-      "isDarkRide": false,
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
       "getsWet": false,
-      "isWaterRide": false
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": true,
+      "livePerformance": true,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
     },
     "lightningLane": false,
     "singleRider": false,
     "photoService": true,
-    "characters": ["Joy", "Sadness"]
+    "characters": [
+      "Joy",
+      "Sadness"
+    ]
   }
 ]

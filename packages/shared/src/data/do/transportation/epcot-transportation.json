@@ -28,22 +28,35 @@
         "priority": 4
       }
     ],
-    "tags": ["monorail", "magic-kingdom", "ttc", "scenic"],
+    "tags": [
+      "monorail",
+      "magic-kingdom",
+      "ttc",
+      "scenic"
+    ],
     "features": {
-      "hasAirConditioning": true,
-      "isInteractive": false,
-      "isRainSafe": true,
-      "hasPhotos": false,
-      "hasCharacters": false,
-      "isLoud": false,
-      "hasStrobes": false,
-      "isDarkRide": false,
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
       "getsWet": false,
-      "isWaterRide": false,
-      "isSpinning": false,
-      "hasRiderSwitch": false,
-      "hasIndividualLL": false,
-      "hasLaunch": false
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
     }
   },
   {
@@ -75,22 +88,35 @@
         "priority": 3
       }
     ],
-    "tags": ["skyliner", "gondola", "international-gateway", "hollywood-studios"],
+    "tags": [
+      "skyliner",
+      "gondola",
+      "international-gateway",
+      "hollywood-studios"
+    ],
     "features": {
-      "hasAirConditioning": false,
-      "isInteractive": false,
-      "isRainSafe": false,
-      "hasPhotos": false,
-      "hasCharacters": false,
-      "isLoud": false,
-      "hasStrobes": false,
-      "isDarkRide": false,
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
       "getsWet": false,
-      "isWaterRide": false,
-      "isSpinning": false,
-      "hasRiderSwitch": false,
-      "hasIndividualLL": false,
-      "hasLaunch": false
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
     }
   },
   {
@@ -122,22 +148,35 @@
         "priority": 3
       }
     ],
-    "tags": ["bus", "resort", "my-disney-experience", "wait-times"],
+    "tags": [
+      "bus",
+      "resort",
+      "my-disney-experience",
+      "wait-times"
+    ],
     "features": {
-      "hasAirConditioning": true,
-      "isInteractive": false,
-      "isRainSafe": true,
-      "hasPhotos": false,
-      "hasCharacters": false,
-      "isLoud": false,
-      "hasStrobes": false,
-      "isDarkRide": false,
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
       "getsWet": false,
-      "isWaterRide": false,
-      "isSpinning": false,
-      "hasRiderSwitch": false,
-      "hasIndividualLL": false,
-      "hasLaunch": false
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
     }
   },
   {
@@ -169,22 +208,35 @@
         "priority": 4
       }
     ],
-    "tags": ["friendship-boats", "international-gateway", "boardwalk", "scenic"],
+    "tags": [
+      "friendship-boats",
+      "international-gateway",
+      "boardwalk",
+      "scenic"
+    ],
     "features": {
-      "hasAirConditioning": false,
-      "isInteractive": false,
-      "isRainSafe": false,
-      "hasPhotos": false,
-      "hasCharacters": false,
-      "isLoud": false,
-      "hasStrobes": false,
-      "isDarkRide": false,
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
       "getsWet": false,
-      "isWaterRide": true,
-      "isSpinning": false,
-      "hasRiderSwitch": false,
-      "hasIndividualLL": false,
-      "hasLaunch": false
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
     }
   },
   {
@@ -216,22 +268,35 @@
         "priority": 3
       }
     ],
-    "tags": ["water-taxi", "world-showcase", "lagoon", "internal"],
+    "tags": [
+      "water-taxi",
+      "world-showcase",
+      "lagoon",
+      "internal"
+    ],
     "features": {
-      "hasAirConditioning": false,
-      "isInteractive": false,
-      "isRainSafe": false,
-      "hasPhotos": false,
-      "hasCharacters": false,
-      "isLoud": false,
-      "hasStrobes": false,
-      "isDarkRide": false,
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
       "getsWet": false,
-      "isWaterRide": true,
-      "isSpinning": false,
-      "hasRiderSwitch": false,
-      "hasIndividualLL": false,
-      "hasLaunch": false
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
     }
   }
 ]

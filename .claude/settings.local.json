@@ -1,19 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(for category in quick-service table-service snacks lounges)",
-      "Bash(do echo \"=== $category ===\")",
-      "Bash(for file in $category/*.json)",
-      "Bash(do if [ -s \"$file\" ])",
-      "Bash(fi)",
-      "Bash(do echo \"=== Checking $file ===\")",
-      "Bash(then echo -n \"$file: \")",
-      "Bash(pnpm web:type-check:*)",
-      "Bash(pnpm --filter @waylight/web type-check)",
-      "Bash(pnpm --filter @waylight/shared build)",
-      "Bash(for file in packages/shared/src/data/eat/$category/*.json)",
-      "Bash(else echo \"$file: empty\")",
-      "Bash(pnpm --filter @waylight/web build)"
+      "Bash(then if grep -q '\"\"features\"\": \\[' \"$file\")",
+      "Bash(elif grep -q '\"\"features\"\":\\[' \"$file\")",
+      "Bash(else echo \"$file: has object format\")",
+      "Bash(sed:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []

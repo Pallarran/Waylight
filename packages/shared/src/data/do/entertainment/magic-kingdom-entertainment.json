@@ -22,24 +22,43 @@
         "priority": 1
       }
     ],
-    "tags": ["parade", "characters", "music", "outdoor", "family-friendly"],
+    "tags": [
+      "parade",
+      "characters",
+      "music",
+      "outdoor",
+      "family-friendly"
+    ],
     "features": {
-      "hasAirConditioning": false,
-      "isInteractive": false,
-      "hasLightningLane": false,
-      "isRainSafe": false,
-      "hasPhotos": true,
-      "hasCharacters": true,
-      "isLoud": false,
-      "hasStrobes": false,
-      "isDarkRide": false,
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
       "getsWet": false,
-      "isWaterRide": false
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": true,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
     },
     "lightningLane": false,
     "singleRider": false,
     "photoService": true,
-    "showTimes": ["3:00 PM"]
+    "showTimes": [
+      "3:00 PM"
+    ]
   },
   {
     "id": "mk-happily-ever-after",
@@ -64,24 +83,118 @@
         "priority": 1
       }
     ],
-    "tags": ["fireworks", "nighttime", "castle", "projection", "music"],
+    "tags": [
+      "fireworks",
+      "nighttime",
+      "castle",
+      "projection",
+      "music"
+    ],
     "features": {
-      "hasAirConditioning": false,
-      "isInteractive": false,
-      "hasLightningLane": false,
-      "isRainSafe": false,
-      "hasPhotos": true,
-      "hasCharacters": false,
-      "isLoud": true,
-      "hasStrobes": true,
-      "isDarkRide": false,
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
       "getsWet": false,
-      "isWaterRide": false
+      "spinningMotion": false,
+      "loudSounds": true,
+      "strobeEffects": true,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
     },
     "lightningLane": false,
     "singleRider": false,
     "photoService": true,
-    "showTimes": ["9:00 PM"]
+    "showTimes": [
+      "9:00 PM"
+    ]
+  },
+  {
+    "id": "mk-disney-starlight",
+    "parkId": "magic-kingdom",
+    "name": "Disney Starlight: Dream the Night Away",
+    "description": "A spectacular nighttime parade featuring illuminated floats, beloved Disney characters, and magical lighting effects. Currently runs twice nightly when available.",
+    "location": "Main Street U.S.A. to Frontierland",
+    "type": "entertainment",
+    "duration": 15,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "starlight-tip-1",
+        "category": "strategy",
+        "content": "Not available on Mickey's Not-So-Scary Halloween Party nights in September/October",
+        "priority": 5
+      },
+      {
+        "id": "starlight-tip-2",
+        "category": "best_time",
+        "content": "Arrive 45-60 minutes early for prime viewing spots - extremely popular",
+        "priority": 5
+      },
+      {
+        "id": "starlight-tip-3",
+        "category": "strategy",
+        "content": "Show times vary by season - check My Disney Experience app for current schedule",
+        "priority": 4
+      }
+    ],
+    "tags": [
+      "nighttime-parade",
+      "characters",
+      "illuminated",
+      "new",
+      "popular",
+      "twice-nightly"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": true,
+      "interactiveElements": false,
+      "characterMeet": true,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": true,
+    "showTimes": [
+      "8:00 PM",
+      "10:00 PM"
+    ]
   },
   {
     "id": "mk-dapper-dans",
@@ -106,23 +219,41 @@
         "priority": 2
       }
     ],
-    "tags": ["music", "street-performers", "barbershop", "classic"],
+    "tags": [
+      "music",
+      "street-performers",
+      "barbershop",
+      "classic"
+    ],
     "features": {
-      "hasAirConditioning": false,
-      "isInteractive": true,
-      "hasLightningLane": false,
-      "isRainSafe": false,
-      "hasPhotos": true,
-      "hasCharacters": false,
-      "isLoud": false,
-      "hasStrobes": false,
-      "isDarkRide": false,
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
       "getsWet": false,
-      "isWaterRide": false
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
     },
     "lightningLane": false,
     "singleRider": false,
     "photoService": false,
-    "showTimes": ["Multiple times daily"]
+    "showTimes": [
+      "Multiple times daily"
+    ]
   }
 ]

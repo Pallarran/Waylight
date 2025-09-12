@@ -1,1 +1,273 @@
-[]
+[
+  {
+    "id": "swiss-family-treehouse",
+    "parkId": "magic-kingdom",
+    "name": "Swiss Family Treehouse",
+    "description": "Climb through the ingenious multi-story treehouse home of the Swiss Family Robinson. Explore their clever inventions and enjoy views of Adventureland from 116 stairs up. CURRENTLY CLOSED for refurbishment with reopening delayed.",
+    "location": "Adventureland",
+    "type": "experience",
+    "duration": 15,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "treehouse-tip-1",
+        "category": "strategy",
+        "content": "ATTRACTION CLOSED: Currently closed for refurbishment, reopening delayed beyond original date",
+        "priority": 5
+      },
+      {
+        "id": "treehouse-tip-2",
+        "category": "photo",
+        "content": "When open, visit at night for magical views of Adventureland from the top (when operational)",
+        "priority": 4
+      },
+      {
+        "id": "treehouse-tip-3",
+        "category": "general",
+        "content": "Involves climbing 116 stairs - take your time and enjoy the story details",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "walkthrough",
+      "swiss-family-robinson",
+      "adventure",
+      "stairs",
+      "views",
+      "temporarily-closed"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "rainSafe": false
+    }
+  },
+  {
+    "id": "tom-sawyer-island",
+    "parkId": "magic-kingdom",
+    "name": "Tom Sawyer Island",
+    "description": "Explore this frontier playground with caves, bridges, and Fort Langhorn. Accessed by raft across the Rivers of America. CLOSING PERMANENTLY on July 7, 2025.",
+    "location": "Frontierland",
+    "type": "experience",
+    "duration": 60,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "tom-sawyer-tip-1",
+        "category": "strategy",
+        "content": "CLOSING PERMANENTLY: Final day is July 6, 2025 - visit soon if you haven't been",
+        "priority": 5
+      },
+      {
+        "id": "tom-sawyer-tip-2",
+        "category": "general",
+        "content": "Self-paced exploration - you can stay as long as you want on the island",
+        "priority": 4
+      },
+      {
+        "id": "tom-sawyer-tip-3",
+        "category": "strategy",
+        "content": "Great break from crowds - peaceful escape with caves and bridges to explore",
+        "priority": 4
+      }
+    ],
+    "tags": [
+      "frontier",
+      "caves",
+      "bridges",
+      "fort",
+      "raft",
+      "playground",
+      "closing-soon"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "rainSafe": false
+    }
+  },
+  {
+    "id": "enchanted-forest-exploration",
+    "parkId": "magic-kingdom",
+    "name": "Enchanted Forest Area Exploration",
+    "description": "Wander through the beautifully themed Enchanted Forest section of New Fantasyland, featuring fairy tale theming and character interactions throughout the area.",
+    "location": "Fantasyland",
+    "type": "experience",
+    "duration": 30,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "enchanted-forest-tip-1",
+        "category": "general",
+        "content": "Beautiful fairy tale theming throughout - perfect for photos and atmosphere",
+        "priority": 4
+      },
+      {
+        "id": "enchanted-forest-tip-2",
+        "category": "character",
+        "content": "Ariel meets as a mermaid at Ariel's Grotto in this area",
+        "priority": 4
+      },
+      {
+        "id": "enchanted-forest-tip-3",
+        "category": "general",
+        "content": "Part of New Fantasyland expansion - immersive Disney fairy tale experience",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "fairy-tale",
+      "new-fantasyland",
+      "character-interactions",
+      "themed-walking",
+      "photo-ops"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": true,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
+    }
+  },
+  {
+    "id": "storybook-circus-exploration",
+    "parkId": "magic-kingdom",
+    "name": "Storybook Circus Area Exploration",
+    "description": "Explore the circus-themed area of New Fantasyland featuring character meet-and-greets at Pete's Silly Sideshow and immersive carnival theming.",
+    "location": "Fantasyland",
+    "type": "experience",
+    "duration": 30,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "storybook-circus-tip-1",
+        "category": "character",
+        "content": "Visit Pete's Silly Sideshow for character meets with Donald, Goofy, Minnie, and Daisy",
+        "priority": 5
+      },
+      {
+        "id": "storybook-circus-tip-2",
+        "category": "general",
+        "content": "Interactive fun with The Storybook Circus Giggle Gang performers",
+        "priority": 4
+      },
+      {
+        "id": "storybook-circus-tip-3",
+        "category": "general",
+        "content": "Circus theming throughout with vintage carnival atmosphere",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "circus",
+      "character-meets",
+      "new-fantasyland",
+      "carnival",
+      "interactive-performers"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": true,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
+    }
+  }
+]

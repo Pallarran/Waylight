@@ -263,6 +263,165 @@ export const EAT_ICONS: Record<string, WaypointIcon> = {
   }
 };
 
+// DO-specific icons for attraction features - Standardized Feature Set
+export const DO_ICONS: Record<string, WaypointIcon> = {
+  // Skip Lines & Services (6 Core Options)
+  'Multi Pass': {
+    emoji: '🎟️',
+    label: 'Multi Pass',
+    description: 'Skip regular lines with Multi Pass (formerly Genie+)',
+    tier: 1
+  },
+  'Single Pass': {
+    emoji: '🎫',
+    label: 'Single Pass',
+    description: 'Individual attraction purchase for popular rides',
+    tier: 1
+  },
+  'Single Rider': {
+    emoji: '👤',
+    label: 'Single Rider',
+    description: 'Single rider line available for faster boarding',
+    tier: 1
+  },
+  'Rider Switch': {
+    emoji: '👨‍👩‍👧‍👦',
+    label: 'Rider Switch',
+    description: 'Child swap service for families with small children',
+    tier: 1
+  },
+  'Mobile Check-in': {
+    emoji: '📱',
+    label: 'Mobile Check-in',
+    description: 'Mobile queue joining or virtual line',
+    tier: 1
+  },
+  'PhotoPass': {
+    emoji: '📸',
+    label: 'PhotoPass',
+    description: 'Official Disney photography service available',
+    tier: 2
+  },
+
+  // What to Expect (10 Core Features)
+  'Dark Ride': {
+    emoji: '🌑',
+    label: 'Dark Ride',
+    description: 'Takes place in darkened environment',
+    tier: 2
+  },
+  'Gets Wet': {
+    emoji: '💧',
+    label: 'Gets Wet',
+    description: 'Guests may get splashed or soaked',
+    tier: 1
+  },
+  'Spinning Motion': {
+    emoji: '🌀',
+    label: 'Spinning Motion',
+    description: 'Ride vehicles spin or rotate',
+    tier: 1
+  },
+  'Loud Sounds': {
+    emoji: '🔊',
+    label: 'Loud Sounds',
+    description: 'High volume audio or sound effects',
+    tier: 2
+  },
+  'Strobe Effects': {
+    emoji: '⚡',
+    label: 'Strobe Effects',
+    description: 'Flashing lights or strobe effects',
+    tier: 2
+  },
+  'Interactive Elements': {
+    emoji: '🎮',
+    label: 'Interactive Elements',
+    description: 'Hands-on participation or guest interaction',
+    tier: 2
+  },
+  'Character Meet': {
+    emoji: '🐭',
+    label: 'Character Meet',
+    description: 'Disney character appearances and meet opportunities',
+    tier: 1
+  },
+  'Live Performance': {
+    emoji: '🎭',
+    label: 'Live Performance',
+    description: 'Live actors, musicians, or performers',
+    tier: 2
+  },
+  'Air Conditioning': {
+    emoji: '❄️',
+    label: 'Air Conditioning',
+    description: 'Climate-controlled indoor environment',
+    tier: 2
+  },
+  'Outdoor Experience': {
+    emoji: '🌳',
+    label: 'Outdoor Experience',
+    description: 'Takes place primarily outdoors',
+    tier: 2
+  },
+  'Scary': {
+    emoji: '👻',
+    label: 'Scary',
+    description: 'May include scary themes, jump scares, or spooky elements',
+    tier: 1
+  },
+  'Big Drops': {
+    emoji: '⛰️',
+    label: 'Big Drops',
+    description: 'Features significant drops or steep descents',
+    tier: 1
+  },
+  'Launch/Speed': {
+    emoji: '🚀',
+    label: 'Launch/Speed',
+    description: 'High-speed launch or fast-paced elements',
+    tier: 1
+  },
+
+  // Important Notes (6 Safety & Accessibility Features)
+  'Height Requirement': {
+    emoji: '📏',
+    label: 'Height Requirement',
+    description: 'Minimum height restrictions apply',
+    tier: 1
+  },
+  'Motion Sensitivity': {
+    emoji: '🤢',
+    label: 'Motion Sensitivity',
+    description: 'May cause motion sickness',
+    tier: 1
+  },
+  'Pregnancy Advisory': {
+    emoji: '🤰',
+    label: 'Pregnancy Advisory',
+    description: 'Not recommended during pregnancy',
+    tier: 1
+  },
+  'Wheelchair Accessible': {
+    emoji: '♿',
+    label: 'Wheelchair Accessible',
+    description: 'Accessible without transfer required',
+    tier: 2
+  },
+  'Transfer Required': {
+    emoji: '🚶',
+    label: 'Transfer Required',
+    description: 'Must transfer from mobility device',
+    tier: 1
+  },
+  'Rain Safe': {
+    emoji: '☔',
+    label: 'Rain Safe',
+    description: 'Weather-protected experience',
+    tier: 2
+  }
+};
+
 // STAY-specific icons for hotel amenities - Standardized Feature Set
 export const STAY_ICONS: Record<string, WaypointIcon> = {
   // Transportation (5 Core Options)
@@ -639,6 +798,243 @@ export function getStayIcons(amenities?: string[], tier?: 1 | 2): WaypointIcon[]
 }
 
 /**
+ * Get icons for DO items based on their features with standardized mapping
+ */
+export function getDoIcons(
+  features?: {
+    // Skip Lines & Services
+    multiPass?: boolean;
+    singlePass?: boolean;
+    singleRider?: boolean;
+    riderSwitch?: boolean;
+    mobileCheckin?: boolean;
+    photoPass?: boolean;
+    
+    // What to Expect
+    darkRide?: boolean;
+    getsWet?: boolean;
+    spinningMotion?: boolean;
+    loudSounds?: boolean;
+    strobeEffects?: boolean;
+    interactiveElements?: boolean;
+    characterMeet?: boolean;
+    livePerformance?: boolean;
+    airConditioning?: boolean;
+    outdoorExperience?: boolean;
+    scary?: boolean;
+    bigDrops?: boolean;
+    launchSpeed?: boolean;
+    
+    // Important Notes
+    heightRequirement?: boolean;
+    motionSensitivity?: boolean;
+    pregnancyAdvisory?: boolean;
+    wheelchairAccessible?: boolean;
+    transferRequired?: boolean;
+    rainSafe?: boolean;
+
+    // Legacy property mapping support
+    hasLightningLane?: boolean; // maps to multiPass
+    hasIndividualLL?: boolean; // maps to singlePass
+    hasPhotos?: boolean; // maps to photoPass
+    hasCharacters?: boolean; // maps to characterMeet
+    hasAirConditioning?: boolean; // maps to airConditioning
+    isInteractive?: boolean; // maps to interactiveElements
+    isRainSafe?: boolean; // maps to rainSafe
+    isDarkRide?: boolean; // maps to darkRide
+    isLoud?: boolean; // maps to loudSounds
+    hasStrobes?: boolean; // maps to strobeEffects
+    isSpinning?: boolean; // maps to spinningMotion
+    hasRiderSwitch?: boolean; // maps to riderSwitch
+  },
+  tier?: 1 | 2
+): WaypointIcon[] {
+  if (!features) return [];
+
+  const activeIcons: WaypointIcon[] = [];
+
+  // Skip Lines & Services mapping
+  if (features.multiPass || features.hasLightningLane) {
+    const icon = DO_ICONS['Multi Pass'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (features.singlePass || features.hasIndividualLL) {
+    const icon = DO_ICONS['Single Pass'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (features.singleRider) {
+    const icon = DO_ICONS['Single Rider'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (features.riderSwitch || features.hasRiderSwitch) {
+    const icon = DO_ICONS['Rider Switch'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (features.mobileCheckin) {
+    const icon = DO_ICONS['Mobile Check-in'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (features.photoPass || features.hasPhotos) {
+    const icon = DO_ICONS['PhotoPass'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  // What to Expect mapping
+  if (features.darkRide || features.isDarkRide) {
+    const icon = DO_ICONS['Dark Ride'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (features.getsWet) {
+    const icon = DO_ICONS['Gets Wet'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (features.spinningMotion || features.isSpinning) {
+    const icon = DO_ICONS['Spinning Motion'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (features.loudSounds || features.isLoud) {
+    const icon = DO_ICONS['Loud Sounds'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (features.strobeEffects || features.hasStrobes) {
+    const icon = DO_ICONS['Strobe Effects'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (features.interactiveElements || features.isInteractive) {
+    const icon = DO_ICONS['Interactive Elements'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (features.characterMeet || features.hasCharacters) {
+    const icon = DO_ICONS['Character Meet'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (features.livePerformance) {
+    const icon = DO_ICONS['Live Performance'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (features.airConditioning || features.hasAirConditioning) {
+    const icon = DO_ICONS['Air Conditioning'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (features.outdoorExperience) {
+    const icon = DO_ICONS['Outdoor Experience'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (features.scary) {
+    const icon = DO_ICONS['Scary'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (features.bigDrops) {
+    const icon = DO_ICONS['Big Drops'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (features.launchSpeed) {
+    const icon = DO_ICONS['Launch/Speed'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  // Important Notes mapping
+  if (features.heightRequirement) {
+    const icon = DO_ICONS['Height Requirement'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (features.motionSensitivity) {
+    const icon = DO_ICONS['Motion Sensitivity'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (features.pregnancyAdvisory) {
+    const icon = DO_ICONS['Pregnancy Advisory'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (features.wheelchairAccessible) {
+    const icon = DO_ICONS['Wheelchair Accessible'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (features.transferRequired) {
+    const icon = DO_ICONS['Transfer Required'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (features.rainSafe || features.isRainSafe) {
+    const icon = DO_ICONS['Rain Safe'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  return activeIcons;
+}
+
+/**
  * Universal function to get icons for any waypoint type
  */
 export function getWaypointIcons(
@@ -656,35 +1052,8 @@ export function getWaypointIcons(
   const category = waypoint.category?.toLowerCase();
 
   if (category === 'do' && waypoint.features) {
-    // Handle both array and object formats for DO items
-    if (Array.isArray(waypoint.features)) {
-      // Convert old array format to structured format
-      const structuredFeatures: Partial<AttractionFeatures> = {};
-      waypoint.features.forEach((feature: string) => {
-        // Map old string features to new boolean properties
-        switch (feature) {
-          case 'dark': structuredFeatures.isDarkRide = true; break;
-          case 'wet': structuredFeatures.getsWet = true; break;
-          case 'scary': structuredFeatures.isScary = true; break;
-          case 'interactive': structuredFeatures.isInteractive = true; break;
-          case 'spinning': structuredFeatures.isSpinning = true; break;
-          case 'water': structuredFeatures.isWaterRide = true; break;
-          case 'photos': structuredFeatures.hasPhotos = true; break;
-          case 'characters': structuredFeatures.hasCharacters = true; break;
-          case 'lightning-lane': structuredFeatures.hasLightningLane = true; break;
-          case 'rain-safe': structuredFeatures.isRainSafe = true; break;
-          case 'air-conditioning': structuredFeatures.hasAirConditioning = true; break;
-          case 'loud': structuredFeatures.isLoud = true; break;
-          case 'big-drops': structuredFeatures.hasBigDrops = true; break;
-          case 'launch': structuredFeatures.hasLaunch = true; break;
-          case 'strobes': structuredFeatures.hasStrobes = true; break;
-        }
-      });
-      return getAttractionIcons(structuredFeatures as AttractionFeatures, tier);
-    } else {
-      // New structured format
-      return getAttractionIcons(waypoint.features as AttractionFeatures, tier);
-    }
+    // Use new standardized DO icons system
+    return getDoIcons(waypoint.features, tier);
   } else if (category === 'eat') {
     // EAT item - pass all relevant properties to getEatIcons for processing
     return getEatIcons(

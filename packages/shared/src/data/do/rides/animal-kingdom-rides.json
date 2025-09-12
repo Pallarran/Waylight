@@ -29,14 +29,28 @@
     ],
     "tags": [],
     "features": {
-      "isDarkRide": true,
-      "isInteractive": true,
-      "hasStrobes": true,
-      "hasAirConditioning": true,
-      "hasPhotos": true,
-      "hasIndividualLL": true,
-      "hasRiderSwitch": true,
-      "hasLightningLane": true
+      "multiPass": false,
+      "singlePass": true,
+      "singleRider": false,
+      "riderSwitch": true,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": true,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": true,
+      "interactiveElements": true,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": true,
+      "motionSensitivity": true,
+      "pregnancyAdvisory": true,
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "rainSafe": true
     }
   },
   {
@@ -68,15 +82,28 @@
     ],
     "tags": [],
     "features": {
-      "isDarkRide": true,
-      "isWaterRide": true,
+      "multiPass": true,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": true,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": true,
       "getsWet": true,
-      "isInteractive": true,
-      "hasAirConditioning": true,
-      "isRainSafe": true,
-      "hasPhotos": true,
-      "hasLightningLane": true,
-      "hasRiderSwitch": true
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "rainSafe": true
     }
   },
   {
@@ -107,10 +134,28 @@
     ],
     "tags": [],
     "features": {
-      "isInteractive": true,
-      "hasPhotos": true,
-      "hasLightningLane": true,
-      "hasRiderSwitch": true
+      "multiPass": true,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": true,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
     }
   },
   {
@@ -143,13 +188,29 @@
     ],
     "tags": [],
     "features": {
-      "isDarkRide": true,
-      "hasBigDrops": true,
-      "hasLaunch": true,
-      "isScary": true,
-      "hasPhotos": true,
-      "hasLightningLane": true,
-      "hasRiderSwitch": true
+      "multiPass": true,
+      "singlePass": false,
+      "singleRider": true,
+      "riderSwitch": true,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": true,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "bigDrops": true,
+      "heightRequirement": true,
+      "motionSensitivity": true,
+      "pregnancyAdvisory": true,
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "rainSafe": false
     }
   },
   {
@@ -169,12 +230,18 @@
     "tips": [
       {
         "id": "krr-tip-1",
-        "content": "You WILL get soaked! Bring waterproof bags for phones and valuables.",
+        "content": "SEASONAL CLOSURE: Closes October 6, 2025 for refurbishment, reopening December 2025",
         "category": "strategy",
         "priority": 5
       },
       {
         "id": "krr-tip-2",
+        "content": "You WILL get soaked! Bring waterproof bags for phones and valuables.",
+        "category": "strategy",
+        "priority": 5
+      },
+      {
+        "id": "krr-tip-3",
         "content": "Other guests can spray you with water cannons from the bridge - beware!",
         "category": "general",
         "priority": 4
@@ -182,14 +249,28 @@
     ],
     "tags": [],
     "features": {
-      "isWaterRide": true,
+      "multiPass": true,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": true,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
       "getsWet": true,
-      "isSpinning": true,
-      "isInteractive": true,
-      "hasBigDrops": true,
-      "hasPhotos": true,
-      "hasLightningLane": true,
-      "hasRiderSwitch": true
+      "spinningMotion": true,
+      "loudSounds": true,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": true,
+      "motionSensitivity": true,
+      "pregnancyAdvisory": true,
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "rainSafe": false
     }
   },
   {
@@ -209,8 +290,8 @@
     "tips": [
       {
         "id": "dino-tip-1",
-        "content": "Attraction closing in 2026 for Tropical Americas development. Experience it while you can!",
-        "category": "general",
+        "content": "CLOSING FEBRUARY 2, 2026: Being reimagined as Indiana Jones Adventure for Tropical Americas land. Experience it while you can!",
+        "category": "strategy",
         "priority": 5
       },
       {
@@ -222,13 +303,29 @@
     ],
     "tags": [],
     "features": {
-      "isDarkRide": true,
-      "isScary": true,
-      "isLoud": true,
-      "hasStrobes": true,
-      "hasPhotos": true,
-      "hasLightningLane": true,
-      "hasRiderSwitch": true
+      "multiPass": true,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": true,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": true,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": true,
+      "strobeEffects": true,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "scary": true,
+      "heightRequirement": true,
+      "motionSensitivity": true,
+      "pregnancyAdvisory": true,
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "rainSafe": true
     }
   },
   {
@@ -259,10 +356,28 @@
     ],
     "tags": [],
     "features": {
-      "hasAirConditioning": true,
-      "hasPhotos": true,
-      "isRainSafe": true,
-      "hasLightningLane": true
+      "multiPass": true,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": true,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
     }
   }
 ]

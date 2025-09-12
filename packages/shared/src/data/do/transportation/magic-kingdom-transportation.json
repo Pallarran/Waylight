@@ -23,27 +23,40 @@
       },
       {
         "id": "mk-monorail-tip-2",
-        "category": "best_time", 
+        "category": "best_time",
         "content": "Operates 30 minutes before park opening to 1 hour after closing",
         "priority": 3
       }
     ],
-    "tags": ["monorail", "express", "ttc", "fast"],
+    "tags": [
+      "monorail",
+      "express",
+      "ttc",
+      "fast"
+    ],
     "features": {
-      "hasAirConditioning": true,
-      "isInteractive": false,
-      "isRainSafe": true,
-      "hasPhotos": false,
-      "hasCharacters": false,
-      "isLoud": false,
-      "hasStrobes": false,
-      "isDarkRide": false,
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
       "getsWet": false,
-      "isWaterRide": false,
-      "isSpinning": false,
-      "hasRiderSwitch": false,
-      "hasIndividualLL": false,
-      "hasLaunch": false
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
     }
   },
   {
@@ -75,22 +88,35 @@
         "priority": 4
       }
     ],
-    "tags": ["ferry", "boat", "scenic", "lagoon"],
+    "tags": [
+      "ferry",
+      "boat",
+      "scenic",
+      "lagoon"
+    ],
     "features": {
-      "hasAirConditioning": false,
-      "isInteractive": false,
-      "isRainSafe": false,
-      "hasPhotos": false,
-      "hasCharacters": false,
-      "isLoud": false,
-      "hasStrobes": false,
-      "isDarkRide": false,
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
       "getsWet": false,
-      "isWaterRide": true,
-      "isSpinning": false,
-      "hasRiderSwitch": false,
-      "hasIndividualLL": false,
-      "hasLaunch": false
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
     }
   },
   {
@@ -99,7 +125,7 @@
     "name": "Resort Monorail Loop",
     "description": "Monorail loop connecting Magic Kingdom with Grand Floridian, Polynesian, and TTC, providing transportation to resort areas.",
     "location": "Magic Kingdom - Grand Floridian - Polynesian - TTC Loop",
-    "type": "transportation", 
+    "type": "transportation",
     "duration": 20,
     "intensity": "low",
     "accessibility": {
@@ -122,22 +148,35 @@
         "priority": 2
       }
     ],
-    "tags": ["monorail", "resort", "loop", "hotels"],
+    "tags": [
+      "monorail",
+      "resort",
+      "loop",
+      "hotels"
+    ],
     "features": {
-      "hasAirConditioning": true,
-      "isInteractive": false,
-      "isRainSafe": true,
-      "hasPhotos": false,
-      "hasCharacters": false,
-      "isLoud": false,
-      "hasStrobes": false,
-      "isDarkRide": false,
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
       "getsWet": false,
-      "isWaterRide": false,
-      "isSpinning": false,
-      "hasRiderSwitch": false,
-      "hasIndividualLL": false,
-      "hasLaunch": false
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
     }
   },
   {
@@ -148,7 +187,7 @@
     "location": "Various Disney Resort Hotels to Magic Kingdom",
     "type": "transportation",
     "duration": 25,
-    "intensity": "low", 
+    "intensity": "low",
     "accessibility": {
       "wheelchairAccessible": true,
       "transferRequired": false,
@@ -169,27 +208,40 @@
         "priority": 3
       }
     ],
-    "tags": ["bus", "resort", "complimentary", "real-time"],
+    "tags": [
+      "bus",
+      "resort",
+      "complimentary",
+      "real-time"
+    ],
     "features": {
-      "hasAirConditioning": true,
-      "isInteractive": false,
-      "isRainSafe": true,
-      "hasPhotos": false,
-      "hasCharacters": false,
-      "isLoud": false,
-      "hasStrobes": false,
-      "isDarkRide": false,
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
       "getsWet": false,
-      "isWaterRide": false,
-      "isSpinning": false,
-      "hasRiderSwitch": false,
-      "hasIndividualLL": false,
-      "hasLaunch": false
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
     }
   },
   {
     "id": "mk-water-taxi-gold-flag",
-    "parkId": "magic-kingdom", 
+    "parkId": "magic-kingdom",
     "name": "Gold Flag Water Taxi",
     "description": "Water transportation connecting Magic Kingdom with Grand Floridian and Polynesian resorts via Seven Seas Lagoon.",
     "location": "Magic Kingdom - Grand Floridian - Polynesian Loop",
@@ -210,28 +262,109 @@
         "priority": 3
       },
       {
-        "id": "mk-water-taxi-tip-2", 
+        "id": "mk-water-taxi-tip-2",
         "category": "strategy",
         "content": "Colored flags indicate different routes - look for Gold Flag",
         "priority": 2
       }
     ],
-    "tags": ["water-taxi", "boat", "gold-flag", "scenic"],
+    "tags": [
+      "water-taxi",
+      "boat",
+      "gold-flag",
+      "scenic"
+    ],
     "features": {
-      "hasAirConditioning": false,
-      "isInteractive": false,
-      "isRainSafe": false,
-      "hasPhotos": false,
-      "hasCharacters": false,
-      "isLoud": false,
-      "hasStrobes": false,
-      "isDarkRide": false,
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
       "getsWet": false,
-      "isWaterRide": true,
-      "isSpinning": false,
-      "hasRiderSwitch": false,
-      "hasIndividualLL": false,
-      "hasLaunch": false
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
+    }
+  },
+  {
+    "id": "mk-walt-disney-world-railroad",
+    "parkId": "magic-kingdom",
+    "name": "Walt Disney World Railroad",
+    "description": "Vintage steam-powered train providing scenic transportation around Magic Kingdom. CURRENTLY OPERATING IN SHUTTLE MODE between Main Street USA and Storybook Circus (Fantasyland) stations only due to construction.",
+    "location": "Main Street USA to Storybook Circus (Shuttle Mode)",
+    "type": "transportation",
+    "duration": 10,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "mk-railroad-tip-1",
+        "category": "strategy",
+        "content": "SHUTTLE MODE: Only operates between Main Street USA and Storybook Circus due to construction",
+        "priority": 5
+      },
+      {
+        "id": "mk-railroad-tip-2",
+        "category": "general",
+        "content": "Great way to rest your feet and see unique views of the park",
+        "priority": 4
+      },
+      {
+        "id": "mk-railroad-tip-3",
+        "category": "strategy",
+        "content": "Frontierland station closed - 2/3 of track unavailable due to Cars Land construction",
+        "priority": 4
+      }
+    ],
+    "tags": [
+      "railroad",
+      "train",
+      "vintage",
+      "scenic",
+      "shuttle-mode",
+      "limited-service"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
     }
   }
 ]

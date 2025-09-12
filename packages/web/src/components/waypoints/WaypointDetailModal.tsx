@@ -348,8 +348,120 @@ export default function WaypointDetailModal({
                 )}
               </div>
             </div>
+          ) : isDoCategory && attraction.features ? (
+            /* Features Section with Icons for DO items - Organized Categories */
+            <div>
+              <h3 className="font-semibold text-ink mb-3">Features</h3>
+              <div className="space-y-4">
+                {/* Access & Services */}
+                {attraction.features && Object.entries(attraction.features).some(([key, value]) => 
+                  ['multiPass', 'singlePass', 'singleRider', 'riderSwitch', 'mobileCheckin', 'photoPass'].includes(key) && value
+                ) && (
+                  <div>
+                    <h4 className="font-medium text-ink text-sm mb-2">Access & Services</h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {Object.entries(attraction.features).map(([key, value]) => {
+                        if (!value || !['multiPass', 'singlePass', 'singleRider', 'riderSwitch', 'mobileCheckin', 'photoPass'].includes(key)) return null;
+                        const labelMap: Record<string, string> = {
+                          'multiPass': 'Multi Pass',
+                          'singlePass': 'Single Pass',
+                          'singleRider': 'Single Rider',
+                          'riderSwitch': 'Rider Switch',
+                          'mobileCheckin': 'Mobile Check-in',
+                          'photoPass': 'PhotoPass'
+                        };
+                        const label = labelMap[key] || key;
+                        const icon = featureIcons.find(icon => icon.label === label);
+                        return icon ? (
+                          <div key={key} className="flex items-center space-x-3 p-3 bg-surface/30 rounded-lg">
+                            <span className="text-2xl flex-shrink-0">{icon.emoji}</span>
+                            <div className="flex-1">
+                              <div className="font-medium text-ink text-sm">{icon.label}</div>
+                              <div className="text-xs text-ink-light">{icon.description}</div>
+                            </div>
+                          </div>
+                        ) : null;
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* Experience */}
+                {attraction.features && Object.entries(attraction.features).some(([key, value]) => 
+                  ['darkRide', 'getsWet', 'spinningMotion', 'loudSounds', 'strobeEffects', 'interactiveElements', 'characterMeet', 'livePerformance', 'airConditioning', 'outdoorExperience', 'scary', 'bigDrops', 'launchSpeed'].includes(key) && value
+                ) && (
+                  <div>
+                    <h4 className="font-medium text-ink text-sm mb-2">Experience</h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {Object.entries(attraction.features).map(([key, value]) => {
+                        if (!value || !['darkRide', 'getsWet', 'spinningMotion', 'loudSounds', 'strobeEffects', 'interactiveElements', 'characterMeet', 'livePerformance', 'airConditioning', 'outdoorExperience', 'scary', 'bigDrops', 'launchSpeed'].includes(key)) return null;
+                        const labelMap: Record<string, string> = {
+                          'darkRide': 'Dark Ride',
+                          'getsWet': 'Gets Wet',
+                          'spinningMotion': 'Spinning Motion',
+                          'loudSounds': 'Loud Sounds',
+                          'strobeEffects': 'Strobe Effects',
+                          'interactiveElements': 'Interactive Elements',
+                          'characterMeet': 'Character Meet',
+                          'livePerformance': 'Live Performance',
+                          'airConditioning': 'Air Conditioning',
+                          'outdoorExperience': 'Outdoor Experience',
+                          'scary': 'Scary',
+                          'bigDrops': 'Big Drops',
+                          'launchSpeed': 'Launch/Speed'
+                        };
+                        const label = labelMap[key] || key;
+                        const icon = featureIcons.find(icon => icon.label === label);
+                        return icon ? (
+                          <div key={key} className="flex items-center space-x-3 p-3 bg-surface/30 rounded-lg">
+                            <span className="text-2xl flex-shrink-0">{icon.emoji}</span>
+                            <div className="flex-1">
+                              <div className="font-medium text-ink text-sm">{icon.label}</div>
+                              <div className="text-xs text-ink-light">{icon.description}</div>
+                            </div>
+                          </div>
+                        ) : null;
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* Important Notes */}
+                {attraction.features && Object.entries(attraction.features).some(([key, value]) => 
+                  ['heightRequirement', 'motionSensitivity', 'pregnancyAdvisory', 'wheelchairAccessible', 'transferRequired', 'rainSafe'].includes(key) && value
+                ) && (
+                  <div>
+                    <h4 className="font-medium text-ink text-sm mb-2">Important Notes</h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {Object.entries(attraction.features).map(([key, value]) => {
+                        if (!value || !['heightRequirement', 'motionSensitivity', 'pregnancyAdvisory', 'wheelchairAccessible', 'transferRequired', 'rainSafe'].includes(key)) return null;
+                        const labelMap: Record<string, string> = {
+                          'heightRequirement': 'Height Requirement',
+                          'motionSensitivity': 'Motion Sensitivity',
+                          'pregnancyAdvisory': 'Pregnancy Advisory',
+                          'wheelchairAccessible': 'Wheelchair Accessible',
+                          'transferRequired': 'Transfer Required',
+                          'rainSafe': 'Rain Safe'
+                        };
+                        const label = labelMap[key] || key;
+                        const icon = featureIcons.find(icon => icon.label === label);
+                        return icon ? (
+                          <div key={key} className="flex items-center space-x-3 p-3 bg-surface/30 rounded-lg">
+                            <span className="text-2xl flex-shrink-0">{icon.emoji}</span>
+                            <div className="flex-1">
+                              <div className="font-medium text-ink text-sm">{icon.label}</div>
+                              <div className="text-xs text-ink-light">{icon.description}</div>
+                            </div>
+                          </div>
+                        ) : null;
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
           ) : (
-            /* Features Section with Icons for other non-STAY, non-EAT items (DO) */
+            /* Features Section with Icons for other categories */
             featureIcons.length > 0 && (
               <div>
                 <h3 className="font-semibold text-ink mb-3">Features</h3>

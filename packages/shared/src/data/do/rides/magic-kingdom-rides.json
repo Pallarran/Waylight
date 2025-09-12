@@ -41,14 +41,29 @@
       "popular"
     ],
     "features": {
-      "isDarkRide": true,
-      "hasPhotos": true,
-      "hasLightningLane": true,
-      "isRainSafe": true,
-      "hasAirConditioning": true,
-      "hasLaunch": true,
-      "hasStrobes": true,
-      "singleRider": false
+      "multiPass": true,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": true,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": true,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "bigDrops": true,
+      "heightRequirement": true,
+      "motionSensitivity": true,
+      "pregnancyAdvisory": true,
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "rainSafe": true
     }
   },
   {
@@ -92,14 +107,29 @@
       "high-capacity"
     ],
     "features": {
-      "isDarkRide": true,
-      "isScary": true,
-      "hasPhotos": true,
-      "hasLightningLane": true,
-      "isRainSafe": true,
-      "hasAirConditioning": true,
-      "hasRiderSwitch": true,
-      "singleRider": false
+      "multiPass": true,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": true,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": true,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "scary": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
     }
   },
   {
@@ -145,13 +175,28 @@
       "immersive"
     ],
     "features": {
-      "isDarkRide": true,
-      "isWaterRide": true,
-      "hasPhotos": true,
-      "hasLightningLane": true,
-      "isRainSafe": true,
-      "hasAirConditioning": true,
-      "hasRiderSwitch": true
+      "multiPass": true,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": true,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": true,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
     }
   },
   {
@@ -199,8 +244,28 @@
       "temporarily-closed"
     ],
     "features": {
-      "hasPhotos": true,
-      "hasRiderSwitch": true
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": true,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": true,
+      "motionSensitivity": true,
+      "pregnancyAdvisory": true,
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "rainSafe": false
     }
   },
   {
@@ -246,9 +311,28 @@
       "outdoor"
     ],
     "features": {
-      "isWaterRide": true,
-      "hasLightningLane": true,
-      "hasRiderSwitch": true
+      "multiPass": true,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": true,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
     }
   },
   {
@@ -294,11 +378,28 @@
       "relaxing"
     ],
     "features": {
-      "isWaterRide": true,
-      "hasLightningLane": true,
-      "isRainSafe": true,
-      "hasAirConditioning": true,
-      "isLoud": true
+      "multiPass": true,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": true,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
     }
   },
   {
@@ -345,11 +446,28 @@
       "immersive"
     ],
     "features": {
-      "hasPhotos": true,
-      "hasIndividualLL": true,
-      "isSpinning": true,
-      "hasRiderSwitch": true,
-      "hasLightningLane": true
+      "multiPass": true,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": true,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": true,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": true,
+      "motionSensitivity": true,
+      "pregnancyAdvisory": true,
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "rainSafe": false
     }
   },
   {
@@ -395,11 +513,28 @@
       "short"
     ],
     "features": {
-      "isDarkRide": true,
-      "hasLightningLane": true,
-      "isRainSafe": true,
-      "hasAirConditioning": true,
-      "hasRiderSwitch": true
+      "multiPass": true,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": true,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": true,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "rainSafe": true
     }
   },
   {
@@ -446,13 +581,28 @@
       "temporarily-closed"
     ],
     "features": {
-      "isDarkRide": true,
-      "isInteractive": true,
-      "isSpinning": true,
-      "hasPhotos": true,
-      "isRainSafe": true,
-      "hasAirConditioning": true,
-      "hasRiderSwitch": true
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": true,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": true,
+      "getsWet": false,
+      "spinningMotion": true,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
     }
   },
   {
@@ -506,12 +656,28 @@
       "princess-tiana"
     ],
     "features": {
+      "multiPass": true,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": true,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
       "getsWet": true,
-      "isWaterRide": true,
-      "hasPhotos": true,
-      "hasLightningLane": true,
-      "hasBigDrops": true,
-      "hasRiderSwitch": true
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": true,
+      "motionSensitivity": true,
+      "pregnancyAdvisory": true,
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "rainSafe": false
     }
   },
   {
@@ -557,7 +723,28 @@
       "alice"
     ],
     "features": {
-      "isSpinning": true
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": true,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": true,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "rainSafe": false
     }
   },
   {
@@ -602,7 +789,30 @@
       "classic",
       "views"
     ],
-    "features": {}
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "rainSafe": false
+    }
   },
   {
     "id": "astro-orbitor",
@@ -647,7 +857,28 @@
       "height"
     ],
     "features": {
-      "isSpinning": true
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": true,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": true,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "rainSafe": false
     }
   },
   {
@@ -693,7 +924,28 @@
       "aladdin"
     ],
     "features": {
-      "getsWet": true
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
+      "getsWet": true,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "rainSafe": false
     }
   },
   {
@@ -739,7 +991,28 @@
       "views"
     ],
     "features": {
-      "hasAirConditioning": true
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
     }
   },
   {
@@ -786,7 +1059,28 @@
       "gas-powered"
     ],
     "features": {
-      "isLoud": true
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": true,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": true,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "rainSafe": false
     }
   },
   {
@@ -832,8 +1126,28 @@
       "high-capacity"
     ],
     "features": {
-      "isDarkRide": true,
-      "hasAirConditioning": true
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": true,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
     }
   },
   {
@@ -878,7 +1192,30 @@
       "photo-op",
       "classic"
     ],
-    "features": {}
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "rainSafe": false
+    }
   },
   {
     "id": "walt-disney-railroad",
@@ -922,7 +1259,30 @@
       "classic",
       "multi-station"
     ],
-    "features": {}
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "rainSafe": false
+    }
   },
   {
     "id": "barnstormer",
@@ -967,7 +1327,30 @@
       "family-friendly",
       "first-coaster"
     ],
-    "features": {}
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "rainSafe": false
+    }
   },
   {
     "id": "tron-lightcycle-run",
@@ -1019,16 +1402,29 @@
       "high-speed"
     ],
     "features": {
-      "isDarkRide": true,
-      "hasPhotos": true,
-      "hasIndividualLL": true,
-      "isRainSafe": true,
-      "hasAirConditioning": true,
-      "hasLaunch": true,
-      "hasStrobes": true,
-      "isLoud": true,
-      "hasRiderSwitch": true,
-      "hasLightningLane": true
+      "multiPass": false,
+      "singlePass": true,
+      "singleRider": false,
+      "riderSwitch": true,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": true,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": true,
+      "strobeEffects": true,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "launchSpeed": true,
+      "heightRequirement": true,
+      "motionSensitivity": true,
+      "pregnancyAdvisory": true,
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "rainSafe": true
     }
   },
   {
@@ -1073,6 +1469,29 @@
       "all-ages",
       "historic"
     ],
-    "features": {}
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": false,
+      "transferRequired": true,
+      "rainSafe": false
+    }
   }
 ]

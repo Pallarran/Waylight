@@ -1,7 +1,38 @@
 // DO Category Data - Attractions and Experiences
 
-// For now, we'll create placeholder data structure
-// This will be populated when we migrate from the existing attractions data
+// Standardized DO Features Interface (22 Features in 3 Categories)
+export interface DoFeatures {
+  // Access & Services (6 Core Features)
+  multiPass?: boolean;           // Skip regular lines with Multi Pass (formerly Genie+)
+  singlePass?: boolean;          // Individual attraction purchase for popular rides
+  singleRider?: boolean;         // Single rider line available for faster boarding
+  riderSwitch?: boolean;         // Child swap service for families with small children
+  mobileCheckin?: boolean;       // Mobile queue joining or virtual line
+  photoPass?: boolean;           // Official Disney photography service available
+
+  // Experience (13 Core Features)
+  darkRide?: boolean;            // Takes place in darkened environment
+  getsWet?: boolean;             // Guests may get splashed or soaked
+  spinningMotion?: boolean;      // Ride vehicles spin or rotate
+  loudSounds?: boolean;          // High volume audio or sound effects
+  strobeEffects?: boolean;       // Flashing lights or strobe effects
+  interactiveElements?: boolean; // Hands-on participation or guest interaction
+  characterMeet?: boolean;       // Disney character appearances and meet opportunities
+  livePerformance?: boolean;     // Live actors, musicians, or performers
+  airConditioning?: boolean;     // Climate-controlled indoor environment
+  outdoorExperience?: boolean;   // Takes place primarily outdoors
+  scary?: boolean;               // May include scary themes, jump scares, or spooky elements
+  bigDrops?: boolean;            // Features significant drops or steep descents
+  launchSpeed?: boolean;         // High-speed launch or fast-paced elements
+
+  // Important Notes (6 Safety & Accessibility Features)
+  heightRequirement?: boolean;   // Minimum height restrictions apply
+  motionSensitivity?: boolean;   // May cause motion sickness
+  pregnancyAdvisory?: boolean;   // Not recommended during pregnancy
+  wheelchairAccessible?: boolean; // Accessible without transfer required
+  transferRequired?: boolean;    // Must transfer from mobility device
+  rainSafe?: boolean;            // Weather-protected experience
+}
 
 export interface DoItem {
   id: string;
@@ -26,23 +57,7 @@ export interface DoItem {
     priority: number;
   }>;
   tags: string[];
-  features?: {
-    hasAirConditioning?: boolean;
-    isInteractive?: boolean;
-    hasLightningLane?: boolean;
-    isRainSafe?: boolean;
-    hasPhotos?: boolean;
-    hasCharacters?: boolean;
-    isLoud?: boolean;
-    hasStrobes?: boolean;
-    isDarkRide?: boolean;
-    getsWet?: boolean;
-    isWaterRide?: boolean;
-    isSpinning?: boolean;
-    hasRiderSwitch?: boolean;
-    hasIndividualLL?: boolean;
-    hasLaunch?: boolean;
-  };
+  features?: DoFeatures;
   // Do-specific fields
   lightningLane?: boolean;
   singleRider?: boolean;

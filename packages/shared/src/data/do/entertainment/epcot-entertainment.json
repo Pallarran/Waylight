@@ -2,11 +2,11 @@
   {
     "id": "epcot-luminous",
     "parkId": "epcot",
-    "name": "EPCOT Forever",
-    "description": "A nighttime spectacular celebrating the spirit of EPCOT with fireworks, lasers, and music over World Showcase Lagoon.",
+    "name": "Luminous: The Symphony of Us",
+    "description": "A spectacular nighttime fireworks experience celebrating human connection with synchronized pyrotechnics, choreographed fountains, lasers, and fire torches on World Showcase Lagoon.",
     "location": "World Showcase Lagoon",
     "type": "entertainment",
-    "duration": 12,
+    "duration": 17,
     "intensity": "low",
     "accessibility": {
       "wheelchairAccessible": true,
@@ -16,30 +16,122 @@
     },
     "tips": [
       {
-        "id": "epcot-forever-tip-1",
+        "id": "luminous-tip-1",
         "category": "best_time",
-        "content": "Best viewing spots are along the World Showcase Promenade. Arrive 45-60 minutes early.",
+        "content": "360° experience - best viewing along World Showcase Promenade. Arrive 45-60 minutes early for prime spots.",
         "priority": 1
       }
     ],
-    "tags": ["fireworks", "nighttime", "lagoon", "lasers", "world-showcase"],
+    "tags": [
+      "fireworks",
+      "nighttime",
+      "lagoon",
+      "lasers",
+      "world-showcase"
+    ],
     "features": {
-      "hasAirConditioning": false,
-      "isInteractive": false,
-      "hasLightningLane": false,
-      "isRainSafe": false,
-      "hasPhotos": true,
-      "hasCharacters": false,
-      "isLoud": true,
-      "hasStrobes": true,
-      "isDarkRide": false,
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
       "getsWet": false,
-      "isWaterRide": false
+      "spinningMotion": false,
+      "loudSounds": true,
+      "strobeEffects": true,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
     },
     "lightningLane": false,
     "singleRider": false,
     "photoService": true,
-    "showTimes": ["9:00 PM"]
+    "showTimes": [
+      "9:00 PM"
+    ]
+  },
+  {
+    "id": "epcot-celebracion-encanto",
+    "parkId": "epcot",
+    "name": "¡Celebración Encanto!",
+    "description": "Dance, sing, and celebrate with the marvelous Madrigal family in this interactive sing-along show featuring beloved characters and songs from Disney's Encanto.",
+    "location": "CommuniCore Plaza Stage",
+    "type": "entertainment",
+    "duration": 20,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "encanto-tip-1",
+        "category": "general",
+        "content": "Now a full-time offering at EPCOT! Interactive show perfect for families with young children.",
+        "priority": 4
+      },
+      {
+        "id": "encanto-tip-2",
+        "category": "strategy",
+        "content": "Multiple showtimes throughout the day - check My Disney Experience app for current schedule.",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "encanto",
+      "sing-along",
+      "interactive",
+      "family-friendly",
+      "stage-show",
+      "new"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": true,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false,
+    "showTimes": [
+      "9:45 AM",
+      "10:45 AM",
+      "11:45 AM",
+      "1:30 PM",
+      "2:30 PM",
+      "3:30 PM"
+    ]
   },
   {
     "id": "epcot-mariachi-cobre",
@@ -64,24 +156,43 @@
         "priority": 2
       }
     ],
-    "tags": ["music", "world-showcase", "cultural", "mexico", "live-performance"],
+    "tags": [
+      "music",
+      "world-showcase",
+      "cultural",
+      "mexico",
+      "live-performance"
+    ],
     "features": {
-      "hasAirConditioning": false,
-      "isInteractive": false,
-      "hasLightningLane": false,
-      "isRainSafe": false,
-      "hasPhotos": true,
-      "hasCharacters": false,
-      "isLoud": false,
-      "hasStrobes": false,
-      "isDarkRide": false,
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
       "getsWet": false,
-      "isWaterRide": false
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
     },
     "lightningLane": false,
     "singleRider": false,
     "photoService": false,
-    "showTimes": ["Multiple times daily"]
+    "showTimes": [
+      "Multiple times daily"
+    ]
   },
   {
     "id": "epcot-voices-of-liberty",
@@ -106,23 +217,42 @@
         "priority": 2
       }
     ],
-    "tags": ["music", "american", "a-cappella", "patriotic", "world-showcase"],
+    "tags": [
+      "music",
+      "american",
+      "a-cappella",
+      "patriotic",
+      "world-showcase"
+    ],
     "features": {
-      "hasAirConditioning": true,
-      "isInteractive": false,
-      "hasLightningLane": false,
-      "isRainSafe": true,
-      "hasPhotos": true,
-      "hasCharacters": false,
-      "isLoud": false,
-      "hasStrobes": false,
-      "isDarkRide": false,
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
       "getsWet": false,
-      "isWaterRide": false
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
     },
     "lightningLane": false,
     "singleRider": false,
     "photoService": false,
-    "showTimes": ["Multiple times daily"]
+    "showTimes": [
+      "Multiple times daily"
+    ]
   }
 ]
