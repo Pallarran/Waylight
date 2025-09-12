@@ -25,7 +25,7 @@
     "tags": ["pandora", "avatar", "night-blossom", "signature", "must-try"],
     "features": {
       "mobileOrder": false,
-      "indoorSeating": false,
+      "outdoorSeating": true,
       "entertainment": false,
       "adrRequired": false,
       "alcoholServed": true,
@@ -70,7 +70,6 @@
     "tags": ["africa", "coffee", "colossal-cinnamon-roll", "breakfast", "mickey-shaped"],
     "features": {
       "mobileOrder": false,
-      "indoorSeating": true,
       "entertainment": false,
       "adrRequired": false,
       "alcoholServed": false,
@@ -92,7 +91,7 @@
     "id": "ak-harambe-market",
     "parkId": "animal-kingdom",
     "name": "Harambe Market",
-    "description": "Africa-themed marketplace offering both quick service meals and specialty snacks including the new Mango Vanilla-Mousse and other tropical treats.",
+    "description": "Africa-themed marketplace offering quick service meals and specialty snacks. CLOSING LATE 2025/WINTER 2025 for refurbishment, reopening early 2026 with new menu featuring hamburgers and chicken nuggets.",
     "location": "Africa - Harambe",
     "type": "snack",
     "serviceType": "snack",
@@ -100,21 +99,27 @@
     "tips": [
       {
         "id": "harambe-market-tip-1",
-        "category": "general",
-        "content": "Features new 2024 tropical desserts like Mango Vanilla-Mousse with passion fruit",
-        "priority": 3
+        "category": "strategy",
+        "content": "TEMPORARY CLOSURE: Closing late 2025 for refurbishment, reopening early 2026 with family-friendly menu",
+        "priority": 5
       },
       {
         "id": "harambe-market-tip-2",
+        "category": "general",
+        "content": "Will incorporate menu items from Restaurantosaurus when it reopens in early 2026",
+        "priority": 4
+      },
+      {
+        "id": "harambe-market-tip-3",
         "category": "strategy",
-        "content": "Good option for both meals and snacks with outdoor seating in Africa section",
-        "priority": 2
+        "content": "Currently features tropical desserts like Mango Vanilla-Mousse - experience current menu while available",
+        "priority": 3
       }
     ],
-    "tags": ["africa", "marketplace", "tropical-desserts", "new-2024", "outdoor-seating"],
+    "tags": ["africa", "marketplace", "temporary-closure", "menu-change", "restaurantosaurus-items"],
     "features": {
       "mobileOrder": true,
-      "indoorSeating": false,
+      "outdoorSeating": true,
       "entertainment": false,
       "adrRequired": false,
       "alcoholServed": false,

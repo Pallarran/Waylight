@@ -25,7 +25,7 @@
     "tags": ["galaxy's-edge", "star-wars", "blue-milk", "green-milk", "iconic"],
     "features": {
       "mobileOrder": false,
-      "indoorSeating": false,
+      "outdoorSeating": true,
       "entertainment": false,
       "adrRequired": false,
       "alcoholServed": true,
@@ -69,7 +69,7 @@
     "tags": ["galaxy's-edge", "popcorn", "coffee", "unique-flavors", "star-wars"],
     "features": {
       "mobileOrder": false,
-      "indoorSeating": false,
+      "outdoorSeating": true,
       "entertainment": false,
       "adrRequired": false,
       "alcoholServed": false,
@@ -114,7 +114,6 @@
     "tags": ["grand-avenue", "craft-beer", "bavarian-pretzel", "adult-friendly", "gourmet"],
     "features": {
       "mobileOrder": false,
-      "indoorSeating": true,
       "entertainment": false,
       "adrRequired": false,
       "alcoholServed": true,
@@ -158,7 +157,7 @@
     "tags": ["pixar", "incredibles", "num-num-cookie", "warm-cookies", "sharing"],
     "features": {
       "mobileOrder": false,
-      "indoorSeating": false,
+      "outdoorSeating": true,
       "entertainment": false,
       "adrRequired": false,
       "alcoholServed": false,
@@ -203,7 +202,6 @@
     "tags": ["star-wars", "wookie-cookie", "chewbacca", "oatmeal-cookies", "echo-lake"],
     "features": {
       "mobileOrder": true,
-      "indoorSeating": true,
       "entertainment": false,
       "adrRequired": false,
       "alcoholServed": false,

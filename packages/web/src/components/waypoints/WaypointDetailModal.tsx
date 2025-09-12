@@ -33,10 +33,11 @@ export default function WaypointDetailModal({
   const isEatCategory = attraction.category === WaypointCategory.EAT;
   const isStayCategory = attraction.category === WaypointCategory.STAY;
 
-  // Get feature icons for this waypoint
+  // Get feature icons for this waypoint (all tiers for complete feature display)
   const featureIcons = getWaypointIcons({
     category: attraction.category,
     features: attraction.features
+    // No tier restriction to show all available features
   });
 
 
@@ -111,11 +112,6 @@ export default function WaypointDetailModal({
                 {attraction.serviceType && (
                   <span className="badge badge-secondary">
                     {formatServiceType(attraction.serviceType)}
-                  </span>
-                )}
-                {attraction.adrRequired && (
-                  <span className="badge bg-red-100 text-red-800">
-                    ADR Required
                   </span>
                 )}
               </>
@@ -243,8 +239,117 @@ export default function WaypointDetailModal({
                 )}
               </div>
             </div>
+          ) : isEatCategory && attraction.features ? (
+            /* Features Section with Icons for EAT items - Organized Categories */
+            <div>
+              <h3 className="font-semibold text-ink mb-3">Features</h3>
+              <div className="space-y-4">
+                {/* Service & Ordering */}
+                {attraction.features && Object.entries(attraction.features).some(([key, value]) => 
+                  ['mobileOrder', 'adrRequired', 'walkupAvailable', 'counterService', 'tableService', 'reservationsRecommended'].includes(key) && value
+                ) && (
+                  <div>
+                    <h4 className="font-medium text-ink text-sm mb-2">Service & Ordering</h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {Object.entries(attraction.features).map(([key, value]) => {
+                        if (!value || !['mobileOrder', 'adrRequired', 'walkupAvailable', 'counterService', 'tableService', 'reservationsRecommended'].includes(key)) return null;
+                        const labelMap: Record<string, string> = {
+                          'mobileOrder': 'Mobile Order',
+                          'adrRequired': 'ADR Required',
+                          'walkupAvailable': 'Walk-up Available',
+                          'counterService': 'Counter Service',
+                          'tableService': 'Table Service',
+                          'reservationsRecommended': 'Reservations Recommended'
+                        };
+                        const label = labelMap[key] || key;
+                        const icon = featureIcons.find(icon => icon.label === label);
+                        return icon ? (
+                          <div key={key} className="flex items-center space-x-3 p-3 bg-surface/30 rounded-lg">
+                            <span className="text-2xl flex-shrink-0">{icon.emoji}</span>
+                            <div className="flex-1">
+                              <div className="font-medium text-ink text-sm">{icon.label}</div>
+                              <div className="text-xs text-ink-light">{icon.description}</div>
+                            </div>
+                          </div>
+                        ) : null;
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* Dining Experience */}
+                {attraction.features && Object.entries(attraction.features).some(([key, value]) => 
+                  ['characterDining', 'entertainment', 'views', 'themedAtmosphere', 'outdoorSeating', 'barLounge', 'familyStyle', 'fineDining'].includes(key) && value
+                ) && (
+                  <div>
+                    <h4 className="font-medium text-ink text-sm mb-2">Dining Experience</h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {Object.entries(attraction.features).map(([key, value]) => {
+                        if (!value || !['characterDining', 'entertainment', 'views', 'themedAtmosphere', 'outdoorSeating', 'barLounge', 'familyStyle', 'fineDining'].includes(key)) return null;
+                        const labelMap: Record<string, string> = {
+                          'characterDining': 'Character Dining',
+                          'entertainment': 'Entertainment',
+                          'views': 'Scenic Views',
+                          'themedAtmosphere': 'Themed Atmosphere',
+                          'outdoorSeating': 'Outdoor Seating',
+                          'barLounge': 'Bar/Lounge',
+                          'familyStyle': 'Family Style',
+                          'fineDining': 'Fine Dining'
+                        };
+                        const label = labelMap[key] || key;
+                        const icon = featureIcons.find(icon => icon.label === label);
+                        return icon ? (
+                          <div key={key} className="flex items-center space-x-3 p-3 bg-surface/30 rounded-lg">
+                            <span className="text-2xl flex-shrink-0">{icon.emoji}</span>
+                            <div className="flex-1">
+                              <div className="font-medium text-ink text-sm">{icon.label}</div>
+                              <div className="text-xs text-ink-light">{icon.description}</div>
+                            </div>
+                          </div>
+                        ) : null;
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* Dietary & Accessibility */}
+                {attraction.features && Object.entries(attraction.features).some(([key, value]) => 
+                  ['vegetarianOptions', 'veganOptions', 'glutenFreeOptions', 'alcoholServed', 'kidFriendly', 'allergyFriendly', 'healthyOptions', 'largePortions'].includes(key) && value
+                ) && (
+                  <div>
+                    <h4 className="font-medium text-ink text-sm mb-2">Dietary & Accessibility</h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {Object.entries(attraction.features).map(([key, value]) => {
+                        if (!value || !['vegetarianOptions', 'veganOptions', 'glutenFreeOptions', 'alcoholServed', 'kidFriendly', 'allergyFriendly', 'healthyOptions', 'largePortions'].includes(key)) return null;
+                        const labelMap: Record<string, string> = {
+                          'vegetarianOptions': 'Vegetarian Options',
+                          'veganOptions': 'Vegan Options',
+                          'glutenFreeOptions': 'Gluten-Free Options',
+                          'alcoholServed': 'Alcohol Served',
+                          'kidFriendly': 'Kid Friendly',
+                          'allergyFriendly': 'Allergy Friendly',
+                          'healthyOptions': 'Healthy Options',
+                          'largePortions': 'Large Portions'
+                        };
+                        const label = labelMap[key] || key;
+                        const icon = featureIcons.find(icon => icon.label === label);
+                        return icon ? (
+                          <div key={key} className="flex items-center space-x-3 p-3 bg-surface/30 rounded-lg">
+                            <span className="text-2xl flex-shrink-0">{icon.emoji}</span>
+                            <div className="flex-1">
+                              <div className="font-medium text-ink text-sm">{icon.label}</div>
+                              <div className="text-xs text-ink-light">{icon.description}</div>
+                            </div>
+                          </div>
+                        ) : null;
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
           ) : (
-            /* Features Section with Icons for non-STAY items */
+            /* Features Section with Icons for other non-STAY, non-EAT items (DO) */
             featureIcons.length > 0 && (
               <div>
                 <h3 className="font-semibold text-ink mb-3">Features</h3>

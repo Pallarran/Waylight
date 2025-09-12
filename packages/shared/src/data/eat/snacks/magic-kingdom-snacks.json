@@ -29,7 +29,14 @@
       }
     ],
     "tags": ["snack", "dole-whip", "refreshing", "dairy-free", "iconic"],
-    "features": ["mobile-order", "outdoor-service"],
+    "features": {
+      "mobileOrder": true,
+      "outdoorSeating": true,
+      "counterService": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "veganOptions": true
+    },
     "cuisineType": "Snacks & Treats",
     "adrRequired": false,
     "mobileOrderAvailable": true,
@@ -71,7 +78,12 @@
       }
     ],
     "tags": ["cinnamon-roll", "lefous-brew", "beauty-beast", "snacks", "themed"],
-    "features": ["mobile-order", "themed-location"],
+    "features": {
+      "mobileOrder": true,
+      "themedAtmosphere": true,
+      "counterService": true,
+      "kidFriendly": true
+    },
     "cuisineType": "Snacks & Treats",
     "adrRequired": false,
     "mobileOrderAvailable": true,
@@ -108,7 +120,13 @@
       }
     ],
     "tags": ["funnel-cake", "snacks", "fresh", "liberty-square", "sweet"],
-    "features": ["outdoor-service", "fresh-made"],
+    "features": {
+      "outdoorSeating": true,
+      "freshMade": true,
+      "mobileOrder": true,
+      "counterService": true,
+      "kidFriendly": true
+    },
     "cuisineType": "Snacks & Treats",
     "adrRequired": false,
     "mobileOrderAvailable": true,

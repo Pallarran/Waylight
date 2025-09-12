@@ -29,13 +29,21 @@
       }
     ],
     "tags": ["table-service", "beauty-beast", "reservations", "upscale", "themed"],
-    "features": ["themed-rooms", "reservations-required", "upscale"],
     "cuisineType": "French",
-    "adrRequired": true,
-    "mobileOrderAvailable": false,
-    "allergyFriendly": ["gluten-free", "vegetarian"],
     "kidFriendly": true,
-    "alcoholServed": true,
+    "features": {
+      "mobileOrder": false,
+      "adrRequired": true,
+      "walkupAvailable": false,
+      "tableService": true,
+      "themedAtmosphere": true,
+      "fineDining": true,
+      "vegetarianOptions": true,
+      "glutenFreeOptions": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true
+    },
     "operatingHours": {
       "breakfast": "8:00 AM - 10:30 AM",
       "lunch": "11:30 AM - 2:30 PM",
@@ -73,7 +81,17 @@
       }
     ],
     "tags": ["character-dining", "princesses", "castle", "upscale", "premium"],
-    "features": ["character-dining", "photo-package", "castle-dining"],
+    "features": {
+      "characterDining": true,
+      "themedAtmosphere": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "glutenFreeOptions": true,
+      "tableService": true
+    },
     "cuisineType": "American Fine Dining",
     "adrRequired": true,
     "mobileOrderAvailable": false,
@@ -117,7 +135,18 @@
       }
     ],
     "tags": ["character-dining", "buffet", "winnie-pooh", "family-friendly", "main-street"],
-    "features": ["character-dining", "buffet-style", "natural-lighting"],
+    "features": {
+      "characterDining": true,
+      "familyStyle": true,
+      "themedAtmosphere": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "glutenFreeOptions": true,
+      "tableService": true
+    },
     "cuisineType": "American Buffet",
     "adrRequired": true,
     "mobileOrderAvailable": false,
@@ -161,7 +190,14 @@
       }
     ],
     "tags": ["table-service", "american", "main-street", "classic", "air-conditioned"],
-    "features": ["air-conditioning", "central-location"],
+    "features": {
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "tableService": true
+    },
     "cuisineType": "American",
     "adrRequired": true,
     "mobileOrderAvailable": false,
@@ -204,7 +240,16 @@
       }
     ],
     "tags": ["table-service", "colonial", "family-style", "turkey", "historical"],
-    "features": ["family-style-dinner", "historical-theming"],
+    "features": {
+      "familyStyle": true,
+      "themedAtmosphere": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "tableService": true
+    },
     "cuisineType": "American Colonial",
     "adrRequired": true,
     "mobileOrderAvailable": false,
@@ -247,7 +292,15 @@
       }
     ],
     "tags": ["table-service", "jungle-cruise", "pan-asian", "air-conditioning", "reservations"],
-    "features": ["jungle-cruise-themed", "air-conditioning", "unique-atmosphere"],
+    "features": {
+      "themedAtmosphere": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "tableService": true
+    },
     "cuisineType": "Pan-Asian",
     "adrRequired": true,
     "mobileOrderAvailable": false,

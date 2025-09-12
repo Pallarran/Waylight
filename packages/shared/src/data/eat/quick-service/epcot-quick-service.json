@@ -33,14 +33,14 @@
     "reservationWindow": 0,
     "features": {
       "mobileOrder": true,
-      "indoorSeating": true,
-      "entertainment": false,
       "adrRequired": false,
+      "walkupAvailable": true,
+      "counterService": true,
       "alcoholServed": false,
       "vegetarianOptions": true,
       "veganOptions": true,
       "glutenFreeOptions": true,
-      "characterDining": false
+      "kidFriendly": true
     }
   },
   {
@@ -76,14 +76,15 @@
     "reservationWindow": 0,
     "features": {
       "mobileOrder": true,
-      "indoorSeating": true,
-      "entertainment": false,
       "adrRequired": false,
+      "walkupAvailable": true,
+      "counterService": true,
+      "healthyOptions": true,
       "alcoholServed": false,
       "vegetarianOptions": true,
       "veganOptions": true,
       "glutenFreeOptions": true,
-      "characterDining": false
+      "kidFriendly": true
     }
   },
   {
@@ -119,14 +120,13 @@
     "reservationWindow": 0,
     "features": {
       "mobileOrder": true,
-      "indoorSeating": true,
-      "entertainment": false,
       "adrRequired": false,
+      "walkupAvailable": true,
+      "counterService": true,
+      "themedAtmosphere": true,
       "alcoholServed": false,
       "vegetarianOptions": true,
-      "veganOptions": false,
-      "glutenFreeOptions": false,
-      "characterDining": false
+      "kidFriendly": true
     }
   }
 ]

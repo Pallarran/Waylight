@@ -23,7 +23,17 @@
       }
     ],
     "tags": ["signature-dining", "fine-dining", "french", "upscale", "world-showcase"],
-    "features": ["signature-dining", "dress-code", "lagoon-views"],
+    "features": {
+      "fineDining": true,
+      "views": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "glutenFreeOptions": true,
+      "tableService": true
+    },
     "cuisineType": "French Fine Dining",
     "adrRequired": true,
     "mobileOrderAvailable": false,
@@ -59,7 +69,19 @@
       }
     ],
     "tags": ["signature-dining", "themed-dining", "space", "unique", "immersive"],
-    "features": ["space-theming", "elevator-experience", "changing-views"],
+    "features": {
+      "themedAtmosphere": true,
+      "entertainment": true,
+      "views": true,
+      "fineDining": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "glutenFreeOptions": true,
+      "tableService": true
+    },
     "cuisineType": "Contemporary American",
     "adrRequired": true,
     "mobileOrderAvailable": false,
@@ -96,7 +118,16 @@
       }
     ],
     "tags": ["steakhouse", "canadian", "cheddar-soup", "cozy", "popular"],
-    "features": ["underground-location", "intimate-atmosphere"],
+    "features": {
+      "themedAtmosphere": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "glutenFreeOptions": true,
+      "tableService": true
+    },
     "cuisineType": "Canadian Steakhouse",
     "adrRequired": true,
     "mobileOrderAvailable": false,
@@ -133,7 +164,18 @@
       }
     ],
     "tags": ["character-dining", "princesses", "norwegian", "buffet", "castle"],
-    "features": ["character-dining", "buffet-style", "castle-setting"],
+    "features": {
+      "characterDining": true,
+      "familyStyle": true,
+      "themedAtmosphere": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "glutenFreeOptions": true,
+      "tableService": true
+    },
     "cuisineType": "Norwegian & American",
     "adrRequired": true,
     "mobileOrderAvailable": false,
@@ -171,7 +213,19 @@
       }
     ],
     "tags": ["character-dining", "rotating", "farm-fresh", "family-style", "unique"],
-    "features": ["rotating-restaurant", "character-dining", "garden-views"],
+    "features": {
+      "entertainment": true,
+      "characterDining": true,
+      "views": true,
+      "themedAtmosphere": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "glutenFreeOptions": true,
+      "tableService": true
+    },
     "cuisineType": "American Farm-to-Table",
     "adrRequired": true,
     "mobileOrderAvailable": false,
@@ -208,7 +262,17 @@
       }
     ],
     "tags": ["italian", "pizza", "wood-fired", "neapolitan", "family"],
-    "features": ["wood-fired-ovens", "outdoor-seating", "authentic-italian"],
+    "features": {
+      "entertainment": true,
+      "outdoorSeating": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "glutenFreeOptions": true,
+      "tableService": true
+    },
     "cuisineType": "Italian",
     "adrRequired": true,
     "mobileOrderAvailable": false,
@@ -245,7 +309,18 @@
       }
     ],
     "tags": ["british", "pub", "fish-chips", "fireworks-view", "traditional"],
-    "features": ["outdoor-seating", "fireworks-views", "pub-atmosphere"],
+    "features": {
+      "outdoorSeating": true,
+      "views": true,
+      "themedAtmosphere": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "glutenFreeOptions": true,
+      "tableService": true
+    },
     "cuisineType": "British Pub",
     "adrRequired": true,
     "mobileOrderAvailable": false,
@@ -282,7 +357,18 @@
       }
     ],
     "tags": ["german", "buffet", "entertainment", "oktoberfest", "community-seating"],
-    "features": ["live-entertainment", "buffet-style", "community-seating"],
+    "features": {
+      "entertainment": true,
+      "familyStyle": true,
+      "themedAtmosphere": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "glutenFreeOptions": true,
+      "tableService": true
+    },
     "cuisineType": "German",
     "adrRequired": true,
     "mobileOrderAvailable": false,

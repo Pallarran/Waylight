@@ -31,7 +31,6 @@
     "reservationWindow": 60,
     "features": {
       "mobileOrder": false,
-      "indoorSeating": true,
       "entertainment": false,
       "adrRequired": true,
       "alcoholServed": true,
@@ -73,13 +72,59 @@
     "reservationWindow": 0,
     "features": {
       "mobileOrder": false,
-      "indoorSeating": true,
       "entertainment": false,
       "adrRequired": false,
       "alcoholServed": true,
       "vegetarianOptions": true,
       "veganOptions": false,
       "glutenFreeOptions": false,
+      "characterDining": false
+    }
+  },
+  {
+    "id": "beak-and-barrel-pirates-lounge",
+    "parkId": "magic-kingdom",
+    "name": "The Beak and Barrel",
+    "description": "Magic Kingdom's first bar! Pirates of the Caribbean-themed lounge featuring cocktails, specialty drinks, and Caribbean-inspired small plates with immersive pirate theming. OPENED AUGUST 29, 2025.",
+    "location": "Adventureland (near Pirates of the Caribbean exit)",
+    "type": "lounge",
+    "serviceType": "lounge",
+    "priceLevel": 3,
+    "tips": [
+      {
+        "id": "beak-barrel-tip-1",
+        "category": "strategy",
+        "content": "NEW OPENING: Magic Kingdom's first bar opened August 29, 2025. Reservations highly recommended.",
+        "priority": 5
+      },
+      {
+        "id": "beak-barrel-tip-2",
+        "category": "general",
+        "content": "Features Captain's Quarters with themed booths telling different pirate lord stories",
+        "priority": 4
+      },
+      {
+        "id": "beak-barrel-tip-3",
+        "category": "general",
+        "content": "Try the Treasure Trove non-alcoholic drink with edible treats or Port of Call gin cocktail",
+        "priority": 3
+      }
+    ],
+    "tags": ["new", "pirates", "historic", "first-bar", "themed", "adventureland", "reservations"],
+    "cuisineType": "Cocktails & Caribbean Small Plates",
+    "kidFriendly": true,
+    "operatingHours": {
+      "daily": "Check My Disney Experience app for current hours"
+    },
+    "reservationWindow": 60,
+    "features": {
+      "mobileOrder": false,
+      "entertainment": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "vegetarianOptions": true,
+      "veganOptions": false,
+      "glutenFreeOptions": true,
       "characterDining": false
     }
   }

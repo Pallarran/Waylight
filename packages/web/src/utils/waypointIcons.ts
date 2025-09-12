@@ -116,97 +116,149 @@ export const ATTRACTION_ICONS: Record<keyof AttractionFeatures, WaypointIcon> = 
   }
 };
 
-// EAT-specific icons for restaurant features
+// EAT-specific icons for restaurant features - Standardized Feature Set
 export const EAT_ICONS: Record<string, WaypointIcon> = {
-  // Service Types
-  'mobile-order': {
+  // Service & Ordering (6 Core Options)
+  'Mobile Order': {
     emoji: '📱',
     label: 'Mobile Order',
-    description: 'Mobile ordering available to skip the line',
+    description: 'Mobile ordering available to skip lines',
     tier: 1
   },
-  'adr-required': {
+  'ADR Required': {
     emoji: '📅',
     label: 'ADR Required',
-    description: 'Advanced Dining Reservations required',
+    description: 'Advanced dining reservations required',
     tier: 1
   },
-  
-  // Seating & Atmosphere
-  'indoor-seating': {
-    emoji: '🏠',
-    label: 'Indoor',
-    description: 'Climate-controlled indoor seating',
-    tier: 2
-  },
-  'outdoor-seating': {
-    emoji: '🌤️',
-    label: 'Outdoor',
-    description: 'Open-air outdoor seating',
-    tier: 2
-  },
-  'upstairs-dining': {
-    emoji: '⬆️',
-    label: 'Upstairs',
-    description: 'Additional seating on upper level',
-    tier: 2
-  },
-  'entertainment': {
-    emoji: '🎭',
-    label: 'Entertainment',
-    description: 'Live entertainment or shows',
+  'Walk-up Available': {
+    emoji: '🚶',
+    label: 'Walk-up Available',
+    description: 'Accepts walk-up guests without reservations',
     tier: 1
   },
-  'castle-views': {
-    emoji: '🏰',
-    label: 'Castle Views',
-    description: 'Dining with Cinderella Castle views',
-    tier: 1
-  },
-  
-  // Special Features
-  'toppings-bar': {
-    emoji: '🥗',
-    label: 'Toppings Bar',
-    description: 'Self-service toppings and condiments',
+  'Counter Service': {
+    emoji: '🍔',
+    label: 'Counter Service',
+    description: 'Order at counter, no table service',
     tier: 2
   },
-  'themed': {
-    emoji: '🎨',
-    label: 'Themed',
-    description: 'Immersive theming and decor',
+  'Table Service': {
+    emoji: '🍽️',
+    label: 'Table Service',
+    description: 'Full table service with servers',
     tier: 2
   },
-  'character-dining': {
+  'Self-Service': {
+    emoji: '🥤',
+    label: 'Self-Service',
+    description: 'Buffet, food court, or self-service style',
+    tier: 2
+  },
+  'Reservations Recommended': {
+    emoji: '📞',
+    label: 'Reservations Recommended',
+    description: 'Reservations recommended but not required',
+    tier: 2
+  },
+
+  // Dining Experience (8 Core Options)
+  'Character Dining': {
     emoji: '🐭',
     label: 'Character Dining',
-    description: 'Disney character meet & greets',
+    description: 'Character meet & greets during meal',
     tier: 1
   },
-  
-  // Dietary & Accessibility
-  'vegetarian': {
-    emoji: '🥬',
-    label: 'Vegetarian',
-    description: 'Vegetarian options available',
+  'Entertainment': {
+    emoji: '🎭',
+    label: 'Entertainment',
+    description: 'Live shows, music, or performances',
+    tier: 1
+  },
+  'Scenic Views': {
+    emoji: '🏰',
+    label: 'Scenic Views',
+    description: 'Unique views of castle, lagoon, or parks',
+    tier: 1
+  },
+  'Themed Atmosphere': {
+    emoji: '🎬',
+    label: 'Themed Atmosphere',
+    description: 'Special theming or immersive environment',
     tier: 2
   },
-  'vegan': {
+  'Outdoor Seating': {
+    emoji: '🌤️',
+    label: 'Outdoor Seating',
+    description: 'Open-air dining available',
+    tier: 2
+  },
+  'Bar/Lounge': {
+    emoji: '🍸',
+    label: 'Bar/Lounge',
+    description: 'Full bar service with cocktails',
+    tier: 2
+  },
+  'Family Style': {
+    emoji: '👨‍👩‍👧‍👦',
+    label: 'Family Style',
+    description: 'Shared platters served to table',
+    tier: 2
+  },
+  'Fine Dining': {
+    emoji: '💎',
+    label: 'Fine Dining',
+    description: 'Upscale signature dining experience',
+    tier: 1
+  },
+
+  // Dietary & Accessibility (6 Core Options)
+  'Vegetarian Options': {
+    emoji: '🥗',
+    label: 'Vegetarian Options',
+    description: 'Substantial vegetarian menu options',
+    tier: 2
+  },
+  'Vegan Options': {
     emoji: '🌱',
-    label: 'Vegan',
-    description: 'Vegan options available',
+    label: 'Vegan Options',
+    description: 'Plant-based menu items available',
     tier: 2
   },
-  'gluten-free': {
+  'Gluten-Free Options': {
     emoji: '🌾',
-    label: 'Gluten-Free',
-    description: 'Gluten-free options available',
+    label: 'Gluten-Free Options',
+    description: 'Dedicated gluten-free preparations',
     tier: 2
   },
-  'alcohol': {
+  'Alcohol Served': {
     emoji: '🍷',
-    label: 'Alcohol',
-    description: 'Alcoholic beverages served',
+    label: 'Alcohol Served',
+    description: 'Beer, wine, or cocktails available',
+    tier: 2
+  },
+  'Kid Friendly': {
+    emoji: '👶',
+    label: 'Kid Friendly',
+    description: 'Child-friendly menu and atmosphere',
+    tier: 2
+  },
+  'Allergy Friendly': {
+    emoji: '⚕️',
+    label: 'Allergy Friendly',
+    description: 'Accommodates food allergies and dietary restrictions',
+    tier: 2
+  },
+  'Healthy Options': {
+    emoji: '🥗',
+    label: 'Healthy Options',
+    description: 'Health-conscious menu selections',
+    tier: 2
+  },
+  'Large Portions': {
+    emoji: '🍽️',
+    label: 'Large Portions',
+    description: 'Generous serving sizes',
     tier: 2
   }
 };
@@ -417,57 +469,152 @@ export function getAttractionIcons(features?: AttractionFeatures, tier?: 1 | 2):
  * Get icons for EAT items based on their features and properties
  */
 export function getEatIcons(
-  features?: string[], 
+  features?: any, 
   adrRequired?: boolean, 
   mobileOrderAvailable?: boolean,
   alcoholServed?: boolean,
   allergyFriendly?: string[],
+  serviceType?: string,
+  kidFriendly?: boolean,
   tier?: 1 | 2
 ): WaypointIcon[] {
   const activeIcons: WaypointIcon[] = [];
 
-  // Add ADR required icon
+  // Service & Ordering Icons
   if (adrRequired) {
-    const icon = EAT_ICONS['adr-required'];
+    const icon = EAT_ICONS['ADR Required'];
     if (icon && (!tier || icon.tier === tier)) {
       activeIcons.push(icon);
     }
   }
 
-  // Add mobile order icon
   if (mobileOrderAvailable) {
-    const icon = EAT_ICONS['mobile-order'];
+    const icon = EAT_ICONS['Mobile Order'];
     if (icon && (!tier || icon.tier === tier)) {
       activeIcons.push(icon);
     }
   }
 
-  // Add alcohol icon
-  if (alcoholServed) {
-    const icon = EAT_ICONS['alcohol'];
+  // Service type mapping
+  if (serviceType) {
+    let serviceIcon: string | null = null;
+    switch (serviceType) {
+      case 'quick':
+        serviceIcon = 'Counter Service';
+        break;
+      case 'table':
+        serviceIcon = 'Table Service';
+        break;
+      case 'buffet':
+      case 'family-style':
+        serviceIcon = serviceType === 'family-style' ? 'Family Style' : 'Self-Service';
+        break;
+    }
+    
+    if (serviceIcon) {
+      const icon = EAT_ICONS[serviceIcon];
+      if (icon && (!tier || icon.tier === tier)) {
+        activeIcons.push(icon);
+      }
+    }
+  }
+
+  // Add walk-up availability (opposite of ADR required)
+  if (!adrRequired) {
+    const icon = EAT_ICONS['Walk-up Available'];
     if (icon && (!tier || icon.tier === tier)) {
       activeIcons.push(icon);
     }
   }
 
-  // Add feature-based icons
+  // Handle feature object structure
   if (features) {
-    features.forEach(feature => {
-      const icon = EAT_ICONS[feature];
-      if (icon && (!tier || icon.tier === tier)) {
-        activeIcons.push(icon);
-      }
-    });
+    if (typeof features === 'object' && !Array.isArray(features)) {
+      // New standardized object format
+      Object.entries(features).forEach(([key, value]) => {
+        if (value === true) {
+          const featureMap: Record<string, string> = {
+            // Service & Ordering (6 features)
+            'mobileOrder': 'Mobile Order',
+            'adrRequired': 'ADR Required', 
+            'walkupAvailable': 'Walk-up Available',
+            'counterService': 'Counter Service',
+            'tableService': 'Table Service',
+            'reservationsRecommended': 'Reservations Recommended',
+            // Dining Experience (8 features)
+            'characterDining': 'Character Dining',
+            'entertainment': 'Entertainment',
+            'views': 'Scenic Views',
+            'themedAtmosphere': 'Themed Atmosphere',
+            'outdoorSeating': 'Outdoor Seating',
+            'barLounge': 'Bar/Lounge',
+            'familyStyle': 'Family Style',
+            'fineDining': 'Fine Dining',
+            // Dietary & Accessibility (6 features)
+            'vegetarianOptions': 'Vegetarian Options',
+            'veganOptions': 'Vegan Options',
+            'glutenFreeOptions': 'Gluten-Free Options',
+            'alcoholServed': 'Alcohol Served',
+            'kidFriendly': 'Kid Friendly',
+            'allergyFriendly': 'Allergy Friendly',
+            'healthyOptions': 'Healthy Options',
+            'largePortions': 'Large Portions'
+          };
+          
+          const iconKey = featureMap[key];
+          if (iconKey) {
+            const icon = EAT_ICONS[iconKey];
+            if (icon && (!tier || icon.tier === tier)) {
+              activeIcons.push(icon);
+            }
+          }
+        }
+      });
+    } else if (Array.isArray(features)) {
+      // Legacy array format - map old names to new
+      features.forEach(feature => {
+        const legacyMap: Record<string, string> = {
+          'character-dining': 'Character Dining',
+          'entertainment': 'Entertainment',
+          'outdoor-seating': 'Outdoor Seating',
+          'castle-views': 'Specialty Views',
+          'signature-dining': 'Fine Dining',
+          'themed': 'Themed Atmosphere',
+          'vegetarian': 'Vegetarian Options',
+          'vegan': 'Vegan Options',
+          'gluten-free': 'Gluten-Free Options',
+          'alcohol': 'Alcohol Served'
+        };
+        
+        const iconKey = legacyMap[feature] || feature;
+        const icon = EAT_ICONS[iconKey];
+        if (icon && (!tier || icon.tier === tier)) {
+          activeIcons.push(icon);
+        }
+      });
+    }
   }
 
-  // Add allergy-friendly icons
-  if (allergyFriendly) {
-    allergyFriendly.forEach(allergy => {
-      const icon = EAT_ICONS[allergy];
-      if (icon && (!tier || icon.tier === tier)) {
-        activeIcons.push(icon);
-      }
-    });
+  // Dietary & Accessibility Icons
+  if (alcoholServed) {
+    const icon = EAT_ICONS['Alcohol Served'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (kidFriendly) {
+    const icon = EAT_ICONS['Kid-Friendly'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
+  }
+
+  if (allergyFriendly && allergyFriendly.length > 0) {
+    const icon = EAT_ICONS['Allergy-Friendly'];
+    if (icon && (!tier || icon.tier === tier)) {
+      activeIcons.push(icon);
+    }
   }
 
   return activeIcons;
@@ -539,47 +686,17 @@ export function getWaypointIcons(
       return getAttractionIcons(waypoint.features as AttractionFeatures, tier);
     }
   } else if (category === 'eat') {
-    const eatFeatures = waypoint.features as any;
-    if (!eatFeatures) return [];
-
-    // Handle both array and object formats for EAT items
-    if (Array.isArray(eatFeatures)) {
-      // Old array format - use directly
-      return getEatIcons(
-        eatFeatures,
-        waypoint.adrRequired,
-        waypoint.mobileOrderAvailable,
-        waypoint.alcoholServed,
-        waypoint.allergyFriendly,
-        tier
-      );
-    } else {
-      // New structured format - extract feature flags
-      const featuresArray: string[] = [];
-      if (eatFeatures.indoorSeating) featuresArray.push('indoor-seating');
-      if (eatFeatures.outdoorSeating) featuresArray.push('outdoor-seating');
-      if (eatFeatures.upstairsDining) featuresArray.push('upstairs-dining');
-      if (eatFeatures.entertainment) featuresArray.push('entertainment');
-      if (eatFeatures.castleViews) featuresArray.push('castle-views');
-      if (eatFeatures.toppingsBar) featuresArray.push('toppings-bar');
-      if (eatFeatures.themed) featuresArray.push('themed');
-      if (eatFeatures.characterDining) featuresArray.push('character-dining');
-      
-      // Extract dietary options
-      const allergyOptions = [];
-      if (eatFeatures.vegetarianOptions) allergyOptions.push('vegetarian');
-      if (eatFeatures.veganOptions) allergyOptions.push('vegan');
-      if (eatFeatures.glutenFreeOptions) allergyOptions.push('gluten-free');
-
-      return getEatIcons(
-        featuresArray,
-        eatFeatures.adrRequired,
-        eatFeatures.mobileOrder,
-        eatFeatures.alcoholServed,
-        allergyOptions.length > 0 ? allergyOptions : undefined,
-        tier
-      );
-    }
+    // EAT item - pass all relevant properties to getEatIcons for processing
+    return getEatIcons(
+      waypoint.features,
+      waypoint.adrRequired,
+      waypoint.mobileOrderAvailable,
+      waypoint.alcoholServed,
+      waypoint.allergyFriendly,
+      (waypoint as any).serviceType,
+      (waypoint as any).kidFriendly,
+      tier
+    );
   } else if (category === 'stay') {
     // STAY item - extract amenities from structured features
     const stayFeatures = waypoint.features as any;

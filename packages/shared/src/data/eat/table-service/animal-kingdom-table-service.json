@@ -23,7 +23,17 @@
       }
     ],
     "tags": ["signature-dining", "fine-dining", "global-cuisine", "imagineers", "upscale"],
-    "features": ["signature-dining", "global-cuisine", "imagineering-artwork"],
+    "features": {
+      "fineDining": true,
+      "themedAtmosphere": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "glutenFreeOptions": true,
+      "tableService": true
+    },
     "cuisineType": "Global Fine Dining",
     "adrRequired": true,
     "mobileOrderAvailable": false,
@@ -60,7 +70,16 @@
       }
     ],
     "tags": ["african", "indian", "animal-views", "bread-service", "savanna"],
-    "features": ["animal-views", "bread-service", "savanna-views"],
+    "features": {
+      "views": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "glutenFreeOptions": true,
+      "tableService": true
+    },
     "cuisineType": "African & Indian",
     "adrRequired": true,
     "mobileOrderAvailable": false,
@@ -97,7 +116,17 @@
       }
     ],
     "tags": ["african", "buffet", "marketplace", "50-dishes", "unique-flavors"],
-    "features": ["buffet-style", "african-cuisine", "marketplace-setting"],
+    "features": {
+      "familyStyle": true,
+      "themedAtmosphere": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "glutenFreeOptions": true,
+      "tableService": true
+    },
     "cuisineType": "African",
     "adrRequired": true,
     "mobileOrderAvailable": false,
@@ -134,7 +163,18 @@
       }
     ],
     "tags": ["character-dining", "safari", "donald-duck", "african-inspired", "buffet"],
-    "features": ["character-dining", "buffet-style", "safari-themed"],
+    "features": {
+      "characterDining": true,
+      "familyStyle": true,
+      "themedAtmosphere": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "glutenFreeOptions": true,
+      "tableService": true
+    },
     "cuisineType": "African & American",
     "adrRequired": true,
     "mobileOrderAvailable": false,
@@ -172,7 +212,16 @@
       }
     ],
     "tags": ["pan-asian", "nepalese", "artifacts", "landry's", "intricate-decor"],
-    "features": ["pan-asian-cuisine", "nepalese-theming", "landry's-operated"],
+    "features": {
+      "themedAtmosphere": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "glutenFreeOptions": true,
+      "tableService": true
+    },
     "cuisineType": "Pan-Asian",
     "adrRequired": true,
     "mobileOrderAvailable": false,
@@ -209,7 +258,16 @@
       }
     ],
     "tags": ["rainforest", "animatronic", "thunderstorms", "immersive", "loud"],
-    "features": ["rainforest-theming", "animatronic-animals", "thunderstorms"],
+    "features": {
+      "themedAtmosphere": true,
+      "entertainment": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "tableService": true
+    },
     "cuisineType": "American",
     "adrRequired": true,
     "mobileOrderAvailable": false,

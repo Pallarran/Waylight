@@ -31,7 +31,6 @@
     "reservationWindow": 0,
     "features": {
       "mobileOrder": false,
-      "indoorSeating": true,
       "entertainment": false,
       "adrRequired": false,
       "alcoholServed": true,
@@ -73,13 +72,59 @@
     "reservationWindow": 0,
     "features": {
       "mobileOrder": false,
-      "indoorSeating": true,
       "entertainment": false,
       "adrRequired": false,
       "alcoholServed": true,
       "vegetarianOptions": true,
       "veganOptions": false,
       "glutenFreeOptions": false,
+      "characterDining": false
+    }
+  },
+  {
+    "id": "geo-82-spaceship-earth-lounge",
+    "parkId": "epcot",
+    "name": "GEO-82",
+    "description": "Adults-only Spaceship Earth-themed lounge offering innovative cocktails and small plates with stunning views of World Celebration gardens. OPENED JUNE 4, 2025.",
+    "location": "World Celebration (Spaceship Earth exit area)",
+    "type": "lounge",
+    "serviceType": "lounge",
+    "priceLevel": 4,
+    "tips": [
+      {
+        "id": "geo-82-tip-1",
+        "category": "strategy",
+        "content": "NEW OPENING: Adults-only lounge opened June 4, 2025. Advanced dining reservations required 60 days ahead.",
+        "priority": 5
+      },
+      {
+        "id": "geo-82-tip-2",
+        "category": "general",
+        "content": "Open even when Spaceship Earth ride is closed for refurbishment",
+        "priority": 4
+      },
+      {
+        "id": "geo-82-tip-3",
+        "category": "general",
+        "content": "Beautiful garden views and themed cocktails celebrating human communication and innovation",
+        "priority": 3
+      }
+    ],
+    "tags": ["new", "adults-only", "spaceship-earth", "upscale", "garden-views", "reservations", "21+"],
+    "cuisineType": "Innovative Cocktails & Small Plates",
+    "kidFriendly": false,
+    "operatingHours": {
+      "daily": "Check My Disney Experience app for current hours"
+    },
+    "reservationWindow": 60,
+    "features": {
+      "mobileOrder": false,
+      "entertainment": false,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "vegetarianOptions": true,
+      "veganOptions": true,
+      "glutenFreeOptions": true,
       "characterDining": false
     }
   }

@@ -23,7 +23,21 @@
       }
     ],
     "tags": ["pandora", "bowls", "navi", "bioluminescent", "healthy"],
-    "features": ["mobile-order", "customizable-bowls", "pandora-theming"],
+    "features": {
+      "mobileOrder": true,
+      "adrRequired": false,
+      "walkupAvailable": true,
+      "entertainment": true,
+      "themedAtmosphere": true,
+      "counterService": true,
+      "healthyOptions": true,
+      "alcoholServed": false,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "veganOptions": true,
+      "glutenFreeOptions": true
+    },
     "cuisineType": "Healthy Bowls",
     "adrRequired": false,
     "mobileOrderAvailable": true,
@@ -69,14 +83,13 @@
     "reservationWindow": 0,
     "features": {
       "mobileOrder": true,
-      "indoorSeating": false,
-      "entertainment": false,
       "adrRequired": false,
+      "walkupAvailable": true,
+      "counterService": true,
+      "outdoorSeating": true,
+      "views": true,
       "alcoholServed": false,
-      "vegetarianOptions": false,
-      "veganOptions": false,
-      "glutenFreeOptions": false,
-      "characterDining": false
+      "kidFriendly": true
     }
   },
   {
@@ -112,14 +125,13 @@
     "reservationWindow": 0,
     "features": {
       "mobileOrder": true,
-      "indoorSeating": true,
-      "entertainment": false,
       "adrRequired": false,
+      "walkupAvailable": true,
+      "counterService": true,
+      "themedAtmosphere": true,
       "alcoholServed": false,
       "vegetarianOptions": true,
-      "veganOptions": false,
-      "glutenFreeOptions": false,
-      "characterDining": false
+      "kidFriendly": true
     }
   }
 ]

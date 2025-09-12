@@ -31,7 +31,6 @@
     "tags": ["sophisticated", "cocktails", "adults", "quiet", "discovery-island"],
     "features": {
       "mobileOrder": false,
-      "indoorSeating": true,
       "entertainment": false,
       "adrRequired": false,
       "alcoholServed": true,
@@ -75,7 +74,7 @@
     "tags": ["africa", "outdoor", "authentic", "harambe", "entertainment"],
     "features": {
       "mobileOrder": false,
-      "indoorSeating": false,
+      "outdoorSeating": true,
       "entertainment": true,
       "adrRequired": false,
       "alcoholServed": true,
@@ -119,7 +118,7 @@
     "tags": ["asia", "frozen-drinks", "casual", "outdoor", "kali-river"],
     "features": {
       "mobileOrder": false,
-      "indoorSeating": false,
+      "outdoorSeating": true,
       "entertainment": false,
       "adrRequired": false,
       "alcoholServed": true,

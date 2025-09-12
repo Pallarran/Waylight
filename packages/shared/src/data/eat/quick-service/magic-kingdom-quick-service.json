@@ -38,14 +38,15 @@
     "reservationWindow": 0,
     "features": {
       "mobileOrder": true,
-      "indoorSeating": true,
-      "entertainment": true,
       "adrRequired": false,
-      "alcoholServed": false,
+      "walkupAvailable": true,
+      "counterService": true,
+      "entertainment": true,
+      "themedAtmosphere": true,
       "vegetarianOptions": true,
-      "veganOptions": false,
-      "glutenFreeOptions": false,
-      "characterDining": false
+      "alcoholServed": false,
+      "kidFriendly": true,
+      "allergyFriendly": false
     }
   },
   {
@@ -78,7 +79,17 @@
       }
     ],
     "tags": ["hot-dogs", "baseball", "main-street", "americana"],
-    "features": ["outdoor-seating", "mobile-order"],
+    "features": {
+      "outdoorSeating": true,
+      "mobileOrder": true,
+      "adrRequired": false,
+      "walkupAvailable": true,
+      "counterService": true,
+      "themedAtmosphere": true,
+      "alcoholServed": false,
+      "kidFriendly": true,
+      "allergyFriendly": false
+    },
     "cuisineType": "American",
     "adrRequired": false,
     "mobileOrderAvailable": true,
@@ -114,18 +125,24 @@
       }
     ],
     "tags": ["burgers", "tex-mex", "outdoor-seating", "frontierland"],
-    "features": ["mobile-order", "toppings-bar", "outdoor-seating"],
     "cuisineType": "Mexican & Southwestern",
-    "adrRequired": false,
-    "mobileOrderAvailable": true,
-    "allergyFriendly": ["vegetarian"],
     "kidFriendly": true,
-    "alcoholServed": false,
     "operatingHours": {
       "lunch": "11:00 AM - 4:00 PM",
       "dinner": "4:00 PM - 9:00 PM"
     },
-    "reservationWindow": 0
+    "reservationWindow": 0,
+    "features": {
+      "mobileOrder": true,
+      "adrRequired": false,
+      "walkupAvailable": true,
+      "counterService": true,
+      "themedAtmosphere": true,
+      "outdoorSeating": true,
+      "vegetarianOptions": true,
+      "alcoholServed": false,
+      "allergyFriendly": true
+    }
   },
   {
     "id": "pinocchio-village-haus",
@@ -151,7 +168,17 @@
       }
     ],
     "tags": ["flatbreads", "fantasyland", "kids-meals", "views"],
-    "features": ["mobile-order", "indoor-seating", "upstairs-dining"],
+    "features": {
+      "mobileOrder": true,
+      "adrRequired": false,
+      "walkupAvailable": true,
+      "counterService": true,
+      "views": true,
+      "vegetarianOptions": true,
+      "alcoholServed": false,
+      "kidFriendly": true,
+      "allergyFriendly": true
+    },
     "cuisineType": "Italian",
     "adrRequired": false,
     "mobileOrderAvailable": true,
@@ -187,7 +214,15 @@
       }
     ],
     "tags": ["seasonal", "mexican", "caribbean", "pirates"],
-    "features": ["mobile-order", "outdoor-seating", "themed"],
+    "features": {
+      "mobileOrder": true,
+      "outdoorSeating": true,
+      "themedAtmosphere": true,
+      "counterService": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true
+    },
     "cuisineType": "Mexican & Caribbean",
     "adrRequired": false,
     "mobileOrderAvailable": true,
@@ -224,7 +259,18 @@
       }
     ],
     "tags": ["seasonal", "burgers", "castle-views", "outdoor"],
-    "features": ["mobile-order", "outdoor-seating", "castle-views"],
+    "features": {
+      "mobileOrder": true,
+      "adrRequired": false,
+      "walkupAvailable": true,
+      "outdoorSeating": true,
+      "views": true,
+      "counterService": true,
+      "vegetarianOptions": true,
+      "alcoholServed": false,
+      "kidFriendly": true,
+      "allergyFriendly": true
+    },
     "cuisineType": "American",
     "adrRequired": false,
     "mobileOrderAvailable": true,

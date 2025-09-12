@@ -1,27 +1,33 @@
 // EAT Category Data - Dining and Food Services
 
 export interface EatFeatures {
-  // Service Features
+  // Service & Ordering (6 Core Options)
   mobileOrder?: boolean;
   adrRequired?: boolean;
-  alcoholServed?: boolean;
+  walkupAvailable?: boolean;
+  counterService?: boolean;
+  tableService?: boolean;
+  reservationsRecommended?: boolean;
   
-  // Seating & Atmosphere
-  indoorSeating?: boolean;
-  outdoorSeating?: boolean;
-  upstairsDining?: boolean;
-  entertainment?: boolean;
-  castleViews?: boolean;
-  
-  // Special Features  
-  toppingsBar?: boolean;
-  themed?: boolean;
+  // Dining Experience (8 Enhanced Options)
   characterDining?: boolean;
+  entertainment?: boolean;
+  views?: boolean;
+  themedAtmosphere?: boolean;
+  outdoorSeating?: boolean;
+  barLounge?: boolean;
+  familyStyle?: boolean;
+  fineDining?: boolean;
   
-  // Dietary Options
+  // Dietary & Accessibility (6 Essential Options)
   vegetarianOptions?: boolean;
   veganOptions?: boolean;
   glutenFreeOptions?: boolean;
+  alcoholServed?: boolean;
+  kidFriendly?: boolean;
+  allergyFriendly?: boolean;
+  healthyOptions?: boolean;
+  largePortions?: boolean;
 }
 
 export interface EatItem {

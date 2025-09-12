@@ -23,7 +23,14 @@
       }
     ],
     "tags": ["star-wars", "cantina", "specialty-cocktails", "dj", "immersive"],
-    "features": ["star-wars-theming", "specialty-cocktails", "dj-entertainment"],
+    "features": {
+      "starWarsTheming": true,
+      "specialtyCocktails": true,
+      "entertainment": true,
+      "themedAtmosphere": true,
+      "adrRequired": true,
+      "alcoholServed": true
+    },
     "cuisineType": "Bar & Cocktails",
     "adrRequired": true,
     "mobileOrderAvailable": false,

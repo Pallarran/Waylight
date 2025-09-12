@@ -23,7 +23,17 @@
       }
     ],
     "tags": ["signature-dining", "hollywood", "cobb-salad", "elegant", "classic"],
-    "features": ["signature-dining", "hollywood-theming", "celebrity-caricatures"],
+    "features": {
+      "fineDining": true,
+      "themedAtmosphere": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "glutenFreeOptions": true,
+      "tableService": true
+    },
     "cuisineType": "American Fine Dining",
     "adrRequired": true,
     "mobileOrderAvailable": false,
@@ -60,7 +70,16 @@
       }
     ],
     "tags": ["themed-dining", "drive-in", "sci-fi", "unique", "1950s"],
-    "features": ["car-booths", "movie-clips", "drive-in-theming"],
+    "features": {
+      "themedAtmosphere": true,
+      "entertainment": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "tableService": true
+    },
     "cuisineType": "American",
     "adrRequired": true,
     "mobileOrderAvailable": false,
@@ -97,7 +116,17 @@
       }
     ],
     "tags": ["themed-dining", "1950s", "interactive", "comfort-food", "family"],
-    "features": ["interactive-service", "1950s-theming", "character-servers"],
+    "features": {
+      "entertainment": true,
+      "themedAtmosphere": true,
+      "characterDining": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "tableService": true
+    },
     "cuisineType": "American Comfort Food",
     "adrRequired": true,
     "mobileOrderAvailable": false,
@@ -114,7 +143,7 @@
     "id": "dhs-mama-melrose",
     "parkId": "hollywood-studios",
     "name": "Mama Melrose's Ristorante Italiano",
-    "description": "Family-owned Italian restaurant serving wood-fired pizzas, pasta, and Italian specialties in a cozy trattoria setting.",
+    "description": "PERMANENTLY CLOSED as of May 11, 2025. Former Italian restaurant closed to make way for Monsters, Inc. themed land development.",
     "location": "Streets of America",
     "type": "table_service",
     "serviceType": "table",
@@ -123,18 +152,27 @@
       {
         "id": "mm-tip-1",
         "category": "strategy",
-        "content": "Wood-fired pizzas and Italian classics. Often easier to get reservations than other table service options.",
-        "priority": 3
+        "content": "PERMANENTLY CLOSED: Closed May 11, 2025 for Monsters, Inc. land construction",
+        "priority": 5
       },
       {
         "id": "mm-tip-2",
         "category": "strategy",
-        "content": "Fantasmic! dinner package available for preferred show seating.",
-        "priority": 4
+        "content": "Consider The Hollywood Brown Derby or 50's Prime Time Café for alternative table service dining",
+        "priority": 3
       }
     ],
-    "tags": ["italian", "wood-fired-pizza", "pasta", "trattoria", "fantasmic-package"],
-    "features": ["wood-fired-ovens", "fantasmic-package", "cozy-atmosphere"],
+    "tags": ["italian", "permanently-closed", "monsters-inc-construction"],
+    "features": {
+      "entertainment": true,
+      "themedAtmosphere": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "tableService": true
+    },
     "cuisineType": "Italian",
     "adrRequired": true,
     "mobileOrderAvailable": false,
@@ -171,7 +209,18 @@
       }
     ],
     "tags": ["character-dining", "buffet", "disney-junior", "art-deco", "family"],
-    "features": ["character-dining", "buffet-style", "art-deco-styling"],
+    "features": {
+      "characterDining": true,
+      "familyStyle": true,
+      "themedAtmosphere": true,
+      "adrRequired": true,
+      "alcoholServed": true,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true,
+      "glutenFreeOptions": true,
+      "tableService": true
+    },
     "cuisineType": "American Buffet",
     "adrRequired": true,
     "mobileOrderAvailable": false,

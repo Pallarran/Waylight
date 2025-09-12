@@ -31,7 +31,7 @@
     "reservationWindow": 0,
     "features": {
       "mobileOrder": true,
-      "indoorSeating": false,
+      "outdoorSeating": true,
       "entertainment": false,
       "adrRequired": false,
       "alcoholServed": false,
@@ -73,7 +73,7 @@
     "reservationWindow": 0,
     "features": {
       "mobileOrder": false,
-      "indoorSeating": false,
+      "outdoorSeating": true,
       "entertainment": false,
       "adrRequired": false,
       "alcoholServed": false,
@@ -115,7 +115,7 @@
     "reservationWindow": 0,
     "features": {
       "mobileOrder": false,
-      "indoorSeating": false,
+      "outdoorSeating": true,
       "entertainment": false,
       "adrRequired": false,
       "alcoholServed": false,

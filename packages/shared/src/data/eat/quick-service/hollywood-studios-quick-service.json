@@ -23,7 +23,17 @@
       }
     ],
     "tags": ["star-wars", "galactic", "themed-dining", "immersive", "unique"],
-    "features": ["mobile-order", "star-wars-theming", "unique-menu"],
+    "features": {
+      "mobileOrder": true,
+      "adrRequired": false,
+      "walkupAvailable": true,
+      "themedAtmosphere": true,
+      "counterService": true,
+      "alcoholServed": false,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "vegetarianOptions": true
+    },
     "cuisineType": "Galactic",
     "adrRequired": false,
     "mobileOrderAvailable": true,
@@ -70,14 +80,14 @@
     "reservationWindow": 0,
     "features": {
       "mobileOrder": true,
-      "indoorSeating": false,
-      "entertainment": false,
       "adrRequired": false,
+      "walkupAvailable": true,
+      "counterService": true,
+      "themedAtmosphere": true,
+      "outdoorSeating": true,
       "alcoholServed": false,
       "vegetarianOptions": true,
-      "veganOptions": false,
-      "glutenFreeOptions": false,
-      "characterDining": false
+      "kidFriendly": true
     }
   },
   {
@@ -113,14 +123,13 @@
     "reservationWindow": 0,
     "features": {
       "mobileOrder": true,
-      "indoorSeating": true,
-      "entertainment": false,
       "adrRequired": false,
+      "walkupAvailable": true,
+      "counterService": true,
+      "themedAtmosphere": true,
       "alcoholServed": false,
       "vegetarianOptions": true,
-      "veganOptions": false,
-      "glutenFreeOptions": false,
-      "characterDining": false
+      "kidFriendly": true
     }
   }
 ]

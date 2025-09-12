@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Clock, MapPin, Users, Star, DollarSign, CalendarCheck, Utensils } from 'lucide-react';
+import { Clock, MapPin, Users, Star, DollarSign, Utensils } from 'lucide-react';
 import type { Attraction } from '../../types';
 import { WaypointCategory } from '../../types';
 import WaypointDetailModal from './WaypointDetailModal';
@@ -107,12 +107,6 @@ export default function WaypointCard({ attraction, showAddToTrip: _showAddToTrip
               <span className="badge badge-secondary">
                 {formatServiceType(attraction.serviceType)}
               </span>
-            )}
-            {attraction.adrRequired && (
-              <div className="flex items-center badge bg-red-100 text-red-800">
-                <CalendarCheck className="w-3 h-3 mr-1" />
-                ADR Required
-              </div>
             )}
           </>
         )}
@@ -243,12 +237,134 @@ export default function WaypointCard({ attraction, showAddToTrip: _showAddToTrip
               </div>
             )}
           </div>
+        ) : isEatCategory ? (
+          <div className="space-y-2">
+            {/* Service & Ordering Features */}
+            {attraction.features && (() => {
+              const serviceOrderingFeatures = ['mobileOrder', 'adrRequired', 'walkupAvailable', 'counterService', 'tableService', 'reservationsRecommended'];
+              const hasServiceFeatures = serviceOrderingFeatures.some(key => attraction.features?.[key]);
+              
+              const icons = getWaypointIcons({
+                category: attraction.category,
+                features: attraction.features
+              });
+              
+              return hasServiceFeatures ? (
+                <div className="flex items-center flex-wrap gap-1">
+                  <span className="text-xs font-medium text-ink mr-2">Service:</span>
+                  {serviceOrderingFeatures.map(key => {
+                    if (!attraction.features?.[key]) return null;
+                    const labelMap: Record<string, string> = {
+                      'mobileOrder': 'Mobile Order',
+                      'adrRequired': 'ADR Required', 
+                      'walkupAvailable': 'Walk-up Available',
+                      'counterService': 'Counter Service',
+                      'tableService': 'Table Service',
+                      'reservationsRecommended': 'Reservations Recommended'
+                    };
+                    const label = labelMap[key];
+                    const icon = icons.find(icon => icon.label === label);
+                    return icon ? (
+                      <span
+                        key={key}
+                        className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-surface border border-surface-dark/20 hover:bg-surface-dark/30 transition-colors cursor-help"
+                        title={`${icon.label}: ${icon.description}`}
+                      >
+                        <span className="text-sm">{icon.emoji}</span>
+                      </span>
+                    ) : null;
+                  })}
+                </div>
+              ) : null;
+            })()}
+
+            {/* Dining Experience */}
+            {attraction.features && (() => {
+              const diningFeatures = ['characterDining', 'entertainment', 'views', 'themedAtmosphere', 'outdoorSeating', 'barLounge', 'familyStyle', 'fineDining'];
+              const hasDiningFeatures = diningFeatures.some(key => attraction.features?.[key]);
+              
+              const icons = getWaypointIcons({
+                category: attraction.category,
+                features: attraction.features
+              });
+              
+              return hasDiningFeatures ? (
+                <div className="flex items-center flex-wrap gap-1">
+                  <span className="text-xs font-medium text-ink mr-2">Experience:</span>
+                  {diningFeatures.map(key => {
+                    if (!attraction.features?.[key]) return null;
+                    const labelMap: Record<string, string> = {
+                      'characterDining': 'Character Dining',
+                      'entertainment': 'Entertainment',
+                      'views': 'Scenic Views',
+                      'themedAtmosphere': 'Themed Atmosphere',
+                      'outdoorSeating': 'Outdoor Seating',
+                      'barLounge': 'Bar/Lounge',
+                      'familyStyle': 'Family Style',
+                      'fineDining': 'Fine Dining'
+                    };
+                    const label = labelMap[key];
+                    const icon = icons.find(icon => icon.label === label);
+                    return icon ? (
+                      <span
+                        key={key}
+                        className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-surface border border-surface-dark/20 hover:bg-surface-dark/30 transition-colors cursor-help"
+                        title={`${icon.label}: ${icon.description}`}
+                      >
+                        <span className="text-sm">{icon.emoji}</span>
+                      </span>
+                    ) : null;
+                  })}
+                </div>
+              ) : null;
+            })()}
+
+            {/* Dietary & Accessibility */}
+            {attraction.features && (() => {
+              const dietaryFeatures = ['vegetarianOptions', 'veganOptions', 'glutenFreeOptions', 'alcoholServed', 'kidFriendly', 'allergyFriendly', 'healthyOptions', 'largePortions'];
+              const hasDietaryFeatures = dietaryFeatures.some(key => attraction.features?.[key]);
+              
+              const icons = getWaypointIcons({
+                category: attraction.category,
+                features: attraction.features
+              });
+              
+              return hasDietaryFeatures ? (
+                <div className="flex items-center flex-wrap gap-1">
+                  <span className="text-xs font-medium text-ink mr-2">Dietary:</span>
+                  {dietaryFeatures.map(key => {
+                    if (!attraction.features?.[key]) return null;
+                    const labelMap: Record<string, string> = {
+                      'vegetarianOptions': 'Vegetarian Options',
+                      'veganOptions': 'Vegan Options',
+                      'glutenFreeOptions': 'Gluten-Free Options',
+                      'alcoholServed': 'Alcohol Served',
+                      'kidFriendly': 'Kid Friendly',
+                      'allergyFriendly': 'Allergy Friendly',
+                      'healthyOptions': 'Healthy Options',
+                      'largePortions': 'Large Portions'
+                    };
+                    const label = labelMap[key];
+                    const icon = icons.find(icon => icon.label === label);
+                    return icon ? (
+                      <span
+                        key={key}
+                        className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-surface border border-surface-dark/20 hover:bg-surface-dark/30 transition-colors cursor-help"
+                        title={`${icon.label}: ${icon.description}`}
+                      >
+                        <span className="text-sm">{icon.emoji}</span>
+                      </span>
+                    ) : null;
+                  })}
+                </div>
+              ) : null;
+            })()}
+          </div>
         ) : (
           <div className="flex flex-wrap gap-1">
             {getWaypointIcons({
               category: attraction.category,
-              features: attraction.features,
-              tier: 1 // Show only essential features on cards
+              features: attraction.features
             }).filter(icon => icon && icon.label).map((icon, index) => (
               <span
                 key={index}
@@ -283,25 +399,6 @@ export default function WaypointCard({ attraction, showAddToTrip: _showAddToTrip
             </div>
           )}
 
-          {/* Additional EAT features - Use standardized icons for Tier 2 features */}
-          <div className="flex flex-wrap gap-1">
-            {getWaypointIcons({
-              category: attraction.category,
-              features: attraction.features,
-              mobileOrderAvailable: attraction.mobileOrderAvailable,
-              adrRequired: attraction.adrRequired,
-              alcoholServed: attraction.alcoholServed,
-              tier: 2 // Show enhanced features in EAT info section
-            }).filter(icon => icon && icon.label).map((icon, index) => (
-              <span
-                key={index}
-                className="inline-flex items-center px-2 py-1 rounded-md text-xs bg-surface border border-surface-dark/20"
-              >
-                <span className="mr-1 text-sm">{icon.emoji}</span>
-                <span>{icon.label}</span>
-              </span>
-            ))}
-          </div>
         </div>
       )}
 
