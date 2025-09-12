@@ -179,6 +179,7 @@ export default function WaypointsWorking() {
       <WaypointIconLegend 
         isOpen={showIconLegend}
         onClose={() => setShowIconLegend(false)}
+        activeCategory={activeCategory}
       />
     </div>
   );

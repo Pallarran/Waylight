@@ -47,9 +47,62 @@ export default function WaypointFilters() {
     setFilters({ resortTier: filters.resortTier === tier ? undefined : tier });
   };
 
+  const handleDoFeatureToggle = (feature: string) => {
+    const currentDoFeatures = filters.doFeatures || {};
+    const newDoFeatures = {
+      ...currentDoFeatures,
+      [feature]: !currentDoFeatures[feature]
+    };
+    
+    // Remove feature if it's false
+    if (!newDoFeatures[feature]) {
+      delete newDoFeatures[feature];
+    }
+    
+    setFilters({ doFeatures: newDoFeatures });
+  };
+
+  const handleEatFeatureToggle = (feature: string) => {
+    const currentEatFeatures = filters.eatFeatures || {};
+    const newEatFeatures = {
+      ...currentEatFeatures,
+      [feature]: !currentEatFeatures[feature]
+    };
+    
+    // Remove feature if it's false
+    if (!newEatFeatures[feature]) {
+      delete newEatFeatures[feature];
+    }
+    
+    setFilters({ eatFeatures: newEatFeatures });
+  };
+
+  const handleStayFeatureToggle = (feature: string) => {
+    const currentStayFeatures = filters.stayFeatures || {};
+    const newStayFeatures = {
+      ...currentStayFeatures,
+      [feature]: !currentStayFeatures[feature]
+    };
+    
+    // Remove feature if it's false
+    if (!newStayFeatures[feature]) {
+      delete newStayFeatures[feature];
+    }
+    
+    setFilters({ stayFeatures: newStayFeatures });
+  };
+
+  const handleIntensityToggle = (intensity: string) => {
+    setFilters({ intensity: filters.intensity === intensity ? undefined : intensity });
+  };
+
   const hasActiveFilters = filters.searchQuery || filters.types.length > 0 || 
                           filters.parkIds.length > 0 || filters.wheelchairAccessible ||
-                          filters.adrRequired || filters.mobileOrderAvailable || filters.priceLevel;
+                          filters.adrRequired || filters.mobileOrderAvailable || filters.priceLevel ||
+                          filters.intensity || filters.resortTier ||
+                          (filters.doFeatures && Object.keys(filters.doFeatures).length > 0) ||
+                          (filters.eatFeatures && Object.keys(filters.eatFeatures).length > 0) ||
+                          (filters.stayFeatures && Object.keys(filters.stayFeatures).length > 0);
 
   return (
     <div className="space-y-4">
@@ -130,30 +183,69 @@ export default function WaypointFilters() {
         {/* DO Category Quick Filters */}
         {activeCategory === WaypointCategory.DO && (
           <>
+            {/* Lightning Lane Filters */}
             <button
-              onClick={() => handleTypeToggle(AttractionType.RIDE)}
+              onClick={() => handleDoFeatureToggle('singlePass')}
               className={`btn-secondary btn-sm ${
-                filters.types.includes(AttractionType.RIDE) ? 'bg-sea/10 text-sea-dark' : ''
+                filters.doFeatures?.singlePass ? 'bg-sea/10 text-sea-dark' : ''
               }`}
             >
-              🎢 Rides
+              🎫 Single Pass
             </button>
             <button
-              onClick={() => handleTypeToggle(AttractionType.SHOW)}
+              onClick={() => handleDoFeatureToggle('multiPass')}
               className={`btn-secondary btn-sm ${
-                filters.types.includes(AttractionType.SHOW) ? 'bg-sea/10 text-sea-dark' : ''
+                filters.doFeatures?.multiPass ? 'bg-sea/10 text-sea-dark' : ''
               }`}
             >
-              🎭 Shows
+              🎟️ Multi Pass
+            </button>
+            
+            {/* Experience Features */}
+            <button
+              onClick={() => handleDoFeatureToggle('scary')}
+              className={`btn-secondary btn-sm ${
+                filters.doFeatures?.scary ? 'bg-sea/10 text-sea-dark' : ''
+              }`}
+            >
+              👻 Scary
             </button>
             <button
-              onClick={() => handleTypeToggle(AttractionType.MEET_GREET)}
+              onClick={() => handleDoFeatureToggle('bigDrops')}
               className={`btn-secondary btn-sm ${
-                filters.types.includes(AttractionType.MEET_GREET) ? 'bg-sea/10 text-sea-dark' : ''
+                filters.doFeatures?.bigDrops ? 'bg-sea/10 text-sea-dark' : ''
               }`}
             >
-              🎯 Meet & Greets
+              ⛰️ Big Drops
             </button>
+            <button
+              onClick={() => handleDoFeatureToggle('launchSpeed')}
+              className={`btn-secondary btn-sm ${
+                filters.doFeatures?.launchSpeed ? 'bg-sea/10 text-sea-dark' : ''
+              }`}
+            >
+              🚀 Launch/Speed
+            </button>
+            
+            {/* Intensity Filters */}
+            <button
+              onClick={() => handleIntensityToggle('low')}
+              className={`btn-secondary btn-sm ${
+                filters.intensity === 'low' ? 'bg-sea/10 text-sea-dark' : ''
+              }`}
+            >
+              😌 Low Intensity
+            </button>
+            <button
+              onClick={() => handleIntensityToggle('high')}
+              className={`btn-secondary btn-sm ${
+                filters.intensity === 'high' ? 'bg-sea/10 text-sea-dark' : ''
+              }`}
+            >
+              🤯 High Intensity
+            </button>
+            
+            {/* Accessibility */}
             <button
               onClick={() => setFilters({ wheelchairAccessible: !filters.wheelchairAccessible })}
               className={`btn-secondary btn-sm ${
@@ -168,6 +260,7 @@ export default function WaypointFilters() {
         {/* EAT Category Quick Filters */}
         {activeCategory === WaypointCategory.EAT && (
           <>
+            {/* Service Types */}
             <button
               onClick={() => handleServiceTypeToggle('quick')}
               className={`btn-secondary btn-sm ${
@@ -192,6 +285,34 @@ export default function WaypointFilters() {
             >
               🍿 Snacks
             </button>
+            
+            {/* Enhanced EAT Features */}
+            <button
+              onClick={() => handleEatFeatureToggle('characterDining')}
+              className={`btn-secondary btn-sm ${
+                filters.eatFeatures?.characterDining ? 'bg-sea/10 text-sea-dark' : ''
+              }`}
+            >
+              🐭 Character Dining
+            </button>
+            <button
+              onClick={() => handleEatFeatureToggle('fineDining')}
+              className={`btn-secondary btn-sm ${
+                filters.eatFeatures?.fineDining ? 'bg-sea/10 text-sea-dark' : ''
+              }`}
+            >
+              ⭐ Signature Dining
+            </button>
+            <button
+              onClick={() => handleEatFeatureToggle('alcoholServed')}
+              className={`btn-secondary btn-sm ${
+                filters.eatFeatures?.alcoholServed ? 'bg-sea/10 text-sea-dark' : ''
+              }`}
+            >
+              🍷 Alcohol
+            </button>
+            
+            {/* Service & Convenience */}
             <button
               onClick={() => setFilters({ adrRequired: !filters.adrRequired })}
               className={`btn-secondary btn-sm ${
@@ -201,14 +322,6 @@ export default function WaypointFilters() {
               📅 ADR Required
             </button>
             <button
-              onClick={() => setFilters({ priceLevel: filters.priceLevel === 1 ? undefined : 1 })}
-              className={`btn-secondary btn-sm ${
-                filters.priceLevel === 1 ? 'bg-sea/10 text-sea-dark' : ''
-              }`}
-            >
-              💰 Budget-Friendly
-            </button>
-            <button
               onClick={() => setFilters({ mobileOrderAvailable: !filters.mobileOrderAvailable })}
               className={`btn-secondary btn-sm ${
                 filters.mobileOrderAvailable ? 'bg-sea/10 text-sea-dark' : ''
@@ -216,36 +329,23 @@ export default function WaypointFilters() {
             >
               📱 Mobile Order
             </button>
+            
+            {/* Price Levels */}
+            <button
+              onClick={() => setFilters({ priceLevel: filters.priceLevel === 1 ? undefined : 1 })}
+              className={`btn-secondary btn-sm ${
+                filters.priceLevel === 1 ? 'bg-sea/10 text-sea-dark' : ''
+              }`}
+            >
+              💰 Budget-Friendly
+            </button>
           </>
         )}
 
         {/* STAY Category Quick Filters */}
         {activeCategory === WaypointCategory.STAY && (
           <>
-            <button
-              onClick={() => handleTypeToggle(AttractionType.RESORT)}
-              className={`btn-secondary btn-sm ${
-                filters.types.includes(AttractionType.RESORT) ? 'bg-sea/10 text-sea-dark' : ''
-              }`}
-            >
-              🏰 Disney Resorts
-            </button>
-            <button
-              onClick={() => handleTypeToggle(AttractionType.UNIVERSAL_RESORT)}
-              className={`btn-secondary btn-sm ${
-                filters.types.includes(AttractionType.UNIVERSAL_RESORT) ? 'bg-sea/10 text-sea-dark' : ''
-              }`}
-            >
-              🎬 Universal Resorts
-            </button>
-            <button
-              onClick={() => handleTypeToggle(AttractionType.HOTEL)}
-              className={`btn-secondary btn-sm ${
-                filters.types.includes(AttractionType.HOTEL) ? 'bg-sea/10 text-sea-dark' : ''
-              }`}
-            >
-              🏨 Other Hotels
-            </button>
+            {/* Resort Tiers */}
             <button
               onClick={() => handleResortTierToggle('deluxe')}
               className={`btn-secondary btn-sm ${
@@ -269,6 +369,68 @@ export default function WaypointFilters() {
               }`}
             >
               💰 Value
+            </button>
+            
+            {/* Transportation Features */}
+            <button
+              onClick={() => handleStayFeatureToggle('monorailAccess')}
+              className={`btn-secondary btn-sm ${
+                filters.stayFeatures?.monorailAccess ? 'bg-sea/10 text-sea-dark' : ''
+              }`}
+            >
+              🚝 Monorail
+            </button>
+            <button
+              onClick={() => handleStayFeatureToggle('boatAccess')}
+              className={`btn-secondary btn-sm ${
+                filters.stayFeatures?.boatAccess ? 'bg-sea/10 text-sea-dark' : ''
+              }`}
+            >
+              ⛵ Boat Access
+            </button>
+            <button
+              onClick={() => handleStayFeatureToggle('walkingDistance')}
+              className={`btn-secondary btn-sm ${
+                filters.stayFeatures?.walkingDistance ? 'bg-sea/10 text-sea-dark' : ''
+              }`}
+            >
+              🚶 Walking Distance
+            </button>
+            
+            {/* Recreation Features */}
+            <button
+              onClick={() => handleStayFeatureToggle('pools')}
+              className={`btn-secondary btn-sm ${
+                filters.stayFeatures?.pools ? 'bg-sea/10 text-sea-dark' : ''
+              }`}
+            >
+              🏊 Pool
+            </button>
+            <button
+              onClick={() => handleStayFeatureToggle('spa')}
+              className={`btn-secondary btn-sm ${
+                filters.stayFeatures?.spa ? 'bg-sea/10 text-sea-dark' : ''
+              }`}
+            >
+              💆 Spa
+            </button>
+            
+            {/* Hotel Types */}
+            <button
+              onClick={() => handleTypeToggle(AttractionType.RESORT)}
+              className={`btn-secondary btn-sm ${
+                filters.types.includes(AttractionType.RESORT) ? 'bg-sea/10 text-sea-dark' : ''
+              }`}
+            >
+              🏰 Disney Resorts
+            </button>
+            <button
+              onClick={() => handleTypeToggle(AttractionType.UNIVERSAL_RESORT)}
+              className={`btn-secondary btn-sm ${
+                filters.types.includes(AttractionType.UNIVERSAL_RESORT) ? 'bg-sea/10 text-sea-dark' : ''
+              }`}
+            >
+              🎬 Universal Resorts
             </button>
           </>
         )}
@@ -352,75 +514,239 @@ export default function WaypointFilters() {
               </div>
             )}
 
-            {/* DO Category Filters */}
+            
+            {/* DO Category Feature Filters */}
             {(activeCategory === 'all' || activeCategory === WaypointCategory.DO) && (
               <div className="space-y-4">
                 <h3 className="font-semibold text-ink border-b border-surface-dark/30 pb-2">
-                  🎢 Things to Do
+                  🎢 DO Features
                 </h3>
                 
                 <div className="grid md:grid-cols-3 gap-6">
-                  {/* DO Types */}
+                  {/* Skip Lines & Services */}
                   <div>
-                    <h4 className="font-medium text-ink mb-3">Types</h4>
-                    <div className="space-y-2">
-                      {[AttractionType.RIDE, AttractionType.SHOW, AttractionType.MEET_GREET, AttractionType.ATTRACTION, AttractionType.EXPERIENCE].map(type => (
-                        <label key={type} className="flex items-center cursor-pointer">
-                          <input
-                            type="checkbox"
-                            checked={filters.types.includes(type)}
-                            onChange={() => handleTypeToggle(type)}
-                            className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
-                          />
-                          <span className="text-sm text-ink capitalize">
-                            {type.replace('_', ' ')}
-                          </span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Intensity Level */}
-                  <div>
-                    <h4 className="font-medium text-ink mb-3">Intensity</h4>
-                    <div className="space-y-2">
-                      <label className="flex items-center cursor-pointer">
-                        <input
-                          type="radio"
-                          name="intensity"
-                          value="all"
-                          onChange={(e) => handleIntensityFilter(e.target.value)}
-                          className="mr-2 text-sea focus:ring-sea/20"
-                        />
-                        <span className="text-sm text-ink">All Levels</span>
-                      </label>
-                      {Object.values(IntensityLevel).map(level => (
-                        <label key={level} className="flex items-center cursor-pointer">
-                          <input
-                            type="radio"
-                            name="intensity"
-                            value={level}
-                            onChange={(e) => handleIntensityFilter(e.target.value)}
-                            className="mr-2 text-sea focus:ring-sea/20"
-                          />
-                          <span className="text-sm text-ink capitalize">{level}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Accessibility */}
-                  <div>
-                    <h4 className="font-medium text-ink mb-3">Accessibility</h4>
+                    <h4 className="font-medium text-ink mb-3 flex items-center">
+                      <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                      Skip Lines & Services
+                    </h4>
                     <div className="space-y-2">
                       <label className="flex items-center cursor-pointer">
                         <input
                           type="checkbox"
-                          checked={filters.wheelchairAccessible}
-                          onChange={() => setFilters({ wheelchairAccessible: !filters.wheelchairAccessible })}
+                          checked={filters.doFeatures?.multiPass || false}
+                          onChange={() => handleDoFeatureToggle('multiPass')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🎟️ Multi Pass</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.doFeatures?.singlePass || false}
+                          onChange={() => handleDoFeatureToggle('singlePass')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🎫 Single Pass</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.doFeatures?.singleRider || false}
+                          onChange={() => handleDoFeatureToggle('singleRider')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">👤 Single Rider</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.doFeatures?.riderSwitch || false}
+                          onChange={() => handleDoFeatureToggle('riderSwitch')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">👨‍👩‍👧‍👦 Rider Switch</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.doFeatures?.mobileCheckin || false}
+                          onChange={() => handleDoFeatureToggle('mobileCheckin')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">📱 Mobile Check-in</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.doFeatures?.photoPass || false}
+                          onChange={() => handleDoFeatureToggle('photoPass')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">📸 PhotoPass</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* What to Expect */}
+                  <div>
+                    <h4 className="font-medium text-ink mb-3 flex items-center">
+                      <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                      What to Expect
+                    </h4>
+                    <div className="space-y-2">
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.doFeatures?.scary || false}
+                          onChange={() => handleDoFeatureToggle('scary')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">👻 Scary</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.doFeatures?.bigDrops || false}
+                          onChange={() => handleDoFeatureToggle('bigDrops')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">⛰️ Big Drops</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.doFeatures?.launchSpeed || false}
+                          onChange={() => handleDoFeatureToggle('launchSpeed')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🚀 Launch/Speed</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.doFeatures?.getsWet || false}
+                          onChange={() => handleDoFeatureToggle('getsWet')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">💧 Gets Wet</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.doFeatures?.spinningMotion || false}
+                          onChange={() => handleDoFeatureToggle('spinningMotion')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🌀 Spinning Motion</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.doFeatures?.darkRide || false}
+                          onChange={() => handleDoFeatureToggle('darkRide')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🌑 Dark Ride</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.doFeatures?.interactiveElements || false}
+                          onChange={() => handleDoFeatureToggle('interactiveElements')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🎮 Interactive</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.doFeatures?.characterMeet || false}
+                          onChange={() => handleDoFeatureToggle('characterMeet')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🐭 Character Meet</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.doFeatures?.livePerformance || false}
+                          onChange={() => handleDoFeatureToggle('livePerformance')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🎭 Live Performance</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.doFeatures?.airConditioning || false}
+                          onChange={() => handleDoFeatureToggle('airConditioning')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">❄️ Air Conditioning</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Important Notes */}
+                  <div>
+                    <h4 className="font-medium text-ink mb-3 flex items-center">
+                      <span className="w-2 h-2 bg-red-500 rounded-full mr-2"></span>
+                      Important Notes
+                    </h4>
+                    <div className="space-y-2">
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.doFeatures?.heightRequirement || false}
+                          onChange={() => handleDoFeatureToggle('heightRequirement')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">📏 Height Requirement</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.doFeatures?.motionSensitivity || false}
+                          onChange={() => handleDoFeatureToggle('motionSensitivity')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🤢 Motion Sensitivity</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.doFeatures?.pregnancyAdvisory || false}
+                          onChange={() => handleDoFeatureToggle('pregnancyAdvisory')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🤰 Pregnancy Advisory</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.doFeatures?.wheelchairAccessible || false}
+                          onChange={() => handleDoFeatureToggle('wheelchairAccessible')}
                           className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
                         />
                         <span className="text-sm text-ink">♿ Wheelchair Accessible</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.doFeatures?.transferRequired || false}
+                          onChange={() => handleDoFeatureToggle('transferRequired')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🚶 Transfer Required</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.doFeatures?.rainSafe || false}
+                          onChange={() => handleDoFeatureToggle('rainSafe')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">☔ Rain Safe</span>
                       </label>
                     </div>
                   </div>
@@ -428,67 +754,35 @@ export default function WaypointFilters() {
               </div>
             )}
 
-            {/* EAT Category Filters */}
+            {/* EAT Category Feature Filters */}
             {(activeCategory === 'all' || activeCategory === WaypointCategory.EAT) && (
               <div className="space-y-4">
                 <h3 className="font-semibold text-ink border-b border-surface-dark/30 pb-2">
-                  🍽️ Places to Eat
+                  🍽️ EAT Features
                 </h3>
                 
                 <div className="grid md:grid-cols-3 gap-6">
-                  {/* Service Types */}
+                  {/* Service & Ordering */}
                   <div>
-                    <h4 className="font-medium text-ink mb-3">Service Type</h4>
-                    <div className="space-y-2">
-                      {['quick', 'table', 'snack', 'lounge'].map(serviceType => (
-                        <label key={serviceType} className="flex items-center cursor-pointer">
-                          <input
-                            type="checkbox"
-                            checked={filters.serviceTypes?.includes(serviceType) || false}
-                            onChange={() => handleServiceTypeToggle(serviceType)}
-                            className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
-                          />
-                          <span className="text-sm text-ink capitalize">
-                            {serviceType === 'quick' ? 'Quick Service' :
-                             serviceType === 'table' ? 'Table Service' :
-                             serviceType}
-                          </span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Price Level */}
-                  <div>
-                    <h4 className="font-medium text-ink mb-3">Price Range</h4>
-                    <div className="space-y-2">
-                      {[1, 2, 3, 4].map(level => (
-                        <label key={level} className="flex items-center cursor-pointer">
-                          <input
-                            type="radio"
-                            name="priceLevel"
-                            value={level}
-                            checked={filters.priceLevel === level}
-                            onChange={() => setFilters({ priceLevel: filters.priceLevel === level ? undefined : level })}
-                            className="mr-2 text-sea focus:ring-sea/20"
-                          />
-                          <span className="text-sm text-ink">
-                            {'$'.repeat(level)} {level === 1 ? 'Budget' : level === 2 ? 'Moderate' : level === 3 ? 'Expensive' : 'Luxury'}
-                          </span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Special Options */}
-                  <div>
-                    <h4 className="font-medium text-ink mb-3">Special Options</h4>
+                    <h4 className="font-medium text-ink mb-3 flex items-center">
+                      <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                      Service & Ordering
+                    </h4>
                     <div className="space-y-2">
                       <label className="flex items-center cursor-pointer">
                         <input
                           type="checkbox"
-                          checked={filters.adrRequired || false}
-                          onChange={() => setFilters({ adrRequired: !filters.adrRequired })}
+                          checked={filters.eatFeatures?.mobileOrder || false}
+                          onChange={() => handleEatFeatureToggle('mobileOrder')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">📱 Mobile Order</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.eatFeatures?.adrRequired || false}
+                          onChange={() => handleEatFeatureToggle('adrRequired')}
                           className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
                         />
                         <span className="text-sm text-ink">📅 ADR Required</span>
@@ -496,11 +790,139 @@ export default function WaypointFilters() {
                       <label className="flex items-center cursor-pointer">
                         <input
                           type="checkbox"
-                          checked={filters.mobileOrderAvailable || false}
-                          onChange={() => setFilters({ mobileOrderAvailable: !filters.mobileOrderAvailable })}
+                          checked={filters.eatFeatures?.quickService || false}
+                          onChange={() => handleEatFeatureToggle('quickService')}
                           className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
                         />
-                        <span className="text-sm text-ink">📱 Mobile Order Available</span>
+                        <span className="text-sm text-ink">🍔 Quick Service</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.eatFeatures?.groupFriendly || false}
+                          onChange={() => handleEatFeatureToggle('groupFriendly')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">👥 Group Friendly</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Dining Experience */}
+                  <div>
+                    <h4 className="font-medium text-ink mb-3 flex items-center">
+                      <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                      Dining Experience
+                    </h4>
+                    <div className="space-y-2">
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.eatFeatures?.characterDining || false}
+                          onChange={() => handleEatFeatureToggle('characterDining')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🐭 Character Dining</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.eatFeatures?.fineDining || false}
+                          onChange={() => handleEatFeatureToggle('fineDining')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">💎 Fine Dining</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.eatFeatures?.scenicViews || false}
+                          onChange={() => handleEatFeatureToggle('scenicViews')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🏰 Scenic Views</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.eatFeatures?.liveEntertainment || false}
+                          onChange={() => handleEatFeatureToggle('liveEntertainment')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🎭 Live Entertainment</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.eatFeatures?.buffet || false}
+                          onChange={() => handleEatFeatureToggle('buffet')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🍛 Buffet</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.eatFeatures?.familyStyle || false}
+                          onChange={() => handleEatFeatureToggle('familyStyle')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">👨‍👩‍👧‍👦 Family Style</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Dietary & Accessibility */}
+                  <div>
+                    <h4 className="font-medium text-ink mb-3 flex items-center">
+                      <span className="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>
+                      Dietary & Accessibility
+                    </h4>
+                    <div className="space-y-2">
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.eatFeatures?.alcoholServed || false}
+                          onChange={() => handleEatFeatureToggle('alcoholServed')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🍷 Alcohol Served</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.eatFeatures?.allergyFriendly || false}
+                          onChange={() => handleEatFeatureToggle('allergyFriendly')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">⚕️ Allergy Friendly</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.eatFeatures?.healthyOptions || false}
+                          onChange={() => handleEatFeatureToggle('healthyOptions')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🥗 Healthy Options</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.eatFeatures?.signatureDish || false}
+                          onChange={() => handleEatFeatureToggle('signatureDish')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🍽️ Signature Dish</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.eatFeatures?.seasonal || false}
+                          onChange={() => handleEatFeatureToggle('seasonal')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🍂 Seasonal Menu</span>
                       </label>
                     </div>
                   </div>
@@ -508,55 +930,240 @@ export default function WaypointFilters() {
               </div>
             )}
 
-            {/* STAY Category Filters */}
+            {/* STAY Category Feature Filters */}
             {(activeCategory === 'all' || activeCategory === WaypointCategory.STAY) && (
               <div className="space-y-4">
                 <h3 className="font-semibold text-ink border-b border-surface-dark/30 pb-2">
-                  🏨 Places to Stay
+                  🏨 STAY Features
                 </h3>
                 
-                <div className="grid md:grid-cols-2 gap-6">
-                  {/* Accommodation Types */}
+                <div className="grid md:grid-cols-4 gap-6">
+                  {/* Transportation */}
                   <div>
-                    <h4 className="font-medium text-ink mb-3">Types</h4>
+                    <h4 className="font-medium text-ink mb-3 flex items-center">
+                      <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                      Transportation
+                    </h4>
                     <div className="space-y-2">
-                      {[AttractionType.RESORT, AttractionType.UNIVERSAL_RESORT, AttractionType.HOTEL].map(type => (
-                        <label key={type} className="flex items-center cursor-pointer">
-                          <input
-                            type="checkbox"
-                            checked={filters.types.includes(type)}
-                            onChange={() => handleTypeToggle(type)}
-                            className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
-                          />
-                          <span className="text-sm text-ink capitalize">
-                            {type === AttractionType.RESORT ? 'Disney Resort' : 
-                             type === AttractionType.UNIVERSAL_RESORT ? 'Universal Resort' :
-                             'Other Hotel'}
-                          </span>
-                        </label>
-                      ))}
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.stayFeatures?.monorailAccess || false}
+                          onChange={() => handleStayFeatureToggle('monorailAccess')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🚝 Monorail</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.stayFeatures?.skylinerAccess || false}
+                          onChange={() => handleStayFeatureToggle('skylinerAccess')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🚡 Skyliner</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.stayFeatures?.boatAccess || false}
+                          onChange={() => handleStayFeatureToggle('boatAccess')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">⛵ Boat Transport</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.stayFeatures?.walkingDistance || false}
+                          onChange={() => handleStayFeatureToggle('walkingDistance')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🚶 Walking Distance</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.stayFeatures?.earlyParkEntry || false}
+                          onChange={() => handleStayFeatureToggle('earlyParkEntry')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🌅 Early Park Entry</span>
+                      </label>
                     </div>
                   </div>
 
-                  {/* Resort Tier */}
+                  {/* Recreation */}
                   <div>
-                    <h4 className="font-medium text-ink mb-3">Resort Tier</h4>
+                    <h4 className="font-medium text-ink mb-3 flex items-center">
+                      <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                      Recreation
+                    </h4>
                     <div className="space-y-2">
-                      {['value', 'moderate', 'deluxe'].map(tier => (
-                        <label key={tier} className="flex items-center cursor-pointer">
-                          <input
-                            type="radio"
-                            name="resortTier"
-                            value={tier}
-                            checked={filters.resortTier === tier}
-                            onChange={() => handleResortTierToggle(tier)}
-                            className="mr-2 text-sea focus:ring-sea/20"
-                          />
-                          <span className="text-sm text-ink capitalize">
-                            {tier === 'deluxe' ? '💎 Deluxe' : tier === 'moderate' ? '🏛️ Moderate' : '💰 Value'}
-                          </span>
-                        </label>
-                      ))}
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.stayFeatures?.pools || false}
+                          onChange={() => handleStayFeatureToggle('pools')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🏊 Pool</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.stayFeatures?.waterSlides || false}
+                          onChange={() => handleStayFeatureToggle('waterSlides')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🌊 Water Features</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.stayFeatures?.spa || false}
+                          onChange={() => handleStayFeatureToggle('spa')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">💆 Spa</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.stayFeatures?.fitness || false}
+                          onChange={() => handleStayFeatureToggle('fitness')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">💪 Fitness Center</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.stayFeatures?.golf || false}
+                          onChange={() => handleStayFeatureToggle('golf')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">⛳ Golf</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.stayFeatures?.beach || false}
+                          onChange={() => handleStayFeatureToggle('beach')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🏖️ Beach</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Dining & Services */}
+                  <div>
+                    <h4 className="font-medium text-ink mb-3 flex items-center">
+                      <span className="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>
+                      Dining & Services
+                    </h4>
+                    <div className="space-y-2">
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.stayFeatures?.dining || false}
+                          onChange={() => handleStayFeatureToggle('dining')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🍽️ Dining</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.stayFeatures?.concierge || false}
+                          onChange={() => handleStayFeatureToggle('concierge')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🔔 Concierge</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.stayFeatures?.businessCenter || false}
+                          onChange={() => handleStayFeatureToggle('businessCenter')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">💼 Business Center</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.stayFeatures?.childcare || false}
+                          onChange={() => handleStayFeatureToggle('childcare')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">👶 Kids Club</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.stayFeatures?.parking || false}
+                          onChange={() => handleStayFeatureToggle('parking')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🅿️ Parking</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Accommodations */}
+                  <div>
+                    <h4 className="font-medium text-ink mb-3 flex items-center">
+                      <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
+                      Accommodations
+                    </h4>
+                    <div className="space-y-2">
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.stayFeatures?.suites || false}
+                          onChange={() => handleStayFeatureToggle('suites')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🛏️ Suites</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.stayFeatures?.villas || false}
+                          onChange={() => handleStayFeatureToggle('villas')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🏘️ Villas</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.stayFeatures?.dvc || false}
+                          onChange={() => handleStayFeatureToggle('dvc')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🏡 Disney Vacation Club</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.stayFeatures?.themedRooms || false}
+                          onChange={() => handleStayFeatureToggle('themedRooms')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">🎨 Themed Rooms</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.stayFeatures?.familyAccommodations || false}
+                          onChange={() => handleStayFeatureToggle('familyAccommodations')}
+                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
+                        />
+                        <span className="text-sm text-ink">👨‍👩‍👧‍👦 Family Accommodations</span>
+                      </label>
                     </div>
                   </div>
                 </div>

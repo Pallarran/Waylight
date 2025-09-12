@@ -16,6 +16,112 @@ interface WaypointFilters {
   mobileOrderAvailable?: boolean; // For dining
   priceLevel?: number; // For dining
   resortTier?: string; // For accommodations
+  intensity?: string; // For DO attractions
+  
+  // Feature-based filters
+  doFeatures?: {
+    // Access & Services
+    multiPass?: boolean;
+    singlePass?: boolean;
+    singleRider?: boolean;
+    riderSwitch?: boolean;
+    mobileCheckin?: boolean;
+    photoPass?: boolean;
+    // Experience
+    darkRide?: boolean;
+    getsWet?: boolean;
+    spinningMotion?: boolean;
+    loudSounds?: boolean;
+    strobeEffects?: boolean;
+    interactiveElements?: boolean;
+    characterMeet?: boolean;
+    livePerformance?: boolean;
+    airConditioning?: boolean;
+    outdoorExperience?: boolean;
+    scary?: boolean;
+    bigDrops?: boolean;
+    launchSpeed?: boolean;
+    // Important Notes
+    heightRequirement?: boolean;
+    motionSensitivity?: boolean;
+    pregnancyAdvisory?: boolean;
+    transferRequired?: boolean;
+    rainSafe?: boolean;
+  };
+  
+  eatFeatures?: {
+    // Service & Convenience
+    adrRequired?: boolean;
+    mobileOrder?: boolean;
+    alcoholServed?: boolean;
+    allergyFriendly?: boolean;
+    groupFriendly?: boolean;
+    quickService?: boolean;
+    // Dining Experience
+    characterDining?: boolean;
+    fineDining?: boolean;
+    buffet?: boolean;
+    familyStyle?: boolean;
+    sharable?: boolean;
+    liveEntertainment?: boolean;
+    scenicViews?: boolean;
+    uniqueExperience?: boolean;
+    seasonal?: boolean;
+    signatureDish?: boolean;
+    chefSpecial?: boolean;
+    healthyOptions?: boolean;
+    // Special Features
+    michelinStar?: boolean;
+    rooftop?: boolean;
+    waterfront?: boolean;
+    resort?: boolean;
+    park?: boolean;
+    disneysprings?: boolean;
+    boardwalk?: boolean;
+    monorailAccessible?: boolean;
+  };
+  
+  stayFeatures?: {
+    // Transportation
+    monorailAccess?: boolean;
+    boatAccess?: boolean;
+    busAccess?: boolean;
+    walkingDistance?: boolean;
+    skylinerAccess?: boolean;
+    carRequired?: boolean;
+    complimentaryTransport?: boolean;
+    earlyParkEntry?: boolean;
+    // Recreation
+    pools?: boolean;
+    waterSlides?: boolean;
+    hotTub?: boolean;
+    spa?: boolean;
+    fitness?: boolean;
+    golf?: boolean;
+    tennis?: boolean;
+    beach?: boolean;
+    marina?: boolean;
+    bikeRental?: boolean;
+    joggingTrail?: boolean;
+    playground?: boolean;
+    // Dining & Services
+    dining?: boolean;
+    quickService?: boolean;
+    tableService?: boolean;
+    roomService?: boolean;
+    concierge?: boolean;
+    businessCenter?: boolean;
+    childcare?: boolean;
+    laundry?: boolean;
+    parking?: boolean;
+    wifi?: boolean;
+    // Accommodations
+    suites?: boolean;
+    villas?: boolean;
+    dvc?: boolean;
+    themedRooms?: boolean;
+    familyAccommodations?: boolean;
+  };
 }
 
 interface WaypointState {
@@ -169,6 +275,9 @@ const defaultFilters: WaypointFilters = {
   wheelchairAccessible: false,
   searchQuery: '',
   serviceTypes: [],
+  doFeatures: {},
+  eatFeatures: {},
+  stayFeatures: {},
 };
 
 const useWaypointStore = create<WaypointState>((set, get) => ({
@@ -306,6 +415,63 @@ const useWaypointStore = create<WaypointState>((set, get) => ({
     // Apply resort tier filter (for STAY category)  
     if (filters.resortTier !== undefined) {
       filtered = filtered.filter(a => a.resortTier === filters.resortTier);
+    }
+    
+    // Apply intensity filter (for DO category)
+    if (filters.intensity !== undefined) {
+      filtered = filtered.filter(a => a.intensity === filters.intensity);
+    }
+    
+    // Apply DO feature filters
+    if (filters.doFeatures && Object.keys(filters.doFeatures).length > 0) {
+      filtered = filtered.filter(a => {
+        if (a.category !== WaypointCategory.DO || !a.features) return true;
+        
+        return Object.entries(filters.doFeatures!).every(([feature, required]) => {
+          if (required === undefined) return true;
+          const featureValue = a.features?.[feature];
+          return required ? featureValue === true : featureValue !== true;
+        });
+      });
+    }
+    
+    // Apply EAT feature filters
+    if (filters.eatFeatures && Object.keys(filters.eatFeatures).length > 0) {
+      filtered = filtered.filter(a => {
+        if (a.category !== WaypointCategory.EAT || !a.features) return true;
+        
+        return Object.entries(filters.eatFeatures!).every(([feature, required]) => {
+          if (required === undefined) return true;
+          const featureValue = a.features?.[feature];
+          return required ? featureValue === true : featureValue !== true;
+        });
+      });
+    }
+    
+    // Apply STAY feature filters  
+    if (filters.stayFeatures && Object.keys(filters.stayFeatures).length > 0) {
+      filtered = filtered.filter(a => {
+        if (a.category !== WaypointCategory.STAY || !a.features) return true;
+        
+        return Object.entries(filters.stayFeatures!).every(([feature, required]) => {
+          if (required === undefined) return true;
+          // For STAY items, check both features and nested feature objects
+          let featureValue;
+          if (a.features?.[feature] !== undefined) {
+            featureValue = a.features[feature];
+          } else {
+            // Check nested feature objects for STAY category
+            const nestedCategories = ['transportation', 'recreation', 'amenities', 'accommodations'];
+            for (const category of nestedCategories) {
+              if (a.features?.[category]?.[feature] !== undefined) {
+                featureValue = a.features[category][feature];
+                break;
+              }
+            }
+          }
+          return required ? featureValue === true : featureValue !== true;
+        });
+      });
     }
     
     // Apply search query
