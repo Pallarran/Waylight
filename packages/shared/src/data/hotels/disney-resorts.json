@@ -21,23 +21,28 @@
         "walking": false
       },
       "amenities": {
+        "pool": true,
+        "waterFeatures": false,
         "spa": true,
-        "multipleDining": true,
+        "fitnessCenter": true,
+        "golf": false,
         "beach": true,
         "marina": true,
-        "pool": true,
-        "waterSlide": false,
-        "lazyRiver": false,
-        "fitnessCenter": true,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": true,
         "businessCenter": true,
-        "golf": false
+        "childcare": false,
+        "parking": true,
+        "wifi": true
       },
       "accommodations": {
-        "dvc": false,
-        "bungalows": false,
         "suites": true,
-        "cabins": false,
-        "villas": false
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": false
       }
     }
   },
@@ -48,7 +53,39 @@
     "type": "disney",
     "priceLevel": "deluxe",
     "description": "South Pacific theming with monorail access and new Island Tower",
-    "amenities": ["Monorail", "Beach", "Marina", "Multiple Dining", "Bungalows", "Island Tower", "DVC"],
+    "features": {
+      "transportation": {
+        "monorail": true,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": true,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": true,
+        "marina": true,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": true,
+        "businessCenter": true,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": true,
+        "dvc": true,
+        "themedRooms": true,
+        "familyAccommodations": true
+      }
+    },
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 5, "description": "Garden, lagoon, or theme park view" },
       { "id": "club-level", "name": "Club Level Room", "sleeps": 5, "description": "Concierge level with lounge access" },
@@ -66,7 +103,39 @@
     "type": "disney",
     "priceLevel": "deluxe",
     "description": "Modern resort with monorail running through the building",
-    "amenities": ["Monorail", "Beach", "Marina", "Multiple Dining", "DVC"],
+    "features": {
+      "transportation": {
+        "monorail": true,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": true,
+        "marina": true,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": true,
+        "businessCenter": true,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": true,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    },
     "rooms": [
       { "id": "standard-garden", "name": "Standard Room - Garden Wing", "sleeps": 5, "description": "Garden wing with resort views" },
       { "id": "standard-tower", "name": "Standard Room - Tower", "sleeps": 5, "description": "Main tower with Magic Kingdom views" },
@@ -81,7 +150,39 @@
     "type": "disney",
     "priceLevel": "deluxe",
     "description": "Pacific Northwest lodge theming with boat transportation",
-    "amenities": ["Boat Transportation", "Multiple Dining", "Geyser", "DVC", "Beach"],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": true,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": true,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": true,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": true,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    },
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Woods or courtyard view" },
       { "id": "club-level", "name": "Club Level Room", "sleeps": 4, "description": "Concierge level with lounge access" },
@@ -95,7 +196,39 @@
     "type": "disney",
     "priceLevel": "deluxe",
     "description": "1940s Atlantic City boardwalk theming with walking access to Epcot",
-    "amenities": ["Walking to Epcot", "Boat to Hollywood Studios", "BoardWalk Entertainment", "Multiple Dining", "DVC"],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": true
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": true,
+        "concierge": true,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": true,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    },
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 5, "description": "Garden or BoardWalk view" },
       { "id": "club-level", "name": "Club Level Room", "sleeps": 5, "description": "Concierge level with lounge access" },
@@ -109,7 +242,39 @@
     "type": "disney",
     "priceLevel": "deluxe",
     "description": "New England yacht club theming with Stormalong Bay",
-    "amenities": ["Walking to Epcot", "Boat to Hollywood Studios", "Stormalong Bay", "Multiple Dining"],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": true
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": true,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": true,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    },
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 5, "description": "Garden or water view" },
       { "id": "club-level", "name": "Club Level Room", "sleeps": 5, "description": "Concierge level with lounge access" },
@@ -123,7 +288,39 @@
     "type": "disney",
     "priceLevel": "deluxe",
     "description": "New England beach resort theming with Stormalong Bay",
-    "amenities": ["Walking to Epcot", "Boat to Hollywood Studios", "Stormalong Bay", "Multiple Dining", "DVC"],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": true
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": true,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": true,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": true,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    },
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 5, "description": "Garden or water view" },
       { "id": "club-level", "name": "Club Level Room", "sleeps": 5, "description": "Concierge level with lounge access" },
@@ -136,8 +333,40 @@
     "address": "2901 Osceola Pkwy, Bay Lake, FL 32830",
     "type": "disney",
     "priceLevel": "deluxe",
-    "description": "African lodge theming with live animals on savannas",
-    "amenities": ["Animal Savannas", "Multiple Dining", "Cultural Activities", "DVC"],
+    "description": "African lodge theming with live animals on savannas. Jambo House guest rooms refurbishment scheduled May 2026 - January 2027.",
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": false,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": true,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": true,
+        "businessCenter": false,
+        "childcare": true,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": true,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    },
     "rooms": [
       { "id": "standard-value", "name": "Standard Room - Value View", "sleeps": 4, "description": "Standard view room" },
       { "id": "standard-savanna", "name": "Standard Room - Savanna View", "sleeps": 4, "description": "Savanna view with animals" },
@@ -152,7 +381,39 @@
     "type": "disney",
     "priceLevel": "moderate",
     "description": "French Quarter theming with boat transportation to Disney Springs",
-    "amenities": ["Boat to Disney Springs", "Pool with Slide", "Food Court", "Dining"],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": true,
+        "spa": false,
+        "fitnessCenter": false,
+        "golf": false,
+        "beach": false,
+        "marina": true,
+        "dining": true,
+        "quickService": true,
+        "entertainment": false,
+        "concierge": false,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": false,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": true,
+        "familyAccommodations": false
+      }
+    },
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "River or garden view" },
       { "id": "royal", "name": "Royal Guest Room", "sleeps": 4, "description": "Princess and the Frog themed room" }
@@ -165,7 +426,39 @@
     "type": "disney",
     "priceLevel": "moderate",
     "description": "Southern plantation and bayou theming with boat transportation",
-    "amenities": ["Boat to Disney Springs", "Multiple Pools", "Food Court", "Dining", "Horse Carriage Rides"],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": true,
+        "spa": false,
+        "fitnessCenter": false,
+        "golf": false,
+        "beach": false,
+        "marina": true,
+        "dining": true,
+        "quickService": true,
+        "entertainment": false,
+        "concierge": false,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": false,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": true,
+        "familyAccommodations": false
+      }
+    },
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "River or garden view" },
       { "id": "royal", "name": "Royal Guest Room", "sleeps": 4, "description": "Princess and the Frog themed room" }
@@ -178,11 +471,43 @@
     "type": "disney",
     "priceLevel": "value",
     "description": "Music theming with giant musical instruments",
-    "amenities": ["Pool", "Food Court", "Family Suites"],
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Music themed standard room" },
       { "id": "family-suite", "name": "Family Suite", "sleeps": 6, "description": "Suite with kitchenette" }
-    ]
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": false,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": false,
+        "fitnessCenter": false,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": false,
+        "quickService": true,
+        "entertainment": false,
+        "concierge": false,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": false,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": true
+      }
+    }
   },
   {
     "id": "all-star-sports",
@@ -191,7 +516,39 @@
     "type": "disney",
     "priceLevel": "value",
     "description": "Sports theming with giant sports equipment decorations",
-    "amenities": ["Pool", "Food Court", "Sports Activities"],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": false,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": false,
+        "fitnessCenter": false,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": false,
+        "quickService": true,
+        "entertainment": false,
+        "concierge": false,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": false,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    },
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Sports themed standard room" },
       { "id": "preferred", "name": "Preferred Room", "sleeps": 4, "description": "Close to amenities" }
@@ -204,7 +561,39 @@
     "type": "disney",
     "priceLevel": "deluxe_villa",
     "description": "European-inspired Disney Vacation Club resort with Skyliner access",
-    "amenities": ["Skyliner", "Multiple Dining", "Rooftop Dining", "Pool", "Spa", "DVC"],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": true,
+        "boat": false,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": true,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": true,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": false,
+        "villas": true,
+        "dvc": true,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    },
     "rooms": [
       { "id": "tower-studio", "name": "Tower Studio", "sleeps": 2, "description": "Compact studio with kitchenette" },
       { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 5, "description": "Studio villa with kitchenette" },
@@ -220,7 +609,39 @@
     "type": "disney",
     "priceLevel": "deluxe_villa",
     "description": "Victorian elegance inspired by Saratoga Springs, New York with boat access to Disney Springs",
-    "amenities": ["Boat to Disney Springs", "Spa", "Golf Course", "Multiple Pools", "Multiple Dining", "DVC"],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": true,
+        "fitnessCenter": true,
+        "golf": true,
+        "beach": false,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": true,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": false,
+        "villas": true,
+        "dvc": true,
+        "themedRooms": false,
+        "familyAccommodations": true
+      }
+    },
     "rooms": [
       { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 4, "description": "Studio villa with kitchenette" },
       { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
@@ -236,7 +657,39 @@
     "type": "disney",
     "priceLevel": "deluxe_villa",
     "description": "Key West island theming, Disney's original Disney Vacation Club resort",
-    "amenities": ["Boat to Disney Springs", "Golf Course", "Multiple Pools", "Marina", "DVC"],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": true,
+        "beach": false,
+        "marina": true,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": true,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": false,
+        "villas": true,
+        "dvc": true,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    },
     "rooms": [
       { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 4, "description": "Studio villa with kitchenette" },
       { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
@@ -251,7 +704,39 @@
     "type": "disney",
     "priceLevel": "moderate",
     "description": "Rustic cabins in a wooded campground setting with boat access to Magic Kingdom",
-    "amenities": ["Boat Transportation", "Campfire Activities", "Horse Trails", "Beach", "Multiple Pools", "Dining"],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": false,
+        "fitnessCenter": false,
+        "golf": false,
+        "beach": true,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": false,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": false,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": true
+      }
+    },
     "rooms": [
       { "id": "cabin", "name": "Wilderness Cabin", "sleeps": 6, "description": "Rustic cabin with full kitchen and deck" }
     ]
@@ -263,7 +748,39 @@
     "type": "disney",
     "priceLevel": "deluxe_villa",
     "description": "Victorian elegance with monorail access and DVC accommodations at Grand Floridian",
-    "amenities": ["Monorail", "Spa", "Multiple Dining", "Beach", "Marina", "DVC"],
+    "features": {
+      "transportation": {
+        "monorail": true,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": true,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": true,
+        "marina": true,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": true,
+        "businessCenter": true,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": false,
+        "villas": true,
+        "dvc": true,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    },
     "rooms": [
       { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 5, "description": "Studio villa with kitchenette" },
       { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 5, "description": "One-bedroom villa with full kitchen" },
@@ -278,7 +795,39 @@
     "type": "disney",
     "priceLevel": "deluxe_villa",
     "description": "Modern DVC resort adjacent to Contemporary Resort with monorail access",
-    "amenities": ["Monorail", "Beach", "Marina", "Multiple Dining", "Contemporary Resort Access", "DVC"],
+    "features": {
+      "transportation": {
+        "monorail": true,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": true,
+        "marina": true,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": true,
+        "businessCenter": true,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": false,
+        "villas": true,
+        "dvc": true,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    },
     "rooms": [
       { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 4, "description": "Studio villa with kitchenette" },
       { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
@@ -293,7 +842,39 @@
     "type": "disney",
     "priceLevel": "deluxe_villa",
     "description": "New England beach resort DVC villas with Stormalong Bay access",
-    "amenities": ["Walking to Epcot", "Boat to Hollywood Studios", "Stormalong Bay", "Multiple Dining", "DVC"],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": true
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": true,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": true,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": false,
+        "villas": true,
+        "dvc": true,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    },
     "rooms": [
       { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 5, "description": "Studio villa with kitchenette" },
       { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
@@ -308,13 +889,45 @@
     "type": "disney",
     "priceLevel": "deluxe_villa",
     "description": "1940s Atlantic City boardwalk themed DVC villas with walking access to Epcot",
-    "amenities": ["Walking to Epcot", "Boat to Hollywood Studios", "BoardWalk Entertainment", "Multiple Dining", "DVC"],
     "rooms": [
       { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 4, "description": "Studio villa with kitchenette" },
       { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
       { "id": "2br-villa", "name": "Two Bedroom Villa", "sleeps": 8, "description": "Two-bedroom villa with full kitchen" },
       { "id": "3br-villa", "name": "Three Bedroom Grand Villa", "sleeps": 12, "description": "Three-bedroom grand villa with full kitchen" }
-    ]
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": true
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": true,
+        "concierge": true,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": false,
+        "villas": true,
+        "dvc": true,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    }
   },
   {
     "id": "animal-kingdom-kidani",
@@ -322,8 +935,40 @@
     "address": "3701 Osceola Pkwy, Bay Lake, FL 32830",
     "type": "disney",
     "priceLevel": "deluxe_villa",
-    "description": "African lodge themed DVC villas with animal savannas and cultural activities",
-    "amenities": ["Animal Savannas", "Multiple Dining", "Cultural Activities", "Pool", "DVC"],
+    "description": "African lodge themed DVC villas with animal savannas and cultural activities. MAJOR REFURBISHMENT: Guest rooms October 2025 - May 2026, pool slide closed September 8, 2025.",
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": false,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": true,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": true,
+        "businessCenter": false,
+        "childcare": true,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": false,
+        "villas": true,
+        "dvc": true,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    },
     "rooms": [
       { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 4, "description": "Studio villa with kitchenette and savanna views" },
       { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
@@ -338,7 +983,39 @@
     "type": "disney",
     "priceLevel": "deluxe_villa",
     "description": "Pacific Northwest lodge themed DVC villas and cabins with boat transportation",
-    "amenities": ["Boat Transportation", "Multiple Dining", "Geyser", "Beach", "DVC"],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": true,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": true,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": true,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": false,
+        "villas": true,
+        "dvc": true,
+        "themedRooms": false,
+        "familyAccommodations": true
+      }
+    },
     "rooms": [
       { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 4, "description": "Studio villa with kitchenette" },
       { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
@@ -353,7 +1030,39 @@
     "type": "disney",
     "priceLevel": "deluxe_villa",
     "description": "Original DVC villas at Wilderness Lodge with Pacific Northwest theming",
-    "amenities": ["Boat Transportation", "Multiple Dining", "Geyser", "Beach", "Wilderness Lodge Access", "DVC"],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": true,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": true,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": true,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": false,
+        "villas": true,
+        "dvc": true,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    },
     "rooms": [
       { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 4, "description": "Studio villa with kitchenette" },
       { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
@@ -382,23 +1091,28 @@
         "walking": false
       },
       "amenities": {
+        "pool": true,
+        "waterFeatures": true,
         "spa": false,
-        "multipleDining": true,
+        "fitnessCenter": true,
+        "golf": false,
         "beach": false,
         "marina": false,
-        "pool": true,
-        "waterSlide": true,
-        "lazyRiver": false,
-        "fitnessCenter": true,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": false,
         "businessCenter": true,
-        "golf": false
+        "childcare": false,
+        "parking": true,
+        "wifi": true
       },
       "accommodations": {
-        "dvc": false,
-        "bungalows": false,
         "suites": true,
-        "cabins": false,
-        "villas": false
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": false
       }
     }
   },
@@ -423,63 +1137,28 @@
         "walking": false
       },
       "amenities": {
+        "pool": true,
+        "waterFeatures": true,
         "spa": false,
-        "multipleDining": true,
+        "fitnessCenter": true,
+        "golf": false,
         "beach": true,
         "marina": true,
-        "pool": true,
-        "waterSlide": true,
-        "lazyRiver": false,
-        "fitnessCenter": true,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": false,
         "businessCenter": false,
-        "golf": false
+        "childcare": false,
+        "parking": true,
+        "wifi": true
       },
       "accommodations": {
+        "suites": false,
+        "villas": true,
         "dvc": true,
-        "bungalows": false,
-        "suites": false,
-        "cabins": false,
-        "villas": true
-      }
-    }
-  },
-  {
-    "id": "port-orleans-french-quarter",
-    "name": "Disney's Port Orleans Resort - French Quarter",
-    "address": "2201 Orleans Dr, Bay Lake, FL 32830",
-    "type": "disney",
-    "priceLevel": "moderate",
-    "description": "New Orleans French Quarter theming with boat transportation to Disney Springs",
-    "rooms": [
-      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "French Quarter themed room" },
-      { "id": "preferred", "name": "Preferred Room", "sleeps": 4, "description": "Closer to amenities and transportation" }
-    ],
-    "features": {
-      "transportation": {
-        "monorail": false,
-        "skyliner": false,
-        "boat": true,
-        "bus": true,
-        "walking": false
-      },
-      "amenities": {
-        "spa": false,
-        "multipleDining": true,
-        "beach": false,
-        "marina": true,
-        "pool": true,
-        "waterSlide": true,
-        "lazyRiver": false,
-        "fitnessCenter": true,
-        "businessCenter": false,
-        "golf": false
-      },
-      "accommodations": {
-        "dvc": false,
-        "bungalows": false,
-        "suites": false,
-        "cabins": false,
-        "villas": false
+        "themedRooms": true,
+        "familyAccommodations": false
       }
     }
   },
@@ -503,23 +1182,28 @@
         "walking": false
       },
       "amenities": {
+        "pool": true,
+        "waterFeatures": false,
         "spa": false,
-        "multipleDining": false,
+        "fitnessCenter": true,
+        "golf": false,
         "beach": false,
         "marina": false,
-        "pool": true,
-        "waterSlide": false,
-        "lazyRiver": false,
-        "fitnessCenter": true,
+        "dining": false,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": false,
         "businessCenter": false,
-        "golf": false
+        "childcare": false,
+        "parking": true,
+        "wifi": true
       },
       "accommodations": {
-        "dvc": false,
-        "bungalows": false,
         "suites": false,
-        "cabins": false,
-        "villas": false
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": false
       }
     }
   },
@@ -544,23 +1228,28 @@
         "walking": false
       },
       "amenities": {
+        "pool": true,
+        "waterFeatures": false,
         "spa": false,
-        "multipleDining": false,
+        "fitnessCenter": false,
+        "golf": false,
         "beach": false,
         "marina": false,
-        "pool": true,
-        "waterSlide": false,
-        "lazyRiver": false,
-        "fitnessCenter": false,
+        "dining": false,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": false,
         "businessCenter": false,
-        "golf": false
+        "childcare": false,
+        "parking": true,
+        "wifi": true
       },
       "accommodations": {
+        "suites": false,
+        "villas": false,
         "dvc": false,
-        "bungalows": false,
-        "suites": true,
-        "cabins": false,
-        "villas": false
+        "themedRooms": false,
+        "familyAccommodations": true
       }
     }
   },
@@ -584,23 +1273,28 @@
         "walking": false
       },
       "amenities": {
+        "pool": true,
+        "waterFeatures": false,
         "spa": false,
-        "multipleDining": false,
+        "fitnessCenter": true,
+        "golf": false,
         "beach": false,
         "marina": false,
-        "pool": true,
-        "waterSlide": false,
-        "lazyRiver": false,
-        "fitnessCenter": true,
+        "dining": false,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": false,
         "businessCenter": false,
-        "golf": false
+        "childcare": false,
+        "parking": true,
+        "wifi": true
       },
       "accommodations": {
+        "suites": false,
+        "villas": false,
         "dvc": false,
-        "bungalows": false,
-        "suites": true,
-        "cabins": false,
-        "villas": false
+        "themedRooms": false,
+        "familyAccommodations": true
       }
     }
   }

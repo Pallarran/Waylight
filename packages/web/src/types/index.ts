@@ -208,6 +208,7 @@ export enum AttractionType {
   DINING = 'dining', // Legacy - will map to appropriate subcategory
   // Stay category
   RESORT = 'resort',
+  UNIVERSAL_RESORT = 'universal_resort',
   HOTEL = 'hotel',
 }
 

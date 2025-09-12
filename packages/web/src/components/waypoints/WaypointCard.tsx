@@ -130,56 +130,136 @@ export default function WaypointCard({ attraction, showAddToTrip: _showAddToTrip
         )}
       </div>
 
-      {/* Category-specific Feature Icons */}
+      {/* Feature Icons */}
       <div className="mb-4">
-        <div className="flex flex-wrap gap-1">
-          {(() => {
-            if (isStayCategory) {
-              // STAY items need amenities extracted from structured features  
-              const stayFeatures = attraction.features as any;
-              const amenities = [];
-              if (stayFeatures?.transportation?.monorail) amenities.push('Monorail');
-              if (stayFeatures?.transportation?.skyliner) amenities.push('Skyliner');
-              if (stayFeatures?.transportation?.boat) amenities.push('Boat');
-              if (stayFeatures?.transportation?.bus) amenities.push('Bus');
-              if (stayFeatures?.transportation?.walking) amenities.push('Walking');
-              if (stayFeatures?.amenities?.spa) amenities.push('Spa');
-              if (stayFeatures?.amenities?.multipleDining) amenities.push('Multiple Dining');
-              if (stayFeatures?.amenities?.beach) amenities.push('Beach');
-              if (stayFeatures?.amenities?.marina) amenities.push('Marina');
-              if (stayFeatures?.amenities?.pool) amenities.push('Pool');
-              if (stayFeatures?.amenities?.waterSlide) amenities.push('Water Slide');
-              if (stayFeatures?.amenities?.lazyRiver) amenities.push('Lazy River');
-              if (stayFeatures?.amenities?.fitnessCenter) amenities.push('Fitness Center');
-              if (stayFeatures?.amenities?.golf) amenities.push('Golf');
-              if (stayFeatures?.accommodations?.dvc) amenities.push('DVC');
-              if (stayFeatures?.accommodations?.bungalows) amenities.push('Bungalows');
-              if (stayFeatures?.accommodations?.suites) amenities.push('Suites');
-              if (stayFeatures?.accommodations?.cabins) amenities.push('Cabins');
-              if (stayFeatures?.accommodations?.villas) amenities.push('Villas');
-              
-              return getWaypointIcons({
-                category: attraction.category,
-                features: attraction.features,
-                amenities: amenities
-              });
-            } else {
-              // DO and EAT items can pass features directly
-              return getWaypointIcons({
-                category: attraction.category,
-                features: attraction.features
-              });
-            }
-          })().map((icon, index) => (
-            <span
-              key={index}
-              className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-surface border border-surface-dark/20 hover:bg-surface-dark/30 transition-colors cursor-help"
-              title={`${icon.label}: ${icon.description}`}
-            >
-              <span className="text-sm">{icon.emoji}</span>
-            </span>
-          ))}
-        </div>
+        {isStayCategory ? (
+          <div className="space-y-2">
+            {/* Transportation */}
+            {attraction.features?.transportation && Object.values(attraction.features.transportation).some(Boolean) && (
+              <div className="flex items-center flex-wrap gap-1">
+                <span className="text-xs font-medium text-ink mr-2">Transportation:</span>
+                {Object.entries(attraction.features.transportation).map(([key, value]) => {
+                  if (!value) return null;
+                  const icons = getWaypointIcons({
+                    category: attraction.category,
+                    features: attraction.features,
+                    tier: 1
+                  });
+                  const labelMap: Record<string, string> = {
+                    'monorail': 'Monorail',
+                    'skyliner': 'Skyliner', 
+                    'boat': 'Boat Transport',
+                    'bus': 'Bus Transport',
+                    'walking': 'Walking Distance'
+                  };
+                  const label = labelMap[key] || key;
+                  const icon = icons.find(icon => icon.label === label);
+                  return icon ? (
+                    <span
+                      key={key}
+                      className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-surface border border-surface-dark/20 hover:bg-surface-dark/30 transition-colors cursor-help"
+                      title={`${icon.label}: ${icon.description}`}
+                    >
+                      <span className="text-sm">{icon.emoji}</span>
+                    </span>
+                  ) : null;
+                })}
+              </div>
+            )}
+
+            {/* Amenities */}
+            {attraction.features?.amenities && Object.values(attraction.features.amenities).some(Boolean) && (
+              <div className="flex items-center flex-wrap gap-1">
+                <span className="text-xs font-medium text-ink mr-2">Amenities:</span>
+                {Object.entries(attraction.features.amenities).map(([key, value]) => {
+                  if (!value) return null;
+                  const icons = getWaypointIcons({
+                    category: attraction.category,
+                    features: attraction.features,
+                    tier: 1
+                  });
+                  const labelMap: Record<string, string> = {
+                    'pool': 'Pool',
+                    'waterFeatures': 'Water Features',
+                    'spa': 'Spa',
+                    'fitnessCenter': 'Fitness Center',
+                    'golf': 'Golf',
+                    'beach': 'Beach',
+                    'marina': 'Marina',
+                    'dining': 'Dining',
+                    'quickService': 'Quick Service',
+                    'entertainment': 'Entertainment',
+                    'concierge': 'Concierge',
+                    'businessCenter': 'Business Center',
+                    'childcare': 'Kids Club',
+                    'parking': 'Parking',
+                    'wifi': 'WiFi'
+                  };
+                  const label = labelMap[key] || key;
+                  const icon = icons.find(icon => icon.label === label);
+                  return icon ? (
+                    <span
+                      key={key}
+                      className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-surface border border-surface-dark/20 hover:bg-surface-dark/30 transition-colors cursor-help"
+                      title={`${icon.label}: ${icon.description}`}
+                    >
+                      <span className="text-sm">{icon.emoji}</span>
+                    </span>
+                  ) : null;
+                })}
+              </div>
+            )}
+
+            {/* Accommodations */}
+            {attraction.features?.accommodations && Object.values(attraction.features.accommodations).some(Boolean) && (
+              <div className="flex items-center flex-wrap gap-1">
+                <span className="text-xs font-medium text-ink mr-2">Accommodations:</span>
+                {Object.entries(attraction.features.accommodations).map(([key, value]) => {
+                  if (!value) return null;
+                  const icons = getWaypointIcons({
+                    category: attraction.category,
+                    features: attraction.features,
+                    tier: 1
+                  });
+                  const labelMap: Record<string, string> = {
+                    'suites': 'Suites',
+                    'villas': 'Villas',
+                    'dvc': 'Disney Vacation Club',
+                    'themedRooms': 'Themed Rooms',
+                    'familyAccommodations': 'Family Accommodations'
+                  };
+                  const label = labelMap[key] || key;
+                  const icon = icons.find(icon => icon.label === label);
+                  return icon ? (
+                    <span
+                      key={key}
+                      className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-surface border border-surface-dark/20 hover:bg-surface-dark/30 transition-colors cursor-help"
+                      title={`${icon.label}: ${icon.description}`}
+                    >
+                      <span className="text-sm">{icon.emoji}</span>
+                    </span>
+                  ) : null;
+                })}
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="flex flex-wrap gap-1">
+            {getWaypointIcons({
+              category: attraction.category,
+              features: attraction.features,
+              tier: 1 // Show only essential features on cards
+            }).filter(icon => icon && icon.label).map((icon, index) => (
+              <span
+                key={index}
+                className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-surface border border-surface-dark/20 hover:bg-surface-dark/30 transition-colors cursor-help"
+                title={`${icon.label}: ${icon.description}`}
+              >
+                <span className="text-sm">{icon.emoji}</span>
+              </span>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* EAT-specific information section */}
@@ -203,23 +283,24 @@ export default function WaypointCard({ attraction, showAddToTrip: _showAddToTrip
             </div>
           )}
 
-          {/* Additional EAT features */}
-          <div className="flex flex-wrap gap-2">
-            {(attraction.features as any)?.mobileOrder && (
-              <span className="inline-flex items-center px-2 py-1 rounded-md text-xs bg-blue-100 text-blue-800">
-                📱 Mobile Order
+          {/* Additional EAT features - Use standardized icons for Tier 2 features */}
+          <div className="flex flex-wrap gap-1">
+            {getWaypointIcons({
+              category: attraction.category,
+              features: attraction.features,
+              mobileOrderAvailable: attraction.mobileOrderAvailable,
+              adrRequired: attraction.adrRequired,
+              alcoholServed: attraction.alcoholServed,
+              tier: 2 // Show enhanced features in EAT info section
+            }).filter(icon => icon && icon.label).map((icon, index) => (
+              <span
+                key={index}
+                className="inline-flex items-center px-2 py-1 rounded-md text-xs bg-surface border border-surface-dark/20"
+              >
+                <span className="mr-1 text-sm">{icon.emoji}</span>
+                <span>{icon.label}</span>
               </span>
-            )}
-            {(attraction.features as any)?.characterDining && (
-              <span className="inline-flex items-center px-2 py-1 rounded-md text-xs bg-purple-100 text-purple-800">
-                🐭 Character Dining
-              </span>
-            )}
-            {(attraction.features as any)?.entertainment && (
-              <span className="inline-flex items-center px-2 py-1 rounded-md text-xs bg-green-100 text-green-800">
-                🎭 Entertainment
-              </span>
-            )}
+            ))}
           </div>
         </div>
       )}

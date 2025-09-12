@@ -6,12 +6,44 @@
     "type": "other",
     "priceLevel": "deluxe",
     "description": "Luxury resort within Disney World with theme park views",
-    "amenities": ["Disney World Location", "Spa", "Multiple Pools", "Golf", "Multiple Dining", "Kids Club"],
     "rooms": [
       { "id": "park-view", "name": "Park View Room", "sleeps": 4, "description": "Theme park view room" },
       { "id": "lake-view", "name": "Lake View Room", "sleeps": 4, "description": "Lake view room" },
       { "id": "suite", "name": "Suite", "sleeps": 6, "description": "One or two-bedroom suite" }
-    ]
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": false,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": true,
+        "fitnessCenter": true,
+        "golf": true,
+        "beach": false,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": true,
+        "businessCenter": true,
+        "childcare": true,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": true
+      }
+    }
   },
   {
     "id": "waldorf-astoria",
@@ -20,11 +52,43 @@
     "type": "other",
     "priceLevel": "deluxe",
     "description": "Luxury resort near Disney World with championship golf",
-    "amenities": ["Golf Course", "Spa", "Multiple Pools", "Multiple Dining", "Shuttle to Disney"],
     "rooms": [
       { "id": "standard", "name": "Deluxe Room", "sleeps": 4, "description": "Luxury room with premium amenities" },
       { "id": "suite", "name": "Suite", "sleeps": 6, "description": "One or two-bedroom suite" }
-    ]
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": false,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": true,
+        "fitnessCenter": true,
+        "golf": true,
+        "beach": false,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": true,
+        "businessCenter": true,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": true
+      }
+    }
   },
   {
     "id": "hilton-bonnet-creek",
@@ -33,11 +97,43 @@
     "type": "other",
     "priceLevel": "moderate",
     "description": "Resort near Disney World with lazy river and waterslide",
-    "amenities": ["Lazy River", "Waterslide", "Multiple Pools", "Multiple Dining", "Shuttle to Disney"],
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Resort or pool view" },
       { "id": "suite", "name": "Suite", "sleeps": 6, "description": "One or two-bedroom suite" }
-    ]
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": false,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": true,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": false,
+        "businessCenter": true,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": true
+      }
+    }
   },
   {
     "id": "buena-vista-palace",
@@ -46,11 +142,43 @@
     "type": "other",
     "priceLevel": "moderate",
     "description": "Resort in Disney Springs area with spa and recreation",
-    "amenities": ["Disney Springs Area", "Spa", "Multiple Pools", "Tennis", "Multiple Dining"],
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Resort or pool view" },
-      { "id": "suite", "name": "Suite", "sleeps": 6, "description": "One or two-bedroom suite" }
-    ]
+      { "id": "suite", "name": "Suite", "sleeps": 6, "description": "One-bedroom suite" }
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": false,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": true,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": false,
+        "businessCenter": true,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": true
+      }
+    }
   },
   {
     "id": "doubletree-disney-springs",
@@ -59,23 +187,134 @@
     "type": "other",
     "priceLevel": "moderate",
     "description": "Resort near SeaWorld with shuttle to theme parks",
-    "amenities": ["Theme Park Shuttles", "Pool", "Multiple Dining", "Fitness Center"],
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Resort or pool view" },
       { "id": "suite", "name": "Suite", "sleeps": 6, "description": "One-bedroom suite" }
-    ]
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": false,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": false,
+        "businessCenter": true,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": true
+      }
+    }
   },
   {
-    "id": "custom",
-    "name": "Other/Custom Hotel",
-    "address": "",
+    "id": "swan-hotel",
+    "name": "Walt Disney World Swan Hotel",
+    "address": "1200 Epcot Resorts Blvd, Bay Lake, FL 32830",
     "type": "other",
-    "priceLevel": "moderate",
-    "description": "Custom hotel not in our database",
-    "amenities": [],
+    "priceLevel": "deluxe",
+    "description": "Elegant hotel in the heart of Disney World with boat transport to Epcot and Hollywood Studios",
     "rooms": [
-      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Standard hotel room" },
-      { "id": "suite", "name": "Suite", "sleeps": 6, "description": "Hotel suite" }
-    ]
+      { "id": "standard", "name": "Resort View Room", "sleeps": 5, "description": "Resort or pool view room" },
+      { "id": "lake-view", "name": "Lake View Room", "sleeps": 5, "description": "Crescent Lake view room" },
+      { "id": "suite", "name": "Suite", "sleeps": 6, "description": "One or two-bedroom suite" }
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": true
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": true,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": true,
+        "businessCenter": true,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": true
+      }
+    }
+  },
+  {
+    "id": "dolphin-hotel",
+    "name": "Walt Disney World Dolphin Hotel",
+    "address": "1500 Epcot Resorts Blvd, Bay Lake, FL 32830",
+    "type": "other",
+    "priceLevel": "deluxe",
+    "description": "Iconic hotel with distinctive architecture, boat transport to Epcot and Hollywood Studios",
+    "rooms": [
+      { "id": "standard", "name": "Resort View Room", "sleeps": 5, "description": "Resort or pool view room" },
+      { "id": "lake-view", "name": "Lake View Room", "sleeps": 5, "description": "Crescent Lake view room" },
+      { "id": "suite", "name": "Suite", "sleeps": 6, "description": "One or two-bedroom suite" }
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": true
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": true,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": true,
+        "businessCenter": true,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": true
+      }
+    }
   }
 ]

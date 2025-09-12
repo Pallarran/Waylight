@@ -54,6 +54,7 @@ const getCategoryFromType = (type: AttractionType): WaypointCategory => {
     case AttractionType.DINING:
       return WaypointCategory.EAT;
     case AttractionType.RESORT:
+    case AttractionType.UNIVERSAL_RESORT:
     case AttractionType.HOTEL:
       return WaypointCategory.STAY;
     default:
@@ -141,7 +142,9 @@ const convertHotelToWaypoint = (hotel: HotelData): Attraction => {
     description: hotel.description || `${hotel.type} resort with ${hotel.rooms.length} room types`,
     duration: 0, // Hotels don't have duration
     location: hotel.address,
-    type: hotel.type === 'disney' ? AttractionType.RESORT : AttractionType.HOTEL,
+    type: hotel.type === 'disney' ? AttractionType.RESORT : 
+          hotel.type === 'universal' ? AttractionType.UNIVERSAL_RESORT : 
+          AttractionType.HOTEL,
     category: WaypointCategory.STAY,
     intensity: 'low' as any, // Hotels are low intensity
     accessibility: { wheelchairAccessible: true }, // Assume accessible

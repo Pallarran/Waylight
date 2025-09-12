@@ -114,7 +114,15 @@ export default function WaypointFilters() {
                 filters.types.includes(AttractionType.RESORT) ? 'bg-sea/10 text-sea-dark' : ''
               }`}
             >
-              🏨 Resorts
+              🏰 Disney Resorts
+            </button>
+            <button
+              onClick={() => handleTypeToggle(AttractionType.UNIVERSAL_RESORT)}
+              className={`btn-secondary btn-sm ${
+                filters.types.includes(AttractionType.UNIVERSAL_RESORT) ? 'bg-sea/10 text-sea-dark' : ''
+              }`}
+            >
+              🎬 Universal Resorts
             </button>
           </>
         )}
@@ -221,6 +229,14 @@ export default function WaypointFilters() {
               }`}
             >
               🏰 Disney Resorts
+            </button>
+            <button
+              onClick={() => handleTypeToggle(AttractionType.UNIVERSAL_RESORT)}
+              className={`btn-secondary btn-sm ${
+                filters.types.includes(AttractionType.UNIVERSAL_RESORT) ? 'bg-sea/10 text-sea-dark' : ''
+              }`}
+            >
+              🎬 Universal Resorts
             </button>
             <button
               onClick={() => handleTypeToggle(AttractionType.HOTEL)}
@@ -504,7 +520,7 @@ export default function WaypointFilters() {
                   <div>
                     <h4 className="font-medium text-ink mb-3">Types</h4>
                     <div className="space-y-2">
-                      {[AttractionType.RESORT, AttractionType.HOTEL].map(type => (
+                      {[AttractionType.RESORT, AttractionType.UNIVERSAL_RESORT, AttractionType.HOTEL].map(type => (
                         <label key={type} className="flex items-center cursor-pointer">
                           <input
                             type="checkbox"
@@ -513,7 +529,9 @@ export default function WaypointFilters() {
                             className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
                           />
                           <span className="text-sm text-ink capitalize">
-                            {type === AttractionType.RESORT ? 'Disney Resort' : 'Other Hotel'}
+                            {type === AttractionType.RESORT ? 'Disney Resort' : 
+                             type === AttractionType.UNIVERSAL_RESORT ? 'Universal Resort' :
+                             'Other Hotel'}
                           </span>
                         </label>
                       ))}

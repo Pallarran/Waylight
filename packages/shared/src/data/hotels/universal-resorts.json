@@ -6,13 +6,45 @@
     "type": "universal",
     "priceLevel": "deluxe",
     "description": "Italian Riviera theming with Express Pass included",
-    "amenities": ["Express Pass", "Water Taxi", "Multiple Pools", "Spa", "Multiple Dining"],
     "rooms": [
       { "id": "garden-view", "name": "Garden View Room", "sleeps": 5, "description": "Garden view with Italian décor" },
       { "id": "bay-view", "name": "Bay View Room", "sleeps": 5, "description": "Portofino Bay view" },
       { "id": "club-level", "name": "Club Level Room", "sleeps": 5, "description": "Concierge level with lounge access" },
       { "id": "suite", "name": "Suite", "sleeps": 6, "description": "Villa or presidential suite" }
-    ]
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": true
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": true,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": true,
+        "businessCenter": true,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    }
   },
   {
     "id": "hard-rock",
@@ -21,13 +53,45 @@
     "type": "universal",
     "priceLevel": "deluxe",
     "description": "Rock and roll theming with Express Pass included",
-    "amenities": ["Express Pass", "Water Taxi", "Pool with Underwater Music", "Multiple Dining", "Live Entertainment"],
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 5, "description": "Pool or garden view" },
       { "id": "deluxe", "name": "Deluxe Room", "sleeps": 5, "description": "Upgraded room with better views" },
       { "id": "club-level", "name": "Club Level Room", "sleeps": 5, "description": "Concierge level with lounge access" },
       { "id": "suite", "name": "Suite", "sleeps": 8, "description": "Rock royalty or presidential suite" }
-    ]
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": true
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": true,
+        "concierge": true,
+        "businessCenter": true,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    }
   },
   {
     "id": "royal-pacific",
@@ -36,12 +100,44 @@
     "type": "universal",
     "priceLevel": "deluxe",
     "description": "South Pacific theming with Express Pass included",
-    "amenities": ["Express Pass", "Water Taxi", "Lagoon Pool", "Multiple Dining", "Torch Lighting Ceremony"],
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 5, "description": "Garden or water view" },
       { "id": "club-level", "name": "Club Level Room", "sleeps": 5, "description": "Concierge level with lounge access" },
       { "id": "suite", "name": "Suite", "sleeps": 6, "description": "Junior or royal suite" }
-    ]
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": true
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": true,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    }
   },
   {
     "id": "sapphire-falls",
@@ -50,11 +146,43 @@
     "type": "universal",
     "priceLevel": "moderate",
     "description": "Caribbean theming with early park admission",
-    "amenities": ["Early Park Admission", "Water Taxi", "Pool with Sand Beach", "Multiple Dining"],
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 5, "description": "Garden or water view" },
       { "id": "suite", "name": "Suite", "sleeps": 6, "description": "Junior or one-bedroom suite" }
-    ]
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": true,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": false,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    }
   },
   {
     "id": "aventura",
@@ -63,11 +191,43 @@
     "type": "universal",
     "priceLevel": "moderate",
     "description": "Modern glass tower with early park admission",
-    "amenities": ["Early Park Admission", "Rooftop Bar", "Food Hall", "Virtual Reality Experience"],
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "City or theme park view" },
       { "id": "suite", "name": "Suite", "sleeps": 6, "description": "Two-bedroom suite with kitchenette" }
-    ]
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": false,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": false,
+        "quickService": true,
+        "entertainment": false,
+        "concierge": false,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    }
   },
   {
     "id": "cabana-bay",
@@ -76,11 +236,43 @@
     "type": "universal",
     "priceLevel": "value",
     "description": "1950s beach resort theming with early park admission",
-    "amenities": ["Early Park Admission", "Lazy River", "Multiple Pools", "Food Court", "Bowling Alley"],
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Pool or courtyard view" },
       { "id": "family-suite", "name": "Family Suite", "sleeps": 6, "description": "Suite with kitchenette" }
-    ]
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": false,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": true,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": false,
+        "quickService": true,
+        "entertainment": false,
+        "concierge": false,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": true
+      }
+    }
   },
   {
     "id": "endless-summer-surfside",
@@ -89,11 +281,43 @@
     "type": "universal",
     "priceLevel": "value",
     "description": "Surf theming with early park admission and shuttle",
-    "amenities": ["Early Park Admission", "Shuttle Transportation", "Pool", "Food Court"],
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Surf themed standard room" },
       { "id": "suite", "name": "Suite", "sleeps": 6, "description": "Two-bedroom suite" }
-    ]
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": false,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": false,
+        "quickService": true,
+        "entertainment": false,
+        "concierge": false,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    }
   },
   {
     "id": "endless-summer-dockside",
@@ -102,10 +326,179 @@
     "type": "universal",
     "priceLevel": "value",
     "description": "Beach theming with early park admission and shuttle",
-    "amenities": ["Early Park Admission", "Shuttle Transportation", "Pool", "Food Court"],
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Beach themed standard room" },
       { "id": "suite", "name": "Suite", "sleeps": 6, "description": "Two-bedroom suite" }
-    ]
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": false,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": false,
+        "quickService": true,
+        "entertainment": false,
+        "concierge": false,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    }
+  },
+  {
+    "id": "helios-grand",
+    "name": "Universal Helios Grand Hotel",
+    "address": "1000 Universal's Epic Universe Blvd, Orlando, FL 32819",
+    "type": "universal",
+    "priceLevel": "signature",
+    "description": "OPENED APRIL 16, 2025. Premier hotel INSIDE Epic Universe with dedicated park entrance, rooftop lounge, and How to Train Your Dragon themed kids' suites.",
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Epic Universe or resort view" },
+      { "id": "epic-view", "name": "Epic Universe View Room", "sleeps": 4, "description": "Direct park views" },
+      { "id": "dragon-suite", "name": "How to Train Your Dragon Kids' Suite", "sleeps": 6, "description": "Viking village themed family suite" },
+      { "id": "suite", "name": "Suite", "sleeps": 6, "description": "Premium suite with park access" }
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": false,
+        "bus": false,
+        "walking": true
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": true,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": true,
+        "quickService": false,
+        "entertainment": false,
+        "concierge": true,
+        "businessCenter": true,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": true
+      }
+    }
+  },
+  {
+    "id": "terra-luna",
+    "name": "Universal Terra Luna Resort",
+    "address": "1001 Universal's Epic Universe Blvd, Orlando, FL 32819", 
+    "type": "universal",
+    "priceLevel": "value",
+    "description": "OPENED MARCH 25, 2025. Adventure-inspired prime value hotel near Epic Universe with planetary themed design and zero-entry pool.",
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Adventure themed standard room" },
+      { "id": "suite", "name": "Suite", "sleeps": 6, "description": "Two-bedroom suite with kitchenette" }
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": false,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": true,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": false,
+        "quickService": true,
+        "entertainment": false,
+        "concierge": false,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    }
+  },
+  {
+    "id": "stella-nova",
+    "name": "Universal Stella Nova Resort", 
+    "address": "1002 Universal's Epic Universe Blvd, Orlando, FL 32819",
+    "type": "universal",
+    "priceLevel": "value",
+    "description": "OPENED JANUARY 21, 2025. First Epic Universe hotel to open, featuring celestial theming and walking distance to Epic Universe.",
+    "rooms": [
+      { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Celestial themed standard room" },
+      { "id": "suite", "name": "Suite", "sleeps": 6, "description": "Two-bedroom suite with kitchenette" }
+    ],
+    "features": {
+      "transportation": {
+        "monorail": false,
+        "skyliner": false,
+        "boat": false,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": false,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": false,
+        "marina": false,
+        "dining": false,
+        "quickService": true,
+        "entertainment": false,
+        "concierge": false,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": true,
+        "villas": false,
+        "dvc": false,
+        "themedRooms": false,
+        "familyAccommodations": false
+      }
+    }
   }
 ]

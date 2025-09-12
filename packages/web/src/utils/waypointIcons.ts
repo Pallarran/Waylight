@@ -211,9 +211,9 @@ export const EAT_ICONS: Record<string, WaypointIcon> = {
   }
 };
 
-// STAY-specific icons for hotel amenities
+// STAY-specific icons for hotel amenities - Standardized Feature Set
 export const STAY_ICONS: Record<string, WaypointIcon> = {
-  // Transportation
+  // Transportation (5 Core Options)
   'Monorail': {
     emoji: '🚝',
     label: 'Monorail',
@@ -222,46 +222,53 @@ export const STAY_ICONS: Record<string, WaypointIcon> = {
   },
   'Skyliner': {
     emoji: '🚡',
-    label: 'Disney Skyliner',
+    label: 'Skyliner',
     description: 'Aerial gondola transportation',
     tier: 1
   },
-  'Boat': {
+  'Boat Transport': {
     emoji: '⛵',
     label: 'Boat Transport',
     description: 'Water transportation to parks',
     tier: 1
   },
-  'Bus': {
+  'Bus Transport': {
     emoji: '🚌',
     label: 'Bus Transport',
-    description: 'Disney bus transportation',
+    description: 'Complimentary bus transportation',
     tier: 2
   },
-  'Walking': {
+  'Walking Distance': {
     emoji: '🚶',
     label: 'Walking Distance',
-    description: 'Walking distance to park',
+    description: 'Walking distance to parks',
     tier: 1
   },
   
-  // Resort Features
-  'Beach': {
-    emoji: '🏖️',
-    label: 'Beach',
-    description: 'Private beach access',
+  // Amenities (15 Core Options)
+  // Recreation & Wellness
+  'Pool': {
+    emoji: '🏊',
+    label: 'Pool',
+    description: 'Swimming pool facilities',
     tier: 1
   },
-  'Marina': {
-    emoji: '⚓',
-    label: 'Marina',
-    description: 'Marina with watercraft rentals',
-    tier: 2
+  'Water Features': {
+    emoji: '🌊',
+    label: 'Water Features',
+    description: 'Water slides, lazy river, or special pool features',
+    tier: 1
   },
   'Spa': {
     emoji: '💆',
     label: 'Spa',
-    description: 'Full-service spa',
+    description: 'Full-service spa and wellness',
+    tier: 2
+  },
+  'Fitness Center': {
+    emoji: '💪',
+    label: 'Fitness Center',
+    description: 'Gym and fitness facilities',
     tier: 2
   },
   'Golf': {
@@ -270,84 +277,100 @@ export const STAY_ICONS: Record<string, WaypointIcon> = {
     description: 'Golf course access',
     tier: 2
   },
-  'Multiple Dining': {
+  'Beach': {
+    emoji: '🏖️',
+    label: 'Beach',
+    description: 'Beach or waterfront access',
+    tier: 1
+  },
+  'Marina': {
+    emoji: '⚓',
+    label: 'Marina',
+    description: 'Marina and water activities',
+    tier: 2
+  },
+  
+  // Dining & Entertainment
+  'Dining': {
     emoji: '🍽️',
-    label: 'Multiple Dining',
-    description: 'Multiple restaurants on-site',
+    label: 'Dining',
+    description: 'Restaurant options available',
     tier: 1
   },
-  'Pool': {
-    emoji: '🏊',
-    label: 'Pool',
-    description: 'Swimming pool facilities',
-    tier: 1
+  'Quick Service': {
+    emoji: '🥤',
+    label: 'Quick Service',
+    description: 'Fast casual dining options',
+    tier: 2
   },
-  'Water Slide': {
-    emoji: '🌊',
-    label: 'Water Slide',
-    description: 'Pool with water slides',
-    tier: 1
+  'Entertainment': {
+    emoji: '🎭',
+    label: 'Entertainment',
+    description: 'Live entertainment and activities',
+    tier: 2
   },
-  'Lazy River': {
-    emoji: '🏞️',
-    label: 'Lazy River',
-    description: 'Lazy river pool feature',
-    tier: 1
-  },
-  'Fitness Center': {
-    emoji: '💪',
-    label: 'Fitness Center',
-    description: 'Gym and fitness facilities',
+  
+  // Services
+  'Concierge': {
+    emoji: '🔔',
+    label: 'Concierge',
+    description: 'Concierge and premium services',
     tier: 2
   },
   'Business Center': {
     emoji: '💼',
     label: 'Business Center',
-    description: 'Business services available',
+    description: 'Business services and facilities',
+    tier: 2
+  },
+  'Kids Club': {
+    emoji: '👶',
+    label: 'Kids Club',
+    description: 'Supervised children activities',
+    tier: 2
+  },
+  'Parking': {
+    emoji: '🅿️',
+    label: 'Parking',
+    description: 'Parking facilities available',
+    tier: 2
+  },
+  'WiFi': {
+    emoji: '📶',
+    label: 'WiFi',
+    description: 'Complimentary wireless internet',
     tier: 2
   },
   
-  // Special Accommodations
-  'DVC': {
-    emoji: '🏡',
-    label: 'Disney Vacation Club',
-    description: 'DVC villa accommodations',
-    tier: 2
-  },
-  'Bungalows': {
-    emoji: '🏨',
-    label: 'Bungalows',
-    description: 'Overwater or private bungalows',
-    tier: 1
-  },
-  'Cabins': {
-    emoji: '🏘️',
-    label: 'Cabins',
-    description: 'Cabin-style accommodations',
-    tier: 1
-  },
-  'Villas': {
-    emoji: '🏘️',
-    label: 'Villas',
-    description: 'Villa accommodations',
-    tier: 2
-  },
+  // Accommodations (5 Core Options)
   'Suites': {
     emoji: '🛏️',
     label: 'Suites',
     description: 'Suite accommodations available',
     tier: 2
   },
-  'Island Tower': {
-    emoji: '🗼',
-    label: 'Island Tower',
-    description: 'New Island Tower accommodations',
+  'Villas': {
+    emoji: '🏘️',
+    label: 'Villas',
+    description: 'Villa-style accommodations',
     tier: 2
   },
-  'Campgrounds': {
-    emoji: '🏕️',
-    label: 'Campgrounds',
-    description: 'RV and camping sites',
+  'Disney Vacation Club': {
+    emoji: '🏡',
+    label: 'Disney Vacation Club',
+    description: 'DVC villa accommodations',
+    tier: 2
+  },
+  'Themed Rooms': {
+    emoji: '🎨',
+    label: 'Themed Rooms',
+    description: 'Specialty or themed room options',
+    tier: 1
+  },
+  'Family Accommodations': {
+    emoji: '👨‍👩‍👧‍👦',
+    label: 'Family Accommodations',
+    description: 'Large family rooms or connecting rooms',
     tier: 1
   }
 };
@@ -365,7 +388,7 @@ export function getAttractionIcons(features?: AttractionFeatures, tier?: 1 | 2):
   (Object.keys(features) as Array<keyof AttractionFeatures>).forEach(key => {
     if (features[key] === true) {
       const icon = ATTRACTION_ICONS[key];
-      if (!tier || icon.tier === tier) {
+      if (icon && (!tier || icon.tier === tier)) {
         // Prioritize Lightning Lane icons (both Multi Pass and Single Pass)
         if (key === 'hasLightningLane' || key === 'hasIndividualLL') {
           lightningLaneIcons.push(icon);
@@ -406,7 +429,7 @@ export function getEatIcons(
   // Add ADR required icon
   if (adrRequired) {
     const icon = EAT_ICONS['adr-required'];
-    if (!tier || icon.tier === tier) {
+    if (icon && (!tier || icon.tier === tier)) {
       activeIcons.push(icon);
     }
   }
@@ -414,7 +437,7 @@ export function getEatIcons(
   // Add mobile order icon
   if (mobileOrderAvailable) {
     const icon = EAT_ICONS['mobile-order'];
-    if (!tier || icon.tier === tier) {
+    if (icon && (!tier || icon.tier === tier)) {
       activeIcons.push(icon);
     }
   }
@@ -422,7 +445,7 @@ export function getEatIcons(
   // Add alcohol icon
   if (alcoholServed) {
     const icon = EAT_ICONS['alcohol'];
-    if (!tier || icon.tier === tier) {
+    if (icon && (!tier || icon.tier === tier)) {
       activeIcons.push(icon);
     }
   }
@@ -559,7 +582,61 @@ export function getWaypointIcons(
     }
   } else if (category === 'stay') {
     // STAY item - extract amenities from structured features
-    return getStayIcons(waypoint.amenities, tier);
+    const stayFeatures = waypoint.features as any;
+    if (!stayFeatures) {
+      // Fallback to legacy amenities array if no structured features
+      return getStayIcons(waypoint.amenities, tier);
+    }
+
+    const amenitiesArray: string[] = [];
+    
+    // Extract transportation features
+    if (stayFeatures.transportation) {
+      if (stayFeatures.transportation.monorail) amenitiesArray.push('Monorail');
+      if (stayFeatures.transportation.skyliner) amenitiesArray.push('Skyliner');
+      if (stayFeatures.transportation.boat) amenitiesArray.push('Boat Transport');
+      if (stayFeatures.transportation.bus) amenitiesArray.push('Bus Transport');
+      if (stayFeatures.transportation.walking) amenitiesArray.push('Walking Distance');
+    }
+    
+    // Extract amenity features
+    if (stayFeatures.amenities) {
+      // Recreation & Wellness
+      if (stayFeatures.amenities.pool) amenitiesArray.push('Pool');
+      if (stayFeatures.amenities.waterFeatures || stayFeatures.amenities.waterSlide || stayFeatures.amenities.lazyRiver) {
+        amenitiesArray.push('Water Features');
+      }
+      if (stayFeatures.amenities.spa) amenitiesArray.push('Spa');
+      if (stayFeatures.amenities.fitnessCenter) amenitiesArray.push('Fitness Center');
+      if (stayFeatures.amenities.golf) amenitiesArray.push('Golf');
+      if (stayFeatures.amenities.beach) amenitiesArray.push('Beach');
+      if (stayFeatures.amenities.marina) amenitiesArray.push('Marina');
+      
+      // Dining & Entertainment
+      if (stayFeatures.amenities.dining || stayFeatures.amenities.multipleDining) amenitiesArray.push('Dining');
+      if (stayFeatures.amenities.quickService || stayFeatures.amenities.foodCourt || stayFeatures.amenities.quickServiceDining) {
+        amenitiesArray.push('Quick Service');
+      }
+      if (stayFeatures.amenities.entertainment || stayFeatures.amenities.liveEntertainment) amenitiesArray.push('Entertainment');
+      
+      // Services
+      if (stayFeatures.amenities.concierge) amenitiesArray.push('Concierge');
+      if (stayFeatures.amenities.businessCenter) amenitiesArray.push('Business Center');
+      if (stayFeatures.amenities.childcare || stayFeatures.amenities.kidsClub) amenitiesArray.push('Kids Club');
+      if (stayFeatures.amenities.parking) amenitiesArray.push('Parking');
+      if (stayFeatures.amenities.wifi) amenitiesArray.push('WiFi');
+    }
+    
+    // Extract accommodation features
+    if (stayFeatures.accommodations) {
+      if (stayFeatures.accommodations.suites) amenitiesArray.push('Suites');
+      if (stayFeatures.accommodations.villas) amenitiesArray.push('Villas');
+      if (stayFeatures.accommodations.dvc) amenitiesArray.push('Disney Vacation Club');
+      if (stayFeatures.accommodations.specialRooms || stayFeatures.accommodations.themedRooms) amenitiesArray.push('Themed Rooms');
+      if (stayFeatures.accommodations.familyRooms || stayFeatures.accommodations.familyAccommodations) amenitiesArray.push('Family Accommodations');
+    }
+    
+    return getStayIcons(amenitiesArray, tier);
   }
 
   return [];
