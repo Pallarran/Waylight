@@ -373,25 +373,25 @@ export default function WaypointFilters() {
             
             {/* Transportation Features */}
             <button
-              onClick={() => handleStayFeatureToggle('monorailAccess')}
+              onClick={() => handleStayFeatureToggle('monorail')}
               className={`btn-secondary btn-sm ${
-                filters.stayFeatures?.monorailAccess ? 'bg-sea/10 text-sea-dark' : ''
+                filters.stayFeatures?.monorail ? 'bg-sea/10 text-sea-dark' : ''
               }`}
             >
               🚝 Monorail
             </button>
             <button
-              onClick={() => handleStayFeatureToggle('boatAccess')}
+              onClick={() => handleStayFeatureToggle('boat')}
               className={`btn-secondary btn-sm ${
-                filters.stayFeatures?.boatAccess ? 'bg-sea/10 text-sea-dark' : ''
+                filters.stayFeatures?.boat ? 'bg-sea/10 text-sea-dark' : ''
               }`}
             >
               ⛵ Boat Access
             </button>
             <button
-              onClick={() => handleStayFeatureToggle('walkingDistance')}
+              onClick={() => handleStayFeatureToggle('walking')}
               className={`btn-secondary btn-sm ${
-                filters.stayFeatures?.walkingDistance ? 'bg-sea/10 text-sea-dark' : ''
+                filters.stayFeatures?.walking ? 'bg-sea/10 text-sea-dark' : ''
               }`}
             >
               🚶 Walking Distance
@@ -399,9 +399,9 @@ export default function WaypointFilters() {
             
             {/* Recreation Features */}
             <button
-              onClick={() => handleStayFeatureToggle('pools')}
+              onClick={() => handleStayFeatureToggle('pool')}
               className={`btn-secondary btn-sm ${
-                filters.stayFeatures?.pools ? 'bg-sea/10 text-sea-dark' : ''
+                filters.stayFeatures?.pool ? 'bg-sea/10 text-sea-dark' : ''
               }`}
             >
               🏊 Pool
@@ -948,8 +948,8 @@ export default function WaypointFilters() {
                       <label className="flex items-center cursor-pointer">
                         <input
                           type="checkbox"
-                          checked={filters.stayFeatures?.monorailAccess || false}
-                          onChange={() => handleStayFeatureToggle('monorailAccess')}
+                          checked={filters.stayFeatures?.monorail || false}
+                          onChange={() => handleStayFeatureToggle('monorail')}
                           className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
                         />
                         <span className="text-sm text-ink">🚝 Monorail</span>
@@ -966,8 +966,8 @@ export default function WaypointFilters() {
                       <label className="flex items-center cursor-pointer">
                         <input
                           type="checkbox"
-                          checked={filters.stayFeatures?.boatAccess || false}
-                          onChange={() => handleStayFeatureToggle('boatAccess')}
+                          checked={filters.stayFeatures?.boat || false}
+                          onChange={() => handleStayFeatureToggle('boat')}
                           className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
                         />
                         <span className="text-sm text-ink">⛵ Boat Transport</span>
@@ -975,8 +975,8 @@ export default function WaypointFilters() {
                       <label className="flex items-center cursor-pointer">
                         <input
                           type="checkbox"
-                          checked={filters.stayFeatures?.walkingDistance || false}
-                          onChange={() => handleStayFeatureToggle('walkingDistance')}
+                          checked={filters.stayFeatures?.walking || false}
+                          onChange={() => handleStayFeatureToggle('walking')}
                           className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
                         />
                         <span className="text-sm text-ink">🚶 Walking Distance</span>
@@ -1003,8 +1003,8 @@ export default function WaypointFilters() {
                       <label className="flex items-center cursor-pointer">
                         <input
                           type="checkbox"
-                          checked={filters.stayFeatures?.pools || false}
-                          onChange={() => handleStayFeatureToggle('pools')}
+                          checked={filters.stayFeatures?.pool || false}
+                          onChange={() => handleStayFeatureToggle('pool')}
                           className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
                         />
                         <span className="text-sm text-ink">🏊 Pool</span>
@@ -1012,8 +1012,8 @@ export default function WaypointFilters() {
                       <label className="flex items-center cursor-pointer">
                         <input
                           type="checkbox"
-                          checked={filters.stayFeatures?.waterSlides || false}
-                          onChange={() => handleStayFeatureToggle('waterSlides')}
+                          checked={filters.stayFeatures?.waterFeatures || false}
+                          onChange={() => handleStayFeatureToggle('waterFeatures')}
                           className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
                         />
                         <span className="text-sm text-ink">🌊 Water Features</span>
@@ -1030,8 +1030,8 @@ export default function WaypointFilters() {
                       <label className="flex items-center cursor-pointer">
                         <input
                           type="checkbox"
-                          checked={filters.stayFeatures?.fitness || false}
-                          onChange={() => handleStayFeatureToggle('fitness')}
+                          checked={filters.stayFeatures?.fitnessCenter || false}
+                          onChange={() => handleStayFeatureToggle('fitnessCenter')}
                           className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
                         />
                         <span className="text-sm text-ink">💪 Fitness Center</span>

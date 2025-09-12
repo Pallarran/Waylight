@@ -83,36 +83,28 @@ interface WaypointFilters {
   
   stayFeatures?: {
     // Transportation
-    monorailAccess?: boolean;
-    boatAccess?: boolean;
-    busAccess?: boolean;
-    walkingDistance?: boolean;
-    skylinerAccess?: boolean;
+    monorail?: boolean;
+    boat?: boolean;
+    bus?: boolean;
+    walking?: boolean;
+    skyliner?: boolean;
     carRequired?: boolean;
     complimentaryTransport?: boolean;
     earlyParkEntry?: boolean;
-    // Recreation
-    pools?: boolean;
-    waterSlides?: boolean;
-    hotTub?: boolean;
+    // Amenities (includes recreation, dining & services)
+    pool?: boolean;
+    waterFeatures?: boolean;
     spa?: boolean;
-    fitness?: boolean;
+    fitnessCenter?: boolean;
     golf?: boolean;
-    tennis?: boolean;
     beach?: boolean;
     marina?: boolean;
-    bikeRental?: boolean;
-    joggingTrail?: boolean;
-    playground?: boolean;
-    // Dining & Services
     dining?: boolean;
     quickService?: boolean;
-    tableService?: boolean;
-    roomService?: boolean;
+    entertainment?: boolean;
     concierge?: boolean;
     businessCenter?: boolean;
     childcare?: boolean;
-    laundry?: boolean;
     parking?: boolean;
     wifi?: boolean;
     // Accommodations
@@ -461,7 +453,7 @@ const useWaypointStore = create<WaypointState>((set, get) => ({
             featureValue = a.features[feature];
           } else {
             // Check nested feature objects for STAY category
-            const nestedCategories = ['transportation', 'recreation', 'amenities', 'accommodations'];
+            const nestedCategories = ['transportation', 'amenities', 'accommodations'];
             for (const category of nestedCategories) {
               if (a.features?.[category]?.[feature] !== undefined) {
                 featureValue = a.features[category][feature];
