@@ -44,7 +44,7 @@ export default function WaypointIconLegend({ isOpen, onClose, activeCategory = '
           categories: [
             { name: 'Transportation', color: 'green', features: ['Monorail', 'Skyliner', 'Boat Transport', 'Bus Transport', 'Walking Distance'] },
             { name: 'Recreation & Wellness', color: 'blue', features: ['Pool', 'Water Features', 'Spa', 'Fitness Center', 'Golf', 'Beach', 'Marina'] },
-            { name: 'Dining & Services', color: 'purple', features: ['Dining', 'Quick Service', 'Entertainment', 'Concierge', 'Business Center', 'Kids Club', 'Parking', 'WiFi'] },
+            { name: 'Dining & Services', color: 'purple', features: ['Dining', 'Quick Service', 'Entertainment', 'Concierge', 'Business Center', 'Kids Club'] },
             { name: 'Accommodations', color: 'orange', features: ['Suites', 'Villas', 'Disney Vacation Club', 'Themed Rooms', 'Family Accommodations'] }
           ]
         };
@@ -68,7 +68,7 @@ export default function WaypointIconLegend({ isOpen, onClose, activeCategory = '
             // STAY Category Groups
             { name: 'STAY: Transportation', color: 'purple', features: ['Monorail', 'Skyliner', 'Boat Transport', 'Bus Transport', 'Walking Distance'] },
             { name: 'STAY: Recreation & Wellness', color: 'purple', features: ['Pool', 'Water Features', 'Spa', 'Fitness Center', 'Golf', 'Beach', 'Marina'] },
-            { name: 'STAY: Dining & Services', color: 'indigo', features: ['Dining', 'Quick Service', 'Entertainment', 'Concierge', 'Business Center', 'Kids Club', 'Parking', 'WiFi'] },
+            { name: 'STAY: Dining & Services', color: 'indigo', features: ['Dining', 'Quick Service', 'Entertainment', 'Concierge', 'Business Center', 'Kids Club'] },
             { name: 'STAY: Accommodations', color: 'pink', features: ['Suites', 'Villas', 'Disney Vacation Club', 'Themed Rooms', 'Family Accommodations'] }
           ]
         };

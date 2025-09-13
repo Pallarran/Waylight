@@ -121,7 +121,7 @@
   }
 
   .section-padding {
-    @apply pt-8 pb-12 md:pt-12 md:pb-16 lg:pt-16 lg:pb-20;
+    @apply pt-4 pb-12 md:pt-6 md:pb-16 lg:pt-8 lg:pb-20;
   }
 
   /* Animation Utilities */

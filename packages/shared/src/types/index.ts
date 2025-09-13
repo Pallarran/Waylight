@@ -91,7 +91,8 @@ export interface TravelingPartyMember {
   id: string;
   name: string;
   age?: number;
-  relationship?: string; // e.g., "spouse", "child", "friend"
+  height?: string; // height in inches or cm, stored as string for flexibility
+  guestType?: string; // e.g., "spouse", "child", "friend"
   specialNeeds?: string; // accessibility needs, dietary restrictions, etc.
   isPlanner?: boolean; // identifies the trip planner/organizer
 }

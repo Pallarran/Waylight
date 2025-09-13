@@ -1100,15 +1100,6 @@ export default function WaypointFilters() {
                         />
                         <span className="text-sm text-ink">👶 Kids Club</span>
                       </label>
-                      <label className="flex items-center cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={filters.stayFeatures?.parking || false}
-                          onChange={() => handleStayFeatureToggle('parking')}
-                          className="mr-2 rounded border-surface-dark text-sea focus:ring-sea/20"
-                        />
-                        <span className="text-sm text-ink">🅿️ Parking</span>
-                      </label>
                     </div>
                   </div>
 

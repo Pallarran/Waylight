@@ -118,10 +118,6 @@ export default function WaypointCard({ attraction, showAddToTrip: _showAddToTrip
           </span>
         )}
 
-        {/* Universal badges - only show accessibility for DO items where it varies */}
-        {isDoCategory && attraction.accessibility?.wheelchairAccessible && (
-          <span className="badge bg-blue-100 text-blue-800">♿ Accessible</span>
-        )}
       </div>
 
       {/* Feature Icons */}
@@ -185,9 +181,7 @@ export default function WaypointCard({ attraction, showAddToTrip: _showAddToTrip
                     'entertainment': 'Entertainment',
                     'concierge': 'Concierge',
                     'businessCenter': 'Business Center',
-                    'childcare': 'Kids Club',
-                    'parking': 'Parking',
-                    'wifi': 'WiFi'
+                    'childcare': 'Kids Club'
                   };
                   const label = labelMap[key] || key;
                   const icon = icons.find(icon => icon.label === label);

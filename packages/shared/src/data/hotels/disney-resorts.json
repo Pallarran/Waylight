@@ -34,8 +34,6 @@
         "concierge": true,
         "businessCenter": true,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": true,
@@ -75,8 +73,6 @@
         "concierge": true,
         "businessCenter": true,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": true,
@@ -122,8 +118,6 @@
         "concierge": true,
         "businessCenter": false,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": false,
@@ -168,8 +162,6 @@
         "concierge": true,
         "businessCenter": true,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": true,
@@ -215,8 +207,6 @@
         "concierge": true,
         "businessCenter": false,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": true,
@@ -261,8 +251,6 @@
         "concierge": true,
         "businessCenter": false,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": true,
@@ -307,8 +295,6 @@
         "concierge": true,
         "businessCenter": false,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": true,
@@ -353,8 +339,6 @@
         "concierge": true,
         "businessCenter": false,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": true,
@@ -399,8 +383,6 @@
         "concierge": true,
         "businessCenter": false,
         "childcare": true,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": true,
@@ -446,8 +428,6 @@
         "concierge": false,
         "businessCenter": false,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": false,
@@ -491,8 +471,6 @@
         "concierge": false,
         "businessCenter": false,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": false,
@@ -540,8 +518,6 @@
         "concierge": false,
         "businessCenter": false,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": false,
@@ -581,8 +557,6 @@
         "concierge": false,
         "businessCenter": false,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": false,
@@ -626,8 +600,6 @@
         "concierge": true,
         "businessCenter": false,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": false,
@@ -674,8 +646,6 @@
         "concierge": true,
         "businessCenter": false,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": false,
@@ -722,8 +692,6 @@
         "concierge": true,
         "businessCenter": false,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": false,
@@ -769,8 +737,6 @@
         "concierge": false,
         "businessCenter": false,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": false,
@@ -813,8 +779,6 @@
         "concierge": true,
         "businessCenter": true,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": false,
@@ -860,8 +824,6 @@
         "concierge": true,
         "businessCenter": true,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": false,
@@ -907,8 +869,6 @@
         "concierge": true,
         "businessCenter": false,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": false,
@@ -960,8 +920,6 @@
         "concierge": true,
         "businessCenter": false,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": false,
@@ -1001,8 +959,6 @@
         "concierge": true,
         "businessCenter": false,
         "childcare": true,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": false,
@@ -1048,8 +1004,6 @@
         "concierge": true,
         "businessCenter": false,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": false,
@@ -1095,8 +1049,6 @@
         "concierge": true,
         "businessCenter": false,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": false,
@@ -1147,8 +1099,6 @@
         "concierge": false,
         "businessCenter": true,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": true,
@@ -1193,8 +1143,6 @@
         "concierge": false,
         "businessCenter": false,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": false,
@@ -1238,8 +1186,6 @@
         "concierge": false,
         "businessCenter": false,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": false,
@@ -1284,8 +1230,6 @@
         "concierge": false,
         "businessCenter": false,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": false,
@@ -1329,8 +1273,6 @@
         "concierge": false,
         "businessCenter": false,
         "childcare": false,
-        "parking": true,
-        "wifi": true
       },
       "accommodations": {
         "suites": false,
