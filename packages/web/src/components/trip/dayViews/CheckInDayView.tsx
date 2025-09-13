@@ -22,6 +22,7 @@ export default function CheckInDayView({ trip, tripDay, date, onQuickAdd, onOpen
   const [editingItem, setEditingItem] = useState<string | null>(null);
   const [showTransportInfo, setShowTransportInfo] = useState(false);
   const [showCheckInInfo, setShowCheckInInfo] = useState(false);
+  const [showAddActivityModal, setShowAddActivityModal] = useState(false);
 
   // Helper function to clean hotel names for display
   const getDisplayHotelName = (hotelName: string) => {
@@ -44,45 +45,9 @@ export default function CheckInDayView({ trip, tripDay, date, onQuickAdd, onOpen
       return null; // Will implement based on available hotel data
     })() : null;
 
-  // Helper function to get hotel-specific transportation recommendations
-  const getHotelTransportationTips = (hotelName: string) => {
-    const name = hotelName.toLowerCase();
 
-    if (name.includes('grand floridian') || name.includes('polynesian') || name.includes('contemporary')) {
-      return {
-        primary: 'monorail',
-        description: 'Your resort has direct monorail access to Magic Kingdom',
-        tips: ['Walking distance to Magic Kingdom', 'Monorail to EPCOT via TTC', 'Premium location benefits']
-      };
-    } else if (name.includes('riviera') || name.includes('caribbean beach') || name.includes('art of animation') || name.includes('pop century')) {
-      return {
-        primary: 'skyliner',
-        description: 'Your resort has Disney Skyliner access',
-        tips: ['Direct Skyliner to EPCOT and Hollywood Studios', 'Scenic aerial transportation', 'No need for buses to these parks']
-      };
-    } else if (name.includes('yacht') || name.includes('beach club') || name.includes('swan') || name.includes('dolphin')) {
-      return {
-        primary: 'walking',
-        description: 'Your resort has boat and walking access to EPCOT',
-        tips: ['Walking distance to EPCOT', 'Boat transportation to Hollywood Studios', 'Close to Disney BoardWalk']
-      };
-    } else if (name.includes('port orleans') || name.includes('old key west') || name.includes('saratoga springs')) {
-      return {
-        primary: 'boat',
-        description: 'Your resort has boat access to Disney Springs',
-        tips: ['Boat transportation to Disney Springs', 'Scenic waterway transportation', 'Bus service to theme parks']
-      };
-    }
-
-    return {
-      primary: 'bus',
-      description: 'Your resort uses Disney bus transportation',
-      tips: ['Complimentary bus service to all parks', 'Buses run approximately every 20 minutes', 'Check My Disney Experience for schedules']
-    };
-  };
-
-  // Helper function to get hotel-specific check-in tips using hotel database
-  const getHotelCheckInTips = (hotelName: string) => {
+  // Helper function to get hotel-specific check-in time
+  const getHotelCheckInTime = (hotelName: string) => {
     // Find the hotel in the database by name
     const hotel = allHotels.find(h => h.name === hotelName);
 
@@ -90,44 +55,17 @@ export default function CheckInDayView({ trip, tripDay, date, onQuickAdd, onOpen
       // Use the actual priceLevel from the database
       switch (hotel.priceLevel) {
         case 'deluxe_villa':
-          return {
-            checkInTime: '4:00 PM',
-            type: 'Deluxe Villa (DVC)',
-            benefits: ['Extended Evening Hours at select parks', 'DVC member benefits', 'Premium resort amenities']
-          };
+          return '4:00 PM';
         case 'deluxe':
-          return {
-            checkInTime: '3:00 PM',
-            type: 'Deluxe Resort',
-            benefits: ['Extended Evening Hours at select parks', 'Premium location and amenities', 'Deluxe resort transportation']
-          };
         case 'moderate':
-          return {
-            checkInTime: '3:00 PM',
-            type: 'Moderate Resort',
-            benefits: ['Themed resort experience', 'Unique transportation options', 'Enhanced amenities']
-          };
         case 'value':
-          return {
-            checkInTime: '3:00 PM',
-            type: 'Value Resort',
-            benefits: ['Fun themed environments', 'All Disney resort benefits', 'Great value for families']
-          };
         default:
-          return {
-            checkInTime: '3:00 PM',
-            type: 'Resort',
-            benefits: ['Disney resort benefits']
-          };
+          return '3:00 PM';
       }
     }
 
     // Fallback for hotels not in database
-    return {
-      checkInTime: '3:00 PM',
-      type: 'Resort',
-      benefits: ['Standard resort amenities']
-    };
+    return '3:00 PM';
   };
 
   // Helper function to get transportation info for bubble
@@ -135,7 +73,7 @@ export default function CheckInDayView({ trip, tripDay, date, onQuickAdd, onOpen
     switch (transportMethod) {
       case 'mears':
         return {
-          title: 'Mears Connect Pricing (2025)',
+          title: 'Mears Connect Pricing',
           details: [
             'Standard: $17.60 adult, $14.30 child (one-way)',
             'Express: $238 for group of 4 (faster service)',
@@ -203,6 +141,141 @@ export default function CheckInDayView({ trip, tripDay, date, onQuickAdd, onOpen
           ]
         };
     }
+  };
+
+  // Helper function to get specific activity icons based on name, with fallback to category icon
+  const getActivityIcon = (activityName: string, categoryType: string): string => {
+    // Map specific activity names to their modal icons
+    const specificIconMap: { [key: string]: string } = {
+      'Room Settling Time': '🧳',
+      'Welcome Dinner': '🍽️',
+      'Welcome Dinner Reservation': '🍽️',
+      'Resort Exploration': '🗺️',
+      'Explore Your Resort': '🗺️',
+      'Early Rest & Recovery': '🛌',
+      'Resort Map & Orientation': '🗺️',
+      'Pool Area Exploration': '🏊',
+      'Locate Resort Spa': '💆',
+      'Resort Beach Walk': '🏖️',
+      'Explore Marina & Watercraft': '⛵',
+      'Golf Course Walk': '⛳',
+      'Check Resort Activities': '🎭',
+      'Monorail Resort Tour': '🚝',
+      'Explore Water Features': '💦',
+      'Animal Safari Viewing': '🦒',
+      'Volcano Pool Exploration': '🌋',
+      'Resort Monorail Experience': '🚝',
+      'Beach & Sand Castle Building': '🏖️',
+      'Contemporary Tower Views': '🏢',
+      'Wilderness Lodge Tour': '🏕️',
+      'Typhoon Lagoon Water Park': '🌊',
+      'Blizzard Beach Water Park': '❄️',
+    };
+
+    // Return specific icon if found, otherwise fall back to category icon
+    return specificIconMap[activityName] || getCategoryIcon(categoryType);
+  };
+
+  // Helper function to get hotel feature-based activity suggestions
+  const getHotelFeatureSuggestions = (hotelData: any) => {
+    const suggestions = [];
+
+    // Smart detection for pool time - arrival day appropriate
+    if (hotelData?.features?.amenities?.pool) {
+      suggestions.push({ name: 'Pool Area Exploration', type: 'break', icon: '🏊' });
+    }
+
+    // Spa reconnaissance rather than booking/experience
+    if (hotelData?.features?.amenities?.spa) {
+      suggestions.push({ name: 'Locate Resort Spa', type: 'tours', icon: '💆' });
+    }
+
+    if (hotelData?.features?.amenities?.beach) {
+      suggestions.push({ name: 'Resort Beach Walk', type: 'break', icon: '🏖️' });
+    }
+
+    if (hotelData?.features?.amenities?.marina) {
+      suggestions.push({ name: 'Explore Marina & Watercraft', type: 'tours', icon: '⛵' });
+    }
+
+    // Light exploration rather than passive viewing
+    if (hotelData?.features?.amenities?.golf) {
+      suggestions.push({ name: 'Golf Course Walk', type: 'break', icon: '⛳' });
+    }
+
+    // Information gathering rather than participation
+    if (hotelData?.features?.amenities?.entertainment) {
+      suggestions.push({ name: 'Check Resort Activities', type: 'tours', icon: '🎭' });
+    }
+
+    if (hotelData?.features?.transportation?.monorail) {
+      suggestions.push({ name: 'Monorail Resort Tour', type: 'tours', icon: '🚝' });
+    }
+
+    if (hotelData?.features?.amenities?.waterFeatures) {
+      suggestions.push({ name: 'Explore Water Features', type: 'tours', icon: '💦' });
+    }
+
+    // Add special features based on hotel specifics - arrival day appropriate
+    if (hotelData?.id === 'animal-kingdom-lodge') {
+      suggestions.push({ name: 'Savanna Animal Viewing', type: 'attraction', icon: '🦁' });
+    }
+
+    if (hotelData?.id === 'grand-floridian') {
+      suggestions.push({ name: 'Victorian Garden Walk', type: 'break', icon: '🌹' });
+    }
+
+    if (hotelData?.id === 'polynesian') {
+      suggestions.push({ name: 'Electrical Water Pageant Viewing', type: 'attraction', icon: '✨' });
+    }
+
+    if (hotelData?.id === 'wilderness-lodge') {
+      suggestions.push({ name: 'Geyser Viewing (Hourly)', type: 'attraction', icon: '💦' });
+    }
+
+    // Add more hotel-specific arrival day activities
+    if (hotelData?.id === 'contemporary') {
+      suggestions.push({ name: 'Monorail Concourse Exploration', type: 'tours', icon: '🚝' });
+    }
+
+    if (hotelData?.id === 'beach-club' || hotelData?.id === 'yacht-club') {
+      suggestions.push({ name: 'Stormalong Bay Familiarization', type: 'tours', icon: '🏖️' });
+    }
+
+    if (hotelData?.id === 'boardwalk') {
+      suggestions.push({ name: 'BoardWalk Promenade Stroll', type: 'break', icon: '🎪' });
+    }
+
+    if (hotelData?.id === 'riviera') {
+      suggestions.push({ name: 'Skyliner Station Exploration', type: 'tours', icon: '🚠' });
+    }
+
+    // Always add these essential arrival day activities if we have space
+    if (suggestions.length < 3) {
+      suggestions.push({ name: 'Lobby & Architecture Tour', type: 'tours', icon: '🏨' });
+    }
+
+    if (suggestions.length < 3 && hotelData?.features?.amenities?.dining) {
+      suggestions.push({ name: 'Explore Dining Options', type: 'tours', icon: '🍽️' });
+    }
+
+
+    return suggestions.slice(0, 3); // Limit to 3 suggestions
+  };
+
+  // Helper function to check water park access
+  const hasWaterParkAccess = (hotelData: any) => {
+    // Disney resort guests typically have water park access (with separate ticket)
+    if (hotelData?.type === 'disney') return true;
+
+    // Universal guests don't have Disney water park access
+    if (hotelData?.type === 'universal') return false;
+
+    // Off-property hotels don't have included access
+    if (hotelData?.type === 'other') return false;
+
+    // Default: if we can't determine, show water parks (better to show than hide)
+    return true;
   };
 
   const updateDayData = async (updates: Partial<TripDay>) => {
@@ -323,11 +396,11 @@ export default function CheckInDayView({ trip, tripDay, date, onQuickAdd, onOpen
           isDragging ? 'opacity-50 scale-95' : 'opacity-100 hover:border-surface-dark'
         } group`}
       >
-        <div className="flex items-center mr-3 opacity-0 group-hover:opacity-100 transition-opacity cursor-grab active:cursor-grabbing">
+        <div className="flex items-center justify-center mr-3 opacity-0 group-hover:opacity-100 transition-opacity cursor-grab active:cursor-grabbing self-center">
           <GripVertical className="w-4 h-4 text-ink-light" />
         </div>
         <div className="flex items-center justify-center w-8 h-8 mr-3 text-lg">
-          {getCategoryIcon(item.type)}
+          {getActivityIcon(item.name, item.type)}
         </div>
         <div className="flex-1">
           {isEditingThis ? (
@@ -598,7 +671,7 @@ export default function CheckInDayView({ trip, tripDay, date, onQuickAdd, onOpen
                     </div>
                     <div className="px-3 py-2 bg-surface/50 border border-surface-dark/50 rounded-lg text-ink text-sm">
                       {trip.accommodation?.hotelName
-                        ? getHotelCheckInTips(trip.accommodation.hotelName).checkInTime
+                        ? getHotelCheckInTime(trip.accommodation.hotelName)
                         : '3:00 PM'
                       }
                     </div>
@@ -618,229 +691,22 @@ export default function CheckInDayView({ trip, tripDay, date, onQuickAdd, onOpen
             </div>
 
 
-            {/* First Day Activities */}
-            <div className="bg-surface-dark/20 rounded-lg p-4">
-              <h3 className="font-semibold text-ink mb-4 flex items-center">
-                <Camera className="w-5 h-5 mr-2 text-pink-500" />
-                Light First Day Activities
-              </h3>
-              <p className="text-sm text-ink-light mb-6">
-                Keep it simple today - you might be tired from travel. Focus on getting oriented and settling in.
-              </p>
-
-              {/* 3-Column Activity Layout */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-
-                {/* Column 1: Essential First Day */}
-                <div className="border-2 border-gray-400/30 rounded-lg p-4 bg-gray-400/5">
-                  <h4 className="font-medium text-ink mb-3 text-sm">Essential First Day</h4>
-                  <div className="space-y-3">
-                    <button
-                      onClick={() => onQuickAdd('dining', undefined, 'Welcome Dinner')}
-                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
-                    >
-                      <Utensils className="w-4 h-4 mr-3 text-orange-500" />
-                      <span className="text-sm text-ink">Welcome Dinner Reservation</span>
-                    </button>
-                    <button
-                      onClick={() => onQuickAdd('tours', undefined, 'Resort Exploration')}
-                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
-                    >
-                      <MapPin className="w-4 h-4 mr-3 text-purple-500" />
-                      <span className="text-sm text-ink">Explore Your Resort</span>
-                    </button>
-                    <button
-                      onClick={() => onQuickAdd('break', undefined, 'Early Rest & Recovery')}
-                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
-                    >
-                      <span className="w-4 h-4 mr-3 text-green-500">🛌</span>
-                      <span className="text-sm text-ink">Early Rest & Recovery</span>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Column 2: Resort-Specific */}
-                <div className="border-2 border-pink-500/30 rounded-lg p-4 bg-pink-500/5">
-                  <h4 className="font-medium text-ink mb-3 text-sm">Resort features</h4>
-                  <div className="space-y-3">
-                    {trip.accommodation?.hotelName && (() => {
-                      const hotelName = trip.accommodation.hotelName.toLowerCase();
-                      let suggestions = [];
-
-                      if (hotelName.includes('animal kingdom lodge')) {
-                        suggestions = [
-                          { name: 'Savanna Animal Viewing', type: 'attraction', icon: '🦁' },
-                          { name: 'Boma African Dinner', type: 'dining', icon: '🍽️' },
-                          { name: 'African Cultural Activities', type: 'attraction', icon: '🥁' }
-                        ];
-                      } else if (hotelName.includes('grand floridian')) {
-                        suggestions = [
-                          { name: 'Monorail Resort Tour', type: 'attraction', icon: '🚝' },
-                          { name: '1900 Park Fare Brunch', type: 'dining', icon: '🥂' },
-                          { name: 'Victorian Garden Walk', type: 'attraction', icon: '🌹' }
-                        ];
-                      } else if (hotelName.includes('polynesian')) {
-                        suggestions = [
-                          { name: 'Lava Pool & Waterslide', type: 'attraction', icon: '🌋' },
-                          { name: 'Seven Seas Lagoon Beach', type: 'break', icon: '🏖️' },
-                          { name: 'Electrical Water Pageant', type: 'attraction', icon: '✨' }
-                        ];
-                      } else if (hotelName.includes('wilderness lodge')) {
-                        suggestions = [
-                          { name: 'Geyser Viewing (Hourly)', type: 'attraction', icon: '💦' },
-                          { name: 'Hidden Mickey Hunt', type: 'attraction', icon: '🔍' },
-                          { name: 'Artist Point Dinner', type: 'dining', icon: '🏔️' }
-                        ];
-                      } else if (hotelName.includes('beach club') || hotelName.includes('yacht club')) {
-                        suggestions = [
-                          { name: 'Stormalong Bay Pool', type: 'attraction', icon: '🏊' },
-                          { name: 'BoardWalk Entertainment', type: 'attraction', icon: '🎠' },
-                          { name: 'Beaches & Cream', type: 'dining', icon: '🍦' }
-                        ];
-                      } else if (hotelName.includes('art of animation')) {
-                        suggestions = [
-                          { name: 'Big Blue Pool', type: 'attraction', icon: '🐠' },
-                          { name: 'Themed Pool Areas', type: 'attraction', icon: '🎨' },
-                          { name: 'Animation Hall Displays', type: 'attraction', icon: '🎭' }
-                        ];
-                      } else if (hotelName.includes('port orleans')) {
-                        suggestions = [
-                          { name: 'Boat to Disney Springs', type: 'attraction', icon: '⛵' },
-                          { name: 'Beignets at French Quarter', type: 'dining', icon: '🥐' },
-                          { name: 'Resort Grounds Walk', type: 'attraction', icon: '🚶' }
-                        ];
-                      } else if (hotelName.includes('island tower')) {
-                        suggestions = [
-                          { name: 'Island Tower Views', type: 'attraction', icon: '🏝️' },
-                          { name: 'Polynesian Lobby Visit', type: 'attraction', icon: '🌺' },
-                          { name: 'Seven Seas Lagoon Walk', type: 'break', icon: '🌊' }
-                        ];
-                      } else {
-                        // Generic resort suggestions
-                        suggestions = [
-                          { name: 'Resort Pool Time', type: 'attraction', icon: '🏊' },
-                          { name: 'Resort Dining', type: 'dining', icon: '🍽️' },
-                          { name: 'Lobby & Grounds Tour', type: 'attraction', icon: '🏨' }
-                        ];
-                      }
-
-                      return suggestions.map((suggestion, index) => (
-                        <button
-                          key={index}
-                          onClick={() => onQuickAdd(suggestion.type as ActivityCategory, undefined, suggestion.name)}
-                          className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
-                        >
-                          <span className="w-4 h-4 mr-3 text-pink-500">{suggestion.icon}</span>
-                          <span className="text-sm text-ink">{suggestion.name}</span>
-                        </button>
-                      ));
-                    })()}
-                  </div>
-                </div>
-
-                {/* Column 3: Water Parks */}
-                <div className="border-2 border-blue-500/30 rounded-lg p-4 bg-blue-500/5">
-                  <h4 className="font-medium text-ink mb-3 text-sm">Water Parks Today</h4>
-                  <div className="space-y-3">
-                    <button
-                      onClick={() => onQuickAdd('waterpark', undefined, 'Typhoon Lagoon Water Park')}
-                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
-                    >
-                      <span className="w-4 h-4 mr-3 text-blue-500">🌊</span>
-                      <span className="text-sm text-ink">Typhoon Lagoon</span>
-                    </button>
-                    <button
-                      onClick={() => onQuickAdd('waterpark', undefined, 'Blizzard Beach Water Park')}
-                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
-                    >
-                      <span className="w-4 h-4 mr-3 text-cyan-500">❄️</span>
-                      <span className="text-sm text-ink">Blizzard Beach</span>
-                    </button>
-                    <button
-                      onClick={() => onQuickAdd('waterpark', undefined, 'Resort Pool Time')}
-                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
-                    >
-                      <span className="w-4 h-4 mr-3 text-teal-500">🏊</span>
-                      <span className="text-sm text-ink">Resort Pool Time</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Custom Activity Form */}
-              {showCustomActivityForm ? (
-                <div className="bg-surface/50 rounded-lg p-3 border border-surface-dark/50 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <h4 className="font-medium text-ink text-sm">Add Custom Activity</h4>
-                    <button
-                      onClick={() => setShowCustomActivityForm(false)}
-                      className="text-ink-light hover:text-ink"
-                    >
-                      <X className="w-4 h-4" />
-                    </button>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                    <input
-                      type="text"
-                      placeholder="Activity name"
-                      value={customActivity.name}
-                      onChange={(e) => setCustomActivity({ ...customActivity, name: e.target.value })}
-                      className="px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
-                    />
-                    <input
-                      type="time"
-                      value={customActivity.startTime}
-                      onChange={(e) => setCustomActivity({ ...customActivity, startTime: e.target.value })}
-                      className="px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
-                    />
-                    <select
-                      value={customActivity.type}
-                      onChange={(e) => setCustomActivity({ ...customActivity, type: e.target.value as ActivityCategory })}
-                      className="px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
-                    >
-                      <option value="attraction">Attraction</option>
-                      <option value="dining">Dining</option>
-                      <option value="shopping">Shopping</option>
-                      <option value="break">Rest/Break</option>
-                      <option value="travel">Travel</option>
-                    </select>
-                  </div>
-                  <div className="flex space-x-2">
-                    <button
-                      onClick={handleAddCustomActivity}
-                      className="btn-primary btn-sm"
-                      disabled={!customActivity.name.trim()}
-                    >
-                      Add Activity
-                    </button>
-                    <button
-                      onClick={() => {
-                        setCustomActivity({ name: '', startTime: '', type: 'attraction' });
-                        setShowCustomActivityForm(false);
-                      }}
-                      className="btn-secondary btn-sm"
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <button
-                  onClick={() => setShowCustomActivityForm(true)}
-                  className="w-full flex items-center justify-center p-3 border-2 border-dashed border-surface-dark/50 rounded-lg hover:border-sea/50 hover:bg-surface-dark/10 transition-colors text-ink-light hover:text-ink"
-                >
-                  <Plus className="w-4 h-4 mr-2" />
-                  <span className="text-sm">Add Custom Activity</span>
-                </button>
-              )}
-            </div>
 
             {/* Today's Schedule */}
             <div className="bg-surface-dark/20 rounded-lg p-4">
-              <h3 className="font-semibold text-ink mb-4 flex items-center">
-                <Clock className="w-5 h-5 mr-2 text-blue-500" />
-                Today's Schedule
-              </h3>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-semibold text-ink flex items-center">
+                  <Clock className="w-5 h-5 mr-2 text-blue-500" />
+                  Today's Schedule
+                </h3>
+                <button
+                  onClick={() => setShowAddActivityModal(true)}
+                  className="flex items-center px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-lg transition-colors"
+                >
+                  <Plus className="w-4 h-4 mr-1" />
+                  Add Activity
+                </button>
+              </div>
 
               {tripDay.items && tripDay.items.length > 0 ? (
                 <div className="space-y-3">
@@ -852,7 +718,7 @@ export default function CheckInDayView({ trip, tripDay, date, onQuickAdd, onOpen
                 <div className="text-center py-8">
                   <span className="text-4xl mb-4 block">🎯</span>
                   <p className="text-ink-light">Add some light activities for your arrival day!</p>
-                  <p className="text-xs text-ink-light mt-2">Use the buttons above or add a custom activity</p>
+                  <p className="text-xs text-ink-light mt-2">Click "Add Activity" above to get started</p>
                 </div>
               )}
             </div>
@@ -863,15 +729,56 @@ export default function CheckInDayView({ trip, tripDay, date, onQuickAdd, onOpen
       {/* Right Panel: Quick Info & Tips */}
       <div className="lg:col-span-4">
         <div className="bg-surface rounded-xl border border-surface-dark/30 p-5 h-full overflow-y-auto">
-          <h3 className="text-lg font-semibold text-ink mb-4">Arrival Day Tips</h3>
-          
           <div className="space-y-4">
+
+            {/* First Day Tips */}
+            <div className="bg-blue-500/10 rounded-lg p-4 border border-blue-500/20">
+              <h4 className="font-medium text-ink mb-3">💡 First Day Tips</h4>
+              <div className="text-sm text-ink-light space-y-2">
+                <p>• Take it slow - you have the whole vacation ahead</p>
+                <p>• Download My Disney Experience app and link your confirmation</p>
+                <p>• Explore your {trip.accommodation?.hotelName ? 'resort' : 'hotel'} - pools, dining, and transportation options</p>
+                <p>• Use mobile ordering for dining - saves time in busy periods</p>
+                <p>• Stay hydrated and pack layers - Florida weather can change quickly</p>
+                {trip.accommodation?.hotelName && (() => {
+                  const hotelData = allHotels.find(hotel =>
+                    hotel.name.toLowerCase().includes(trip.accommodation!.hotelName!.toLowerCase()) ||
+                    trip.accommodation!.hotelName!.toLowerCase().includes(hotel.name.toLowerCase())
+                  );
+                  return hotelData?.type !== 'disney' ? (
+                    <p>• Book Lightning Lane Multi Pass up to 3 days in advance</p>
+                  ) : null;
+                })()}
+                {tripDay.arrivalPlan?.transportMethod === 'car' && (
+                  <p>• Take photos of parking location if driving</p>
+                )}
+              </div>
+
+              {/* Resort Guest Benefits Subsection */}
+              {trip.accommodation?.hotelName && (() => {
+                const hotelData = allHotels.find(hotel =>
+                  hotel.name.toLowerCase().includes(trip.accommodation!.hotelName!.toLowerCase()) ||
+                  trip.accommodation!.hotelName!.toLowerCase().includes(hotel.name.toLowerCase())
+                );
+                return hotelData?.type === 'disney' ? (
+                  <div className="mt-4 pt-3 border-t border-blue-500/30">
+                    <h5 className="font-medium text-ink mb-2 text-xs uppercase tracking-wide">🏰 Resort Guest Benefits</h5>
+                    <div className="text-sm text-ink-light space-y-2">
+                      <p>• Complete online check-in before arrival to save time</p>
+                      <p>• Book Lightning Lane Multi Pass up to 7 days in advance</p>
+                      <p>• Take advantage of FREE water park admission today</p>
+                      <p>• Remember Early Park Access (30 minutes early)</p>
+                    </div>
+                  </div>
+                ) : null;
+              })()}
+            </div>
 
             {/* Important Numbers */}
             <div className="bg-surface-dark/20 rounded-lg p-4">
               <h4 className="font-medium text-ink mb-3 flex items-center">
                 <Phone className="w-4 h-4 mr-2 text-blue-500" />
-                Important Numbers (2025)
+                Important Numbers
               </h4>
               <div className="space-y-2 text-sm text-ink-light">
                 <div>General Guest Services: (407) 939-5277</div>
@@ -882,72 +789,268 @@ export default function CheckInDayView({ trip, tripDay, date, onQuickAdd, onOpen
               </div>
             </div>
 
-            {/* Weather */}
-            <div className="bg-surface-dark/20 rounded-lg p-4">
-              <h4 className="font-medium text-ink mb-3">☀️ Weather & Packing</h4>
-              <div className="text-sm text-ink-light space-y-1">
-                <p>Check the weather app for today's forecast</p>
-                <p>Pack layers for air conditioning</p>
-                <p>Don't forget sunscreen & water bottle</p>
-              </div>
-            </div>
-
-            {/* First Day Tips */}
-            <div className="bg-blue-500/10 rounded-lg p-4 border border-blue-500/20">
-              <h4 className="font-medium text-ink mb-3">💡 First Day Tips (2025)</h4>
-              <div className="text-sm text-ink-light space-y-2">
-                <p>• Take it slow - you have the whole vacation ahead</p>
-                <p>• Explore your resort layout and amenities</p>
-                <p>• Set up Lightning Lane Multi Pass for tomorrow (7 days advance for resort guests)</p>
-                <p>• Download your resort confirmation to My Disney Experience app</p>
-                <p>• Take photos of parking location if driving</p>
-                <p>• Try mobile ordering for quick dining options</p>
-                <p>• Stay hydrated - Florida heat can be intense</p>
-                <p>• Consider the FREE water park option today!</p>
-              </div>
-            </div>
-
-            {/* Resort Transportation Access & Benefits */}
-            {trip.accommodation?.hotelName && (
-              <div className="bg-purple-500/10 rounded-lg p-4 border border-purple-500/20">
-                <h4 className="font-medium text-ink mb-3 flex items-center">
-                  <Car className="w-4 h-4 mr-2 text-purple-500" />
-                  Resort Transportation & Benefits
-                </h4>
-
-                {/* Transportation Access */}
-                <div className="mb-4">
-                  <div className="text-sm">
-                    <div className="font-medium text-ink mb-2">
-                      🚊 {getHotelTransportationTips(trip.accommodation.hotelName).description}
-                    </div>
-                    <div className="text-ink-light space-y-1">
-                      {getHotelTransportationTips(trip.accommodation.hotelName).tips.map((tip, index) => (
-                        <div key={index}>• {tip}</div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Resort Benefits */}
-                <div className="border-t border-purple-500/20 pt-3">
-                  <div className="text-sm">
-                    <div className="font-medium text-ink mb-2">
-                      🏨 {getHotelCheckInTips(trip.accommodation.hotelName).type} Perks
-                    </div>
-                    <div className="text-ink-light space-y-1">
-                      {getHotelCheckInTips(trip.accommodation.hotelName).benefits.map((benefit, index) => (
-                        <div key={index}>• {benefit}</div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </div>
     </div>
+
+      {/* Add Activity Modal */}
+      {showAddActivityModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-surface rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h2 className="text-xl font-semibold text-ink flex items-center">
+                    <Camera className="w-5 h-5 mr-2 text-pink-500" />
+                    Light First Day Activities
+                  </h2>
+                  <p className="text-sm text-ink-light mt-1">
+                    Keep it simple today - you might be tired from travel. Focus on getting oriented and settling in.
+                  </p>
+                </div>
+                <button
+                  onClick={() => setShowAddActivityModal(false)}
+                  className="p-2 text-ink-light hover:text-ink hover:bg-surface-dark rounded-lg transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Dynamic Activity Layout */}
+              <div className={(() => {
+                // Calculate visible columns dynamically
+                const hotelData = trip.accommodation?.hotelName ?
+                  allHotels.find(hotel =>
+                    hotel.name.toLowerCase().includes(trip.accommodation!.hotelName!.toLowerCase()) ||
+                    trip.accommodation!.hotelName!.toLowerCase().includes(hotel.name.toLowerCase())
+                  ) : null;
+
+                const hasResortFeatures = hotelData ? getHotelFeatureSuggestions(hotelData).length > 0 : false;
+                const showWaterParks = hotelData ? hasWaterParkAccess(hotelData) : true;
+
+                let visibleColumns = 1; // Always show Essential First Day
+                if (hasResortFeatures) visibleColumns++;
+                if (showWaterParks) visibleColumns++;
+
+                // Return appropriate grid classes
+                if (visibleColumns === 3) {
+                  return "grid grid-cols-1 md:grid-cols-3 gap-6 mb-6";
+                } else if (visibleColumns === 2) {
+                  return "grid grid-cols-1 md:grid-cols-2 gap-6 mb-6";
+                } else {
+                  return "grid grid-cols-1 gap-6 mb-6 max-w-md mx-auto";
+                }
+              })()}>
+
+                {/* Column 1: Essential First Day */}
+                <div className="border-2 border-gray-400/30 rounded-lg p-4 bg-gray-400/5">
+                  <h4 className="font-medium text-ink mb-3 text-sm">Essential First Day</h4>
+                  <div className="space-y-3">
+                    <button
+                      onClick={() => {
+                        onQuickAdd('break', undefined, 'Room Settling Time');
+                        setShowAddActivityModal(false);
+                      }}
+                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                    >
+                      <span className="w-4 h-4 mr-3 text-blue-500">🧳</span>
+                      <span className="text-sm text-ink">Room Settling Time</span>
+                    </button>
+                    <button
+                      onClick={() => {
+                        onQuickAdd('dining', undefined, 'Welcome Dinner');
+                        setShowAddActivityModal(false);
+                      }}
+                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                    >
+                      <Utensils className="w-4 h-4 mr-3 text-orange-500" />
+                      <span className="text-sm text-ink">Welcome Dinner Reservation</span>
+                    </button>
+                    <button
+                      onClick={() => {
+                        onQuickAdd('tours', undefined, 'Resort Exploration');
+                        setShowAddActivityModal(false);
+                      }}
+                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                    >
+                      <MapPin className="w-4 h-4 mr-3 text-purple-500" />
+                      <span className="text-sm text-ink">Explore Your Resort</span>
+                    </button>
+                    <button
+                      onClick={() => {
+                        onQuickAdd('break', undefined, 'Early Rest & Recovery');
+                        setShowAddActivityModal(false);
+                      }}
+                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                    >
+                      <span className="w-4 h-4 mr-3 text-green-500">🛌</span>
+                      <span className="text-sm text-ink">Early Rest & Recovery</span>
+                    </button>
+                    <button
+                      onClick={() => {
+                        onQuickAdd('tours', undefined, 'Resort Map & Orientation');
+                        setShowAddActivityModal(false);
+                      }}
+                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                    >
+                      <span className="w-4 h-4 mr-3 text-indigo-500">🗺️</span>
+                      <span className="text-sm text-ink">Resort Map & Orientation</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Column 2: Resort-Specific Features (Dynamic) */}
+                {(() => {
+                  const hotelData = trip.accommodation?.hotelName ?
+                    allHotels.find(hotel =>
+                      hotel.name.toLowerCase().includes(trip.accommodation!.hotelName!.toLowerCase()) ||
+                      trip.accommodation!.hotelName!.toLowerCase().includes(hotel.name.toLowerCase())
+                    ) : null;
+
+                  const suggestions = hotelData ? getHotelFeatureSuggestions(hotelData) : [];
+
+                  if (suggestions.length === 0) return null;
+
+                  return (
+                    <div className="border-2 border-pink-500/30 rounded-lg p-4 bg-pink-500/5">
+                      <h4 className="font-medium text-ink mb-3 text-sm">Resort Features</h4>
+                      <div className="space-y-3">
+                        {suggestions.map((suggestion, index) => (
+                          <button
+                            key={index}
+                            onClick={() => {
+                              onQuickAdd(suggestion.type as ActivityCategory, undefined, suggestion.name);
+                              setShowAddActivityModal(false);
+                            }}
+                            className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                          >
+                            <span className="w-4 h-4 mr-3 text-pink-500">{suggestion.icon}</span>
+                            <span className="text-sm text-ink">{suggestion.name}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })()}
+
+                {/* Column 3: Water Parks (Dynamic) */}
+                {(() => {
+                  const hotelData = trip.accommodation?.hotelName ?
+                    allHotels.find(hotel =>
+                      hotel.name.toLowerCase().includes(trip.accommodation!.hotelName!.toLowerCase()) ||
+                      trip.accommodation!.hotelName!.toLowerCase().includes(hotel.name.toLowerCase())
+                    ) : null;
+
+                  const showWaterParks = hotelData ? hasWaterParkAccess(hotelData) : true;
+
+                  if (!showWaterParks) return null;
+
+                  return (
+                    <div className="border-2 border-blue-400/30 rounded-lg p-4 bg-blue-400/5">
+                      <h4 className="font-medium text-ink mb-3 text-sm">Water Parks Today</h4>
+                      <div className="space-y-3">
+                        <button
+                          onClick={() => {
+                            onQuickAdd('waterpark', undefined, 'Typhoon Lagoon Water Park');
+                            setShowAddActivityModal(false);
+                          }}
+                          className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                        >
+                          <span className="w-4 h-4 mr-3 text-blue-500">🌊</span>
+                          <span className="text-sm text-ink">Typhoon Lagoon</span>
+                        </button>
+                        <button
+                          onClick={() => {
+                            onQuickAdd('waterpark', undefined, 'Blizzard Beach Water Park');
+                            setShowAddActivityModal(false);
+                          }}
+                          className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                        >
+                          <span className="w-4 h-4 mr-3 text-cyan-500">❄️</span>
+                          <span className="text-sm text-ink">Blizzard Beach</span>
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })()}
+              </div>
+
+              {/* Custom Activity Form in Modal */}
+              {showCustomActivityForm ? (
+                <div className="bg-surface-dark/20 rounded-lg p-4 mt-4">
+                  <div className="flex items-center justify-between mb-4">
+                    <h4 className="font-medium text-ink">Add Custom Activity</h4>
+                    <button
+                      onClick={() => setShowCustomActivityForm(false)}
+                      className="p-1 text-ink-light hover:text-ink hover:bg-surface-dark rounded transition-colors"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <input
+                      type="text"
+                      placeholder="Activity name"
+                      value={customActivity.name}
+                      onChange={(e) => setCustomActivity({ ...customActivity, name: e.target.value })}
+                      className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                    />
+                    <input
+                      type="time"
+                      placeholder="Start time (optional)"
+                      value={customActivity.startTime}
+                      onChange={(e) => setCustomActivity({ ...customActivity, startTime: e.target.value })}
+                      className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                    />
+                    <select
+                      value={customActivity.type}
+                      onChange={(e) => setCustomActivity({ ...customActivity, type: e.target.value as ActivityCategory })}
+                      className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                    >
+                      <option value="attraction">Attraction</option>
+                      <option value="dining">Dining</option>
+                      <option value="break">Break</option>
+                      <option value="tours">Tour</option>
+                      <option value="waterpark">Water Park</option>
+                      <option value="travel">Travel</option>
+                    </select>
+                  </div>
+                  <div className="flex space-x-2 mt-4">
+                    <button
+                      onClick={() => {
+                        if (customActivity.name.trim()) {
+                          onQuickAdd(customActivity.type, undefined, customActivity.name);
+                          setCustomActivity({ name: '', startTime: '', type: 'attraction' });
+                          setShowCustomActivityForm(false);
+                          setShowAddActivityModal(false);
+                        }
+                      }}
+                      className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-lg transition-colors"
+                    >
+                      Add Activity
+                    </button>
+                    <button
+                      onClick={() => setShowCustomActivityForm(false)}
+                      className="px-4 py-2 bg-surface-dark hover:bg-surface-dark/80 text-ink text-sm rounded-lg transition-colors"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  onClick={() => setShowCustomActivityForm(true)}
+                  className="w-full mt-4 p-3 border-2 border-dashed border-surface-dark rounded-lg text-ink-light hover:text-ink hover:border-ink transition-colors text-center"
+                >
+                  <Plus className="w-4 h-4 mx-auto mb-1" />
+                  <span className="text-sm">Add Custom Activity</span>
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </DndProvider>
   );
 }

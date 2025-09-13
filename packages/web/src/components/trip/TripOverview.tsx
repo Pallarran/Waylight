@@ -17,16 +17,16 @@ interface DraggablePartyMemberProps {
   updatePartyMember: (id: string, updates: Partial<TravelingPartyMember>) => void;
   removePartyMember: (id: string) => void;
   movePartyMember: (dragIndex: number, hoverIndex: number) => void;
-  relationshipOptions: string[];
+  guestTypeOptions: string[];
 }
 
-const DraggablePartyMember = ({ 
-  member, 
-  index, 
-  updatePartyMember, 
-  removePartyMember, 
+const DraggablePartyMember = ({
+  member,
+  index,
+  updatePartyMember,
+  removePartyMember,
   movePartyMember,
-  relationshipOptions
+  guestTypeOptions
 }: DraggablePartyMemberProps) => {
   const [{ isDragging }, drag] = useDrag({
     type: 'party-member',
@@ -73,32 +73,48 @@ const DraggablePartyMember = ({
             <Trash2 className="w-4 h-4" />
           </button>
         </div>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="space-y-3">
           <div>
-            <label className="block text-xs font-medium text-ink mb-1">Age</label>
-            <input
-              type="number"
-              value={member.age || ''}
-              onChange={(e) => updatePartyMember(member.id, { age: e.target.value ? parseInt(e.target.value) : undefined })}
-              className="w-full px-3 py-2 bg-surface border border-surface-dark rounded text-ink text-sm focus:outline-none focus:border-sea"
-              placeholder="Age"
-              min="0"
-              max="120"
-            />
-          </div>
-          <div>
-            <label className="block text-xs font-medium text-ink mb-1">Relationship</label>
+            <label className="block text-xs font-medium text-ink mb-1">Guest Type</label>
             <select
-              value={member.relationship || ''}
-              onChange={(e) => updatePartyMember(member.id, { relationship: e.target.value })}
+              value={member.guestType || ''}
+              onChange={(e) => updatePartyMember(member.id, { guestType: e.target.value })}
               className="w-full px-3 py-2 bg-surface border border-surface-dark rounded text-ink text-sm focus:outline-none focus:border-sea"
             >
               <option value="">Select...</option>
-              {relationshipOptions.map(option => (
+              {guestTypeOptions.map(option => (
                 <option key={option} value={option}>{option}</option>
               ))}
             </select>
           </div>
+
+          {/* Show age and height only for children */}
+          {member.guestType === 'Child' && (
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="block text-xs font-medium text-ink mb-1">Age</label>
+                <input
+                  type="number"
+                  value={member.age || ''}
+                  onChange={(e) => updatePartyMember(member.id, { age: e.target.value ? parseInt(e.target.value) : undefined })}
+                  className="w-full px-3 py-2 bg-surface border border-surface-dark rounded text-ink text-sm focus:outline-none focus:border-sea"
+                  placeholder="Age"
+                  min="0"
+                  max="17"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-ink mb-1">Height (inches)</label>
+                <input
+                  type="text"
+                  value={member.height || ''}
+                  onChange={(e) => updatePartyMember(member.id, { height: e.target.value })}
+                  className="w-full px-3 py-2 bg-surface border border-surface-dark rounded text-ink text-sm focus:outline-none focus:border-sea"
+                  placeholder="e.g. 48"
+                />
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <div>
@@ -128,6 +144,7 @@ export default function TripOverview({ trip }: TripOverviewProps) {
   const [notesData, setNotesData] = useState(trip.notes || '');
   const [selectedHotelId, setSelectedHotelId] = useState<string>('');
   const [availableRooms, setAvailableRooms] = useState<RoomType[]>([]);
+  const [isHandlingHotelSelection, setIsHandlingHotelSelection] = useState(false);
 
   // Helper function to clean hotel names for display
   const getDisplayHotelName = (hotelName: string) => {
@@ -156,6 +173,9 @@ export default function TripOverview({ trip }: TripOverviewProps) {
 
   // Initialize hotel selection from existing accommodation data
   useEffect(() => {
+    // Don't run initialization if we're currently handling a hotel selection
+    if (isHandlingHotelSelection) return;
+
     if (accommodationData.hotelName) {
       // Try to find hotel by name in our database
       const allOptions = hotelOptions.flatMap(group => group.options);
@@ -166,11 +186,12 @@ export default function TripOverview({ trip }: TripOverviewProps) {
         setSelectedHotelId('custom');
       }
     }
-  }, [accommodationData.hotelName, hotelOptions]);
+  }, [accommodationData.hotelName, hotelOptions, isHandlingHotelSelection]);
 
   const handleHotelSelection = (hotelId: string) => {
+    setIsHandlingHotelSelection(true);
     setSelectedHotelId(hotelId);
-    
+
     if (hotelId === 'custom') {
       // Clear hotel-specific data for custom entry
       setAccommodationData(prev => ({
@@ -182,15 +203,18 @@ export default function TripOverview({ trip }: TripOverviewProps) {
     } else {
       const hotel = getHotelById(hotelId);
       if (hotel) {
-        // Auto-populate hotel name and address
+        // Auto-populate hotel name and address (store original name, not cleaned)
         setAccommodationData(prev => ({
           ...prev,
-          hotelName: getDisplayHotelName(hotel.name),
+          hotelName: hotel.name, // Store original name with prefix
           address: hotel.address,
           roomType: '' // Reset room type when changing hotels
         }));
       }
     }
+
+    // Reset the flag after a brief delay to allow state updates to complete
+    setTimeout(() => setIsHandlingHotelSelection(false), 0);
   };
 
   const handleCheckInDateChange = (date: string) => {
@@ -254,7 +278,8 @@ export default function TripOverview({ trip }: TripOverviewProps) {
       id: Date.now().toString(),
       name: '',
       age: undefined,
-      relationship: '',
+      height: undefined,
+      guestType: '',
       specialNeeds: ''
     };
     setPartyData([...partyData, newMember]);
@@ -280,7 +305,7 @@ export default function TripOverview({ trip }: TripOverviewProps) {
     setPartyData(newPartyData);
   };
 
-  const relationshipOptions = [
+  const guestTypeOptions = [
     'Trip Planner',
     'Spouse/Partner',
     'Child',
@@ -571,7 +596,7 @@ export default function TripOverview({ trip }: TripOverviewProps) {
                       updatePartyMember={updatePartyMember}
                       removePartyMember={removePartyMember}
                       movePartyMember={movePartyMember}
-                      relationshipOptions={relationshipOptions}
+                      guestTypeOptions={guestTypeOptions}
                     />
                   ))}
                 </div>
@@ -606,7 +631,7 @@ export default function TripOverview({ trip }: TripOverviewProps) {
                 {trip.travelingParty && trip.travelingParty.length > 0 ? (
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
                     {trip.travelingParty.map((member) => {
-                      const isPlanner = member.relationship === 'Trip Planner';
+                      const isPlanner = member.guestType === 'Trip Planner';
                       return (
                         <div 
                           key={member.id} 
@@ -616,19 +641,24 @@ export default function TripOverview({ trip }: TripOverviewProps) {
                               : 'bg-surface-dark/50'
                           }`}
                         >
-                          <div className="flex items-center space-x-2 mb-2">
+                          <div className="mb-2">
                             <h4 className={`font-medium ${isPlanner ? 'text-sea' : 'text-ink'}`}>
                               {member.name}
                             </h4>
+                          </div>
+                          <div className="flex items-center space-x-4 text-sm text-ink-light">
                             {isPlanner && (
                               <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-sea/20 text-sea">
                                 Planner
                               </span>
                             )}
-                          </div>
-                          <div className="flex items-center space-x-4 text-sm text-ink-light">
-                            {member.age && <span>Age {member.age}</span>}
-                            {member.relationship && !isPlanner && <span>{member.relationship}</span>}
+                            {member.guestType && !isPlanner && <span>{member.guestType}</span>}
+                            {member.guestType === 'Child' && (
+                              <div className="flex items-center space-x-3">
+                                {member.age && <span>Age {member.age}</span>}
+                                {member.height && <span>{member.height}"</span>}
+                              </div>
+                            )}
                           </div>
                           {member.specialNeeds && (
                             <p className="text-sm text-ink-light mt-2">{member.specialNeeds}</p>
