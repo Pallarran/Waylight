@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { format, addDays } from 'date-fns';
 import { Plus, Calendar, Clock, MapPin, ChevronDown, GripVertical, Edit2, Save, X, Download, Share, ArrowLeft, Info, Users } from 'lucide-react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
@@ -7,11 +7,18 @@ import { useTripStore } from '../../stores';
 import { PARKS, getParkName } from '../../data/parks';
 import { getCategoryIcon, getCategoryColor, getCategoryInfo } from '../../data/activityCategories';
 import { getAllDoItems, getAllEatItems } from '@waylight/shared';
+import { detectDayType, getDayIcon, getDayTypeInfo, getDayLayoutConfig } from '../../utils/dayTypeUtils';
 // import QuickAddBar from './QuickAddBar'; // Temporarily disabled due to syntax error
 import TripOverview from './TripOverview';
 import CheatSheetView from './CheatSheetView';
+import RestDayView from './dayViews/RestDayView';
+import CheckInDayView from './dayViews/CheckInDayView';
+import CheckOutDayView from './dayViews/CheckOutDayView';
+import DisneySpringsView from './dayViews/DisneySpringsView';
+import SpecialEventView from './dayViews/SpecialEventView';
+import DayTypeModal from './DayTypeModal';
 
-import type { Trip, ItineraryItem, ActivityCategory, TripDay } from '../../types';
+import type { Trip, ItineraryItem, ActivityCategory, TripDay, DayType } from '../../types';
 
 interface TripDayPlannerProps {
   trip: Trip;
@@ -552,6 +559,7 @@ const DraggableItem = ({ item, index, tripId, dayId, moveItem }: DraggableItemPr
 export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerProps) {
   const [currentView, setCurrentView] = useState<'overview' | number>('overview');
   const [showParkSelector, setShowParkSelector] = useState(false);
+  const [showDayTypeModal, setShowDayTypeModal] = useState(false);
   const [isEditingTrip, setIsEditingTrip] = useState(false);
   const [showCheatSheet, setShowCheatSheet] = useState(false);
   const [tripEditData, setTripEditData] = useState({
@@ -560,15 +568,6 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
     endDate: trip.endDate
   });
   const { addDay, updateDay, addItem, reorderItems, updateTrip } = useTripStore();
-
-  // Helper function to update day data
-  const updateDayData = async (dayId: string, updates: Partial<TripDay>) => {
-    try {
-      await updateDay(trip.id, dayId, updates);
-    } catch (error) {
-      console.error('Failed to update day:', error);
-    }
-  };
 
   // Parse dates as local dates to avoid timezone issues
   const startDate = new Date(trip.startDate + 'T00:00:00');
@@ -582,9 +581,54 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
     currentDate = addDays(currentDate, 1);
   }
 
+  // Auto-create missing days with default day types
+  useEffect(() => {
+    const autoCreateMissingDays = async () => {
+      const existingDates = new Set(trip.days?.map(day => day.date) || []);
+      const totalDays = tripDays.length;
+      
+      for (let index = 0; index < tripDays.length; index++) {
+        const date = tripDays[index];
+        const dateString = format(date, 'yyyy-MM-dd');
+        
+        if (!existingDates.has(dateString)) {
+          // Determine default day type
+          let defaultDayType: DayType;
+          const isFirstDay = index === 0;
+          const isLastDay = index === totalDays - 1;
+          
+          if (isFirstDay) {
+            defaultDayType = 'check-in';
+          } else if (isLastDay) {
+            defaultDayType = 'check-out';
+          } else {
+            defaultDayType = 'park-day';
+          }
+          
+          try {
+            await addDay(trip.id, dateString, defaultDayType);
+          } catch (error) {
+            console.error(`Failed to auto-create day ${dateString}:`, error);
+          }
+        }
+      }
+    };
+    
+    autoCreateMissingDays();
+  }, [trip.id, trip.startDate, trip.endDate]); // Dependencies: re-run if trip ID or date range changes
+
+  // Helper function to update day data
+  const updateDayData = async (dayId: string, updates: Partial<TripDay>) => {
+    try {
+      await updateDay(trip.id, dayId, updates);
+    } catch (error) {
+      console.error('Failed to update day:', error);
+    }
+  };
+
   const selectedDayIndex = typeof currentView === 'number' ? currentView : 0;
-  const selectedDay = trip.days?.[selectedDayIndex];
   const selectedDate = tripDays[selectedDayIndex];
+  const selectedDay = selectedDate ? trip.days?.find(d => d.date === format(selectedDate, 'yyyy-MM-dd')) : undefined;
   
   // If showing overview, we don't need a selectedDate
   if (currentView !== 'overview' && !selectedDate) {
@@ -647,6 +691,17 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
       setShowParkSelector(false);
     } catch (error) {
       console.error('Failed to update park:', error);
+    }
+  };
+
+  const handleDayTypeSelection = async (dayType: DayType | null) => {
+    if (!selectedDay) return;
+    
+    try {
+      await updateDay(trip.id, selectedDay.id, { dayType });
+      setShowDayTypeModal(false);
+    } catch (error) {
+      console.error('Failed to update day type:', error);
     }
   };
 
@@ -915,6 +970,17 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
               const dayData = trip.days?.find(d => d.date === format(date, 'yyyy-MM-dd'));
               const isSelected = currentView === index;
               
+              // Detect day type and get appropriate icon
+              let dayTypeIcon = null;
+              let dayTypeName = null;
+              
+              if (dayData) {
+                const detectedDayType = detectDayType(dayData, trip, index);
+                const finalDayType = dayData.dayType || detectedDayType || 'rest-day';
+                dayTypeIcon = getDayIcon(dayData, detectedDayType) || '📅';
+                dayTypeName = getDayTypeInfo(finalDayType).name;
+              }
+              
               return (
                 <button
                   key={format(date, 'yyyy-MM-dd')}
@@ -924,6 +990,7 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
                       ? 'bg-sea/10 text-sea-dark border-b-2 border-sea'
                       : 'text-ink-light hover:text-ink hover:bg-surface-dark/50'
                   }`}
+                  title={dayData ? dayTypeName || 'Planned day' : 'Empty day'}
                 >
                   <span className="text-sm font-medium">
                     {format(date, 'EEE')}
@@ -931,9 +998,13 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
                   <span className="text-xs">
                     {format(date, 'MMM d')}
                   </span>
-                  {dayData && (
+                  {dayTypeIcon ? (
+                    <span className="text-sm mt-1" role="img" aria-label={dayTypeName || 'Day type'}>
+                      {dayTypeIcon}
+                    </span>
+                  ) : dayData ? (
                     <div className="w-2 h-2 bg-glow rounded-full mt-1"></div>
-                  )}
+                  ) : null}
                 </button>
               );
             })}
@@ -941,10 +1012,37 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
         </div>
 
         {/* Content */}
-        {currentView === 'overview' ? (
-          <TripOverview trip={trip} />
-        ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[calc(100vh-200px)]">
+        {currentView === 'overview' && <TripOverview trip={trip} />}
+        {currentView !== 'overview' && !selectedDay && (
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-[500px]">
+            <div className="lg:col-span-12 flex items-center justify-center">
+              <div className="text-center py-16">
+                <Calendar className="w-20 h-20 text-ink-light/30 mx-auto mb-6" />
+                <h4 className="text-lg font-medium text-ink mb-2">Loading Day...</h4>
+                <p className="text-ink-light mb-6">Setting up your schedule</p>
+              </div>
+            </div>
+          </div>
+        )}
+        {currentView !== 'overview' && selectedDay && (() => {
+          const detectedDayType = detectDayType(selectedDay, trip, selectedDayIndex);
+          
+          // Render specialized day view based on detected type
+          if (detectedDayType === 'rest-day') {
+            return <RestDayView trip={trip} tripDay={selectedDay} date={selectedDate!} onQuickAdd={handleQuickAdd} onOpenDayTypeModal={() => setShowDayTypeModal(true)} />;
+          } else if (detectedDayType === 'check-in') {
+            return <CheckInDayView trip={trip} tripDay={selectedDay} date={selectedDate!} onQuickAdd={handleQuickAdd} onOpenDayTypeModal={() => setShowDayTypeModal(true)} />;
+          } else if (detectedDayType === 'check-out') {
+            return <CheckOutDayView trip={trip} tripDay={selectedDay} date={selectedDate!} onQuickAdd={handleQuickAdd} onOpenDayTypeModal={() => setShowDayTypeModal(true)} />;
+          } else if (detectedDayType === 'disney-springs') {
+            return <DisneySpringsView trip={trip} tripDay={selectedDay} date={selectedDate!} onQuickAdd={handleQuickAdd} onOpenDayTypeModal={() => setShowDayTypeModal(true)} />;
+          } else if (detectedDayType === 'special-event') {
+            return <SpecialEventView trip={trip} tripDay={selectedDay} date={selectedDate!} onQuickAdd={handleQuickAdd} onOpenDayTypeModal={() => setShowDayTypeModal(true)} />;
+          }
+
+          // Default to existing 3-column layout for park days and park hopper days
+          return (
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-[500px]">
             {/* Left Panel: Day Context & Quick Actions */}
             <div className="lg:col-span-3">
               <div className="bg-surface rounded-xl border border-surface-dark/30 p-5 h-full overflow-y-auto">
@@ -973,6 +1071,18 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
                         <ChevronDown className={`w-4 h-4 transition-transform ${showParkSelector ? 'rotate-180' : ''}`} />
                       </button>
                     </div>
+                    
+                    {/* Day Type Selection */}
+                    <button
+                      onClick={() => setShowDayTypeModal(true)}
+                      className="flex items-center text-ink-light hover:text-ink w-full p-2 rounded-lg hover:bg-surface-dark/20 transition-colors"
+                    >
+                      <span className="text-lg mr-2">{getDayIcon(selectedDay, detectDayType(selectedDay, trip, selectedDayIndex)) || '📅'}</span>
+                      <span className="text-sm font-medium">
+                        {getDayTypeInfo(selectedDay?.dayType || detectDayType(selectedDay, trip, selectedDayIndex)).name}
+                      </span>
+                      <span className="ml-auto text-xs text-ink-light">Change</span>
+                    </button>
                   </div>
                 </div>
 
@@ -1011,6 +1121,7 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
                     )}
                   </div>
                 )}
+
 
                 {selectedDay && (
                   <div className="space-y-6">
@@ -1056,14 +1167,8 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
                 {!selectedDay && (
                   <div className="text-center py-12">
                     <Calendar className="w-16 h-16 text-ink-light/50 mx-auto mb-4" />
-                    <h4 className="text-lg font-medium text-ink mb-2">Plan This Day</h4>
-                    <p className="text-ink-light mb-6 text-sm">Start building your schedule</p>
-                    <button
-                      onClick={() => selectedDate && handleAddDay(selectedDate)}
-                      className="btn-primary"
-                    >
-                      Start Planning
-                    </button>
+                    <h4 className="text-lg font-medium text-ink mb-2">Loading Day...</h4>
+                    <p className="text-ink-light mb-6 text-sm">Setting up your schedule</p>
                   </div>
                 )}
               </div>
@@ -1119,8 +1224,8 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
                     <div className="text-center py-16">
                       <div className="max-w-sm mx-auto">
                         <Calendar className="w-20 h-20 text-ink-light/30 mx-auto mb-6" />
-                        <h4 className="text-lg font-medium text-ink mb-2">Plan This Day</h4>
-                        <p className="text-ink-light">Start building your schedule by clicking "Start Planning"</p>
+                        <h4 className="text-lg font-medium text-ink mb-2">Loading Day...</h4>
+                        <p className="text-ink-light">Setting up your schedule</p>
                       </div>
                     </div>
                   )}
@@ -1350,13 +1455,26 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
               </div>
             </div>
           </div>
-        )}
+          );
+        })()}
 
         {/* Cheat Sheet Modal */}
         {showCheatSheet && selectedDay && (
           <CheatSheetView
             tripDay={selectedDay}
             onClose={() => setShowCheatSheet(false)}
+          />
+        )}
+
+        {/* Day Type Modal */}
+        {selectedDay && (
+          <DayTypeModal
+            isOpen={showDayTypeModal}
+            onClose={() => setShowDayTypeModal(false)}
+            trip={trip}
+            tripDay={selectedDay}
+            dayIndex={selectedDayIndex}
+            onSelectDayType={handleDayTypeSelection}
           />
         )}
       </div>

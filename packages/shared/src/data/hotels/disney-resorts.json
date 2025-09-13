@@ -52,7 +52,7 @@
     "address": "1600 Seven Seas Dr, Bay Lake, FL 32830",
     "type": "disney",
     "priceLevel": "deluxe",
-    "description": "South Pacific theming with monorail access and new Island Tower",
+    "description": "South Pacific theming with monorail access and DVC bungalows",
     "features": {
       "transportation": {
         "monorail": true,
@@ -90,10 +90,53 @@
       { "id": "standard", "name": "Standard Room", "sleeps": 5, "description": "Garden, lagoon, or theme park view" },
       { "id": "club-level", "name": "Club Level Room", "sleeps": 5, "description": "Concierge level with lounge access" },
       { "id": "suite", "name": "Suite", "sleeps": 6, "description": "One or two-bedroom suite" },
-      { "id": "bungalow", "name": "Bungalow", "sleeps": 8, "description": "Over-the-water bungalow" },
-      { "id": "island-tower-duo", "name": "Island Tower - Duo Studio", "sleeps": 3, "description": "Island Tower duo studio with kitchenette" },
-      { "id": "island-tower-1br", "name": "Island Tower - 1 Bedroom Villa", "sleeps": 5, "description": "Island Tower one-bedroom villa with full kitchen" },
-      { "id": "island-tower-2br", "name": "Island Tower - 2 Bedroom Villa", "sleeps": 9, "description": "Island Tower two-bedroom villa with full kitchen" }
+      { "id": "bungalow", "name": "Bungalow", "sleeps": 8, "description": "Over-the-water bungalow" }
+    ]
+  },
+  {
+    "id": "polynesian-island-tower",
+    "name": "Island Tower at Disney's Polynesian Villas & Bungalows",
+    "address": "1600 Seven Seas Dr, Bay Lake, FL 32830",
+    "type": "disney",
+    "priceLevel": "deluxe_villa",
+    "description": "Disney Vacation Club resort with South Pacific theming and monorail access, opened December 2024",
+    "features": {
+      "transportation": {
+        "monorail": true,
+        "skyliner": false,
+        "boat": true,
+        "bus": true,
+        "walking": false
+      },
+      "amenities": {
+        "pool": true,
+        "waterFeatures": true,
+        "spa": false,
+        "fitnessCenter": true,
+        "golf": false,
+        "beach": true,
+        "marina": true,
+        "dining": true,
+        "quickService": true,
+        "entertainment": false,
+        "concierge": true,
+        "businessCenter": false,
+        "childcare": false,
+        "parking": true,
+        "wifi": true
+      },
+      "accommodations": {
+        "suites": false,
+        "villas": true,
+        "dvc": true,
+        "themedRooms": true,
+        "familyAccommodations": true
+      }
+    },
+    "rooms": [
+      { "id": "duo-studio", "name": "Duo Studio", "sleeps": 3, "description": "Studio villa with kitchenette and modern Polynesian theming" },
+      { "id": "1br-villa", "name": "1 Bedroom Villa", "sleeps": 5, "description": "One-bedroom villa with full kitchen and washer/dryer" },
+      { "id": "2br-villa", "name": "2 Bedroom Villa", "sleeps": 9, "description": "Two-bedroom villa with full kitchen and multiple bathrooms" }
     ]
   },
   {

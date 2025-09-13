@@ -26,7 +26,7 @@ interface SimpleTripState {
   stopPeriodicSync: () => void;
   
   // Day management
-  addDay: (tripId: string, date: string) => Promise<TripDay>;
+  addDay: (tripId: string, date: string, dayType?: DayType) => Promise<TripDay>;
   updateDay: (tripId: string, dayId: string, updates: Partial<TripDay>) => Promise<void>;
   deleteDay: (tripId: string, dayId: string) => Promise<void>;
   
@@ -221,10 +221,10 @@ const useSimpleTripStore = create<SimpleTripState>((set, get) => ({
   },
 
   // Day management methods
-  addDay: async (tripId, date) => {
+  addDay: async (tripId, date, dayType) => {
     set({ error: null });
     try {
-      const newDay = await DatabaseService.addDay(tripId, date);
+      const newDay = await DatabaseService.addDay(tripId, date, dayType);
       set((state) => ({
         trips: state.trips.map(trip => 
           trip.id === tripId 

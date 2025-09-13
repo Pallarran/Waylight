@@ -5,7 +5,13 @@
       "Bash(elif grep -q '\"\"features\"\":\\[' \"$file\")",
       "Bash(else echo \"$file: has object format\")",
       "Bash(sed:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(pnpm type-check:*)",
+      "WebSearch",
+      "Bash(npm run type-check:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npm run build:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []

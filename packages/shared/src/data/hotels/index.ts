@@ -44,33 +44,49 @@ export const getRoomsForHotel = (hotelId: string): RoomType[] => {
 };
 
 export const getHotelOptions = () => {
+  // Helper function to create hotel option
+  const createHotelOption = (hotel: HotelData) => ({
+    value: hotel.id,
+    label: hotel.name,
+    address: hotel.address,
+    rooms: hotel.rooms
+  });
+
+  // Helper function to sort hotels alphabetically
+  const sortHotelsAlphabetically = (hotels: HotelData[]) =>
+    hotels.sort((a, b) => a.name.localeCompare(b.name));
+
+  // Group Disney resorts by price level
+  const deluxeAndDeluxeVilla = sortHotelsAlphabetically(
+    disneyResorts.filter(hotel => hotel.priceLevel === 'deluxe' || hotel.priceLevel === 'deluxe_villa')
+  );
+  const moderate = sortHotelsAlphabetically(
+    disneyResorts.filter(hotel => hotel.priceLevel === 'moderate')
+  );
+  const value = sortHotelsAlphabetically(
+    disneyResorts.filter(hotel => hotel.priceLevel === 'value')
+  );
+
   const options = [
     {
-      label: 'Disney Resorts',
-      options: disneyResorts.map(hotel => ({
-        value: hotel.id,
-        label: hotel.name,
-        address: hotel.address,
-        rooms: hotel.rooms
-      }))
+      label: 'Disney Deluxe & DVC Resorts',
+      options: deluxeAndDeluxeVilla.map(createHotelOption)
     },
     {
-      label: 'Universal Resorts', 
-      options: universalResorts.map(hotel => ({
-        value: hotel.id,
-        label: hotel.name,
-        address: hotel.address,
-        rooms: hotel.rooms
-      }))
+      label: 'Disney Moderate Resorts',
+      options: moderate.map(createHotelOption)
+    },
+    {
+      label: 'Disney Value Resorts',
+      options: value.map(createHotelOption)
+    },
+    {
+      label: 'Universal Resorts',
+      options: sortHotelsAlphabetically(universalResorts).map(createHotelOption)
     },
     {
       label: 'Other Hotels',
-      options: otherHotels.map(hotel => ({
-        value: hotel.id,
-        label: hotel.name,
-        address: hotel.address,
-        rooms: hotel.rooms
-      }))
+      options: sortHotelsAlphabetically(otherHotels).map(createHotelOption)
     }
   ];
 

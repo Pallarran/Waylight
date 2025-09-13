@@ -92,9 +92,19 @@ export interface CheatSheetData {
   }[];
 }
 
+export type DayType = 
+  | 'park-day'
+  | 'park-hopper'
+  | 'check-in'
+  | 'check-out'
+  | 'rest-day'
+  | 'disney-springs'
+  | 'special-event';
+
 export interface TripDay {
   id: string;
   date: string;
+  dayType?: DayType;
   parkId?: string;
   notes?: string;
   items: ItineraryItem[];

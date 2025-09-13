@@ -129,6 +129,14 @@ export default function TripOverview({ trip }: TripOverviewProps) {
   const [selectedHotelId, setSelectedHotelId] = useState<string>('');
   const [availableRooms, setAvailableRooms] = useState<RoomType[]>([]);
 
+  // Helper function to clean hotel names for display
+  const getDisplayHotelName = (hotelName: string) => {
+    return hotelName
+      .replace(/^Disney's\s+/i, '')
+      .replace(/^Universal's\s+/i, '')
+      .replace(/^Universal\s+/i, '');
+  };
+
   const hotelOptions = getHotelOptions();
   const { updateTrip } = useTripStore();
 
@@ -177,7 +185,7 @@ export default function TripOverview({ trip }: TripOverviewProps) {
         // Auto-populate hotel name and address
         setAccommodationData(prev => ({
           ...prev,
-          hotelName: hotel.name,
+          hotelName: getDisplayHotelName(hotel.name),
           address: hotel.address,
           roomType: '' // Reset room type when changing hotels
         }));
@@ -320,7 +328,7 @@ export default function TripOverview({ trip }: TripOverviewProps) {
                       <optgroup key={group.label} label={group.label}>
                         {group.options.map(hotel => (
                           <option key={hotel.value} value={hotel.value}>
-                            {hotel.label}
+                            {getDisplayHotelName(hotel.label)}
                           </option>
                         ))}
                       </optgroup>
@@ -450,7 +458,7 @@ export default function TripOverview({ trip }: TripOverviewProps) {
                   <div className="space-y-4">
                     {/* Hotel Header */}
                     <div className="border-l-4 border-sea/50 pl-4 bg-gradient-to-r from-sea/5 to-transparent p-4 rounded-r-lg">
-                      <h4 className="font-semibold text-ink text-lg">{trip.accommodation.hotelName}</h4>
+                      <h4 className="font-semibold text-ink text-lg">{getDisplayHotelName(trip.accommodation.hotelName)}</h4>
                       {trip.accommodation.roomType && (
                         <div className="flex items-center mt-2">
                           <Hotel className="w-4 h-4 text-sea mr-2" />

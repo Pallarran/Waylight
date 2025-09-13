@@ -1,5 +1,5 @@
 import Dexie, { Table } from 'dexie';
-import type { Trip, TripDay, ItineraryItem } from '../types';
+import type { Trip, TripDay, ItineraryItem, DayType } from '../types';
 
 // Database interface for Dexie
 export interface WaylightDB extends Dexie {
@@ -78,7 +78,7 @@ export class DatabaseService {
   }
 
   // Day operations
-  static async addDay(tripId: string, date: string): Promise<TripDay> {
+  static async addDay(tripId: string, date: string, dayType?: DayType): Promise<TripDay> {
     const trip = await db.trips.get(tripId);
     if (!trip) {
       throw new Error('Trip not found');
@@ -87,7 +87,8 @@ export class DatabaseService {
     const newDay: TripDay = {
       id: crypto.randomUUID(),
       date,
-      items: []
+      items: [],
+      ...(dayType && { dayType })
     };
 
     const updatedTrip = {
