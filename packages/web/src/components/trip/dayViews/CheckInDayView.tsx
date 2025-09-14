@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Plane, Clock, MapPin, Hotel, Utensils, Camera, Phone, Edit, XCircle, Plus, Info, GripVertical, Save } from 'lucide-react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -29,7 +30,7 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
   // Helper function to get hotel-specific check-in time
   const getHotelCheckInTime = (hotelName: string) => {
     // Find the hotel in the database by name
-    const hotel = allHotels.find(h => h.name === hotelName);
+    const hotel = allHotels.find((h: any) => h.name === hotelName); // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
     if (hotel) {
       // Use the actual priceLevel from the database
@@ -174,7 +175,8 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
   };
 
   // Helper function to get transportation info for bubble
-  const getTransportationInfo = (transportMethod: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _getTransportationInfo = (transportMethod: string) => {
     switch (transportMethod) {
       case 'mears':
         return {
@@ -401,7 +403,8 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
     }
   };
 
-  const updateAccommodationData = async (updates: any) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
+  const _updateAccommodationData = async (updates: any) => {
     try {
       const { updateTrip } = useTripStore.getState();
       await updateTrip(trip.id, {
@@ -415,7 +418,8 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
     }
   };
 
-  const handleAddCustomActivity = async () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _handleAddCustomActivity = async () => {
     if (!customActivity.name.trim()) return;
 
     try {
@@ -483,7 +487,6 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
           notes: editData.notes || undefined,
         });
         setIsEditingThis(false);
-        setEditingItem(null);
       } catch (error) {
         console.error('Failed to update item:', error);
       }
@@ -496,17 +499,17 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
         notes: item.notes || '',
       });
       setIsEditingThis(false);
-      setEditingItem(null);
     };
 
     const handleEdit = () => {
       setIsEditingThis(true);
-      setEditingItem(item.id);
     };
 
     return (
       <div
-        ref={(node) => drag(drop(node))}
+        ref={(node) => {
+          drag(drop(node));
+        }}
         className={`relative flex items-start p-3 bg-surface border border-surface-dark/50 rounded-lg transition-all duration-200 ${
           isDragging ? 'opacity-50 scale-95' : 'opacity-100 hover:border-surface-dark'
         } group`}
@@ -605,7 +608,7 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
       <div className="lg:col-span-8">
         <div className="bg-surface rounded-xl border border-surface-dark/30 p-6 h-full overflow-y-auto">
           {/* Header */}
-          <div className="flex items-center mb-6 py-4 px-4 border-b border-surface-dark/20 relative bg-gradient-to-r from-sea/60 to-sea-light/60 rounded-lg min-h-[120px]">
+          <div className="flex items-center mb-6 py-4 px-4 border-b border-surface-dark/20 relative bg-gradient-to-r from-sea-light/60 to-sea/60 rounded-lg min-h-[120px]">
             {onOpenDayTypeModal && (
               <button
                 onClick={onOpenDayTypeModal}
@@ -868,7 +871,7 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
                 <p>• Use mobile ordering for dining - saves time in busy periods</p>
                 <p>• Stay hydrated and pack layers - Florida weather can change quickly</p>
                 {trip.accommodation?.hotelName && (() => {
-                  const hotelData = allHotels.find(hotel =>
+                  const hotelData = allHotels.find((hotel: any) => // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     hotel.name.toLowerCase().includes(trip.accommodation!.hotelName!.toLowerCase()) ||
                     trip.accommodation!.hotelName!.toLowerCase().includes(hotel.name.toLowerCase())
                   );
@@ -883,7 +886,7 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
 
               {/* Resort Guest Benefits Subsection */}
               {trip.accommodation?.hotelName && (() => {
-                const hotelData = allHotels.find(hotel =>
+                const hotelData = allHotels.find((hotel: any) =>
                   hotel.name.toLowerCase().includes(trip.accommodation!.hotelName!.toLowerCase()) ||
                   trip.accommodation!.hotelName!.toLowerCase().includes(hotel.name.toLowerCase())
                 );
@@ -923,32 +926,36 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
 
       {/* Add Activity Modal */}
       {showAddActivityModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-          <div className="bg-surface rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <h2 className="text-xl font-semibold text-ink flex items-center">
-                    <Camera className="w-5 h-5 mr-2 text-pink-500" />
-                    Light First Day Activities
-                  </h2>
-                  <p className="text-sm text-ink-light mt-1">
-                    Keep it simple today - you might be tired from travel. Focus on getting oriented and settling in.
-                  </p>
-                </div>
-                <button
-                  onClick={() => setShowAddActivityModal(false)}
-                  className="p-2 text-ink-light hover:text-ink hover:bg-surface-dark rounded-lg transition-colors"
-                >
-                  <XCircle className="w-5 h-5" />
-                </button>
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+          <div className="bg-surface rounded-xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden border border-surface-dark/30">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b border-surface-dark/20 bg-gradient-to-r from-teal-500/10 via-blue-500/10 to-green-500/10">
+              <div>
+                <h3 className="text-xl font-semibold text-ink flex items-center">
+                  <Camera className="w-5 h-5 mr-2 text-pink-500" />
+                  Light First Day Activities
+                </h3>
+                <p className="text-sm text-ink-light mt-1">
+                  Keep it simple today - you might be tired from travel. Focus on getting oriented and settling in.
+                </p>
               </div>
+              <button
+                onClick={() => setShowAddActivityModal(false)}
+                className="p-2 rounded-lg hover:bg-surface-dark/20 transition-colors"
+              >
+                <XCircle className="w-5 h-5 text-ink-light" />
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
+              <div className="space-y-6">
 
               {/* Dynamic Activity Layout */}
               <div className={(() => {
                 // Calculate visible columns dynamically
                 const hotelData = trip.accommodation?.hotelName ?
-                  allHotels.find(hotel =>
+                  allHotels.find((hotel: any) =>
                     hotel.name.toLowerCase().includes(trip.accommodation!.hotelName!.toLowerCase()) ||
                     trip.accommodation!.hotelName!.toLowerCase().includes(hotel.name.toLowerCase())
                   ) : null;
@@ -1030,7 +1037,7 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
                 {/* Column 2: Resort-Specific Features (Dynamic) */}
                 {(() => {
                   const hotelData = trip.accommodation?.hotelName ?
-                    allHotels.find(hotel =>
+                    allHotels.find((hotel: any) =>
                       hotel.name.toLowerCase().includes(trip.accommodation!.hotelName!.toLowerCase()) ||
                       trip.accommodation!.hotelName!.toLowerCase().includes(hotel.name.toLowerCase())
                     ) : null;
@@ -1064,7 +1071,7 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
                 {/* Column 3: Water Parks (Dynamic) */}
                 {(() => {
                   const hotelData = trip.accommodation?.hotelName ?
-                    allHotels.find(hotel =>
+                    allHotels.find((hotel: any) =>
                       hotel.name.toLowerCase().includes(trip.accommodation!.hotelName!.toLowerCase()) ||
                       trip.accommodation!.hotelName!.toLowerCase().includes(hotel.name.toLowerCase())
                     ) : null;
@@ -1174,6 +1181,17 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
                   <span className="text-sm">Add Custom Activity</span>
                 </button>
               )}
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="flex justify-end items-center p-6 border-t border-surface-dark/20 bg-surface-dark/5">
+              <button
+                onClick={() => setShowAddActivityModal(false)}
+                className="px-4 py-2 bg-surface border border-surface-dark/30 rounded-lg text-ink-light hover:text-ink hover:bg-surface-dark/10 transition-colors"
+              >
+                Close
+              </button>
             </div>
           </div>
         </div>

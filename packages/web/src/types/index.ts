@@ -16,6 +16,12 @@ export interface Trip {
   notes?: string;
   createdAt: string;
   updatedAt: string;
+  accommodation?: {
+    hotelName?: string;
+    hotelId?: string;
+    address?: string;
+    confirmationNumber?: string;
+  };
 }
 
 export interface ArrivalPlan {

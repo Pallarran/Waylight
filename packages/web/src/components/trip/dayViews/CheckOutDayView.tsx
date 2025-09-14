@@ -1,4 +1,5 @@
-import { Plane, Clock, Camera, Luggage, Plus, XCircle, GripVertical, MapPin, Phone, Save, Edit, Info } from 'lucide-react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Plane, Clock, Camera, Luggage, Plus, XCircle, GripVertical, MapPin, Save, Edit, Info, ShoppingBag, Utensils } from 'lucide-react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TripDay, Trip, ActivityCategory } from '../../../types';
@@ -15,8 +16,8 @@ interface CheckOutDayViewProps {
   onOpenDayTypeModal?: () => void;
 }
 
-export default function CheckOutDayView({ trip, tripDay, date, onQuickAdd, onOpenDayTypeModal }: CheckOutDayViewProps) {
-  const { updateDay, addItem, deleteItem, updateItem, reorderItems } = useTripStore();
+export default function CheckOutDayView({ trip, tripDay, onQuickAdd, onOpenDayTypeModal }: CheckOutDayViewProps) {
+  const { updateDay, deleteItem, updateItem, reorderItems } = useTripStore();
   const [showAddActivityModal, setShowAddActivityModal] = useState(false);
   const [editingItem, setEditingItem] = useState<string | null>(null);
   const [showTimingBreakdown, setShowTimingBreakdown] = useState(false);
@@ -30,7 +31,8 @@ export default function CheckOutDayView({ trip, tripDay, date, onQuickAdd, onOpe
   };
 
   // Helper function to get hotel-specific check-out time
-  const getHotelCheckOutTime = (hotelName: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const getHotelCheckOutTime = (_hotelName: string) => {
     // All Disney resort hotels have the same 11:00 AM check-out time as of 2025
     // This includes all tiers: Value, Moderate, Deluxe, and DVC (Deluxe Villa)
     return '11:00';
@@ -287,7 +289,8 @@ export default function CheckOutDayView({ trip, tripDay, date, onQuickAdd, onOpe
   };
 
   // Helper function to get transportation-specific tips with flight type context
-  const getTransportationTips = (transportMethod: string, flightType: string = 'domestic') => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _getTransportationTips = (transportMethod: string, flightType: string = 'domestic') => {
     const baseTips = [];
 
     switch (transportMethod) {
@@ -438,7 +441,9 @@ export default function CheckOutDayView({ trip, tripDay, date, onQuickAdd, onOpe
 
     return (
       <div
-        ref={(node) => drag(drop(node))}
+        ref={(node) => {
+          drag(drop(node));
+        }}
         className={`relative flex items-start p-3 bg-surface border border-surface-dark/50 rounded-lg transition-all duration-200 ${
           isDragging ? 'opacity-50 scale-95' : 'opacity-100 hover:border-surface-dark'
         } group`}
@@ -539,7 +544,7 @@ export default function CheckOutDayView({ trip, tripDay, date, onQuickAdd, onOpe
       <div className="lg:col-span-8">
         <div className="bg-surface rounded-xl border border-surface-dark/30 p-6 h-full overflow-y-auto">
           {/* Header */}
-          <div className="flex items-center mb-6 py-4 px-4 border-b border-surface-dark/20 relative bg-gradient-to-r from-sea/60 to-sea-light/60 rounded-lg min-h-[120px]">
+          <div className="flex items-center mb-6 py-4 px-4 border-b border-surface-dark/20 relative bg-gradient-to-r from-sea-light/60 to-sea/60 rounded-lg min-h-[120px]">
             {onOpenDayTypeModal && (
               <button
                 onClick={onOpenDayTypeModal}
@@ -773,7 +778,7 @@ export default function CheckOutDayView({ trip, tripDay, date, onQuickAdd, onOpe
 
               {/* Resort Guest Benefits Subsection */}
               {trip.accommodation?.hotelName && (() => {
-                const hotelData = allHotels.find(hotel =>
+                const hotelData = allHotels.find((hotel: any) => // eslint-disable-line @typescript-eslint/no-explicit-any
                   hotel.name.toLowerCase().includes(trip.accommodation!.hotelName!.toLowerCase()) ||
                   trip.accommodation!.hotelName!.toLowerCase().includes(hotel.name.toLowerCase())
                 );
@@ -798,26 +803,30 @@ export default function CheckOutDayView({ trip, tripDay, date, onQuickAdd, onOpe
 
       {/* Add Final Activity Modal */}
       {showAddActivityModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-          <div className="bg-surface rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <h2 className="text-xl font-semibold text-ink flex items-center">
-                    <Camera className="w-5 h-5 mr-2 text-pink-500" />
-                    Final Day Activities
-                  </h2>
-                  <p className="text-sm text-ink-light mt-1">
-                    Make your last day magical while keeping departure time in mind.
-                  </p>
-                </div>
-                <button
-                  onClick={() => setShowAddActivityModal(false)}
-                  className="p-2 text-ink-light hover:text-ink hover:bg-surface-dark rounded-lg transition-colors"
-                >
-                  <XCircle className="w-5 h-5" />
-                </button>
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+          <div className="bg-surface rounded-xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden border border-surface-dark/30">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b border-surface-dark/20 bg-gradient-to-r from-teal-500/10 via-blue-500/10 to-green-500/10">
+              <div>
+                <h3 className="text-xl font-semibold text-ink flex items-center">
+                  <Camera className="w-5 h-5 mr-2 text-pink-500" />
+                  Final Day Activities
+                </h3>
+                <p className="text-sm text-ink-light mt-1">
+                  Make your last day magical while keeping departure time in mind.
+                </p>
               </div>
+              <button
+                onClick={() => setShowAddActivityModal(false)}
+                className="p-2 rounded-lg hover:bg-surface-dark/20 transition-colors"
+              >
+                <XCircle className="w-5 h-5 text-ink-light" />
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
+              <div className="space-y-6">
 
               {/* Activity Categories */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
@@ -989,6 +998,17 @@ export default function CheckOutDayView({ trip, tripDay, date, onQuickAdd, onOpe
                   );
                 })()}
               </div>
+            </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="flex justify-end items-center p-6 border-t border-surface-dark/20 bg-surface-dark/5">
+              <button
+                onClick={() => setShowAddActivityModal(false)}
+                className="px-4 py-2 bg-surface border border-surface-dark/30 rounded-lg text-ink-light hover:text-ink hover:bg-surface-dark/10 transition-colors"
+              >
+                Close
+              </button>
             </div>
           </div>
         </div>

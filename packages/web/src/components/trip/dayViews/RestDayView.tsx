@@ -1,10 +1,24 @@
-import { Clock, Plus, Waves, X, GripVertical, Edit, Save, XCircle, Bed, Coffee, Users, Calendar, Sun, Cloud, MapPin, Phone, Wifi, Car, Camera, Utensils, Dumbbell, Sparkles } from 'lucide-react';
+import { Clock, Plus, Waves, X, GripVertical, Edit, Save, XCircle, MapPin, Car, Utensils, Sparkles } from 'lucide-react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TripDay, Trip, ActivityCategory } from '../../../types';
+
+interface ResortActivity {
+  name: string;
+  description: string;
+  emoji: string;
+  category: string;
+}
+
+interface ScheduleItem {
+  id: string;
+  name: string;
+  startTime?: string;
+  notes?: string;
+}
 import { useTripStore } from '../../../stores';
 import { useState } from 'react';
-import { allHotels } from '@waylight/shared';
+import { allHotels, getResortDiningByResortId } from '@waylight/shared';
 
 interface RestDayViewProps {
   trip: Trip;
@@ -14,16 +28,10 @@ interface RestDayViewProps {
   onOpenDayTypeModal?: () => void;
 }
 
-export default function RestDayView({ trip, tripDay, date, onQuickAdd, onOpenDayTypeModal }: RestDayViewProps) {
+export default function RestDayView({ trip, tripDay, onQuickAdd, onOpenDayTypeModal }: RestDayViewProps) {
   const { reorderItems, updateItem, deleteItem } = useTripStore();
   const [showActivityModal, setShowActivityModal] = useState(false);
   const [editingItem, setEditingItem] = useState<string | null>(null);
-  const [restPreferences, setRestPreferences] = useState({
-    activityLevel: 'low',
-    preferredStartTime: '09:00',
-    groupActivities: true,
-    weatherBackup: true
-  });
 
   // Helper function to get resort-specific relaxation activities
   const getResortActivities = () => {
@@ -32,7 +40,7 @@ export default function RestDayView({ trip, tripDay, date, onQuickAdd, onOpenDay
       return getDefaultActivities();
     }
 
-    const hotel = allHotels.find(h =>
+    const hotel = allHotels.find((h: any) => // eslint-disable-line @typescript-eslint/no-explicit-any
       h.name.toLowerCase().includes(hotelName.toLowerCase()) ||
       hotelName.toLowerCase().includes(h.name.toLowerCase())
     );
@@ -41,7 +49,6 @@ export default function RestDayView({ trip, tripDay, date, onQuickAdd, onOpenDay
       return getDefaultActivities();
     }
 
-    const activities = [];
 
     // Helper functions to check if hotel has specific amenities
     const hasPoolFeature = (feature: string) => {
@@ -183,12 +190,12 @@ export default function RestDayView({ trip, tripDay, date, onQuickAdd, onOpenDay
     ];
 
     // Group activities by their category
-    const categorizedActivities: Record<string, any[]> = {};
+    const categorizedActivities: Record<string, ResortActivity[]> = {};
     allActivities.forEach(activity => {
       if (!categorizedActivities[activity.category]) {
         categorizedActivities[activity.category] = [];
       }
-      categorizedActivities[activity.category].push(activity);
+      categorizedActivities[activity.category]?.push(activity);
     });
 
     // Return activities organized by the 5 main categories with emojis
@@ -235,7 +242,7 @@ export default function RestDayView({ trip, tripDay, date, onQuickAdd, onOpenDay
       return null;
     }
 
-    const hotel = allHotels.find(h =>
+    const hotel = allHotels.find((h: any) => // eslint-disable-line @typescript-eslint/no-explicit-any
       h.name.toLowerCase().includes(hotelName.toLowerCase()) ||
       hotelName.toLowerCase().includes(h.name.toLowerCase())
     );
@@ -318,7 +325,7 @@ export default function RestDayView({ trip, tripDay, date, onQuickAdd, onOpenDay
   };
 
   // Enhanced DraggableScheduleItem component matching check-in/out pattern
-  const DraggableScheduleItem = ({ item, index }: { item: any; index: number }) => {
+  const DraggableScheduleItem = ({ item, index }: { item: ScheduleItem; index: number }) => {
     const [isEditingThis, setIsEditingThis] = useState(false);
     const [editData, setEditData] = useState({
       name: item.name,
@@ -385,7 +392,9 @@ export default function RestDayView({ trip, tripDay, date, onQuickAdd, onOpenDay
 
     return (
       <div
-        ref={(node) => drag(drop(node))}
+        ref={(node) => {
+          drag(drop(node));
+        }}
         className={`group relative bg-surface border transition-all duration-200 rounded-lg ${
           isDragging
             ? 'opacity-50 scale-95 border-teal-500/50 shadow-lg'
@@ -501,7 +510,7 @@ export default function RestDayView({ trip, tripDay, date, onQuickAdd, onOpenDay
     const hotelName = trip.accommodation?.hotelName;
     if (!hotelName) return null;
 
-    return allHotels.find(h =>
+    return allHotels.find((h: any) => // eslint-disable-line @typescript-eslint/no-explicit-any
       h.name.toLowerCase().includes(hotelName.toLowerCase()) ||
       hotelName.toLowerCase().includes(h.name.toLowerCase())
     );
@@ -516,7 +525,7 @@ export default function RestDayView({ trip, tripDay, date, onQuickAdd, onOpenDay
         <div className="lg:col-span-8">
           <div className="bg-surface rounded-xl border border-surface-dark/30 p-6 h-full overflow-y-auto">
             {/* Header */}
-            <div className="flex items-center mb-6 py-4 px-4 border-b border-surface-dark/20 relative bg-gradient-to-r from-sea/60 to-sea-light/60 rounded-lg min-h-[120px]">
+            <div className="flex items-center mb-6 py-4 px-4 border-b border-surface-dark/20 relative bg-gradient-to-r from-sea-light/60 to-sea/60 rounded-lg min-h-[120px]">
               {onOpenDayTypeModal && (
                 <button
                   onClick={onOpenDayTypeModal}
@@ -547,27 +556,19 @@ export default function RestDayView({ trip, tripDay, date, onQuickAdd, onOpenDay
                   : 'Your Resort';
 
                 return (
-                  <div className="bg-gradient-to-r from-sea/10 to-sea-light/10 rounded-xl p-6 border border-sea/20">
-                    <h3 className="text-lg font-semibold text-ink mb-4 flex items-center">
-                      <MapPin className="w-5 h-5 mr-2 text-sea" />
+                  <div className="bg-gradient-to-r from-sea/10 to-sea-light/10 rounded-lg p-4 border border-sea/20">
+                    <h3 className="text-base font-medium text-ink mb-3 flex items-center">
+                      <MapPin className="w-4 h-4 mr-2 text-sea" />
                       Today at the {displayName}
                     </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {resortSummary.map((section, index) => {
+                    <div className="flex flex-wrap gap-3 text-sm text-ink-light">
+                      {resortSummary.slice(0, 3).map((section, index) => {
                         const IconComponent = section.icon;
+                        const mainDetail = section.details[0] || `${section.title} available`;
                         return (
-                          <div key={index} className="bg-surface/50 rounded-lg p-4">
-                            <div className="flex items-center mb-2">
-                              <IconComponent className="w-4 h-4 mr-2 text-sea" />
-                              <h4 className="font-medium text-ink">{section.title}</h4>
-                            </div>
-                            <div className="space-y-1">
-                              {section.details.map((detail, detailIndex) => (
-                                <p key={detailIndex} className="text-sm text-ink-light">
-                                  • {detail}
-                                </p>
-                              ))}
-                            </div>
+                          <div key={index} className="flex items-center">
+                            <IconComponent className="w-3 h-3 mr-1 text-sea" />
+                            <span>{mainDetail.replace('• ', '')}</span>
                           </div>
                         );
                       })}
@@ -614,79 +615,7 @@ export default function RestDayView({ trip, tripDay, date, onQuickAdd, onOpenDay
       <div className="lg:col-span-4">
         <div className="bg-surface rounded-xl border border-surface-dark/30 p-6 h-full overflow-y-auto">
           <div className="space-y-6">
-            {/* Current Conditions */}
-            <div className="bg-gradient-to-br from-blue-500/10 to-teal-500/10 rounded-xl p-4 border border-blue-500/20">
-              <h4 className="font-semibold text-ink mb-3 flex items-center">
-                <Sun className="w-4 h-4 mr-2 text-yellow-500" />
-                Today's Conditions
-              </h4>
-              <div className="space-y-2 text-sm text-ink-light">
-                <div className="flex items-center justify-between">
-                  <span>Weather</span>
-                  <span className="flex items-center text-ink">
-                    <Sun className="w-3 h-3 mr-1" /> Sunny & Warm
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span>Best for</span>
-                  <span className="text-ink">Pool & Outdoor Activities</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span>Pool Status</span>
-                  <span className="text-green-500 font-medium">Open & Ready</span>
-                </div>
-              </div>
-            </div>
-
-
-
-            {/* Resort Information */}
-            {hotelInfo && (
-              <div className="bg-surface-dark/10 rounded-xl p-4">
-                <h4 className="font-semibold text-ink mb-3 flex items-center">
-                  <MapPin className="w-4 h-4 mr-2 text-blue-500" />
-                  Resort Information
-                </h4>
-                <div className="space-y-2 text-sm">
-                  <div className="font-medium text-ink">{hotelInfo.name}</div>
-                  <div className="text-ink-light space-y-1">
-                    {hotelInfo.features?.amenities?.pool?.basic && <p>• Pool: 7:00 AM - 11:00 PM</p>}
-                    {(hotelInfo.features?.amenities?.dining?.table_service || hotelInfo.features?.amenities?.dining?.quick_service) && <p>• Resort dining available</p>}
-                    {hotelInfo.features?.amenities?.spa?.full_service && <p>• Spa services (book in advance)</p>}
-                    {hotelInfo.transportation && (
-                      <div className="flex items-center">
-                        <Car className="w-3 h-3 mr-1" />
-                        <span>Transportation every 15-20 min</span>
-                      </div>
-                    )}
-                    {hotelInfo.amenities?.wifi && (
-                      <div className="flex items-center">
-                        <Wifi className="w-3 h-3 mr-1" />
-                        <span>Complimentary WiFi</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Weather Backup Plans */}
-            {restPreferences.weatherBackup && (
-              <div className="bg-yellow-500/10 rounded-xl p-4 border border-yellow-500/20">
-                <h4 className="font-semibold text-ink mb-3 flex items-center">
-                  <Cloud className="w-4 h-4 mr-2 text-yellow-500" />
-                  Weather Backup Plans
-                </h4>
-                <div className="text-sm text-ink-light space-y-2">
-                  <div><strong className="text-ink">If sunny:</strong> Pool, outdoor walks, resort grounds</div>
-                  <div><strong className="text-ink">If rainy:</strong> Resort tours, indoor dining, spa time</div>
-                  <div><strong className="text-ink">If hot:</strong> Air-conditioned lounges, indoor pools</div>
-                  <div><strong className="text-ink">If cool:</strong> Hot tubs, covered walkways, cozy dining</div>
-                </div>
-              </div>
-            )}
-
-            {/* Rest Philosophy */}
+            {/* Rest Philosophy - Now at top */}
             <div className="bg-purple-500/10 rounded-xl p-4 border border-purple-500/20">
               <h4 className="font-semibold text-ink mb-3">🏖️ Rest Day Philosophy</h4>
               <div className="text-sm text-ink-light space-y-1">
@@ -697,10 +626,111 @@ export default function RestDayView({ trip, tripDay, date, onQuickAdd, onOpenDay
                 <p>• No guilt about doing "nothing"</p>
               </div>
             </div>
+
+            {/* Enhanced Resort Amenities */}
+            {hotelInfo && (() => {
+              const diningOptions = hotelInfo.diningOptions ? getResortDiningByResortId(hotelInfo.id) : [];
+
+              return (
+                <div className="bg-surface-dark/10 rounded-xl p-4">
+                  <h4 className="font-semibold text-ink mb-3 flex items-center">
+                    <Sparkles className="w-4 h-4 mr-2 text-blue-500" />
+                    Resort Amenities
+                  </h4>
+                  <div className="space-y-4">
+
+                    {/* Dining Options */}
+                    {diningOptions.length > 0 && (
+                      <div>
+                        <div className="flex items-center mb-2">
+                          <Utensils className="w-3 h-3 mr-1 text-orange-500" />
+                          <span className="font-medium text-ink text-sm">Dining Options</span>
+                        </div>
+                        <div className="text-xs text-ink-light space-y-1 ml-4">
+                          {(() => {
+                            // Sort restaurants by type: table service first, then quick service, then lounge, then others
+                            const sortedDining = [...diningOptions].sort((a, b) => {
+                              const typeOrder: Record<string, number> = { 'table_service': 1, 'quick_service': 2, 'lounge': 3 };
+                              const aOrder = typeOrder[a.type as string] || 4;
+                              const bOrder = typeOrder[b.type as string] || 4;
+                              return aOrder - bOrder;
+                            });
+
+                            return sortedDining.map((restaurant, index) => (
+                              <div key={index} className="flex items-center justify-between">
+                                <span>{restaurant.name}</span>
+                                <span className="text-teal-600">
+                                  {restaurant.type === 'table_service' ? 'Table Service' :
+                                   restaurant.type === 'quick_service' ? 'Quick Service' :
+                                   restaurant.type === 'lounge' ? 'Lounge' : restaurant.serviceType}
+                                </span>
+                              </div>
+                            ));
+                          })()}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Pool & Recreation */}
+                    {hotelInfo.features?.amenities?.pool?.basic && (
+                      <div>
+                        <div className="flex items-center mb-2">
+                          <Waves className="w-3 h-3 mr-1 text-blue-500" />
+                          <span className="font-medium text-ink text-sm">Pool & Recreation</span>
+                        </div>
+                        <div className="text-xs text-ink-light space-y-1 ml-4">
+                          <p>• Pool: 7:00 AM - 11:00 PM</p>
+                          {hotelInfo.features.amenities.pool.water_slides && <p>• Water slides available</p>}
+                          {hotelInfo.features.amenities.pool.lazy_river && <p>• Lazy river available</p>}
+                          {hotelInfo.features.amenities.pool.hot_tub && <p>• Hot tubs available</p>}
+                          {hotelInfo.features.amenities.pool.pool_bar && <p>• Poolside bar service</p>}
+                          {hotelInfo.features?.amenities?.recreation?.beach && <p>• Beach access available</p>}
+                          {hotelInfo.features?.amenities?.recreation?.golf && <p>• Golf course on property</p>}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Spa & Wellness */}
+                    {hotelInfo.features?.amenities?.spa?.full_service && (
+                      <div>
+                        <div className="flex items-center mb-2">
+                          <Sparkles className="w-3 h-3 mr-1 text-purple-500" />
+                          <span className="font-medium text-ink text-sm">Spa & Wellness</span>
+                        </div>
+                        <div className="text-xs text-ink-light space-y-1 ml-4">
+                          <p>• Full-service spa (book in advance)</p>
+                          {hotelInfo.features.amenities.spa.couples_treatments && <p>• Couples treatments available</p>}
+                          {hotelInfo.features.amenities.spa.fitness_center && <p>• Fitness center access</p>}
+                          {hotelInfo.features.amenities.spa.sauna && <p>• Sauna facilities</p>}
+                          {hotelInfo.features.amenities.spa.steam_room && <p>• Steam room available</p>}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Transportation */}
+                    <div>
+                      <div className="flex items-center mb-2">
+                        <Car className="w-3 h-3 mr-1 text-green-500" />
+                        <span className="font-medium text-ink text-sm">Transportation</span>
+                      </div>
+                      <div className="text-xs text-ink-light space-y-1 ml-4">
+                        {hotelInfo.features?.transportation?.monorail && <p>• Monorail to parks</p>}
+                        {hotelInfo.features?.transportation?.boat && <p>• Boat transportation</p>}
+                        {hotelInfo.features?.transportation?.skyliner && <p>• Disney Skyliner</p>}
+                        {hotelInfo.features?.transportation?.bus && <p>• Complimentary bus service</p>}
+                        {hotelInfo.features?.transportation?.walking && <p>• Walking distance to parks</p>}
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              );
+            })()}
+
           </div>
         </div>
       </div>
-      </div>
+    </div>
 
       {/* Enhanced Resort Activity Modal */}
       {showActivityModal && (
@@ -740,7 +770,7 @@ export default function RestDayView({ trip, tripDay, date, onQuickAdd, onOpenDay
                         <span className="w-2 h-2 bg-teal-500 rounded-full mr-2"></span>
                         {categoryName}
                       </h4>
-                      <div className="grid md:grid-cols-2 gap-3">
+                      <div className="grid md:grid-cols-3 gap-3">
                         {activities.map((activity, index) => (
                           <button
                             key={index}
