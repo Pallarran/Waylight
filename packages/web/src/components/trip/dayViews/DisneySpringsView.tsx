@@ -18,6 +18,66 @@ export default function DisneySpringsView({ trip, tripDay, onQuickAdd, onOpenDay
   const [showAddActivityModal, setShowAddActivityModal] = useState(false);
   const [showCustomActivityForm, setShowCustomActivityForm] = useState(false);
   const [customActivity, setCustomActivity] = useState({ name: '', startTime: '', type: 'entertainment' as ActivityCategory });
+  const [selectedTransportation, setSelectedTransportation] = useState('own-car');
+
+  // Transportation options with dynamic tips
+  const transportationOptions: Record<string, { label: string; icon: string; tips: string[] }> = {
+    'own-car': {
+      label: 'Own Car',
+      icon: '🚗',
+      tips: [
+        'Free parking in all Disney Springs garages',
+        'Orange Garage is closest to Disney Springs Marketplace',
+        'Lime Garage is near Town Center and West Side',
+        'Grapefruit Garage serves the Landing area',
+        'Arrive early on weekends for better parking spots'
+      ]
+    },
+    'rideshare': {
+      label: 'Uber/Lyft',
+      icon: '🚕',
+      tips: [
+        'Drop-off location is near the Orange Garage',
+        'Consider cost vs. convenience from your resort',
+        'Surge pricing may apply during peak hours',
+        'Book return ride in advance during busy periods',
+        'Allow extra time for pickup during events'
+      ]
+    },
+    'resort-transport': {
+      label: 'Resort Transportation',
+      icon: '🚌',
+      tips: [
+        'Available from Disney resort hotels only',
+        'Bus service typically runs every 20 minutes',
+        'No direct transport from Magic Kingdom resorts',
+        'Check operating hours - service may end early',
+        'Consider alternate transport after park hours'
+      ]
+    },
+    'boat': {
+      label: 'Boat from Resort',
+      icon: '⛵',
+      tips: [
+        'Available from Disney\'s Saratoga Springs Resort',
+        'Available from Disney\'s Old Key West Resort',
+        'Most scenic way to arrive at Disney Springs',
+        'Weather dependent - may not operate in storms',
+        'Limited operating hours - check schedule'
+      ]
+    },
+    'walking': {
+      label: 'Walking from Resort',
+      icon: '🚶',
+      tips: [
+        'Only practical from Saratoga Springs Resort',
+        'About 10-15 minute walk via bridge',
+        'Well-lit and safe pedestrian walkway',
+        'Great way to work up an appetite',
+        'Free and no wait times!'
+      ]
+    }
+  };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const updateDayData = async (updates: Partial<TripDay>) => {
@@ -221,14 +281,45 @@ export default function DisneySpringsView({ trip, tripDay, onQuickAdd, onOpenDay
                   <Car className="w-5 h-5 mr-2 text-blue-500" />
                   Getting There & Transportation
                 </h3>
-                <div className="space-y-3 text-sm">
-                  <div className="flex items-center text-ink-light">
-                    <MapPin className="w-4 h-4 mr-2" />
-                    <span>Free parking in all Disney Springs garages</span>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  {/* Transportation Selector */}
+                  <div>
+                    <label className="block text-sm font-medium text-ink mb-2">
+                      Select your transportation method:
+                    </label>
+                    <select
+                      value={selectedTransportation}
+                      onChange={(e) => setSelectedTransportation(e.target.value)}
+                      className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                    >
+                      {Object.entries(transportationOptions).map(([key, option]) => (
+                        <option key={key} value={key}>
+                          {option.icon} {option.label}
+                        </option>
+                      ))}
+                    </select>
                   </div>
-                  <div className="flex items-center text-ink-light">
-                    <Car className="w-4 h-4 mr-2" />
-                    <span>Consider Uber/Lyft if staying on-property</span>
+
+                  {/* Dynamic Tips */}
+                  <div>
+                    <h4 className="text-sm font-medium text-ink mb-2 flex items-center">
+                      <span className="text-base mr-2">{transportationOptions[selectedTransportation]?.icon}</span>
+                      {transportationOptions[selectedTransportation]?.label} Tips
+                    </h4>
+                    <div className="space-y-2">
+                      {transportationOptions[selectedTransportation]?.tips.slice(0, 3).map((tip, index) => (
+                        <div key={index} className="flex items-start text-xs text-ink-light">
+                          <span className="text-green-500 mr-2 mt-0.5">•</span>
+                          <span>{tip}</span>
+                        </div>
+                      ))}
+                      {transportationOptions[selectedTransportation]?.tips.length > 3 && (
+                        <div className="text-xs text-ink-light/70 italic">
+                          +{transportationOptions[selectedTransportation].tips.length - 3} more tips available
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
