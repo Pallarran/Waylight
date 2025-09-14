@@ -1,11 +1,11 @@
-import { Plane, Car, Clock, MapPin, Hotel, Utensils, Camera, CheckCircle, Phone, Droplets, Edit2, X, Plus, Info, GripVertical, Save } from 'lucide-react';
+import { Plane, Clock, MapPin, Hotel, Utensils, Camera, Phone, Edit2, X, Plus, Info, GripVertical, Save } from 'lucide-react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TripDay, Trip, ActivityCategory } from '../../../types';
 import { useTripStore } from '../../../stores';
 import { useState } from 'react';
-import { getHotelById, allHotels, type HotelData } from '@waylight/shared';
-import { getCategoryIcon, getCategoryColor } from '../../../data/activityCategories';
+import { allHotels } from '@waylight/shared';
+import { getCategoryIcon } from '../../../data/activityCategories';
 
 interface CheckInDayViewProps {
   trip: Trip;
@@ -15,35 +15,15 @@ interface CheckInDayViewProps {
   onOpenDayTypeModal?: () => void;
 }
 
-export default function CheckInDayView({ trip, tripDay, date, onQuickAdd, onOpenDayTypeModal }: CheckInDayViewProps) {
+export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTypeModal }: CheckInDayViewProps) {
   const { updateDay, addItem, deleteItem, updateItem, reorderItems } = useTripStore();
   const [showCustomActivityForm, setShowCustomActivityForm] = useState(false);
   const [customActivity, setCustomActivity] = useState({ name: '', startTime: '', type: 'attraction' as ActivityCategory });
-  const [editingItem, setEditingItem] = useState<string | null>(null);
   const [showTransportInfo, setShowTransportInfo] = useState(false);
   const [showCheckInInfo, setShowCheckInInfo] = useState(false);
   const [showAddActivityModal, setShowAddActivityModal] = useState(false);
 
-  // Helper function to clean hotel names for display
-  const getDisplayHotelName = (hotelName: string) => {
-    return hotelName
-      .replace(/^Disney's\s+/i, '')
-      .replace(/^Universal's\s+/i, '')
-      .replace(/^Universal\s+/i, '');
-  };
 
-  // Get hotel information for tailored content
-  const selectedHotel = trip.accommodation?.hotelName ?
-    (() => {
-      // Try to find by name first (for custom entries), then by ID
-      const hotelOptions = [
-        // You'd need to import getHotelOptions and flatten it, but for now let's work with what we have
-      ];
-
-      // For now, we'll use a simple approach to get hotel info
-      // This could be enhanced later with proper hotel matching
-      return null; // Will implement based on available hotel data
-    })() : null;
 
 
   // Helper function to get hotel-specific check-in time
@@ -234,16 +214,6 @@ export default function CheckInDayView({ trip, tripDay, date, onQuickAdd, onOpen
             'Peak/surge times: $50-70+',
             'Late night arrivals: Can reach $100+',
             'Travel time: 20-30 minutes direct'
-          ]
-        };
-      case 'car':
-        return {
-          title: 'Rental Car Information',
-          details: [
-            'Travel time: 20-30 minutes from MCO',
-            'Resort parking: $15-25/night (varies by resort tier)',
-            'Complimentary self-parking for day guests',
-            'Valet parking available at most resorts'
           ]
         };
       case 'taxi':

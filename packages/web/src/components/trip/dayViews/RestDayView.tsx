@@ -1,10 +1,10 @@
-import { Clock, MapPin, Plus, Waves, Sun, Utensils, ShoppingBag, X, GripVertical } from 'lucide-react';
+import { Clock, Plus, Waves, X, GripVertical } from 'lucide-react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TripDay, Trip, ActivityCategory } from '../../../types';
 import { useTripStore } from '../../../stores';
 import { useState } from 'react';
-import { getHotelById, allHotels, type HotelData } from '@waylight/shared';
+import { allHotels } from '@waylight/shared';
 
 interface RestDayViewProps {
   trip: Trip;

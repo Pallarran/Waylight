@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Plus, MapPin, Loader2, AlertCircle, Cloud, CloudOff } from 'lucide-react';
+import { Plus, MapPin, Loader2, AlertCircle, Cloud } from 'lucide-react';
 import { useTripStore } from '../stores';
 import CreateTripModal from '../components/trip/CreateTripModal';
 import TripCard from '../components/trip/TripCard';

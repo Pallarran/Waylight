@@ -7,7 +7,7 @@ import { useTripStore } from '../../stores';
 import { PARKS, getParkName } from '../../data/parks';
 import { getCategoryIcon, getCategoryColor, getCategoryInfo } from '../../data/activityCategories';
 import { getAllDoItems, getAllEatItems } from '@waylight/shared';
-import { detectDayType, getDayIcon, getDayTypeInfo, getDayLayoutConfig } from '../../utils/dayTypeUtils';
+import { detectDayType, getDayIcon, getDayTypeInfo } from '../../utils/dayTypeUtils';
 // import QuickAddBar from './QuickAddBar'; // Temporarily disabled due to syntax error
 import TripOverview from './TripOverview';
 import CheatSheetView from './CheatSheetView';
@@ -635,14 +635,6 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
     return <div className="text-center text-ink-light">No valid date selected</div>;
   }
 
-  const handleAddDay = async (date: Date) => {
-    const dateString = format(date, 'yyyy-MM-dd');
-    try {
-      await addDay(trip.id, dateString);
-    } catch (error) {
-      console.error('Failed to add day:', error);
-    }
-  };
 
   const handleQuickAdd = async (type: ActivityCategory, attractionId?: string, customName?: string) => {
     if (!selectedDay) return;

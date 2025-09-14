@@ -1,11 +1,11 @@
-import { Plane, Car, Clock, ShoppingBag, Camera, Utensils, Luggage, CheckCircle, Plus, X, GripVertical, MapPin, Phone, Save, Edit2, Info } from 'lucide-react';
+import { Plane, Clock, Camera, Luggage, Plus, X, GripVertical, MapPin, Phone, Save, Edit2, Info } from 'lucide-react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TripDay, Trip, ActivityCategory } from '../../../types';
 import { useTripStore } from '../../../stores';
 import { useState } from 'react';
-import { getHotelById, allHotels, type HotelData } from '@waylight/shared';
-import { getCategoryIcon, getCategoryColor } from '../../../data/activityCategories';
+import { allHotels } from '@waylight/shared';
+import { getCategoryIcon } from '../../../data/activityCategories';
 
 interface CheckOutDayViewProps {
   trip: Trip;

@@ -1,8 +1,8 @@
 import { create } from 'zustand';
-import type { Trip, TripDay, ItineraryItem } from '../types';
+import type { Trip, TripDay, ItineraryItem, DayType } from '../types';
 import { DatabaseService } from '../services/database';
 import { createTrip } from '../utils/trip';
-import { syncService, authService } from '@waylight/shared';
+import { syncService, authService, type SyncStatus, type AuthState } from '@waylight/shared';
 
 interface SimpleTripState {
   trips: Trip[];
@@ -43,18 +43,6 @@ interface SimpleTripState {
   showSuccess: (message: string) => void;
 }
 
-// Helper function to sync a trip after local update
-const syncTripAfterUpdate = (tripId: string) => {
-  const authState = authService.getState();
-  if (authState.user && !authState.loading) {
-    // Get the store instance
-    const store = useSimpleTripStore.getState();
-    const updatedTrip = store.getTripById(tripId);
-    if (updatedTrip) {
-      syncService.uploadTrip(updatedTrip).catch(console.error);
-    }
-  }
-};
 
 const useSimpleTripStore = create<SimpleTripState>((set, get) => ({
   trips: [],
@@ -80,7 +68,7 @@ const useSimpleTripStore = create<SimpleTripState>((set, get) => ({
     );
 
     // Listen for sync status changes
-    syncService.subscribe((status) => {
+    syncService.subscribe((status: SyncStatus) => {
       set({ isSyncing: status.syncing });
       if (status.error) {
         set({ error: status.error });
@@ -88,7 +76,7 @@ const useSimpleTripStore = create<SimpleTripState>((set, get) => ({
     });
 
     // Auto-sync when user authenticates and start periodic sync
-    authService.subscribe((authState) => {
+    authService.subscribe((authState: AuthState) => {
       if (authState.user && !authState.loading) {
         get().syncTrips();
         get().startPeriodicSync();

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Clock, MapPin, Users, Star, DollarSign, Utensils } from 'lucide-react';
+import { Clock, MapPin, Users, Star, Utensils } from 'lucide-react';
 import type { Attraction } from '../../types';
 import { WaypointCategory } from '../../types';
 import WaypointDetailModal from './WaypointDetailModal';
