@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Plane, Clock, MapPin, Hotel, Utensils, Camera, Phone, Edit, XCircle, Plus, Info, GripVertical, Save } from 'lucide-react';
+import { Plane, Clock, Hotel, Camera, Phone, Edit, XCircle, Plus, Info, GripVertical, Save } from 'lucide-react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TripDay, Trip, ActivityCategory } from '../../../types';
@@ -30,7 +30,7 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
   // Helper function to get hotel-specific check-in time
   const getHotelCheckInTime = (hotelName: string) => {
     // Find the hotel in the database by name
-    const hotel = allHotels.find((h: any) => h.name === hotelName); // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const hotel = allHotels.find((h: any) => h.name === hotelName);  
 
     if (hotel) {
       // Use the actual priceLevel from the database
@@ -403,7 +403,7 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
     }
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const _updateAccommodationData = async (updates: any) => {
     try {
       const { updateTrip } = useTripStore.getState();
@@ -871,7 +871,7 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
                 <p>• Use mobile ordering for dining - saves time in busy periods</p>
                 <p>• Stay hydrated and pack layers - Florida weather can change quickly</p>
                 {trip.accommodation?.hotelName && (() => {
-                  const hotelData = allHotels.find((hotel: any) => // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  const hotelData = allHotels.find((hotel: any) =>  
                     hotel.name.toLowerCase().includes(trip.accommodation!.hotelName!.toLowerCase()) ||
                     trip.accommodation!.hotelName!.toLowerCase().includes(hotel.name.toLowerCase())
                   );
@@ -951,85 +951,105 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
             <div className="p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
               <div className="space-y-6">
 
-              {/* Dynamic Activity Layout */}
-              <div className={(() => {
-                // Calculate visible columns dynamically
-                const hotelData = trip.accommodation?.hotelName ?
-                  allHotels.find((hotel: any) =>
-                    hotel.name.toLowerCase().includes(trip.accommodation!.hotelName!.toLowerCase()) ||
-                    trip.accommodation!.hotelName!.toLowerCase().includes(hotel.name.toLowerCase())
-                  ) : null;
-
-                const hasResortFeatures = hotelData ? getHotelFeatureSuggestions(hotelData).length > 0 : false;
-                const showWaterParks = hotelData ? hasWaterParkAccess(hotelData) : true;
-
-                let visibleColumns = 1; // Always show Essential First Day
-                if (hasResortFeatures) visibleColumns++;
-                if (showWaterParks) visibleColumns++;
-
-                // Return appropriate grid classes
-                if (visibleColumns === 3) {
-                  return "grid grid-cols-1 md:grid-cols-3 gap-6 mb-6";
-                } else if (visibleColumns === 2) {
-                  return "grid grid-cols-1 md:grid-cols-2 gap-6 mb-6";
-                } else {
-                  return "grid grid-cols-1 gap-6 mb-6 max-w-md mx-auto";
-                }
-              })()}>
+              {/* Activity Categories - Vertical Layout */}
+              <div className="space-y-6">
 
                 {/* Column 1: Essential First Day */}
-                <div className="border-2 border-gray-400/30 rounded-lg p-4 bg-gray-400/5">
-                  <h4 className="font-medium text-ink mb-3 text-sm">Essential First Day</h4>
-                  <div className="space-y-3">
+                <div className="rounded-lg p-4">
+                  <h4 className="text-lg font-medium text-ink mb-3 flex items-center">
+                    <span className="w-2 h-2 bg-gray-500 rounded-full mr-2"></span>
+                    Essential First Day
+                  </h4>
+                  <div className="grid md:grid-cols-3 gap-3">
                     <button
                       onClick={() => {
                         onQuickAdd('break', undefined, 'Room Settling Time');
                         setShowAddActivityModal(false);
                       }}
-                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                      className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
                     >
-                      <span className="w-4 h-4 mr-3 text-blue-500">🧳</span>
-                      <span className="text-sm text-ink">Room Settling Time</span>
+                      <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🧳</span>
+                      <div className="flex-1">
+                        <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                          Room Settling Time
+                        </div>
+                        <div className="text-xs text-ink-light mt-1">
+                          Unpack and get comfortable
+                        </div>
+                      </div>
+                      <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
                     </button>
                     <button
                       onClick={() => {
                         onQuickAdd('dining', undefined, 'Welcome Dinner');
                         setShowAddActivityModal(false);
                       }}
-                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                      className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
                     >
-                      <Utensils className="w-4 h-4 mr-3 text-orange-500" />
-                      <span className="text-sm text-ink">Welcome Dinner Reservation</span>
+                      <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🍽️</span>
+                      <div className="flex-1">
+                        <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                          Welcome Dinner
+                        </div>
+                        <div className="text-xs text-ink-light mt-1">
+                          Celebrate your arrival
+                        </div>
+                      </div>
+                      <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
                     </button>
                     <button
                       onClick={() => {
                         onQuickAdd('tours', undefined, 'Resort Exploration');
                         setShowAddActivityModal(false);
                       }}
-                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                      className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
                     >
-                      <MapPin className="w-4 h-4 mr-3 text-purple-500" />
-                      <span className="text-sm text-ink">Explore Your Resort</span>
+                      <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🏨</span>
+                      <div className="flex-1">
+                        <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                          Explore Your Resort
+                        </div>
+                        <div className="text-xs text-ink-light mt-1">
+                          Discover amenities and layout
+                        </div>
+                      </div>
+                      <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
                     </button>
                     <button
                       onClick={() => {
                         onQuickAdd('break', undefined, 'Early Rest & Recovery');
                         setShowAddActivityModal(false);
                       }}
-                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                      className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
                     >
-                      <span className="w-4 h-4 mr-3 text-green-500">🛌</span>
-                      <span className="text-sm text-ink">Early Rest & Recovery</span>
+                      <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🛌</span>
+                      <div className="flex-1">
+                        <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                          Early Rest & Recovery
+                        </div>
+                        <div className="text-xs text-ink-light mt-1">
+                          Recharge from travel
+                        </div>
+                      </div>
+                      <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
                     </button>
                     <button
                       onClick={() => {
                         onQuickAdd('tours', undefined, 'Resort Map & Orientation');
                         setShowAddActivityModal(false);
                       }}
-                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                      className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
                     >
-                      <span className="w-4 h-4 mr-3 text-indigo-500">🗺️</span>
-                      <span className="text-sm text-ink">Resort Map & Orientation</span>
+                      <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🗺️</span>
+                      <div className="flex-1">
+                        <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                          Resort Map & Orientation
+                        </div>
+                        <div className="text-xs text-ink-light mt-1">
+                          Learn the best routes
+                        </div>
+                      </div>
+                      <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
                     </button>
                   </div>
                 </div>
@@ -1047,9 +1067,12 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
                   if (suggestions.length === 0) return null;
 
                   return (
-                    <div className="border-2 border-pink-500/30 rounded-lg p-4 bg-pink-500/5">
-                      <h4 className="font-medium text-ink mb-3 text-sm">Resort Features</h4>
-                      <div className="space-y-3">
+                    <div className="rounded-lg p-4">
+                      <h4 className="text-lg font-medium text-ink mb-3 flex items-center">
+                        <span className="w-2 h-2 bg-pink-500 rounded-full mr-2"></span>
+                        Resort Features
+                      </h4>
+                      <div className="grid md:grid-cols-3 gap-3">
                         {suggestions.map((suggestion, index) => (
                           <button
                             key={index}
@@ -1057,10 +1080,18 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
                               onQuickAdd(suggestion.type as ActivityCategory, undefined, suggestion.name);
                               setShowAddActivityModal(false);
                             }}
-                            className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                            className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
                           >
-                            <span className="w-4 h-4 mr-3 text-pink-500">{suggestion.icon}</span>
-                            <span className="text-sm text-ink">{suggestion.name}</span>
+                            <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">{suggestion.icon}</span>
+                            <div className="flex-1">
+                              <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                                {suggestion.name}
+                              </div>
+                              <div className="text-xs text-ink-light mt-1">
+                                Resort amenity
+                              </div>
+                            </div>
+                            <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
                           </button>
                         ))}
                       </div>
@@ -1081,28 +1112,47 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
                   if (!showWaterParks) return null;
 
                   return (
-                    <div className="border-2 border-blue-400/30 rounded-lg p-4 bg-blue-400/5">
-                      <h4 className="font-medium text-ink mb-3 text-sm">Water Parks Today</h4>
-                      <div className="space-y-3">
+                    <div className="rounded-lg p-4">
+                      <h4 className="text-lg font-medium text-ink mb-3 flex items-center">
+                        <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                        Water Parks Today
+                      </h4>
+                      <div className="grid md:grid-cols-3 gap-3">
                         <button
                           onClick={() => {
                             onQuickAdd('waterpark', undefined, 'Typhoon Lagoon Water Park');
                             setShowAddActivityModal(false);
                           }}
-                          className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                          className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
                         >
-                          <span className="w-4 h-4 mr-3 text-blue-500">🌊</span>
-                          <span className="text-sm text-ink">Typhoon Lagoon</span>
+                          <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🌊</span>
+                          <div className="flex-1">
+                            <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                              Typhoon Lagoon
+                            </div>
+                            <div className="text-xs text-ink-light mt-1">
+                              Tropical water park adventure
+                            </div>
+                          </div>
+                          <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
                         </button>
                         <button
                           onClick={() => {
                             onQuickAdd('waterpark', undefined, 'Blizzard Beach Water Park');
                             setShowAddActivityModal(false);
                           }}
-                          className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                          className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
                         >
-                          <span className="w-4 h-4 mr-3 text-cyan-500">❄️</span>
-                          <span className="text-sm text-ink">Blizzard Beach</span>
+                          <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">❄️</span>
+                          <div className="flex-1">
+                            <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                              Blizzard Beach
+                            </div>
+                            <div className="text-xs text-ink-light mt-1">
+                              Winter wonderland water park
+                            </div>
+                          </div>
+                          <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
                         </button>
                       </div>
                     </div>

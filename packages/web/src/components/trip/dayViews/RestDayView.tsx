@@ -32,6 +32,8 @@ export default function RestDayView({ trip, tripDay, onQuickAdd, onOpenDayTypeMo
   const { reorderItems, updateItem, deleteItem } = useTripStore();
   const [showActivityModal, setShowActivityModal] = useState(false);
   const [editingItem, setEditingItem] = useState<string | null>(null);
+  const [showCustomActivityForm, setShowCustomActivityForm] = useState(false);
+  const [customActivity, setCustomActivity] = useState({ name: '', startTime: '', type: 'attraction' as ActivityCategory });
 
   // Helper function to get resort-specific relaxation activities
   const getResortActivities = () => {
@@ -544,7 +546,7 @@ export default function RestDayView({ trip, tripDay, onQuickAdd, onOpenDayTypeMo
               </div>
             </div>
 
-            <div className="p-6 space-y-6">
+            <div className="space-y-6">
               {/* Your Resort Today */}
               {(() => {
                 const resortSummary = getResortSummary();
@@ -798,6 +800,79 @@ export default function RestDayView({ trip, tripDay, onQuickAdd, onOpenDayTypeMo
                     </div>
                   );
                 })}
+
+              {/* Custom Activity Form in Modal */}
+              {showCustomActivityForm ? (
+                <div className="bg-surface-dark/20 rounded-lg p-4 mt-4">
+                  <div className="flex items-center justify-between mb-4">
+                    <h4 className="font-medium text-ink">Add Custom Activity</h4>
+                    <button
+                      onClick={() => setShowCustomActivityForm(false)}
+                      className="p-1 text-ink-light hover:text-ink hover:bg-surface-dark rounded transition-colors"
+                    >
+                      <XCircle className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <input
+                      type="text"
+                      placeholder="Activity name"
+                      value={customActivity.name}
+                      onChange={(e) => setCustomActivity({ ...customActivity, name: e.target.value })}
+                      className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                    />
+                    <input
+                      type="time"
+                      placeholder="Start time (optional)"
+                      value={customActivity.startTime}
+                      onChange={(e) => setCustomActivity({ ...customActivity, startTime: e.target.value })}
+                      className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                    />
+                    <select
+                      value={customActivity.type}
+                      onChange={(e) => setCustomActivity({ ...customActivity, type: e.target.value as ActivityCategory })}
+                      className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                    >
+                      <option value="attraction">Attraction</option>
+                      <option value="dining">Dining</option>
+                      <option value="break">Break</option>
+                      <option value="show">Show</option>
+                      <option value="meet_greet">Meet & Greet</option>
+                      <option value="tours">Tour</option>
+                      <option value="shopping">Shopping</option>
+                    </select>
+                  </div>
+                  <div className="flex space-x-2 mt-4">
+                    <button
+                      onClick={() => {
+                        if (customActivity.name.trim()) {
+                          onQuickAdd(customActivity.type, undefined, customActivity.name);
+                          setCustomActivity({ name: '', startTime: '', type: 'attraction' });
+                          setShowCustomActivityForm(false);
+                          setShowActivityModal(false);
+                        }
+                      }}
+                      className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-lg transition-colors"
+                    >
+                      Add Activity
+                    </button>
+                    <button
+                      onClick={() => setShowCustomActivityForm(false)}
+                      className="px-4 py-2 bg-surface-dark hover:bg-surface-dark/80 text-ink text-sm rounded-lg transition-colors"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  onClick={() => setShowCustomActivityForm(true)}
+                  className="w-full mt-4 p-3 border-2 border-dashed border-surface-dark rounded-lg text-ink-light hover:text-ink hover:border-ink transition-colors text-center"
+                >
+                  <Plus className="w-4 h-4 mx-auto mb-1" />
+                  <span className="text-sm">Add Custom Activity</span>
+                </button>
+              )}
               </div>
             </div>
 

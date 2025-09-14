@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Plane, Clock, Camera, Luggage, Plus, XCircle, GripVertical, MapPin, Save, Edit, Info, ShoppingBag, Utensils } from 'lucide-react';
+import { Plane, Clock, Camera, Luggage, Plus, XCircle, GripVertical, Save, Edit, Info } from 'lucide-react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TripDay, Trip, ActivityCategory } from '../../../types';
@@ -21,6 +21,8 @@ export default function CheckOutDayView({ trip, tripDay, onQuickAdd, onOpenDayTy
   const [showAddActivityModal, setShowAddActivityModal] = useState(false);
   const [editingItem, setEditingItem] = useState<string | null>(null);
   const [showTimingBreakdown, setShowTimingBreakdown] = useState(false);
+  const [showCustomActivityForm, setShowCustomActivityForm] = useState(false);
+  const [customActivity, setCustomActivity] = useState({ name: '', startTime: '', type: 'attraction' as ActivityCategory });
 
   const updateDayData = async (updates: Partial<TripDay>) => {
     try {
@@ -778,7 +780,7 @@ export default function CheckOutDayView({ trip, tripDay, onQuickAdd, onOpenDayTy
 
               {/* Resort Guest Benefits Subsection */}
               {trip.accommodation?.hotelName && (() => {
-                const hotelData = allHotels.find((hotel: any) => // eslint-disable-line @typescript-eslint/no-explicit-any
+                const hotelData = allHotels.find((hotel: any) =>  
                   hotel.name.toLowerCase().includes(trip.accommodation!.hotelName!.toLowerCase()) ||
                   trip.accommodation!.hotelName!.toLowerCase().includes(hotel.name.toLowerCase())
                 );
@@ -828,99 +830,169 @@ export default function CheckOutDayView({ trip, tripDay, onQuickAdd, onOpenDayTy
             <div className="p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
               <div className="space-y-6">
 
-              {/* Activity Categories */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+              {/* Activity Categories - Vertical Layout */}
+              <div className="space-y-6">
 
                 {/* Column 1: Essential Departure Tasks */}
-                <div className="border-2 border-gray-400/30 rounded-lg p-4 bg-gray-400/5">
-                  <h4 className="font-medium text-ink mb-3 text-sm">Essential Departure Tasks</h4>
-                  <div className="space-y-3">
+                <div className="rounded-lg p-4">
+                  <h4 className="text-lg font-medium text-ink mb-3 flex items-center">
+                    <span className="w-2 h-2 bg-gray-500 rounded-full mr-2"></span>
+                    Essential Departure Tasks
+                  </h4>
+                  <div className="grid md:grid-cols-3 gap-3">
                     <button
                       onClick={() => {
                         onQuickAdd('travel', undefined, 'Pack Final Items');
                         setShowAddActivityModal(false);
                       }}
-                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                      className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
                     >
-                      <span className="w-4 h-4 mr-3 text-blue-500">🧳</span>
-                      <span className="text-sm text-ink">Pack Final Items</span>
+                      <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🧳</span>
+                      <div className="flex-1">
+                        <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                          Pack Final Items
+                        </div>
+                        <div className="text-xs text-ink-light mt-1">
+                          Double check nothing is left behind
+                        </div>
+                      </div>
+                      <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
                     </button>
                     <button
                       onClick={() => {
                         onQuickAdd('travel', undefined, 'Room Final Check');
                         setShowAddActivityModal(false);
                       }}
-                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                      className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
                     >
-                      <span className="w-4 h-4 mr-3 text-orange-500">🔍</span>
-                      <span className="text-sm text-ink">Room Final Check</span>
+                      <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🔍</span>
+                      <div className="flex-1">
+                        <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                          Room Final Check
+                        </div>
+                        <div className="text-xs text-ink-light mt-1">
+                          Inspect all drawers and corners
+                        </div>
+                      </div>
+                      <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
                     </button>
                     <button
                       onClick={() => {
                         onQuickAdd('travel', undefined, 'Hotel Check-out Process');
                         setShowAddActivityModal(false);
                       }}
-                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                      className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
                     >
-                      <span className="w-4 h-4 mr-3 text-purple-500">🏨</span>
-                      <span className="text-sm text-ink">Hotel Check-out</span>
+                      <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🏨</span>
+                      <div className="flex-1">
+                        <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                          Hotel Check-out
+                        </div>
+                        <div className="text-xs text-ink-light mt-1">
+                          Complete checkout process
+                        </div>
+                      </div>
+                      <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
                     </button>
                     <button
                       onClick={() => {
                         onQuickAdd('travel', undefined, 'Transportation Coordination');
                         setShowAddActivityModal(false);
                       }}
-                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                      className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
                     >
-                      <span className="w-4 h-4 mr-3 text-green-500">🚌</span>
-                      <span className="text-sm text-ink">Transportation Setup</span>
+                      <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🚌</span>
+                      <div className="flex-1">
+                        <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                          Transportation Setup
+                        </div>
+                        <div className="text-xs text-ink-light mt-1">
+                          Coordinate departure transport
+                        </div>
+                      </div>
+                      <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
                     </button>
                   </div>
                 </div>
 
                 {/* Column 2: Memory Making */}
-                <div className="border-2 border-pink-500/30 rounded-lg p-4 bg-pink-500/5">
-                  <h4 className="font-medium text-ink mb-3 text-sm">Memory Making</h4>
-                  <div className="space-y-3">
+                <div className="rounded-lg p-4">
+                  <h4 className="text-lg font-medium text-ink mb-3 flex items-center">
+                    <span className="w-2 h-2 bg-pink-500 rounded-full mr-2"></span>
+                    Memory Making
+                  </h4>
+                  <div className="grid md:grid-cols-3 gap-3">
                     <button
                       onClick={() => {
                         onQuickAdd('attraction', undefined, 'Final Photo Opportunities');
                         setShowAddActivityModal(false);
                       }}
-                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                      className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
                     >
-                      <Camera className="w-4 h-4 mr-3 text-pink-500" />
-                      <span className="text-sm text-ink">Final Photos</span>
+                      <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">📸</span>
+                      <div className="flex-1">
+                        <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                          Final Photos
+                        </div>
+                        <div className="text-xs text-ink-light mt-1">
+                          Capture last magical moments
+                        </div>
+                      </div>
+                      <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
                     </button>
                     <button
                       onClick={() => {
                         onQuickAdd('attraction', undefined, 'Memory Recording Session');
                         setShowAddActivityModal(false);
                       }}
-                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                      className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
                     >
-                      <span className="w-4 h-4 mr-3 text-indigo-500">🎙️</span>
-                      <span className="text-sm text-ink">Record Memories</span>
+                      <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🎙️</span>
+                      <div className="flex-1">
+                        <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                          Record Memories
+                        </div>
+                        <div className="text-xs text-ink-light mt-1">
+                          Voice notes about the trip
+                        </div>
+                      </div>
+                      <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
                     </button>
                     <button
                       onClick={() => {
                         onQuickAdd('attraction', undefined, 'PhotoPass Download');
                         setShowAddActivityModal(false);
                       }}
-                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                      className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
                     >
-                      <span className="w-4 h-4 mr-3 text-cyan-500">📱</span>
-                      <span className="text-sm text-ink">Download Photos</span>
+                      <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">📱</span>
+                      <div className="flex-1">
+                        <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                          Download Photos
+                        </div>
+                        <div className="text-xs text-ink-light mt-1">
+                          Save your PhotoPass pictures
+                        </div>
+                      </div>
+                      <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
                     </button>
                     <button
                       onClick={() => {
                         onQuickAdd('shopping', undefined, 'Last-minute Shopping');
                         setShowAddActivityModal(false);
                       }}
-                      className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                      className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
                     >
-                      <ShoppingBag className="w-4 h-4 mr-3 text-purple-500" />
-                      <span className="text-sm text-ink">Final Souvenirs</span>
+                      <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🛍️</span>
+                      <div className="flex-1">
+                        <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                          Final Souvenirs
+                        </div>
+                        <div className="text-xs text-ink-light mt-1">
+                          Last chance for gifts
+                        </div>
+                      </div>
+                      <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
                     </button>
                   </div>
                 </div>
@@ -938,38 +1010,65 @@ export default function CheckOutDayView({ trip, tripDay, onQuickAdd, onOpenDayTy
                   if (suggestions.length === 0) {
                     // Fallback static activities if no hotel-specific ones
                     return (
-                      <div className="border-2 border-blue-400/30 rounded-lg p-4 bg-blue-400/5">
-                        <h4 className="font-medium text-ink mb-3 text-sm">Farewell Experiences</h4>
-                        <div className="space-y-3">
+                      <div className="rounded-lg p-4">
+                        <h4 className="text-lg font-medium text-ink mb-3 flex items-center">
+                          <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                          Farewell Experiences
+                        </h4>
+                        <div className="grid md:grid-cols-3 gap-3">
                           <button
                             onClick={() => {
                               onQuickAdd('dining', undefined, 'Final Resort Dining');
                               setShowAddActivityModal(false);
                             }}
-                            className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                            className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
                           >
-                            <Utensils className="w-4 h-4 mr-3 text-orange-500" />
-                            <span className="text-sm text-ink">Final Meal</span>
+                            <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🍽️</span>
+                            <div className="flex-1">
+                              <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                                Final Meal
+                              </div>
+                              <div className="text-xs text-ink-light mt-1">
+                                Last dining experience
+                              </div>
+                            </div>
+                            <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
                           </button>
                           <button
                             onClick={() => {
                               onQuickAdd('attraction', undefined, 'One Final Attraction');
                               setShowAddActivityModal(false);
                             }}
-                            className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                            className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
                           >
-                            <span className="w-4 h-4 mr-3 text-red-500">🎢</span>
-                            <span className="text-sm text-ink">One Last Ride</span>
+                            <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🎢</span>
+                            <div className="flex-1">
+                              <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                                One Last Ride
+                              </div>
+                              <div className="text-xs text-ink-light mt-1">
+                                Final attraction experience
+                              </div>
+                            </div>
+                            <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
                           </button>
                           <button
                             onClick={() => {
                               onQuickAdd('attraction', undefined, 'Resort Grounds Final Walk');
                               setShowAddActivityModal(false);
                             }}
-                            className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                            className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
                           >
-                            <MapPin className="w-4 h-4 mr-3 text-teal-500" />
-                            <span className="text-sm text-ink">Resort Farewell Tour</span>
+                            <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🚶</span>
+                            <div className="flex-1">
+                              <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                                Resort Farewell Tour
+                              </div>
+                              <div className="text-xs text-ink-light mt-1">
+                                Walk through favorite spots
+                              </div>
+                            </div>
+                            <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
                           </button>
                         </div>
                       </div>
@@ -977,9 +1076,12 @@ export default function CheckOutDayView({ trip, tripDay, onQuickAdd, onOpenDayTy
                   }
 
                   return (
-                    <div className="border-2 border-blue-400/30 rounded-lg p-4 bg-blue-400/5">
-                      <h4 className="font-medium text-ink mb-3 text-sm">Resort Farewell</h4>
-                      <div className="space-y-3">
+                    <div className="rounded-lg p-4">
+                      <h4 className="text-lg font-medium text-ink mb-3 flex items-center">
+                        <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                        Resort Farewell
+                      </h4>
+                      <div className="grid md:grid-cols-3 gap-3">
                         {suggestions.map((suggestion, index) => (
                           <button
                             key={index}
@@ -987,16 +1089,97 @@ export default function CheckOutDayView({ trip, tripDay, onQuickAdd, onOpenDayTy
                               onQuickAdd(suggestion.type as ActivityCategory, undefined, suggestion.name);
                               setShowAddActivityModal(false);
                             }}
-                            className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                            className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
                           >
-                            <span className="w-4 h-4 mr-3 text-blue-500">{suggestion.icon}</span>
-                            <span className="text-sm text-ink">{suggestion.name}</span>
+                            <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">{suggestion.icon}</span>
+                            <div className="flex-1">
+                              <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                                {suggestion.name}
+                              </div>
+                              <div className="text-xs text-ink-light mt-1">
+                                Resort farewell activity
+                              </div>
+                            </div>
+                            <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
                           </button>
                         ))}
                       </div>
                     </div>
                   );
                 })()}
+
+              {/* Custom Activity Form in Modal */}
+              {showCustomActivityForm ? (
+                <div className="bg-surface-dark/20 rounded-lg p-4 mt-4">
+                  <div className="flex items-center justify-between mb-4">
+                    <h4 className="font-medium text-ink">Add Custom Activity</h4>
+                    <button
+                      onClick={() => setShowCustomActivityForm(false)}
+                      className="p-1 text-ink-light hover:text-ink hover:bg-surface-dark rounded transition-colors"
+                    >
+                      <XCircle className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <input
+                      type="text"
+                      placeholder="Activity name"
+                      value={customActivity.name}
+                      onChange={(e) => setCustomActivity({ ...customActivity, name: e.target.value })}
+                      className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                    />
+                    <input
+                      type="time"
+                      placeholder="Start time (optional)"
+                      value={customActivity.startTime}
+                      onChange={(e) => setCustomActivity({ ...customActivity, startTime: e.target.value })}
+                      className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                    />
+                    <select
+                      value={customActivity.type}
+                      onChange={(e) => setCustomActivity({ ...customActivity, type: e.target.value as ActivityCategory })}
+                      className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                    >
+                      <option value="attraction">Attraction</option>
+                      <option value="dining">Dining</option>
+                      <option value="break">Break</option>
+                      <option value="show">Show</option>
+                      <option value="meet_greet">Meet & Greet</option>
+                      <option value="tours">Tour</option>
+                      <option value="shopping">Shopping</option>
+                    </select>
+                  </div>
+                  <div className="flex space-x-2 mt-4">
+                    <button
+                      onClick={() => {
+                        if (customActivity.name.trim()) {
+                          onQuickAdd(customActivity.type, undefined, customActivity.name);
+                          setCustomActivity({ name: '', startTime: '', type: 'attraction' });
+                          setShowCustomActivityForm(false);
+                          setShowAddActivityModal(false);
+                        }
+                      }}
+                      className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-lg transition-colors"
+                    >
+                      Add Activity
+                    </button>
+                    <button
+                      onClick={() => setShowCustomActivityForm(false)}
+                      className="px-4 py-2 bg-surface-dark hover:bg-surface-dark/80 text-ink text-sm rounded-lg transition-colors"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  onClick={() => setShowCustomActivityForm(true)}
+                  className="w-full mt-4 p-3 border-2 border-dashed border-surface-dark rounded-lg text-ink-light hover:text-ink hover:border-ink transition-colors text-center"
+                >
+                  <Plus className="w-4 h-4 mx-auto mb-1" />
+                  <span className="text-sm">Add Custom Activity</span>
+                </button>
+              )}
               </div>
             </div>
             </div>

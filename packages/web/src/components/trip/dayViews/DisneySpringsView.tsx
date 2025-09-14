@@ -1,6 +1,9 @@
-import { Utensils, ShoppingBag, Music, Car, MapPin, Clock, DollarSign, Gift } from 'lucide-react';
+import { ShoppingBag, Car, MapPin, Clock, Plus, GripVertical, Edit, Save, XCircle } from 'lucide-react';
+import { DndProvider, useDrag, useDrop } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TripDay, Trip, ActivityCategory } from '../../../types';
 import { useTripStore } from '../../../stores';
+import { useState } from 'react';
 
 interface DisneySpringsViewProps {
   trip: Trip;
@@ -10,9 +13,13 @@ interface DisneySpringsViewProps {
   onOpenDayTypeModal?: () => void;
 }
 
-export default function DisneySpringsView({ trip, tripDay, date, onQuickAdd, onOpenDayTypeModal }: DisneySpringsViewProps) {
-  const { updateDay } = useTripStore();
+export default function DisneySpringsView({ trip, tripDay, onQuickAdd, onOpenDayTypeModal }: DisneySpringsViewProps) {
+  const { updateDay, deleteItem, updateItem, reorderItems } = useTripStore();
+  const [showAddActivityModal, setShowAddActivityModal] = useState(false);
+  const [showCustomActivityForm, setShowCustomActivityForm] = useState(false);
+  const [customActivity, setCustomActivity] = useState({ name: '', startTime: '', type: 'entertainment' as ActivityCategory });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const updateDayData = async (updates: Partial<TripDay>) => {
     try {
       await updateDay(trip.id, tripDay.id, updates);
@@ -21,168 +28,270 @@ export default function DisneySpringsView({ trip, tripDay, date, onQuickAdd, onO
     }
   };
 
-  return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-[500px]">
-      {/* Left Panel: Dining & Entertainment */}
-      <div className="lg:col-span-6">
-        <div className="bg-surface rounded-xl border border-surface-dark/30 p-6 h-full overflow-y-auto">
-          {/* Header */}
-          <div className="flex items-center mb-6 pb-4 border-b border-surface-dark/20 relative">
-            {onOpenDayTypeModal && (
-              <button
-                onClick={onOpenDayTypeModal}
-                className="absolute top-0 right-0 flex items-center space-x-2 px-3 py-2 bg-surface/50 backdrop-blur-sm border border-surface-dark/30 rounded-lg text-ink-light hover:text-ink hover:bg-surface/70 transition-colors text-sm"
-              >
-                <span className="text-base">🛍️</span>
-                <span>Change Day Type</span>
-              </button>
-            )}
-            <div className="flex items-center justify-center w-12 h-12 bg-orange-500/20 text-orange-500 rounded-xl mr-4">
-              <span className="text-2xl">🛍️</span>
+  // DraggableItem component for schedule items
+  const DraggableScheduleItem = ({ item, index }: { item: unknown; index: number }) => {
+    const [isEditingThis, setIsEditingThis] = useState(false);
+    const [editData, setEditData] = useState({
+      name: item.name,
+      startTime: item.startTime || '',
+      notes: item.notes || '',
+    });
+
+    const [{ isDragging }, drag] = useDrag({
+      type: 'SCHEDULE_ITEM',
+      item: { id: item.id, index },
+      collect: (monitor) => ({
+        isDragging: monitor.isDragging(),
+      }),
+    });
+
+    const [, drop] = useDrop({
+      accept: 'SCHEDULE_ITEM',
+      hover: (draggedItem: { id: string; index: number }) => {
+        if (draggedItem.index !== index) {
+          reorderItems(trip.id, tripDay.id, draggedItem.index, index);
+          draggedItem.index = index;
+        }
+      },
+    });
+
+    const handleSave = async () => {
+      try {
+        await updateItem(trip.id, tripDay.id, item.id, {
+          name: editData.name,
+          startTime: editData.startTime || undefined,
+          notes: editData.notes || undefined,
+        });
+        setIsEditingThis(false);
+      } catch (error) {
+        console.error('Failed to update item:', error);
+      }
+    };
+
+    const handleCancel = () => {
+      setEditData({
+        name: item.name,
+        startTime: item.startTime || '',
+        notes: item.notes || '',
+      });
+      setIsEditingThis(false);
+    };
+
+    const handleEdit = () => {
+      setIsEditingThis(true);
+    };
+
+    return (
+      <div
+        ref={(node) => {
+          drag(drop(node));
+        }}
+        className={`relative flex items-start p-3 bg-surface border border-surface-dark/50 rounded-lg transition-all duration-200 ${
+          isDragging ? 'opacity-50 scale-95' : 'opacity-100 hover:border-surface-dark'
+        } group`}
+      >
+        <div className="flex items-center justify-center mr-3 opacity-0 group-hover:opacity-100 transition-opacity cursor-grab active:cursor-grabbing self-center">
+          <GripVertical className="w-4 h-4 text-ink-light" />
+        </div>
+        <div className="flex items-center justify-center w-8 h-8 mr-3 text-lg">
+          {item.type === 'dining' ? '🍽️' :
+           item.type === 'shopping' ? '🛍️' :
+           item.type === 'show' ? '🎵' : '✨'}
+        </div>
+        <div className="flex-1">
+          {isEditingThis ? (
+            <div className="space-y-3">
+              <div>
+                <input
+                  type="text"
+                  value={editData.name}
+                  onChange={(e) => setEditData({ ...editData, name: e.target.value })}
+                  className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                  placeholder="Activity name"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <input
+                  type="time"
+                  value={editData.startTime}
+                  onChange={(e) => setEditData({ ...editData, startTime: e.target.value })}
+                  className="px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                />
+                <input
+                  type="text"
+                  value={editData.notes}
+                  onChange={(e) => setEditData({ ...editData, notes: e.target.value })}
+                  className="px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                  placeholder="Notes (optional)"
+                />
+              </div>
+              <div className="flex space-x-2">
+                <button
+                  onClick={handleSave}
+                  className="flex items-center px-3 py-1.5 bg-green-500 hover:bg-green-600 text-white text-xs rounded transition-colors"
+                >
+                  <Save className="w-3 h-3 mr-1" />
+                  Save
+                </button>
+                <button
+                  onClick={handleCancel}
+                  className="flex items-center px-3 py-1.5 bg-surface-dark hover:bg-surface-dark/80 text-ink text-xs rounded transition-colors"
+                >
+                  <XCircle className="w-3 h-3 mr-1" />
+                  Cancel
+                </button>
+              </div>
             </div>
+          ) : (
             <div>
-              <h2 className="text-xl font-semibold text-ink">Disney Springs Adventure</h2>
-              <p className="text-ink-light">Entertainment, dining, and shopping district</p>
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <h4 className="font-medium text-ink text-sm">{item.name}</h4>
+                  <div className="flex items-center text-xs text-ink-light mt-1 space-x-3">
+                    {item.startTime && (
+                      <span className="flex items-center">
+                        <Clock className="w-3 h-3 mr-1" />
+                        {item.startTime}
+                      </span>
+                    )}
+                    {item.notes && (
+                      <span className="flex items-center">
+                        <MapPin className="w-3 h-3 mr-1" />
+                        {item.notes}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
+          )}
+        </div>
+        {!isEditingThis && (
+          <div className="flex items-center space-x-1 opacity-0 group-hover:opacity-100 transition-opacity">
+            <button
+              onClick={handleEdit}
+              className="p-1 text-ink-light hover:text-ink hover:bg-surface-dark/50 rounded transition-colors"
+              title="Edit activity"
+            >
+              <Edit className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => deleteItem(trip.id, tripDay.id, item.id)}
+              className="p-1 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded transition-colors"
+              title="Delete activity"
+            >
+              <XCircle className="w-4 h-4" />
+            </button>
           </div>
+        )}
+      </div>
+    );
+  };
 
-          {/* Dining & Reservations */}
-          <div className="space-y-6">
-            <div className="bg-surface-dark/20 rounded-lg p-4">
-              <h3 className="font-semibold text-ink mb-4 flex items-center">
-                <Utensils className="w-5 h-5 mr-2 text-orange-500" />
-                Dining & Reservations
-              </h3>
-              <div className="space-y-3">
+  return (
+    <DndProvider backend={HTML5Backend}>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-[500px]">
+        {/* Left Panel: Main Planning Content */}
+        <div className="lg:col-span-8">
+          <div className="bg-surface rounded-xl border border-surface-dark/30 p-6 h-full overflow-y-auto">
+            {/* Header */}
+            <div className="flex items-center mb-6 py-4 px-4 border-b border-surface-dark/20 relative bg-gradient-to-r from-sea-light/60 to-sea/60 rounded-lg min-h-[120px]">
+              {onOpenDayTypeModal && (
                 <button
-                  onClick={() => onQuickAdd('dining', undefined, 'Disney Springs Restaurant')}
-                  className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
+                  onClick={onOpenDayTypeModal}
+                  className="absolute top-3 right-3 flex items-center space-x-2 px-3 py-2 bg-surface/50 backdrop-blur-sm border border-surface-dark/30 rounded-lg text-ink-light hover:text-ink hover:bg-surface/70 transition-colors text-sm"
                 >
-                  <span className="text-lg mr-3">🍽️</span>
-                  <div className="flex-1">
-                    <div className="font-medium text-ink">Table Service Restaurant</div>
-                    <div className="text-xs text-ink-light">Reservations recommended</div>
-                  </div>
+                  <span className="text-base">🛍️</span>
+                  <span>Change Day Type</span>
                 </button>
-
-                <div className="grid md:grid-cols-2 gap-3">
-                  <button
-                    onClick={() => onQuickAdd('dining', undefined, 'Marketplace Snacks')}
-                    className="flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
-                  >
-                    <span className="text-lg mr-3">🧁</span>
-                    <div>
-                      <div className="font-medium text-ink text-sm">Marketplace Treats</div>
-                      <div className="text-xs text-ink-light">Gideon's, Joffrey's, etc.</div>
-                    </div>
-                  </button>
-
-                  <button
-                    onClick={() => onQuickAdd('dining', undefined, 'Food Trucks')}
-                    className="flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
-                  >
-                    <span className="text-lg mr-3">🚛</span>
-                    <div>
-                      <div className="font-medium text-ink text-sm">Food Trucks</div>
-                      <div className="text-xs text-ink-light">West Side options</div>
-                    </div>
-                  </button>
-                </div>
-              </div>
-
-              {/* Current dining reservations */}
-              {tripDay.items?.filter(item => item.type === 'dining').length > 0 && (
-                <div className="mt-4 p-3 bg-orange-500/10 rounded-lg border border-orange-500/20">
-                  <h4 className="font-medium text-ink mb-2">Today's Dining</h4>
-                  {tripDay.items.filter(item => item.type === 'dining').map(item => (
-                    <div key={item.id} className="flex items-center justify-between py-1">
-                      <span className="text-sm text-ink">{item.name}</span>
-                      {item.startTime && <span className="text-xs text-ink-light">{item.startTime}</span>}
-                    </div>
-                  ))}
-                </div>
               )}
-            </div>
-
-            {/* Live Entertainment */}
-            <div className="bg-surface-dark/20 rounded-lg p-4">
-              <h3 className="font-semibold text-ink mb-4 flex items-center">
-                <Music className="w-5 h-5 mr-2 text-purple-500" />
-                Live Entertainment & Events
-              </h3>
-              <div className="grid md:grid-cols-2 gap-3">
-                <button
-                  onClick={() => onQuickAdd('show', undefined, 'Street Performers')}
-                  className="flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
-                >
-                  <Music className="w-4 h-4 mr-3 text-purple-500" />
-                  <div>
-                    <div className="text-sm font-medium text-ink">Street Performances</div>
-                    <div className="text-xs text-ink-light">Check times at info</div>
-                  </div>
-                </button>
-
-                <button
-                  onClick={() => onQuickAdd('attraction', undefined, 'Seasonal Events')}
-                  className="flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
-                >
-                  <span className="text-lg mr-3">🎪</span>
-                  <div>
-                    <div className="text-sm font-medium text-ink">Special Events</div>
-                    <div className="text-xs text-ink-light">Check Disney Springs app</div>
-                  </div>
-                </button>
+              <div className="flex items-center justify-center w-12 h-12 mr-4">
+                <span className="text-2xl">🛍️</span>
+              </div>
+              <div>
+                <h2 className="text-xl font-semibold text-ink">Disney Springs Adventure</h2>
+                <p className="text-ink-light">Entertainment, dining, and shopping district</p>
               </div>
             </div>
 
-            {/* Transportation & Parking */}
-            <div className="bg-surface-dark/20 rounded-lg p-4">
-              <h3 className="font-semibold text-ink mb-4 flex items-center">
-                <Car className="w-5 h-5 mr-2 text-blue-500" />
-                Getting There & Around
-              </h3>
-              <div className="space-y-3 text-sm">
-                <div className="flex items-center text-ink-light">
-                  <MapPin className="w-4 h-4 mr-2" />
-                  <span>Free parking in all Disney Springs garages</span>
+            <div className="space-y-6">
+              {/* Getting There & Transportation */}
+              <div className="bg-surface-dark/20 rounded-lg p-4">
+                <h3 className="font-semibold text-ink mb-4 flex items-center">
+                  <Car className="w-5 h-5 mr-2 text-blue-500" />
+                  Getting There & Transportation
+                </h3>
+                <div className="space-y-3 text-sm">
+                  <div className="flex items-center text-ink-light">
+                    <MapPin className="w-4 h-4 mr-2" />
+                    <span>Free parking in all Disney Springs garages</span>
+                  </div>
+                  <div className="flex items-center text-ink-light">
+                    <Car className="w-4 h-4 mr-2" />
+                    <span>Consider Uber/Lyft if staying on-property</span>
+                  </div>
                 </div>
-                <div className="flex items-center text-ink-light">
-                  <Car className="w-4 h-4 mr-2" />
-                  <span>Consider Uber/Lyft if staying on-property</span>
+              </div>
+
+
+              {/* Today's Schedule */}
+              <div className="bg-surface-dark/20 rounded-lg p-4">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-semibold text-ink flex items-center">
+                    <Clock className="w-5 h-5 mr-2 text-blue-500" />
+                    Today's Schedule
+                  </h3>
+                  <button
+                    onClick={() => setShowAddActivityModal(true)}
+                    className="flex items-center px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-lg transition-colors"
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add Activity
+                  </button>
                 </div>
-                <div>
-                  <label className="block text-xs font-medium text-ink mb-1">Transportation Method</label>
-                  <select className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea">
-                    <option>Drive & Park</option>
-                    <option>Resort Bus Transportation</option>
-                    <option>Uber/Lyft</option>
-                    <option>Disney Springs Resort Area Transportation</option>
-                  </select>
-                </div>
+
+                {tripDay.items && tripDay.items.length > 0 ? (
+                  <div className="space-y-3">
+                    {tripDay.items.map((item, index) => (
+                      <DraggableScheduleItem key={item.id} item={item} index={index} />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-8">
+                    <span className="text-3xl mb-2 block">🎯</span>
+                    <p className="text-sm text-ink-light">Add dining, shopping, and entertainment plans!</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Right Panel: Shopping & Budget */}
-      <div className="lg:col-span-6">
-        <div className="bg-surface rounded-xl border border-surface-dark/30 p-6 h-full overflow-y-auto">
-          <h3 className="text-lg font-semibold text-ink mb-6 flex items-center">
-            <ShoppingBag className="w-5 h-5 mr-2 text-green-500" />
-            Shopping & Budget Planning
-          </h3>
+        {/* Right Panel: Tips & Quick Actions */}
+        <div className="lg:col-span-4">
+          <div className="bg-surface rounded-xl border border-surface-dark/30 p-6 h-full overflow-y-auto">
+            <div className="space-y-6">
+            {/* Disney Springs Philosophy */}
+            <div className="bg-gradient-to-br from-orange-500/10 to-yellow-500/10 rounded-lg p-4 border border-orange-500/20">
+              <h3 className="font-semibold text-ink mb-3 text-lg">🏞️ Disney Springs Experience</h3>
+              <p className="text-sm text-ink-light leading-relaxed mb-3">
+                Disney Springs is where magic meets modern lifestyle. It's not just shopping and dining—it's an
+                immersive experience that blends Disney storytelling with world-class entertainment and cuisine.
+              </p>
+              <div className="bg-orange-500/20 rounded-lg p-3">
+                <p className="text-xs font-medium text-ink">✨ Today's Focus</p>
+                <p className="text-sm text-ink-light mt-1">
+                  Explore at your own pace, discover unique experiences, and create memories beyond the parks.
+                </p>
+              </div>
+            </div>
 
-          <div className="space-y-6">
-            {/* Shopping Budget */}
+            {/* Quick Budget Tracker */}
             <div className="bg-green-500/10 rounded-lg p-4 border border-green-500/20">
-              <h4 className="font-medium text-ink mb-3 flex items-center">
-                <DollarSign className="w-4 h-4 mr-2 text-green-500" />
-                Shopping Budget
-              </h4>
+              <h4 className="font-medium text-ink mb-3">💰 Budget Tracker</h4>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-ink mb-1">Total Budget</label>
+                  <label className="block text-xs font-medium text-ink mb-1">Budget</label>
                   <input
                     type="number"
                     placeholder="$200"
@@ -190,7 +299,7 @@ export default function DisneySpringsView({ trip, tripDay, date, onQuickAdd, onO
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-ink mb-1">Spent So Far</label>
+                  <label className="block text-xs font-medium text-ink mb-1">Spent</label>
                   <input
                     type="number"
                     placeholder="$0"
@@ -200,128 +309,404 @@ export default function DisneySpringsView({ trip, tripDay, date, onQuickAdd, onO
               </div>
             </div>
 
-            {/* Store Priorities */}
-            <div className="bg-surface-dark/20 rounded-lg p-4">
-              <h4 className="font-medium text-ink mb-3">🏪 Store Priority List</h4>
-              <div className="space-y-3">
-                <button
-                  onClick={() => onQuickAdd('shopping', undefined, 'World of Disney')}
-                  className="w-full flex items-center p-3 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
-                >
-                  <span className="text-lg mr-3">🏰</span>
-                  <div className="flex-1">
-                    <div className="font-medium text-ink text-sm">World of Disney</div>
-                    <div className="text-xs text-ink-light">Largest Disney store - everything!</div>
-                  </div>
-                </button>
-
-                <div className="grid md:grid-cols-2 gap-2">
-                  <button
-                    onClick={() => onQuickAdd('shopping', undefined, 'UNIQLO Disney')}
-                    className="flex items-center p-2 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
-                  >
-                    <span className="mr-2 text-sm">👕</span>
-                    <span className="text-xs text-ink">UNIQLO Disney</span>
-                  </button>
-
-                  <button
-                    onClick={() => onQuickAdd('shopping', undefined, 'Disney Home')}
-                    className="flex items-center p-2 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
-                  >
-                    <span className="mr-2 text-sm">🏠</span>
-                    <span className="text-xs text-ink">Disney Home</span>
-                  </button>
-
-                  <button
-                    onClick={() => onQuickAdd('shopping', undefined, 'Disney Pin Traders')}
-                    className="flex items-center p-2 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
-                  >
-                    <span className="mr-2 text-sm">📌</span>
-                    <span className="text-xs text-ink">Pin Traders</span>
-                  </button>
-
-                  <button
-                    onClick={() => onQuickAdd('shopping', undefined, 'Other Stores')}
-                    className="flex items-center p-2 bg-surface border border-surface-dark rounded-lg hover:bg-surface-dark/20 transition-colors text-left"
-                  >
-                    <span className="mr-2 text-sm">🛍️</span>
-                    <span className="text-xs text-ink">Browse Others</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Gift Planning */}
-            <div className="bg-surface-dark/20 rounded-lg p-4">
-              <h4 className="font-medium text-ink mb-3 flex items-center">
-                <Gift className="w-4 h-4 mr-2 text-pink-500" />
-                Gift Planning
-              </h4>
-              <textarea
-                placeholder="Who needs gifts? What are you looking for?&#10;&#10;• Mom - Disney jewelry&#10;• Kids - plush characters&#10;• Coworkers - pins or snacks"
-                className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea resize-none"
-                rows={6}
-              />
-            </div>
-
-            {/* Shipping Options */}
-            <div className="bg-blue-500/10 rounded-lg p-4 border border-blue-500/20">
-              <h4 className="font-medium text-ink mb-3">📦 Shipping & Package Services</h4>
-              <div className="text-sm text-ink-light space-y-1">
-                <p>• Free resort delivery for purchases $50+</p>
-                <p>• Ship home available at most stores</p>
-                <p>• Consider package pickup services</p>
-                <p>• Large items can be held until departure</p>
-              </div>
-            </div>
-
-            {/* Today's Shopping List */}
-            <div className="bg-surface-dark/20 rounded-lg p-4">
-              <h4 className="font-medium text-ink mb-3 flex items-center">
-                <Clock className="w-4 h-4 mr-2 text-blue-500" />
-                Today's Activities
-              </h4>
-              
-              {tripDay.items && tripDay.items.length > 0 ? (
-                <div className="space-y-2">
-                  {tripDay.items.map((item, index) => (
-                    <div key={item.id} className="flex items-center justify-between p-2 bg-surface border border-surface-dark/50 rounded-lg">
-                      <div className="flex items-center">
-                        <span className="text-sm mr-2">
-                          {item.type === 'dining' ? '🍽️' : 
-                           item.type === 'shopping' ? '🛍️' : 
-                           item.type === 'show' ? '🎵' : '✨'}
-                        </span>
-                        <span className="text-sm text-ink">{item.name}</span>
-                      </div>
-                      {item.startTime && (
-                        <span className="text-xs text-ink-light">{item.startTime}</span>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-6">
-                  <span className="text-3xl mb-2 block">🎯</span>
-                  <p className="text-sm text-ink-light">Add dining and shopping plans!</p>
-                </div>
-              )}
-            </div>
-
-            {/* Pro Tips */}
+            {/* Pro Tips & Shortcuts */}
             <div className="bg-purple-500/10 rounded-lg p-4 border border-purple-500/20">
-              <h4 className="font-medium text-ink mb-3">💡 Disney Springs Pro Tips</h4>
-              <div className="text-sm text-ink-light space-y-1">
-                <p>• Download the Disney Springs app for maps & deals</p>
-                <p>• Check for seasonal events and pop-ups</p>
-                <p>• Many stores offer exclusive merchandise</p>
-                <p>• Parking is free but fills up on weekends</p>
-                <p>• Some restaurants take walk-ups after 2pm</p>
+              <h4 className="font-medium text-ink mb-3">💡 Pro Tips & Shortcuts</h4>
+              <div className="text-sm text-ink-light space-y-2">
+                <div className="flex items-start">
+                  <span className="mr-2 text-purple-400 text-xs">📱</span>
+                  <span>Download Disney Springs app for live wait times & exclusive offers</span>
+                </div>
+                <div className="flex items-start">
+                  <span className="mr-2 text-purple-400 text-xs">🚗</span>
+                  <span>Free parking but arrive early on weekends (lots fill by noon)</span>
+                </div>
+                <div className="flex items-start">
+                  <span className="mr-2 text-purple-400 text-xs">🍽️</span>
+                  <span>Many restaurants accept walk-ins after 2pm</span>
+                </div>
+                <div className="flex items-start">
+                  <span className="mr-2 text-purple-400 text-xs">📦</span>
+                  <span>Free resort delivery on purchases $50+ (order by 3pm)</span>
+                </div>
+                <div className="flex items-start">
+                  <span className="mr-2 text-purple-400 text-xs">🎪</span>
+                  <span>Check for seasonal events, pop-ups & live entertainment</span>
+                </div>
               </div>
+            </div>
+
             </div>
           </div>
         </div>
       </div>
-    </div>
+
+      {/* Add Activity Modal */}
+      {showAddActivityModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+          <div className="bg-surface rounded-xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden border border-surface-dark/30">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b border-surface-dark/20 bg-gradient-to-r from-teal-500/10 via-blue-500/10 to-green-500/10">
+              <div>
+                <h3 className="text-xl font-semibold text-ink flex items-center">
+                  <ShoppingBag className="w-5 h-5 mr-2 text-orange-500" />
+                  Add Disney Springs Activity
+                </h3>
+                <p className="text-sm text-ink-light mt-1">
+                  Add dining, shopping, or entertainment to your Disney Springs day
+                </p>
+              </div>
+              <button
+                onClick={() => setShowAddActivityModal(false)}
+                className="p-2 rounded-lg hover:bg-surface-dark/20 transition-colors"
+              >
+                <XCircle className="w-5 h-5 text-ink-light" />
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
+              <div className="space-y-6">
+
+            {/* Popular Disney Springs Activities - Vertical Layout */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-ink mb-4">Popular Disney Springs Activities</h3>
+
+              {/* General Activities - Moved to top */}
+              <div className="rounded-lg p-4 mb-6">
+                <h4 className="text-lg font-medium text-ink mb-3 flex items-center">
+                  <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                  ✨ General Activities
+                </h4>
+                <div className="grid md:grid-cols-3 gap-3">
+                  <button
+                    onClick={() => {
+                      onQuickAdd('break', undefined, 'Leisurely Shopping Browse');
+                      setShowAddActivityModal(false);
+                    }}
+                    className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
+                  >
+                    <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🚶</span>
+                    <div className="flex-1">
+                      <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                        Leisurely Shopping Browse
+                      </div>
+                      <div className="text-xs text-ink-light mt-1">
+                        Explore at your own pace
+                      </div>
+                    </div>
+                    <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
+                  </button>
+                  <button
+                    onClick={() => {
+                      onQuickAdd('dining', undefined, 'Quick Snack & Drinks');
+                      setShowAddActivityModal(false);
+                    }}
+                    className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
+                  >
+                    <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🥨</span>
+                    <div className="flex-1">
+                      <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                        Quick Snack & Drinks
+                      </div>
+                      <div className="text-xs text-ink-light mt-1">
+                        Grab food and beverages
+                      </div>
+                    </div>
+                    <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
+                  </button>
+                  <button
+                    onClick={() => {
+                      onQuickAdd('tours', undefined, 'Explore Marketplace');
+                      setShowAddActivityModal(false);
+                    }}
+                    className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
+                  >
+                    <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🗺️</span>
+                    <div className="flex-1">
+                      <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                        Explore Marketplace
+                      </div>
+                      <div className="text-xs text-ink-light mt-1">
+                        Discover all areas
+                      </div>
+                    </div>
+                    <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
+                  </button>
+                  <button
+                    onClick={() => {
+                      onQuickAdd('break', undefined, 'Rest & People Watch');
+                      setShowAddActivityModal(false);
+                    }}
+                    className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
+                  >
+                    <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">☕</span>
+                    <div className="flex-1">
+                      <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                        Rest & People Watch
+                      </div>
+                      <div className="text-xs text-ink-light mt-1">
+                        Relax and observe the crowds
+                      </div>
+                    </div>
+                    <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
+                  </button>
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                {/* Dining Highlights */}
+                <div className="rounded-lg p-4">
+                  <h4 className="text-lg font-medium text-ink mb-3 flex items-center">
+                    <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
+                    🍽️ Dining Highlights
+                  </h4>
+                  <div className="grid md:grid-cols-3 gap-3">
+                    <button
+                      onClick={() => {
+                        onQuickAdd('dining', undefined, 'Table Service Restaurant');
+                        setShowAddActivityModal(false);
+                      }}
+                      className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
+                    >
+                      <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🍽️</span>
+                      <div className="flex-1">
+                        <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                          Table Service Restaurant
+                        </div>
+                        <div className="text-xs text-ink-light mt-1">
+                          Make reservations recommended
+                        </div>
+                      </div>
+                      <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
+                    </button>
+                    <button
+                      onClick={() => {
+                        onQuickAdd('dining', undefined, 'Marketplace Treats');
+                        setShowAddActivityModal(false);
+                      }}
+                      className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
+                    >
+                      <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🧁</span>
+                      <div className="flex-1">
+                        <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                          Quick Treats
+                        </div>
+                        <div className="text-xs text-ink-light mt-1">
+                          Gideon's, Joffrey's
+                        </div>
+                      </div>
+                      <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
+                    </button>
+                    <button
+                      onClick={() => {
+                        onQuickAdd('entertainment', undefined, 'Live Entertainment');
+                        setShowAddActivityModal(false);
+                      }}
+                      className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
+                    >
+                      <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🎵</span>
+                      <div className="flex-1">
+                        <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                          Live Entertainment
+                        </div>
+                        <div className="text-xs text-ink-light mt-1">
+                          Street performers
+                        </div>
+                      </div>
+                      <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Shopping & Entertainment */}
+                <div className="rounded-lg p-4">
+                  <h4 className="text-lg font-medium text-ink mb-3 flex items-center">
+                    <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                    🛍️ Shopping & Entertainment
+                  </h4>
+                  <div className="grid md:grid-cols-3 gap-3">
+                    <button
+                      onClick={() => {
+                        onQuickAdd('shopping', undefined, 'World of Disney');
+                        setShowAddActivityModal(false);
+                      }}
+                      className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
+                    >
+                      <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🏰</span>
+                      <div className="flex-1">
+                        <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                          World of Disney
+                        </div>
+                        <div className="text-xs text-ink-light mt-1">
+                          Largest Disney merchandise store
+                        </div>
+                      </div>
+                      <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
+                    </button>
+                    <button
+                      onClick={() => {
+                        onQuickAdd('shopping', undefined, 'UNIQLO Disney');
+                        setShowAddActivityModal(false);
+                      }}
+                      className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
+                    >
+                      <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">👕</span>
+                      <div className="flex-1">
+                        <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                          UNIQLO Disney
+                        </div>
+                        <div className="text-xs text-ink-light mt-1">
+                          Disney apparel
+                        </div>
+                      </div>
+                      <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
+                    </button>
+                    <button
+                      onClick={() => {
+                        onQuickAdd('shopping', undefined, 'Disney Pin Traders');
+                        setShowAddActivityModal(false);
+                      }}
+                      className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
+                    >
+                      <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">📍</span>
+                      <div className="flex-1">
+                        <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                          Pin Traders
+                        </div>
+                        <div className="text-xs text-ink-light mt-1">
+                          Pin trading
+                        </div>
+                      </div>
+                      <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
+                    </button>
+                    <button
+                      onClick={() => {
+                        onQuickAdd('entertainment', undefined, 'Cirque du Soleil');
+                        setShowAddActivityModal(false);
+                      }}
+                      className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
+                    >
+                      <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🎭</span>
+                      <div className="flex-1">
+                        <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                          Cirque du Soleil
+                        </div>
+                        <div className="text-xs text-ink-light mt-1">
+                          Live show
+                        </div>
+                      </div>
+                      <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
+                    </button>
+                    <button
+                      onClick={() => {
+                        onQuickAdd('entertainment', undefined, 'AMC Disney Springs');
+                        setShowAddActivityModal(false);
+                      }}
+                      className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
+                    >
+                      <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">🎬</span>
+                      <div className="flex-1">
+                        <div className="font-medium text-ink group-hover:text-teal-600 transition-colors">
+                          AMC Theater
+                        </div>
+                        <div className="text-xs text-ink-light mt-1">
+                          Movies
+                        </div>
+                      </div>
+                      <Plus className="w-4 h-4 text-ink-light group-hover:text-teal-500 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+
+              {/* Custom Activity Form in Modal */}
+              {showCustomActivityForm ? (
+                <div className="bg-surface-dark/20 rounded-lg p-4 mt-4">
+                  <div className="flex items-center justify-between mb-4">
+                    <h4 className="font-medium text-ink">Add Custom Activity</h4>
+                    <button
+                      onClick={() => setShowCustomActivityForm(false)}
+                      className="p-1 text-ink-light hover:text-ink hover:bg-surface-dark rounded transition-colors"
+                    >
+                      <XCircle className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <input
+                      type="text"
+                      placeholder="Activity name"
+                      value={customActivity.name}
+                      onChange={(e) => setCustomActivity({ ...customActivity, name: e.target.value })}
+                      className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                    />
+                    <input
+                      type="time"
+                      placeholder="Start time (optional)"
+                      value={customActivity.startTime}
+                      onChange={(e) => setCustomActivity({ ...customActivity, startTime: e.target.value })}
+                      className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                    />
+                    <select
+                      value={customActivity.type}
+                      onChange={(e) => setCustomActivity({ ...customActivity, type: e.target.value as ActivityCategory })}
+                      className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
+                    >
+                      <option value="dining">Dining</option>
+                      <option value="shopping">Shopping</option>
+                      <option value="entertainment">Entertainment</option>
+                      <option value="break">Break</option>
+                      <option value="tours">Tour</option>
+                    </select>
+                  </div>
+                  <div className="flex space-x-2 mt-4">
+                    <button
+                      onClick={() => {
+                        if (customActivity.name.trim()) {
+                          onQuickAdd(customActivity.type, undefined, customActivity.name);
+                          setCustomActivity({ name: '', startTime: '', type: 'entertainment' });
+                          setShowCustomActivityForm(false);
+                          setShowAddActivityModal(false);
+                        }
+                      }}
+                      className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-lg transition-colors"
+                    >
+                      Add Activity
+                    </button>
+                    <button
+                      onClick={() => setShowCustomActivityForm(false)}
+                      className="px-4 py-2 bg-surface-dark hover:bg-surface-dark/80 text-ink text-sm rounded-lg transition-colors"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  onClick={() => setShowCustomActivityForm(true)}
+                  className="w-full mt-4 p-3 border-2 border-dashed border-surface-dark rounded-lg text-ink-light hover:text-ink hover:border-ink transition-colors text-center"
+                >
+                  <Plus className="w-4 h-4 mx-auto mb-1" />
+                  <span className="text-sm">Add Custom Activity</span>
+                </button>
+              )}
+            </div>
+            </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="flex justify-end items-center p-6 border-t border-surface-dark/20 bg-surface-dark/5">
+              <button
+                onClick={() => setShowAddActivityModal(false)}
+                className="px-4 py-2 bg-surface border border-surface-dark/30 rounded-lg text-ink-light hover:text-ink hover:bg-surface-dark/10 transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </DndProvider>
   );
 }
