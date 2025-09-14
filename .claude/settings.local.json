@@ -13,7 +13,18 @@
       "Bash(npm run build:*)",
       "Bash(git add:*)",
       "Bash(git push:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(pkill:*)",
+      "Bash(git restore:*)",
+      "Bash(node:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(npm run lint)",
+      "Bash(cat:*)",
+      "Bash(dos2unix:*)",
+      "Bash(taskkill:*)",
+      "Bash(pnpm run:*)",
+      "WebFetch(domain:disneyworld.disney.go.com)",
+      "Bash(python:*)"
     ],
     "deny": [],
     "ask": []
