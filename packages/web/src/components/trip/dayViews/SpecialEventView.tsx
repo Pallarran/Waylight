@@ -10,7 +10,7 @@ interface SpecialEventViewProps {
   onOpenDayTypeModal?: () => void;
 }
 
-export default function SpecialEventView({ trip, tripDay, date, onQuickAdd, onOpenDayTypeModal }: SpecialEventViewProps) {
+export default function SpecialEventView({ trip, tripDay, onQuickAdd, onOpenDayTypeModal }: SpecialEventViewProps) {
   const { updateDay } = useTripStore();
 
   // Find the main special event from the day's items
@@ -21,6 +21,7 @@ export default function SpecialEventView({ trip, tripDay, date, onQuickAdd, onOp
     item.name.toLowerCase().includes('tour')
   ) || { name: 'Special Event', startTime: '19:00' };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const updateDayData = async (updates: Partial<TripDay>) => {
     try {
       await updateDay(trip.id, tripDay.id, updates);

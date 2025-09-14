@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
-import { Edit, Save, XCircle, Plus, Users, Hotel, MapPin, Calendar, FileText, XCircle as Trash, GripVertical } from 'lucide-react';
+import { Edit, Save, XCircle, Plus, Users, Hotel, MapPin, Calendar, FileText, GripVertical, X } from 'lucide-react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useTripStore } from '../../stores';

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Search, X, Sliders } from 'lucide-react';
 import { useWaypointStore } from '../../stores';
-import { AttractionType, IntensityLevel, WaypointCategory } from '../../types';
+import { AttractionType, WaypointCategory } from '../../types';
 import { getParks } from '@waylight/shared';
 
 export default function WaypointFilters() {
@@ -27,6 +27,7 @@ export default function WaypointFilters() {
     setFilters({ parkIds: newParkIds });
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleIntensityFilter = (intensity: string) => {
     // TODO: Implement proper intensity filtering when store supports it
     const currentQuery = filters.searchQuery;

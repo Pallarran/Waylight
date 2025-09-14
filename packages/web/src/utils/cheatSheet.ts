@@ -71,7 +71,12 @@ export const formatTime = (time: string): string => {
   if (!time) return '';
   
   try {
-    const [hours, minutes] = time.split(':').map(Number);
+    const parts = time.split(':').map(Number);
+    if (parts.length !== 2) return time;
+
+    const [hours, minutes] = parts;
+    if (hours === undefined || minutes === undefined) return time;
+
     const period = hours >= 12 ? 'PM' : 'AM';
     const displayHours = hours === 0 ? 12 : hours > 12 ? hours - 12 : hours;
     return `${displayHours}:${minutes.toString().padStart(2, '0')} ${period}`;

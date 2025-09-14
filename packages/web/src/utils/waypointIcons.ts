@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { AttractionFeatures } from '@waylight/shared';
 
 export interface WaypointIcon {

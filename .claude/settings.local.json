@@ -24,7 +24,10 @@
       "Bash(taskkill:*)",
       "Bash(pnpm run:*)",
       "WebFetch(domain:disneyworld.disney.go.com)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(pnpm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run lint:*)"
     ],
     "deny": [],
     "ask": []

@@ -9,8 +9,7 @@ import {
   getPriceLevelColor,
   getResortTierColor,
   formatServiceType,
-  formatResortTier,
-  getCategoryColor
+  formatResortTier
 } from '../../utils/waypointFormatting';
 
 interface AttractionDetailModalProps {

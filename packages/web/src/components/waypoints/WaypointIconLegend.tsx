@@ -1,5 +1,5 @@
 import { Info, X } from 'lucide-react';
-import { ATTRACTION_ICONS, DO_ICONS, EAT_ICONS, STAY_ICONS } from '../../utils/waypointIcons';
+import { DO_ICONS, EAT_ICONS, STAY_ICONS } from '../../utils/waypointIcons';
 import { WaypointCategory } from '../../types';
 
 interface AttractionIconLegendProps {
@@ -128,15 +128,21 @@ export default function WaypointIconLegend({ isOpen, onClose, activeCategory = '
                   {category.name}
                 </h3>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-                  {categoryIcons.map(([key, icon]) => (
-                    <div key={key} className={`flex items-start space-x-2 p-3 rounded-lg ${colorClasses.bg}`}>
-                      <span className="text-2xl flex-shrink-0">{icon.emoji}</span>
-                      <div className="flex-1 min-w-0">
-                        <h4 className={`font-medium ${colorClasses.text}`}>{icon.label}</h4>
-                        <p className={`text-sm ${colorClasses.subtext}`}>{icon.description}</p>
+                  {categoryIcons.map(([key, icon]) => {
+                    // Type guard to ensure icon is a WaypointIcon object
+                    const iconObj = typeof icon === 'object' && icon && 'emoji' in icon ? icon : null;
+                    if (!iconObj) return null;
+
+                    return (
+                      <div key={key as string} className={`flex items-start space-x-2 p-3 rounded-lg ${colorClasses.bg}`}>
+                        <span className="text-2xl flex-shrink-0">{iconObj.emoji}</span>
+                        <div className="flex-1 min-w-0">
+                          <h4 className={`font-medium ${colorClasses.text}`}>{iconObj.label}</h4>
+                          <p className={`text-sm ${colorClasses.subtext}`}>{iconObj.description}</p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  }).filter(Boolean)}
                 </div>
               </div>
             );

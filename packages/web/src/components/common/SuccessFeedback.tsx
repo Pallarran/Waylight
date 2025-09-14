@@ -27,6 +27,7 @@ export default function SuccessFeedback({
       }, duration);
       return () => clearTimeout(timer);
     }
+    return undefined;
   }, [show, duration, onHide]);
 
   if (!visible) return null;

@@ -1,16 +1,16 @@
 import disneyResortsDining from './disney-resorts-dining.json';
 import universalResortsDining from './universal-resorts-dining.json';
-import otherHotelsDining from './other-hotels-dining.json';
+import otherHotelsDiningData from './other-hotels-dining.json';
 
 export const allResortDining = [
   ...disneyResortsDining,
   ...universalResortsDining,
-  ...otherHotelsDining
+  ...otherHotelsDiningData
 ];
 
 export const disneyDining = disneyResortsDining;
 export const universalDining = universalResortsDining;
-export const otherHotelsDining = otherHotelsDining;
+export const otherHotelsDining = otherHotelsDiningData;
 
 export const getResortDining = (resortId: string) => {
   return allResortDining.filter(dining => dining.resortId === resortId);
@@ -29,5 +29,5 @@ export const getSignatureDining = () => {
 };
 
 export const getCharacterDining = () => {
-  return allResortDining.filter(dining => dining.features?.characterDining);
+  return allResortDining.filter(dining => (dining.features as any)?.characterDining);
 };

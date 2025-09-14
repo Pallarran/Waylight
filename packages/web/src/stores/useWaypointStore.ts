@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { create } from 'zustand';
 import { AttractionType, WaypointCategory, type Attraction } from '../types';
 import { getAllDoItems, getAllEatItems, allHotels, type HotelData } from '@waylight/shared';
@@ -142,23 +143,6 @@ interface WaypointState {
   getWaypointsByCategory: (category: WaypointCategory) => Attraction[];
 }
 
-// Helper function to get category from attraction type
-const getCategoryFromType = (type: AttractionType): WaypointCategory => {
-  switch (type) {
-    case AttractionType.QUICK_SERVICE:
-    case AttractionType.TABLE_SERVICE:
-    case AttractionType.SNACK:
-    case AttractionType.LOUNGE:
-    case AttractionType.DINING:
-      return WaypointCategory.EAT;
-    case AttractionType.RESORT:
-    case AttractionType.UNIVERSAL_RESORT:
-    case AttractionType.HOTEL:
-      return WaypointCategory.STAY;
-    default:
-      return WaypointCategory.DO;
-  }
-};
 
 // Helper function to convert DO items to waypoint format
 const convertDoItemToWaypoint = (doItem: any): Attraction => {
@@ -183,7 +167,7 @@ const convertDoItemToWaypoint = (doItem: any): Attraction => {
 // Helper function to convert EAT items to waypoint format
 const convertEatItemToWaypoint = (eatItem: any): Attraction => {
   // Map EAT service types to AttractionType
-  const getAttractionTypeFromEatType = (eatType: string, serviceType: string): AttractionType => {
+  const getAttractionTypeFromEatType = (_eatType: string, serviceType: string): AttractionType => {
     switch (serviceType) {
       case 'quick': return AttractionType.QUICK_SERVICE;
       case 'table': return AttractionType.TABLE_SERVICE;
