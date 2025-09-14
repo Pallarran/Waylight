@@ -68,6 +68,131 @@ export default function CheckInDayView({ trip, tripDay, date, onQuickAdd, onOpen
     return '3:00 PM';
   };
 
+  // Helper function to calculate expected resort arrival time
+  const calculateResortArrival = (flightTime: string, transportMethod: string, flightType: string = 'domestic') => {
+    if (!flightTime || !transportMethod) return '';
+
+    const flight = new Date(`1970-01-01T${flightTime}:00`);
+
+    // Airport processing time based on travel mode
+    let airportProcessing = 0;
+    let travelTime = 0;
+
+    if (flightType === 'driving') {
+      airportProcessing = 0; // No airport processing for driving
+      travelTime = 0; // Direct to resort
+    } else {
+      // Airport processing time based on flight type
+      if (flightType === 'international') {
+        airportProcessing = 60; // Immigration, customs, baggage claim
+      } else {
+        airportProcessing = 30; // Domestic baggage claim and exit
+      }
+      // Travel time from MCO to Disney (30 minutes baseline)
+      travelTime = 30;
+    }
+
+    // Transportation-specific delays
+    let transportBuffer = 0;
+    switch (transportMethod) {
+      case 'car':
+        if (flightType === 'driving') {
+          transportBuffer = 0; // Direct drive, no additional buffer
+        } else {
+          transportBuffer = 30; // Car rental pickup and shuttle time
+        }
+        break;
+      case 'rideshare':
+        transportBuffer = 15; // Wait time for pickup
+        break;
+      case 'mears':
+        transportBuffer = 20; // Boarding and multiple stops
+        break;
+      case 'mears-express':
+        transportBuffer = 10; // Boarding, fewer stops
+        break;
+      case 'taxi':
+        transportBuffer = 10; // Minimal wait time
+        break;
+      case 'minnie-van':
+        transportBuffer = 5; // Premium service, minimal wait
+        break;
+      case 'private':
+        transportBuffer = 5; // Premium service, minimal wait
+        break;
+      default:
+        transportBuffer = 15; // Default buffer
+    }
+
+    const totalMinutes = airportProcessing + travelTime + transportBuffer;
+    const arrival = new Date(flight.getTime() + (totalMinutes * 60000));
+    return arrival.toTimeString().slice(0, 5);
+  };
+
+  // Helper function to get arrival timing breakdown for display
+  const getArrivalTimingBreakdown = (flightTime: string, transportMethod: string, flightType: string = 'domestic') => {
+    if (!flightTime || !transportMethod) return null;
+
+    let airportProcessing = 0;
+    let travelTime = 0;
+    let transportBuffer = 0;
+
+    if (flightType === 'driving') {
+      airportProcessing = 0;
+      travelTime = 0;
+    } else {
+      if (flightType === 'international') {
+        airportProcessing = 60; // Immigration, customs, baggage claim
+      } else {
+        airportProcessing = 30; // Domestic baggage claim and exit
+      }
+      travelTime = 30;
+    }
+
+    switch (transportMethod) {
+      case 'car':
+        if (flightType === 'driving') {
+          transportBuffer = 0;
+        } else {
+          transportBuffer = 30; // Car rental pickup and shuttle time
+        }
+        break;
+      case 'rideshare':
+        transportBuffer = 15;
+        break;
+      case 'mears':
+        transportBuffer = 20;
+        break;
+      case 'mears-express':
+        transportBuffer = 10;
+        break;
+      case 'taxi':
+        transportBuffer = 10;
+        break;
+      case 'minnie-van':
+        transportBuffer = 5;
+        break;
+      case 'private':
+        transportBuffer = 5;
+        break;
+      default:
+        transportBuffer = 15;
+    }
+
+    const totalMinutes = airportProcessing + travelTime + transportBuffer;
+    const totalHours = Math.floor(totalMinutes / 60);
+    const remainingMinutes = totalMinutes % 60;
+
+    return {
+      airportProcessing,
+      travelTime,
+      transportBuffer,
+      totalMinutes,
+      totalHours,
+      remainingMinutes
+    };
+  };
+
   // Helper function to get transportation info for bubble
   const getTransportationInfo = (transportMethod: string) => {
     switch (transportMethod) {
@@ -76,9 +201,29 @@ export default function CheckInDayView({ trip, tripDay, date, onQuickAdd, onOpen
           title: 'Mears Connect Pricing',
           details: [
             'Standard: $17.60 adult, $14.30 child (one-way)',
-            'Express: $238 for group of 4 (faster service)',
             '24/7 service from both main & C terminals',
-            'Travel time: 30-60 minutes depending on stops'
+            'Travel time: 45-75 minutes with multiple stops',
+            'Round-trip packages available'
+          ]
+        };
+      case 'mears-express':
+        return {
+          title: 'Mears Connect Express Pricing',
+          details: [
+            'Express: $238 for group of 4 (faster service)',
+            'Direct service with fewer stops',
+            'Travel time: 30-45 minutes',
+            'Book online in advance for guaranteed service'
+          ]
+        };
+      case 'car':
+        return {
+          title: 'Personal/Rental Car Information',
+          details: [
+            'Parking: Free self-parking at Disney resort hotels',
+            'Valet parking available for additional fee at most resorts',
+            'GPS recommended - Disney signage can be confusing',
+            'Consider traffic during peak arrival/departure times'
           ]
         };
       case 'rideshare':
@@ -517,98 +662,128 @@ export default function CheckInDayView({ trip, tripDay, date, onQuickAdd, onOpen
                   <Plane className="w-5 h-5 mr-2 text-blue-500" />
                   Travel & Transportation
                 </div>
-                <div className="relative">
+                {tripDay.arrivalPlan?.transportMethod && (
                   <button
-                    onClick={() => setShowTransportInfo(!showTransportInfo)}
-                    className="text-ink-light hover:text-ink transition-colors"
-                    title="Transportation information"
+                    onClick={() => setShowTransportInfo(true)}
+                    className="p-1 rounded-full hover:bg-surface-dark/20 transition-colors"
+                    title="View transportation information"
                   >
-                    <Info className="w-4 h-4" />
+                    <Info className="w-4 h-4 text-ink-light" />
                   </button>
-
-                  {/* Transportation Info Bubble */}
-                  {showTransportInfo && tripDay.arrivalPlan?.transportMethod && (() => {
-                    const transportInfo = getTransportationInfo(tripDay.arrivalPlan.transportMethod);
-                    return transportInfo && (
-                      <div className="absolute right-0 top-6 z-10 w-80 bg-surface border border-surface-dark rounded-lg shadow-lg p-3">
-                        <div className="text-xs">
-                          <div className="font-medium text-ink mb-2">{transportInfo.title}</div>
-                          <div className="text-ink-light space-y-1">
-                            {transportInfo.details.map((detail, index) => (
-                              <div key={index}>• {detail}</div>
-                            ))}
-                          </div>
-                          <div className="mt-3 pt-2 border-t border-surface-dark/30 text-ink-light italic">
-                            <div className="text-xs">
-                              💡 Prices are estimates and subject to change. Check official sources for current rates.
-                            </div>
-                          </div>
-                        </div>
-                        <div className="absolute top-0 right-3 transform -translate-y-1 w-2 h-2 bg-surface border-l border-t border-surface-dark rotate-45"></div>
-                      </div>
-                    );
-                  })()}
-                </div>
+                )}
               </h3>
 
               <div className="space-y-6">
                 <div>
-                  <div className="grid grid-cols-1 md:grid-cols-10 gap-4 items-start">
-                    <div className="md:col-span-5">
-                      <div className="flex items-center justify-between mb-1 min-h-[20px]">
-                        <label className="block text-xs font-medium text-ink">Flight/Drive Details</label>
+                  <div className="space-y-4">
+                    {/* Line 1: Flight/Drive Details (40%) + Flight/Drive Time (30%) + Travel Mode (30%) */}
+                    <div className="grid grid-cols-10 gap-4">
+                      <div className="col-span-10 md:col-span-4">
+                        <div className="flex items-center justify-between mb-1 min-h-[20px]">
+                          <label className="block text-xs font-medium text-ink">Flight/Drive Details</label>
+                        </div>
+                        <input
+                          type="text"
+                          value={tripDay.arrivalPlan?.flightDetails || ''}
+                          onChange={(e) => updateDayData({
+                            arrivalPlan: {
+                              ...tripDay.arrivalPlan,
+                              flightDetails: e.target.value
+                            }
+                          })}
+                          className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea focus:ring-1 focus:ring-sea/20 transition-colors"
+                          placeholder={tripDay.arrivalPlan?.flightType === 'driving'
+                            ? "Driving to resort, arriving around 2:30 PM..."
+                            : "Flight AA123, departing 8:30 AM from LAX..."}
+                        />
                       </div>
-                      <input
-                        type="text"
-                        value={tripDay.arrivalPlan?.departureTime || ''}
-                        onChange={(e) => updateDayData({
-                          arrivalPlan: {
-                            ...tripDay.arrivalPlan,
-                            departureTime: e.target.value
-                          }
-                        })}
-                        className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea focus:ring-1 focus:ring-sea/20 transition-colors"
-                        placeholder="Flight AA123, departing 8:30 AM from LAX..."
-                      />
+                      <div className="col-span-10 md:col-span-3">
+                        <div className="flex items-center justify-between mb-1 min-h-[20px]">
+                          <label className="block text-xs font-medium text-ink">
+                            {tripDay.arrivalPlan?.flightType === 'driving' ? 'Target Arrival' : 'Flight Time'}
+                          </label>
+                        </div>
+                        <input
+                          type="time"
+                          value={tripDay.arrivalPlan?.tapInTime || ''}
+                          onChange={(e) => updateDayData({
+                            arrivalPlan: {
+                              ...tripDay.arrivalPlan,
+                              tapInTime: e.target.value
+                            }
+                          })}
+                          className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea focus:ring-1 focus:ring-sea/20 transition-colors"
+                        />
+                      </div>
+                      <div className="col-span-10 md:col-span-3">
+                        <div className="flex items-center justify-between mb-1 min-h-[20px]">
+                          <label className="block text-xs font-medium text-ink">Travel Mode</label>
+                        </div>
+                        <select
+                          value={tripDay.arrivalPlan?.flightType || 'domestic'}
+                          onChange={(e) => updateDayData({
+                            arrivalPlan: {
+                              ...tripDay.arrivalPlan,
+                              flightType: e.target.value as 'domestic' | 'international' | 'driving',
+                              // Auto-set transportation when driving is selected
+                              transportMethod: e.target.value === 'driving' ? 'car' : tripDay.arrivalPlan?.transportMethod
+                            }
+                          })}
+                          className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea focus:ring-1 focus:ring-sea/20 transition-colors"
+                        >
+                          <option value="domestic">Domestic Flight</option>
+                          <option value="international">International Flight</option>
+                          <option value="driving">Driving to Resort</option>
+                        </select>
+                      </div>
                     </div>
-                    <div className="md:col-span-2">
-                      <div className="flex items-center justify-between mb-1 min-h-[20px]">
-                        <label className="block text-xs font-medium text-ink">Expected Arrival</label>
+
+                    {/* Line 2: Transportation (60%) + Arrival at Resort Around (40%) */}
+                    <div className="grid grid-cols-10 gap-4">
+                      <div className="col-span-10 md:col-span-6">
+                        <div className="flex items-center justify-between mb-1 min-h-[20px]">
+                          <label className="block text-xs font-medium text-ink">Transportation</label>
+                        </div>
+                        <select
+                          value={tripDay.arrivalPlan?.transportMethod || ''}
+                          onChange={(e) => updateDayData({
+                            arrivalPlan: {
+                              ...tripDay.arrivalPlan,
+                              transportMethod: e.target.value as any
+                            }
+                          })}
+                          disabled={tripDay.arrivalPlan?.flightType === 'driving'}
+                          className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea focus:ring-1 focus:ring-sea/20 transition-colors disabled:bg-surface-dark/10 disabled:cursor-not-allowed"
+                        >
+                          <option value="">Choose...</option>
+                          {tripDay.arrivalPlan?.flightType === 'driving' ? (
+                            <option value="car">🚗 Personal Vehicle</option>
+                          ) : (
+                            <>
+                              <option value="mears">🚌 Mears Connect</option>
+                              <option value="mears-express">🚌 Mears Connect Express</option>
+                              <option value="rideshare">🚙 Rideshare</option>
+                              <option value="car">🚗 Rental Car</option>
+                              <option value="taxi">🚕 Taxi</option>
+                              <option value="minnie-van">🎭 Minnie Van</option>
+                              <option value="private">🚐 Private Service</option>
+                            </>
+                          )}
+                        </select>
                       </div>
-                      <input
-                        type="time"
-                        value={tripDay.arrivalPlan?.tapInTime || ''}
-                        onChange={(e) => updateDayData({
-                          arrivalPlan: {
-                            ...tripDay.arrivalPlan,
-                            tapInTime: e.target.value
+                      <div className="col-span-10 md:col-span-4">
+                        <div className="flex items-center justify-between mb-1 min-h-[20px]">
+                          <label className="block text-xs font-medium text-ink">
+                            {tripDay.arrivalPlan?.flightType === 'driving' ? 'Arrive at Resort By' : 'Arrival at Resort Around'}
+                          </label>
+                        </div>
+                        <div className="px-3 py-2 bg-surface/50 border border-surface-dark/50 rounded-lg text-ink text-sm">
+                          {tripDay.arrivalPlan?.tapInTime && tripDay.arrivalPlan?.transportMethod
+                            ? calculateResortArrival(tripDay.arrivalPlan.tapInTime, tripDay.arrivalPlan.transportMethod, tripDay.arrivalPlan?.flightType || 'domestic')
+                            : 'Set details'
                           }
-                        })}
-                        className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea focus:ring-1 focus:ring-sea/20 transition-colors"
-                      />
-                    </div>
-                    <div className="md:col-span-3">
-                      <div className="flex items-center justify-between mb-1 min-h-[20px]">
-                        <label className="block text-xs font-medium text-ink">Transportation</label>
+                        </div>
                       </div>
-                      <select
-                        value={tripDay.arrivalPlan?.transportMethod || ''}
-                        onChange={(e) => updateDayData({
-                          arrivalPlan: {
-                            ...tripDay.arrivalPlan,
-                            transportMethod: e.target.value as any
-                          }
-                        })}
-                        className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea focus:ring-1 focus:ring-sea/20 transition-colors"
-                      >
-                        <option value="">Choose...</option>
-                        <option value="mears">🚌 Mears Connect</option>
-                        <option value="rideshare">🚙 Rideshare</option>
-                        <option value="car">🚗 Rental Car</option>
-                        <option value="taxi">🚕 Taxi</option>
-                        <option value="minnie-van">🎭 Minnie Van</option>
-                        <option value="private">🚐 Private Service</option>
-                      </select>
                     </div>
                   </div>
                 </div>
@@ -624,31 +799,13 @@ export default function CheckInDayView({ trip, tripDay, date, onQuickAdd, onOpen
                   <Hotel className="w-5 h-5 mr-2 text-orange-500" />
                   Check-in
                 </div>
-                <div className="relative">
-                  <button
-                    onClick={() => setShowCheckInInfo(!showCheckInInfo)}
-                    className="text-ink-light hover:text-ink transition-colors"
-                    title="Digital check-in information"
-                  >
-                    <Info className="w-4 h-4" />
-                  </button>
-
-                  {/* Digital Check-in Info Bubble */}
-                  {showCheckInInfo && (
-                    <div className="absolute right-0 top-6 z-10 w-72 bg-surface border border-surface-dark rounded-lg shadow-lg p-3">
-                      <div className="text-xs">
-                        <div className="font-medium text-ink mb-2">📱 Digital Check-in Available</div>
-                        <div className="text-ink-light space-y-1">
-                          <div>• Use My Disney Experience app for contactless check-in</div>
-                          <div>• Room assignment notifications sent to your phone</div>
-                          <div>• Early check-in subject to availability</div>
-                          <div>• Store luggage with Bell Services if room not ready</div>
-                        </div>
-                      </div>
-                      <div className="absolute top-0 right-3 transform -translate-y-1 w-2 h-2 bg-surface border-l border-t border-surface-dark rotate-45"></div>
-                    </div>
-                  )}
-                </div>
+                <button
+                  onClick={() => setShowCheckInInfo(true)}
+                  className="p-1 rounded-full hover:bg-surface-dark/20 transition-colors"
+                  title="View digital check-in information"
+                >
+                  <Info className="w-4 h-4 text-ink-light" />
+                </button>
               </h3>
 
 
@@ -1047,6 +1204,177 @@ export default function CheckInDayView({ trip, tripDay, date, onQuickAdd, onOpen
                   <span className="text-sm">Add Custom Activity</span>
                 </button>
               )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Arrival Timing Breakdown Modal */}
+      {showTransportInfo && (() => {
+        const breakdown = getArrivalTimingBreakdown(
+          tripDay.arrivalPlan?.tapInTime || '',
+          tripDay.arrivalPlan?.transportMethod || '',
+          tripDay.arrivalPlan?.flightType || 'domestic'
+        );
+
+        return breakdown && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+            <div className="bg-white rounded-xl shadow-xl max-w-md w-full">
+              <div className="flex items-center justify-between p-4 border-b border-surface-dark/20">
+                <h3 className="text-lg font-semibold text-ink flex items-center">
+                  <Clock className="w-5 h-5 mr-2 text-blue-500" />
+                  Arrival Timing Breakdown
+                </h3>
+                <button
+                  onClick={() => setShowTransportInfo(false)}
+                  className="p-1 rounded-lg hover:bg-surface-dark/10 transition-colors"
+                >
+                  <X className="w-5 h-5 text-ink-light" />
+                </button>
+              </div>
+
+              <div className="p-4">
+                <div className="text-center mb-4">
+                  <div className="text-2xl font-bold text-ink">
+                    {breakdown.totalHours > 0 ? `${breakdown.totalHours}h ` : ''}{breakdown.remainingMinutes}m
+                  </div>
+                  <div className="text-sm text-ink-light">
+                    {tripDay.arrivalPlan?.flightType === 'driving' ? 'Direct drive to resort' : 'Total time from landing to resort'}
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  {breakdown.airportProcessing > 0 && (
+                    <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
+                      <div>
+                        <div className="font-medium text-blue-900">Airport Processing</div>
+                        <div className="text-sm text-blue-700">
+                          {tripDay.arrivalPlan?.flightType === 'international'
+                            ? 'Immigration, customs & baggage'
+                            : 'Baggage claim & exit'}
+                        </div>
+                      </div>
+                      <div className="text-lg font-semibold text-blue-900">
+                        {breakdown.airportProcessing}m
+                      </div>
+                    </div>
+                  )}
+
+                  {breakdown.travelTime > 0 && (
+                    <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg">
+                      <div>
+                        <div className="font-medium text-green-900">Travel Time</div>
+                        <div className="text-sm text-green-700">MCO Airport to Disney resort</div>
+                      </div>
+                      <div className="text-lg font-semibold text-green-900">
+                        {breakdown.travelTime}m
+                      </div>
+                    </div>
+                  )}
+
+                  {breakdown.transportBuffer > 0 && (
+                    <div className="flex justify-between items-center p-3 bg-orange-50 rounded-lg">
+                      <div>
+                        <div className="font-medium text-orange-900">Transport Buffer</div>
+                        <div className="text-sm text-orange-700">
+                          {tripDay.arrivalPlan?.flightType === 'driving'
+                            ? 'Parking & check-in'
+                            : 'Pickup wait & logistics'}
+                        </div>
+                      </div>
+                      <div className="text-lg font-semibold text-orange-900">
+                        {breakdown.transportBuffer}m
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {tripDay.arrivalPlan?.flightType === 'international' && (
+                  <div className="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p className="text-sm text-blue-700">
+                      💡 International arrivals require additional time for customs and immigration processing
+                    </p>
+                  </div>
+                )}
+
+                {tripDay.arrivalPlan?.flightType === 'driving' && (
+                  <div className="mt-4 p-3 bg-green-50 rounded-lg">
+                    <p className="text-sm text-green-700">
+                      🚗 Driving directly to resort - times shown are for parking and resort check-in
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              <div className="flex justify-end p-4 border-t border-surface-dark/20">
+                <button
+                  onClick={() => setShowTransportInfo(false)}
+                  className="btn-primary"
+                >
+                  Got it!
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* Digital Check-in Info Modal */}
+      {showCheckInInfo && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-xl shadow-xl max-w-md w-full">
+            <div className="flex items-center justify-between p-4 border-b border-surface-dark/20">
+              <h3 className="text-lg font-semibold text-ink flex items-center">
+                <Hotel className="w-5 h-5 mr-2 text-orange-500" />
+                Digital Check-in Available
+              </h3>
+              <button
+                onClick={() => setShowCheckInInfo(false)}
+                className="p-1 rounded-lg hover:bg-surface-dark/10 transition-colors"
+              >
+                <X className="w-5 h-5 text-ink-light" />
+              </button>
+            </div>
+
+            <div className="p-4">
+              <div className="text-center mb-4">
+                <span className="text-4xl">📱</span>
+                <div className="text-sm text-ink-light mt-2">Use the My Disney Experience app for a seamless check-in</div>
+              </div>
+
+              <div className="space-y-3">
+                <div className="flex items-start">
+                  <span className="text-orange-500 mr-2 mt-0.5">•</span>
+                  <span className="text-ink text-sm">Use My Disney Experience app for contactless check-in</span>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-orange-500 mr-2 mt-0.5">•</span>
+                  <span className="text-ink text-sm">Room assignment notifications sent to your phone</span>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-orange-500 mr-2 mt-0.5">•</span>
+                  <span className="text-ink text-sm">Early check-in subject to availability</span>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-orange-500 mr-2 mt-0.5">•</span>
+                  <span className="text-ink text-sm">Store luggage with Bell Services if room not ready</span>
+                </div>
+              </div>
+
+              <div className="mt-4 p-3 bg-orange-50 rounded-lg">
+                <p className="text-sm text-orange-700">
+                  💡 Digital check-in typically opens 60 days before your arrival date
+                </p>
+              </div>
+            </div>
+
+            <div className="flex justify-end p-4 border-t border-surface-dark/20">
+              <button
+                onClick={() => setShowCheckInInfo(false)}
+                className="btn-primary"
+              >
+                Got it!
+              </button>
             </div>
           </div>
         </div>

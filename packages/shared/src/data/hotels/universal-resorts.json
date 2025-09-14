@@ -33,7 +33,7 @@
         "entertainment": false,
         "concierge": true,
         "businessCenter": true,
-        "childcare": false,
+        "childcare": false
       },
       "accommodations": {
         "suites": true,
@@ -78,7 +78,7 @@
         "entertainment": true,
         "concierge": true,
         "businessCenter": true,
-        "childcare": false,
+        "childcare": false
       },
       "accommodations": {
         "suites": true,
@@ -122,7 +122,7 @@
         "entertainment": false,
         "concierge": true,
         "businessCenter": false,
-        "childcare": false,
+        "childcare": false
       },
       "accommodations": {
         "suites": true,
@@ -165,7 +165,7 @@
         "entertainment": false,
         "concierge": false,
         "businessCenter": false,
-        "childcare": false,
+        "childcare": false
       },
       "accommodations": {
         "suites": true,
@@ -208,7 +208,7 @@
         "entertainment": false,
         "concierge": false,
         "businessCenter": false,
-        "childcare": false,
+        "childcare": false
       },
       "accommodations": {
         "suites": true,
@@ -251,7 +251,7 @@
         "entertainment": false,
         "concierge": false,
         "businessCenter": false,
-        "childcare": false,
+        "childcare": false
       },
       "accommodations": {
         "suites": true,
@@ -294,7 +294,7 @@
         "entertainment": false,
         "concierge": false,
         "businessCenter": false,
-        "childcare": false,
+        "childcare": false
       },
       "accommodations": {
         "suites": true,
@@ -337,7 +337,7 @@
         "entertainment": false,
         "concierge": false,
         "businessCenter": false,
-        "childcare": false,
+        "childcare": false
       },
       "accommodations": {
         "suites": true,
@@ -382,7 +382,7 @@
         "entertainment": false,
         "concierge": true,
         "businessCenter": true,
-        "childcare": false,
+        "childcare": false
       },
       "accommodations": {
         "suites": true,
@@ -425,7 +425,7 @@
         "entertainment": false,
         "concierge": false,
         "businessCenter": false,
-        "childcare": false,
+        "childcare": false
       },
       "accommodations": {
         "suites": true,
@@ -468,7 +468,7 @@
         "entertainment": false,
         "concierge": false,
         "businessCenter": false,
-        "childcare": false,
+        "childcare": false
       },
       "accommodations": {
         "suites": true,

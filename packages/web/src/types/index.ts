@@ -20,6 +20,8 @@ export interface Trip {
 
 export interface ArrivalPlan {
   departureTime?: string;
+  flightDetails?: string;
+  flightType?: 'domestic' | 'international' | 'driving';
   transportMethod?: 'car' | 'monorail' | 'bus' | 'boat' | 'rideshare' | 'walk';
   securityTime?: string;
   tapInTime?: string;
