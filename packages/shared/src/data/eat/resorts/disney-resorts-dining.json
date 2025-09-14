@@ -1,0 +1,1454 @@
+[
+  {
+    "id": "grand-floridian-victoria-alberts",
+    "resortId": "grand-floridian",
+    "name": "Victoria & Albert's",
+    "description": "Disney's award-winning AAA Five Diamond signature restaurant offering an intimate fine dining experience with a multi-course prix fixe menu.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 4,
+    "cuisineType": "American Fine Dining",
+    "location": "Main Building, Second Floor",
+    "operatingHours": {
+      "dinner": "5:30 PM - 9:30 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": false,
+    "alcoholServed": true,
+    "features": {
+      "fineDining": true,
+      "signatureDining": true,
+      "adultOnly": true,
+      "prixFixe": true,
+      "chefTable": true,
+      "dressCode": true
+    },
+    "tips": [
+      {
+        "id": "victoria-alberts-tip-1",
+        "category": "strategy",
+        "content": "Guests must be 10 years or older to dine here - adults only restaurant",
+        "priority": 5
+      },
+      {
+        "id": "victoria-alberts-tip-2",
+        "category": "strategy",
+        "content": "Book exactly 60 days in advance - this is one of the hardest reservations to get",
+        "priority": 5
+      },
+      {
+        "id": "victoria-alberts-tip-3",
+        "category": "general",
+        "content": "Dress code enforced - business casual to formal attire required",
+        "priority": 4
+      },
+      {
+        "id": "victoria-alberts-tip-4",
+        "category": "general",
+        "content": "Prix fixe menu starting at $295 per person - perfect for special occasions",
+        "priority": 4
+      }
+    ],
+    "tags": ["signature-dining", "fine-dining", "adult-only", "special-occasion", "expensive", "dress-code"]
+  },
+  {
+    "id": "grand-floridian-narcoossees",
+    "resortId": "grand-floridian",
+    "name": "Narcoossee's",
+    "description": "Signature seafood restaurant with stunning views of Seven Seas Lagoon and Magic Kingdom fireworks.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "cuisineType": "American Seafood",
+    "location": "Lakeside",
+    "operatingHours": {
+      "lunch": "11:30 AM - 3:00 PM",
+      "dinner": "5:00 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "signatureDining": true,
+      "lakefrontViews": true,
+      "fireworksViews": true,
+      "seafoodFocused": true
+    },
+    "tips": [
+      {
+        "id": "narcoossees-tip-1",
+        "category": "strategy",
+        "content": "Request a window table when booking for Magic Kingdom fireworks views",
+        "priority": 5
+      },
+      {
+        "id": "narcoossees-tip-2",
+        "category": "strategy",
+        "content": "Book dinner reservations around fireworks time (8-9 PM) for the best experience",
+        "priority": 4
+      },
+      {
+        "id": "narcoossees-tip-3",
+        "category": "general",
+        "content": "Known for fresh seafood and lobster - try the signature seafood tower",
+        "priority": 4
+      }
+    ],
+    "tags": ["signature-dining", "seafood", "views", "fireworks", "romantic"]
+  },
+  {
+    "id": "grand-floridian-citricos",
+    "resortId": "grand-floridian",
+    "name": "Cítricos",
+    "description": "Upscale Mediterranean-inspired restaurant offering modern American cuisine with a focus on fresh ingredients and innovative flavors.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "cuisineType": "Mediterranean American",
+    "location": "Main Building, Second Floor",
+    "operatingHours": {
+      "dinner": "5:30 PM - 9:30 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "signatureDining": true,
+      "mediterraneanCuisine": true,
+      "openKitchen": true,
+      "seasonalMenu": true
+    },
+    "tips": [
+      {
+        "id": "citricos-tip-1",
+        "category": "general",
+        "content": "Features an open kitchen where you can watch chefs prepare your meal",
+        "priority": 4
+      },
+      {
+        "id": "citricos-tip-2",
+        "category": "general",
+        "content": "Menu changes seasonally featuring Mediterranean-inspired dishes",
+        "priority": 3
+      },
+      {
+        "id": "citricos-tip-3",
+        "category": "strategy",
+        "content": "Less crowded than other Grand Floridian signature restaurants but equally excellent",
+        "priority": 4
+      }
+    ],
+    "tags": ["signature-dining", "mediterranean", "open-kitchen", "upscale"]
+  },
+  {
+    "id": "grand-floridian-1900-park-fare",
+    "resortId": "grand-floridian",
+    "name": "1900 Park Fare",
+    "description": "Character dining restaurant featuring Disney characters in an elegant Victorian setting with buffet-style dining.",
+    "type": "table_service",
+    "serviceType": "buffet",
+    "priceLevel": 2,
+    "cuisineType": "American Buffet",
+    "location": "Main Building, First Floor",
+    "operatingHours": {
+      "breakfast": "8:00 AM - 11:30 AM",
+      "dinner": "4:00 PM - 8:30 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "characterDining": true,
+      "buffetStyle": true,
+      "familyFriendly": true,
+      "victorianTheme": true
+    },
+    "tips": [
+      {
+        "id": "1900-park-fare-tip-1",
+        "category": "strategy",
+        "content": "Characters vary by meal - typically Cinderella and friends at breakfast, different characters at dinner",
+        "priority": 4
+      },
+      {
+        "id": "1900-park-fare-tip-2",
+        "category": "general",
+        "content": "Beautiful Victorian dining room with elegant atmosphere for character dining",
+        "priority": 3
+      },
+      {
+        "id": "1900-park-fare-tip-3",
+        "category": "strategy",
+        "content": "Great option for families wanting character interaction without park admission",
+        "priority": 4
+      }
+    ],
+    "tags": ["character-dining", "buffet", "family-friendly", "victorian", "cinderella"]
+  },
+  {
+    "id": "grand-floridian-cafe",
+    "resortId": "grand-floridian",
+    "name": "Grand Floridian Cafe",
+    "description": "Casual dining restaurant offering American cuisine with a relaxed atmosphere and moderate pricing in an elegant setting.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 2,
+    "cuisineType": "American Casual",
+    "location": "Main Building, First Floor",
+    "operatingHours": {
+      "breakfast": "7:00 AM - 11:30 AM",
+      "lunch": "11:30 AM - 2:00 PM",
+      "dinner": "5:00 PM - 9:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "casualDining": true,
+      "allDayDining": true,
+      "moderatelyPriced": true,
+      "comfortFood": true
+    },
+    "tips": [
+      {
+        "id": "grand-floridian-cafe-tip-1",
+        "category": "strategy",
+        "content": "Hidden gem with Grand Floridian elegance at more affordable prices",
+        "priority": 5
+      },
+      {
+        "id": "grand-floridian-cafe-tip-2",
+        "category": "general",
+        "content": "Try the buttermilk fried chicken and waffle or the miso-glazed salmon",
+        "priority": 4
+      },
+      {
+        "id": "grand-floridian-cafe-tip-3",
+        "category": "strategy",
+        "content": "Great breakfast spot with avocado toast and Mickey waffles available",
+        "priority": 4
+      }
+    ],
+    "tags": ["casual-dining", "american", "moderate-price", "all-day", "hidden-gem"]
+  },
+  {
+    "id": "grand-floridian-gasparilla-grill",
+    "resortId": "grand-floridian",
+    "name": "Gasparilla Island Grill",
+    "description": "Quick service restaurant offering fresh sandwiches, salads, and baked goods made with bread from the Grand Floridian Bakery.",
+    "type": "quick_service",
+    "serviceType": "counter",
+    "priceLevel": 2,
+    "cuisineType": "American Quick Service",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "allDay": "6:00 AM - 12:00 AM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "quickService": true,
+      "mobileOrder": true,
+      "freshBread": true,
+      "grabAndGo": true,
+      "bakeryItems": true
+    },
+    "tips": [
+      {
+        "id": "gasparilla-grill-tip-1",
+        "category": "general",
+        "content": "Bread made fresh daily at the Grand Floridian Bakery - try the sandwiches",
+        "priority": 4
+      },
+      {
+        "id": "gasparilla-grill-tip-2",
+        "category": "strategy",
+        "content": "Use mobile order to skip the line during busy breakfast and lunch hours",
+        "priority": 4
+      },
+      {
+        "id": "gasparilla-grill-tip-3",
+        "category": "general",
+        "content": "Great spot for Mickey waffles, breakfast platters, and artisan burgers",
+        "priority": 3
+      }
+    ],
+    "tags": ["quick-service", "fresh-bread", "mobile-order", "breakfast", "sandwiches"]
+  },
+  {
+    "id": "grand-floridian-enchanted-rose",
+    "resortId": "grand-floridian",
+    "name": "Enchanted Rose",
+    "description": "Elegant lounge inspired by Beauty and the Beast, located on the second floor of the resort lobby, offering craft cocktails and small plates.",
+    "type": "lounge",
+    "serviceType": "lounge",
+    "priceLevel": 3,
+    "cuisineType": "Cocktails & Small Plates",
+    "location": "Main Building, Second Floor Lobby",
+    "operatingHours": {
+      "evening": "4:00 PM - 12:00 AM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "craftCocktails": true,
+      "beautyAndBeast": true,
+      "lobbyViews": true,
+      "romanticSetting": true,
+      "smallPlates": true
+    },
+    "tips": [
+      {
+        "id": "enchanted-rose-tip-1",
+        "category": "general",
+        "content": "Arguably the most elegant bar at Walt Disney World with Beauty and the Beast theming",
+        "priority": 5
+      },
+      {
+        "id": "enchanted-rose-tip-2",
+        "category": "strategy",
+        "content": "Perfect spot for a romantic drink before or after dinner at Grand Floridian",
+        "priority": 4
+      },
+      {
+        "id": "enchanted-rose-tip-3",
+        "category": "general",
+        "content": "Try the signature cocktails inspired by Beauty and the Beast characters",
+        "priority": 4
+      }
+    ],
+    "tags": ["lounge", "cocktails", "beauty-and-beast", "romantic", "elegant", "lobby-bar"]
+  },
+  {
+    "id": "grand-floridian-citricos-lounge",
+    "resortId": "grand-floridian",
+    "name": "Cítricos Lounge",
+    "description": "Intimate lounge adjacent to Cítricos restaurant, offering craft cocktails and appetizers in a sophisticated setting.",
+    "type": "lounge",
+    "serviceType": "lounge",
+    "priceLevel": 3,
+    "cuisineType": "Cocktails & Appetizers",
+    "location": "Main Building, Second Floor",
+    "operatingHours": {
+      "evening": "5:00 PM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "intimateSetting": true,
+      "craftCocktails": true,
+      "appetizers": true,
+      "adultFocused": true
+    },
+    "tips": [
+      {
+        "id": "citricos-lounge-tip-1",
+        "category": "strategy",
+        "content": "Great spot to wait for your Cítricos dinner reservation",
+        "priority": 4
+      },
+      {
+        "id": "citricos-lounge-tip-2",
+        "category": "general",
+        "content": "More intimate and quieter than Enchanted Rose for conversation",
+        "priority": 3
+      }
+    ],
+    "tags": ["lounge", "cocktails", "intimate", "appetizers", "quiet"]
+  },
+  {
+    "id": "grand-floridian-beaches-pool-bar",
+    "resortId": "grand-floridian",
+    "name": "Beaches Pool Bar & Grill",
+    "description": "Poolside dining offering tropical drinks, light meals, and snacks while enjoying the resort's beach area and pools.",
+    "type": "quick_service",
+    "serviceType": "poolside",
+    "priceLevel": 2,
+    "cuisineType": "Poolside American",
+    "location": "Beach Pool Area",
+    "operatingHours": {
+      "seasonal": "11:00 AM - 6:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "poolside": true,
+      "tropicalDrinks": true,
+      "beachViews": true,
+      "casualDining": true
+    },
+    "tips": [
+      {
+        "id": "beaches-pool-bar-tip-1",
+        "category": "general",
+        "content": "Perfect for staying by the pool with food and drinks delivered to your chair",
+        "priority": 4
+      },
+      {
+        "id": "beaches-pool-bar-tip-2",
+        "category": "general",
+        "content": "Enjoy tropical cocktails while watching boats on Seven Seas Lagoon",
+        "priority": 3
+      }
+    ],
+    "tags": ["poolside", "tropical-drinks", "beach", "casual", "relaxing"]
+  },
+  {
+    "id": "grand-floridian-courtyard-pool-bar",
+    "resortId": "grand-floridian",
+    "name": "Courtyard Pool Bar",
+    "description": "Pool bar serving refreshing beverages and light snacks at the resort's courtyard pool area.",
+    "type": "quick_service",
+    "serviceType": "poolside",
+    "priceLevel": 2,
+    "cuisineType": "Poolside Beverages",
+    "location": "Courtyard Pool Area",
+    "operatingHours": {
+      "seasonal": "11:00 AM - 6:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "poolside": true,
+      "beverageFocused": true,
+      "courtyardSetting": true
+    },
+    "tips": [
+      {
+        "id": "courtyard-pool-bar-tip-1",
+        "category": "general",
+        "content": "Quieter pool area compared to the main beach pool",
+        "priority": 3
+      }
+    ],
+    "tags": ["poolside", "beverages", "courtyard", "quiet"]
+  },
+  {
+    "id": "polynesian-ohana",
+    "resortId": "polynesian",
+    "name": "'Ohana",
+    "description": "One of Disney World's most popular restaurants offering all-you-care-to-enjoy Polynesian family-style dining with character breakfast and traditional dinner.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "cuisineType": "Polynesian Family Style",
+    "location": "Great Ceremonial House, Second Floor",
+    "operatingHours": {
+      "breakfast": "7:30 AM - 12:15 PM",
+      "dinner": "3:30 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "characterDining": true,
+      "familyStyle": true,
+      "allYouCareToEnjoy": true,
+      "polynesian": true
+    },
+    "tips": [
+      {
+        "id": "ohana-tip-1",
+        "category": "strategy",
+        "content": "Book exactly 60 days in advance - this is one of the hardest reservations to get at Disney World",
+        "priority": 5
+      },
+      {
+        "id": "ohana-tip-2",
+        "category": "strategy",
+        "content": "Breakfast features character dining with Lilo, Stitch, Mickey, and Pluto",
+        "priority": 5
+      },
+      {
+        "id": "ohana-tip-3",
+        "category": "general",
+        "content": "Dinner is all-you-care-to-enjoy family-style feast with grilled meats and famous bread pudding",
+        "priority": 4
+      },
+      {
+        "id": "ohana-tip-4",
+        "category": "general",
+        "content": "Adults $62, Children $40 for dinner - excellent value for the amount of food",
+        "priority": 4
+      }
+    ],
+    "tags": ["character-dining", "family-style", "polynesian", "popular", "hard-reservation"]
+  },
+  {
+    "id": "polynesian-kona-cafe",
+    "resortId": "polynesian",
+    "name": "Kona Cafe",
+    "description": "A hidden gem serving Pacific Rim cuisine with famous breakfast items like Tonga Toast and Macadamia Nut Pancakes.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 2,
+    "cuisineType": "Pacific Rim",
+    "location": "Great Ceremonial House, Second Floor",
+    "operatingHours": {
+      "breakfast": "7:30 AM - 2:00 PM",
+      "dinner": "5:00 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "hiddenGem": true,
+      "breakfast": true,
+      "pacificRim": true,
+      "signatureItems": true
+    },
+    "tips": [
+      {
+        "id": "kona-cafe-tip-1",
+        "category": "general",
+        "content": "Famous for Tonga Toast - French toast stuffed with bananas and rolled in cinnamon sugar",
+        "priority": 5
+      },
+      {
+        "id": "kona-cafe-tip-2",
+        "category": "general",
+        "content": "Macadamia Nut Pancakes are a must-try breakfast item",
+        "priority": 4
+      },
+      {
+        "id": "kona-cafe-tip-3",
+        "category": "strategy",
+        "content": "Less crowded than other Polynesian restaurants but equally excellent food",
+        "priority": 4
+      }
+    ],
+    "tags": ["hidden-gem", "breakfast", "pacific-rim", "tonga-toast", "casual-dining"]
+  },
+  {
+    "id": "polynesian-trader-sams-grog-grotto",
+    "resortId": "polynesian",
+    "name": "Trader Sam's Grog Grotto",
+    "description": "Disney World's most popular tiki bar featuring interactive cocktails with special effects and themed decor.",
+    "type": "lounge",
+    "serviceType": "lounge",
+    "priceLevel": 3,
+    "cuisineType": "Tiki Bar & Small Plates",
+    "location": "Great Ceremonial House, Ground Floor",
+    "operatingHours": {
+      "evening": "3:00 PM - 12:00 AM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "tikBar": true,
+      "interactiveEffects": true,
+      "adultOnlyAfter8PM": true,
+      "walkUpOnly": true,
+      "virtualQueue": true
+    },
+    "tips": [
+      {
+        "id": "trader-sams-tip-1",
+        "category": "strategy",
+        "content": "Arrive at least one hour before 3:00 PM opening to join virtual queue - no reservations accepted",
+        "priority": 5
+      },
+      {
+        "id": "trader-sams-tip-2",
+        "category": "general",
+        "content": "All ages welcome until 8:00 PM, then 21+ only after 8:00 PM",
+        "priority": 5
+      },
+      {
+        "id": "trader-sams-tip-3",
+        "category": "general",
+        "content": "Interactive cocktails trigger special effects - order the Uh-Oa! or Krakatoa Punch",
+        "priority": 4
+      },
+      {
+        "id": "trader-sams-tip-4",
+        "category": "strategy",
+        "content": "Try the outdoor Tiki Terrace if Grog Grotto is full - same drinks, no wait",
+        "priority": 4
+      }
+    ],
+    "tags": ["tiki-bar", "interactive", "popular", "walk-up-only", "special-effects"]
+  },
+  {
+    "id": "polynesian-captain-cooks",
+    "resortId": "polynesian",
+    "name": "Captain Cook's",
+    "description": "Popular quick service restaurant serving Polynesian and Asian-inspired dishes for breakfast, lunch, and dinner.",
+    "type": "quick_service",
+    "serviceType": "counter",
+    "priceLevel": 2,
+    "cuisineType": "Polynesian Quick Service",
+    "location": "Great Ceremonial House, Ground Floor",
+    "operatingHours": {
+      "allDay": "7:00 AM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "quickService": true,
+      "mobileOrder": true,
+      "allDayDining": true,
+      "asianFusion": true
+    },
+    "tips": [
+      {
+        "id": "captain-cooks-tip-1",
+        "category": "general",
+        "content": "Considered one of the best quick service restaurants at Disney World",
+        "priority": 4
+      },
+      {
+        "id": "captain-cooks-tip-2",
+        "category": "strategy",
+        "content": "Use mobile order during peak meal times to skip the lines",
+        "priority": 4
+      },
+      {
+        "id": "captain-cooks-tip-3",
+        "category": "general",
+        "content": "Try the Pulled Pork Nachos or Asian dishes for unique flavors",
+        "priority": 3
+      }
+    ],
+    "tags": ["quick-service", "polynesian", "asian-fusion", "mobile-order", "popular"]
+  },
+  {
+    "id": "polynesian-tambu-lounge",
+    "resortId": "polynesian",
+    "name": "Tambu Lounge",
+    "description": "Tropical-themed lounge adjacent to 'Ohana serving specialty cocktails including drinks served in fresh pineapples.",
+    "type": "lounge",
+    "serviceType": "lounge",
+    "priceLevel": 3,
+    "cuisineType": "Tropical Cocktails & Appetizers",
+    "location": "Great Ceremonial House, Second Floor",
+    "operatingHours": {
+      "allDay": "8:30 AM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "tropicalCocktails": true,
+      "pineappleDrinks": true,
+      "adjacentToOhana": true,
+      "appetizers": true
+    },
+    "tips": [
+      {
+        "id": "tambu-lounge-tip-1",
+        "category": "general",
+        "content": "Famous for Lapu Lapu - rum drink served in a fresh pineapple",
+        "priority": 4
+      },
+      {
+        "id": "tambu-lounge-tip-2",
+        "category": "strategy",
+        "content": "Perfect spot to wait for your 'Ohana reservation",
+        "priority": 4
+      },
+      {
+        "id": "tambu-lounge-tip-3",
+        "category": "general",
+        "content": "Appetizers available after 4:00 PM",
+        "priority": 3
+      }
+    ],
+    "tags": ["lounge", "tropical", "pineapple-drinks", "appetizers", "ohana-adjacent"]
+  },
+  {
+    "id": "polynesian-kona-island",
+    "resortId": "polynesian",
+    "name": "Kona Island",
+    "description": "Quick service kiosk offering specialty coffee, pastries, sushi, and grab-and-go items throughout the day.",
+    "type": "quick_service",
+    "serviceType": "kiosk",
+    "priceLevel": 2,
+    "cuisineType": "Coffee & Sushi",
+    "location": "Great Ceremonial House, Second Floor",
+    "operatingHours": {
+      "allDay": "6:30 AM - 10:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "sushi": true,
+      "coffee": true,
+      "pastries": true,
+      "grabAndGo": true
+    },
+    "tips": [
+      {
+        "id": "kona-island-tip-1",
+        "category": "general",
+        "content": "Morning coffee and pastries, afternoon sushi and sandwiches",
+        "priority": 4
+      },
+      {
+        "id": "kona-island-tip-2",
+        "category": "general",
+        "content": "Convenient grab-and-go option near Kona Cafe",
+        "priority": 3
+      }
+    ],
+    "tags": ["quick-service", "coffee", "sushi", "grab-and-go", "kiosk"]
+  },
+  {
+    "id": "polynesian-pineapple-lanai",
+    "resortId": "polynesian",
+    "name": "Pineapple Lanai",
+    "description": "The only place outside Magic Kingdom to get Dole Whips, featuring multiple flavors and specialty versions.",
+    "type": "quick_service",
+    "serviceType": "kiosk",
+    "priceLevel": 1,
+    "cuisineType": "Frozen Treats",
+    "location": "Pool Area",
+    "operatingHours": {
+      "seasonal": "11:00 AM - 6:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["dairy-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "doleWhip": true,
+      "uniqueLocation": true,
+      "poolside": true,
+      "rumFloater": true
+    },
+    "tips": [
+      {
+        "id": "pineapple-lanai-tip-1",
+        "category": "general",
+        "content": "Only place outside Magic Kingdom to get Dole Whips",
+        "priority": 5
+      },
+      {
+        "id": "pineapple-lanai-tip-2",
+        "category": "general",
+        "content": "Try the Rum Floater version or souvenir Tiki Sipper",
+        "priority": 4
+      },
+      {
+        "id": "pineapple-lanai-tip-3",
+        "category": "general",
+        "content": "Multiple Dole Whip flavors available beyond traditional pineapple",
+        "priority": 3
+      }
+    ],
+    "tags": ["dole-whip", "frozen-treats", "poolside", "unique", "family-favorite"]
+  },
+  {
+    "id": "polynesian-barefoot-pool-bar",
+    "resortId": "polynesian",
+    "name": "Barefoot Pool Bar",
+    "description": "Poolside bar and grill near the Lava Pool offering tropical cocktails and full meals with views of Seven Seas Lagoon.",
+    "type": "quick_service",
+    "serviceType": "poolside",
+    "priceLevel": 2,
+    "cuisineType": "Poolside American",
+    "location": "Lava Pool Area",
+    "operatingHours": {
+      "lunch": "11:00 AM - 10:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "poolside": true,
+      "tropicalDrinks": true,
+      "lakeViews": true,
+      "fullMeals": true,
+      "beachViews": true
+    },
+    "tips": [
+      {
+        "id": "barefoot-pool-tip-1",
+        "category": "general",
+        "content": "Entrees available until 8:00 PM, drinks until 10:00 PM",
+        "priority": 4
+      },
+      {
+        "id": "barefoot-pool-tip-2",
+        "category": "general",
+        "content": "Stunning views of Seven Seas Lagoon, Grand Floridian, and Cinderella Castle",
+        "priority": 4
+      },
+      {
+        "id": "barefoot-pool-tip-3",
+        "category": "strategy",
+        "content": "Perfect for staying by the pool all day with food and drinks delivered",
+        "priority": 3
+      }
+    ],
+    "tags": ["poolside", "tropical-drinks", "views", "beach", "casual"]
+  },
+  {
+    "id": "polynesian-oasis-pool-bar",
+    "resortId": "polynesian",
+    "name": "Oasis Bar and Grill",
+    "description": "Pool bar near the Oasis Pool serving the same menu as Barefoot Pool Bar with tropical cocktails and food.",
+    "type": "quick_service",
+    "serviceType": "poolside",
+    "priceLevel": 2,
+    "cuisineType": "Poolside American",
+    "location": "Oasis Pool Area",
+    "operatingHours": {
+      "lunch": "11:00 AM - 10:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "poolside": true,
+      "tropicalDrinks": true,
+      "sameMenuAsBarefoot": true,
+      "quieterLocation": true
+    },
+    "tips": [
+      {
+        "id": "oasis-pool-tip-1",
+        "category": "general",
+        "content": "Same great food as Barefoot Pool Bar with two convenient locations",
+        "priority": 3
+      },
+      {
+        "id": "oasis-pool-tip-2",
+        "category": "strategy",
+        "content": "Alternative to Barefoot if that location is busy",
+        "priority": 3
+      }
+    ],
+    "tags": ["poolside", "tropical-drinks", "alternative", "casual"]
+  },
+  {
+    "id": "polynesian-island-tower-wailulu",
+    "resortId": "polynesian-island-tower",
+    "name": "Wailulu Bar & Grill",
+    "description": "Brand new restaurant celebrating Polynesian flavors with Magic Kingdom fireworks views, opened December 2024.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "cuisineType": "Pacific Islands",
+    "location": "Island Tower, Overlooking Seven Seas Lagoon",
+    "operatingHours": {
+      "breakfast": "7:00 AM - 11:00 AM",
+      "lunch": "11:00 AM - 10:00 PM",
+      "bar": "11:00 AM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "newOpening2024": true,
+      "fireworksViews": true,
+      "castleViews": true,
+      "pacificIslands": true,
+      "walkUp": true
+    },
+    "tips": [
+      {
+        "id": "wailulu-tip-1",
+        "category": "strategy",
+        "content": "Hot new spot for Magic Kingdom fireworks viewing - arrive early for outdoor seating",
+        "priority": 5
+      },
+      {
+        "id": "wailulu-tip-2",
+        "category": "general",
+        "content": "Name means 'calm water' in Hawaiian - celebrates Pacific Islands from Easter Island to Fiji",
+        "priority": 4
+      },
+      {
+        "id": "wailulu-tip-3",
+        "category": "general",
+        "content": "Try the Beef Short Rib Loco Moco or Wayfinder Burger for unique flavors",
+        "priority": 4
+      },
+      {
+        "id": "wailulu-tip-4",
+        "category": "strategy",
+        "content": "Currently no reservations required but may be added to ADR system soon",
+        "priority": 4
+      }
+    ],
+    "tags": ["new-2024", "fireworks-views", "pacific-islands", "walk-up", "trendy"]
+  },
+  {
+    "id": "contemporary-california-grill",
+    "resortId": "contemporary",
+    "name": "California Grill",
+    "description": "Signature restaurant on the 15th floor offering contemporary American cuisine with panoramic views of Magic Kingdom fireworks.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 4,
+    "cuisineType": "Contemporary American",
+    "location": "15th Floor, Main Tower",
+    "operatingHours": {
+      "dinner": "5:00 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "signatureDining": true,
+      "fireworksViews": true,
+      "15thFloor": true,
+      "panoramicViews": true,
+      "openKitchen": true
+    },
+    "tips": [
+      {
+        "id": "california-grill-tip-1",
+        "category": "strategy",
+        "content": "Request window table when booking for best fireworks views",
+        "priority": 5
+      },
+      {
+        "id": "california-grill-tip-2",
+        "category": "general",
+        "content": "Prix fixe menu: Adults $89, Children $39 - worth it for the experience",
+        "priority": 4
+      },
+      {
+        "id": "california-grill-tip-3",
+        "category": "strategy",
+        "content": "Book dinner around fireworks time for outdoor viewing deck access",
+        "priority": 4
+      },
+      {
+        "id": "california-grill-tip-4",
+        "category": "general",
+        "content": "Take elevator to 15th floor even without reservation to see the view",
+        "priority": 3
+      }
+    ],
+    "tags": ["signature-dining", "fireworks-views", "15th-floor", "expensive", "romantic"]
+  },
+  {
+    "id": "contemporary-chef-mickeys",
+    "resortId": "contemporary",
+    "name": "Chef Mickey's",
+    "description": "Popular character dining buffet featuring Mickey, Minnie, Donald, Goofy, and Pluto in the Grand Canyon Concourse.",
+    "type": "table_service",
+    "serviceType": "buffet",
+    "priceLevel": 3,
+    "cuisineType": "American Buffet",
+    "location": "Grand Canyon Concourse, 4th Floor",
+    "operatingHours": {
+      "breakfast": "7:00 AM - 11:30 AM",
+      "brunch": "11:30 AM - 2:30 PM",
+      "dinner": "5:00 PM - 9:30 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "characterDining": true,
+      "buffetStyle": true,
+      "famousCharacters": true,
+      "monorailViews": true,
+      "familyFriendly": true
+    },
+    "tips": [
+      {
+        "id": "chef-mickeys-tip-1",
+        "category": "strategy",
+        "content": "Book exactly 60 days in advance - extremely popular character meal",
+        "priority": 5
+      },
+      {
+        "id": "chef-mickeys-tip-2",
+        "category": "general",
+        "content": "Adults $58 breakfast/$69 dinner, Children $37/$42 - great character interaction",
+        "priority": 4
+      },
+      {
+        "id": "chef-mickeys-tip-3",
+        "category": "general",
+        "content": "Watch monorails go by during your meal - unique Disney experience",
+        "priority": 4
+      },
+      {
+        "id": "chef-mickeys-tip-4",
+        "category": "strategy",
+        "content": "Bring autograph book and camera for character photos",
+        "priority": 4
+      }
+    ],
+    "tags": ["character-dining", "buffet", "popular", "family-favorite", "monorail-views"]
+  },
+  {
+    "id": "contemporary-steakhouse-71",
+    "resortId": "contemporary",
+    "name": "Steakhouse 71",
+    "description": "Upscale steakhouse serving new American cuisine with local and regional organic ingredients for breakfast, lunch, and dinner.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "cuisineType": "New American Steakhouse",
+    "location": "First Floor, Main Tower",
+    "operatingHours": {
+      "breakfast": "7:00 AM - 11:00 AM",
+      "lunch": "11:30 AM - 2:00 PM",
+      "dinner": "5:00 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "casualElegance": true,
+      "organicIngredients": true,
+      "localSourcing": true,
+      "steakhouse": true,
+      "allDayDining": true
+    },
+    "tips": [
+      {
+        "id": "steakhouse-71-tip-1",
+        "category": "general",
+        "content": "Pricing ranges $35-$59.99 per adult - good value for upscale dining",
+        "priority": 4
+      },
+      {
+        "id": "steakhouse-71-tip-2",
+        "category": "general",
+        "content": "Focus on local and organic ingredients with new American twist",
+        "priority": 4
+      },
+      {
+        "id": "steakhouse-71-tip-3",
+        "category": "strategy",
+        "content": "Great option for upscale dining without signature restaurant pricing",
+        "priority": 4
+      }
+    ],
+    "tags": ["steakhouse", "new-american", "organic", "upscale", "all-day-dining"]
+  },
+  {
+    "id": "contemporary-contempo-cafe",
+    "resortId": "contemporary",
+    "name": "Contempo Cafe",
+    "description": "Upscale quick service restaurant on the Grand Canyon Concourse serving artisanal sandwiches, salads, and flatbread pizzas.",
+    "type": "quick_service",
+    "serviceType": "counter",
+    "priceLevel": 2,
+    "cuisineType": "Upscale Quick Service",
+    "location": "Grand Canyon Concourse, 4th Floor",
+    "operatingHours": {
+      "allDay": "7:00 AM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "upscaleQuickService": true,
+      "mobileOrder": true,
+      "artisanalFood": true,
+      "monorailViews": true,
+      "flatbreads": true
+    },
+    "tips": [
+      {
+        "id": "contempo-cafe-tip-1",
+        "category": "general",
+        "content": "Upscale quick service - try the Contempo Artisanal Burger ($16.49)",
+        "priority": 4
+      },
+      {
+        "id": "contempo-cafe-tip-2",
+        "category": "strategy",
+        "content": "Use mobile ordering for convenience during busy meal times",
+        "priority": 4
+      },
+      {
+        "id": "contempo-cafe-tip-3",
+        "category": "general",
+        "content": "Watch monorails pass by while you dine on the 4th floor",
+        "priority": 3
+      }
+    ],
+    "tags": ["quick-service", "upscale", "artisanal", "mobile-order", "monorail-views"]
+  },
+  {
+    "id": "contemporary-steakhouse-71-lounge",
+    "resortId": "contemporary",
+    "name": "Steakhouse 71 Lounge",
+    "description": "Sophisticated lounge adjacent to Steakhouse 71 serving craft cocktails and light bites.",
+    "type": "lounge",
+    "serviceType": "lounge",
+    "priceLevel": 3,
+    "cuisineType": "Cocktails & Light Bites",
+    "location": "First Floor, Main Tower",
+    "operatingHours": {
+      "allDay": "12:00 PM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "craftCocktails": true,
+      "lightBites": true,
+      "sophisticatedSetting": true,
+      "adjacentToSteakhouse": true
+    },
+    "tips": [
+      {
+        "id": "steakhouse-71-lounge-tip-1",
+        "category": "strategy",
+        "content": "Perfect spot to wait for Steakhouse 71 reservation",
+        "priority": 4
+      },
+      {
+        "id": "steakhouse-71-lounge-tip-2",
+        "category": "general",
+        "content": "Sophisticated atmosphere with craft cocktails and appetizers",
+        "priority": 3
+      }
+    ],
+    "tags": ["lounge", "cocktails", "sophisticated", "light-bites"]
+  },
+  {
+    "id": "wilderness-lodge-artist-point",
+    "resortId": "wilderness-lodge",
+    "name": "Artist Point",
+    "description": "Storybook character dining experience featuring Snow White characters including the rare Evil Queen in an elegant Pacific Northwest setting.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "cuisineType": "American Character Dining",
+    "location": "Main Lodge, First Floor",
+    "operatingHours": {
+      "dinner": "4:00 PM - 9:15 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "characterDining": true,
+      "storybook": true,
+      "evilQueen": true,
+      "pacificNorthwest": true,
+      "elegantSetting": true
+    },
+    "tips": [
+      {
+        "id": "artist-point-tip-1",
+        "category": "strategy",
+        "content": "One of the few places to meet the Evil Queen - book early for this rare character",
+        "priority": 5
+      },
+      {
+        "id": "artist-point-tip-2",
+        "category": "general",
+        "content": "Fixed-price menu with shared appetizers, entree selection, and dessert",
+        "priority": 4
+      },
+      {
+        "id": "artist-point-tip-3",
+        "category": "general",
+        "content": "Beautiful Pacific Northwest theming with elegant atmosphere",
+        "priority": 4
+      }
+    ],
+    "tags": ["character-dining", "evil-queen", "storybook", "elegant", "rare-characters"]
+  },
+  {
+    "id": "wilderness-lodge-whispering-canyon",
+    "resortId": "wilderness-lodge",
+    "name": "Whispering Canyon Cafe",
+    "description": "Rowdy Wild West themed restaurant famous for all-you-care-to-enjoy skillets and interactive entertainment from cast members.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 2,
+    "cuisineType": "American Wild West",
+    "location": "Main Lodge, First Floor",
+    "operatingHours": {
+      "breakfast": "7:30 AM - 11:00 AM",
+      "lunch": "11:30 AM - 2:00 PM",
+      "dinner": "5:00 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "allYouCareToEnjoy": true,
+      "interactiveEntertainment": true,
+      "wildWest": true,
+      "familyFun": true,
+      "rowdyAtmosphere": true
+    },
+    "tips": [
+      {
+        "id": "whispering-canyon-tip-1",
+        "category": "general",
+        "content": "TEMPORARY CLOSURE: May 12-21, 2025 for refurbishment",
+        "priority": 5
+      },
+      {
+        "id": "whispering-canyon-tip-2",
+        "category": "general",
+        "content": "Famous for cast member antics and games - be prepared for fun interactions",
+        "priority": 5
+      },
+      {
+        "id": "whispering-canyon-tip-3",
+        "category": "general",
+        "content": "All-you-care-to-enjoy skillets are the signature - great value for families",
+        "priority": 4
+      },
+      {
+        "id": "whispering-canyon-tip-4",
+        "category": "strategy",
+        "content": "Ask for ketchup at your own risk - part of the Wild West experience",
+        "priority": 4
+      }
+    ],
+    "tags": ["wild-west", "interactive", "family-fun", "all-you-care-to-enjoy", "rowdy"]
+  },
+  {
+    "id": "animal-kingdom-lodge-jiko",
+    "resortId": "animal-kingdom-lodge",
+    "name": "Jiko - The Cooking Place",
+    "description": "Award-winning signature restaurant featuring African-inspired cuisine with an extensive South African wine selection.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 4,
+    "cuisineType": "African-Inspired Fine Dining",
+    "location": "Jambo House, Ground Floor",
+    "operatingHours": {
+      "dinner": "5:30 PM - 9:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "signatureDining": true,
+      "africanInspired": true,
+      "southAfricanWines": true,
+      "romanticSetting": true,
+      "awardWinning": true
+    },
+    "tips": [
+      {
+        "id": "jiko-tip-1",
+        "category": "strategy",
+        "content": "One of Disney World's most romantic restaurants - perfect for special occasions",
+        "priority": 5
+      },
+      {
+        "id": "jiko-tip-2",
+        "category": "general",
+        "content": "Requires 2 Disney Dining Plan credits as signature restaurant",
+        "priority": 4
+      },
+      {
+        "id": "jiko-tip-3",
+        "category": "general",
+        "content": "Extensive South African wine list pairs perfectly with African-inspired dishes",
+        "priority": 4
+      },
+      {
+        "id": "jiko-tip-4",
+        "category": "general",
+        "content": "Dress code enforced - business casual to formal attire",
+        "priority": 4
+      }
+    ],
+    "tags": ["signature-dining", "african-inspired", "romantic", "award-winning", "dress-code"]
+  },
+  {
+    "id": "animal-kingdom-lodge-boma",
+    "resortId": "animal-kingdom-lodge",
+    "name": "Boma - Flavors of Africa",
+    "description": "Outstanding buffet featuring authentic African cuisine with over 50 dishes from across the continent.",
+    "type": "table_service",
+    "serviceType": "buffet",
+    "priceLevel": 2,
+    "cuisineType": "African Buffet",
+    "location": "Jambo House, Ground Floor",
+    "operatingHours": {
+      "breakfast": "7:30 AM - 11:00 AM",
+      "dinner": "4:30 PM - 9:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free", "vegan"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "africanCuisine": true,
+      "buffetStyle": true,
+      "over50Dishes": true,
+      "authenticFlavors": true,
+      "bestBuffet": true
+    },
+    "tips": [
+      {
+        "id": "boma-tip-1",
+        "category": "general",
+        "content": "Widely considered the best buffet at Walt Disney World",
+        "priority": 5
+      },
+      {
+        "id": "boma-tip-2",
+        "category": "general",
+        "content": "Over 50 authentic African dishes - try the watermelon salad and seafood",
+        "priority": 4
+      },
+      {
+        "id": "boma-tip-3",
+        "category": "strategy",
+        "content": "Excellent value for money with authentic, ambitious flavors",
+        "priority": 4
+      },
+      {
+        "id": "boma-tip-4",
+        "category": "general",
+        "content": "Great options for vegetarians and those with dietary restrictions",
+        "priority": 4
+      }
+    ],
+    "tags": ["buffet", "african-cuisine", "best-buffet", "authentic", "value"]
+  },
+  {
+    "id": "boardwalk-flying-fish",
+    "resortId": "boardwalk",
+    "name": "Flying Fish",
+    "description": "Upscale seafood restaurant featuring fresh catches and show kitchen with BoardWalk entertainment nearby.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 4,
+    "cuisineType": "Seafood Fine Dining",
+    "location": "BoardWalk Promenade",
+    "operatingHours": {
+      "dinner": "5:00 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "signatureDining": true,
+      "seafoodFocused": true,
+      "showKitchen": true,
+      "boardwalkLocation": true,
+      "upscale": true
+    },
+    "tips": [
+      {
+        "id": "flying-fish-tip-1",
+        "category": "general",
+        "content": "Disney World's premier seafood restaurant - requires 2 dining plan credits",
+        "priority": 5
+      },
+      {
+        "id": "flying-fish-tip-2",
+        "category": "strategy",
+        "content": "Perfect for adult night out - enjoy BoardWalk entertainment after dinner",
+        "priority": 4
+      },
+      {
+        "id": "flying-fish-tip-3",
+        "category": "general",
+        "content": "Show kitchen allows you to watch chefs prepare fresh seafood",
+        "priority": 4
+      }
+    ],
+    "tags": ["signature-dining", "seafood", "upscale", "boardwalk", "show-kitchen"]
+  }
+]

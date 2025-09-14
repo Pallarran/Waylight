@@ -21,19 +21,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": true,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": true,
-        "marina": true,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": true,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": true,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": true
+        },
+        "spa": {
+          "full_service": true,
+          "couples_treatments": true,
+          "fitness_center": true,
+          "sauna": true,
+          "steam_room": true
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": true,
+          "character_dining": true,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": true,
+          "marina": true,
+          "boat_rentals": true,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": true,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": true,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -42,7 +74,19 @@
         "themedRooms": false,
         "familyAccommodations": false
       }
-    }
+    },
+    "diningOptions": [
+      "grand-floridian-victoria-alberts",
+      "grand-floridian-narcoossees",
+      "grand-floridian-citricos",
+      "grand-floridian-1900-park-fare",
+      "grand-floridian-cafe",
+      "grand-floridian-gasparilla-grill",
+      "grand-floridian-enchanted-rose",
+      "grand-floridian-citricos-lounge",
+      "grand-floridian-beaches-pool-bar",
+      "grand-floridian-courtyard-pool-bar"
+    ]
   },
   {
     "id": "polynesian",
@@ -60,19 +104,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": true,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": true,
-        "marina": true,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": true,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": true,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": true,
+          "couples_treatments": true,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": true,
+          "character_dining": true,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": true,
+          "marina": true,
+          "boat_rentals": true,
+          "fishing": true,
+          "bike_rentals": true,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": true,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": true,
+          "character_meet_greets": true,
+          "movies_under_stars": true,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -82,6 +158,17 @@
         "familyAccommodations": true
       }
     },
+    "diningOptions": [
+      "polynesian-ohana",
+      "polynesian-kona-cafe",
+      "polynesian-trader-sams-grog-grotto",
+      "polynesian-captain-cooks",
+      "polynesian-tambu-lounge",
+      "polynesian-kona-island",
+      "polynesian-pineapple-lanai",
+      "polynesian-barefoot-pool-bar",
+      "polynesian-oasis-pool-bar"
+    ],
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 5, "description": "Garden, lagoon, or theme park view" },
       { "id": "club-level", "name": "Club Level Room", "sleeps": 5, "description": "Concierge level with lounge access" },
@@ -105,19 +192,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": true,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": true,
-        "marina": true,
-        "dining": true,
-        "quickService": true,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": true
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": false,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": false,
+          "character_dining": false,
+          "signature_dining": false
+        },
+        "recreation": {
+          "beach": true,
+          "marina": true,
+          "boat_rentals": true,
+          "fishing": true,
+          "bike_rentals": true,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": true,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": false,
@@ -127,6 +246,9 @@
         "familyAccommodations": true
       }
     },
+    "diningOptions": [
+      "polynesian-island-tower-wailulu"
+    ],
     "rooms": [
       { "id": "duo-studio", "name": "Duo Studio", "sleeps": 3, "description": "Studio villa with kitchenette and modern Polynesian theming" },
       { "id": "1br-villa", "name": "1 Bedroom Villa", "sleeps": 5, "description": "One-bedroom villa with full kitchen and washer/dryer" },
@@ -149,19 +271,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": true,
-        "marina": true,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": true,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": true,
+          "character_dining": true,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": true,
+          "marina": true,
+          "boat_rentals": true,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": true,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -171,6 +325,13 @@
         "familyAccommodations": false
       }
     },
+    "diningOptions": [
+      "contemporary-california-grill",
+      "contemporary-chef-mickeys",
+      "contemporary-steakhouse-71",
+      "contemporary-contempo-cafe",
+      "contemporary-steakhouse-71-lounge"
+    ],
     "rooms": [
       { "id": "standard-garden", "name": "Standard Room - Garden Wing", "sleeps": 5, "description": "Garden wing with resort views" },
       { "id": "standard-tower", "name": "Standard Room - Tower", "sleeps": 5, "description": "Main tower with Magic Kingdom views" },
@@ -194,19 +355,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": true,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": true,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": true,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": true,
+          "character_dining": true,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": true,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": true,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -216,6 +409,10 @@
         "familyAccommodations": false
       }
     },
+    "diningOptions": [
+      "wilderness-lodge-artist-point",
+      "wilderness-lodge-whispering-canyon"
+    ],
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Woods or courtyard view" },
       { "id": "club-level", "name": "Club Level Room", "sleeps": 4, "description": "Concierge level with lounge access" },
@@ -238,19 +435,51 @@
         "walking": true
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": true,
-        "concierge": true,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": true,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": true,
+          "character_dining": false,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": true,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": true,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -260,6 +489,9 @@
         "familyAccommodations": false
       }
     },
+    "diningOptions": [
+      "boardwalk-flying-fish"
+    ],
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 5, "description": "Garden or BoardWalk view" },
       { "id": "club-level", "name": "Club Level Room", "sleeps": 5, "description": "Concierge level with lounge access" },
@@ -282,19 +514,51 @@
         "walking": true
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": true,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": true,
+          "water_slides": true,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": true
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": true,
+          "character_dining": false,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": true,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -304,6 +568,7 @@
         "familyAccommodations": false
       }
     },
+    "diningOptions": [],
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 5, "description": "Garden or water view" },
       { "id": "club-level", "name": "Club Level Room", "sleeps": 5, "description": "Concierge level with lounge access" },
@@ -326,19 +591,51 @@
         "walking": true
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": true,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": true,
+          "water_slides": true,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": true
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": true,
+          "character_dining": false,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": true,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -348,6 +645,7 @@
         "familyAccommodations": false
       }
     },
+    "diningOptions": [],
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 5, "description": "Garden or water view" },
       { "id": "club-level", "name": "Club Level Room", "sleeps": 5, "description": "Concierge level with lounge access" },
@@ -370,19 +668,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": true,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": false,
-        "childcare": true
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": true,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": true,
+          "couples_treatments": true,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": true,
+          "character_dining": true,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": false,
+          "childcare": true,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": true,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -392,6 +722,10 @@
         "familyAccommodations": false
       }
     },
+    "diningOptions": [
+      "animal-kingdom-lodge-jiko",
+      "animal-kingdom-lodge-boma"
+    ],
     "rooms": [
       { "id": "standard-value", "name": "Standard Room - Value View", "sleeps": 4, "description": "Standard view room" },
       { "id": "standard-savanna", "name": "Standard Room - Savanna View", "sleeps": 4, "description": "Savanna view with animals" },
@@ -415,19 +749,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": true,
-        "spa": false,
-        "fitnessCenter": false,
-        "golf": false,
-        "beach": false,
-        "marina": true,
-        "dining": true,
-        "quickService": true,
-        "entertainment": false,
-        "concierge": false,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": true,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": false,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": false,
+          "character_dining": false,
+          "signature_dining": false
+        },
+        "recreation": {
+          "beach": false,
+          "marina": true,
+          "boat_rentals": true,
+          "fishing": true,
+          "bike_rentals": true,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": false,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": false
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": false,
@@ -437,6 +803,7 @@
         "familyAccommodations": false
       }
     },
+    "diningOptions": [],
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "River or garden view" },
       { "id": "royal", "name": "Royal Guest Room", "sleeps": 4, "description": "Princess and the Frog themed room" }
@@ -458,19 +825,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": true,
-        "spa": false,
-        "fitnessCenter": false,
-        "golf": false,
-        "beach": false,
-        "marina": true,
-        "dining": true,
-        "quickService": true,
-        "entertainment": false,
-        "concierge": false,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": true,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": false,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": false,
+          "character_dining": false,
+          "signature_dining": false
+        },
+        "recreation": {
+          "beach": false,
+          "marina": true,
+          "boat_rentals": true,
+          "fishing": true,
+          "bike_rentals": true,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": false,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": false
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": false,
@@ -480,6 +879,7 @@
         "familyAccommodations": false
       }
     },
+    "diningOptions": [],
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "River or garden view" },
       { "id": "royal", "name": "Royal Guest Room", "sleeps": 4, "description": "Princess and the Frog themed room" }
@@ -505,19 +905,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": false,
-        "fitnessCenter": false,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": false,
-        "quickService": true,
-        "entertainment": false,
-        "concierge": false,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": false,
+          "pool_bar": false,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": false,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": false,
+          "quick_service": true,
+          "pool_bar": false,
+          "room_service": false,
+          "character_dining": false,
+          "signature_dining": false
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": false
+        },
+        "services": {
+          "concierge": false,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": false
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": false,
@@ -526,7 +958,8 @@
         "themedRooms": false,
         "familyAccommodations": true
       }
-    }
+    },
+    "diningOptions": []
   },
   {
     "id": "all-star-sports",
@@ -544,19 +977,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": false,
-        "fitnessCenter": false,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": false,
-        "quickService": true,
-        "entertainment": false,
-        "concierge": false,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": false,
+          "pool_bar": false,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": false,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": false,
+          "quick_service": true,
+          "pool_bar": false,
+          "room_service": false,
+          "character_dining": false,
+          "signature_dining": false
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": false
+        },
+        "services": {
+          "concierge": false,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": false
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": false,
@@ -566,6 +1031,7 @@
         "familyAccommodations": false
       }
     },
+    "diningOptions": [],
     "rooms": [
       { "id": "standard", "name": "Standard Room", "sleeps": 4, "description": "Sports themed standard room" },
       { "id": "preferred", "name": "Preferred Room", "sleeps": 4, "description": "Close to amenities" }
@@ -587,19 +1053,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": true,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": true,
+          "couples_treatments": true,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": false,
+          "character_dining": false,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": false,
@@ -609,6 +1107,7 @@
         "familyAccommodations": false
       }
     },
+    "diningOptions": [],
     "rooms": [
       { "id": "tower-studio", "name": "Tower Studio", "sleeps": 2, "description": "Compact studio with kitchenette" },
       { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 5, "description": "Studio villa with kitchenette" },
@@ -633,19 +1132,52 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": true,
-        "fitnessCenter": true,
-        "golf": true,
-        "beach": false,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": true,
+          "couples_treatments": true,
+          "fitness_center": true,
+          "sauna": true,
+          "steam_room": true
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": false,
+          "character_dining": false,
+          "signature_dining": false
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": true,
+          "walking_trails": true,
+          "golf": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": false,
@@ -655,6 +1187,7 @@
         "familyAccommodations": true
       }
     },
+    "diningOptions": [],
     "rooms": [
       { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 4, "description": "Studio villa with kitchenette" },
       { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
@@ -679,19 +1212,52 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": true,
-        "beach": false,
-        "marina": true,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": true,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": false,
+          "character_dining": false,
+          "signature_dining": false
+        },
+        "recreation": {
+          "beach": false,
+          "marina": true,
+          "boat_rentals": true,
+          "fishing": true,
+          "bike_rentals": true,
+          "walking_trails": true,
+          "golf": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": false,
@@ -701,6 +1267,7 @@
         "familyAccommodations": false
       }
     },
+    "diningOptions": [],
     "rooms": [
       { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 4, "description": "Studio villa with kitchenette" },
       { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
@@ -724,19 +1291,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": false,
-        "fitnessCenter": false,
-        "golf": false,
-        "beach": true,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": false,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": true,
+          "pool_bar": false,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": false,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": false,
+          "room_service": false,
+          "character_dining": true,
+          "signature_dining": false
+        },
+        "recreation": {
+          "beach": true,
+          "marina": false,
+          "boat_rentals": true,
+          "fishing": true,
+          "bike_rentals": true,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": false,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": false
+        },
+        "entertainment": {
+          "live_music": true,
+          "character_meet_greets": false,
+          "movies_under_stars": true,
+          "campfire": true
+        }
       },
       "accommodations": {
         "suites": false,
@@ -746,6 +1345,7 @@
         "familyAccommodations": true
       }
     },
+    "diningOptions": [],
     "rooms": [
       { "id": "cabin", "name": "Wilderness Cabin", "sleeps": 6, "description": "Rustic cabin with full kitchen and deck" }
     ]
@@ -766,19 +1366,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": true,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": true,
-        "marina": true,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": true,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": true,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": true
+        },
+        "spa": {
+          "full_service": true,
+          "couples_treatments": true,
+          "fitness_center": true,
+          "sauna": true,
+          "steam_room": true
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": true,
+          "character_dining": true,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": true,
+          "marina": true,
+          "boat_rentals": true,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": true,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": true,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": false,
@@ -788,6 +1420,18 @@
         "familyAccommodations": false
       }
     },
+    "diningOptions": [
+      "grand-floridian-victoria-alberts",
+      "grand-floridian-narcoossees",
+      "grand-floridian-citricos",
+      "grand-floridian-1900-park-fare",
+      "grand-floridian-cafe",
+      "grand-floridian-gasparilla-grill",
+      "grand-floridian-enchanted-rose",
+      "grand-floridian-citricos-lounge",
+      "grand-floridian-beaches-pool-bar",
+      "grand-floridian-courtyard-pool-bar"
+    ],
     "rooms": [
       { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 5, "description": "Studio villa with kitchenette" },
       { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 5, "description": "One-bedroom villa with full kitchen" },
@@ -811,19 +1455,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": true,
-        "marina": true,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": true,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": true,
+          "character_dining": true,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": true,
+          "marina": true,
+          "boat_rentals": true,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": true,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": false,
@@ -833,6 +1509,13 @@
         "familyAccommodations": false
       }
     },
+    "diningOptions": [
+      "contemporary-california-grill",
+      "contemporary-chef-mickeys",
+      "contemporary-steakhouse-71",
+      "contemporary-contempo-cafe",
+      "contemporary-steakhouse-71-lounge"
+    ],
     "rooms": [
       { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 4, "description": "Studio villa with kitchenette" },
       { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
@@ -856,19 +1539,51 @@
         "walking": true
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": true,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": true,
+          "water_slides": true,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": true
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": false,
+          "character_dining": false,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": true,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": false,
@@ -878,6 +1593,7 @@
         "familyAccommodations": false
       }
     },
+    "diningOptions": [],
     "rooms": [
       { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 5, "description": "Studio villa with kitchenette" },
       { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
@@ -907,19 +1623,51 @@
         "walking": true
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": true,
-        "concierge": true,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": true,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": false,
+          "character_dining": false,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": true,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": true,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": false,
@@ -928,7 +1676,10 @@
         "themedRooms": false,
         "familyAccommodations": false
       }
-    }
+    },
+    "diningOptions": [
+      "boardwalk-flying-fish"
+    ]
   },
   {
     "id": "animal-kingdom-kidani",
@@ -946,19 +1697,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": true,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": false,
-        "childcare": true
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": false,
+          "character_dining": false,
+          "signature_dining": false
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": false,
+          "childcare": true,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": true,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": false,
@@ -968,6 +1751,10 @@
         "familyAccommodations": false
       }
     },
+    "diningOptions": [
+      "animal-kingdom-lodge-jiko",
+      "animal-kingdom-lodge-boma"
+    ],
     "rooms": [
       { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 4, "description": "Studio villa with kitchenette and savanna views" },
       { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
@@ -991,19 +1778,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": true,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": true,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": true,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": false,
+          "character_dining": true,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": true,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": true,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": false,
@@ -1013,6 +1832,10 @@
         "familyAccommodations": true
       }
     },
+    "diningOptions": [
+      "wilderness-lodge-artist-point",
+      "wilderness-lodge-whispering-canyon"
+    ],
     "rooms": [
       { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 4, "description": "Studio villa with kitchenette" },
       { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
@@ -1036,19 +1859,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": true,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": true,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": true,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": false,
+          "character_dining": true,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": true,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": true,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": false,
@@ -1058,6 +1913,10 @@
         "familyAccommodations": false
       }
     },
+    "diningOptions": [
+      "wilderness-lodge-artist-point",
+      "wilderness-lodge-whispering-canyon"
+    ],
     "rooms": [
       { "id": "deluxe-studio", "name": "Deluxe Studio", "sleeps": 4, "description": "Studio villa with kitchenette" },
       { "id": "1br-villa", "name": "One Bedroom Villa", "sleeps": 4, "description": "One-bedroom villa with full kitchen" },
@@ -1086,19 +1945,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": true,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": false,
-        "businessCenter": true,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": true,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": true,
+          "couples_treatments": true,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": true,
+          "character_dining": false,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": true,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": false,
+          "business_center": true,
+          "childcare": false,
+          "laundry": true,
+          "car_service": false
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -1107,7 +1998,8 @@
         "themedRooms": false,
         "familyAccommodations": false
       }
-    }
+    },
+    "diningOptions": []
   },
   {
     "id": "caribbean-beach",
@@ -1130,19 +2022,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": true,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": true,
-        "marina": true,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": false,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": true,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": false,
+          "character_dining": false,
+          "signature_dining": false
+        },
+        "recreation": {
+          "beach": true,
+          "marina": true,
+          "boat_rentals": true,
+          "fishing": true,
+          "bike_rentals": true,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": false,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": false
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": false,
@@ -1151,7 +2075,8 @@
         "themedRooms": true,
         "familyAccommodations": false
       }
-    }
+    },
+    "diningOptions": []
   },
   {
     "id": "pop-century",
@@ -1173,19 +2098,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": false,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": false,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": false,
+          "pool_bar": false,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": false,
+          "quick_service": true,
+          "pool_bar": false,
+          "room_service": false,
+          "character_dining": false,
+          "signature_dining": false
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": false
+        },
+        "services": {
+          "concierge": false,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": false
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": false,
@@ -1194,7 +2151,8 @@
         "themedRooms": false,
         "familyAccommodations": false
       }
-    }
+    },
+    "diningOptions": []
   },
   {
     "id": "all-star-movies",
@@ -1217,19 +2175,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": false,
-        "fitnessCenter": false,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": false,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": false,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": false,
+          "pool_bar": false,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": false,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": false,
+          "quick_service": true,
+          "pool_bar": false,
+          "room_service": false,
+          "character_dining": false,
+          "signature_dining": false
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": false
+        },
+        "services": {
+          "concierge": false,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": false
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": false,
@@ -1238,7 +2228,8 @@
         "themedRooms": false,
         "familyAccommodations": true
       }
-    }
+    },
+    "diningOptions": []
   },
   {
     "id": "art-of-animation",
@@ -1260,19 +2251,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": false,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": false,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": false,
+          "pool_bar": false,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": false,
+          "quick_service": true,
+          "pool_bar": false,
+          "room_service": false,
+          "character_dining": false,
+          "signature_dining": false
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": false
+        },
+        "services": {
+          "concierge": false,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": false
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": false,
@@ -1281,6 +2304,7 @@
         "themedRooms": false,
         "familyAccommodations": true
       }
-    }
+    },
+    "diningOptions": []
   }
 ]

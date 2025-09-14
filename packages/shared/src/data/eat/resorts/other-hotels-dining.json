@@ -1,0 +1,1529 @@
+[
+  {
+    "id": "four-seasons-capa",
+    "resortId": "four-seasons",
+    "name": "Capa",
+    "description": "Michelin-starred 17th-floor rooftop steakhouse and bar featuring Spanish-influenced cuisine with panoramic views of Magic Kingdom fireworks and an open kitchen with wood-burning grill.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 4,
+    "cuisineType": "Spanish Steakhouse",
+    "location": "17th Floor Rooftop",
+    "operatingHours": {
+      "dinner": "5:30 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "signatureDining": true,
+      "rooftopDining": true,
+      "fireworksViews": true,
+      "michelinStarred": true,
+      "openKitchen": true,
+      "woodBurningGrill": true
+    },
+    "tips": [
+      {
+        "id": "capa-tip-1",
+        "category": "strategy",
+        "content": "Book dinner around fireworks time for spectacular Magic Kingdom views from the 17th floor",
+        "priority": 5
+      },
+      {
+        "id": "capa-tip-2",
+        "category": "general",
+        "content": "Michelin-starred restaurant with Spanish-influenced cuisine and expert cuts",
+        "priority": 5
+      },
+      {
+        "id": "capa-tip-3",
+        "category": "general",
+        "content": "Open kitchen and wood-burning grill allow diners to watch the culinary action",
+        "priority": 4
+      },
+      {
+        "id": "capa-tip-4",
+        "category": "strategy",
+        "content": "Outdoor patio offers unobstructed fireworks views - request patio seating",
+        "priority": 4
+      }
+    ],
+    "tags": ["signature-dining", "michelin-starred", "rooftop", "fireworks-views", "spanish", "steakhouse"]
+  },
+  {
+    "id": "four-seasons-ravello",
+    "resortId": "four-seasons",
+    "name": "Ravello",
+    "description": "Destination Italian restaurant serving fresh authentic cuisine inspired by Italy's culinary traditions with house-made pastas, wood-fired pizzas, and character dining with Goofy & His Pals.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "cuisineType": "Authentic Italian",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "breakfast": "7:00 AM - 11:00 AM",
+      "lunch": "12:00 PM - 2:30 PM",
+      "dinner": "5:30 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "characterDining": true,
+      "woodFiredPizza": true,
+      "houseMadePasta": true,
+      "indoorOutdoorSeating": true,
+      "authenticallyItalian": true
+    },
+    "tips": [
+      {
+        "id": "ravello-tip-1",
+        "category": "strategy",
+        "content": "Good Morning Breakfast with Goofy & His Pals - unique character dining experience",
+        "priority": 5
+      },
+      {
+        "id": "ravello-tip-2",
+        "category": "general",
+        "content": "House-made pastas and wood-fired pizzas celebrate authentic Italian flavors",
+        "priority": 4
+      },
+      {
+        "id": "ravello-tip-3",
+        "category": "general",
+        "content": "Special prix-fixe three-course menu available for $60 per person",
+        "priority": 4
+      },
+      {
+        "id": "ravello-tip-4",
+        "category": "general",
+        "content": "Indoor-outdoor setting with seasonal ingredients and bold flavors",
+        "priority": 3
+      }
+    ],
+    "tags": ["italian", "character-dining", "wood-fired-pizza", "house-made-pasta", "goofy"]
+  },
+  {
+    "id": "four-seasons-pb-and-g",
+    "resortId": "four-seasons",
+    "name": "Pool Bar & Grill (PB&G)",
+    "description": "Lively southern-inspired poolside restaurant serving American coastal fare with locally sourced ingredients from seafood to salads in a lakeside setting.",
+    "type": "quick_service",
+    "serviceType": "poolside",
+    "priceLevel": 2,
+    "cuisineType": "Southern Coastal American",
+    "location": "Pool Area, Lakeside",
+    "operatingHours": {
+      "lunch": "11:00 AM - 6:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "poolside": true,
+      "southernInspired": true,
+      "locallySourced": true,
+      "lakesideViews": true,
+      "coastalCuisine": true
+    },
+    "tips": [
+      {
+        "id": "pb-and-g-tip-1",
+        "category": "general",
+        "content": "Southern-inspired coastal cuisine with locally sourced ingredients",
+        "priority": 4
+      },
+      {
+        "id": "pb-and-g-tip-2",
+        "category": "general",
+        "content": "Beautiful lakeside setting perfect for relaxed poolside dining",
+        "priority": 4
+      },
+      {
+        "id": "pb-and-g-tip-3",
+        "category": "general",
+        "content": "Menu draws inspiration from coastal regions with fresh seafood focus",
+        "priority": 3
+      }
+    ],
+    "tags": ["poolside", "southern", "coastal", "locally-sourced", "lakeside-views"]
+  },
+  {
+    "id": "four-seasons-plancha",
+    "resortId": "four-seasons",
+    "name": "Plancha",
+    "description": "Golf clubhouse restaurant serving Cuban-American cuisine in a relaxed country club atmosphere with views of the championship golf course.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 2,
+    "cuisineType": "Cuban-American",
+    "location": "Golf Clubhouse",
+    "operatingHours": {
+      "lunch": "11:00 AM - 5:00 PM"
+    },
+    "reservationWindow": 30,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "golfClubhouse": true,
+      "cubanAmerican": true,
+      "golfCourseViews": true,
+      "countryClubSetting": true
+    },
+    "tips": [
+      {
+        "id": "plancha-tip-1",
+        "category": "general",
+        "content": "Cuban-American cuisine in a relaxed golf clubhouse setting",
+        "priority": 4
+      },
+      {
+        "id": "plancha-tip-2",
+        "category": "general",
+        "content": "Beautiful views of the championship golf course while dining",
+        "priority": 3
+      },
+      {
+        "id": "plancha-tip-3",
+        "category": "strategy",
+        "content": "Perfect for golfers and families wanting casual dining with a view",
+        "priority": 3
+      }
+    ],
+    "tags": ["cuban-american", "golf-clubhouse", "golf-course-views", "casual-dining"]
+  },
+  {
+    "id": "four-seasons-lobby-bar",
+    "resortId": "four-seasons",
+    "name": "The Lobby Bar",
+    "description": "Elegant lobby lounge offering craft cocktails and a full menu of eclectic food in a sophisticated atmosphere with resort views.",
+    "type": "lounge",
+    "serviceType": "lounge",
+    "priceLevel": 3,
+    "cuisineType": "Cocktails & Eclectic American",
+    "location": "Main Building, Lobby Level",
+    "operatingHours": {
+      "allDay": "11:00 AM - 12:00 AM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "lobbyLounge": true,
+      "craftCocktails": true,
+      "eclecticMenu": true,
+      "sophisticatedSetting": true,
+      "allDayDining": true
+    },
+    "tips": [
+      {
+        "id": "lobby-bar-tip-1",
+        "category": "general",
+        "content": "Elegant lobby setting with craft cocktails and eclectic food menu",
+        "priority": 4
+      },
+      {
+        "id": "lobby-bar-tip-2",
+        "category": "strategy",
+        "content": "Perfect for pre-dinner cocktails or casual meeting spot",
+        "priority": 3
+      },
+      {
+        "id": "lobby-bar-tip-3",
+        "category": "general",
+        "content": "Sophisticated atmosphere with all-day dining and drink service",
+        "priority": 3
+      }
+    ],
+    "tags": ["lobby-lounge", "craft-cocktails", "eclectic-menu", "sophisticated", "all-day"]
+  },
+  {
+    "id": "four-seasons-lickety-split",
+    "resortId": "four-seasons",
+    "name": "Lickety-Split",
+    "description": "Colorful coffee bar offering Starbucks coffee, pastries, and culinary creations to go in a vibrant grab-and-go setting.",
+    "type": "quick_service",
+    "serviceType": "counter",
+    "priceLevel": 2,
+    "cuisineType": "Coffee & Pastries",
+    "location": "Main Building, Lobby Level",
+    "operatingHours": {
+      "allDay": "6:00 AM - 6:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "dairy-free"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "starbucksCoffee": true,
+      "grabAndGo": true,
+      "colorfulSetting": true,
+      "pastries": true,
+      "quickService": true
+    },
+    "tips": [
+      {
+        "id": "lickety-split-tip-1",
+        "category": "general",
+        "content": "Colorful coffee bar with Starbucks coffee and fresh pastries",
+        "priority": 4
+      },
+      {
+        "id": "lickety-split-tip-2",
+        "category": "strategy",
+        "content": "Perfect grab-and-go option for quick breakfast or snacks",
+        "priority": 4
+      },
+      {
+        "id": "lickety-split-tip-3",
+        "category": "general",
+        "content": "Culinary creations to go - convenient for park days",
+        "priority": 3
+      }
+    ],
+    "tags": ["coffee-bar", "starbucks", "grab-and-go", "pastries", "colorful"]
+  },
+  {
+    "id": "waldorf-astoria-bull-and-bear",
+    "resortId": "waldorf-astoria",
+    "name": "Bull & Bear",
+    "description": "Award-winning signature steakhouse featuring re-imagined classics including tableside Caesar salad, Chateaubriand for Two, and premium steaks in an elegant setting.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 4,
+    "cuisineType": "American Steakhouse",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "dinner": "5:30 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "signatureDining": true,
+      "awardWinning": true,
+      "tableSideService": true,
+      "premiumSteaks": true,
+      "elegantSetting": true
+    },
+    "tips": [
+      {
+        "id": "bull-bear-tip-1",
+        "category": "general",
+        "content": "Award-winning signature restaurant with re-imagined steakhouse classics",
+        "priority": 5
+      },
+      {
+        "id": "bull-bear-tip-2",
+        "category": "general",
+        "content": "Famous Caesar salad prepared tableside and Chateaubriand for Two",
+        "priority": 4
+      },
+      {
+        "id": "bull-bear-tip-3",
+        "category": "strategy",
+        "content": "Recently renovated with new culinary innovations in 2025",
+        "priority": 4
+      },
+      {
+        "id": "bull-bear-tip-4",
+        "category": "general",
+        "content": "Elegant atmosphere perfect for special occasions and business dinners",
+        "priority": 3
+      }
+    ],
+    "tags": ["signature-dining", "steakhouse", "award-winning", "tableside-service", "elegant"]
+  },
+  {
+    "id": "waldorf-astoria-oscars-brasserie",
+    "resortId": "waldorf-astoria",
+    "name": "Oscar's Brasserie",
+    "description": "Opulent breakfast restaurant featuring a world-class buffet with crepes, omelets, charcuterie, fresh Florida fruit, and cold-pressed juices with croissant bar.",
+    "type": "table_service",
+    "serviceType": "buffet",
+    "priceLevel": 3,
+    "cuisineType": "European Breakfast",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "breakfast": "7:00 AM - 11:00 AM",
+      "croissantBar": "6:00 AM - 11:00 AM"
+    },
+    "reservationWindow": 30,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "buffetStyle": true,
+      "worldClass": true,
+      "croissantBar": true,
+      "freshFruit": true,
+      "coldPressedJuices": true
+    },
+    "tips": [
+      {
+        "id": "oscars-tip-1",
+        "category": "general",
+        "content": "Opulent breakfast buffet with crepes, omelets, and fresh charcuterie",
+        "priority": 4
+      },
+      {
+        "id": "oscars-tip-2",
+        "category": "strategy",
+        "content": "Arrive early for fresh croissants from the croissant bar starting at 6:00 AM",
+        "priority": 4
+      },
+      {
+        "id": "oscars-tip-3",
+        "category": "general",
+        "content": "Features fresh Florida fruit and cold-pressed juices",
+        "priority": 3
+      }
+    ],
+    "tags": ["breakfast-buffet", "european", "croissant-bar", "fresh-fruit", "world-class"]
+  },
+  {
+    "id": "waldorf-astoria-aquamarine",
+    "resortId": "waldorf-astoria",
+    "name": "Aquamarine",
+    "description": "Poolside dining restaurant serving sandwiches, salads, starters, and cocktails in a relaxed aquatic atmosphere with pool service.",
+    "type": "quick_service",
+    "serviceType": "poolside",
+    "priceLevel": 2,
+    "cuisineType": "Poolside American",
+    "location": "Pool Area",
+    "operatingHours": {
+      "lunch": "11:00 AM - 6:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "poolside": true,
+      "poolService": true,
+      "aquaticAtmosphere": true,
+      "casualDining": true
+    },
+    "tips": [
+      {
+        "id": "aquamarine-tip-1",
+        "category": "general",
+        "content": "Perfect poolside dining with sandwiches, salads, and refreshing cocktails",
+        "priority": 4
+      },
+      {
+        "id": "aquamarine-tip-2",
+        "category": "general",
+        "content": "Food and drinks can be served to your pool chair for ultimate relaxation",
+        "priority": 3
+      }
+    ],
+    "tags": ["poolside", "sandwiches", "salads", "cocktails", "pool-service"]
+  },
+  {
+    "id": "waldorf-astoria-peacock-alley",
+    "resortId": "waldorf-astoria",
+    "name": "Peacock Alley",
+    "description": "Elegant lobby lounge offering cocktails and smaller plates including the famous Peacock Egg cocktail in the resort's majestic lobby setting.",
+    "type": "lounge",
+    "serviceType": "lounge",
+    "priceLevel": 3,
+    "cuisineType": "Cocktails & Small Plates",
+    "location": "Main Building, Lobby Level",
+    "operatingHours": {
+      "allDay": "11:00 AM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "lobbyLounge": true,
+      "elegantSetting": true,
+      "signatureCocktails": true,
+      "smallPlates": true,
+      "majesticLobby": true
+    },
+    "tips": [
+      {
+        "id": "peacock-alley-tip-1",
+        "category": "general",
+        "content": "Try the famous one-of-a-kind Peacock Egg cocktail",
+        "priority": 5
+      },
+      {
+        "id": "peacock-alley-tip-2",
+        "category": "general",
+        "content": "Recently renovated with new design innovations in the majestic lobby",
+        "priority": 4
+      },
+      {
+        "id": "peacock-alley-tip-3",
+        "category": "strategy",
+        "content": "Perfect for pre-dinner cocktails or evening socializing",
+        "priority": 3
+      }
+    ],
+    "tags": ["lobby-lounge", "cocktails", "peacock-egg", "elegant", "small-plates"]
+  },
+  {
+    "id": "waldorf-astoria-clubhouse-grille",
+    "resortId": "waldorf-astoria",
+    "name": "The Clubhouse Grille",
+    "description": "Golf course restaurant at the 19th hole serving menu items from Bull & Bear Smokehouse in a relaxed country club atmosphere.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 2,
+    "cuisineType": "American Smokehouse",
+    "location": "Waldorf Astoria Golf Club",
+    "operatingHours": {
+      "lunch": "11:00 AM - 5:00 PM"
+    },
+    "reservationWindow": 30,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "golfClubhouse": true,
+      "19thHole": true,
+      "smokehouse": true,
+      "countryClubSetting": true
+    },
+    "tips": [
+      {
+        "id": "clubhouse-grille-tip-1",
+        "category": "general",
+        "content": "Located at the 19th hole with menu items from Bull & Bear Smokehouse",
+        "priority": 4
+      },
+      {
+        "id": "clubhouse-grille-tip-2",
+        "category": "strategy",
+        "content": "Perfect for golfers wanting quality dining at the golf club",
+        "priority": 3
+      }
+    ],
+    "tags": ["golf-clubhouse", "19th-hole", "smokehouse", "country-club", "casual"]
+  },
+  {
+    "id": "hilton-bonnet-creek-la-luce",
+    "resortId": "hilton-bonnet-creek",
+    "name": "La Luce",
+    "description": "Modern Italian country kitchen created by Napa Valley chef Donna Scala, serving thin crust pizzas, homemade pasta, and family tradition dishes.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 4,
+    "cuisineType": "Modern Italian",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "dinner": "6:00 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "signatureDining": true,
+      "celebrityChef": true,
+      "modernItalian": true,
+      "homemadePasta": true,
+      "thinCrustPizza": true
+    },
+    "tips": [
+      {
+        "id": "la-luce-tip-1",
+        "category": "general",
+        "content": "Created by renowned Napa Valley chef Donna Scala",
+        "priority": 5
+      },
+      {
+        "id": "la-luce-tip-2",
+        "category": "general",
+        "content": "Features homemade pasta and thin crust pizzas rooted in family tradition",
+        "priority": 4
+      },
+      {
+        "id": "la-luce-tip-3",
+        "category": "general",
+        "content": "Modern Italian country kitchen with contemporary takes on classics",
+        "priority": 4
+      }
+    ],
+    "tags": ["signature-dining", "modern-italian", "celebrity-chef", "homemade-pasta", "thin-crust-pizza"]
+  },
+  {
+    "id": "hilton-bonnet-creek-zeta-asia",
+    "resortId": "hilton-bonnet-creek",
+    "name": "Zeta Asia",
+    "description": "Sophisticated Pan-Asian restaurant offering traditional and signature sushi rolls, sashimi, and innovative hand-crafted cocktails in swanky surroundings.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 4,
+    "cuisineType": "Pan-Asian Sushi",
+    "location": "Lobby Level",
+    "operatingHours": {
+      "dinner": "5:30 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "signatureDining": true,
+      "panAsian": true,
+      "sushiBar": true,
+      "handCraftedCocktails": true,
+      "swankySurroundings": true
+    },
+    "tips": [
+      {
+        "id": "zeta-asia-tip-1",
+        "category": "general",
+        "content": "Sophisticated Pan-Asian cuisine with traditional and signature sushi options",
+        "priority": 4
+      },
+      {
+        "id": "zeta-asia-tip-2",
+        "category": "general",
+        "content": "Features innovative hand-crafted cocktails in swanky surroundings",
+        "priority": 4
+      },
+      {
+        "id": "zeta-asia-tip-3",
+        "category": "strategy",
+        "content": "Perfect for sushi lovers wanting upscale Pan-Asian dining experience",
+        "priority": 3
+      }
+    ],
+    "tags": ["signature-dining", "pan-asian", "sushi", "cocktails", "sophisticated"]
+  },
+  {
+    "id": "hilton-bonnet-creek-myth",
+    "resortId": "hilton-bonnet-creek",
+    "name": "Myth",
+    "description": "Stylish lobby bar offering more than just drinks with charm and style for quick bites or late night drinks in an upscale setting.",
+    "type": "lounge",
+    "serviceType": "lounge",
+    "priceLevel": 3,
+    "cuisineType": "Cocktails & Light Bites",
+    "location": "Main Building, Lobby Level",
+    "operatingHours": {
+      "allDay": "11:00 AM - 1:00 AM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "lobbyBar": true,
+      "stylish": true,
+      "quickBites": true,
+      "lateNight": true,
+      "upscaleSetting": true
+    },
+    "tips": [
+      {
+        "id": "myth-tip-1",
+        "category": "general",
+        "content": "More than a lobby bar - offers charm and style for quick bites",
+        "priority": 4
+      },
+      {
+        "id": "myth-tip-2",
+        "category": "strategy",
+        "content": "Perfect for late night drinks - open until 1:00 AM",
+        "priority": 3
+      },
+      {
+        "id": "myth-tip-3",
+        "category": "general",
+        "content": "Stylish upscale setting ideal for business or casual meetings",
+        "priority": 3
+      }
+    ],
+    "tags": ["lobby-bar", "stylish", "quick-bites", "late-night", "upscale"]
+  },
+  {
+    "id": "hilton-bonnet-creek-coffee-bar",
+    "resortId": "hilton-bonnet-creek",
+    "name": "Coffee Bar",
+    "description": "Fresh-focused coffee bar offering barista creations with vegan and gluten-free options for convenient grab-and-go service.",
+    "type": "quick_service",
+    "serviceType": "counter",
+    "priceLevel": 2,
+    "cuisineType": "Coffee & Pastries",
+    "location": "Main Building, Lobby Level",
+    "operatingHours": {
+      "allDay": "6:00 AM - 6:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegan", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "baristaCreations": true,
+      "freshFocused": true,
+      "veganOptions": true,
+      "glutenFreeOptions": true,
+      "grabAndGo": true
+    },
+    "tips": [
+      {
+        "id": "coffee-bar-tip-1",
+        "category": "general",
+        "content": "Fresh-focused coffee bar with barista creations",
+        "priority": 4
+      },
+      {
+        "id": "coffee-bar-tip-2",
+        "category": "general",
+        "content": "Excellent vegan and gluten-free options available",
+        "priority": 4
+      },
+      {
+        "id": "coffee-bar-tip-3",
+        "category": "strategy",
+        "content": "Perfect grab-and-go option for quick breakfast or coffee",
+        "priority": 3
+      }
+    ],
+    "tags": ["coffee-bar", "barista", "vegan-options", "gluten-free", "grab-and-go"]
+  },
+  {
+    "id": "hilton-bonnet-creek-pool-dining",
+    "resortId": "hilton-bonnet-creek",
+    "name": "Pool Dining",
+    "description": "Tropical paradise poolside restaurant and bar with upbeat atmosphere offering burgers, salads, kid-friendly fare, and poolside family fun.",
+    "type": "quick_service",
+    "serviceType": "poolside",
+    "priceLevel": 2,
+    "cuisineType": "Poolside American",
+    "location": "Pool Area",
+    "operatingHours": {
+      "lunch": "11:00 AM - 6:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "poolside": true,
+      "tropicalParadise": true,
+      "upbeatAtmosphere": true,
+      "familyFun": true,
+      "kidFriendlyFare": true
+    },
+    "tips": [
+      {
+        "id": "pool-dining-tip-1",
+        "category": "general",
+        "content": "Tropical paradise atmosphere with upbeat poolside family fun",
+        "priority": 4
+      },
+      {
+        "id": "pool-dining-tip-2",
+        "category": "general",
+        "content": "Kid-friendly fare including burgers and salads",
+        "priority": 4
+      },
+      {
+        "id": "pool-dining-tip-3",
+        "category": "strategy",
+        "content": "Perfect for families wanting to stay poolside all day",
+        "priority": 3
+      }
+    ],
+    "tags": ["poolside", "tropical", "family-fun", "kid-friendly", "upbeat"]
+  },
+  {
+    "id": "buena-vista-palace-letterpress",
+    "resortId": "buena-vista-palace",
+    "name": "LetterPress Restaurant",
+    "description": "Main dining restaurant serving buffet breakfast daily and offering American cuisine for breakfast, brunch, lunch, and dinner in a casual atmosphere.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 2,
+    "cuisineType": "American Casual",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "breakfast": "6:30 AM - 11:00 AM",
+      "brunch": "11:00 AM - 2:00 PM",
+      "lunch": "12:00 PM - 5:00 PM",
+      "dinner": "5:00 PM - 10:00 PM"
+    },
+    "reservationWindow": 30,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "buffetBreakfast": true,
+      "allDayDining": true,
+      "casualAtmosphere": true,
+      "americanCuisine": true,
+      "familyFriendly": true
+    },
+    "tips": [
+      {
+        "id": "letterpress-tip-1",
+        "category": "general",
+        "content": "Features daily buffet breakfast plus all-day American dining",
+        "priority": 4
+      },
+      {
+        "id": "letterpress-tip-2",
+        "category": "strategy",
+        "content": "Great value for families with casual atmosphere and diverse menu",
+        "priority": 4
+      },
+      {
+        "id": "letterpress-tip-3",
+        "category": "general",
+        "content": "All-day dining from breakfast through dinner",
+        "priority": 3
+      }
+    ],
+    "tags": ["american-cuisine", "buffet-breakfast", "all-day-dining", "casual", "family-friendly"]
+  },
+  {
+    "id": "buena-vista-palace-shades-pool-bar",
+    "resortId": "buena-vista-palace",
+    "name": "Shades Pool Bar & Grille",
+    "description": "Poolside dining serving delicious drinks and casual cuisine with hand-crafted cocktails and light bites by the pool.",
+    "type": "quick_service",
+    "serviceType": "poolside",
+    "priceLevel": 2,
+    "cuisineType": "Poolside American",
+    "location": "Pool Area",
+    "operatingHours": {
+      "lunch": "11:00 AM - 6:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "poolside": true,
+      "handCraftedCocktails": true,
+      "lightBites": true,
+      "casualCuisine": true
+    },
+    "tips": [
+      {
+        "id": "shades-tip-1",
+        "category": "general",
+        "content": "Hand-crafted cocktails and casual cuisine by the pool",
+        "priority": 4
+      },
+      {
+        "id": "shades-tip-2",
+        "category": "strategy",
+        "content": "Perfect for poolside relaxation with food and drinks",
+        "priority": 3
+      }
+    ],
+    "tags": ["poolside", "cocktails", "light-bites", "casual", "pool-service"]
+  },
+  {
+    "id": "buena-vista-palace-citrus-28",
+    "resortId": "buena-vista-palace",
+    "name": "Citrus 28 Marketplace",
+    "description": "Grab-and-go marketplace offering Starbucks coffee, light meals, pastries, snacks, and convenience items for quick service.",
+    "type": "quick_service",
+    "serviceType": "counter",
+    "priceLevel": 2,
+    "cuisineType": "Coffee & Grab-and-Go",
+    "location": "Main Building, Lobby Level",
+    "operatingHours": {
+      "allDay": "6:00 AM - 10:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "starbucksCoffee": true,
+      "grabAndGo": true,
+      "marketplace": true,
+      "lightMeals": true,
+      "convenienceItems": true
+    },
+    "tips": [
+      {
+        "id": "citrus-28-tip-1",
+        "category": "general",
+        "content": "Features Starbucks coffee and grab-and-go convenience items",
+        "priority": 4
+      },
+      {
+        "id": "citrus-28-tip-2",
+        "category": "strategy",
+        "content": "Perfect for quick breakfast before Disney Springs or theme parks",
+        "priority": 4
+      },
+      {
+        "id": "citrus-28-tip-3",
+        "category": "general",
+        "content": "Little market with snacks and dry items for convenience",
+        "priority": 3
+      }
+    ],
+    "tags": ["starbucks", "grab-and-go", "marketplace", "convenience", "quick-service"]
+  },
+  {
+    "id": "doubletree-seaworld-laguna",
+    "resortId": "doubletree-disney-springs",
+    "name": "Laguna Restaurant & Bar",
+    "description": "Modern American restaurant serving all-day dining with elevated yet laid-back atmosphere, featuring steak, seafood, and kids menu with pool views.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 2,
+    "cuisineType": "Modern American",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "breakfast": "6:30 AM - 11:00 AM",
+      "lunch": "11:30 AM - 5:00 PM",
+      "dinner": "5:00 PM - 10:00 PM"
+    },
+    "reservationWindow": 30,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "allDayDining": true,
+      "modernAmerican": true,
+      "poolViews": true,
+      "patioSeating": true,
+      "elevatedCasual": true
+    },
+    "tips": [
+      {
+        "id": "laguna-tip-1",
+        "category": "general",
+        "content": "Elevated yet laid-back modern American fare with pool views",
+        "priority": 4
+      },
+      {
+        "id": "laguna-tip-2",
+        "category": "general",
+        "content": "Features outdoor patio seating with ceiling fans",
+        "priority": 4
+      },
+      {
+        "id": "laguna-tip-3",
+        "category": "general",
+        "content": "All-day dining from breakfast through dinner with kids menu",
+        "priority": 3
+      }
+    ],
+    "tags": ["modern-american", "all-day-dining", "pool-views", "patio-seating", "family-friendly"]
+  },
+  {
+    "id": "doubletree-seaworld-albertos",
+    "resortId": "doubletree-disney-springs",
+    "name": "Alberto's Pizzeria",
+    "description": "Italian restaurant serving gourmet pizzas with made-from-scratch dough, soups, hot subs, and pasta, plus Starbucks coffee and pastries.",
+    "type": "quick_service",
+    "serviceType": "counter",
+    "priceLevel": 2,
+    "cuisineType": "Italian Pizza & Pasta",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "allDay": "11:00 AM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "gourmetPizza": true,
+      "scratchMadeDough": true,
+      "starbucksCoffee": true,
+      "takeOut": true,
+      "italianFavorites": true
+    },
+    "tips": [
+      {
+        "id": "albertos-tip-1",
+        "category": "general",
+        "content": "Gourmet pizzas made with fresh, from-scratch dough",
+        "priority": 4
+      },
+      {
+        "id": "albertos-tip-2",
+        "category": "general",
+        "content": "Also serves Starbucks coffee, pastries, and desserts",
+        "priority": 4
+      },
+      {
+        "id": "albertos-tip-3",
+        "category": "strategy",
+        "content": "Perfect for dine-in or take-out pizza and Italian favorites",
+        "priority": 3
+      }
+    ],
+    "tags": ["gourmet-pizza", "italian", "starbucks", "take-out", "scratch-made"]
+  },
+  {
+    "id": "doubletree-seaworld-sonoma-lounge",
+    "resortId": "doubletree-disney-springs",
+    "name": "Sonoma Lounge",
+    "description": "Relaxed lobby lounge offering light bites, fine wines, and cocktails in a comfortable setting perfect for easy evenings.",
+    "type": "lounge",
+    "serviceType": "lounge",
+    "priceLevel": 2,
+    "cuisineType": "Wine & Light Bites",
+    "location": "Main Building, Lobby Level",
+    "operatingHours": {
+      "evening": "4:00 PM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "lobbyLounge": true,
+      "fineWines": true,
+      "lightBites": true,
+      "relaxedSetting": true,
+      "comfortableSetting": true
+    },
+    "tips": [
+      {
+        "id": "sonoma-tip-1",
+        "category": "general",
+        "content": "Relaxed lobby lounge with fine wines and light bites",
+        "priority": 4
+      },
+      {
+        "id": "sonoma-tip-2",
+        "category": "strategy",
+        "content": "Perfect for easy evenings with comfortable seating",
+        "priority": 3
+      }
+    ],
+    "tags": ["lobby-lounge", "fine-wines", "light-bites", "relaxed", "comfortable"]
+  },
+  {
+    "id": "doubletree-seaworld-barefoot-bar",
+    "resortId": "doubletree-disney-springs",
+    "name": "Barefoot Bar",
+    "description": "Festive poolside bar located at the edge of the Lagoon Pool, serving frozen specialties, tropical cocktails, and light fare.",
+    "type": "quick_service",
+    "serviceType": "poolside",
+    "priceLevel": 2,
+    "cuisineType": "Poolside Tropical",
+    "location": "Lagoon Pool Area",
+    "operatingHours": {
+      "seasonal": "11:00 AM - 7:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "poolside": true,
+      "frozenSpecialties": true,
+      "tropicalCocktails": true,
+      "festiveBar": true,
+      "lagoonPool": true
+    },
+    "tips": [
+      {
+        "id": "barefoot-bar-tip-1",
+        "category": "general",
+        "content": "Festive poolside bar with frozen specialties and tropical drinks",
+        "priority": 4
+      },
+      {
+        "id": "barefoot-bar-tip-2",
+        "category": "general",
+        "content": "Located at the edge of the resort's beautiful Lagoon Pool",
+        "priority": 3
+      }
+    ],
+    "tags": ["poolside", "frozen-specialties", "tropical-cocktails", "festive", "lagoon-pool"]
+  },
+  {
+    "id": "swan-hotel-il-mulino",
+    "resortId": "swan-hotel",
+    "name": "Il Mulino New York Trattoria",
+    "description": "Traditional Italian cuisine from the Abruzzi region served in a lively bistro environment, inspired by the #1 Italian restaurant in NYC according to Zagat.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 4,
+    "cuisineType": "Traditional Italian",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "dinner": "5:00 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "signatureDining": true,
+      "traditionalItalian": true,
+      "abruzziRegion": true,
+      "livelyBistro": true,
+      "zagatRated": true
+    },
+    "tips": [
+      {
+        "id": "il-mulino-tip-1",
+        "category": "general",
+        "content": "Inspired by NYC's #1 Italian restaurant according to Zagat for two decades",
+        "priority": 5
+      },
+      {
+        "id": "il-mulino-tip-2",
+        "category": "general",
+        "content": "Traditional Italian cuisine from the Abruzzi region in lively bistro setting",
+        "priority": 4
+      },
+      {
+        "id": "il-mulino-tip-3",
+        "category": "strategy",
+        "content": "Does not accept Disney Dining Plan - make reservations through Swan/Dolphin",
+        "priority": 4
+      }
+    ],
+    "tags": ["signature-dining", "traditional-italian", "zagat-rated", "abruzzi", "lively-bistro"]
+  },
+  {
+    "id": "swan-hotel-shulas",
+    "resortId": "swan-hotel",
+    "name": "Shula's Steak House",
+    "description": "Elegant steakhouse featuring premium steak and seafood with the famous 48-ounce porterhouse challenge and 2003 Award of Excellence.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 4,
+    "cuisineType": "Premium Steakhouse",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "dinner": "5:00 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "signatureDining": true,
+      "elegantSteakhouse": true,
+      "48ozChallenge": true,
+      "awardWinning": true,
+      "premiumCuts": true
+    },
+    "tips": [
+      {
+        "id": "shulas-tip-1",
+        "category": "general",
+        "content": "Famous 48-ounce porterhouse challenge - join Shula's 48oz. Club if you finish!",
+        "priority": 5
+      },
+      {
+        "id": "shulas-tip-2",
+        "category": "general",
+        "content": "2003 Award of Excellence recipient for elegant steakhouse dining",
+        "priority": 4
+      },
+      {
+        "id": "shulas-tip-3",
+        "category": "strategy",
+        "content": "Perfect for special occasions and steak enthusiasts",
+        "priority": 4
+      }
+    ],
+    "tags": ["signature-dining", "steakhouse", "48oz-challenge", "award-winning", "elegant"]
+  },
+  {
+    "id": "swan-hotel-garden-grove",
+    "resortId": "swan-hotel",
+    "name": "Garden Grove",
+    "description": "American fare restaurant with Central Park garden atmosphere featuring a 25-foot oak tree with twinkling lights, serving breakfast, lunch, and dinner.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 2,
+    "cuisineType": "American Garden Dining",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "breakfast": "6:30 AM - 11:00 AM",
+      "lunch": "11:30 AM - 2:00 PM",
+      "dinner": "5:00 PM - 9:30 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "gardenAtmosphere": true,
+      "centralParkTheme": true,
+      "25FootOakTree": true,
+      "twinklingLights": true,
+      "allDayDining": true
+    },
+    "tips": [
+      {
+        "id": "garden-grove-tip-1",
+        "category": "general",
+        "content": "Beautiful Central Park garden atmosphere with 25-foot oak tree centerpiece",
+        "priority": 5
+      },
+      {
+        "id": "garden-grove-tip-2",
+        "category": "general",
+        "content": "Tranquil setting with twinkling lights and paper lanterns",
+        "priority": 4
+      },
+      {
+        "id": "garden-grove-tip-3",
+        "category": "strategy",
+        "content": "Perfect for families wanting elegant but comfortable dining",
+        "priority": 4
+      }
+    ],
+    "tags": ["american-fare", "garden-atmosphere", "central-park", "oak-tree", "family-friendly"]
+  },
+  {
+    "id": "swan-hotel-bourbon-steak",
+    "resortId": "swan-hotel",
+    "name": "Bourbon Steak by Michael Mina",
+    "description": "New modern steakhouse opened July 2025 by Michelin-starred chef Michael Mina, featuring premium beef and seafood with global flavors.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 4,
+    "cuisineType": "Modern American Steakhouse",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "dinner": "5:30 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "signatureDining": true,
+      "newOpening2025": true,
+      "michelinStarredChef": true,
+      "modernSteakhouse": true,
+      "globalFlavors": true
+    },
+    "tips": [
+      {
+        "id": "bourbon-steak-tip-1",
+        "category": "strategy",
+        "content": "NEW 2025 - Opened July 26th by renowned chef Michael Mina",
+        "priority": 5
+      },
+      {
+        "id": "bourbon-steak-tip-2",
+        "category": "general",
+        "content": "Michelin-starred chef with restaurants nationwide",
+        "priority": 5
+      },
+      {
+        "id": "bourbon-steak-tip-3",
+        "category": "general",
+        "content": "Modern take on American steakhouse with premium cuts and global flavors",
+        "priority": 4
+      }
+    ],
+    "tags": ["signature-dining", "new-2025", "michelin-chef", "modern-steakhouse", "global-flavors"]
+  },
+  {
+    "id": "dolphin-hotel-bluezoo",
+    "resortId": "dolphin-hotel",
+    "name": "Todd English's bluezoo",
+    "description": "Award-winning restaurant by celebrity chef Todd English featuring fresh seafood in a chic underwater setting with backlit blue bar and live entertainment.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 4,
+    "cuisineType": "Contemporary Seafood",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "dinner": "5:00 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "signatureDining": true,
+      "celebrityChef": true,
+      "underwaterSetting": true,
+      "backlitBar": true,
+      "liveEntertainment": true,
+      "awardWinning": true
+    },
+    "tips": [
+      {
+        "id": "bluezoo-tip-1",
+        "category": "general",
+        "content": "Created by celebrity chef Todd English with chic underwater atmosphere",
+        "priority": 5
+      },
+      {
+        "id": "bluezoo-tip-2",
+        "category": "general",
+        "content": "Famous for fresh seafood and signature cocktails like Bazooka Joe Vodka",
+        "priority": 4
+      },
+      {
+        "id": "bluezoo-tip-3",
+        "category": "general",
+        "content": "Features live entertainment seasonally and unique blue backlit bar",
+        "priority": 4
+      }
+    ],
+    "tags": ["signature-dining", "celebrity-chef", "seafood", "underwater-theme", "live-entertainment"]
+  },
+  {
+    "id": "dolphin-hotel-kimonos",
+    "resortId": "dolphin-hotel",
+    "name": "Kimonos",
+    "description": "Award-winning sushi restaurant and lounge voted top sushi by Orlando Sentinel, featuring traditional Japanese cuisine, karaoke, and Kobe beef satay.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 4,
+    "cuisineType": "Traditional Japanese Sushi",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "dinner": "5:30 PM - 12:00 AM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "signatureDining": true,
+      "awardWinningSushi": true,
+      "karaoke": true,
+      "kobeBeef": true,
+      "traditionalJapanese": true
+    },
+    "tips": [
+      {
+        "id": "kimonos-tip-1",
+        "category": "general",
+        "content": "Voted top sushi restaurant by Orlando Sentinel readers",
+        "priority": 5
+      },
+      {
+        "id": "kimonos-tip-2",
+        "category": "general",
+        "content": "Features karaoke every evening starting at 9:30 PM",
+        "priority": 4
+      },
+      {
+        "id": "kimonos-tip-3",
+        "category": "general",
+        "content": "Specialties include Kobe beef satay, gyoza, and tempura platters",
+        "priority": 4
+      }
+    ],
+    "tags": ["signature-dining", "sushi", "award-winning", "karaoke", "japanese"]
+  },
+  {
+    "id": "dolphin-hotel-rosa-mexicano",
+    "resortId": "dolphin-hotel",
+    "name": "Rosa Mexicano",
+    "description": "Stylish Mexican restaurant offering fresh authentic cuisine with award-winning margaritas including the signature frozen pomegranate margarita.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "cuisineType": "Authentic Mexican",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "lunch": "11:30 AM - 3:00 PM",
+      "dinner": "5:00 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "signatureDining": true,
+      "authentically Mexican": true,
+      "awardWinningMargaritas": true,
+      "stylishFestive": true,
+      "frozenPomegranate": true
+    },
+    "tips": [
+      {
+        "id": "rosa-mexicano-tip-1",
+        "category": "general",
+        "content": "Award-winning margaritas - try the signature frozen pomegranate",
+        "priority": 5
+      },
+      {
+        "id": "rosa-mexicano-tip-2",
+        "category": "general",
+        "content": "Fresh authentic Mexican cuisine in stylish festive atmosphere",
+        "priority": 4
+      },
+      {
+        "id": "rosa-mexicano-tip-3",
+        "category": "general",
+        "content": "Beloved classics and sophisticated dishes for all tastes",
+        "priority": 4
+      }
+    ],
+    "tags": ["mexican", "award-winning-margaritas", "authentic", "stylish", "festive"]
+  },
+  {
+    "id": "dolphin-hotel-phins",
+    "resortId": "dolphin-hotel",
+    "name": "Phins",
+    "description": "Casual poolside dining serving American favorites with tropical drinks and light fare in a relaxed pool atmosphere.",
+    "type": "quick_service",
+    "serviceType": "poolside",
+    "priceLevel": 2,
+    "cuisineType": "Poolside American",
+    "location": "Pool Area",
+    "operatingHours": {
+      "lunch": "11:00 AM - 6:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "poolside": true,
+      "americanFavorites": true,
+      "tropicalDrinks": true,
+      "casualDining": true,
+      "lightFare": true
+    },
+    "tips": [
+      {
+        "id": "phins-tip-1",
+        "category": "general",
+        "content": "Casual poolside dining with American favorites and tropical drinks",
+        "priority": 4
+      },
+      {
+        "id": "phins-tip-2",
+        "category": "strategy",
+        "content": "Perfect for staying poolside all day with food and beverage service",
+        "priority": 3
+      }
+    ],
+    "tags": ["poolside", "american-favorites", "tropical-drinks", "casual", "light-fare"]
+  },
+  {
+    "id": "dolphin-hotel-fountain",
+    "resortId": "dolphin-hotel",
+    "name": "The Fountain",
+    "description": "Classic American diner and soda fountain serving burgers, sandwiches, ice cream sundaes, and milkshakes in a nostalgic family-friendly setting.",
+    "type": "quick_service",
+    "serviceType": "counter",
+    "priceLevel": 2,
+    "cuisineType": "American Diner",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "allDay": "11:00 AM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "classicDiner": true,
+      "sodaFountain": true,
+      "iceCreamSundaes": true,
+      "milkshakes": true,
+      "nostalgicSetting": true
+    },
+    "tips": [
+      {
+        "id": "fountain-tip-1",
+        "category": "general",
+        "content": "Classic American diner with soda fountain and ice cream sundaes",
+        "priority": 4
+      },
+      {
+        "id": "fountain-tip-2",
+        "category": "strategy",
+        "content": "Perfect for families wanting casual dining and sweet treats",
+        "priority": 4
+      },
+      {
+        "id": "fountain-tip-3",
+        "category": "general",
+        "content": "Nostalgic atmosphere with burgers, sandwiches, and milkshakes",
+        "priority": 3
+      }
+    ],
+    "tags": ["american-diner", "soda-fountain", "ice-cream", "milkshakes", "family-friendly"]
+  }
+]

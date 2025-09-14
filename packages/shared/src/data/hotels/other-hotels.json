@@ -20,19 +20,52 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": true,
-        "fitnessCenter": true,
-        "golf": true,
-        "beach": false,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": true,
-        "childcare": true
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": true,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": true,
+          "couples_treatments": true,
+          "fitness_center": true,
+          "sauna": true,
+          "steam_room": true
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": true,
+          "character_dining": false,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": true,
+          "golf": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": true,
+          "childcare": true,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -41,7 +74,15 @@
         "themedRooms": false,
         "familyAccommodations": true
       }
-    }
+    },
+    "diningOptions": [
+      "four-seasons-capa",
+      "four-seasons-ravello",
+      "four-seasons-pb-and-g",
+      "four-seasons-plancha",
+      "four-seasons-lobby-bar",
+      "four-seasons-lickety-split"
+    ]
   },
   {
     "id": "waldorf-astoria",
@@ -63,19 +104,52 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": true,
-        "fitnessCenter": true,
-        "golf": true,
-        "beach": false,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": true,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": true,
+          "couples_treatments": true,
+          "fitness_center": true,
+          "sauna": true,
+          "steam_room": true
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": false,
+          "pool_bar": true,
+          "room_service": true,
+          "character_dining": false,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": true,
+          "golf": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": true,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -84,7 +158,14 @@
         "themedRooms": false,
         "familyAccommodations": true
       }
-    }
+    },
+    "diningOptions": [
+      "waldorf-astoria-bull-bear",
+      "waldorf-astoria-oscars-brasserie",
+      "waldorf-astoria-aquamarine",
+      "waldorf-astoria-peacock-alley",
+      "waldorf-astoria-clubhouse-grille"
+    ]
   },
   {
     "id": "hilton-bonnet-creek",
@@ -106,19 +187,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": true,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": false,
-        "businessCenter": true,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": true,
+          "water_slides": true,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": true,
+          "character_dining": false,
+          "signature_dining": false
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": false,
+          "business_center": true,
+          "childcare": false,
+          "laundry": true,
+          "car_service": false
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -127,7 +240,14 @@
         "themedRooms": false,
         "familyAccommodations": true
       }
-    }
+    },
+    "diningOptions": [
+      "hilton-bonnet-creek-la-luce",
+      "hilton-bonnet-creek-zeta-asia",
+      "hilton-bonnet-creek-myth",
+      "hilton-bonnet-creek-coffee-bar",
+      "hilton-bonnet-creek-pool-dining"
+    ]
   },
   {
     "id": "buena-vista-palace",
@@ -149,19 +269,52 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": true,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": false,
-        "businessCenter": true,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": true,
+          "couples_treatments": true,
+          "fitness_center": true,
+          "sauna": true,
+          "steam_room": true
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": false,
+          "pool_bar": true,
+          "room_service": true,
+          "character_dining": false,
+          "signature_dining": false
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": true,
+          "golf": false
+        },
+        "services": {
+          "concierge": false,
+          "business_center": true,
+          "childcare": false,
+          "laundry": true,
+          "car_service": false
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -170,7 +323,12 @@
         "themedRooms": false,
         "familyAccommodations": true
       }
-    }
+    },
+    "diningOptions": [
+      "buena-vista-palace-letterpress",
+      "buena-vista-palace-shades-pool-bar",
+      "buena-vista-palace-citrus-28-marketplace"
+    ]
   },
   {
     "id": "doubletree-disney-springs",
@@ -192,19 +350,52 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": false,
-        "businessCenter": true,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": true,
+          "pool_bar": false,
+          "kiddie_pool": false,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": false,
+          "pool_bar": false,
+          "room_service": true,
+          "character_dining": false,
+          "signature_dining": false
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": false,
+          "golf": false
+        },
+        "services": {
+          "concierge": false,
+          "business_center": true,
+          "childcare": false,
+          "laundry": true,
+          "car_service": false
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -213,7 +404,13 @@
         "themedRooms": false,
         "familyAccommodations": true
       }
-    }
+    },
+    "diningOptions": [
+      "doubletree-seaworld-laguna-restaurant",
+      "doubletree-seaworld-albertos-pizzeria",
+      "doubletree-seaworld-sonoma-lounge",
+      "doubletree-seaworld-barefoot-bar"
+    ]
   },
   {
     "id": "swan-hotel",
@@ -236,19 +433,52 @@
         "walking": true
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": true,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": true,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": false,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": true,
+          "couples_treatments": true,
+          "fitness_center": true,
+          "sauna": true,
+          "steam_room": true
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": false,
+          "pool_bar": true,
+          "room_service": true,
+          "character_dining": false,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": false,
+          "golf": false
+        },
+        "services": {
+          "concierge": true,
+          "business_center": true,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -257,7 +487,13 @@
         "themedRooms": false,
         "familyAccommodations": true
       }
-    }
+    },
+    "diningOptions": [
+      "swan-hotel-il-mulino",
+      "swan-hotel-shulas-steak-house",
+      "swan-hotel-garden-grove",
+      "swan-hotel-bourbon-steak"
+    ]
   },
   {
     "id": "dolphin-hotel",
@@ -280,19 +516,52 @@
         "walking": true
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": true,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": true,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": false,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": true,
+          "couples_treatments": true,
+          "fitness_center": true,
+          "sauna": true,
+          "steam_room": true
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": false,
+          "pool_bar": true,
+          "room_service": true,
+          "character_dining": false,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": false,
+          "golf": false
+        },
+        "services": {
+          "concierge": true,
+          "business_center": true,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -301,6 +570,13 @@
         "themedRooms": false,
         "familyAccommodations": true
       }
-    }
+    },
+    "diningOptions": [
+      "dolphin-hotel-bluezoo",
+      "dolphin-hotel-kimonos",
+      "dolphin-hotel-rosa-mexicano",
+      "dolphin-hotel-phins",
+      "dolphin-hotel-fountain"
+    ]
   }
 ]

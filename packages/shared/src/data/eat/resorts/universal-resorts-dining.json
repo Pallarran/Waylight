@@ -1,0 +1,1835 @@
+[
+  {
+    "id": "portofino-bice-ristorante",
+    "resortId": "portofino-bay",
+    "name": "Bice Ristorante",
+    "description": "Internationally renowned upscale Italian restaurant offering spectacular harbor views and authentic Northern Italian cuisine with an elegant atmosphere.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 4,
+    "cuisineType": "Northern Italian Fine Dining",
+    "location": "Harbor Side, Second Floor",
+    "operatingHours": {
+      "dinner": "5:30 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "signatureDining": true,
+      "harborViews": true,
+      "internationalBrand": true,
+      "romanticSetting": true,
+      "dressCode": true
+    },
+    "tips": [
+      {
+        "id": "bice-tip-1",
+        "category": "strategy",
+        "content": "Request harbor view table when booking for spectacular water views",
+        "priority": 5
+      },
+      {
+        "id": "bice-tip-2",
+        "category": "general",
+        "content": "Internationally acclaimed restaurant with locations worldwide - authentic Northern Italian cuisine",
+        "priority": 4
+      },
+      {
+        "id": "bice-tip-3",
+        "category": "general",
+        "content": "Smart casual dress code enforced - upscale dining experience",
+        "priority": 4
+      }
+    ],
+    "tags": ["signature-dining", "italian", "harbor-views", "upscale", "international"]
+  },
+  {
+    "id": "portofino-trattoria-del-porto",
+    "resortId": "portofino-bay",
+    "name": "Trattoria del Porto",
+    "description": "Waterfront Italian restaurant offering modern Mediterranean cuisine with indoor and outdoor seating overlooking Harbor Piazza.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "cuisineType": "Mediterranean Italian",
+    "location": "Harbor Piazza Level",
+    "operatingHours": {
+      "lunch": "11:30 AM - 2:30 PM",
+      "dinner": "5:30 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "waterfrontDining": true,
+      "outdoorSeating": true,
+      "harborViews": true,
+      "modernItalian": true
+    },
+    "tips": [
+      {
+        "id": "trattoria-tip-1",
+        "category": "strategy",
+        "content": "Request outdoor seating for the best harbor views and people watching",
+        "priority": 5
+      },
+      {
+        "id": "trattoria-tip-2",
+        "category": "general",
+        "content": "Perfect spot for lunch after exploring the resort or before park visits",
+        "priority": 4
+      },
+      {
+        "id": "trattoria-tip-3",
+        "category": "general",
+        "content": "Features fresh Mediterranean flavors with modern Italian preparation",
+        "priority": 4
+      }
+    ],
+    "tags": ["waterfront", "outdoor-seating", "mediterranean", "harbor-views", "casual-elegant"]
+  },
+  {
+    "id": "portofino-mama-dellas",
+    "resortId": "portofino-bay",
+    "name": "Mama Della's Ristorante",
+    "description": "Authentic family-style Italian restaurant serving traditional dishes from Tuscany, Naples, and Piemonte in a warm, welcoming atmosphere.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 2,
+    "cuisineType": "Traditional Italian Family Style",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "dinner": "5:30 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "familyStyle": true,
+      "traditionalItalian": true,
+      "authenticRecipes": true,
+      "warmAtmosphere": true
+    },
+    "tips": [
+      {
+        "id": "mama-dellas-tip-1",
+        "category": "general",
+        "content": "Perfect for families wanting authentic Italian comfort food in a cozy setting",
+        "priority": 5
+      },
+      {
+        "id": "mama-dellas-tip-2",
+        "category": "general",
+        "content": "Features recipes from different regions of Italy - try the handmade pasta",
+        "priority": 4
+      },
+      {
+        "id": "mama-dellas-tip-3",
+        "category": "strategy",
+        "content": "Great value for authentic Italian dining at the resort",
+        "priority": 4
+      }
+    ],
+    "tags": ["family-style", "traditional-italian", "authentic", "casual", "family-friendly"]
+  },
+  {
+    "id": "portofino-sals-market",
+    "resortId": "portofino-bay",
+    "name": "Sal's Market Deli",
+    "description": "Italian marketplace offering fresh deli meats, cheeses, antipasto, salads, and authentic wood-fired pizzas.",
+    "type": "quick_service",
+    "serviceType": "counter",
+    "priceLevel": 2,
+    "cuisineType": "Italian Deli & Pizza",
+    "location": "Main Building, Lower Level",
+    "operatingHours": {
+      "allDay": "7:00 AM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "marketplace": true,
+      "woodFiredPizza": true,
+      "freshIngredients": true,
+      "grabAndGo": true
+    },
+    "tips": [
+      {
+        "id": "sals-market-tip-1",
+        "category": "general",
+        "content": "Wood-fired pizzas are made fresh throughout the day - perfect for quick meals",
+        "priority": 4
+      },
+      {
+        "id": "sals-market-tip-2",
+        "category": "strategy",
+        "content": "Great for breakfast pastries, lunch sandwiches, or dinner pizza",
+        "priority": 4
+      },
+      {
+        "id": "sals-market-tip-3",
+        "category": "general",
+        "content": "Authentic Italian deli experience with imported meats and cheeses",
+        "priority": 3
+      }
+    ],
+    "tags": ["quick-service", "italian-deli", "pizza", "marketplace", "all-day"]
+  },
+  {
+    "id": "portofino-splendido-bar-grill",
+    "resortId": "portofino-bay",
+    "name": "Splendido Bar & Grill",
+    "description": "Poolside restaurant and bar offering casual dining with burgers, salads, and light Italian specialties alongside tropical cocktails.",
+    "type": "quick_service",
+    "serviceType": "poolside",
+    "priceLevel": 2,
+    "cuisineType": "Poolside American Italian",
+    "location": "Beach Pool Area",
+    "operatingHours": {
+      "seasonal": "11:00 AM - 7:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "poolside": true,
+      "casualDining": true,
+      "tropicalDrinks": true,
+      "beachViews": true
+    },
+    "tips": [
+      {
+        "id": "splendido-tip-1",
+        "category": "general",
+        "content": "Perfect for staying poolside all day with food and drinks delivered to your chair",
+        "priority": 4
+      },
+      {
+        "id": "splendido-tip-2",
+        "category": "general",
+        "content": "Enjoy Italian-inspired poolside fare with harbor and beach views",
+        "priority": 3
+      }
+    ],
+    "tags": ["poolside", "casual", "italian-american", "beach-views", "tropical-drinks"]
+  },
+  {
+    "id": "portofino-gelateria",
+    "resortId": "portofino-bay",
+    "name": "Gelateria",
+    "description": "Authentic Italian gelateria offering artisanal gelato, milkshakes, and smoothies made with premium ingredients.",
+    "type": "quick_service",
+    "serviceType": "kiosk",
+    "priceLevel": 1,
+    "cuisineType": "Italian Gelato & Desserts",
+    "location": "Harbor Piazza",
+    "operatingHours": {
+      "afternoon": "12:00 PM - 10:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "artisanalGelato": true,
+      "authenticItalian": true,
+      "premiumIngredients": true,
+      "harbourLocation": true
+    },
+    "tips": [
+      {
+        "id": "gelateria-tip-1",
+        "category": "general",
+        "content": "Authentic Italian gelato made fresh daily with rotating flavor selections",
+        "priority": 4
+      },
+      {
+        "id": "gelateria-tip-2",
+        "category": "general",
+        "content": "Perfect sweet treat while strolling the harbor or after dinner",
+        "priority": 3
+      }
+    ],
+    "tags": ["gelato", "italian", "desserts", "authentic", "family-favorite"]
+  },
+  {
+    "id": "hard-rock-kitchen",
+    "resortId": "hard-rock",
+    "name": "The Kitchen",
+    "description": "Signature restaurant featuring New American cuisine with rock and roll flair, offering creative dishes in an energetic atmosphere.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "cuisineType": "New American Rock Theme",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "breakfast": "7:00 AM - 11:00 AM",
+      "dinner": "5:30 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "signatureDining": true,
+      "rockAndRoll": true,
+      "newAmerican": true,
+      "energeticAtmosphere": true
+    },
+    "tips": [
+      {
+        "id": "kitchen-tip-1",
+        "category": "general",
+        "content": "Rock and roll themed fine dining with memorabilia throughout the restaurant",
+        "priority": 4
+      },
+      {
+        "id": "kitchen-tip-2",
+        "category": "strategy",
+        "content": "Popular with families and music lovers - book early for dinner",
+        "priority": 4
+      },
+      {
+        "id": "kitchen-tip-3",
+        "category": "general",
+        "content": "Creative New American dishes with playful rock-themed names",
+        "priority": 3
+      }
+    ],
+    "tags": ["signature-dining", "rock-theme", "new-american", "energetic", "family-friendly"]
+  },
+  {
+    "id": "hard-rock-palm-restaurant",
+    "resortId": "hard-rock",
+    "name": "Palm Restaurant",
+    "description": "Classic American steakhouse known for prime steaks, fresh lobster, and traditional New York-style dining experience.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 4,
+    "cuisineType": "American Steakhouse",
+    "location": "Main Building, Second Floor",
+    "operatingHours": {
+      "dinner": "5:00 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "signatureDining": true,
+      "primeSteak": true,
+      "classicSteakhouse": true,
+      "newYorkStyle": true
+    },
+    "tips": [
+      {
+        "id": "palm-tip-1",
+        "category": "general",
+        "content": "Famous steakhouse chain known for prime cuts and fresh lobster",
+        "priority": 5
+      },
+      {
+        "id": "palm-tip-2",
+        "category": "general",
+        "content": "Walls feature caricatures of celebrities and regular customers",
+        "priority": 4
+      },
+      {
+        "id": "palm-tip-3",
+        "category": "strategy",
+        "content": "Perfect for special occasions and steak lovers",
+        "priority": 4
+      }
+    ],
+    "tags": ["signature-dining", "steakhouse", "prime-cuts", "classic", "celebrity-caricatures"]
+  },
+  {
+    "id": "hard-rock-emack-bolios",
+    "resortId": "hard-rock",
+    "name": "Emack & Bolio's",
+    "description": "Gourmet ice cream parlor offering unique flavors and premium ice cream with rock and roll attitude.",
+    "type": "quick_service",
+    "serviceType": "kiosk",
+    "priceLevel": 2,
+    "cuisineType": "Gourmet Ice Cream",
+    "location": "Main Building, Lobby Level",
+    "operatingHours": {
+      "allDay": "11:00 AM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "gourmetIceCream": true,
+      "uniqueFlavors": true,
+      "premiumIngredients": true,
+      "rockTheme": true
+    },
+    "tips": [
+      {
+        "id": "emack-bolios-tip-1",
+        "category": "general",
+        "content": "Famous Boston-based ice cream chain with creative flavors",
+        "priority": 4
+      },
+      {
+        "id": "emack-bolios-tip-2",
+        "category": "general",
+        "content": "Try unique flavors like Deep Purple Chip or Grasshopper Pie",
+        "priority": 3
+      }
+    ],
+    "tags": ["ice-cream", "gourmet", "unique-flavors", "boston-brand", "rock-theme"]
+  },
+  {
+    "id": "hard-rock-beachclub",
+    "resortId": "hard-rock",
+    "name": "Beach Club",
+    "description": "Poolside bar and grill offering casual dining with burgers, sandwiches, and tropical cocktails in a laid-back beach atmosphere.",
+    "type": "quick_service",
+    "serviceType": "poolside",
+    "priceLevel": 2,
+    "cuisineType": "Poolside American",
+    "location": "Pool Deck",
+    "operatingHours": {
+      "seasonal": "11:00 AM - 6:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "poolside": true,
+      "casualDining": true,
+      "tropicalDrinks": true,
+      "beachAtmosphere": true
+    },
+    "tips": [
+      {
+        "id": "beachclub-tip-1",
+        "category": "general",
+        "content": "Perfect for pool day dining without leaving the water recreation area",
+        "priority": 4
+      },
+      {
+        "id": "beachclub-tip-2",
+        "category": "general",
+        "content": "Tropical cocktails and light meals in a relaxed rock-themed setting",
+        "priority": 3
+      }
+    ],
+    "tags": ["poolside", "casual", "tropical-drinks", "beach-theme", "relaxed"]
+  },
+  {
+    "id": "hard-rock-starbucks",
+    "resortId": "hard-rock",
+    "name": "Starbucks",
+    "description": "Full-service Starbucks location offering specialty coffee, teas, pastries, and breakfast items with rock memorabilia decor.",
+    "type": "quick_service",
+    "serviceType": "counter",
+    "priceLevel": 2,
+    "cuisineType": "Coffee & Pastries",
+    "location": "Main Building, Lobby Level",
+    "operatingHours": {
+      "allDay": "6:00 AM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": ["vegetarian", "dairy-free"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "starbucks": true,
+      "mobileOrder": true,
+      "rockDecor": true,
+      "allDayService": true
+    },
+    "tips": [
+      {
+        "id": "hard-rock-starbucks-tip-1",
+        "category": "strategy",
+        "content": "Use Starbucks mobile app for ordering and earning rewards",
+        "priority": 4
+      },
+      {
+        "id": "hard-rock-starbucks-tip-2",
+        "category": "general",
+        "content": "Rock memorabilia decorates this unique Starbucks location",
+        "priority": 3
+      }
+    ],
+    "tags": ["starbucks", "coffee", "mobile-order", "rock-decor", "all-day"]
+  },
+  {
+    "id": "royal-pacific-islands-dining",
+    "resortId": "royal-pacific",
+    "name": "Islands Dining Room",
+    "description": "Pacific Rim restaurant offering breakfast buffet and dinner with island-inspired cuisine and tropical atmosphere.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "cuisineType": "Pacific Rim",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "breakfast": "7:00 AM - 11:00 AM",
+      "dinner": "5:30 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "signatureDining": true,
+      "pacificRim": true,
+      "buffetBreakfast": true,
+      "tropicalAtmosphere": true
+    },
+    "tips": [
+      {
+        "id": "islands-dining-tip-1",
+        "category": "general",
+        "content": "Breakfast buffet features both American and Asian-inspired dishes",
+        "priority": 4
+      },
+      {
+        "id": "islands-dining-tip-2",
+        "category": "general",
+        "content": "Dinner menu focuses on Pacific Rim flavors with fresh seafood",
+        "priority": 4
+      },
+      {
+        "id": "islands-dining-tip-3",
+        "category": "strategy",
+        "content": "Beautiful tropical setting perfect for relaxed family dining",
+        "priority": 3
+      }
+    ],
+    "tags": ["signature-dining", "pacific-rim", "breakfast-buffet", "tropical", "family-friendly"]
+  },
+  {
+    "id": "royal-pacific-tuk-tuk-market",
+    "resortId": "royal-pacific",
+    "name": "Tuk Tuk Market",
+    "description": "Grab-and-go marketplace in the hotel lobby offering coffee, pastries, sandwiches, and Asian-inspired snacks.",
+    "type": "quick_service",
+    "serviceType": "kiosk",
+    "priceLevel": 2,
+    "cuisineType": "Asian Fusion Grab & Go",
+    "location": "Main Building, Lobby Level",
+    "operatingHours": {
+      "allDay": "6:30 AM - 10:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "grabAndGo": true,
+      "asianInspired": true,
+      "convenience": true,
+      "lobbyLocation": true
+    },
+    "tips": [
+      {
+        "id": "tuk-tuk-tip-1",
+        "category": "general",
+        "content": "Perfect for quick breakfast or snacks on the go to the parks",
+        "priority": 4
+      },
+      {
+        "id": "tuk-tuk-tip-2",
+        "category": "general",
+        "content": "Features Asian-inspired options alongside American favorites",
+        "priority": 3
+      }
+    ],
+    "tags": ["grab-and-go", "asian-fusion", "convenience", "lobby", "quick-service"]
+  },
+  {
+    "id": "royal-pacific-wantilan-luau",
+    "resortId": "royal-pacific",
+    "name": "Wantilan Luau",
+    "description": "Seasonal Polynesian dinner show featuring traditional food, music, and dance in an outdoor lagoon setting (seasonal operation).",
+    "type": "table_service",
+    "serviceType": "dinner_show",
+    "priceLevel": 4,
+    "cuisineType": "Polynesian Dinner Show",
+    "location": "Lagoon Area",
+    "operatingHours": {
+      "seasonal": "6:00 PM - 8:30 PM (select nights)"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "dinnerShow": true,
+      "polynesian": true,
+      "liveEntertainment": true,
+      "seasonalOperation": true,
+      "lagoonSetting": true
+    },
+    "tips": [
+      {
+        "id": "wantilan-tip-1",
+        "category": "strategy",
+        "content": "Seasonal operation - check availability when booking your stay",
+        "priority": 5
+      },
+      {
+        "id": "wantilan-tip-2",
+        "category": "general",
+        "content": "Authentic Polynesian dinner show with fire dancing and live music",
+        "priority": 4
+      },
+      {
+        "id": "wantilan-tip-3",
+        "category": "general",
+        "content": "Beautiful lagoon setting for a unique cultural dining experience",
+        "priority": 4
+      }
+    ],
+    "tags": ["dinner-show", "polynesian", "seasonal", "entertainment", "cultural"]
+  },
+  {
+    "id": "royal-pacific-bula-bar",
+    "resortId": "royal-pacific",
+    "name": "Bula Bar & Grille",
+    "description": "Poolside bar and restaurant offering tropical cocktails, light meals, and island-inspired cuisine with lagoon views.",
+    "type": "quick_service",
+    "serviceType": "poolside",
+    "priceLevel": 2,
+    "cuisineType": "Poolside Tropical",
+    "location": "Pool Area",
+    "operatingHours": {
+      "seasonal": "11:00 AM - 7:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "poolside": true,
+      "tropicalCocktails": true,
+      "lagoonViews": true,
+      "islandInspired": true
+    },
+    "tips": [
+      {
+        "id": "bula-bar-tip-1",
+        "category": "general",
+        "content": "Beautiful lagoon views while enjoying tropical drinks and light meals",
+        "priority": 4
+      },
+      {
+        "id": "bula-bar-tip-2",
+        "category": "general",
+        "content": "Perfect for relaxing by the pool with Pacific-inspired flavors",
+        "priority": 3
+      }
+    ],
+    "tags": ["poolside", "tropical-cocktails", "lagoon-views", "island-inspired", "relaxing"]
+  },
+  {
+    "id": "sapphire-falls-amatista-cookhouse",
+    "resortId": "sapphire-falls",
+    "name": "Amatista Cookhouse",
+    "description": "Caribbean-inspired restaurant featuring bold flavors, fresh seafood, and vibrant island cuisine with waterfall views.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "cuisineType": "Caribbean",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "breakfast": "7:00 AM - 11:00 AM",
+      "dinner": "5:30 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "signatureDining": true,
+      "caribbean": true,
+      "waterfallViews": true,
+      "freshSeafood": true
+    },
+    "tips": [
+      {
+        "id": "amatista-tip-1",
+        "category": "general",
+        "content": "Features bold Caribbean flavors with fresh tropical ingredients",
+        "priority": 4
+      },
+      {
+        "id": "amatista-tip-2",
+        "category": "strategy",
+        "content": "Request seating near windows for beautiful waterfall views",
+        "priority": 4
+      },
+      {
+        "id": "amatista-tip-3",
+        "category": "general",
+        "content": "Excellent fresh seafood preparation with island spices",
+        "priority": 3
+      }
+    ],
+    "tags": ["signature-dining", "caribbean", "waterfall-views", "fresh-seafood", "tropical"]
+  },
+  {
+    "id": "sapphire-falls-strong-water-tavern",
+    "resortId": "sapphire-falls",
+    "name": "Strong Water Tavern",
+    "description": "Rum-focused bar and lounge featuring over 50 different rums, Caribbean-inspired cocktails, and small plates.",
+    "type": "lounge",
+    "serviceType": "lounge",
+    "priceLevel": 3,
+    "cuisineType": "Rum Bar & Small Plates",
+    "location": "Main Building, Lobby Level",
+    "operatingHours": {
+      "evening": "5:00 PM - 12:00 AM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": false,
+    "alcoholServed": true,
+    "features": {
+      "rumFocused": true,
+      "over50Rums": true,
+      "craftCocktails": true,
+      "smallPlates": true,
+      "adultsOnly": true
+    },
+    "tips": [
+      {
+        "id": "strong-water-tip-1",
+        "category": "general",
+        "content": "Over 50 different rums from around the Caribbean and beyond",
+        "priority": 5
+      },
+      {
+        "id": "strong-water-tip-2",
+        "category": "general",
+        "content": "Adults only venue - perfect for evening cocktails and conversation",
+        "priority": 4
+      },
+      {
+        "id": "strong-water-tip-3",
+        "category": "general",
+        "content": "Expert bartenders can recommend rums based on your taste preferences",
+        "priority": 4
+      }
+    ],
+    "tags": ["rum-bar", "adults-only", "craft-cocktails", "caribbean", "evening"]
+  },
+  {
+    "id": "sapphire-falls-new-dutch-trading",
+    "resortId": "sapphire-falls",
+    "name": "New Dutch Trading Co.",
+    "description": "Quick-service marketplace offering grab-and-go items, sandwiches, salads, and beverages in a tropical market setting.",
+    "type": "quick_service",
+    "serviceType": "counter",
+    "priceLevel": 2,
+    "cuisineType": "American Quick Service",
+    "location": "Main Building, Lobby Level",
+    "operatingHours": {
+      "allDay": "6:30 AM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "quickService": true,
+      "grabAndGo": true,
+      "marketSetting": true,
+      "mobileOrder": true
+    },
+    "tips": [
+      {
+        "id": "new-dutch-tip-1",
+        "category": "strategy",
+        "content": "Use mobile ordering for faster service during busy park times",
+        "priority": 4
+      },
+      {
+        "id": "new-dutch-tip-2",
+        "category": "general",
+        "content": "Convenient for quick breakfast or snacks before heading to parks",
+        "priority": 3
+      }
+    ],
+    "tags": ["quick-service", "grab-and-go", "mobile-order", "convenient", "all-day"]
+  },
+  {
+    "id": "sapphire-falls-drhum-club",
+    "resortId": "sapphire-falls",
+    "name": "Drhum Club Kantine",
+    "description": "Poolside bar and grill serving tropical cocktails, light meals, and Caribbean-inspired snacks with water views.",
+    "type": "quick_service",
+    "serviceType": "poolside",
+    "priceLevel": 2,
+    "cuisineType": "Poolside Caribbean",
+    "location": "Pool Deck",
+    "operatingHours": {
+      "seasonal": "11:00 AM - 7:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "poolside": true,
+      "tropicalDrinks": true,
+      "caribbeanInspired": true,
+      "waterViews": true
+    },
+    "tips": [
+      {
+        "id": "drhum-tip-1",
+        "category": "general",
+        "content": "Perfect for pool day dining with Caribbean-inspired flavors",
+        "priority": 4
+      },
+      {
+        "id": "drhum-tip-2",
+        "category": "general",
+        "content": "Enjoy tropical cocktails while relaxing by the beautiful pool",
+        "priority": 3
+      }
+    ],
+    "tags": ["poolside", "caribbean", "tropical-drinks", "water-views", "casual"]
+  },
+  {
+    "id": "aventura-bar-17",
+    "resortId": "aventura",
+    "name": "Bar 17 Bistro",
+    "description": "Rooftop bar and bistro on the 17th floor offering panoramic views of Universal Orlando and contemporary cuisine.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 3,
+    "cuisineType": "Contemporary American",
+    "location": "17th Floor Rooftop",
+    "operatingHours": {
+      "dinner": "5:00 PM - 11:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "rooftopDining": true,
+      "panoramicViews": true,
+      "17thFloor": true,
+      "contemporaryAmerican": true,
+      "skylineViews": true
+    },
+    "tips": [
+      {
+        "id": "bar-17-tip-1",
+        "category": "strategy",
+        "content": "Book sunset reservations for incredible views of Universal Orlando",
+        "priority": 5
+      },
+      {
+        "id": "bar-17-tip-2",
+        "category": "general",
+        "content": "Highest dining location at Universal Orlando with 360-degree views",
+        "priority": 5
+      },
+      {
+        "id": "bar-17-tip-3",
+        "category": "general",
+        "content": "Modern glass tower location offers unique perspective of theme parks",
+        "priority": 4
+      }
+    ],
+    "tags": ["rooftop", "panoramic-views", "17th-floor", "contemporary", "sunset"]
+  },
+  {
+    "id": "aventura-urban-pantry",
+    "resortId": "aventura",
+    "name": "Urban Pantry",
+    "description": "Modern quick-service food hall offering diverse cuisines including Asian, Latin, and American options with contemporary styling.",
+    "type": "quick_service",
+    "serviceType": "food_court",
+    "priceLevel": 2,
+    "cuisineType": "International Food Hall",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "allDay": "6:00 AM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "foodHall": true,
+      "diverseCuisines": true,
+      "modernStyling": true,
+      "mobileOrder": true
+    },
+    "tips": [
+      {
+        "id": "urban-pantry-tip-1",
+        "category": "general",
+        "content": "Multiple cuisine stations offer something for everyone in the family",
+        "priority": 4
+      },
+      {
+        "id": "urban-pantry-tip-2",
+        "category": "strategy",
+        "content": "Use mobile ordering to skip lines and try different international options",
+        "priority": 4
+      },
+      {
+        "id": "urban-pantry-tip-3",
+        "category": "general",
+        "content": "Modern food hall concept with contemporary design and seating",
+        "priority": 3
+      }
+    ],
+    "tags": ["food-hall", "international", "mobile-order", "diverse-options", "modern"]
+  },
+  {
+    "id": "aventura-starbucks",
+    "resortId": "aventura",
+    "name": "Starbucks",
+    "description": "Modern Starbucks location in the hotel lobby offering specialty coffee, teas, pastries, and breakfast items.",
+    "type": "quick_service",
+    "serviceType": "counter",
+    "priceLevel": 2,
+    "cuisineType": "Coffee & Pastries",
+    "location": "Main Building, Lobby Level",
+    "operatingHours": {
+      "allDay": "5:30 AM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": ["vegetarian", "dairy-free"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "starbucks": true,
+      "mobileOrder": true,
+      "modernDesign": true,
+      "lobbyLocation": true
+    },
+    "tips": [
+      {
+        "id": "aventura-starbucks-tip-1",
+        "category": "strategy",
+        "content": "Use Starbucks app for mobile ordering and rewards",
+        "priority": 4
+      },
+      {
+        "id": "aventura-starbucks-tip-2",
+        "category": "general",
+        "content": "Modern design complements the hotel's contemporary aesthetic",
+        "priority": 3
+      }
+    ],
+    "tags": ["starbucks", "coffee", "mobile-order", "modern", "lobby"]
+  },
+  {
+    "id": "cabana-bay-bayliner-diner",
+    "resortId": "cabana-bay",
+    "name": "Bayliner Diner",
+    "description": "1950s-style food court featuring multiple stations with burgers, pizza, international cuisine, and desserts in a retro dining atmosphere.",
+    "type": "quick_service",
+    "serviceType": "food_court",
+    "priceLevel": 2,
+    "cuisineType": "American Food Court",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "allDay": "6:00 AM - 12:00 AM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "foodCourt": true,
+      "1950sTheme": true,
+      "multipleStations": true,
+      "retroAtmosphere": true,
+      "mobileOrder": true
+    },
+    "tips": [
+      {
+        "id": "bayliner-tip-1",
+        "category": "general",
+        "content": "Multiple food stations offer variety - pizza, burgers, international, and desserts",
+        "priority": 4
+      },
+      {
+        "id": "bayliner-tip-2",
+        "category": "strategy",
+        "content": "Use mobile ordering during peak meal times to avoid long lines",
+        "priority": 4
+      },
+      {
+        "id": "bayliner-tip-3",
+        "category": "general",
+        "content": "Authentic 1950s diner atmosphere with period music and decor",
+        "priority": 3
+      }
+    ],
+    "tags": ["food-court", "1950s-theme", "family-friendly", "mobile-order", "retro"]
+  },
+  {
+    "id": "cabana-bay-starbucks",
+    "resortId": "cabana-bay",
+    "name": "Starbucks",
+    "description": "Retro-themed Starbucks in the hotel lobby offering specialty coffee with 1950s design elements and beachside atmosphere.",
+    "type": "quick_service",
+    "serviceType": "counter",
+    "priceLevel": 2,
+    "cuisineType": "Coffee & Pastries",
+    "location": "Main Building, Lobby Level",
+    "operatingHours": {
+      "allDay": "6:00 AM - 10:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": ["vegetarian", "dairy-free"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "starbucks": true,
+      "retroTheme": true,
+      "mobileOrder": true,
+      "beachAtmosphere": true
+    },
+    "tips": [
+      {
+        "id": "cabana-starbucks-tip-1",
+        "category": "general",
+        "content": "Unique retro design fits perfectly with resort's 1950s beach theme",
+        "priority": 4
+      },
+      {
+        "id": "cabana-starbucks-tip-2",
+        "category": "strategy",
+        "content": "Mobile order available through Starbucks app",
+        "priority": 3
+      }
+    ],
+    "tags": ["starbucks", "retro-theme", "mobile-order", "beach-atmosphere", "1950s"]
+  },
+  {
+    "id": "cabana-bay-swizzle-lounge",
+    "resortId": "cabana-bay",
+    "name": "Swizzle Lounge",
+    "description": "Retro cocktail lounge in the hotel lobby serving classic cocktails with a modern twist in a 1950s-themed atmosphere.",
+    "type": "lounge",
+    "serviceType": "lounge",
+    "priceLevel": 2,
+    "cuisineType": "Classic Cocktails",
+    "location": "Main Building, Lobby Level",
+    "operatingHours": {
+      "evening": "5:00 PM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": false,
+    "alcoholServed": true,
+    "features": {
+      "retroCocktails": true,
+      "1950sTheme": true,
+      "classicDrinks": true,
+      "lobbyBar": true,
+      "adultsOnly": true
+    },
+    "tips": [
+      {
+        "id": "swizzle-tip-1",
+        "category": "general",
+        "content": "Classic cocktails with modern twists in authentic 1950s atmosphere",
+        "priority": 4
+      },
+      {
+        "id": "swizzle-tip-2",
+        "category": "general",
+        "content": "Perfect for evening drinks after a day at the theme parks",
+        "priority": 3
+      }
+    ],
+    "tags": ["cocktail-lounge", "retro", "1950s-theme", "classic-cocktails", "adults-only"]
+  },
+  {
+    "id": "cabana-bay-galaxy-bowl",
+    "resortId": "cabana-bay",
+    "name": "Galaxy Bowl Restaurant",
+    "description": "Unique restaurant inside the resort's retro bowling alley serving burgers, pizza, and classic American fare.",
+    "type": "quick_service",
+    "serviceType": "counter",
+    "priceLevel": 2,
+    "cuisineType": "American Bowling Alley",
+    "location": "Galaxy Bowl, Second Floor",
+    "operatingHours": {
+      "evening": "4:00 PM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "bowlingAlley": true,
+      "uniqueLocation": true,
+      "americanClassics": true,
+      "familyFun": true
+    },
+    "tips": [
+      {
+        "id": "galaxy-bowl-tip-1",
+        "category": "general",
+        "content": "One-of-a-kind dining experience inside an actual bowling alley",
+        "priority": 5
+      },
+      {
+        "id": "galaxy-bowl-tip-2",
+        "category": "strategy",
+        "content": "Perfect for family entertainment night - bowl and dine together",
+        "priority": 4
+      },
+      {
+        "id": "galaxy-bowl-tip-3",
+        "category": "general",
+        "content": "Classic bowling alley food with burgers, pizza, and fries",
+        "priority": 3
+      }
+    ],
+    "tags": ["bowling-alley", "unique", "family-fun", "american-classics", "entertainment"]
+  },
+  {
+    "id": "cabana-bay-hideaway-bar",
+    "resortId": "cabana-bay",
+    "name": "The Hideaway Bar & Grill",
+    "description": "Poolside bar and restaurant serving specialty drinks, light meals, and snacks with 1950s beach theming.",
+    "type": "quick_service",
+    "serviceType": "poolside",
+    "priceLevel": 2,
+    "cuisineType": "Poolside American",
+    "location": "Cabana Courtyard Pool",
+    "operatingHours": {
+      "seasonal": "11:00 AM - 9:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "poolside": true,
+      "beachTheming": true,
+      "specialtyDrinks": true,
+      "1950sStyle": true
+    },
+    "tips": [
+      {
+        "id": "hideaway-tip-1",
+        "category": "general",
+        "content": "Perfect for pool day dining without leaving the water recreation area",
+        "priority": 4
+      },
+      {
+        "id": "hideaway-tip-2",
+        "category": "general",
+        "content": "Retro beach atmosphere with specialty cocktails and light fare",
+        "priority": 3
+      }
+    ],
+    "tags": ["poolside", "beach-theme", "specialty-drinks", "retro", "casual"]
+  },
+  {
+    "id": "cabana-bay-atomic-tonic",
+    "resortId": "cabana-bay",
+    "name": "Atomic Tonic",
+    "description": "Additional poolside bar location serving tropical cocktails and refreshments with atomic-age theming.",
+    "type": "quick_service",
+    "serviceType": "poolside",
+    "priceLevel": 2,
+    "cuisineType": "Poolside Beverages",
+    "location": "Lazy River Pool Area",
+    "operatingHours": {
+      "seasonal": "11:00 AM - 7:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "poolside": true,
+      "tropicalCocktails": true,
+      "atomicTheming": true,
+      "lazyRiver": true
+    },
+    "tips": [
+      {
+        "id": "atomic-tonic-tip-1",
+        "category": "general",
+        "content": "Convenient location near the lazy river for continuous pool enjoyment",
+        "priority": 4
+      },
+      {
+        "id": "atomic-tonic-tip-2",
+        "category": "general",
+        "content": "Atomic-age themed cocktails and refreshments",
+        "priority": 3
+      }
+    ],
+    "tags": ["poolside", "lazy-river", "tropical-cocktails", "atomic-theme", "convenient"]
+  },
+  {
+    "id": "endless-summer-surfside-beach-break",
+    "resortId": "endless-summer-surfside",
+    "name": "Beach Break Cafe",
+    "description": "Quick-service food court featuring multiple stations with American favorites, international options, and grab-and-go items.",
+    "type": "quick_service",
+    "serviceType": "food_court",
+    "priceLevel": 2,
+    "cuisineType": "American Food Court",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "allDay": "6:00 AM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "foodCourt": true,
+      "multipleStations": true,
+      "grabAndGo": true,
+      "mobileOrder": true,
+      "valueOption": true
+    },
+    "tips": [
+      {
+        "id": "beach-break-tip-1",
+        "category": "general",
+        "content": "Multiple food stations provide variety at affordable prices",
+        "priority": 4
+      },
+      {
+        "id": "beach-break-tip-2",
+        "category": "strategy",
+        "content": "Use mobile ordering to save time during busy meal periods",
+        "priority": 4
+      },
+      {
+        "id": "beach-break-tip-3",
+        "category": "general",
+        "content": "Great value option with surf-themed atmosphere",
+        "priority": 3
+      }
+    ],
+    "tags": ["food-court", "value", "mobile-order", "surf-theme", "family-friendly"]
+  },
+  {
+    "id": "endless-summer-dockside-pier-8",
+    "resortId": "endless-summer-dockside",
+    "name": "Pier 8 Market",
+    "description": "Food court offering breakfast, lunch, and dinner with affordable options in a relaxed beach-themed atmosphere.",
+    "type": "quick_service",
+    "serviceType": "food_court",
+    "priceLevel": 2,
+    "cuisineType": "American Food Court",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "allDay": "6:00 AM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "foodCourt": true,
+      "affordableOptions": true,
+      "beachTheme": true,
+      "mobileOrder": true,
+      "valueOption": true
+    },
+    "tips": [
+      {
+        "id": "pier-8-tip-1",
+        "category": "general",
+        "content": "Affordable dining options perfect for budget-conscious families",
+        "priority": 4
+      },
+      {
+        "id": "pier-8-tip-2",
+        "category": "strategy",
+        "content": "Mobile ordering available for faster service",
+        "priority": 4
+      },
+      {
+        "id": "pier-8-tip-3",
+        "category": "general",
+        "content": "Relaxed beach atmosphere with comfortable seating",
+        "priority": 3
+      }
+    ],
+    "tags": ["food-court", "affordable", "beach-theme", "mobile-order", "value"]
+  },
+  {
+    "id": "endless-summer-dockside-sunset-lounge",
+    "resortId": "endless-summer-dockside",
+    "name": "Sunset Lounge",
+    "description": "Hotel lobby lounge offering a variety of cocktails, wines, and beers in a casual beach-themed setting.",
+    "type": "lounge",
+    "serviceType": "lounge",
+    "priceLevel": 2,
+    "cuisineType": "Cocktails & Beer",
+    "location": "Main Building, Lobby Level",
+    "operatingHours": {
+      "evening": "4:00 PM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": false,
+    "alcoholServed": true,
+    "features": {
+      "lobbyLounge": true,
+      "casualSetting": true,
+      "beachTheme": true,
+      "affordableDrinks": true,
+      "adultsOnly": true
+    },
+    "tips": [
+      {
+        "id": "sunset-lounge-tip-1",
+        "category": "general",
+        "content": "Casual spot for evening drinks at value resort pricing",
+        "priority": 3
+      },
+      {
+        "id": "sunset-lounge-tip-2",
+        "category": "general",
+        "content": "Beach-themed decor complements the resort's coastal atmosphere",
+        "priority": 3
+      }
+    ],
+    "tags": ["lobby-lounge", "casual", "beach-theme", "affordable", "evening"]
+  },
+  {
+    "id": "endless-summer-dockside-pool-bars",
+    "resortId": "endless-summer-dockside",
+    "name": "Pool Bars (Oasis Beach Bar & Wave Maker's)",
+    "description": "Two poolside bars serving tropical drinks and light refreshments with beachside service to pool chairs.",
+    "type": "quick_service",
+    "serviceType": "poolside",
+    "priceLevel": 2,
+    "cuisineType": "Poolside Beverages",
+    "location": "Pool Areas",
+    "operatingHours": {
+      "seasonal": "11:00 AM - 7:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "poolside": true,
+      "multipleLocations": true,
+      "tropicalDrinks": true,
+      "beachsideService": true
+    },
+    "tips": [
+      {
+        "id": "pool-bars-tip-1",
+        "category": "general",
+        "content": "Two convenient locations ensure drinks are always nearby while swimming",
+        "priority": 4
+      },
+      {
+        "id": "pool-bars-tip-2",
+        "category": "general",
+        "content": "Tropical drinks served to pool chairs for ultimate relaxation",
+        "priority": 3
+      }
+    ],
+    "tags": ["poolside", "multiple-locations", "tropical-drinks", "convenient", "beachside"]
+  },
+  {
+    "id": "helios-grand-flora-taverna",
+    "resortId": "helios-grand",
+    "name": "Flora Taverna",
+    "description": "Signature Mediterranean restaurant featuring fresh, authentic dishes with emphasis on Greek and Italian flavors and Epic Universe views.",
+    "type": "table_service",
+    "serviceType": "table",
+    "priceLevel": 4,
+    "cuisineType": "Mediterranean Fine Dining",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "breakfast": "7:00 AM - 11:00 AM",
+      "dinner": "5:30 PM - 10:00 PM"
+    },
+    "reservationWindow": 60,
+    "adrRequired": true,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "signatureDining": true,
+      "mediterranean": true,
+      "epicUniverseViews": true,
+      "freshIngredients": true,
+      "authenticFlavors": true
+    },
+    "tips": [
+      {
+        "id": "flora-taverna-tip-1",
+        "category": "strategy",
+        "content": "NEW 2025 - Book early as this is the premier dining at Universal's newest deluxe hotel",
+        "priority": 5
+      },
+      {
+        "id": "flora-taverna-tip-2",
+        "category": "general",
+        "content": "Features authentic Mediterranean cuisine with views of Epic Universe",
+        "priority": 5
+      },
+      {
+        "id": "flora-taverna-tip-3",
+        "category": "general",
+        "content": "Emphasis on fresh, high-quality ingredients and traditional preparation",
+        "priority": 4
+      }
+    ],
+    "tags": ["signature-dining", "mediterranean", "new-2025", "epic-universe-views", "premium"]
+  },
+  {
+    "id": "helios-grand-bar-helios",
+    "resortId": "helios-grand",
+    "name": "Bar Helios",
+    "description": "Rooftop bar overlooking Epic Universe offering craft cocktails, wine, and small plates with panoramic theme park views.",
+    "type": "lounge",
+    "serviceType": "lounge",
+    "priceLevel": 4,
+    "cuisineType": "Rooftop Bar & Small Plates",
+    "location": "Rooftop Level",
+    "operatingHours": {
+      "evening": "4:00 PM - 12:00 AM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "rooftopBar": true,
+      "epicUniverseViews": true,
+      "craftCocktails": true,
+      "panoramicViews": true,
+      "premiumLocation": true
+    },
+    "tips": [
+      {
+        "id": "bar-helios-tip-1",
+        "category": "strategy",
+        "content": "NEW 2025 - Prime location for Epic Universe views and sunset cocktails",
+        "priority": 5
+      },
+      {
+        "id": "bar-helios-tip-2",
+        "category": "general",
+        "content": "Rooftop location offers unparalleled views of Universal's newest theme park",
+        "priority": 5
+      },
+      {
+        "id": "bar-helios-tip-3",
+        "category": "strategy",
+        "content": "Arrive early for sunset views and best seating options",
+        "priority": 4
+      }
+    ],
+    "tags": ["rooftop-bar", "epic-universe-views", "craft-cocktails", "new-2025", "premium"]
+  },
+  {
+    "id": "helios-grand-aurora-market",
+    "resortId": "helios-grand",
+    "name": "Aurora Market",
+    "description": "Upscale coffee shop and marketplace offering Starbucks coffee, pastries, grab-and-go items, and light meals.",
+    "type": "quick_service",
+    "serviceType": "counter",
+    "priceLevel": 3,
+    "cuisineType": "Coffee & Gourmet Market",
+    "location": "Main Building, Lobby Level",
+    "operatingHours": {
+      "allDay": "5:30 AM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": ["vegetarian", "dairy-free"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "upscaleMarket": true,
+      "starbucksCoffee": true,
+      "gourmetOptions": true,
+      "mobileOrder": true,
+      "premiumLocation": true
+    },
+    "tips": [
+      {
+        "id": "aurora-market-tip-1",
+        "category": "general",
+        "content": "NEW 2025 - Upscale market with premium grab-and-go options",
+        "priority": 4
+      },
+      {
+        "id": "aurora-market-tip-2",
+        "category": "strategy",
+        "content": "Perfect for quick breakfast before early Epic Universe access",
+        "priority": 4
+      },
+      {
+        "id": "aurora-market-tip-3",
+        "category": "general",
+        "content": "Mobile ordering available for convenience",
+        "priority": 3
+      }
+    ],
+    "tags": ["upscale-market", "starbucks", "mobile-order", "new-2025", "convenient"]
+  },
+  {
+    "id": "helios-grand-lotus-lagoon",
+    "resortId": "helios-grand",
+    "name": "Lotus Lagoon",
+    "description": "Poolside bar and grill offering tropical cocktails, light meals, and upscale poolside dining with lagoon theming.",
+    "type": "quick_service",
+    "serviceType": "poolside",
+    "priceLevel": 3,
+    "cuisineType": "Upscale Poolside",
+    "location": "Pool Area",
+    "operatingHours": {
+      "seasonal": "11:00 AM - 8:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "upscalePoolside": true,
+      "lagoonTheming": true,
+      "tropicalCocktails": true,
+      "premiumDining": true
+    },
+    "tips": [
+      {
+        "id": "lotus-lagoon-tip-1",
+        "category": "general",
+        "content": "NEW 2025 - Upscale poolside dining matching the hotel's premium level",
+        "priority": 4
+      },
+      {
+        "id": "lotus-lagoon-tip-2",
+        "category": "general",
+        "content": "Tropical cocktails and elevated poolside fare",
+        "priority": 3
+      }
+    ],
+    "tags": ["upscale-poolside", "tropical-cocktails", "lagoon-theme", "new-2025", "premium"]
+  },
+  {
+    "id": "stella-nova-cosmos-cafe",
+    "resortId": "stella-nova",
+    "name": "Cosmos Cafe & Market",
+    "description": "Quick-service restaurant and market featuring high-quality international cuisine with stellar space theming and excellent food quality.",
+    "type": "quick_service",
+    "serviceType": "food_court",
+    "priceLevel": 2,
+    "cuisineType": "International Quick Service",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "allDay": "6:00 AM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": ["vegetarian", "gluten-free"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "highQuality": true,
+      "internationalCuisine": true,
+      "spaceTheming": true,
+      "excellentFood": true,
+      "mobileOrder": true
+    },
+    "tips": [
+      {
+        "id": "cosmos-cafe-tip-1",
+        "category": "general",
+        "content": "OPENED 2025 - Reviewers call this some of the best resort quick-service food",
+        "priority": 5
+      },
+      {
+        "id": "cosmos-cafe-tip-2",
+        "category": "general",
+        "content": "Try the salmon fried rice, pulled pork sandwich, or eggs Benedict",
+        "priority": 5
+      },
+      {
+        "id": "cosmos-cafe-tip-3",
+        "category": "general",
+        "content": "Space-themed atmosphere with stellar food quality",
+        "priority": 4
+      }
+    ],
+    "tags": ["high-quality", "international", "space-theme", "opened-2025", "excellent-food"]
+  },
+  {
+    "id": "stella-nova-galaxy-bar",
+    "resortId": "stella-nova",
+    "name": "Galaxy Bar & Grill",
+    "description": "Poolside bar and restaurant offering refreshments and meals with celestial theming and space-inspired cocktails.",
+    "type": "quick_service",
+    "serviceType": "poolside",
+    "priceLevel": 2,
+    "cuisineType": "Poolside Space Theme",
+    "location": "Pool Area",
+    "operatingHours": {
+      "seasonal": "11:00 AM - 7:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "poolside": true,
+      "celestialTheming": true,
+      "spaceInspired": true,
+      "poolsideRefreshments": true
+    },
+    "tips": [
+      {
+        "id": "galaxy-bar-tip-1",
+        "category": "general",
+        "content": "OPENED 2025 - Space-themed poolside dining with cosmic cocktails",
+        "priority": 4
+      },
+      {
+        "id": "galaxy-bar-tip-2",
+        "category": "general",
+        "content": "Perfect for pool relaxation with celestial atmosphere",
+        "priority": 3
+      }
+    ],
+    "tags": ["poolside", "space-theme", "celestial", "opened-2025", "cosmic-cocktails"]
+  },
+  {
+    "id": "terra-luna-omega-cafe",
+    "resortId": "terra-luna",
+    "name": "Omega Cafe & Market",
+    "description": "Adventure-themed quick-service restaurant serving breakfast, lunch, and dinner with planetary theming and hearty portions.",
+    "type": "quick_service",
+    "serviceType": "food_court",
+    "priceLevel": 2,
+    "cuisineType": "American Adventure Theme",
+    "location": "Main Building, Ground Floor",
+    "operatingHours": {
+      "allDay": "6:00 AM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": true,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": false,
+    "features": {
+      "adventureTheme": true,
+      "planetaryTheming": true,
+      "heartyPortions": true,
+      "mobileOrder": true,
+      "allDayDining": true
+    },
+    "tips": [
+      {
+        "id": "omega-cafe-tip-1",
+        "category": "general",
+        "content": "OPENED 2025 - Try the Big French Dipper or Earth Shake Fried Chicken Sandwich",
+        "priority": 4
+      },
+      {
+        "id": "omega-cafe-tip-2",
+        "category": "general",
+        "content": "Adventure and planetary themed menu and atmosphere",
+        "priority": 4
+      },
+      {
+        "id": "omega-cafe-tip-3",
+        "category": "strategy",
+        "content": "Mobile ordering available for convenience",
+        "priority": 3
+      }
+    ],
+    "tags": ["adventure-theme", "planetary", "hearty-portions", "opened-2025", "mobile-order"]
+  },
+  {
+    "id": "terra-luna-luna-bar",
+    "resortId": "terra-luna",
+    "name": "Luna Bar",
+    "description": "Evening cocktail lounge featuring lunar libations with creative cocktails inspired by space exploration and celestial themes.",
+    "type": "lounge",
+    "serviceType": "lounge",
+    "priceLevel": 2,
+    "cuisineType": "Lunar Cocktails",
+    "location": "Main Building, Lobby Level",
+    "operatingHours": {
+      "evening": "4:00 PM - 11:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": false,
+    "alcoholServed": true,
+    "features": {
+      "lunarLibations": true,
+      "creativeCocktails": true,
+      "spaceExploration": true,
+      "celestialThemes": true,
+      "adultsOnly": true
+    },
+    "tips": [
+      {
+        "id": "luna-bar-tip-1",
+        "category": "general",
+        "content": "OPENED 2025 - Try the Hyperion (bourbon cocktail) or Io (gin cocktail)",
+        "priority": 4
+      },
+      {
+        "id": "luna-bar-tip-2",
+        "category": "general",
+        "content": "Creative lunar-themed cocktails with space exploration inspiration",
+        "priority": 4
+      },
+      {
+        "id": "luna-bar-tip-3",
+        "category": "general",
+        "content": "Perfect evening spot for space-themed cocktails",
+        "priority": 3
+      }
+    ],
+    "tags": ["lunar-cocktails", "creative", "space-exploration", "opened-2025", "evening"]
+  },
+  {
+    "id": "terra-luna-moonrise-bar",
+    "resortId": "terra-luna",
+    "name": "Moonrise Bar & Grill",
+    "description": "Poolside bar and restaurant offering space-themed refreshments and meals with lunar atmosphere and cosmic cocktails.",
+    "type": "quick_service",
+    "serviceType": "poolside",
+    "priceLevel": 2,
+    "cuisineType": "Poolside Space Theme",
+    "location": "Pool Area",
+    "operatingHours": {
+      "seasonal": "11:00 AM - 7:00 PM"
+    },
+    "reservationWindow": 0,
+    "adrRequired": false,
+    "mobileOrderAvailable": false,
+    "allergyFriendly": ["vegetarian"],
+    "kidFriendly": true,
+    "alcoholServed": true,
+    "features": {
+      "poolside": true,
+      "spaceThemed": true,
+      "lunarAtmosphere": true,
+      "cosmicCocktails": true
+    },
+    "tips": [
+      {
+        "id": "moonrise-bar-tip-1",
+        "category": "general",
+        "content": "OPENED 2025 - Space-themed poolside dining with cosmic atmosphere",
+        "priority": 4
+      },
+      {
+        "id": "moonrise-bar-tip-2",
+        "category": "general",
+        "content": "Perfect for poolside relaxation with lunar-inspired refreshments",
+        "priority": 3
+      }
+    ],
+    "tags": ["poolside", "space-theme", "lunar-atmosphere", "opened-2025", "cosmic"]
+  }
+]

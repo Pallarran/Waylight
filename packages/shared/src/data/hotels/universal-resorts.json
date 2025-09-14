@@ -21,19 +21,51 @@
         "walking": true
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": true,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": true,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": true,
+          "couples_treatments": true,
+          "fitness_center": true,
+          "sauna": true,
+          "steam_room": true
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": true,
+          "character_dining": false,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": true,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -42,7 +74,15 @@
         "themedRooms": false,
         "familyAccommodations": false
       }
-    }
+    },
+    "diningOptions": [
+      "portofino-bice-ristorante",
+      "portofino-trattoria-del-porto",
+      "portofino-mama-dellas",
+      "portofino-sals-market",
+      "portofino-splendido-bar-grill",
+      "portofino-gelateria"
+    ]
   },
   {
     "id": "hard-rock",
@@ -66,19 +106,51 @@
         "walking": true
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": true,
-        "concierge": true,
-        "businessCenter": true,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": true,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": true,
+          "character_dining": false,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": true,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": true,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -87,7 +159,14 @@
         "themedRooms": false,
         "familyAccommodations": false
       }
-    }
+    },
+    "diningOptions": [
+      "hard-rock-kitchen",
+      "hard-rock-palm-restaurant",
+      "hard-rock-emack-bolios",
+      "hard-rock-beachclub",
+      "hard-rock-starbucks"
+    ]
   },
   {
     "id": "royal-pacific",
@@ -110,19 +189,51 @@
         "walking": true
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": true,
+          "character_dining": false,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": true,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -131,7 +242,13 @@
         "themedRooms": false,
         "familyAccommodations": false
       }
-    }
+    },
+    "diningOptions": [
+      "royal-pacific-islands-dining",
+      "royal-pacific-tuk-tuk-market",
+      "royal-pacific-wantilan-luau",
+      "royal-pacific-bula-bar"
+    ]
   },
   {
     "id": "sapphire-falls",
@@ -153,19 +270,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": true,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": false,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": true,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": false,
+          "character_dining": false,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": true,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": true,
+          "walking_trails": true
+        },
+        "services": {
+          "concierge": false,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": false
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -174,7 +323,13 @@
         "themedRooms": false,
         "familyAccommodations": false
       }
-    }
+    },
+    "diningOptions": [
+      "sapphire-falls-amatista-cookhouse",
+      "sapphire-falls-strong-water-tavern",
+      "sapphire-falls-new-dutch-trading",
+      "sapphire-falls-drhum-club"
+    ]
   },
   {
     "id": "aventura",
@@ -196,19 +351,52 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": false,
-        "quickService": true,
-        "entertainment": false,
-        "concierge": false,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": true,
+          "pool_bar": false,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": false,
+          "quick_service": true,
+          "pool_bar": false,
+          "room_service": false,
+          "character_dining": false,
+          "signature_dining": false
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": false,
+          "golf": false
+        },
+        "services": {
+          "concierge": false,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": false
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -217,7 +405,12 @@
         "themedRooms": false,
         "familyAccommodations": false
       }
-    }
+    },
+    "diningOptions": [
+      "aventura-bar-17",
+      "aventura-urban-pantry",
+      "aventura-starbucks"
+    ]
   },
   {
     "id": "cabana-bay",
@@ -239,19 +432,51 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": true,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": false,
-        "quickService": true,
-        "entertainment": false,
-        "concierge": false,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": true,
+          "water_slides": true,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": false,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": false,
+          "character_dining": false,
+          "signature_dining": false
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": false
+        },
+        "services": {
+          "concierge": false,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": false
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -260,7 +485,15 @@
         "themedRooms": false,
         "familyAccommodations": true
       }
-    }
+    },
+    "diningOptions": [
+      "cabana-bay-bayliner-diner",
+      "cabana-bay-starbucks",
+      "cabana-bay-swizzle-lounge",
+      "cabana-bay-galaxy-bowl",
+      "cabana-bay-hideaway-bar",
+      "cabana-bay-atomic-tonic"
+    ]
   },
   {
     "id": "endless-summer-surfside",
@@ -282,19 +515,52 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": false,
-        "quickService": true,
-        "entertainment": false,
-        "concierge": false,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": true,
+          "pool_bar": false,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": false,
+          "quick_service": true,
+          "pool_bar": false,
+          "room_service": false,
+          "character_dining": false,
+          "signature_dining": false
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": false,
+          "golf": false
+        },
+        "services": {
+          "concierge": false,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": false
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -303,7 +569,10 @@
         "themedRooms": false,
         "familyAccommodations": false
       }
-    }
+    },
+    "diningOptions": [
+      "endless-summer-surfside-beach-break"
+    ]
   },
   {
     "id": "endless-summer-dockside",
@@ -325,19 +594,52 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": false,
-        "quickService": true,
-        "entertainment": false,
-        "concierge": false,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": true,
+          "pool_bar": false,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": false,
+          "quick_service": true,
+          "pool_bar": false,
+          "room_service": false,
+          "character_dining": false,
+          "signature_dining": false
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": false,
+          "golf": false
+        },
+        "services": {
+          "concierge": false,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": false
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -346,7 +648,12 @@
         "themedRooms": false,
         "familyAccommodations": false
       }
-    }
+    },
+    "diningOptions": [
+      "endless-summer-dockside-pier-8",
+      "endless-summer-dockside-sunset-lounge",
+      "endless-summer-dockside-pool-bars"
+    ]
   },
   {
     "id": "helios-grand",
@@ -370,19 +677,51 @@
         "walking": true
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": true,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": true,
-        "quickService": false,
-        "entertainment": false,
-        "concierge": true,
-        "businessCenter": true,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": true,
+          "pool_bar": true,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": true,
+          "couples_treatments": true,
+          "fitness_center": true,
+          "sauna": true,
+          "steam_room": true
+        },
+        "dining": {
+          "table_service": true,
+          "quick_service": true,
+          "pool_bar": true,
+          "room_service": true,
+          "character_dining": true,
+          "signature_dining": true
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": false
+        },
+        "services": {
+          "concierge": true,
+          "business_center": true,
+          "childcare": false,
+          "laundry": true,
+          "car_service": true
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": true,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -391,7 +730,13 @@
         "themedRooms": false,
         "familyAccommodations": true
       }
-    }
+    },
+    "diningOptions": [
+      "helios-grand-flora-taverna",
+      "helios-grand-bar-helios",
+      "helios-grand-aurora-market",
+      "helios-grand-lotus-lagoon"
+    ]
   },
   {
     "id": "terra-luna",
@@ -413,19 +758,52 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": true,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": false,
-        "quickService": true,
-        "entertainment": false,
-        "concierge": false,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": true,
+          "hot_tub": true,
+          "pool_bar": false,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": false,
+          "quick_service": true,
+          "pool_bar": false,
+          "room_service": false,
+          "character_dining": false,
+          "signature_dining": false
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": false,
+          "golf": false
+        },
+        "services": {
+          "concierge": false,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": false
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -434,7 +812,12 @@
         "themedRooms": false,
         "familyAccommodations": false
       }
-    }
+    },
+    "diningOptions": [
+      "terra-luna-omega-cafe",
+      "terra-luna-luna-bar",
+      "terra-luna-moonrise-bar"
+    ]
   },
   {
     "id": "stella-nova",
@@ -456,19 +839,52 @@
         "walking": false
       },
       "amenities": {
-        "pool": true,
-        "waterFeatures": false,
-        "spa": false,
-        "fitnessCenter": true,
-        "golf": false,
-        "beach": false,
-        "marina": false,
-        "dining": false,
-        "quickService": true,
-        "entertainment": false,
-        "concierge": false,
-        "businessCenter": false,
-        "childcare": false
+        "pool": {
+          "basic": true,
+          "lazy_river": false,
+          "water_slides": false,
+          "hot_tub": true,
+          "pool_bar": false,
+          "kiddie_pool": true,
+          "zero_entry": false
+        },
+        "spa": {
+          "full_service": false,
+          "couples_treatments": false,
+          "fitness_center": true,
+          "sauna": false,
+          "steam_room": false
+        },
+        "dining": {
+          "table_service": false,
+          "quick_service": true,
+          "pool_bar": false,
+          "room_service": false,
+          "character_dining": false,
+          "signature_dining": false
+        },
+        "recreation": {
+          "beach": false,
+          "marina": false,
+          "boat_rentals": false,
+          "fishing": false,
+          "bike_rentals": false,
+          "walking_trails": false,
+          "golf": false
+        },
+        "services": {
+          "concierge": false,
+          "business_center": false,
+          "childcare": false,
+          "laundry": true,
+          "car_service": false
+        },
+        "entertainment": {
+          "live_music": false,
+          "character_meet_greets": false,
+          "movies_under_stars": false,
+          "campfire": false
+        }
       },
       "accommodations": {
         "suites": true,
@@ -477,6 +893,10 @@
         "themedRooms": false,
         "familyAccommodations": false
       }
-    }
+    },
+    "diningOptions": [
+      "stella-nova-cosmos-cafe",
+      "stella-nova-galaxy-bar"
+    ]
   }
 ]

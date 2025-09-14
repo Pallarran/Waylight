@@ -84,6 +84,11 @@ import epcotLoungesData from './lounges/epcot-lounges.json';
 import hollywoodStudiosLoungesData from './lounges/hollywood-studios-lounges.json';
 import animalKingdomLoungesData from './lounges/animal-kingdom-lounges.json';
 
+// Resort Dining
+import disneyResortsDiningData from './resorts/disney-resorts-dining.json';
+import universalResortsDiningData from './resorts/universal-resorts-dining.json';
+import otherHotelsDiningData from './resorts/other-hotels-dining.json';
+
 // Cast imported data to proper types and combine all parks
 export const quickServiceRestaurants: EatItem[] = [
   ...(magicKingdomQuickServiceData as EatItem[]),
@@ -113,8 +118,18 @@ export const lounges: EatItem[] = [
   ...(animalKingdomLoungesData as EatItem[])
 ];
 
+export const resortDining: EatItem[] = [
+  ...(disneyResortsDiningData as EatItem[]),
+  ...(universalResortsDiningData as EatItem[]),
+  ...(otherHotelsDiningData as EatItem[])
+];
+
+export const disneyResortDining: EatItem[] = disneyResortsDiningData as EatItem[];
+export const universalResortDining: EatItem[] = universalResortsDiningData as EatItem[];
+export const otherHotelsDining: EatItem[] = otherHotelsDiningData as EatItem[];
+
 export const getAllEatItems = (): EatItem[] => {
-  return [...quickServiceRestaurants, ...tableServiceRestaurants, ...snackStands, ...lounges];
+  return [...quickServiceRestaurants, ...tableServiceRestaurants, ...snackStands, ...lounges, ...resortDining];
 };
 
 export const getEatItemsByPark = (parkId: string): EatItem[] => {
@@ -139,4 +154,29 @@ export const getEatItemsByPriceLevel = (priceLevel: 1 | 2 | 3 | 4): EatItem[] =>
 
 export const getEatItemById = (id: string): EatItem | undefined => {
   return getAllEatItems().find(item => item.id === id);
+};
+
+// Resort dining specific functions
+export const getResortDiningByResortId = (resortId: string): EatItem[] => {
+  return resortDining.filter(item => item.resortId === resortId);
+};
+
+export const getSignatureDining = (): EatItem[] => {
+  return getAllEatItems().filter(item => item.features?.fineDining || item.priceLevel === 4);
+};
+
+export const getCharacterDining = (): EatItem[] => {
+  return getAllEatItems().filter(item => item.features?.characterDining);
+};
+
+export const getQuickServiceByResort = (resortId: string): EatItem[] => {
+  return resortDining.filter(item => item.resortId === resortId && item.type === 'quick_service');
+};
+
+export const getTableServiceByResort = (resortId: string): EatItem[] => {
+  return resortDining.filter(item => item.resortId === resortId && item.type === 'table_service');
+};
+
+export const getLoungesByResort = (resortId: string): EatItem[] => {
+  return resortDining.filter(item => item.resortId === resortId && item.type === 'lounge');
 };
