@@ -1,5 +1,5 @@
 import { format, differenceInDays, isAfter, isBefore } from 'date-fns';
-import { Calendar, MapPin, Clock, MoreVertical } from 'lucide-react';
+import { Calendar, MapPin, Clock, MoreVertical, XCircle } from 'lucide-react';
 import { useState } from 'react';
 import { useTripStore } from '../../stores';
 
@@ -93,8 +93,9 @@ export default function TripCard({ trip, isActive = false, onClick }: TripCardPr
                   e.stopPropagation();
                   handleDelete();
                 }}
-                className="block w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 transition-colors duration-150"
+                className="block w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 transition-colors duration-150 flex items-center"
               >
+                <XCircle className="w-4 h-4 mr-2" />
                 Delete
               </button>
             </div>

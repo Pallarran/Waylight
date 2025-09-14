@@ -158,34 +158,78 @@ export default function WaypointCard({ attraction, showAddToTrip: _showAddToTrip
             )}
 
             {/* Amenities */}
-            {attraction.features?.amenities && Object.values(attraction.features.amenities).some(Boolean) && (
+            {attraction.features?.amenities && (
               <div className="flex items-center flex-wrap gap-1">
                 <span className="text-xs font-medium text-ink mr-2">Amenities:</span>
-                {Object.entries(attraction.features.amenities).map(([key, value]) => {
-                  if (!value) return null;
+                {(() => {
+                  const amenities = attraction.features.amenities;
                   const icons = getWaypointIcons({
                     category: attraction.category,
                     features: attraction.features,
                     tier: 1
                   });
-                  const labelMap: Record<string, string> = {
-                    'pool': 'Pool',
-                    'waterFeatures': 'Water Features',
-                    'spa': 'Spa',
-                    'fitnessCenter': 'Fitness Center',
-                    'golf': 'Golf',
-                    'beach': 'Beach',
-                    'marina': 'Marina',
-                    'dining': 'Dining',
-                    'quickService': 'Quick Service',
-                    'entertainment': 'Entertainment',
-                    'concierge': 'Concierge',
-                    'businessCenter': 'Business Center',
-                    'childcare': 'Kids Club'
-                  };
-                  const label = labelMap[key] || key;
-                  const icon = icons.find(icon => icon.label === label);
-                  return icon ? (
+
+                  const displayIcons = [];
+
+                  // Pool & Water Features
+                  if (amenities.pool && Object.values(amenities.pool).some(Boolean)) {
+                    const poolIcon = icons.find(icon => icon.label === 'Pool');
+                    if (poolIcon) displayIcons.push({ key: 'pool', icon: poolIcon });
+
+                    // Show water features icon if slides or lazy river exist
+                    if (amenities.pool.water_slides || amenities.pool.lazy_river) {
+                      const waterIcon = icons.find(icon => icon.label === 'Water Features');
+                      if (waterIcon) displayIcons.push({ key: 'water_features', icon: waterIcon });
+                    }
+                  }
+
+                  // Spa & Wellness
+                  if (amenities.spa && Object.values(amenities.spa).some(Boolean)) {
+                    const spaIcon = icons.find(icon => icon.label === 'Spa');
+                    if (spaIcon) displayIcons.push({ key: 'spa', icon: spaIcon });
+                  }
+
+                  // Dining
+                  if (amenities.dining && Object.values(amenities.dining).some(Boolean)) {
+                    const diningIcon = icons.find(icon => icon.label === 'Dining');
+                    if (diningIcon) displayIcons.push({ key: 'dining', icon: diningIcon });
+                  }
+
+                  // Recreation Activities
+                  if (amenities.recreation) {
+                    if (amenities.recreation.beach) {
+                      const beachIcon = icons.find(icon => icon.label === 'Beach');
+                      if (beachIcon) displayIcons.push({ key: 'beach', icon: beachIcon });
+                    }
+                    if (amenities.recreation.marina) {
+                      const marinaIcon = icons.find(icon => icon.label === 'Marina');
+                      if (marinaIcon) displayIcons.push({ key: 'marina', icon: marinaIcon });
+                    }
+                    if (amenities.recreation.golf) {
+                      const golfIcon = icons.find(icon => icon.label === 'Golf');
+                      if (golfIcon) displayIcons.push({ key: 'golf', icon: golfIcon });
+                    }
+                  }
+
+                  // Entertainment
+                  if (amenities.entertainment && Object.values(amenities.entertainment).some(Boolean)) {
+                    const entertainmentIcon = icons.find(icon => icon.label === 'Entertainment');
+                    if (entertainmentIcon) displayIcons.push({ key: 'entertainment', icon: entertainmentIcon });
+                  }
+
+                  // Guest Services (show individual service icons)
+                  if (amenities.services) {
+                    if (amenities.services.concierge) {
+                      const conciergeIcon = icons.find(icon => icon.label === 'Concierge');
+                      if (conciergeIcon) displayIcons.push({ key: 'concierge', icon: conciergeIcon });
+                    }
+                    if (amenities.services.childcare) {
+                      const childcareIcon = icons.find(icon => icon.label === 'Kids Club');
+                      if (childcareIcon) displayIcons.push({ key: 'childcare', icon: childcareIcon });
+                    }
+                  }
+
+                  return displayIcons.map(({ key, icon }) => (
                     <span
                       key={key}
                       className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-surface border border-surface-dark/20 hover:bg-surface-dark/30 transition-colors cursor-help"
@@ -193,8 +237,8 @@ export default function WaypointCard({ attraction, showAddToTrip: _showAddToTrip
                     >
                       <span className="text-sm">{icon.emoji}</span>
                     </span>
-                  ) : null;
-                })}
+                  ));
+                })()}
               </div>
             )}
 

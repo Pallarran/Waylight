@@ -161,45 +161,171 @@ export default function WaypointDetailModal({
                   </div>
                 )}
 
-                {/* Amenities */}
-                {attraction.features.amenities && Object.values(attraction.features.amenities).some(Boolean) && (
-                  <div>
-                    <h4 className="font-medium text-ink text-sm mb-2">Amenities</h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {Object.entries(attraction.features.amenities).map(([key, value]) => {
-                        if (!value) return null;
-                        const labelMap: Record<string, string> = {
-                          // Recreation & Wellness
-                          'pool': 'Pool',
-                          'waterFeatures': 'Water Features',
-                          'spa': 'Spa',
-                          'fitnessCenter': 'Fitness Center',
-                          'golf': 'Golf',
-                          'beach': 'Beach',
-                          'marina': 'Marina',
-                          // Dining & Entertainment
-                          'dining': 'Dining',
-                          'quickService': 'Quick Service',
-                          'entertainment': 'Entertainment',
-                          // Services
-                          'concierge': 'Concierge',
-                          'businessCenter': 'Business Center',
-                          'childcare': 'Kids Club'
-                        };
-                        const label = labelMap[key] || key;
-                        const icon = featureIcons.find(icon => icon.label === label);
-                        return icon ? (
-                          <div key={key} className="flex items-center space-x-3 p-3 bg-surface/30 rounded-lg">
-                            <span className="text-2xl flex-shrink-0">{icon.emoji}</span>
-                            <div className="flex-1">
-                              <div className="font-medium text-ink text-sm">{icon.label}</div>
-                              <div className="text-xs text-ink-light">{icon.description}</div>
-                            </div>
-                          </div>
-                        ) : null;
-                      })}
-                    </div>
-                  </div>
+                {/* Amenities - Granular Details */}
+                {attraction.features.amenities && (
+                  <>
+                    {/* Pool & Water Activities */}
+                    {(attraction.features.amenities.pool || attraction.features.amenities.recreation?.beach) && (
+                      <div>
+                        <h4 className="font-medium text-ink text-sm mb-2 flex items-center">
+                          <span className="text-lg mr-2">🏊</span>
+                          Pool & Water Activities
+                        </h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          {(() => {
+                            const poolDetails = [];
+                            const amenities = attraction.features.amenities;
+
+                            // Pool features
+                            if (amenities.pool) {
+                              if (amenities.pool.basic) poolDetails.push('Swimming pool available');
+                              if (amenities.pool.kiddie_pool) poolDetails.push('Children\'s pool area');
+                              if (amenities.pool.hot_tub) poolDetails.push('Hot tub/spa available');
+                              if (amenities.pool.water_slides) poolDetails.push('Water slides');
+                              if (amenities.pool.lazy_river) poolDetails.push('Lazy river');
+                              if (amenities.pool.zero_entry) poolDetails.push('Zero-entry pool');
+                              if (amenities.pool.pool_bar) poolDetails.push('Pool bar service');
+                            }
+
+                            // Recreation features
+                            if (amenities.recreation?.beach) poolDetails.push('Beach access');
+                            if (amenities.recreation?.marina) poolDetails.push('Marina activities');
+
+                            return poolDetails.map((detail, index) => (
+                              <div key={index} className="text-xs text-ink-light bg-blue-50/30 rounded-md px-2 py-1">
+                                • {detail}
+                              </div>
+                            ));
+                          })()}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Wellness & Spa */}
+                    {attraction.features.amenities.spa && (
+                      <div>
+                        <h4 className="font-medium text-ink text-sm mb-2 flex items-center">
+                          <span className="text-lg mr-2">💆</span>
+                          Wellness & Spa
+                        </h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          {(() => {
+                            const spaDetails = [];
+                            const spa = attraction.features.amenities.spa;
+
+                            if (spa.full_service) spaDetails.push('Full-service spa');
+                            if (spa.couples_treatments) spaDetails.push('Couples treatments');
+                            if (spa.fitness_center) spaDetails.push('Fitness center');
+                            if (spa.sauna) spaDetails.push('Sauna available');
+                            if (spa.steam_room) spaDetails.push('Steam room available');
+
+                            return spaDetails.map((detail, index) => (
+                              <div key={index} className="text-xs text-ink-light bg-purple-50/30 rounded-md px-2 py-1">
+                                • {detail}
+                              </div>
+                            ));
+                          })()}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Dining Options */}
+                    {attraction.features.amenities.dining && (
+                      <div>
+                        <h4 className="font-medium text-ink text-sm mb-2 flex items-center">
+                          <span className="text-lg mr-2">🍽️</span>
+                          Dining Options
+                        </h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          {(() => {
+                            const diningDetails = [];
+                            const dining = attraction.features.amenities.dining;
+
+                            if (dining.table_service) diningDetails.push('Table service restaurant');
+                            if (dining.signature_dining) diningDetails.push('Signature dining');
+                            if (dining.character_dining) diningDetails.push('Character dining');
+                            if (dining.quick_service) diningDetails.push('Quick service options');
+                            if (dining.pool_bar) diningDetails.push('Pool bar');
+                            if (dining.room_service) diningDetails.push('Room service available');
+
+                            return diningDetails.map((detail, index) => (
+                              <div key={index} className="text-xs text-ink-light bg-orange-50/30 rounded-md px-2 py-1">
+                                • {detail}
+                              </div>
+                            ));
+                          })()}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Recreation & Activities */}
+                    {(attraction.features.amenities.recreation || attraction.features.amenities.entertainment) && (
+                      <div>
+                        <h4 className="font-medium text-ink text-sm mb-2 flex items-center">
+                          <span className="text-lg mr-2">🎾</span>
+                          Recreation & Activities
+                        </h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          {(() => {
+                            const recDetails = [];
+                            const rec = attraction.features.amenities.recreation;
+                            const ent = attraction.features.amenities.entertainment;
+
+                            // Recreation activities
+                            if (rec) {
+                              if (rec.golf) recDetails.push('Golf course access');
+                              if (rec.boat_rentals) recDetails.push('Boat rentals available');
+                              if (rec.bike_rentals) recDetails.push('Bike rentals available');
+                              if (rec.fishing) recDetails.push('Fishing available');
+                              if (rec.walking_trails) recDetails.push('Walking trails');
+                            }
+
+                            // Entertainment activities
+                            if (ent) {
+                              if (ent.live_music) recDetails.push('Live music');
+                              if (ent.character_meet_greets) recDetails.push('Character meet & greets');
+                              if (ent.movies_under_stars) recDetails.push('Movies under the stars');
+                              if (ent.campfire) recDetails.push('Campfire activities');
+                            }
+
+                            return recDetails.map((detail, index) => (
+                              <div key={index} className="text-xs text-ink-light bg-green-50/30 rounded-md px-2 py-1">
+                                • {detail}
+                              </div>
+                            ));
+                          })()}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Guest Services */}
+                    {attraction.features.amenities.services && (
+                      <div>
+                        <h4 className="font-medium text-ink text-sm mb-2 flex items-center">
+                          <span className="text-lg mr-2">🏨</span>
+                          Guest Services
+                        </h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          {(() => {
+                            const serviceDetails = [];
+                            const services = attraction.features.amenities.services;
+
+                            if (services.concierge) serviceDetails.push('Concierge services');
+                            if (services.business_center) serviceDetails.push('Business center');
+                            if (services.childcare) serviceDetails.push('Kids Club/childcare');
+                            if (services.laundry) serviceDetails.push('Laundry services');
+                            if (services.car_service) serviceDetails.push('Car service available');
+
+                            return serviceDetails.map((detail, index) => (
+                              <div key={index} className="text-xs text-ink-light bg-gray-50/30 rounded-md px-2 py-1">
+                                • {detail}
+                              </div>
+                            ));
+                          })()}
+                        </div>
+                      </div>
+                    )}
+                  </>
                 )}
 
                 {/* Accommodations */}

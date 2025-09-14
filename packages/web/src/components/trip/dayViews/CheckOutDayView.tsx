@@ -1,4 +1,4 @@
-import { Plane, Clock, Camera, Luggage, Plus, X, GripVertical, MapPin, Phone, Save, Edit2, Info } from 'lucide-react';
+import { Plane, Clock, Camera, Luggage, Plus, XCircle, GripVertical, MapPin, Phone, Save, Edit, Info } from 'lucide-react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TripDay, Trip, ActivityCategory } from '../../../types';
@@ -509,13 +509,13 @@ export default function CheckOutDayView({ trip, tripDay, date, onQuickAdd, onOpe
                     disabled={editingItem !== null && editingItem !== item.id}
                     className="p-1 text-ink-light hover:text-ink hover:bg-surface-dark/50 rounded transition-colors disabled:opacity-50"
                   >
-                    <Edit2 className="w-3 h-3" />
+                    <Edit className="w-3 h-3" />
                   </button>
                   <button
                     onClick={() => deleteItem(trip.id, tripDay.id, item.id)}
                     className="p-1 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded transition-colors"
                   >
-                    <X className="w-3 h-3" />
+                    <XCircle className="w-3 h-3" />
                   </button>
                 </div>
               </div>
@@ -539,17 +539,17 @@ export default function CheckOutDayView({ trip, tripDay, date, onQuickAdd, onOpe
       <div className="lg:col-span-8">
         <div className="bg-surface rounded-xl border border-surface-dark/30 p-6 h-full overflow-y-auto">
           {/* Header */}
-          <div className="flex items-center mb-6 pb-4 border-b border-surface-dark/20 relative">
+          <div className="flex items-center mb-6 py-4 px-4 border-b border-surface-dark/20 relative bg-gradient-to-r from-sea/60 to-sea-light/60 rounded-lg min-h-[120px]">
             {onOpenDayTypeModal && (
               <button
                 onClick={onOpenDayTypeModal}
-                className="absolute top-0 right-0 flex items-center space-x-2 px-3 py-2 bg-surface/50 backdrop-blur-sm border border-surface-dark/30 rounded-lg text-ink-light hover:text-ink hover:bg-surface/70 transition-colors text-sm"
+                className="absolute top-3 right-3 flex items-center space-x-2 px-3 py-2 bg-surface/50 backdrop-blur-sm border border-surface-dark/30 rounded-lg text-ink-light hover:text-ink hover:bg-surface/70 transition-colors text-sm"
               >
                 <span className="text-base">✈️</span>
                 <span>Change Day Type</span>
               </button>
             )}
-            <div className="flex items-center justify-center w-12 h-12 bg-blue-500/20 text-blue-500 rounded-xl mr-4">
+            <div className="flex items-center justify-center w-12 h-12 mr-4">
               <span className="text-2xl">✈️</span>
             </div>
             <div>
@@ -815,7 +815,7 @@ export default function CheckOutDayView({ trip, tripDay, date, onQuickAdd, onOpe
                   onClick={() => setShowAddActivityModal(false)}
                   className="p-2 text-ink-light hover:text-ink hover:bg-surface-dark rounded-lg transition-colors"
                 >
-                  <X className="w-5 h-5" />
+                  <XCircle className="w-5 h-5" />
                 </button>
               </div>
 
@@ -1014,7 +1014,7 @@ export default function CheckOutDayView({ trip, tripDay, date, onQuickAdd, onOpe
                   onClick={() => setShowTimingBreakdown(false)}
                   className="p-1 rounded-lg hover:bg-surface-dark/10 transition-colors"
                 >
-                  <X className="w-5 h-5 text-ink-light" />
+                  <XCircle className="w-5 h-5 text-ink-light" />
                 </button>
               </div>
 

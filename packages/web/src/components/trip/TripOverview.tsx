@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
-import { Edit2, Save, X, Plus, Users, Hotel, MapPin, Calendar, FileText, Trash2, GripVertical } from 'lucide-react';
+import { Edit, Save, XCircle, Plus, Users, Hotel, MapPin, Calendar, FileText, XCircle as Trash, GripVertical } from 'lucide-react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useTripStore } from '../../stores';
@@ -70,7 +70,7 @@ const DraggablePartyMember = ({
             onClick={() => removePartyMember(member.id)}
             className="p-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded transition-colors"
           >
-            <Trash2 className="w-4 h-4" />
+            <XCircle className="w-4 h-4" />
           </button>
         </div>
         <div className="space-y-3">
@@ -333,7 +333,7 @@ export default function TripOverview({ trip }: TripOverviewProps) {
                   onClick={() => setIsEditingAccommodation(true)}
                   className="p-2 text-ink-light hover:text-ink hover:bg-surface-dark/50 rounded-lg transition-colors"
                 >
-                  <Edit2 className="w-4 h-4" />
+                  <Edit className="w-4 h-4" />
                 </button>
               )}
             </div>
@@ -580,7 +580,7 @@ export default function TripOverview({ trip }: TripOverviewProps) {
                   onClick={() => setIsEditingParty(true)}
                   className="p-2 text-ink-light hover:text-ink hover:bg-surface-dark/50 rounded-lg transition-colors"
                 >
-                  <Edit2 className="w-4 h-4" />
+                  <Edit className="w-4 h-4" />
                 </button>
               )}
             </div>
@@ -687,7 +687,7 @@ export default function TripOverview({ trip }: TripOverviewProps) {
                 onClick={() => setIsEditingNotes(true)}
                 className="p-2 text-ink-light hover:text-ink hover:bg-surface-dark/50 rounded-lg transition-colors"
               >
-                <Edit2 className="w-4 h-4" />
+                <Edit className="w-4 h-4" />
               </button>
             )}
           </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { format, addDays } from 'date-fns';
-import { Plus, Calendar, Clock, MapPin, ChevronDown, GripVertical, Edit2, Save, X, Download, Share, ArrowLeft, Info, Users } from 'lucide-react';
+import { Plus, Calendar, Clock, MapPin, ChevronDown, GripVertical, Edit, Save, XCircle, Download, Share, ArrowLeft, Info, Users } from 'lucide-react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useTripStore } from '../../stores';
@@ -461,14 +461,14 @@ const DraggableItem = ({ item, index, tripId, dayId, moveItem }: DraggableItemPr
                   onClick={() => setIsEditing(true)}
                   className="text-xs text-ink-light hover:text-ink px-2 py-1 rounded-md hover:bg-surface-dark/50 transition-colors flex items-center"
                 >
-                  <Edit2 className="w-3 h-3 mr-1" />
+                  <Edit className="w-3 h-3 mr-1" />
                   Edit
                 </button>
                 <button
                   onClick={handleDelete}
                   className="text-xs text-red-400 hover:text-red-300 px-2 py-1 rounded-md hover:bg-red-500/10 transition-colors"
                 >
-                  <X className="w-3 h-3" />
+                  <XCircle className="w-3 h-3" />
                 </button>
               </div>
             </div>
@@ -893,7 +893,7 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
                   className="p-2 text-ink-light hover:text-ink hover:bg-surface-dark/50 rounded-lg transition-colors"
                   title="Edit trip details"
                 >
-                  <Edit2 className="w-4 h-4" />
+                  <Edit className="w-4 h-4" />
                 </button>
               </div>
               <div className="flex items-center space-x-2">
