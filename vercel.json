@@ -10,10 +10,10 @@
     }
   ],
   "functions": {
-    "api/sync-live-data.ts": {
+    "packages/web/api/sync-live-data.ts": {
       "maxDuration": 840
     },
-    "api/manual-sync.ts": {
+    "packages/web/api/manual-sync.ts": {
       "maxDuration": 840
     }
   },
