@@ -127,6 +127,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
 // Export configuration for Vercel
 export const config = {
-  maxDuration: 14 * 60, // 14 minutes (just under Vercel's 15-minute limit)
+  maxDuration: 10, // 10 seconds for hobby plan
   regions: ['iad1'], // Deploy to US East for better performance with Disney APIs
 };

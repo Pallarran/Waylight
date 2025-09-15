@@ -37,7 +37,8 @@
       "Bash(npm init:*)",
       "Bash(npm install:*)",
       "Bash(npx tsx:*)",
-      "Bash(pnpm add:*)"
+      "Bash(pnpm add:*)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []

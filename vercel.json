@@ -1,10 +1,10 @@
 {
   "functions": {
     "api/sync-live-data.ts": {
-      "maxDuration": 840
+      "maxDuration": 10
     },
     "api/manual-sync.ts": {
-      "maxDuration": 840
+      "maxDuration": 10
     }
   },
   "crons": [

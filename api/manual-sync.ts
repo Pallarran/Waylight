@@ -160,6 +160,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 }
 
 export const config = {
-  maxDuration: 14 * 60, // 14 minutes
+  maxDuration: 10, // 10 seconds for hobby plan
   regions: ['iad1'],
 };
