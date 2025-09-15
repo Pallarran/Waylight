@@ -2,11 +2,15 @@
   "version": 2,
   "builds": [
     {
-      "src": "package.json",
+      "src": "packages/web/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "packages/web/dist"
+        "distDir": "dist"
       }
+    },
+    {
+      "src": "packages/web/api/**/*.ts",
+      "use": "@vercel/node"
     }
   ],
   "functions": {
@@ -25,11 +29,11 @@
   ],
   "routes": [
     {
-      "handle": "filesystem"
+      "src": "/api/(.*)",
+      "dest": "packages/web/api/$1"
     },
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "handle": "filesystem"
     },
     {
       "src": "/(.*)",
