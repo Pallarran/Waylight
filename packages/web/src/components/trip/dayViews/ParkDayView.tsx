@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import {
   Clock, Plus, MapPin, Zap, Calendar, Car, Utensils,
-  Star, Edit, Save, X, GripVertical,
+  Star, Edit, Save, X, GripVertical, Target,
   ChevronDown, Sparkles, Info, XCircle
 } from 'lucide-react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';

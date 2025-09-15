@@ -44,10 +44,15 @@
     }
   },
   "hollywood-studios": {
-    "_placeholder": {
-      "showTimes": [],
+    "hs-fantasmic": {
+      "showTimes": ["8:30 PM", "10:00 PM"],
       "lastUpdated": "2025-01-15",
-      "notes": "Entertainment data to be added"
+      "notes": "Twice nightly when available, may have single show on select dates"
+    },
+    "hs-star-wars-march": {
+      "showTimes": ["Multiple times daily"],
+      "lastUpdated": "2025-01-15",
+      "notes": "Check My Disney Experience app for current times"
     }
   },
   "animal-kingdom": {

@@ -55,11 +55,7 @@
     },
     "lightningLane": false,
     "singleRider": false,
-    "photoService": true,
-    "showTimes": [
-      "8:30 PM",
-      "10:00 PM"
-    ]
+    "photoService": true
   },
   {
     "id": "hs-star-wars-march",
@@ -116,9 +112,6 @@
     },
     "lightningLane": false,
     "singleRider": false,
-    "photoService": true,
-    "showTimes": [
-      "Multiple times daily"
-    ]
+    "photoService": true
   }
 ]
