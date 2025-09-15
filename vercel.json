@@ -1,12 +1,4 @@
 {
-  "functions": {
-    "api/sync-live-data.ts": {
-      "maxDuration": 10
-    },
-    "api/manual-sync.ts": {
-      "maxDuration": 10
-    }
-  },
   "crons": [
     {
       "path": "/api/sync-live-data",
