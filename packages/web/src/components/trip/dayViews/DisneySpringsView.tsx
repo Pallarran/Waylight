@@ -27,10 +27,8 @@ export default function DisneySpringsView({ trip, tripDay, onQuickAdd, onOpenDay
       icon: '🚗',
       tips: [
         'Free parking in all Disney Springs garages',
-        'Orange Garage is closest to Disney Springs Marketplace',
-        'Lime Garage is near Town Center and West Side',
-        'Grapefruit Garage serves the Landing area',
-        'Arrive early on weekends for better parking spots'
+        'Orange Garage is closest to Marketplace',
+        'Arrive early on weekends for better spots'
       ]
     },
     'rideshare': {
@@ -38,10 +36,8 @@ export default function DisneySpringsView({ trip, tripDay, onQuickAdd, onOpenDay
       icon: '🚕',
       tips: [
         'Drop-off location is near the Orange Garage',
-        'Consider cost vs. convenience from your resort',
         'Surge pricing may apply during peak hours',
-        'Book return ride in advance during busy periods',
-        'Allow extra time for pickup during events'
+        'Book return ride in advance during busy periods'
       ]
     },
     'resort-transport': {
@@ -49,21 +45,17 @@ export default function DisneySpringsView({ trip, tripDay, onQuickAdd, onOpenDay
       icon: '🚌',
       tips: [
         'Available from Disney resort hotels only',
-        'Bus service typically runs every 20 minutes',
-        'No direct transport from Magic Kingdom resorts',
-        'Check operating hours - service may end early',
-        'Consider alternate transport after park hours'
+        'Bus service runs every 20 minutes',
+        'Check operating hours - service may end early'
       ]
     },
     'boat': {
       label: 'Boat from Resort',
       icon: '⛵',
       tips: [
-        'Available from Disney\'s Saratoga Springs Resort',
-        'Available from Disney\'s Old Key West Resort',
+        'Available from Saratoga Springs & Old Key West',
         'Most scenic way to arrive at Disney Springs',
-        'Weather dependent - may not operate in storms',
-        'Limited operating hours - check schedule'
+        'Weather dependent - may not operate in storms'
       ]
     },
     'walking': {
@@ -72,9 +64,7 @@ export default function DisneySpringsView({ trip, tripDay, onQuickAdd, onOpenDay
       tips: [
         'Only practical from Saratoga Springs Resort',
         'About 10-15 minute walk via bridge',
-        'Well-lit and safe pedestrian walkway',
-        'Great way to work up an appetite',
-        'Free and no wait times!'
+        'Well-lit, safe pedestrian walkway'
       ]
     }
   };
@@ -303,10 +293,6 @@ export default function DisneySpringsView({ trip, tripDay, onQuickAdd, onOpenDay
 
                   {/* Dynamic Tips */}
                   <div>
-                    <h4 className="text-sm font-medium text-ink mb-2 flex items-center">
-                      <span className="text-base mr-2">{transportationOptions[selectedTransportation]?.icon}</span>
-                      {transportationOptions[selectedTransportation]?.label} Tips
-                    </h4>
                     <div className="space-y-2">
                       {transportationOptions[selectedTransportation]?.tips.slice(0, 3).map((tip, index) => (
                         <div key={index} className="flex items-start text-xs text-ink-light">

@@ -27,7 +27,9 @@
       "Bash(python:*)",
       "Bash(pnpm install:*)",
       "Bash(npx tsc:*)",
-      "Bash(npm run lint:*)"
+      "Bash(npm run lint:*)",
+      "Bash(npm run typecheck:*)",
+      "Bash(npx eslint:*)"
     ],
     "deny": [],
     "ask": []

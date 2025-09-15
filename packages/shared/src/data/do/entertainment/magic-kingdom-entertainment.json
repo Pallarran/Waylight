@@ -55,10 +55,7 @@
     },
     "lightningLane": false,
     "singleRider": false,
-    "photoService": true,
-    "showTimes": [
-      "3:00 PM"
-    ]
+    "photoService": true
   },
   {
     "id": "mk-happily-ever-after",
@@ -116,10 +113,7 @@
     },
     "lightningLane": false,
     "singleRider": false,
-    "photoService": true,
-    "showTimes": [
-      "9:00 PM"
-    ]
+    "photoService": true
   },
   {
     "id": "mk-disney-starlight",
@@ -190,11 +184,7 @@
     },
     "lightningLane": false,
     "singleRider": false,
-    "photoService": true,
-    "showTimes": [
-      "8:00 PM",
-      "10:00 PM"
-    ]
+    "photoService": true
   },
   {
     "id": "mk-dapper-dans",
@@ -251,9 +241,6 @@
     },
     "lightningLane": false,
     "singleRider": false,
-    "photoService": false,
-    "showTimes": [
-      "Multiple times daily"
-    ]
+    "photoService": false
   }
 ]

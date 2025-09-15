@@ -55,10 +55,7 @@
     },
     "lightningLane": false,
     "singleRider": false,
-    "photoService": true,
-    "showTimes": [
-      "9:00 PM"
-    ]
+    "photoService": true
   },
   {
     "id": "epcot-celebracion-encanto",
@@ -123,15 +120,7 @@
     },
     "lightningLane": false,
     "singleRider": false,
-    "photoService": false,
-    "showTimes": [
-      "9:45 AM",
-      "10:45 AM",
-      "11:45 AM",
-      "1:30 PM",
-      "2:30 PM",
-      "3:30 PM"
-    ]
+    "photoService": false
   },
   {
     "id": "epcot-mariachi-cobre",
@@ -189,10 +178,7 @@
     },
     "lightningLane": false,
     "singleRider": false,
-    "photoService": false,
-    "showTimes": [
-      "Multiple times daily"
-    ]
+    "photoService": false
   },
   {
     "id": "epcot-voices-of-liberty",
@@ -250,9 +236,6 @@
     },
     "lightningLane": false,
     "singleRider": false,
-    "photoService": false,
-    "showTimes": [
-      "Multiple times daily"
-    ]
+    "photoService": false
   }
 ]

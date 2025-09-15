@@ -16,6 +16,7 @@ import CheckInDayView from './dayViews/CheckInDayView';
 import CheckOutDayView from './dayViews/CheckOutDayView';
 import DisneySpringsView from './dayViews/DisneySpringsView';
 import SpecialEventView from './dayViews/SpecialEventView';
+import ParkDayView from './dayViews/ParkDayView';
 import DayTypeModal from './DayTypeModal';
 
 import type { Trip, ItineraryItem, ActivityCategory, TripDay, DayType } from '../../types';
@@ -686,11 +687,23 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
     }
   };
 
-  const handleDayTypeSelection = async (dayType: DayType | null) => {
+  const handleDayTypeSelection = async (dayType: DayType | null, selectedParks?: string[]) => {
     if (!selectedDay) return;
-    
+
+    const updates: Partial<TripDay> = { dayType };
+
+    // Handle park selection for park day types
+    if (dayType === 'park-day' && selectedParks?.length === 1) {
+      updates.parkId = selectedParks[0];
+    } else if (dayType === 'park-hopper' && selectedParks?.length > 1) {
+      // For park hopper, set the first park as the primary parkId
+      // Note: You may need to extend TripDay type to support multiple parks
+      updates.parkId = selectedParks[0];
+      // TODO: Consider adding parkIds field to TripDay type for park hopper support
+    }
+
     try {
-      await updateDay(trip.id, selectedDay.id, { dayType });
+      await updateDay(trip.id, selectedDay.id, updates);
       setShowDayTypeModal(false);
     } catch (error) {
       console.error('Failed to update day type:', error);
@@ -1018,7 +1031,7 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
         )}
         {currentView !== 'overview' && selectedDay && (() => {
           const detectedDayType = detectDayType(selectedDay, trip, selectedDayIndex);
-          
+
           // Render specialized day view based on detected type
           if (detectedDayType === 'rest-day') {
             return <RestDayView trip={trip} tripDay={selectedDay} date={selectedDate!} onQuickAdd={handleQuickAdd} onOpenDayTypeModal={() => setShowDayTypeModal(true)} />;
@@ -1030,6 +1043,8 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
             return <DisneySpringsView trip={trip} tripDay={selectedDay} date={selectedDate!} onQuickAdd={handleQuickAdd} onOpenDayTypeModal={() => setShowDayTypeModal(true)} />;
           } else if (detectedDayType === 'special-event') {
             return <SpecialEventView trip={trip} tripDay={selectedDay} date={selectedDate!} onQuickAdd={handleQuickAdd} onOpenDayTypeModal={() => setShowDayTypeModal(true)} />;
+          } else if (detectedDayType === 'park-day' || detectedDayType === 'park-hopper') {
+            return <ParkDayView trip={trip} tripDay={selectedDay} date={selectedDate!} onQuickAdd={handleQuickAdd} onOpenDayTypeModal={() => setShowDayTypeModal(true)} />;
           }
 
           // Default to existing 3-column layout for park days and park hopper days

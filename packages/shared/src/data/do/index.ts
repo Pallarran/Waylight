@@ -66,6 +66,34 @@ export interface DoItem {
   showTimes?: string[]; // for shows and entertainment
 }
 
+// Import entertainment schedules
+import entertainmentSchedules from '../schedules/entertainment-schedules.json';
+
+// Schedule interfaces
+export interface EntertainmentSchedule {
+  showTimes: string[];
+  lastUpdated: string;
+  notes?: string;
+}
+
+export interface EntertainmentSchedules {
+  [parkId: string]: {
+    [entertainmentId: string]: EntertainmentSchedule;
+  };
+}
+
+// Helper function to get show times for an entertainment item
+export const getEntertainmentShowTimes = (parkId: string, entertainmentId: string): string[] => {
+  const schedules = entertainmentSchedules as EntertainmentSchedules;
+  const schedule = schedules[parkId]?.[entertainmentId];
+  return schedule?.showTimes || [];
+};
+
+// Helper function to get all entertainment schedules
+export const getEntertainmentSchedules = (): EntertainmentSchedules => {
+  return entertainmentSchedules as EntertainmentSchedules;
+};
+
 // Import data from all parks and all categories - all files now exist for future-proofing
 // Rides
 import magicKingdomRidesData from './rides/magic-kingdom-rides.json';

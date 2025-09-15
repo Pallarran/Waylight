@@ -1,0 +1,60 @@
+{
+  "magic-kingdom": {
+    "mk-festival-fantasy-parade": {
+      "showTimes": ["2:00 PM"],
+      "lastUpdated": "2025-01-15",
+      "notes": "Single daily performance"
+    },
+    "mk-happily-ever-after": {
+      "showTimes": ["9:00 PM"],
+      "lastUpdated": "2025-01-15",
+      "notes": "Nightly fireworks spectacular"
+    },
+    "mk-disney-starlight": {
+      "showTimes": ["8:00 PM", "10:00 PM"],
+      "lastUpdated": "2025-01-15",
+      "notes": "Twice nightly when available, not during special events"
+    },
+    "mk-dapper-dans": {
+      "showTimes": ["Multiple times daily"],
+      "lastUpdated": "2025-01-15",
+      "notes": "Check My Disney Experience app for current times"
+    }
+  },
+  "epcot": {
+    "epcot-luminous": {
+      "showTimes": ["9:00 PM"],
+      "lastUpdated": "2025-01-15",
+      "notes": "Nightly fireworks spectacular"
+    },
+    "epcot-celebracion-encanto": {
+      "showTimes": ["9:45 AM", "10:45 AM", "11:45 AM", "1:30 PM", "2:30 PM", "3:30 PM"],
+      "lastUpdated": "2025-01-15",
+      "notes": "Multiple daily performances"
+    },
+    "epcot-mariachi-cobre": {
+      "showTimes": ["Multiple times daily"],
+      "lastUpdated": "2025-01-15",
+      "notes": "Check My Disney Experience app for current times"
+    },
+    "epcot-voices-of-liberty": {
+      "showTimes": ["Multiple times daily"],
+      "lastUpdated": "2025-01-15",
+      "notes": "Usually before American Adventure shows"
+    }
+  },
+  "hollywood-studios": {
+    "_placeholder": {
+      "showTimes": [],
+      "lastUpdated": "2025-01-15",
+      "notes": "Entertainment data to be added"
+    }
+  },
+  "animal-kingdom": {
+    "_placeholder": {
+      "showTimes": [],
+      "lastUpdated": "2025-01-15",
+      "notes": "Entertainment data to be added"
+    }
+  }
+}

@@ -47,6 +47,8 @@ export interface FamilyPriority {
   priority: number; // 1-5, 1 being highest
   type: 'must-do' | 'nice-to-have';
   notes?: string;
+  completed?: boolean;
+  completedAt?: string; // ISO timestamp of when it was completed
 }
 
 export interface BackupPlan {
@@ -67,6 +69,34 @@ export interface SafetyInfo {
   idBracelets?: boolean;
   strollerTag?: string;
   sunscreenTimes?: string[];
+  notes?: string;
+}
+
+export interface DiningReservation {
+  id: string;
+  restaurantName: string;
+  time: string;
+  partySize: number;
+  confirmationNumber?: string;
+  allergyNotes?: string;
+  location?: string;
+  mealType: 'breakfast' | 'lunch' | 'dinner' | 'snack';
+}
+
+export interface BreakPlan {
+  returnTime?: string;
+  backInParkTime?: string;
+  breakType: 'hotel' | 'nap' | 'pool' | 'rest_in_park';
+  notes?: string;
+}
+
+export interface Entertainment {
+  id: string;
+  name: string;
+  type: 'parade' | 'show' | 'character_meet' | 'fireworks';
+  time?: string;
+  location: string;
+  duration?: number;
   notes?: string;
 }
 
@@ -116,10 +146,13 @@ export interface TripDay {
   parkId?: string;
   notes?: string;
   items: ItineraryItem[];
-  // Cheat sheet specific data
+  // Park day specific data
   arrivalPlan?: ArrivalPlan;
   lightningLanePlan?: LightningLanePlan;
   familyPriorities?: FamilyPriority[];
+  diningReservations?: DiningReservation[];
+  breakPlan?: BreakPlan;
+  entertainment?: Entertainment[];
   backupPlan?: BackupPlan;
   photoOpportunities?: PhotoOpportunity[];
   safetyInfo?: SafetyInfo;
