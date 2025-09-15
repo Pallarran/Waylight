@@ -61,5 +61,8 @@
   },
   "homepage": "https://github.com/Pallarran/Waylight#readme",
   "license": "MIT",
-  "author": "Waylight Team"
+  "author": "Waylight Team",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.57.4"
+  }
 }
