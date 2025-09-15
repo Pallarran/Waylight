@@ -29,7 +29,15 @@
       "Bash(npx tsc:*)",
       "Bash(npm run lint:*)",
       "Bash(npm run typecheck:*)",
-      "Bash(npx eslint:*)"
+      "Bash(npx eslint:*)",
+      "WebFetch(domain:themeparks.wiki)",
+      "WebFetch(domain:api.themeparks.wiki)",
+      "WebFetch(domain:queue-times.com)",
+      "Bash(grep:*)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tsx:*)",
+      "Bash(pnpm add:*)"
     ],
     "deny": [],
     "ask": []

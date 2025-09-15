@@ -10,6 +10,28 @@ export default function Footer() {
           <p className="text-xs text-ink-light mt-1">
             Not affiliated with The Walt Disney Company.
           </p>
+          <div className="mt-3 pt-3 border-t border-surface-dark/20">
+            <p className="text-xs text-ink-light">
+              Proudly powered by live data from{' '}
+              <a
+                href="https://themeparks.wiki"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:text-primary-dark underline"
+              >
+                ThemeParks.wiki
+              </a>{' '}
+              and{' '}
+              <a
+                href="https://queue-times.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:text-primary-dark underline"
+              >
+                Queue-Times.com
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </footer>

@@ -9,6 +9,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useTripStore } from '../../../stores';
 import { getParkById } from '../../../data/parks';
 import { getDoItemsByPark, getEatItemsByPark, entertainment, getEntertainmentShowTimes } from '@waylight/shared';
+import { LiveParkStatus } from '../../liveData';
 import type {
   Trip, TripDay, ActivityCategory, ItineraryItem,
   PhotoOpportunity, BackupPlan
@@ -375,6 +376,15 @@ export default function ParkDayView({ trip, tripDay, date, onQuickAdd, onOpenDay
                 </p>
               </div>
             </div>
+
+            {/* Live Park Status */}
+            {tripDay.parkId && (
+              <div className="mb-6">
+                <LiveParkStatus
+                  parkId={tripDay.parkId}
+                />
+              </div>
+            )}
 
             {/* Arrival Strategy Box */}
             <div className="bg-surface-dark/10 rounded-lg p-4 mb-6 border border-surface-dark/20">
@@ -2502,8 +2512,9 @@ const ParkDayAddActivityModal = ({ trip, tripDay, onClose, onQuickAdd }: any) =>
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <div className="bg-surface rounded-xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden border border-surface-dark/30">
+    <>
+      <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+        <div className="bg-surface rounded-xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden border border-surface-dark/30">
         {/* Modal Header */}
         <div className="flex items-center justify-between p-6 border-b border-surface-dark/20 bg-gradient-to-r from-sea-light/20 to-sea/20">
           <div>
@@ -2809,6 +2820,7 @@ const ParkDayAddActivityModal = ({ trip, tripDay, onClose, onQuickAdd }: any) =>
           </button>
         </div>
       </div>
+    </div>
 
       {/* ADR Modal */}
       {showAdrModal && (
@@ -3135,6 +3147,6 @@ const ParkDayAddActivityModal = ({ trip, tripDay, onClose, onQuickAdd }: any) =>
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };

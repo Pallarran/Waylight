@@ -9,6 +9,20 @@
       }
     }
   ],
+  "functions": {
+    "api/sync-live-data.ts": {
+      "maxDuration": 840
+    },
+    "api/manual-sync.ts": {
+      "maxDuration": 840
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/sync-live-data",
+      "schedule": "*/15 * * * *"
+    }
+  ],
   "routes": [
     {
       "handle": "filesystem"
