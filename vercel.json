@@ -7,17 +7,13 @@
       "config": {
         "distDir": "dist"
       }
-    },
-    {
-      "src": "packages/web/api/**/*.ts",
-      "use": "@vercel/node"
     }
   ],
   "functions": {
-    "packages/web/api/sync-live-data.ts": {
+    "api/sync-live-data.ts": {
       "maxDuration": 840
     },
-    "packages/web/api/manual-sync.ts": {
+    "api/manual-sync.ts": {
       "maxDuration": 840
     }
   },
@@ -28,10 +24,6 @@
     }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "packages/web/api/$1"
-    },
     {
       "handle": "filesystem"
     },
