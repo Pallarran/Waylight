@@ -86,19 +86,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     console.log('🔧 Manual sync triggered...');
 
-    const parks = ['magic-kingdom', 'epcot', 'hollywood-studios', 'animal-kingdom'];
-    const results = [];
-
-    for (const parkSlug of parks) {
-      const parkId = PARK_IDS[parkSlug as keyof typeof PARK_IDS];
-      const result = await syncParkData(parkSlug, parkId);
-      results.push({ park: parkSlug, ...result });
-    }
+    // For Hobby plan: sync only one park to stay within 10-second limit
+    const parkSlug = 'magic-kingdom';
+    const parkId = PARK_IDS[parkSlug];
+    const result = await syncParkData(parkSlug, parkId);
+    const results = [{ park: parkSlug, ...result }];
 
     const duration = Date.now() - startTime;
     const successCount = results.filter(r => r.success).length;
 
-    console.log(`✅ Manual sync completed in ${duration}ms - ${successCount}/${parks.length} parks updated`);
+    console.log(`✅ Manual sync completed in ${duration}ms - ${successCount}/1 parks updated`);
 
     // Return HTML response for browser testing
     if (req.headers.accept?.includes('text/html')) {
@@ -108,7 +105,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           <body style="font-family: Arial, sans-serif; margin: 40px;">
             <h1>✅ Manual Sync Completed</h1>
             <p><strong>Duration:</strong> ${duration}ms</p>
-            <p><strong>Parks Updated:</strong> ${successCount}/${parks.length}</p>
+            <p><strong>Parks Updated:</strong> ${successCount}/1</p>
             <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
             <h3>Results:</h3>
             <pre>${JSON.stringify(results, null, 2)}</pre>
@@ -125,7 +122,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       duration: `${duration}ms`,
       timestamp: new Date().toISOString(),
       results,
-      summary: { updated: successCount, total: parks.length }
+      summary: { updated: successCount, total: 1 }
     });
 
   } catch (error) {
