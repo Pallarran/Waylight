@@ -1,14 +1,4 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "packages/web/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    }
-  ],
   "functions": {
     "api/sync-live-data.ts": {
       "maxDuration": 840
@@ -23,15 +13,7 @@
       "schedule": "*/15 * * * *"
     }
   ],
-  "routes": [
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ],
   "buildCommand": "pnpm --filter @waylight/shared build && pnpm --filter @waylight/web build",
-  "installCommand": "pnpm install"
+  "installCommand": "pnpm install",
+  "outputDirectory": "packages/web/dist"
 }
