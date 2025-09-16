@@ -17,11 +17,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const authKey = req.query.key || req.body?.key;
   const expectedKey = process.env.MANUAL_SYNC_KEY;
 
+  // Only check auth if environment variable is set
   if (expectedKey && authKey !== expectedKey) {
     return res.status(401).json({
       error: 'Unauthorized',
       message: 'Please provide a valid key parameter'
     });
+  }
+
+  // If no expected key is set, allow all requests (for development/testing)
+  if (!expectedKey) {
+    console.log('🔓 No MANUAL_SYNC_KEY set - allowing manual sync request');
   }
 
   const startTime = Date.now();

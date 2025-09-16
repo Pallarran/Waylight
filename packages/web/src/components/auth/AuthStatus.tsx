@@ -51,7 +51,7 @@ export default function AuthStatus() {
       }
 
       // Production path - call the API endpoint
-      const response = await fetch('/api/manual-sync?key=test-key-123', {
+      const response = await fetch('/api/manual-sync', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -59,14 +59,19 @@ export default function AuthStatus() {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
+        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+        throw new Error(`HTTP ${response.status}: ${errorData.error || errorData.message || 'Unknown error'}`);
       }
 
       const result = await response.json();
       console.log('Park hours refresh completed:', result);
 
       // Show success message
-      alert('Park hours refreshed successfully!');
+      if (result.success) {
+        alert('Park hours refreshed successfully!');
+      } else {
+        throw new Error(result.error || result.message || 'Sync failed');
+      }
     } catch (error) {
       console.error('Failed to refresh park hours:', error);
       alert('Failed to refresh park hours. Please try again.');
