@@ -4,8 +4,7 @@
  */
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { spawn } from 'child_process';
-import path from 'path';
+import { backgroundSyncService } from '@waylight/shared';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Allow both GET and POST for manual testing
@@ -37,45 +36,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     // Get days parameter or use default
     const days = parseInt(req.query.days as string || '7');
+    console.log(`Syncing next ${days} days of park data`);
 
-    // Run the sync-parks.js script
-    const scriptPath = path.join(process.cwd(), '..', '..', 'scripts', 'sync-parks.js');
-    const args = ['--days', days.toString()];
+    // Use the background sync service directly
+    const syncResult = await backgroundSyncService.syncAllParks();
 
-    console.log(`Running sync script: node ${scriptPath} ${args.join(' ')}`);
-
-    const syncResult = await new Promise<{ success: boolean; output: string; error?: string }>((resolve) => {
-      const child = spawn('node', [scriptPath, ...args], {
-        cwd: path.join(process.cwd(), '..', '..'),
-        env: { ...process.env }
-      });
-
-      let output = '';
-      let errorOutput = '';
-
-      child.stdout?.on('data', (data) => {
-        const message = data.toString();
-        output += message;
-        console.log(message.trim());
-      });
-
-      child.stderr?.on('data', (data) => {
-        const message = data.toString();
-        errorOutput += message;
-        console.error(message.trim());
-      });
-
-      child.on('close', (code) => {
-        if (code === 0) {
-          resolve({ success: true, output });
-        } else {
-          resolve({ success: false, output, error: errorOutput || `Process exited with code ${code}` });
-        }
-      });
-
-      child.on('error', (error) => {
-        resolve({ success: false, output, error: error.message });
-      });
+    console.log('✅ Sync completed:', {
+      success: syncResult.success,
+      parksProcessed: syncResult.parksProcessed,
+      errors: syncResult.errors?.length || 0
     });
 
     const duration = Date.now() - startTime;
@@ -94,11 +63,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             <h1>${statusEmoji} ${statusText}</h1>
             <p><strong>Duration:</strong> ${duration}ms</p>
             <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
-            <p><strong>Days synced:</strong> ${days}</p>
-            ${syncResult.error ? `<p><strong>Error:</strong> ${syncResult.error}</p>` : ''}
-            <h3>Output:</h3>
-            <pre style="background: #f5f5f5; padding: 15px; border-radius: 5px;">${syncResult.output}</pre>
-            <p><a href="/api/manual-sync?key=${authKey}">Run Again</a></p>
+            <p><strong>Parks processed:</strong> ${syncResult.parksProcessed || 0}</p>
+            <p><strong>Errors:</strong> ${syncResult.errors?.length || 0}</p>
+            ${syncResult.errors?.length ? `<h3>Errors:</h3><pre style="background: #ffe6e6; padding: 15px; border-radius: 5px;">${syncResult.errors.join('\n')}</pre>` : ''}
+            <p><a href="/api/manual-sync">Run Again</a></p>
           </body>
         </html>
       `);
@@ -110,9 +78,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       message: syncResult.success ? 'Manual sync completed successfully' : 'Manual sync failed',
       duration: `${duration}ms`,
       timestamp: new Date().toISOString(),
-      days,
-      output: syncResult.output,
-      error: syncResult.error
+      parksProcessed: syncResult.parksProcessed || 0,
+      errors: syncResult.errors || [],
+      details: syncResult
     });
 
   } catch (error) {
@@ -131,7 +99,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             <p><strong>Error:</strong> ${errorMessage}</p>
             <p><strong>Duration:</strong> ${duration}ms</p>
             <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
-            <p><a href="/api/manual-sync?key=${authKey}">Try Again</a></p>
+            <p><a href="/api/manual-sync">Try Again</a></p>
           </body>
         </html>
       `);
