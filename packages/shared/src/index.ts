@@ -23,6 +23,8 @@ export * from './services/sync';
 export * from './services/liveDataService';
 export * from './services/themeParksApi';
 export * from './services/queueTimesApi';
+export * from './services/crowdPredictionRepository';
+export * from './services/backgroundSyncService';
 
 // Constants
 export const APP_NAME = 'Waylight';

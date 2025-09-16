@@ -400,6 +400,47 @@ export interface Database {
           updated_at?: string;
         };
       };
+      park_crowd_predictions: {
+        Row: {
+          id: string;
+          park_id: string;
+          prediction_date: string; // Date in YYYY-MM-DD format
+          crowd_level: number; // 1-10 scale
+          crowd_level_description: string;
+          recommendation: string | null;
+          data_source: string;
+          confidence_score: number | null; // 0.00-1.00 if available
+          synced_at: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          park_id: string;
+          prediction_date: string;
+          crowd_level: number;
+          crowd_level_description: string;
+          recommendation?: string | null;
+          data_source?: string;
+          confidence_score?: number | null;
+          synced_at?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          park_id?: string;
+          prediction_date?: string;
+          crowd_level?: number;
+          crowd_level_description?: string;
+          recommendation?: string | null;
+          data_source?: string;
+          confidence_score?: number | null;
+          synced_at?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
     };
   };
 }

@@ -1,6 +1,7 @@
 import { themeParksApiClient } from './themeParksApi';
 import { queueTimesApiClient } from './queueTimesApi';
 import { liveDataRepository } from './liveDataRepository';
+import { crowdPredictionRepository, CrowdPredictionRepository } from './crowdPredictionRepository';
 import { getParkMapping } from '../config/parkMappings';
 import { Database } from './supabase';
 
@@ -108,6 +109,54 @@ export class BackgroundSyncService {
 
     const duration = Date.now() - startTime;
     console.log(`Full sync completed in ${duration}ms`);
+  }
+
+  /**
+   * Sync all parks data (used by manual sync API)
+   */
+  async syncAllParks(): Promise<{
+    success: boolean;
+    parksProcessed: number;
+    errors: string[];
+  }> {
+    console.log('🚀 Starting manual sync for all parks...');
+    const startTime = Date.now();
+
+    const results = {
+      success: true,
+      parksProcessed: 0,
+      errors: [] as string[]
+    };
+
+    try {
+      // Run the full sync which includes both ThemeParks and Queue-Times data
+      await this.runFullSync();
+
+      // Also sync crowd predictions for better trip planning
+      if (this.config.enabledServices.queueTimes) {
+        console.log('📊 Adding crowd predictions sync...');
+        const crowdResults = await this.syncAllParkCrowdPredictions(180);
+
+        results.parksProcessed = crowdResults.parksProcessed;
+        results.errors.push(...crowdResults.errors);
+
+        if (!crowdResults.success) {
+          results.success = false;
+        }
+      } else {
+        results.parksProcessed = this.config.enabledParks.length;
+      }
+
+      const duration = Date.now() - startTime;
+      console.log(`🚀 Manual sync completed in ${duration}ms. Success: ${results.success}`);
+
+      return results;
+    } catch (error) {
+      results.success = false;
+      results.errors.push(`Sync failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      console.error('❌ Manual sync failed:', error);
+      return results;
+    }
   }
 
   /**
@@ -267,6 +316,97 @@ export class BackgroundSyncService {
     } catch (error) {
       console.warn(`Failed to sync crowd data for ${parkId}:`, error);
       // Don't throw here as crowd data is supplementary
+    }
+  }
+
+  /**
+   * Sync 180-day crowd predictions for a park from Queue-Times API
+   */
+  private async syncCrowdPredictions(parkId: string, days: number = 180): Promise<void> {
+    try {
+      console.log(`Syncing ${days}-day crowd predictions for ${parkId}...`);
+
+      // Get crowd predictions from Queue-Times API
+      const predictions = await queueTimesApiClient.getCrowdPredictionsForDays(parkId, days);
+
+      if (predictions.length > 0) {
+        // Transform to database format
+        const dbPredictions = predictions.map(prediction =>
+          CrowdPredictionRepository.transformPredictionToDb(prediction)
+        );
+
+        // Bulk upsert to database
+        await crowdPredictionRepository.upsertCrowdPredictions(dbPredictions);
+
+        console.log(`✅ Synced ${predictions.length} crowd predictions for ${parkId}`);
+
+        // Update sync status
+        await liveDataRepository.updateSyncStatus('crowd_predictions', true);
+      } else {
+        console.warn(`⚠️ No crowd predictions received for ${parkId}`);
+      }
+    } catch (error) {
+      console.error(`❌ Failed to sync crowd predictions for ${parkId}:`, error);
+      await liveDataRepository.updateSyncStatus('crowd_predictions', false,
+        error instanceof Error ? error.message : 'Unknown error');
+      // Don't throw here as crowd predictions are supplementary
+    }
+  }
+
+  /**
+   * Sync crowd predictions for all supported parks
+   */
+  async syncAllParkCrowdPredictions(days: number = 180): Promise<{
+    success: boolean;
+    parksProcessed: number;
+    errors: string[];
+  }> {
+    const results = {
+      success: true,
+      parksProcessed: 0,
+      errors: [] as string[]
+    };
+
+    console.log(`🔮 Starting crowd predictions sync for ${days} days...`);
+
+    try {
+      // Clean up old predictions first
+      const cleanedCount = await crowdPredictionRepository.cleanupOldPredictions();
+      if (cleanedCount > 0) {
+        console.log(`🧹 Cleaned up ${cleanedCount} old crowd predictions`);
+      }
+
+      for (const parkId of this.config.enabledParks) {
+        if (!this.config.enabledServices.queueTimes) {
+          console.log(`Skipping crowd predictions for ${parkId} (Queue-Times disabled)`);
+          continue;
+        }
+
+        try {
+          await this.syncCrowdPredictions(parkId, days);
+          results.parksProcessed++;
+
+          // Rate limiting - wait between park requests
+          if (results.parksProcessed < this.config.enabledParks.length) {
+            await this.delay(2000); // 2 second delay between parks
+          }
+        } catch (error) {
+          const errorMsg = `Failed to sync crowd predictions for ${parkId}: ${error instanceof Error ? error.message : 'Unknown error'}`;
+          results.errors.push(errorMsg);
+          console.error(errorMsg);
+        }
+      }
+
+      results.success = results.errors.length === 0;
+
+      console.log(`🔮 Crowd predictions sync completed. Parks: ${results.parksProcessed}, Errors: ${results.errors.length}`);
+
+      return results;
+    } catch (error) {
+      results.success = false;
+      results.errors.push(`Crowd predictions sync failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      console.error('❌ Crowd predictions sync failed:', error);
+      return results;
     }
   }
 

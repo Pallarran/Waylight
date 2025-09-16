@@ -65,6 +65,17 @@ export interface ParkCrowdData {
   lastUpdated: string;
 }
 
+export interface ParkCrowdPrediction {
+  parkId: string;
+  predictionDate: string; // YYYY-MM-DD
+  crowdLevel: number; // 1-10 scale
+  description: string; // "Very Low", "Low", "Moderate", "High", "Very High"
+  recommendation?: string;
+  dataSource: string; // "queue_times_api", "estimated", etc.
+  confidenceScore?: number; // 0.00-1.00 if available
+  lastUpdated: string;
+}
+
 // API Response Types for ThemeParks.wiki
 export interface ThemeParksAPIEntity {
   id: string;

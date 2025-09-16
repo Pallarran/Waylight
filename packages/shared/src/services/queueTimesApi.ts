@@ -1,6 +1,7 @@
 import {
   ParkCrowdData,
   CrowdPrediction,
+  ParkCrowdPrediction,
   LiveDataError
 } from '../types/liveData';
 import { getParkMapping } from '../config/parkMappings';
@@ -80,7 +81,7 @@ export class QueueTimesAPIClient {
     }
   }
 
-  async getCrowdPredictions(waypointParkId: string, days: number = 30): Promise<ParkCrowdData> {
+  async getCrowdPredictions(waypointParkId: string, days: number = 180): Promise<ParkCrowdData> {
     const mapping = getParkMapping(waypointParkId);
     if (!mapping?.queueTimesId) {
       throw new Error(`No Queue-Times mapping found for park: ${waypointParkId}`);
@@ -133,6 +134,80 @@ export class QueueTimesAPIClient {
       console.warn(`Failed to get current crowd level for ${waypointParkId}:`, error);
       return null;
     }
+  }
+
+  /**
+   * Get crowd predictions for a specific date range
+   * Returns data in ParkCrowdPrediction format for database storage
+   */
+  async getCrowdPredictionsForDateRange(
+    waypointParkId: string,
+    startDate: string,
+    endDate: string
+  ): Promise<ParkCrowdPrediction[]> {
+    const mapping = getParkMapping(waypointParkId);
+    if (!mapping?.queueTimesId) {
+      throw new Error(`No Queue-Times mapping found for park: ${waypointParkId}`);
+    }
+
+    try {
+      // Parse date range
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+
+      // Get full forecast data
+      const queueTimesUrl = this.getQueueTimesUrl(mapping.queueTimesId);
+      const response = await this.fetchWithCache<QueueTimesResponse>(
+        `${queueTimesUrl}.json`,
+        48 * 60 * 60 * 1000 // 48 hour cache for crowd predictions
+      );
+
+      // Filter forecasts to the requested date range
+      const filteredPredictions = response.forecast
+        .filter(forecast => {
+          const forecastDate = new Date(forecast.date);
+          return forecastDate >= start && forecastDate <= end;
+        })
+        .map(forecast => ({
+          parkId: waypointParkId,
+          predictionDate: forecast.date,
+          crowdLevel: forecast.crowd_level,
+          description: this.mapCrowdLevelToDescription(forecast.crowd_level),
+          recommendation: this.getCrowdRecommendation(forecast.crowd_level),
+          dataSource: 'queue_times_api',
+          lastUpdated: new Date().toISOString()
+        } as ParkCrowdPrediction));
+
+      return filteredPredictions;
+    } catch (error) {
+      if (error instanceof Error && 'code' in error) {
+        throw error; // Re-throw LiveDataError
+      }
+
+      const apiError: LiveDataError = {
+        code: 'PARSE_ERROR',
+        message: `Failed to get crowd predictions for ${waypointParkId} (${startDate} to ${endDate})`,
+        details: { waypointParkId, startDate, endDate, error },
+        timestamp: new Date().toISOString()
+      };
+      throw apiError;
+    }
+  }
+
+  /**
+   * Get crowd predictions for the next N days starting from today
+   * Optimized for bulk 180-day forecasts
+   */
+  async getCrowdPredictionsForDays(waypointParkId: string, days: number = 180): Promise<ParkCrowdPrediction[]> {
+    const today = new Date();
+    const endDate = new Date(today);
+    endDate.setDate(today.getDate() + days - 1);
+
+    return this.getCrowdPredictionsForDateRange(
+      waypointParkId,
+      today.toISOString().split('T')[0]!,
+      endDate.toISOString().split('T')[0]!
+    );
   }
 
   private getQueueTimesUrl(queueTimesId: string): string {
