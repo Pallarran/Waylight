@@ -211,12 +211,12 @@ export class QueueTimesAPIClient {
   }
 
   private getQueueTimesUrl(queueTimesId: string): string {
-    // Map our park IDs to Queue-Times URLs
+    // Map our park IDs to Queue-Times URLs (Disney World parks are IDs 5-8)
     const urlMappings: Record<string, string> = {
-      'magic-kingdom': `${QUEUE_TIMES_API_BASE}/1/queue_times`,
-      'epcot': `${QUEUE_TIMES_API_BASE}/2/queue_times`,
-      'hollywood-studios': `${QUEUE_TIMES_API_BASE}/3/queue_times`,
-      'animal-kingdom': `${QUEUE_TIMES_API_BASE}/4/queue_times`
+      'magic-kingdom': `${QUEUE_TIMES_API_BASE}/6/queue_times`,
+      'epcot': `${QUEUE_TIMES_API_BASE}/5/queue_times`,
+      'hollywood-studios': `${QUEUE_TIMES_API_BASE}/7/queue_times`,
+      'animal-kingdom': `${QUEUE_TIMES_API_BASE}/8/queue_times`
     };
 
     const url = urlMappings[queueTimesId];

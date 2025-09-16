@@ -3,6 +3,7 @@ import { Filter, Search, Star, Users, TrendingUp, AlertTriangle, Download, BarCh
 import GroupRatingCard from './GroupRatingCard';
 import { getAllDoItems, getAllEatItems } from '@waylight/shared';
 import { ActivityRatingsService } from '@waylight/shared';
+import { PARKS } from '../../data/parks';
 import type { Trip, ActivityRating, ActivityRatingSummary, GroupRatingData, ActivityCategory, TravelingPartyMember } from '../../types';
 
 interface ActivityPreferencesProps {
@@ -14,6 +15,7 @@ type SortOption = 'name' | 'rating' | 'consensus' | 'priority';
 
 export default function ActivityPreferences({ trip }: ActivityPreferencesProps) {
   const [activeFilter, setActiveFilter] = useState<FilterTab>('all');
+  const [selectedParks, setSelectedParks] = useState<Set<string>>(new Set());
   const [sortBy, setSortBy] = useState<SortOption>('name');
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
@@ -50,6 +52,17 @@ export default function ActivityPreferences({ trip }: ActivityPreferencesProps) 
     loadRatingsData();
   }, [trip.id]);
 
+  // Helper functions
+  const getPartyMembers = (): TravelingPartyMember[] => {
+    return trip.travelingParty || [];
+  };
+
+  const getCurrentPartyMemberId = (): string => {
+    // Get the current user's party member ID (typically the planner)
+    const plannerMember = trip.travelingParty?.find(member => member.isPlanner);
+    return plannerMember?.id || trip.travelingParty?.[0]?.id || '';
+  };
+
   // Get all available attractions
   const allAttractions = useMemo(() => {
     const doItems = getAllDoItems();
@@ -60,6 +73,11 @@ export default function ActivityPreferences({ trip }: ActivityPreferencesProps) 
   // Filter attractions based on current filters
   const filteredAttractions = useMemo(() => {
     let filtered = allAttractions;
+
+    // Filter by parks
+    if (selectedParks.size > 0) {
+      filtered = filtered.filter(item => selectedParks.has(item.parkId));
+    }
 
     // Filter by category
     if (activeFilter !== 'all') {
@@ -82,7 +100,7 @@ export default function ActivityPreferences({ trip }: ActivityPreferencesProps) 
     }
 
     return filtered;
-  }, [allAttractions, activeFilter, searchQuery]);
+  }, [allAttractions, selectedParks, activeFilter, searchQuery]);
 
   // Create GroupRatingData objects
   const groupRatingData: GroupRatingData[] = useMemo(() => {
@@ -140,11 +158,6 @@ export default function ActivityPreferences({ trip }: ActivityPreferencesProps) 
     return data;
   }, [groupRatingData, sortBy, showHighPriorityOnly]);
 
-  // Helper functions
-
-  const getPartyMembers = (): TravelingPartyMember[] => {
-    return trip.travelingParty || [];
-  };
 
   const handleRatingChange = async (rating: Partial<ActivityRating>) => {
     try {
@@ -178,6 +191,7 @@ export default function ActivityPreferences({ trip }: ActivityPreferencesProps) 
 
   const handleDeleteRating = async (ratingId: string) => {
     try {
+      console.log('Deleting rating:', ratingId);
       await ActivityRatingsService.deleteRating(ratingId);
 
       // Update local state
@@ -186,6 +200,8 @@ export default function ActivityPreferences({ trip }: ActivityPreferencesProps) 
       // Reload summaries to get updated consensus data
       const updatedSummaries = await ActivityRatingsService.getRatingSummariesForTrip(trip.id);
       setSummaries(updatedSummaries);
+
+      console.log('Rating deleted successfully');
 
     } catch (err) {
       console.error('Error deleting rating:', err);
@@ -216,7 +232,7 @@ export default function ActivityPreferences({ trip }: ActivityPreferencesProps) 
   };
 
   const filterTabs: { id: FilterTab; label: string; icon: string }[] = [
-    { id: 'all', label: 'All Activities', icon: '🎭' },
+    { id: 'all', label: 'All', icon: '🎭' },
     { id: 'rides', label: 'Rides', icon: '🎢' },
     { id: 'shows', label: 'Shows', icon: '🎪' },
     { id: 'dining', label: 'Dining', icon: '🍽️' },
@@ -309,7 +325,8 @@ export default function ActivityPreferences({ trip }: ActivityPreferencesProps) 
       <div className="bg-surface rounded-lg p-4 border border-surface-dark/30">
         <div className="space-y-4">
           {/* Filter Tabs */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap items-center gap-2">
+            {/* Activity Category Filters */}
             {filterTabs.map(tab => (
               <button
                 key={tab.id}
@@ -324,6 +341,47 @@ export default function ActivityPreferences({ trip }: ActivityPreferencesProps) 
                 <span>{tab.label}</span>
               </button>
             ))}
+
+            {/* Separator */}
+            <div className="w-px h-6 bg-surface-dark/50 mx-2"></div>
+
+            {/* Park Filters */}
+            <span className="text-sm text-ink-light font-medium">Parks:</span>
+            {PARKS.map(park => (
+              <button
+                key={park.id}
+                onClick={() => {
+                  setSelectedParks(prev => {
+                    const newSet = new Set(prev);
+                    if (newSet.has(park.id)) {
+                      newSet.delete(park.id);
+                    } else {
+                      newSet.add(park.id);
+                    }
+                    return newSet;
+                  });
+                }}
+                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors flex items-center space-x-1.5 ${
+                  selectedParks.has(park.id)
+                    ? 'bg-sea text-white'
+                    : 'bg-surface-dark/50 text-ink-light hover:text-ink hover:bg-surface-dark'
+                }`}
+              >
+                <span>{park.icon}</span>
+                <span>{park.abbreviation}</span>
+              </button>
+            ))}
+            {(selectedParks.size > 0 || activeFilter !== 'all') && (
+              <button
+                onClick={() => {
+                  setSelectedParks(new Set());
+                  setActiveFilter('all');
+                }}
+                className="px-2 py-1.5 rounded-lg text-xs text-ink-light hover:text-ink hover:bg-surface-dark/50 transition-colors"
+              >
+                Clear All
+              </button>
+            )}
           </div>
 
           {/* Search and Sort */}

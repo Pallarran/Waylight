@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS activity_ratings (
   trip_id uuid NOT NULL,
   party_member_id text NOT NULL, -- References traveling_party_member.id from trips
   attraction_id text NOT NULL, -- References attraction data (rides, shows, dining, etc.)
-  activity_type text NOT NULL CHECK (activity_type IN ('ride', 'show', 'dining', 'meet_greet', 'shopping', 'attraction', 'waterpark', 'tours', 'special_events')),
+  activity_type text NOT NULL CHECK (activity_type IN ('ride', 'show', 'dining', 'meet_greet', 'shopping', 'attraction', 'waterpark', 'tours', 'special_events', 'quick_service', 'table_service', 'snack', 'lounge', 'experience', 'walkthrough', 'entertainment', 'transportation', 'parade')),
   rating integer NOT NULL CHECK (rating >= 1 AND rating <= 5), -- 1-5 star rating
   preference_type text CHECK (preference_type IN ('must_do', 'want_to_do', 'neutral', 'skip', 'avoid')),
   notes text, -- Optional notes from the party member

@@ -44,7 +44,9 @@
       "Bash(set PORT=3000)",
       "Bash(dir C:UsersvinceCodeWaylightpackageswebapi)",
       "Bash(pnpm --filter @waylight/shared build)",
-      "Bash(pnpm --filter @waylight/web build)"
+      "Bash(pnpm --filter @waylight/web build)",
+      "WebFetch(domain:www.thrill-data.com)",
+      "Bash(psql:*)"
     ],
     "deny": [],
     "ask": []

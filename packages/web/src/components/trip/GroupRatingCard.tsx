@@ -76,7 +76,7 @@ const PreferenceSelector = ({
   const preferences: { value: PreferenceType; label: string; color: string; icon: string }[] = [
     { value: 'must_do', label: 'Must Do', color: 'text-glow bg-glow/20 border-glow/50', icon: '⭐' },
     { value: 'want_to_do', label: 'Want to Do', color: 'text-sea bg-sea/20 border-sea/50', icon: '👍' },
-    { value: 'neutral', label: 'Neutral', color: 'text-ink-light bg-surface-dark/20 border-surface-dark/50', icon: '😐' },
+    { value: 'neutral', label: 'Neutral', color: 'text-ink bg-gray-300/40 border-gray-400/60', icon: '😐' },
     { value: 'skip', label: 'Skip', color: 'text-orange-400 bg-orange-500/20 border-orange-500/50', icon: '⏭️' },
     { value: 'avoid', label: 'Avoid', color: 'text-red-400 bg-red-500/20 border-red-500/50', icon: '❌' },
   ];
@@ -88,15 +88,12 @@ const PreferenceSelector = ({
           key={pref.value}
           onClick={() => onChange(pref.value)}
           disabled={disabled}
-          className={`p-2 rounded-lg border text-xs font-medium transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed ${
+          className={`w-8 h-8 rounded-lg border text-sm transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center ${
             value === pref.value ? pref.color : 'text-ink-light bg-surface-dark/20 border-surface-dark/50 hover:bg-surface-dark/40'
           }`}
           title={pref.label}
         >
-          <div className="flex flex-col items-center space-y-1">
-            <span className="text-sm">{pref.icon}</span>
-            <span className="text-xs">{pref.label.split(' ')[0]}</span>
-          </div>
+          {pref.icon}
         </button>
       ))}
     </div>
@@ -139,6 +136,32 @@ export default function GroupRatingCard({
     ratingsMap.set(rating.partyMemberId, rating);
   });
 
+  // Map attraction types to valid activity types for database
+  const getValidActivityType = (attractionType: string): string => {
+    const typeMap: Record<string, string> = {
+      'ride': 'ride',
+      'show': 'show',
+      'dining': 'dining',
+      'meet_greet': 'meet_greet',
+      'shopping': 'shopping',
+      'attraction': 'attraction',
+      'waterpark': 'waterpark',
+      'tours': 'tours',
+      'special_events': 'special_events',
+      'quick_service': 'quick_service',
+      'table_service': 'table_service',
+      'snack': 'snack',
+      'lounge': 'lounge',
+      'experience': 'experience',
+      'walkthrough': 'walkthrough',
+      'entertainment': 'entertainment',
+      'transportation': 'transportation',
+      'parade': 'parade'
+    };
+
+    return typeMap[attractionType] || 'attraction'; // Default to 'attraction' if type not found
+  };
+
   const handleRatingUpdate = (partyMemberId: string, updates: Partial<ActivityRating>) => {
     const existingRating = ratingsMap.get(partyMemberId);
 
@@ -147,8 +170,8 @@ export default function GroupRatingCard({
       tripId: existingRating?.tripId || '',
       partyMemberId,
       attractionId: attraction.id,
-      activityType: attraction.type,
-      rating: 0,
+      activityType: getValidActivityType(attraction.type),
+      rating: existingRating?.rating || 3, // Default to 3 stars if no existing rating
       heightRestrictionOk: true,
       intensityComfortable: true,
       createdAt: existingRating?.createdAt || '',
@@ -234,107 +257,82 @@ export default function GroupRatingCard({
         </div>
       </div>
 
-      {/* Rating Interface - All Party Members */}
+      {/* Compact Rating Interface - All Party Members Side-by-Side */}
       <div className="p-4 bg-surface-dark/20">
-        <div className="space-y-6">
+        <div className="space-y-4">
           <h4 className="text-sm font-medium text-ink flex items-center">
             <Users className="w-4 h-4 mr-2" />
             Rate for All Party Members
           </h4>
 
-          {partyMembers.map((member) => {
-            const memberRating = ratingsMap.get(member.id);
+          {/* Party Members Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {partyMembers.map((member) => {
+              const memberRating = ratingsMap.get(member.id);
 
-            return (
-              <div key={member.id} className="p-4 bg-surface rounded-lg border border-surface-dark/30">
-                <div className="space-y-4">
+              return (
+                <div key={member.id} className="p-3 bg-surface rounded-lg border border-surface-dark/30">
                   {/* Member Header */}
-                  <div className="flex items-center justify-between">
-                    <h5 className="font-medium text-ink flex items-center">
-                      {member.name}
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center">
+                      <span className="font-medium text-ink text-sm">{member.name}</span>
                       {member.isPlanner && (
-                        <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-sea/20 text-sea">
-                          Planner
-                        </span>
+                        <span className="ml-1 text-xs text-sea">★</span>
                       )}
-                    </h5>
+                    </div>
                     {memberRating && onDeleteRating && (
                       <button
                         onClick={() => onDeleteRating(memberRating.id)}
                         className="text-red-400 hover:text-red-300 transition-colors"
                       >
-                        <X className="w-4 h-4" />
+                        <X className="w-3 h-3" />
                       </button>
                     )}
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {/* Rating */}
-                    <div>
-                      <label className="block text-xs font-medium text-ink-light mb-2">Rating</label>
-                      <StarRating
-                        rating={memberRating?.rating || 0}
-                        onRatingChange={(rating) => handleRatingUpdate(member.id, { rating })}
-                        size="md"
-                      />
-                    </div>
-
-                    {/* Preference */}
-                    <div>
-                      <label className="block text-xs font-medium text-ink-light mb-2">Preference</label>
-                      <PreferenceSelector
-                        value={memberRating?.preferenceType}
-                        onChange={(preferenceType) => handleRatingUpdate(member.id, { preferenceType })}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Safety Considerations */}
-                  {(hasHeightRequirement || isIntenseRide) && (
-                    <div className="space-y-2">
-                      <label className="block text-xs font-medium text-ink-light">Safety Considerations</label>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                        {hasHeightRequirement && (
-                          <label className="flex items-center space-x-2">
-                            <input
-                              type="checkbox"
-                              checked={memberRating?.heightRestrictionOk ?? true}
-                              onChange={(e) => handleRatingUpdate(member.id, { heightRestrictionOk: e.target.checked })}
-                              className="rounded border-surface-dark bg-surface-dark text-sea focus:border-sea focus:ring-0"
-                            />
-                            <span className="text-xs text-ink">Height OK ({hasHeightRequirement}")</span>
-                          </label>
-                        )}
-                        {isIntenseRide && (
-                          <label className="flex items-center space-x-2">
-                            <input
-                              type="checkbox"
-                              checked={memberRating?.intensityComfortable ?? true}
-                              onChange={(e) => handleRatingUpdate(member.id, { intensityComfortable: e.target.checked })}
-                              className="rounded border-surface-dark bg-surface-dark text-sea focus:border-sea focus:ring-0"
-                            />
-                            <span className="text-xs text-ink">Intensity OK</span>
-                          </label>
-                        )}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Notes */}
-                  <div>
-                    <label className="block text-xs font-medium text-ink-light mb-2">Notes</label>
-                    <textarea
-                      value={memberRating?.notes || ''}
-                      onChange={(e) => handleRatingUpdate(member.id, { notes: e.target.value })}
-                      className="w-full px-3 py-1.5 bg-surface-dark border border-surface-dark rounded text-ink text-xs focus:outline-none focus:border-sea"
-                      placeholder="Special considerations..."
-                      rows={2}
+                  {/* Compact Preference Selector - Emoji Only */}
+                  <div className="space-y-2">
+                    <PreferenceSelector
+                      value={memberRating?.preferenceType}
+                      onChange={(preferenceType) => handleRatingUpdate(member.id, { preferenceType })}
                     />
                   </div>
+
+                  {/* Safety Warnings (if applicable) */}
+                  {(hasHeightRequirement || isIntenseRide) && (
+                    <div className="mt-2 flex gap-1">
+                      {hasHeightRequirement && (
+                        <button
+                          onClick={() => handleRatingUpdate(member.id, { heightRestrictionOk: !(memberRating?.heightRestrictionOk ?? true) })}
+                          className={`w-6 h-6 rounded text-xs flex items-center justify-center transition-colors ${
+                            memberRating?.heightRestrictionOk !== false
+                              ? 'bg-green-500/20 text-green-400'
+                              : 'bg-red-500/20 text-red-400'
+                          }`}
+                          title={`Height requirement ${hasHeightRequirement}" - Click to toggle`}
+                        >
+                          {memberRating?.heightRestrictionOk !== false ? '✓' : '✗'}
+                        </button>
+                      )}
+                      {isIntenseRide && (
+                        <button
+                          onClick={() => handleRatingUpdate(member.id, { intensityComfortable: !(memberRating?.intensityComfortable ?? true) })}
+                          className={`w-6 h-6 rounded text-xs flex items-center justify-center transition-colors ${
+                            memberRating?.intensityComfortable !== false
+                              ? 'bg-green-500/20 text-green-400'
+                              : 'bg-red-500/20 text-red-400'
+                          }`}
+                          title="High intensity - Click to toggle comfort level"
+                        >
+                          {memberRating?.intensityComfortable !== false ? '💪' : '😰'}
+                        </button>
+                      )}
+                    </div>
+                  )}
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
 
@@ -358,7 +356,7 @@ export default function GroupRatingCard({
                   <div key={rating.id} className="p-3 bg-surface-dark/30 rounded-lg">
                     <div className="flex items-center justify-between mb-2">
                       <span className="font-medium text-ink">{getPartyMemberName(rating.partyMemberId)}</span>
-                      {rating.partyMemberId === currentPartyMemberId && onDeleteRating && (
+                      {onDeleteRating && (
                         <button
                           onClick={() => onDeleteRating(rating.id)}
                           className="text-red-400 hover:text-red-300 transition-colors"

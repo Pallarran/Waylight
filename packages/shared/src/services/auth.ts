@@ -83,11 +83,12 @@ export class AuthService {
     try {
       console.log('👤 Loading profile for user:', user.email);
 
-      const { data: profile, error } = await supabase
+      const { data: profiles, error } = await supabase
         .from('profiles')
         .select('*')
-        .eq('id', user.id)
-        .single();
+        .eq('id', user.id);
+
+      const profile = profiles?.[0] || null;
 
       if (error) {
         console.warn('⚠️ Profile query error (might not exist yet):', error.message);

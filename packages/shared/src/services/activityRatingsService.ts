@@ -84,14 +84,23 @@ export class ActivityRatingsService {
    * Delete a rating
    */
   static async deleteRating(ratingId: string): Promise<void> {
-    const { error } = await supabase
+    console.log('Attempting to delete rating with ID:', ratingId);
+
+    const { data, error } = await supabase
       .from('activity_ratings')
       .delete()
-      .eq('id', ratingId);
+      .eq('id', ratingId)
+      .select(); // Add select to see what was deleted
+
+    console.log('Delete result:', { data, error });
 
     if (error) {
       console.error('Error deleting rating:', error);
       throw new Error(`Failed to delete rating: ${error.message}`);
+    }
+
+    if (!data || data.length === 0) {
+      console.warn('No rating was deleted - rating may not exist or RLS policy blocked deletion');
     }
   }
 
