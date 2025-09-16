@@ -6,7 +6,6 @@ import { getCategoryIcon, getCategoryColor } from '../../data/activityCategories
 interface GroupRatingCardProps {
   ratingData: GroupRatingData;
   partyMembers: TravelingPartyMember[];
-  currentPartyMemberId?: string;
   onRatingChange?: (rating: Partial<ActivityRating>) => void;
   onDeleteRating?: (ratingId: string) => void;
   expanded?: boolean;
@@ -127,32 +126,33 @@ const ConsensusIndicator = ({ level }: { level?: ConsensusLevel }) => {
 export default function GroupRatingCard({
   ratingData,
   partyMembers,
-  currentPartyMemberId,
   onRatingChange,
   onDeleteRating,
   expanded = false,
   onToggleExpand
 }: GroupRatingCardProps) {
-  const { attraction, summary, individualRatings, userRating } = ratingData;
-  const [showNotes, setShowNotes] = useState(false);
+  const { attraction, summary, individualRatings } = ratingData;
 
-  // Get current user's rating or create a new one
-  const currentUserRating = userRating || {
-    id: '',
-    tripId: '',
-    partyMemberId: currentPartyMemberId || '',
-    attractionId: attraction.id,
-    activityType: attraction.type,
-    rating: 0,
-    heightRestrictionOk: true,
-    intensityComfortable: true,
-    createdAt: '',
-    updatedAt: ''
-  };
+  // Create ratings map for quick lookup
+  const ratingsMap = new Map<string, ActivityRating>();
+  individualRatings.forEach(rating => {
+    ratingsMap.set(rating.partyMemberId, rating);
+  });
 
-  const handleRatingUpdate = (updates: Partial<ActivityRating>) => {
+  const handleRatingUpdate = (partyMemberId: string, updates: Partial<ActivityRating>) => {
+    const existingRating = ratingsMap.get(partyMemberId);
+
     onRatingChange?.({
-      ...currentUserRating,
+      ...existingRating,
+      tripId: existingRating?.tripId || '',
+      partyMemberId,
+      attractionId: attraction.id,
+      activityType: attraction.type,
+      rating: 0,
+      heightRestrictionOk: true,
+      intensityComfortable: true,
+      createdAt: existingRating?.createdAt || '',
+      updatedAt: existingRating?.updatedAt || '',
       ...updates
     });
   };
@@ -234,77 +234,107 @@ export default function GroupRatingCard({
         </div>
       </div>
 
-      {/* Rating Interface - Always Shown */}
+      {/* Rating Interface - All Party Members */}
       <div className="p-4 bg-surface-dark/20">
-        <div className="space-y-4">
-          {/* Your Rating */}
-          <div>
-            <label className="block text-sm font-medium text-ink mb-2">Your Rating</label>
-            <StarRating
-              rating={currentUserRating.rating}
-              onRatingChange={(rating) => handleRatingUpdate({ rating })}
-              size="lg"
-            />
-          </div>
+        <div className="space-y-6">
+          <h4 className="text-sm font-medium text-ink flex items-center">
+            <Users className="w-4 h-4 mr-2" />
+            Rate for All Party Members
+          </h4>
 
-          {/* Preference Type */}
-          <div>
-            <label className="block text-sm font-medium text-ink mb-2">Your Preference</label>
-            <PreferenceSelector
-              value={currentUserRating.preferenceType}
-              onChange={(preferenceType) => handleRatingUpdate({ preferenceType })}
-            />
-          </div>
+          {partyMembers.map((member) => {
+            const memberRating = ratingsMap.get(member.id);
 
-          {/* Safety Checks */}
-          {(hasHeightRequirement || isIntenseRide) && (
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-ink">Safety Considerations</label>
-              {hasHeightRequirement && (
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    checked={currentUserRating.heightRestrictionOk}
-                    onChange={(e) => handleRatingUpdate({ heightRestrictionOk: e.target.checked })}
-                    className="rounded border-surface-dark bg-surface-dark text-sea focus:border-sea focus:ring-0"
-                  />
-                  <span className="text-sm text-ink">Meets height requirement ({hasHeightRequirement}")</span>
-                </label>
-              )}
-              {isIntenseRide && (
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    checked={currentUserRating.intensityComfortable}
-                    onChange={(e) => handleRatingUpdate({ intensityComfortable: e.target.checked })}
-                    className="rounded border-surface-dark bg-surface-dark text-sea focus:border-sea focus:ring-0"
-                  />
-                  <span className="text-sm text-ink">Comfortable with high intensity</span>
-                </label>
-              )}
-            </div>
-          )}
+            return (
+              <div key={member.id} className="p-4 bg-surface rounded-lg border border-surface-dark/30">
+                <div className="space-y-4">
+                  {/* Member Header */}
+                  <div className="flex items-center justify-between">
+                    <h5 className="font-medium text-ink flex items-center">
+                      {member.name}
+                      {member.isPlanner && (
+                        <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-sea/20 text-sea">
+                          Planner
+                        </span>
+                      )}
+                    </h5>
+                    {memberRating && onDeleteRating && (
+                      <button
+                        onClick={() => onDeleteRating(memberRating.id)}
+                        className="text-red-400 hover:text-red-300 transition-colors"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    )}
+                  </div>
 
-          {/* Notes */}
-          <div>
-            <button
-              onClick={() => setShowNotes(!showNotes)}
-              className="flex items-center text-sm font-medium text-ink hover:text-sea transition-colors mb-2"
-            >
-              <MessageCircle className="w-4 h-4 mr-2" />
-              Notes {currentUserRating.notes ? '(has notes)' : '(optional)'}
-              {showNotes ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />}
-            </button>
-            {showNotes && (
-              <textarea
-                value={currentUserRating.notes || ''}
-                onChange={(e) => handleRatingUpdate({ notes: e.target.value })}
-                className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea"
-                placeholder="Any thoughts, concerns, or special considerations..."
-                rows={3}
-              />
-            )}
-          </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* Rating */}
+                    <div>
+                      <label className="block text-xs font-medium text-ink-light mb-2">Rating</label>
+                      <StarRating
+                        rating={memberRating?.rating || 0}
+                        onRatingChange={(rating) => handleRatingUpdate(member.id, { rating })}
+                        size="md"
+                      />
+                    </div>
+
+                    {/* Preference */}
+                    <div>
+                      <label className="block text-xs font-medium text-ink-light mb-2">Preference</label>
+                      <PreferenceSelector
+                        value={memberRating?.preferenceType}
+                        onChange={(preferenceType) => handleRatingUpdate(member.id, { preferenceType })}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Safety Considerations */}
+                  {(hasHeightRequirement || isIntenseRide) && (
+                    <div className="space-y-2">
+                      <label className="block text-xs font-medium text-ink-light">Safety Considerations</label>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        {hasHeightRequirement && (
+                          <label className="flex items-center space-x-2">
+                            <input
+                              type="checkbox"
+                              checked={memberRating?.heightRestrictionOk ?? true}
+                              onChange={(e) => handleRatingUpdate(member.id, { heightRestrictionOk: e.target.checked })}
+                              className="rounded border-surface-dark bg-surface-dark text-sea focus:border-sea focus:ring-0"
+                            />
+                            <span className="text-xs text-ink">Height OK ({hasHeightRequirement}")</span>
+                          </label>
+                        )}
+                        {isIntenseRide && (
+                          <label className="flex items-center space-x-2">
+                            <input
+                              type="checkbox"
+                              checked={memberRating?.intensityComfortable ?? true}
+                              onChange={(e) => handleRatingUpdate(member.id, { intensityComfortable: e.target.checked })}
+                              className="rounded border-surface-dark bg-surface-dark text-sea focus:border-sea focus:ring-0"
+                            />
+                            <span className="text-xs text-ink">Intensity OK</span>
+                          </label>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Notes */}
+                  <div>
+                    <label className="block text-xs font-medium text-ink-light mb-2">Notes</label>
+                    <textarea
+                      value={memberRating?.notes || ''}
+                      onChange={(e) => handleRatingUpdate(member.id, { notes: e.target.value })}
+                      className="w-full px-3 py-1.5 bg-surface-dark border border-surface-dark rounded text-ink text-xs focus:outline-none focus:border-sea"
+                      placeholder="Special considerations..."
+                      rows={2}
+                    />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 

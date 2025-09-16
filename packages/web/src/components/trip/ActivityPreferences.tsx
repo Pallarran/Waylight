@@ -141,10 +141,6 @@ export default function ActivityPreferences({ trip }: ActivityPreferencesProps) 
   }, [groupRatingData, sortBy, showHighPriorityOnly]);
 
   // Helper functions
-  const getCurrentPartyMemberId = (): string => {
-    // In real implementation, this would get the current user's party member ID
-    return trip.travelingParty?.[0]?.id || '';
-  };
 
   const getPartyMembers = (): TravelingPartyMember[] => {
     return trip.travelingParty || [];
@@ -234,7 +230,7 @@ export default function ActivityPreferences({ trip }: ActivityPreferencesProps) 
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-semibold text-ink">Activity Preferences</h2>
-          <p className="text-ink-light mt-1">Rate attractions to help prioritize your trip planning</p>
+          <p className="text-ink-light mt-1">Rate attractions for all party members to help prioritize your trip planning</p>
         </div>
         <div className="flex items-center space-x-2">
           <button
@@ -404,7 +400,6 @@ export default function ActivityPreferences({ trip }: ActivityPreferencesProps) 
               key={data.attraction.id}
               ratingData={data}
               partyMembers={getPartyMembers()}
-              currentPartyMemberId={getCurrentPartyMemberId()}
               onRatingChange={handleRatingChange}
               onDeleteRating={handleDeleteRating}
               expanded={expandedCards.has(data.attraction.id)}

@@ -109,7 +109,9 @@ $$ language 'plpgsql';
 
 -- Function to recalculate rating summary for a specific trip and attraction
 CREATE OR REPLACE FUNCTION recalculate_rating_summary(p_trip_id uuid, p_attraction_id text)
-RETURNS void AS $$
+RETURNS void
+LANGUAGE plpgsql
+SECURITY DEFINER AS $$
 DECLARE
   rating_data RECORD;
   ratings_array integer[];
@@ -178,11 +180,13 @@ BEGIN
     last_calculated_at = EXCLUDED.last_calculated_at,
     updated_at = NOW();
 END;
-$$ language 'plpgsql';
+$$;
 
 -- Trigger function to automatically update summaries when ratings change
 CREATE OR REPLACE FUNCTION update_rating_summary_trigger()
-RETURNS TRIGGER AS $$
+RETURNS TRIGGER
+LANGUAGE plpgsql
+SECURITY DEFINER AS $$
 BEGIN
   -- Handle INSERT and UPDATE
   IF TG_OP = 'INSERT' OR TG_OP = 'UPDATE' THEN
@@ -198,7 +202,7 @@ BEGIN
 
   RETURN NULL;
 END;
-$$ language 'plpgsql';
+$$;
 
 -- Trigger to automatically maintain rating summaries
 CREATE TRIGGER maintain_rating_summaries
@@ -221,6 +225,18 @@ CREATE POLICY "Users can manage their trip ratings" ON activity_ratings
 
 CREATE POLICY "Users can read their trip rating summaries" ON activity_rating_summaries
   FOR SELECT USING (
+    trip_id IN (
+      SELECT id FROM trips WHERE user_id = auth.uid()
+    )
+  );
+
+-- Allow system/triggers to manage rating summaries
+CREATE POLICY "System can manage rating summaries" ON activity_rating_summaries
+  FOR ALL TO postgres USING (true);
+
+-- Allow authenticated users to insert/update summaries for their trips
+CREATE POLICY "Users can manage their trip rating summaries" ON activity_rating_summaries
+  FOR ALL USING (
     trip_id IN (
       SELECT id FROM trips WHERE user_id = auth.uid()
     )
