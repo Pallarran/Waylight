@@ -478,6 +478,7 @@ export default function ParkDayView({ trip, tripDay, date, onQuickAdd, onOpenDay
               priorities={familyPriorities}
               tripDay={tripDay}
               onUpdate={(priorities) => updateTripDayData({ familyPriorities: priorities })}
+              getActivityRating={getActivityRating}
             />
 
             {/* Lightning Lane */}
@@ -1218,7 +1219,7 @@ const BreakSection = ({ breakPlan, onUpdate }: any) => {
 };
 
 
-const PrioritiesSection = ({ priorities, tripDay, onUpdate }: any) => {
+const PrioritiesSection = ({ priorities, tripDay, onUpdate, getActivityRating }: any) => {
   const [showModal, setShowModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedPriorities, setSelectedPriorities] = useState(priorities || []);
