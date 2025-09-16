@@ -106,59 +106,6 @@
     "showTimes": ["Multiple times daily"]
   },
   {
-    "id": "ak-its-tough-to-be-bug",
-    "parkId": "animal-kingdom",
-    "name": "It's Tough to be a Bug!",
-    "description": "PERMANENTLY CLOSED as of March 17, 2025. Being replaced by Zootopia: Better Zoogether! opening November 7, 2025 in the Tree of Life Theater.",
-    "location": "Tree of Life Theater",
-    "type": "show",
-    "duration": 8,
-    "intensity": "moderate",
-    "accessibility": {
-      "wheelchairAccessible": true,
-      "transferRequired": false,
-      "serviceAnimalsAllowed": false,
-      "signLanguageAvailable": true
-    },
-    "tips": [
-      {
-        "id": "bugs-life-tip-1",
-        "category": "strategy",
-        "content": "PERMANENTLY CLOSED: Closed March 17, 2025 - replaced by Zootopia: Better Zoogether! November 7, 2025",
-        "priority": 5
-      }
-    ],
-    "tags": ["3D", "bugs-life", "permanently-closed", "tree-of-life"],
-    "features": {
-      "multiPass": false,
-      "singlePass": false,
-      "singleRider": false,
-      "riderSwitch": false,
-      "mobileCheckin": false,
-      "photoPass": false,
-      "darkRide": true,
-      "getsWet": true,
-      "spinningMotion": false,
-      "loudSounds": true,
-      "strobeEffects": true,
-      "interactiveElements": false,
-      "characterMeet": true,
-      "livePerformance": true,
-      "airConditioning": true,
-      "outdoorExperience": false,
-      "heightRequirement": false,
-      "motionSensitivity": false,
-      "pregnancyAdvisory": false,
-      "wheelchairAccessible": true,
-      "transferRequired": false,
-      "rainSafe": true
-    },
-    "lightningLane": false,
-    "singleRider": false,
-    "photoService": false,
-    "showTimes": ["Every 15 minutes"]
-  },
-  {
     "id": "ak-zootopia-better-zoogether",
     "parkId": "animal-kingdom",
     "name": "Zootopia: Better Zoogether!",
@@ -216,5 +163,77 @@
     "singleRider": false,
     "photoService": true,
     "showTimes": ["Opening November 7, 2025"]
+  },
+  {
+    "id": "ak-feathered-friends-in-flight",
+    "parkId": "animal-kingdom",
+    "name": "Feathered Friends in Flight!",
+    "description": "An outdoor bird show at Rafiki's Planet Watch featuring exotic birds from around the world demonstrating their natural behaviors and conservation messages.",
+    "location": "Rafiki's Planet Watch",
+    "type": "show",
+    "duration": 20,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "feathered-friends-tip-1",
+        "category": "general",
+        "content": "Outdoor bird show featuring exotic birds in natural behaviors - educational and entertaining",
+        "priority": 4
+      },
+      {
+        "id": "feathered-friends-tip-2",
+        "category": "strategy",
+        "content": "Take Wildlife Express Train to reach Rafiki's Planet Watch - combine with other attractions there",
+        "priority": 4
+      },
+      {
+        "id": "feathered-friends-tip-3",
+        "category": "best_time",
+        "content": "Outdoor show - check weather conditions and showtimes may vary seasonally",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "birds",
+      "outdoor-show",
+      "conservation",
+      "educational",
+      "rafikis-planet-watch",
+      "family-friendly"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": true,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false,
+    "showTimes": ["Multiple times daily - check Disney app for current schedule"]
   }
 ]

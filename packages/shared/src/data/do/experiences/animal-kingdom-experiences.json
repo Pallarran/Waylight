@@ -172,5 +172,361 @@
     "lightningLane": false,
     "singleRider": false,
     "photoService": false
+  },
+  {
+    "id": "ak-oasis-exhibits",
+    "parkId": "animal-kingdom",
+    "name": "The Oasis Exhibits",
+    "description": "Explore the peaceful entrance area of Animal Kingdom with lush gardens, waterfalls, and animal exhibits including giant anteaters, tapirs, and exotic birds.",
+    "location": "The Oasis",
+    "type": "experience",
+    "duration": 20,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "oasis-tip-1",
+        "category": "general",
+        "content": "Perfect way to start or end your Animal Kingdom visit - peaceful gardens with unique animals",
+        "priority": 4
+      },
+      {
+        "id": "oasis-tip-2",
+        "category": "strategy",
+        "content": "Often overlooked by guests rushing to attractions - take time to explore the winding paths",
+        "priority": 3
+      },
+      {
+        "id": "oasis-tip-3",
+        "category": "photo",
+        "content": "Beautiful photo opportunities with waterfalls, gardens, and unique animals like giant anteaters",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "entrance",
+      "gardens",
+      "animals",
+      "peaceful",
+      "walkthrough",
+      "often-missed"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false
+  },
+  {
+    "id": "ak-conservation-station",
+    "parkId": "animal-kingdom",
+    "name": "Conservation Station",
+    "description": "Educational facility at Rafiki's Planet Watch featuring interactive exhibits about animal care, conservation efforts, and veterinary sciences with behind-the-scenes animal care areas.",
+    "location": "Rafiki's Planet Watch",
+    "type": "experience",
+    "duration": 30,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "conservation-station-tip-1",
+        "category": "general",
+        "content": "Educational and inspiring - learn about Disney's real conservation efforts and animal care",
+        "priority": 4
+      },
+      {
+        "id": "conservation-station-tip-2",
+        "category": "strategy",
+        "content": "Take Wildlife Express Train to reach Rafiki's Planet Watch - plan 1-2 hours for full experience",
+        "priority": 4
+      },
+      {
+        "id": "conservation-station-tip-3",
+        "category": "general",
+        "content": "Watch veterinary procedures through viewing windows and interactive animal encounters",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "conservation",
+      "educational",
+      "veterinary",
+      "behind-the-scenes",
+      "rafikis-planet-watch",
+      "interactive"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false
+  },
+  {
+    "id": "ak-affection-section",
+    "parkId": "animal-kingdom",
+    "name": "Affection Section",
+    "description": "Interactive petting zoo area at Rafiki's Planet Watch where guests can meet and interact with friendly domestic animals including goats, sheep, and other farm animals.",
+    "location": "Rafiki's Planet Watch",
+    "type": "experience",
+    "duration": 20,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "affection-section-tip-1",
+        "category": "general",
+        "content": "Perfect for young children - hands-on animal interactions with friendly farm animals",
+        "priority": 5
+      },
+      {
+        "id": "affection-section-tip-2",
+        "category": "strategy",
+        "content": "Take Wildlife Express Train to reach - combine with Conservation Station visit",
+        "priority": 4
+      },
+      {
+        "id": "affection-section-tip-3",
+        "category": "general",
+        "content": "Great place for kids to pet and brush goats, sheep, and other gentle animals",
+        "priority": 4
+      }
+    ],
+    "tags": [
+      "petting-zoo",
+      "interactive",
+      "kids-favorite",
+      "farm-animals",
+      "rafikis-planet-watch",
+      "hands-on"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false
+  },
+  {
+    "id": "ak-habitat-habit",
+    "parkId": "animal-kingdom",
+    "name": "Habitat Habit!",
+    "description": "Interactive trail experience at Rafiki's Planet Watch where guests can observe cotton-top tamarins and learn about animal behavior and conservation through hands-on activities.",
+    "location": "Rafiki's Planet Watch",
+    "type": "experience",
+    "duration": 15,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "habitat-habit-tip-1",
+        "category": "general",
+        "content": "Educational trail focusing on animal behavior and habitat conservation",
+        "priority": 3
+      },
+      {
+        "id": "habitat-habit-tip-2",
+        "category": "strategy",
+        "content": "Combine with other Rafiki's Planet Watch attractions for full experience",
+        "priority": 4
+      },
+      {
+        "id": "habitat-habit-tip-3",
+        "category": "general",
+        "content": "Watch cotton-top tamarins and learn about their endangered status and conservation",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "educational",
+      "conservation",
+      "cotton-top-tamarins",
+      "rafikis-planet-watch",
+      "interactive",
+      "trail"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false
+  },
+  {
+    "id": "ak-wilderness-explorers",
+    "parkId": "animal-kingdom",
+    "name": "Wilderness Explorers",
+    "description": "Interactive scavenger hunt experience inspired by Disney•Pixar's Up where guests earn badges by completing activities and learning about animals throughout Animal Kingdom.",
+    "location": "Park-wide",
+    "type": "experience",
+    "duration": 120,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "wilderness-explorers-tip-1",
+        "category": "strategy",
+        "content": "Start at Wilderness Explorers headquarters near entrance - collect handbook and earn badges throughout the day",
+        "priority": 5
+      },
+      {
+        "id": "wilderness-explorers-tip-2",
+        "category": "general",
+        "content": "Perfect activity for families with kids - educational and engaging way to explore the entire park",
+        "priority": 5
+      },
+      {
+        "id": "wilderness-explorers-tip-3",
+        "category": "strategy",
+        "content": "Complete activities while waiting for attractions or during meal breaks - great way to maximize your day",
+        "priority": 4
+      }
+    ],
+    "tags": [
+      "interactive",
+      "scavenger-hunt",
+      "up",
+      "badges",
+      "educational",
+      "park-wide",
+      "family-activity"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false
   }
 ]
