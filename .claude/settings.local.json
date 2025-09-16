@@ -38,7 +38,13 @@
       "Bash(npm install:*)",
       "Bash(npx tsx:*)",
       "Bash(pnpm add:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "WebFetch(domain:docs.themeparks.wiki)",
+      "Bash(netstat:*)",
+      "Bash(set PORT=3000)",
+      "Bash(dir C:UsersvinceCodeWaylightpackageswebapi)",
+      "Bash(pnpm --filter @waylight/shared build)",
+      "Bash(pnpm --filter @waylight/web build)"
     ],
     "deny": [],
     "ask": []

@@ -4,7 +4,8 @@
  */
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { backgroundSyncService } from '@waylight/shared';
+import { spawn } from 'child_process';
+import path from 'path';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Allow both GET and POST for manual testing
@@ -28,41 +29,69 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     console.log('🔧 Manual sync triggered...');
 
-    // Get configuration from query params or use defaults
-    const syncConfig = {
-      syncIntervalMinutes: 15,
-      enabledParks: (req.query.parks as string || 'magic-kingdom,epcot,hollywood-studios,animal-kingdom').split(','),
-      enabledServices: {
-        themeparks: req.query.themeparks !== 'false',
-        queueTimes: req.query.queueTimes !== 'false'
-      },
-      retryAttempts: parseInt(req.query.retries as string || '3'),
-      retryDelayMs: 5000
-    };
+    // Get days parameter or use default
+    const days = parseInt(req.query.days as string || '7');
 
-    // Update configuration and run sync
-    backgroundSyncService.updateConfig(syncConfig);
-    await backgroundSyncService.runFullSync();
+    // Run the sync-parks.js script
+    const scriptPath = path.join(process.cwd(), '..', '..', 'scripts', 'sync-parks.js');
+    const args = ['--days', days.toString()];
 
-    // Get statistics
-    const stats = await backgroundSyncService.getSyncStats();
+    console.log(`Running sync script: node ${scriptPath} ${args.join(' ')}`);
+
+    const syncResult = await new Promise<{ success: boolean; output: string; error?: string }>((resolve) => {
+      const child = spawn('node', [scriptPath, ...args], {
+        cwd: path.join(process.cwd(), '..', '..'),
+        env: { ...process.env }
+      });
+
+      let output = '';
+      let errorOutput = '';
+
+      child.stdout?.on('data', (data) => {
+        const message = data.toString();
+        output += message;
+        console.log(message.trim());
+      });
+
+      child.stderr?.on('data', (data) => {
+        const message = data.toString();
+        errorOutput += message;
+        console.error(message.trim());
+      });
+
+      child.on('close', (code) => {
+        if (code === 0) {
+          resolve({ success: true, output });
+        } else {
+          resolve({ success: false, output, error: errorOutput || `Process exited with code ${code}` });
+        }
+      });
+
+      child.on('error', (error) => {
+        resolve({ success: false, output, error: error.message });
+      });
+    });
+
     const duration = Date.now() - startTime;
 
     console.log(`✅ Manual sync completed in ${duration}ms`);
 
     // Return HTML response for browser testing
     if (req.headers.accept?.includes('text/html')) {
-      return res.status(200).send(`
+      const statusEmoji = syncResult.success ? '✅' : '❌';
+      const statusText = syncResult.success ? 'Manual Sync Completed' : 'Manual Sync Failed';
+
+      return res.status(syncResult.success ? 200 : 500).send(`
         <html>
           <head><title>Waylight Manual Sync</title></head>
           <body style="font-family: Arial, sans-serif; margin: 40px;">
-            <h1>✅ Manual Sync Completed</h1>
+            <h1>${statusEmoji} ${statusText}</h1>
             <p><strong>Duration:</strong> ${duration}ms</p>
             <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
-            <h3>Configuration:</h3>
-            <pre>${JSON.stringify(syncConfig, null, 2)}</pre>
-            <h3>Sync Statistics:</h3>
-            <pre>${JSON.stringify(stats, null, 2)}</pre>
+            <p><strong>Days synced:</strong> ${days}</p>
+            ${syncResult.error ? `<p><strong>Error:</strong> ${syncResult.error}</p>` : ''}
+            <h3>Output:</h3>
+            <pre style="background: #f5f5f5; padding: 15px; border-radius: 5px;">${syncResult.output}</pre>
             <p><a href="/api/manual-sync?key=${authKey}">Run Again</a></p>
           </body>
         </html>
@@ -70,13 +99,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     // Return JSON response for API calls
-    return res.status(200).json({
-      success: true,
-      message: 'Manual sync completed successfully',
+    return res.status(syncResult.success ? 200 : 500).json({
+      success: syncResult.success,
+      message: syncResult.success ? 'Manual sync completed successfully' : 'Manual sync failed',
       duration: `${duration}ms`,
       timestamp: new Date().toISOString(),
-      stats,
-      config: syncConfig
+      days,
+      output: syncResult.output,
+      error: syncResult.error
     });
 
   } catch (error) {
@@ -103,6 +133,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     return res.status(500).json({
       success: false,
+      message: 'Manual sync failed with exception',
       error: errorMessage,
       duration: `${duration}ms`,
       timestamp: new Date().toISOString()

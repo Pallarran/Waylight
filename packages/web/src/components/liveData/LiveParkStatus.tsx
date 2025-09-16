@@ -1,23 +1,26 @@
 import React from 'react';
 import { Clock, AlertCircle, CheckCircle, XCircle, Users, RefreshCw } from 'lucide-react';
-import { useParkLiveData } from '../../hooks/useLiveDataStore';
+import { useParkLiveData, useParkLiveDataForDate } from '../../hooks/useLiveDataStore';
 
 interface LiveParkStatusProps {
   parkId: string;
+  date?: string; // YYYY-MM-DD format for date-specific data
   className?: string;
 }
 
 export const LiveParkStatus: React.FC<LiveParkStatusProps> = ({
   parkId,
+  date,
   className = ''
 }) => {
+  // Use date-specific hook if date is provided, otherwise use current date hook
   const {
     parkData,
     isLoading,
     errors,
     lastUpdated,
     actions
-  } = useParkLiveData(parkId);
+  } = date ? useParkLiveDataForDate(parkId, date) : useParkLiveData(parkId);
 
   const getParkStatusIcon = (status: string) => {
     switch (status) {
@@ -61,7 +64,8 @@ export const LiveParkStatus: React.FC<LiveParkStatusProps> = ({
     return 'Very High';
   };
 
-  const formatTime = (timeString: string) => {
+  const formatTime = (timeString: string | null) => {
+    if (!timeString) return null;
     try {
       const [hours, minutes] = timeString.split(':');
       const hour = parseInt(hours);
@@ -151,7 +155,13 @@ export const LiveParkStatus: React.FC<LiveParkStatusProps> = ({
             <div>
               <div className="font-medium text-gray-700">Park Hours</div>
               <div className="text-gray-600">
-                {formatTime(parkData.hours.regular.open)} - {formatTime(parkData.hours.regular.close)}
+                {parkData.hours.regular.open && parkData.hours.regular.close ? (
+                  `${formatTime(parkData.hours.regular.open)} - ${formatTime(parkData.hours.regular.close)}`
+                ) : parkData.dataSource === 'unavailable' ? (
+                  <span className="text-amber-600 italic">Hours not yet available</span>
+                ) : (
+                  <span className="text-gray-500">TBD</span>
+                )}
               </div>
             </div>
           </div>

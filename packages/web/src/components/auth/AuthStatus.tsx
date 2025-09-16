@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { LogIn, LogOut, User, Cloud, CloudOff, Loader2 } from 'lucide-react';
+import { LogIn, LogOut, User, RefreshCw, Loader2 } from 'lucide-react';
 import { authService, syncService, type AuthState, type SyncStatus } from '@waylight/shared';
 import AuthModal from './AuthModal';
 
@@ -8,6 +8,7 @@ export default function AuthStatus() {
   const [syncStatus, setSyncStatus] = useState<SyncStatus>(syncService.getStatus());
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const [isRefreshingParks, setIsRefreshingParks] = useState(false);
 
   useEffect(() => {
     const unsubscribeAuth = authService.subscribe(setAuthState);
@@ -28,8 +29,50 @@ export default function AuthStatus() {
     }
   };
 
-  const handleSync = () => {
-    syncService.syncTrips();
+  const handleRefreshParks = async () => {
+    if (isRefreshingParks) return;
+
+    setIsRefreshingParks(true);
+    try {
+      // Check if we're in development mode (Vite dev server doesn't support API routes)
+      const isDevelopment = import.meta.env.DEV;
+
+      if (isDevelopment) {
+        // In development, simulate the refresh and show user feedback
+        console.log('🔧 Development mode: API routes not available in Vite dev server');
+        console.log('💡 To manually refresh park data, run: node scripts/sync-parks.js --days 7');
+
+        // Simulate a short delay to show the loading state
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        // Show user-friendly message
+        alert('Development mode: API refresh not available.\n\nTo refresh park data manually, run:\nnode scripts/sync-parks.js --days 7\n\nThis button will work in production deployment.');
+        return;
+      }
+
+      // Production path - call the API endpoint
+      const response = await fetch('/api/manual-sync?key=test-key-123', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log('Park hours refresh completed:', result);
+
+      // Show success message
+      alert('Park hours refreshed successfully!');
+    } catch (error) {
+      console.error('Failed to refresh park hours:', error);
+      alert('Failed to refresh park hours. Please try again.');
+    } finally {
+      setIsRefreshingParks(false);
+    }
   };
 
   if (authState.loading) {
@@ -59,19 +102,17 @@ export default function AuthStatus() {
   return (
     <>
       <div className="flex items-center gap-3">
-        {/* Sync Status */}
+        {/* Park Hours Refresh */}
         <button
-          onClick={handleSync}
-          disabled={syncStatus.syncing || !syncStatus.online}
+          onClick={handleRefreshParks}
+          disabled={isRefreshingParks}
           className="flex items-center gap-1 px-2 py-1 rounded-md hover:bg-surface-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          title={syncStatus.online ? 'Sync trips' : 'Offline'}
+          title="Refresh park hours"
         >
-          {syncStatus.syncing ? (
+          {isRefreshingParks ? (
             <Loader2 className="h-4 w-4 animate-spin text-sea" />
-          ) : syncStatus.online ? (
-            <Cloud className="h-4 w-4 text-sea" />
           ) : (
-            <CloudOff className="h-4 w-4 text-ink-light" />
+            <RefreshCw className="h-4 w-4 text-sea" />
           )}
         </button>
 
@@ -98,16 +139,16 @@ export default function AuthStatus() {
               
               <div className="p-1">
                 <button
-                  onClick={handleSync}
-                  disabled={syncStatus.syncing || !syncStatus.online}
+                  onClick={handleRefreshParks}
+                  disabled={isRefreshingParks}
                   className="w-full flex items-center gap-2 px-3 py-2 text-sm text-ink-light hover:text-ink hover:bg-surface rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {syncStatus.syncing ? (
+                  {isRefreshingParks ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
                   ) : (
-                    <Cloud className="h-4 w-4" />
+                    <RefreshCw className="h-4 w-4" />
                   )}
-                  {syncStatus.syncing ? 'Syncing...' : 'Sync Trips'}
+                  {isRefreshingParks ? 'Refreshing...' : 'Refresh Park Hours'}
                 </button>
                 
                 <button
