@@ -104,5 +104,293 @@
     "singleRider": false,
     "photoService": false,
     "showTimes": ["12:00 PM", "2:30 PM", "4:00 PM", "5:30 PM"]
+  },
+  {
+    "id": "hs-vacation-fun-mickey-minnie",
+    "parkId": "hollywood-studios",
+    "name": "Vacation Fun - An Original Animated Short with Mickey & Minnie",
+    "description": "Enjoy a delightful animated short film featuring Mickey Mouse and Minnie Mouse on a fun vacation adventure, created exclusively for Disney's Hollywood Studios.",
+    "location": "Grand Avenue",
+    "type": "show",
+    "duration": 10,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "vacation-fun-tip-1",
+        "category": "general",
+        "content": "Short and sweet animated film perfect for Mickey Mouse fans and families with young kids",
+        "priority": 4
+      },
+      {
+        "id": "vacation-fun-tip-2",
+        "category": "best_time",
+        "content": "Great air-conditioned break with comfortable seating and typically short waits",
+        "priority": 5
+      },
+      {
+        "id": "vacation-fun-tip-3",
+        "category": "general",
+        "content": "Original Disney animation created exclusively for Hollywood Studios",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "mickey-mouse",
+      "minnie-mouse",
+      "animated-short",
+      "family-friendly",
+      "air-conditioned",
+      "exclusive"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": true,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false,
+    "showTimes": ["Continuous showings every 15 minutes"]
+  },
+  {
+    "id": "hs-disney-jr-play-and-dance",
+    "parkId": "hollywood-studios",
+    "name": "Disney Jr. Play and Dance!",
+    "description": "Join favorite Disney Junior characters for an interactive musical celebration featuring singing, dancing, and audience participation with beloved preschool characters.",
+    "location": "Animation Courtyard",
+    "type": "show",
+    "duration": 25,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "disney-jr-tip-1",
+        "category": "general",
+        "content": "Perfect for families with preschoolers - interactive show with singing and dancing",
+        "priority": 5
+      },
+      {
+        "id": "disney-jr-tip-2",
+        "category": "strategy",
+        "content": "Arrive early for best seats - kids love to dance along with the characters",
+        "priority": 4
+      },
+      {
+        "id": "disney-jr-tip-3",
+        "category": "best_time",
+        "content": "Great air-conditioned break featuring beloved Disney Junior characters",
+        "priority": 4
+      }
+    ],
+    "tags": [
+      "disney-junior",
+      "interactive",
+      "preschool",
+      "singing",
+      "dancing",
+      "family-friendly"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": true,
+      "livePerformance": true,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false,
+    "showTimes": ["Multiple times daily - check Disney app for current schedule"]
+  },
+  {
+    "id": "hs-disney-villains-unfairly-ever-after",
+    "parkId": "hollywood-studios",
+    "name": "Disney Villains: Unfairly Ever After",
+    "description": "Join Disney's most notorious villains as they take over the stage to tell their side of the story in this wickedly entertaining musical show featuring iconic villain songs.",
+    "location": "Theater of the Stars",
+    "type": "show",
+    "duration": 30,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "villains-show-tip-1",
+        "category": "general",
+        "content": "Features beloved Disney villains telling their side of classic fairy tales with humor and music",
+        "priority": 5
+      },
+      {
+        "id": "villains-show-tip-2",
+        "category": "strategy",
+        "content": "Popular show - arrive 20-30 minutes early for best seating, especially during busy seasons",
+        "priority": 4
+      },
+      {
+        "id": "villains-show-tip-3",
+        "category": "general",
+        "content": "Great for Disney villain fans and families - entertaining mix of comedy and classic villain songs",
+        "priority": 4
+      }
+    ],
+    "tags": [
+      "disney-villains",
+      "musical",
+      "comedy",
+      "family-friendly",
+      "outdoor-theater",
+      "live-performers"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": true,
+      "livePerformance": true,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": true,
+    "showTimes": ["Multiple times daily - check Disney app for current schedule"]
+  },
+  {
+    "id": "hs-little-mermaid-musical-adventure",
+    "parkId": "hollywood-studios",
+    "name": "The Little Mermaid – A Musical Adventure",
+    "description": "Join Ariel on her journey from under the sea to the surface world in this new condensed musical featuring beloved songs from Disney's The Little Mermaid.",
+    "location": "Animation Courtyard",
+    "type": "show",
+    "duration": 25,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "mermaid-musical-tip-1",
+        "category": "general",
+        "content": "New condensed musical featuring classic Little Mermaid songs like 'Under the Sea' and 'Part of Your World'",
+        "priority": 5
+      },
+      {
+        "id": "mermaid-musical-tip-2",
+        "category": "strategy",
+        "content": "Popular new show - arrive early for best seating as it's still drawing crowds",
+        "priority": 4
+      },
+      {
+        "id": "mermaid-musical-tip-3",
+        "category": "general",
+        "content": "Perfect for Little Mermaid fans and families with kids who love Disney princess stories",
+        "priority": 4
+      }
+    ],
+    "tags": [
+      "little-mermaid",
+      "musical",
+      "ariel",
+      "princess",
+      "new-show",
+      "family-friendly"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": true,
+      "livePerformance": true,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": true,
+    "showTimes": ["Multiple times daily - check Disney app for current schedule"]
   }
 ]

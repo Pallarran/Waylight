@@ -176,5 +176,221 @@
     "singleRider": false,
     "photoService": false,
     "showTimes": ["10:15 AM", "11:45 AM", "1:15 PM", "2:45 PM", "4:15 PM", "5:45 PM", "7:15 PM"]
+  },
+  {
+    "id": "mk-monsters-inc-laugh-floor",
+    "parkId": "magic-kingdom",
+    "name": "Monsters Inc. Laugh Floor",
+    "description": "Interactive comedy show featuring Mike Wazowski and other monsters from Monsters Inc. in a live, improvisational performance that includes audience participation.",
+    "location": "Tomorrowland",
+    "type": "show",
+    "duration": 15,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "laugh-floor-tip-1",
+        "category": "general",
+        "content": "Interactive show - audience participation encouraged! Mike may call on guests for jokes or comments.",
+        "priority": 5
+      },
+      {
+        "id": "laugh-floor-tip-2",
+        "category": "strategy",
+        "content": "Submit jokes via text before the show starts - they might use yours during the performance!",
+        "priority": 4
+      },
+      {
+        "id": "laugh-floor-tip-3",
+        "category": "best_time",
+        "content": "Perfect air-conditioned break with typically short waits - great for hot days",
+        "priority": 4
+      }
+    ],
+    "tags": [
+      "interactive",
+      "comedy",
+      "monsters-inc",
+      "audience-participation",
+      "air-conditioned",
+      "family-friendly"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": false,
+      "livePerformance": true,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false,
+    "showTimes": ["Varies by day - check Disney app for current schedule"]
+  },
+  {
+    "id": "mk-hall-of-presidents",
+    "parkId": "magic-kingdom",
+    "name": "The Hall of Presidents",
+    "description": "Experience American history through an inspiring film and audio-animatronic presentation featuring all U.S. Presidents, including speeches from the current and founding presidents.",
+    "location": "Liberty Square",
+    "type": "show",
+    "duration": 25,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "hall-presidents-tip-1",
+        "category": "general",
+        "content": "Historic attraction that's been a Magic Kingdom staple since opening - great for American history buffs",
+        "priority": 4
+      },
+      {
+        "id": "hall-presidents-tip-2",
+        "category": "best_time",
+        "content": "Perfect air-conditioned break during hot days with comfortable seating and rarely long waits",
+        "priority": 5
+      },
+      {
+        "id": "hall-presidents-tip-3",
+        "category": "general",
+        "content": "Features all 46 presidents in audio-animatronic form - look for the detailed craftsmanship",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "historic",
+      "educational",
+      "american-history",
+      "audio-animatronic",
+      "air-conditioned",
+      "classic"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": true,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false,
+    "showTimes": ["Multiple times daily - check Disney app for current schedule"]
+  },
+  {
+    "id": "mk-carousel-of-progress",
+    "parkId": "magic-kingdom",
+    "name": "Walt Disney's Carousel of Progress",
+    "description": "Experience a century of American progress through the eyes of an audio-animatronic family in this rotating theater show that was personally created by Walt Disney.",
+    "location": "Tomorrowland",
+    "type": "show",
+    "duration": 20,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "carousel-progress-tip-1",
+        "category": "general",
+        "content": "Walt Disney's personal favorite attraction - one of the few he directly created and narrated",
+        "priority": 5
+      },
+      {
+        "id": "carousel-progress-tip-2",
+        "category": "best_time",
+        "content": "Perfect air-conditioned break with comfortable seating and typically no wait",
+        "priority": 5
+      },
+      {
+        "id": "carousel-progress-tip-3",
+        "category": "general",
+        "content": "Rotating theater takes you through different time periods - listen for the catchy theme song!",
+        "priority": 4
+      }
+    ],
+    "tags": [
+      "classic",
+      "historic",
+      "walt-disney-original",
+      "audio-animatronic",
+      "air-conditioned",
+      "rotating-theater"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": true,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": true,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false,
+    "showTimes": ["Continuous performances throughout the day"]
   }
 ]

@@ -954,7 +954,7 @@
     "name": "Tomorrowland Transit Authority PeopleMover",
     "description": "Take a relaxing elevated tour of Tomorrowland on this slow-moving transportation system.",
     "location": "Tomorrowland",
-    "type": "transportation",
+    "type": "ride",
     "duration": 10,
     "intensity": "low",
     "accessibility": {

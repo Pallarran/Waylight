@@ -268,5 +268,73 @@
       "transferRequired": false,
       "rainSafe": true
     }
+  },
+  {
+    "id": "pirates-adventure-treasures-seven-seas",
+    "parkId": "magic-kingdom",
+    "name": "A Pirate's Adventure ~ Treasures of the Seven Seas",
+    "description": "Use a talisman and special map to embark on an interactive treasure hunt through Adventureland, following clues and activating magical effects to uncover pirate treasures.",
+    "location": "Adventureland",
+    "type": "experience",
+    "duration": 20,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "pirates-adventure-tip-1",
+        "category": "strategy",
+        "content": "Pick up your complimentary talisman and map at The Crow's Nest near Pirates of the Caribbean",
+        "priority": 5
+      },
+      {
+        "id": "pirates-adventure-tip-2",
+        "category": "general",
+        "content": "Great activity for kids - interactive treasure hunt with magical effects throughout Adventureland",
+        "priority": 4
+      },
+      {
+        "id": "pirates-adventure-tip-3",
+        "category": "best_time",
+        "content": "Perfect activity for hot days as you can take breaks in shade and air conditioning between locations",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "interactive",
+      "treasure-hunt",
+      "pirates",
+      "family-friendly",
+      "walking",
+      "adventureland"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
+    }
   }
 ]

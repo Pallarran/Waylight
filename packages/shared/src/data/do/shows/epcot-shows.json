@@ -104,5 +104,293 @@
     "singleRider": false,
     "photoService": false,
     "showTimes": ["Every 20 minutes"]
+  },
+  {
+    "id": "epcot-beauty-beast-sing-along",
+    "parkId": "epcot",
+    "name": "Beauty and the Beast Sing-Along",
+    "description": "Join Belle, Beast, and the enchanted objects for a delightful sing-along retelling of the beloved Beauty and the Beast story with live performers and audience participation.",
+    "location": "France Pavilion",
+    "type": "show",
+    "duration": 15,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "beauty-beast-sing-tip-1",
+        "category": "general",
+        "content": "Interactive sing-along - don't be shy about participating with the songs!",
+        "priority": 5
+      },
+      {
+        "id": "beauty-beast-sing-tip-2",
+        "category": "best_time",
+        "content": "Great air-conditioned break in World Showcase with comfortable theater seating",
+        "priority": 4
+      },
+      {
+        "id": "beauty-beast-sing-tip-3",
+        "category": "general",
+        "content": "Perfect for Beauty and the Beast fans and families with young children",
+        "priority": 4
+      }
+    ],
+    "tags": [
+      "sing-along",
+      "beauty-and-the-beast",
+      "interactive",
+      "family-friendly",
+      "air-conditioned",
+      "live-performers"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": false,
+      "livePerformance": true,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false,
+    "showTimes": ["Multiple times daily - check Disney app for current schedule"]
+  },
+  {
+    "id": "epcot-canada-far-wide",
+    "parkId": "epcot",
+    "name": "Canada Far and Wide in Circle-Vision 360",
+    "description": "Experience the breathtaking beauty of Canada through a 360-degree film showcasing the country's stunning landscapes, cities, and natural wonders.",
+    "location": "Canada Pavilion",
+    "type": "show",
+    "duration": 18,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "canada-far-wide-tip-1",
+        "category": "general",
+        "content": "360-degree film - you'll need to stand and turn to see all the action around you",
+        "priority": 5
+      },
+      {
+        "id": "canada-far-wide-tip-2",
+        "category": "best_time",
+        "content": "Great air-conditioned break in World Showcase with spectacular Canadian scenery",
+        "priority": 4
+      },
+      {
+        "id": "canada-far-wide-tip-3",
+        "category": "general",
+        "content": "Features stunning footage of Canadian Rockies, cities, and natural landmarks",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "circle-vision",
+      "360-degree",
+      "canada",
+      "documentary",
+      "nature",
+      "air-conditioned"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": true,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": true,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": true,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false,
+    "showTimes": ["Continuous showings throughout the day"]
+  },
+  {
+    "id": "epcot-disney-pixar-short-film-festival",
+    "parkId": "epcot",
+    "name": "Disney and Pixar Short Film Festival",
+    "description": "Enjoy a collection of beloved Disney and Pixar animated shorts in 3D, featuring characters like Mickey Mouse and stories from Pixar's acclaimed short films.",
+    "location": "Future World",
+    "type": "show",
+    "duration": 18,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "short-film-festival-tip-1",
+        "category": "general",
+        "content": "3D film experience featuring rotating collection of Disney and Pixar animated shorts",
+        "priority": 4
+      },
+      {
+        "id": "short-film-festival-tip-2",
+        "category": "best_time",
+        "content": "Perfect air-conditioned break with comfortable seating - great for all ages",
+        "priority": 5
+      },
+      {
+        "id": "short-film-festival-tip-3",
+        "category": "general",
+        "content": "Features beloved characters and award-winning Pixar storytelling in short format",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "3d-film",
+      "pixar",
+      "disney-animation",
+      "short-films",
+      "family-friendly",
+      "air-conditioned"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": false,
+      "characterMeet": false,
+      "livePerformance": true,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false,
+    "showTimes": ["Continuous showings every 20 minutes"]
+  },
+  {
+    "id": "epcot-turtle-talk-with-crush",
+    "parkId": "epcot",
+    "name": "Turtle Talk With Crush",
+    "description": "Have a real-time conversation with Crush, the 150-year-old sea turtle from Finding Nemo, in this interactive show where Crush responds to audience questions and comments.",
+    "location": "The Seas with Nemo & Friends Pavilion",
+    "type": "show",
+    "duration": 15,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "turtle-talk-tip-1",
+        "category": "general",
+        "content": "Interactive show - Crush can see and respond to kids in the audience in real time!",
+        "priority": 5
+      },
+      {
+        "id": "turtle-talk-tip-2",
+        "category": "strategy",
+        "content": "Kids love this - sit up front and encourage them to wave and ask questions",
+        "priority": 4
+      },
+      {
+        "id": "turtle-talk-tip-3",
+        "category": "best_time",
+        "content": "Great air-conditioned break with typically short waits - perfect for families",
+        "priority": 4
+      }
+    ],
+    "tags": [
+      "interactive",
+      "finding-nemo",
+      "crush",
+      "kids-favorite",
+      "family-friendly",
+      "air-conditioned"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": true,
+      "livePerformance": true,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": false,
+    "showTimes": ["Multiple times daily - check Disney app for current schedule"]
   }
 ]

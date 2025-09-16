@@ -114,5 +114,76 @@
     "lightningLane": false,
     "singleRider": false,
     "photoService": false
+  },
+  {
+    "id": "epcot-journey-of-water-moana",
+    "parkId": "epcot",
+    "name": "Journey of Water, Inspired by Moana",
+    "description": "A self-guided walkthrough experience where guests interact with magical water that comes to life, inspired by Disney's Moana and celebrating the natural water cycle.",
+    "location": "Future World",
+    "type": "experience",
+    "duration": 15,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "journey-water-tip-1",
+        "category": "general",
+        "content": "Interactive water features respond to your movements - great for kids and families",
+        "priority": 5
+      },
+      {
+        "id": "journey-water-tip-2",
+        "category": "strategy",
+        "content": "You may get slightly wet from the interactive water elements - plan accordingly",
+        "priority": 4
+      },
+      {
+        "id": "journey-water-tip-3",
+        "category": "photo",
+        "content": "Beautiful outdoor setting with unique water effects - perfect for photos",
+        "priority": 4
+      }
+    ],
+    "tags": [
+      "moana",
+      "interactive",
+      "water-features",
+      "walkthrough",
+      "family-friendly",
+      "newest-attraction"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
+      "getsWet": true,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
+    },
+    "lightningLane": false,
+    "singleRider": false,
+    "photoService": true
   }
 ]
