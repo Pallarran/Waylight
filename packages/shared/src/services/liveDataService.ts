@@ -111,10 +111,10 @@ export class LiveDataService implements LiveDataServiceInterface {
               close: scheduleData.regular_close
             },
             ...(scheduleData.early_entry_open && {
-              earlyEntry: { open: scheduleData.early_entry_open }
+              earlyEntry: { open: scheduleData.early_entry_open as string }
             }),
             ...(scheduleData.extended_evening_close && {
-              extendedEvening: { close: scheduleData.extended_evening_close }
+              extendedEvening: { close: scheduleData.extended_evening_close as string }
             })
           },
           lastUpdated: scheduleData.synced_at,
