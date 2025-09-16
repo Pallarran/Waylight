@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Clock, Plus, MapPin, Zap, Calendar, Car, Utensils,
   Star, Edit, Save, X, GripVertical, Target,
@@ -8,11 +8,11 @@ import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useTripStore } from '../../../stores';
 import { getParkById } from '../../../data/parks';
-import { getDoItemsByPark, getEatItemsByPark, entertainment, getEntertainmentShowTimes } from '@waylight/shared';
+import { getDoItemsByPark, getEatItemsByPark, entertainment, getEntertainmentShowTimes, ActivityRatingsService } from '@waylight/shared';
 import { ParkHoursSummary } from '../../liveData';
 import type {
   Trip, TripDay, ActivityCategory, ItineraryItem,
-  PhotoOpportunity, BackupPlan
+  PhotoOpportunity, BackupPlan, ActivityRatingSummary
 } from '../../../types';
 
 interface ParkDayViewProps {
@@ -270,9 +270,41 @@ const DraggableScheduleItem = ({ item, index, onUpdate, onDelete, moveItem }: Dr
   );
 };
 
+// Simple StarRating component for displaying readonly ratings
+const StarRating = ({ rating, size = 'sm' }: { rating: number; size?: 'sm' | 'md' }) => {
+  const starSizes = {
+    sm: 'w-3 h-3',
+    md: 'w-4 h-4'
+  };
+
+  return (
+    <div className="flex items-center space-x-0.5">
+      {[1, 2, 3, 4, 5].map((star) => {
+        const filled = rating >= star;
+        const halfFilled = rating >= star - 0.5 && rating < star;
+
+        return (
+          <Star
+            key={star}
+            className={`${starSizes[size]} ${
+              filled
+                ? 'fill-glow text-glow'
+                : halfFilled
+                ? 'fill-glow/50 text-glow'
+                : 'fill-transparent text-surface-dark'
+            }`}
+          />
+        );
+      })}
+      <span className="text-xs text-ink-light ml-1">{rating.toFixed(1)}</span>
+    </div>
+  );
+};
+
 export default function ParkDayView({ trip, tripDay, date, onQuickAdd, onOpenDayTypeModal }: ParkDayViewProps) {
   const { updateDay, reorderItems, updateItem, deleteItem, addItem } = useTripStore();
   const [showAddActivityModal, setShowAddActivityModal] = useState(false);
+  const [ratingSummaries, setRatingSummaries] = useState<ActivityRatingSummary[]>([]);
 
   // Initialize empty data structures if they don't exist
   const arrivalPlan = tripDay.arrivalPlan || {};
@@ -328,6 +360,26 @@ export default function ParkDayView({ trip, tripDay, date, onQuickAdd, onOpenDay
       title: parkData.name,
       subtitle: subtitles[tripDay.parkId as keyof typeof subtitles] || 'Strategic planning for your magical Disney park adventure'
     };
+  };
+
+  // Load rating summaries for this trip
+  useEffect(() => {
+    const loadRatingSummaries = async () => {
+      try {
+        const summaries = await ActivityRatingsService.getRatingSummariesForTrip(trip.id);
+        setRatingSummaries(summaries);
+      } catch (error) {
+        console.error('Error loading rating summaries:', error);
+      }
+    };
+
+    loadRatingSummaries();
+  }, [trip.id]);
+
+  // Helper function to get rating for an activity
+  const getActivityRating = (attractionId: string): number | null => {
+    const summary = ratingSummaries.find(s => s.attractionId === attractionId);
+    return summary?.averageRating ?? null;
   };
 
   const moveScheduleItem = (dragIndex: number, hoverIndex: number) => {
@@ -1540,9 +1592,15 @@ const PrioritiesSection = ({ priorities, tripDay, onUpdate }: any) => {
                         }`}
                         onClick={() => canAdd && addToPriorities(activity)}
                       >
-                        <div className="font-medium flex items-center">
-                          {isSelected && <span className="mr-2">✨</span>}
-                          {activity.name}
+                        <div className="font-medium flex items-center justify-between">
+                          <div className="flex items-center">
+                            {isSelected && <span className="mr-2">✨</span>}
+                            {activity.name}
+                          </div>
+                          {(() => {
+                            const rating = getActivityRating(activity.id);
+                            return rating ? <StarRating rating={rating} size="sm" /> : null;
+                          })()}
                         </div>
                         <div className="text-xs text-ink-light mt-1">
                           {activity.type === 'attraction' ? '🎢' : '🍽️'} {activity.category}
@@ -1565,11 +1623,21 @@ const PrioritiesSection = ({ priorities, tripDay, onUpdate }: any) => {
                   {selectedPriorities.map((priority: any, index: number) => (
                     <div key={priority.id} className="p-3 bg-surface-dark/20 rounded-lg border border-surface-dark/30 hover:border-glow/30 transition-all">
                       <div className="flex items-center justify-between mb-2">
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-2 flex-1 mr-2">
                           <div className="w-5 h-5 rounded-full bg-glow/20 flex items-center justify-center text-xs font-bold text-glow">
                             {index + 1}
                           </div>
-                          <span className="text-sm font-medium text-ink">{priority.name}</span>
+                          <div className="flex-1">
+                            <span className="text-sm font-medium text-ink">{priority.name}</span>
+                            {(() => {
+                              const rating = getActivityRating(priority.id);
+                              return rating ? (
+                                <div className="mt-1">
+                                  <StarRating rating={rating} size="sm" />
+                                </div>
+                              ) : null;
+                            })()}
+                          </div>
                         </div>
                         <div className="flex items-center space-x-1">
                           <button
