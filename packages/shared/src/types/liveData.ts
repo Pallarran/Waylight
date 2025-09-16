@@ -4,7 +4,7 @@ export interface LiveParkData {
   parkId: string;
   status: 'operating' | 'closed' | 'limited';
   hours: {
-    regular: { open: string; close: string };
+    regular: { open: string | null; close: string | null };
     earlyEntry?: { open: string };
     extendedEvening?: { close: string };
   };
@@ -12,6 +12,8 @@ export interface LiveParkData {
   lastUpdated: string;
   attractions: LiveAttractionData[];
   entertainment: LiveEntertainmentData[];
+  dataSource?: string; // Source of the data (themeparks_api, unavailable, etc.)
+  isEstimated?: boolean; // Whether this is estimated data
 }
 
 export interface LiveAttractionData {
@@ -34,6 +36,19 @@ export interface LiveEntertainmentData {
   showTimes: string[];
   status: 'operating' | 'cancelled' | 'delayed';
   nextShowTime?: string;
+  lastUpdated: string;
+}
+
+export interface LiveParkEventData {
+  id: number;
+  parkId: string;
+  eventDate: string; // YYYY-MM-DD
+  eventName: string;
+  eventType: string;
+  eventOpen: string | null; // HH:MM format
+  eventClose: string | null; // HH:MM format
+  description: string;
+  dataSource?: string;
   lastUpdated: string;
 }
 
@@ -138,6 +153,7 @@ export interface ParkMapping {
 export interface LiveDataServiceInterface {
   // Park data
   getParkData(parkId: string): Promise<LiveParkData>;
+  getParkDataForDate(parkId: string, date: string): Promise<LiveParkData>;
   getMultipleParkData(parkIds: string[]): Promise<LiveParkData[]>;
 
   // Attraction data
@@ -146,6 +162,9 @@ export interface LiveDataServiceInterface {
 
   // Entertainment data
   getEntertainmentSchedule(parkId: string): Promise<LiveEntertainmentData[]>;
+
+  // Park events data
+  getParkEventsForDate(parkId: string, date: string): Promise<LiveParkEventData[]>;
 
   // Crowd predictions
   getCrowdPredictions(parkId: string, days: number): Promise<ParkCrowdData>;
