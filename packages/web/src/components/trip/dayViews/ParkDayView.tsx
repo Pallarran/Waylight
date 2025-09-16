@@ -270,33 +270,26 @@ const DraggableScheduleItem = ({ item, index, onUpdate, onDelete, moveItem }: Dr
   );
 };
 
-// Simple StarRating component for displaying readonly ratings
+// Simple StarRating component for displaying single colored star with numeric rating
 const StarRating = ({ rating, size = 'sm' }: { rating: number; size?: 'sm' | 'md' }) => {
   const starSizes = {
     sm: 'w-3 h-3',
     md: 'w-4 h-4'
   };
 
-  return (
-    <div className="flex items-center space-x-0.5">
-      {[1, 2, 3, 4, 5].map((star) => {
-        const filled = rating >= star;
-        const halfFilled = rating >= star - 0.5 && rating < star;
+  // Color based on rating score
+  const getStarColor = (rating: number) => {
+    if (rating >= 4.5) return 'fill-green-400 text-green-400'; // Excellent (green)
+    if (rating >= 4.0) return 'fill-glow text-glow'; // Very good (gold/yellow)
+    if (rating >= 3.5) return 'fill-orange-400 text-orange-400'; // Good (orange)
+    if (rating >= 3.0) return 'fill-yellow-500 text-yellow-500'; // Average (yellow)
+    return 'fill-red-400 text-red-400'; // Below average (red)
+  };
 
-        return (
-          <Star
-            key={star}
-            className={`${starSizes[size]} ${
-              filled
-                ? 'fill-glow text-glow'
-                : halfFilled
-                ? 'fill-glow/50 text-glow'
-                : 'fill-transparent text-surface-dark'
-            }`}
-          />
-        );
-      })}
-      <span className="text-xs text-ink-light ml-1">{rating.toFixed(1)}</span>
+  return (
+    <div className="flex items-center space-x-1">
+      <Star className={`${starSizes[size]} ${getStarColor(rating)}`} />
+      <span className="text-xs text-ink-light">({rating.toFixed(1)})</span>
     </div>
   );
 };
@@ -1593,18 +1586,18 @@ const PrioritiesSection = ({ priorities, tripDay, onUpdate, getActivityRating }:
                         }`}
                         onClick={() => canAdd && addToPriorities(activity)}
                       >
-                        <div className="font-medium flex items-center justify-between">
-                          <div className="flex items-center">
-                            {isSelected && <span className="mr-2">✨</span>}
-                            {activity.name}
-                          </div>
+                        <div className="font-medium flex items-center">
+                          {isSelected && <span className="mr-2">✨</span>}
+                          {activity.name}
+                        </div>
+                        <div className="text-xs text-ink-light mt-1 flex items-center justify-between">
+                          <span>
+                            {activity.type === 'attraction' ? '🎢' : '🍽️'} {activity.category}
+                          </span>
                           {(() => {
                             const rating = getActivityRating(activity.id);
                             return rating ? <StarRating rating={rating} size="sm" /> : null;
                           })()}
-                        </div>
-                        <div className="text-xs text-ink-light mt-1">
-                          {activity.type === 'attraction' ? '🎢' : '🍽️'} {activity.category}
                         </div>
                       </div>
                     );
@@ -1628,15 +1621,11 @@ const PrioritiesSection = ({ priorities, tripDay, onUpdate, getActivityRating }:
                           <div className="w-5 h-5 rounded-full bg-glow/20 flex items-center justify-center text-xs font-bold text-glow">
                             {index + 1}
                           </div>
-                          <div className="flex-1">
+                          <div className="flex-1 flex items-center justify-between">
                             <span className="text-sm font-medium text-ink">{priority.name}</span>
                             {(() => {
                               const rating = getActivityRating(priority.id);
-                              return rating ? (
-                                <div className="mt-1">
-                                  <StarRating rating={rating} size="sm" />
-                                </div>
-                              ) : null;
+                              return rating ? <StarRating rating={rating} size="sm" /> : null;
                             })()}
                           </div>
                         </div>
