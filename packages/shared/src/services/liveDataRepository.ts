@@ -3,6 +3,7 @@ import {
   LiveParkData,
   LiveAttractionData,
   LiveEntertainmentData,
+  LiveParkEventData,
   LiveDataError
 } from '../types/liveData';
 
@@ -10,12 +11,15 @@ import {
 type LiveParkRow = Database['public']['Tables']['live_parks']['Row'];
 type LiveAttractionRow = Database['public']['Tables']['live_attractions']['Row'];
 type LiveEntertainmentRow = Database['public']['Tables']['live_entertainment']['Row'];
+type LiveParkEventRow = Database['public']['Tables']['live_park_events']['Row'];
 type LiveSyncStatusRow = Database['public']['Tables']['live_sync_status']['Row'];
+type LiveParkScheduleRow = Database['public']['Tables']['live_park_schedules']['Row'];
 
 type LiveParkInsert = Database['public']['Tables']['live_parks']['Insert'];
 type LiveAttractionInsert = Database['public']['Tables']['live_attractions']['Insert'];
 type LiveEntertainmentInsert = Database['public']['Tables']['live_entertainment']['Insert'];
 type LiveSyncStatusInsert = Database['public']['Tables']['live_sync_status']['Insert'];
+type LiveParkScheduleInsert = Database['public']['Tables']['live_park_schedules']['Insert'];
 
 /**
  * Repository class for managing live park data in the database
@@ -200,6 +204,66 @@ export class LiveDataRepository {
     }
   }
 
+  // Date-Specific Park Schedule Operations
+  async getParkScheduleForDate(parkId: string, date: string): Promise<LiveParkScheduleRow | null> {
+    try {
+      const { data, error } = await supabase
+        .from('live_park_schedules')
+        .select('*')
+        .eq('park_id', parkId)
+        .eq('schedule_date', date)
+        .single();
+
+      if (error) {
+        if (error.code === 'PGRST116') {
+          // No rows found
+          return null;
+        }
+        throw error;
+      }
+
+      return data;
+    } catch (error) {
+      const liveDataError: LiveDataError = {
+        code: 'API_ERROR',
+        message: error instanceof Error ? error.message : 'Database error',
+        details: { parkId, date, error },
+        timestamp: new Date().toISOString()
+      };
+      throw liveDataError;
+    }
+  }
+
+  async getParkSchedulesForDateRange(parkId: string, startDate: string, endDate: string): Promise<LiveParkScheduleRow[]> {
+    try {
+      const { data, error } = await supabase
+        .from('live_park_schedules')
+        .select('*')
+        .eq('park_id', parkId)
+        .gte('schedule_date', startDate)
+        .lte('schedule_date', endDate)
+        .order('schedule_date');
+
+      if (error) throw error;
+      return data || [];
+    } catch (error) {
+      const liveDataError: LiveDataError = {
+        code: 'API_ERROR',
+        message: error instanceof Error ? error.message : 'Database error',
+        details: { parkId, startDate, endDate, error },
+        timestamp: new Date().toISOString()
+      };
+      throw liveDataError;
+    }
+  }
+
+  async upsertParkSchedule(scheduleData: LiveParkScheduleInsert): Promise<void> {
+    const { error } = await supabase
+      .from('live_park_schedules')
+      .upsert(scheduleData, { onConflict: 'park_id,schedule_date' });
+    if (error) throw error;
+  }
+
   // Data Cleanup Operations
   async cleanOldData(olderThanHours: number = 24): Promise<void> {
     const cutoffTime = new Date(Date.now() - olderThanHours * 60 * 60 * 1000).toISOString();
@@ -222,6 +286,13 @@ export class LiveDataRepository {
       .from('live_parks')
       .delete()
       .lt('last_updated', parkCutoffTime);
+
+    // Clean old schedule data (older than 30 days)
+    const scheduleCutoffTime = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    await supabase
+      .from('live_park_schedules')
+      .delete()
+      .lt('schedule_date', scheduleCutoffTime);
   }
 
   // Transform functions to convert database types to live data types
@@ -277,6 +348,41 @@ export class LiveDataRepository {
       nextShowTime: entertainment.next_show_time || undefined,
       lastUpdated: entertainment.last_updated
     };
+  }
+
+  // Park Events Operations
+  async getParkEventsForDate(parkId: string, date: string): Promise<LiveParkEventData[]> {
+    try {
+      const { data: events, error } = await supabase
+        .from('live_park_events')
+        .select('*')
+        .eq('park_id', parkId)
+        .eq('event_date', date)
+        .order('event_open');
+
+      if (error) throw error;
+
+      return (events || []).map((event: LiveParkEventRow): LiveParkEventData => ({
+        id: event.id,
+        parkId: event.park_id,
+        eventDate: event.event_date,
+        eventName: event.event_name,
+        eventType: event.event_type,
+        eventOpen: event.event_open,
+        eventClose: event.event_close,
+        description: event.description || event.event_name,
+        dataSource: event.data_source || undefined,
+        lastUpdated: event.synced_at || new Date().toISOString()
+      }));
+    } catch (error) {
+      console.error(`[LiveDataRepository] Error fetching park events for ${parkId} on ${date}:`, error);
+      throw {
+        code: 'API_ERROR',
+        message: `Failed to fetch park events for ${parkId} on ${date}`,
+        details: error,
+        timestamp: new Date().toISOString()
+      } as LiveDataError;
+    }
   }
 }
 

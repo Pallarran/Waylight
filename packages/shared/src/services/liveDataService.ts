@@ -2,6 +2,7 @@ import {
   LiveParkData,
   LiveAttractionData,
   LiveEntertainmentData,
+  LiveParkEventData,
   ParkCrowdData,
   LiveDataConfig,
   CacheEntry,
@@ -81,6 +82,79 @@ export class LiveDataService implements LiveDataServiceInterface {
     }
   }
 
+  // Date-specific park data method for trip planning
+  async getParkDataForDate(parkId: string, date: string): Promise<LiveParkData> {
+    if (!isParkSupported(parkId)) {
+      throw new Error(`Park ${parkId} is not supported for live data`);
+    }
+
+    // Check in-memory cache first
+    const cacheKey = `park_data_${parkId}_${date}`;
+    const cached = this.getCachedData<LiveParkData>(cacheKey, this.config.refreshIntervals.parkHours);
+
+    if (cached) {
+      return cached;
+    }
+
+    try {
+      // Get date-specific schedule data
+      const scheduleData = await liveDataRepository.getParkScheduleForDate(parkId, date);
+
+      if (scheduleData) {
+        // Create LiveParkData from schedule data
+        const parkData: LiveParkData = {
+          parkId,
+          status: 'operating', // Assume operating if we have schedule data
+          hours: {
+            regular: {
+              open: scheduleData.regular_open,
+              close: scheduleData.regular_close
+            },
+            ...(scheduleData.early_entry_open && {
+              earlyEntry: { open: scheduleData.early_entry_open }
+            }),
+            ...(scheduleData.extended_evening_close && {
+              extendedEvening: { close: scheduleData.extended_evening_close }
+            })
+          },
+          lastUpdated: scheduleData.synced_at,
+          attractions: [], // Attractions are not date-specific
+          entertainment: [], // Entertainment is not date-specific
+          dataSource: scheduleData.data_source,
+          isEstimated: scheduleData.is_estimated
+        };
+
+        // Cache the result
+        this.setCachedData(cacheKey, parkData, this.config.refreshIntervals.parkHours);
+        return parkData;
+      } else {
+        // No schedule data for this date - return with fallback messaging
+        const parkData: LiveParkData = {
+          parkId,
+          status: 'operating',
+          hours: {
+            regular: {
+              open: null,
+              close: null
+            }
+          },
+          lastUpdated: new Date().toISOString(),
+          attractions: [],
+          entertainment: [],
+          dataSource: 'unavailable',
+          isEstimated: true
+        };
+
+        return parkData;
+      }
+    } catch (error) {
+      this.handleError('getParkDataForDate', error as LiveDataError);
+      // Fall back to mock data if database fails
+      console.warn(`Database failed for ${parkId} on ${date}, falling back to mock data`);
+      return this.getMockParkData(parkId);
+    }
+  }
+
   private getMockParkData(parkId: string): LiveParkData {
     return {
       parkId,
@@ -154,6 +228,25 @@ export class LiveDataService implements LiveDataServiceInterface {
       return entertainment;
     } catch (error) {
       this.handleError('getEntertainmentSchedule', error as LiveDataError);
+      return []; // Return empty array instead of throwing
+    }
+  }
+
+  async getParkEventsForDate(parkId: string, date: string): Promise<LiveParkEventData[]> {
+    if (!isParkSupported(parkId)) {
+      throw new Error(`Park ${parkId} is not supported for live data`);
+    }
+    const cacheKey = `park_events_${parkId}_${date}`;
+    const cached = this.getCachedData<LiveParkEventData[]>(cacheKey, this.config.refreshIntervals.parkHours);
+    if (cached) {
+      return cached;
+    }
+    try {
+      const events = await liveDataRepository.getParkEventsForDate(parkId, date);
+      this.setCachedData(cacheKey, events, this.config.refreshIntervals.parkHours);
+      return events;
+    } catch (error) {
+      this.handleError('getParkEventsForDate', error as LiveDataError);
       return []; // Return empty array instead of throwing
     }
   }

@@ -5,6 +5,7 @@ import {
   LiveParkData,
   LiveAttractionData,
   LiveEntertainmentData,
+  LiveParkEventData,
   ParkCrowdData,
   LiveDataError
 } from '@waylight/shared';
@@ -15,6 +16,7 @@ interface LiveDataState {
   parkData: Record<string, LiveParkData>;
   waitTimes: Record<string, LiveAttractionData[]>;
   entertainment: Record<string, LiveEntertainmentData[]>;
+  parkEvents: Record<string, LiveParkEventData[]>; // keyed by parkId_date
   crowdPredictions: Record<string, ParkCrowdData>;
 
   // Loading states
@@ -22,6 +24,7 @@ interface LiveDataState {
     parkData: Record<string, boolean>;
     waitTimes: Record<string, boolean>;
     entertainment: Record<string, boolean>;
+    parkEvents: Record<string, boolean>;
     crowdPredictions: Record<string, boolean>;
   };
 
@@ -30,6 +33,7 @@ interface LiveDataState {
     parkData: Record<string, LiveDataError | null>;
     waitTimes: Record<string, LiveDataError | null>;
     entertainment: Record<string, LiveDataError | null>;
+    parkEvents: Record<string, LiveDataError | null>;
     crowdPredictions: Record<string, LiveDataError | null>;
   };
 
@@ -44,14 +48,17 @@ interface LiveDataState {
     parkData: Record<string, string>;
     waitTimes: Record<string, string>;
     entertainment: Record<string, string>;
+    parkEvents: Record<string, string>;
     crowdPredictions: Record<string, string>;
   };
 
   // Actions
   fetchParkData: (parkId: string) => Promise<void>;
+  fetchParkDataForDate: (parkId: string, date: string) => Promise<void>;
   fetchMultipleParkData: (parkIds: string[]) => Promise<void>;
   fetchWaitTimes: (parkId: string) => Promise<void>;
   fetchEntertainment: (parkId: string) => Promise<void>;
+  fetchParkEventsForDate: (parkId: string, date: string) => Promise<void>;
   fetchCrowdPredictions: (parkId: string, days?: number) => Promise<void>;
 
   // Auto-refresh controls
@@ -72,12 +79,14 @@ export const useLiveDataStore = create<LiveDataState>()(
     parkData: {},
     waitTimes: {},
     entertainment: {},
+    parkEvents: {},
     crowdPredictions: {},
 
     loading: {
       parkData: {},
       waitTimes: {},
       entertainment: {},
+      parkEvents: {},
       crowdPredictions: {}
     },
 
@@ -85,6 +94,7 @@ export const useLiveDataStore = create<LiveDataState>()(
       parkData: {},
       waitTimes: {},
       entertainment: {},
+      parkEvents: {},
       crowdPredictions: {}
     },
 
@@ -97,6 +107,7 @@ export const useLiveDataStore = create<LiveDataState>()(
       parkData: {},
       waitTimes: {},
       entertainment: {},
+      parkEvents: {},
       crowdPredictions: {}
     },
 
@@ -134,6 +145,45 @@ export const useLiveDataStore = create<LiveDataState>()(
           loading: {
             ...state.loading,
             parkData: { ...state.loading.parkData, [parkId]: false }
+          }
+        }));
+      }
+    },
+
+    fetchParkDataForDate: async (parkId: string, date: string) => {
+      const cacheKey = `${parkId}_${date}`;
+      set(state => ({
+        loading: {
+          ...state.loading,
+          parkData: { ...state.loading.parkData, [cacheKey]: true }
+        },
+        errors: {
+          ...state.errors,
+          parkData: { ...state.errors.parkData, [cacheKey]: null }
+        }
+      }));
+
+      try {
+        const data = await liveDataService.getParkDataForDate(parkId, date);
+        set(state => ({
+          parkData: { ...state.parkData, [cacheKey]: data },
+          lastUpdated: {
+            ...state.lastUpdated,
+            parkData: { ...state.lastUpdated.parkData, [cacheKey]: new Date().toISOString() }
+          }
+        }));
+      } catch (error) {
+        set(state => ({
+          errors: {
+            ...state.errors,
+            parkData: { ...state.errors.parkData, [cacheKey]: error as LiveDataError }
+          }
+        }));
+      } finally {
+        set(state => ({
+          loading: {
+            ...state.loading,
+            parkData: { ...state.loading.parkData, [cacheKey]: false }
           }
         }));
       }
@@ -317,6 +367,45 @@ export const useLiveDataStore = create<LiveDataState>()(
       }
     },
 
+    fetchParkEventsForDate: async (parkId: string, date: string) => {
+      const cacheKey = `${parkId}_${date}`;
+      set(state => ({
+        loading: {
+          ...state.loading,
+          parkEvents: { ...state.loading.parkEvents, [cacheKey]: true }
+        },
+        errors: {
+          ...state.errors,
+          parkEvents: { ...state.errors.parkEvents, [cacheKey]: null }
+        }
+      }));
+
+      try {
+        const data = await liveDataService.getParkEventsForDate(parkId, date);
+        set(state => ({
+          parkEvents: { ...state.parkEvents, [cacheKey]: data },
+          lastUpdated: {
+            ...state.lastUpdated,
+            parkEvents: { ...state.lastUpdated.parkEvents, [cacheKey]: new Date().toISOString() }
+          }
+        }));
+      } catch (error) {
+        set(state => ({
+          errors: {
+            ...state.errors,
+            parkEvents: { ...state.errors.parkEvents, [cacheKey]: error as LiveDataError }
+          }
+        }));
+      } finally {
+        set(state => ({
+          loading: {
+            ...state.loading,
+            parkEvents: { ...state.loading.parkEvents, [cacheKey]: false }
+          }
+        }));
+      }
+    },
+
     startAutoRefresh: (parkIds: string[]) => {
       // Stop existing auto-refresh
       liveDataService.stopAutoRefresh();
@@ -361,6 +450,7 @@ export const useLiveDataStore = create<LiveDataState>()(
           parkData: {},
           waitTimes: {},
           entertainment: {},
+          parkEvents: {},
           crowdPredictions: {}
         }
       });
@@ -372,6 +462,7 @@ export const useLiveDataStore = create<LiveDataState>()(
 export const selectParkData = (parkId: string) => (state: LiveDataState) => state.parkData[parkId];
 export const selectWaitTimes = (parkId: string) => (state: LiveDataState) => state.waitTimes[parkId] || [];
 export const selectEntertainment = (parkId: string) => (state: LiveDataState) => state.entertainment[parkId] || [];
+export const selectParkEvents = (parkId: string, date: string) => (state: LiveDataState) => state.parkEvents[`${parkId}_${date}`] || [];
 export const selectCrowdPredictions = (parkId: string) => (state: LiveDataState) => state.crowdPredictions[parkId];
 
 export const selectIsLoading = (type: keyof LiveDataState['loading'], parkId: string) => (state: LiveDataState) =>
@@ -392,26 +483,30 @@ export const useParkLiveData = (parkId: string) => {
     if (parkId && !store.parkData[parkId]) {
       store.fetchParkData(parkId);
     }
-  }, [parkId, store]);
+  }, [parkId, store.parkData, store.fetchParkData]);
 
   return {
     parkData: store.parkData[parkId],
     waitTimes: store.waitTimes[parkId] || [],
     entertainment: store.entertainment[parkId] || [],
+    parkEvents: [], // No date-specific events for this hook
     isLoading: {
       parkData: store.loading.parkData[parkId] || false,
       waitTimes: store.loading.waitTimes[parkId] || false,
-      entertainment: store.loading.entertainment[parkId] || false
+      entertainment: store.loading.entertainment[parkId] || false,
+      parkEvents: false
     },
     errors: {
       parkData: store.errors.parkData[parkId],
       waitTimes: store.errors.waitTimes[parkId],
-      entertainment: store.errors.entertainment[parkId]
+      entertainment: store.errors.entertainment[parkId],
+      parkEvents: null
     },
     lastUpdated: {
       parkData: store.lastUpdated.parkData[parkId],
       waitTimes: store.lastUpdated.waitTimes[parkId],
-      entertainment: store.lastUpdated.entertainment[parkId]
+      entertainment: store.lastUpdated.entertainment[parkId],
+      parkEvents: undefined
     },
     actions: {
       fetchParkData: () => store.fetchParkData(parkId),
@@ -421,6 +516,63 @@ export const useParkLiveData = (parkId: string) => {
         store.clearError('parkData', parkId);
         store.clearError('waitTimes', parkId);
         store.clearError('entertainment', parkId);
+      }
+    }
+  };
+};
+
+// Hook for date-specific park data with automatic fetching
+export const useParkLiveDataForDate = (parkId: string, date: string) => {
+  const store = useLiveDataStore();
+  const cacheKey = `${parkId}_${date}`;
+
+  // Auto-fetch park data when parkId or date changes
+  React.useEffect(() => {
+    if (parkId && date && !store.parkData[cacheKey]) {
+      store.fetchParkDataForDate(parkId, date);
+    }
+  }, [parkId, date, cacheKey, store.parkData, store.fetchParkDataForDate]);
+
+  // Auto-fetch park events when parkId or date changes
+  React.useEffect(() => {
+    if (parkId && date && !store.parkEvents[cacheKey]) {
+      store.fetchParkEventsForDate(parkId, date);
+    }
+  }, [parkId, date, cacheKey, store.parkEvents, store.fetchParkEventsForDate]);
+
+  return {
+    parkData: store.parkData[cacheKey],
+    waitTimes: store.waitTimes[parkId] || [], // Wait times are not date-specific
+    entertainment: store.entertainment[parkId] || [], // Entertainment is not date-specific
+    parkEvents: store.parkEvents[cacheKey] || [], // Park events are date-specific
+    isLoading: {
+      parkData: store.loading.parkData[cacheKey] || false,
+      waitTimes: store.loading.waitTimes[parkId] || false,
+      entertainment: store.loading.entertainment[parkId] || false,
+      parkEvents: store.loading.parkEvents[cacheKey] || false
+    },
+    errors: {
+      parkData: store.errors.parkData[cacheKey],
+      waitTimes: store.errors.waitTimes[parkId],
+      entertainment: store.errors.entertainment[parkId],
+      parkEvents: store.errors.parkEvents[cacheKey]
+    },
+    lastUpdated: {
+      parkData: store.lastUpdated.parkData[cacheKey],
+      waitTimes: store.lastUpdated.waitTimes[parkId],
+      entertainment: store.lastUpdated.entertainment[parkId],
+      parkEvents: store.lastUpdated.parkEvents[cacheKey]
+    },
+    actions: {
+      fetchParkData: () => store.fetchParkDataForDate(parkId, date),
+      fetchWaitTimes: () => store.fetchWaitTimes(parkId),
+      fetchEntertainment: () => store.fetchEntertainment(parkId),
+      fetchParkEvents: () => store.fetchParkEventsForDate(parkId, date),
+      clearErrors: () => {
+        store.clearError('parkData', cacheKey);
+        store.clearError('waitTimes', parkId);
+        store.clearError('entertainment', parkId);
+        store.clearError('parkEvents', cacheKey);
       }
     }
   };

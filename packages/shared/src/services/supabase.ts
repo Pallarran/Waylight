@@ -1,8 +1,20 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Supabase configuration from environment variables
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || 'https://zclzhvkoqwelhfxahaly.supabase.co';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjbHpodmtvcXdlbGhmeGFoYWx5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc1NTAwMDMsImV4cCI6MjA3MzEyNjAwM30.UYjLv3TjT6e-Wv0JEbWTgCmF50vbBEIBduEMKeSVp5s';
+// Supabase configuration - support both Node.js and browser environments
+const getEnvVar = (key: string, fallback?: string) => {
+  // Check if we're in Node.js environment
+  if (typeof process !== 'undefined' && process.env) {
+    return process.env[key];
+  }
+  // Check if we're in Vite browser environment
+  if (typeof import.meta !== 'undefined' && (import.meta as any).env) {
+    return ((import.meta as any).env as any)[key];
+  }
+  return fallback;
+};
+
+const supabaseUrl = getEnvVar('VITE_SUPABASE_URL') || getEnvVar('NEXT_PUBLIC_SUPABASE_URL') || 'https://zclzhvkoqwelhfxahaly.supabase.co';
+const supabaseAnonKey = getEnvVar('VITE_SUPABASE_ANON_KEY') || getEnvVar('NEXT_PUBLIC_SUPABASE_ANON_KEY') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjbHpodmtvcXdlbGhmeGFoYWx5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc1NTAwMDMsImV4cCI6MjA3MzEyNjAwM30.UYjLv3TjT6e-Wv0JEbWTgCmF50vbBEIBduEMKeSVp5s';
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
@@ -296,6 +308,94 @@ export interface Database {
           total_syncs?: number;
           successful_syncs?: number;
           failed_syncs?: number;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      live_park_schedules: {
+        Row: {
+          id: string;
+          park_id: string;
+          schedule_date: string; // Date in YYYY-MM-DD format
+          regular_open: string | null; // Time in HH:MM format
+          regular_close: string | null; // Time in HH:MM format
+          early_entry_open: string | null; // Time in HH:MM format
+          extended_evening_close: string | null; // Time in HH:MM format
+          data_source: string;
+          is_estimated: boolean;
+          synced_at: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          park_id: string;
+          schedule_date: string;
+          regular_open?: string | null;
+          regular_close?: string | null;
+          early_entry_open?: string | null;
+          extended_evening_close?: string | null;
+          data_source?: string;
+          is_estimated?: boolean;
+          synced_at?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          park_id?: string;
+          schedule_date?: string;
+          regular_open?: string | null;
+          regular_close?: string | null;
+          early_entry_open?: string | null;
+          extended_evening_close?: string | null;
+          data_source?: string;
+          is_estimated?: boolean;
+          synced_at?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      live_park_events: {
+        Row: {
+          id: number;
+          park_id: string;
+          event_date: string; // Date in YYYY-MM-DD format
+          event_name: string;
+          event_type: string;
+          event_open: string | null; // Time in HH:MM:SS format
+          event_close: string | null; // Time in HH:MM:SS format
+          description: string | null;
+          data_source: string | null;
+          synced_at: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: number;
+          park_id: string;
+          event_date: string;
+          event_name: string;
+          event_type: string;
+          event_open?: string | null;
+          event_close?: string | null;
+          description?: string | null;
+          data_source?: string | null;
+          synced_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: number;
+          park_id?: string;
+          event_date?: string;
+          event_name?: string;
+          event_type?: string;
+          event_open?: string | null;
+          event_close?: string | null;
+          description?: string | null;
+          data_source?: string | null;
+          synced_at?: string | null;
           created_at?: string;
           updated_at?: string;
         };

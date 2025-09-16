@@ -9,7 +9,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useTripStore } from '../../../stores';
 import { getParkById } from '../../../data/parks';
 import { getDoItemsByPark, getEatItemsByPark, entertainment, getEntertainmentShowTimes } from '@waylight/shared';
-import { LiveParkStatus } from '../../liveData';
+import { ParkHoursSummary } from '../../liveData';
 import type {
   Trip, TripDay, ActivityCategory, ItineraryItem,
   PhotoOpportunity, BackupPlan
@@ -377,14 +377,6 @@ export default function ParkDayView({ trip, tripDay, date, onQuickAdd, onOpenDay
               </div>
             </div>
 
-            {/* Live Park Status */}
-            {tripDay.parkId && (
-              <div className="mb-6">
-                <LiveParkStatus
-                  parkId={tripDay.parkId}
-                />
-              </div>
-            )}
 
             {/* Arrival Strategy Box */}
             <div className="bg-surface-dark/10 rounded-lg p-4 mb-6 border border-surface-dark/20">
@@ -421,6 +413,13 @@ export default function ParkDayView({ trip, tripDay, date, onQuickAdd, onOpenDay
           <div className="bg-surface rounded-xl border border-surface-dark/30 p-6 h-full overflow-y-auto">
             <h3 className="text-xl font-semibold text-ink mb-6">Park Day Dashboard</h3>
 
+            {/* Park Hours Summary */}
+            {tripDay.parkId && (
+              <ParkHoursSummary
+                parkId={tripDay.parkId}
+                date={date.toISOString().split('T')[0]} // Convert Date to YYYY-MM-DD format
+              />
+            )}
 
             {/* Family Priorities */}
             <PrioritiesSection
