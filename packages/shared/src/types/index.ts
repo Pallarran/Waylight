@@ -171,5 +171,41 @@ export interface ExportFormat {
   includeMap: boolean;
 }
 
+// Activity Rating Types
+export type PreferenceType = 'must_do' | 'want_to_do' | 'neutral' | 'skip' | 'avoid';
+export type ConsensusLevel = 'high' | 'medium' | 'low' | 'conflict';
+
+export interface ActivityRating {
+  id: string;
+  tripId: string;
+  partyMemberId: string;
+  attractionId: string;
+  activityType: string; // Maps to ActivityCategory from web types
+  rating: number; // 1-5 stars
+  preferenceType?: PreferenceType;
+  notes?: string;
+  heightRestrictionOk: boolean;
+  intensityComfortable: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ActivityRatingSummary {
+  id: string;
+  tripId: string;
+  attractionId: string;
+  activityType: string;
+  averageRating?: number;
+  ratingCount: number;
+  mustDoCount: number;
+  avoidCount: number;
+  consensusLevel?: ConsensusLevel;
+  heightRestrictedCount: number;
+  intensityConcernsCount: number;
+  lastCalculatedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 // Live Data Types
 export * from './liveData';

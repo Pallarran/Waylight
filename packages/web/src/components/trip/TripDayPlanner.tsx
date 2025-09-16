@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { format, addDays } from 'date-fns';
-import { Plus, Calendar, Clock, MapPin, ChevronDown, GripVertical, Edit, Save, XCircle, Download, Share, ArrowLeft, Info, Users } from 'lucide-react';
+import { Plus, Calendar, Clock, MapPin, ChevronDown, GripVertical, Edit, Save, XCircle, Download, Share, ArrowLeft, Info, Users, Star } from 'lucide-react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useTripStore } from '../../stores';
@@ -18,6 +18,8 @@ import DisneySpringsView from './dayViews/DisneySpringsView';
 import SpecialEventView from './dayViews/SpecialEventView';
 import ParkDayView from './dayViews/ParkDayView';
 import DayTypeModal from './DayTypeModal';
+import ActivityPreferences from './ActivityPreferences';
+import RatingsSummary from './RatingsSummary';
 
 import type { Trip, ItineraryItem, ActivityCategory, TripDay, DayType } from '../../types';
 
@@ -558,7 +560,7 @@ const DraggableItem = ({ item, index, tripId, dayId, moveItem }: DraggableItemPr
 };
 
 export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerProps) {
-  const [currentView, setCurrentView] = useState<'overview' | number>('overview');
+  const [currentView, setCurrentView] = useState<'overview' | 'preferences' | number>('overview');
   const [showParkSelector, setShowParkSelector] = useState(false);
   const [showDayTypeModal, setShowDayTypeModal] = useState(false);
   const [isEditingTrip, setIsEditingTrip] = useState(false);
@@ -970,6 +972,19 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
               <span className="text-xs mt-1">Overview</span>
             </button>
 
+            {/* Activity Preferences Tab */}
+            <button
+              onClick={() => setCurrentView('preferences')}
+              className={`flex flex-col items-center px-4 py-3 rounded-t-lg whitespace-nowrap transition-colors ${
+                currentView === 'preferences'
+                  ? 'bg-sea/10 text-sea-dark border-b-2 border-sea'
+                  : 'text-ink-light hover:text-ink hover:bg-surface-dark/50'
+              }`}
+            >
+              <Star className="w-4 h-4" />
+              <span className="text-xs mt-1">Preferences</span>
+            </button>
+
             {/* Day Tabs */}
             {tripDays.map((date, index) => {
               const dayData = trip.days?.find(d => d.date === format(date, 'yyyy-MM-dd'));
@@ -1018,7 +1033,8 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
 
         {/* Content */}
         {currentView === 'overview' && <TripOverview trip={trip} />}
-        {currentView !== 'overview' && !selectedDay && (
+        {currentView === 'preferences' && <ActivityPreferences trip={trip} />}
+        {typeof currentView === 'number' && !selectedDay && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-[500px]">
             <div className="lg:col-span-12 flex items-center justify-center">
               <div className="text-center py-16">
@@ -1029,7 +1045,7 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
             </div>
           </div>
         )}
-        {currentView !== 'overview' && selectedDay && (() => {
+        {typeof currentView === 'number' && selectedDay && (() => {
           const detectedDayType = detectDayType(selectedDay, trip, selectedDayIndex);
 
           // Render specialized day view based on detected type
@@ -1146,6 +1162,15 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
                         </div>
                       </div>
                     </div>
+
+                    {/* Group Ratings Summary */}
+                    {selectedDay.items && selectedDay.items.length > 0 && (
+                      <RatingsSummary
+                        tripId={trip.id}
+                        attractionIds={selectedDay.items.map(item => item.attractionId).filter(Boolean)}
+                        partyMembers={trip.travelingParty || []}
+                      />
+                    )}
 
                     {/* Quick Add Section */}
                     <div>

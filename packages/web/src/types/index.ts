@@ -284,6 +284,50 @@ export interface Tip {
   priority: number;
 }
 
+// Activity Rating Interfaces
+
+export type PreferenceType = 'must_do' | 'want_to_do' | 'neutral' | 'skip' | 'avoid';
+export type ConsensusLevel = 'high' | 'medium' | 'low' | 'conflict';
+
+export interface ActivityRating {
+  id: string;
+  tripId: string;
+  partyMemberId: string;
+  attractionId: string;
+  activityType: ActivityCategory;
+  rating: number; // 1-5 stars
+  preferenceType?: PreferenceType;
+  notes?: string;
+  heightRestrictionOk: boolean;
+  intensityComfortable: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ActivityRatingSummary {
+  id: string;
+  tripId: string;
+  attractionId: string;
+  activityType: ActivityCategory;
+  averageRating?: number;
+  ratingCount: number;
+  mustDoCount: number;
+  avoidCount: number;
+  consensusLevel?: ConsensusLevel;
+  heightRestrictedCount: number;
+  intensityConcernsCount: number;
+  lastCalculatedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface GroupRatingData {
+  attraction: Attraction | DoItem | EatItem;
+  summary?: ActivityRatingSummary;
+  individualRatings: ActivityRating[];
+  userRating?: ActivityRating; // Current user's rating if exists
+}
+
 // New category-specific interfaces
 
 export enum DoType {
