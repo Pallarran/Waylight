@@ -34,41 +34,64 @@ export class AuthService {
   }
 
   private async initializeAuth() {
-    // Get initial session
-    const { data: { session } } = await supabase.auth.getSession();
-    
-    if (session?.user) {
-      await this.loadUserProfile(session.user);
-    }
+    try {
+      console.log('🔑 Initializing auth...');
 
-    this.updateState({
-      session,
-      loading: false
-    });
+      // Get initial session
+      const { data: { session }, error } = await supabase.auth.getSession();
 
-    // Listen for auth changes
-    supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log('Auth state changed:', event, session?.user?.email);
-      
+      if (error) {
+        console.error('❌ Error getting session:', error);
+      } else {
+        console.log('✅ Initial session:', session?.user?.email || 'No session');
+      }
+
       if (session?.user) {
         await this.loadUserProfile(session.user);
-      } else {
-        this.updateState({
-          user: null,
-          session: null,
-          loading: false
-        });
       }
-    });
+
+      this.updateState({
+        session,
+        loading: false
+      });
+
+      // Listen for auth changes
+      supabase.auth.onAuthStateChange(async (event, session) => {
+        console.log('🔄 Auth state changed:', event, session?.user?.email);
+
+        if (session?.user) {
+          await this.loadUserProfile(session.user);
+        } else {
+          this.updateState({
+            user: null,
+            session: null,
+            loading: false
+          });
+        }
+      });
+    } catch (error) {
+      console.error('❌ Failed to initialize auth:', error);
+      this.updateState({
+        user: null,
+        session: null,
+        loading: false
+      });
+    }
   }
 
   private async loadUserProfile(user: User) {
     try {
-      const { data: profile } = await supabase
+      console.log('👤 Loading profile for user:', user.email);
+
+      const { data: profile, error } = await supabase
         .from('profiles')
         .select('*')
         .eq('id', user.id)
         .single();
+
+      if (error) {
+        console.warn('⚠️ Profile query error (might not exist yet):', error.message);
+      }
 
       this.updateState({
         user: {
@@ -79,8 +102,11 @@ export class AuthService {
         session: (await supabase.auth.getSession()).data.session,
         loading: false
       });
+
+      console.log('✅ User profile loaded:', user.email);
     } catch (error) {
-      console.error('Error loading user profile:', error);
+      console.error('❌ Error loading user profile:', error);
+      // Still set user data even if profile fails
       this.updateState({
         user: {
           id: user.id,
@@ -139,12 +165,19 @@ export class AuthService {
   }
 
   async signIn(email: string, password: string) {
+    console.log('🔐 Attempting sign in for:', email);
+
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password
     });
 
-    if (error) throw error;
+    if (error) {
+      console.error('❌ Sign in error:', error.message);
+      throw error;
+    }
+
+    console.log('✅ Sign in successful for:', email);
     return data;
   }
 
