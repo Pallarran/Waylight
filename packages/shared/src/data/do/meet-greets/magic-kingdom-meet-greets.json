@@ -121,5 +121,79 @@
       "Tiana",
       "Elena"
     ]
+  },
+  {
+    "id": "mk-ariel-grotto",
+    "parkId": "magic-kingdom",
+    "name": "Meet Ariel at Her Grotto",
+    "description": "Meet Princess Ariel in her magical undersea grotto in the Enchanted Forest area of New Fantasyland, complete with waterfalls and underwater theming.",
+    "location": "Fantasyland",
+    "type": "meet_greet",
+    "duration": 5,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "ariel-tip-1",
+        "category": "strategy",
+        "content": "Ariel appears as a mermaid - one of the few places to meet her in her iconic form.",
+        "priority": 5
+      },
+      {
+        "id": "ariel-tip-2",
+        "category": "photo",
+        "content": "Beautiful underwater grotto theming makes for stunning photos with waterfalls and sea elements.",
+        "priority": 4
+      },
+      {
+        "id": "ariel-tip-3",
+        "category": "general",
+        "content": "Located in the Enchanted Forest section of New Fantasyland near Beast's Castle.",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "princess",
+      "ariel",
+      "little-mermaid",
+      "grotto",
+      "new-fantasyland",
+      "underwater-theming"
+    ],
+    "features": {
+      "multiPass": true,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": true,
+      "livePerformance": true,
+      "airConditioning": false,
+      "outdoorExperience": true,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": false
+    },
+    "lightningLane": true,
+    "singleRider": false,
+    "photoService": true,
+    "characters": [
+      "Ariel"
+    ]
   }
 ]

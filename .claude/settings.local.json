@@ -46,7 +46,8 @@
       "Bash(pnpm --filter @waylight/shared build)",
       "Bash(pnpm --filter @waylight/web build)",
       "WebFetch(domain:www.thrill-data.com)",
-      "Bash(psql:*)"
+      "Bash(psql:*)",
+      "WebFetch(domain:github.com)"
     ],
     "deny": [],
     "ask": []

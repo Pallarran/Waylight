@@ -10,7 +10,7 @@ interface ActivityPreferencesProps {
   trip: Trip;
 }
 
-type FilterTab = 'all' | 'rides' | 'shows' | 'dining' | 'meet_greet' | 'attractions';
+type FilterTab = 'all' | 'rides' | 'shows' | 'meet_greet' | 'attractions';
 type SortOption = 'name' | 'rating' | 'consensus' | 'priority';
 
 export default function ActivityPreferences({ trip }: ActivityPreferencesProps) {
@@ -49,8 +49,14 @@ export default function ActivityPreferences({ trip }: ActivityPreferencesProps) 
       }
     };
 
-    loadRatingsData();
-  }, [trip.id]);
+    // Only load if we have a valid trip ID
+    if (trip?.id) {
+      loadRatingsData();
+    } else {
+      console.warn('No trip ID available, skipping ratings load');
+      setLoading(false);
+    }
+  }, [trip?.id]);
 
   // Helper functions
   const getPartyMembers = (): TravelingPartyMember[] => {
@@ -74,6 +80,12 @@ export default function ActivityPreferences({ trip }: ActivityPreferencesProps) 
   const filteredAttractions = useMemo(() => {
     let filtered = allAttractions;
 
+    // Exclude transportation and dining items from preferences
+    filtered = filtered.filter(item =>
+      item.type !== 'transportation' &&
+      !['quick_service', 'table_service', 'snack', 'lounge', 'food_cart'].includes(item.type)
+    );
+
     // Filter by parks
     if (selectedParks.size > 0) {
       filtered = filtered.filter(item => selectedParks.has(item.parkId));
@@ -84,7 +96,6 @@ export default function ActivityPreferences({ trip }: ActivityPreferencesProps) 
       filtered = filtered.filter(item => {
         if (activeFilter === 'rides') return item.type === 'ride';
         if (activeFilter === 'shows') return item.type === 'show';
-        if (activeFilter === 'dining') return ['quick_service', 'table_service', 'snack', 'lounge'].includes(item.type);
         if (activeFilter === 'meet_greet') return item.type === 'meet_greet';
         if (activeFilter === 'attractions') return ['attraction', 'experience', 'walkthrough'].includes(item.type);
         return true;
@@ -191,7 +202,6 @@ export default function ActivityPreferences({ trip }: ActivityPreferencesProps) 
 
   const handleDeleteRating = async (ratingId: string) => {
     try {
-      console.log('Deleting rating:', ratingId);
       await ActivityRatingsService.deleteRating(ratingId);
 
       // Update local state
@@ -199,9 +209,9 @@ export default function ActivityPreferences({ trip }: ActivityPreferencesProps) 
 
       // Reload summaries to get updated consensus data
       const updatedSummaries = await ActivityRatingsService.getRatingSummariesForTrip(trip.id);
+      console.log('Updated summaries after rating change:', updatedSummaries);
       setSummaries(updatedSummaries);
 
-      console.log('Rating deleted successfully');
 
     } catch (err) {
       console.error('Error deleting rating:', err);
@@ -235,7 +245,6 @@ export default function ActivityPreferences({ trip }: ActivityPreferencesProps) 
     { id: 'all', label: 'All', icon: '🎭' },
     { id: 'rides', label: 'Rides', icon: '🎢' },
     { id: 'shows', label: 'Shows', icon: '🎪' },
-    { id: 'dining', label: 'Dining', icon: '🍽️' },
     { id: 'meet_greet', label: 'Characters', icon: '🐭' },
     { id: 'attractions', label: 'Attractions', icon: '🏰' }
   ];

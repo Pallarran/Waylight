@@ -200,5 +200,73 @@
       "transferRequired": false,
       "rainSafe": false
     }
+  },
+  {
+    "id": "enchanted-tales-with-belle",
+    "parkId": "magic-kingdom",
+    "name": "Enchanted Tales with Belle",
+    "description": "Join Belle in an interactive storytelling experience where guests become part of the Beauty and the Beast story in Maurice's cottage and Beast's library.",
+    "location": "Fantasyland",
+    "type": "experience",
+    "duration": 20,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": true
+    },
+    "tips": [
+      {
+        "id": "belle-tip-1",
+        "category": "strategy",
+        "content": "Interactive show where guests participate in telling the story - great for shy kids to get involved.",
+        "priority": 5
+      },
+      {
+        "id": "belle-tip-2",
+        "category": "photo",
+        "content": "Beautiful sets including Maurice's cottage and Beast's library with amazing detail and props.",
+        "priority": 4
+      },
+      {
+        "id": "belle-tip-3",
+        "category": "general",
+        "content": "Part of the New Fantasyland expansion - immersive Beauty and the Beast experience.",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "interactive",
+      "storytelling",
+      "beauty-and-the-beast",
+      "belle",
+      "new-fantasyland",
+      "family-friendly"
+    ],
+    "features": {
+      "multiPass": true,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": true,
+      "livePerformance": true,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
+    }
   }
 ]

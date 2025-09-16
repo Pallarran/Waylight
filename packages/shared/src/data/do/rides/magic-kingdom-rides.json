@@ -1428,6 +1428,73 @@
     }
   },
   {
+    "id": "many-adventures-winnie-pooh",
+    "parkId": "magic-kingdom",
+    "name": "The Many Adventures of Winnie the Pooh",
+    "description": "Join Pooh, Piglet, Eeyore, and Tigger on a whimsical journey through the Hundred Acre Wood in honey pot vehicles.",
+    "location": "Fantasyland",
+    "type": "ride",
+    "duration": 4,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "pooh-tip-1",
+        "content": "Look for interactive elements like the spinning honey pot and bouncing with Tigger",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "pooh-tip-2",
+        "content": "Great for all ages - perfect first dark ride for young children",
+        "category": "general",
+        "priority": 4
+      },
+      {
+        "id": "pooh-tip-3",
+        "content": "Usually shorter waits compared to other Fantasyland dark rides",
+        "category": "best_time",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "dark-ride",
+      "family-friendly",
+      "winnie-the-pooh",
+      "classic",
+      "interactive"
+    ],
+    "features": {
+      "multiPass": true,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": true,
+      "mobileCheckin": false,
+      "photoPass": false,
+      "darkRide": true,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
+    }
+  },
+  {
     "id": "prince-charming-carrousel",
     "parkId": "magic-kingdom",
     "name": "Prince Charming Regal Carrousel",

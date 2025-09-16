@@ -162,8 +162,24 @@ export default function GroupRatingCard({
     return typeMap[attractionType] || 'attraction'; // Default to 'attraction' if type not found
   };
 
+  // Map preference types to rating values
+  const getPreferenceRating = (preferenceType?: string): number => {
+    const ratingMap: Record<string, number> = {
+      'must_do': 5,      // ⭐ = 5 stars
+      'want_to_do': 4,   // 👍 = 4 stars
+      'neutral': 3,      // 😐 = 3 stars
+      'skip': 2,         // ⏭️ = 2 stars
+      'avoid': 1         // ❌ = 1 star
+    };
+    return preferenceType ? ratingMap[preferenceType] || 3 : 3;
+  };
+
   const handleRatingUpdate = (partyMemberId: string, updates: Partial<ActivityRating>) => {
     const existingRating = ratingsMap.get(partyMemberId);
+
+    // Calculate rating based on preference type
+    const newPreferenceType = updates.preferenceType || existingRating?.preferenceType;
+    const calculatedRating = getPreferenceRating(newPreferenceType);
 
     onRatingChange?.({
       ...existingRating,
@@ -171,7 +187,7 @@ export default function GroupRatingCard({
       partyMemberId,
       attractionId: attraction.id,
       activityType: getValidActivityType(attraction.type),
-      rating: existingRating?.rating || 3, // Default to 3 stars if no existing rating
+      rating: calculatedRating, // Use calculated rating based on preference
       heightRestrictionOk: true,
       intensityComfortable: true,
       createdAt: existingRating?.createdAt || '',
@@ -189,6 +205,13 @@ export default function GroupRatingCard({
   const hasHeightRequirement = 'heightRequirement' in attraction && attraction.heightRequirement;
   const isIntenseRide = 'intensity' in attraction && ['high', 'extreme'].includes(attraction.intensity);
 
+  // Check for refurbishment in description text
+  const isRefurbishment = 'description' in attraction &&
+    attraction.description &&
+    (attraction.description.toLowerCase().includes('currently closed') ||
+     attraction.description.toLowerCase().includes('closed for refurbishment') ||
+     attraction.description.toLowerCase().includes('temporarily closed'));
+
   return (
     <div className="bg-surface rounded-xl border border-surface-dark/30 overflow-hidden">
       {/* Header */}
@@ -202,7 +225,7 @@ export default function GroupRatingCard({
 
             <div className="flex-1 min-w-0">
               <h3 className="font-semibold text-ink text-lg mb-1">{attraction.name}</h3>
-              <div className="flex items-center space-x-3 text-sm text-ink-light">
+              <div className="flex items-center flex-wrap gap-x-3 gap-y-1 text-sm text-ink-light">
                 <span className={`px-2 py-1 rounded-md ${getCategoryColor(attraction.type).replace('text-', 'bg-')}/20 ${getCategoryColor(attraction.type)} font-medium`}>
                   {attraction.type}
                 </span>
@@ -212,10 +235,6 @@ export default function GroupRatingCard({
                 {'duration' in attraction && attraction.duration && (
                   <span>{attraction.duration} min</span>
                 )}
-              </div>
-
-              {/* Warnings */}
-              <div className="flex items-center space-x-2 mt-2">
                 {hasHeightRequirement && (
                   <div className="flex items-center text-xs text-orange-400 bg-orange-500/10 px-2 py-1 rounded-md">
                     <Ruler className="w-3 h-3 mr-1" />
@@ -226,6 +245,12 @@ export default function GroupRatingCard({
                   <div className="flex items-center text-xs text-red-400 bg-red-500/10 px-2 py-1 rounded-md">
                     <AlertTriangle className="w-3 h-3 mr-1" />
                     High intensity
+                  </div>
+                )}
+                {isRefurbishment && (
+                  <div className="flex items-center text-xs text-gray-500 bg-gray-200/20 px-2 py-1 rounded-md">
+                    <X className="w-3 h-3 mr-1" />
+                    Closed for refurbishment
                   </div>
                 )}
               </div>
@@ -244,15 +269,6 @@ export default function GroupRatingCard({
               </div>
             )}
 
-            {/* Expand/Collapse */}
-            {onToggleExpand && (
-              <button
-                onClick={onToggleExpand}
-                className="p-2 text-ink-light hover:text-ink hover:bg-surface-dark/50 rounded-lg transition-colors"
-              >
-                {expanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-              </button>
-            )}
           </div>
         </div>
       </div>
@@ -336,65 +352,6 @@ export default function GroupRatingCard({
         </div>
       </div>
 
-      {/* Expanded Section - Group Ratings */}
-      {expanded && (
-        <div className="p-4 border-t border-surface-dark/30">
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <h4 className="font-medium text-ink">Group Ratings</h4>
-              {summary && (
-                <div className="text-sm text-ink-light">
-                  {summary.mustDoCount > 0 && <span className="text-glow">{summary.mustDoCount} must-do</span>}
-                  {summary.avoidCount > 0 && <span className="text-red-400 ml-2">{summary.avoidCount} avoid</span>}
-                </div>
-              )}
-            </div>
-
-            {individualRatings.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {individualRatings.map((rating) => (
-                  <div key={rating.id} className="p-3 bg-surface-dark/30 rounded-lg">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="font-medium text-ink">{getPartyMemberName(rating.partyMemberId)}</span>
-                      {onDeleteRating && (
-                        <button
-                          onClick={() => onDeleteRating(rating.id)}
-                          className="text-red-400 hover:text-red-300 transition-colors"
-                        >
-                          <X className="w-4 h-4" />
-                        </button>
-                      )}
-                    </div>
-                    <div className="space-y-2">
-                      <StarRating rating={rating.rating} readonly size="sm" />
-                      {rating.preferenceType && (
-                        <div className="flex items-center space-x-2">
-                          <Heart className="w-3 h-3 text-ink-light" />
-                          <span className="text-xs text-ink-light capitalize">{rating.preferenceType.replace('_', ' ')}</span>
-                        </div>
-                      )}
-                      {!rating.heightRestrictionOk && (
-                        <div className="text-xs text-orange-400">⚠️ Height restriction concern</div>
-                      )}
-                      {!rating.intensityComfortable && (
-                        <div className="text-xs text-red-400">⚠️ Intensity concern</div>
-                      )}
-                      {rating.notes && (
-                        <p className="text-xs text-ink-light italic">"{rating.notes}"</p>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-6 text-ink-light">
-                <Users className="w-8 h-8 mx-auto mb-2 opacity-50" />
-                <p className="text-sm">No ratings from group members yet</p>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
     </div>
   );
 }
