@@ -100,7 +100,15 @@ export default function AuthStatus() {
           // Add delay between API calls
           await new Promise(resolve => setTimeout(resolve, 1000)); // 1 second delay
 
-          const scheduleResponse = await fetchWithRetry(`https://api.themeparks.wiki/v1/entity/${parkId}/schedule`);
+          // Get schedule data for the next 90 days
+          const today = new Date();
+          const endDate = new Date(today);
+          endDate.setDate(today.getDate() + 90);
+
+          const startDateStr = today.toISOString().split('T')[0];
+          const endDateStr = endDate.toISOString().split('T')[0];
+
+          const scheduleResponse = await fetchWithRetry(`https://api.themeparks.wiki/v1/entity/${parkId}/schedule?startDate=${startDateStr}&endDate=${endDateStr}`);
           if (!scheduleResponse) {
             throw new Error(`Failed to fetch schedule data for ${parkName} after retries`);
           }
@@ -317,13 +325,35 @@ export default function AuthStatus() {
 
             console.log(`✅ Updated ${eventUpdateCount}/${eventsData.length} events for ${parkName}`);
 
+          // Clean up old schedules first (older than 30 days)
+          const thirtyDaysAgo = new Date();
+          thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+          const cleanupDate = thirtyDaysAgo.toISOString().split('T')[0]; // YYYY-MM-DD format
+
+          const { error: scheduleCleanupError } = await supabase
+            .from('live_park_schedules')
+            .delete()
+            .eq('park_id', parkName)
+            .lt('schedule_date', cleanupDate);
+
+          if (scheduleCleanupError) {
+            console.warn(`⚠️ Failed to cleanup old schedules for ${parkName}:`, scheduleCleanupError);
+            if (scheduleCleanupError.message.includes('row-level security')) {
+              errors.push(`${parkName}: Schedules table DELETE not allowed - RLS policy needed`);
+              console.log(`⏸️ Skipping schedules table updates for ${parkName} (DELETE permission denied)`);
+              continue;
+            }
+          } else {
+            console.log(`🧹 Cleaned up old schedules for ${parkName} (before ${cleanupDate})`);
+          }
+
           // Update park schedules in database (regular operating hours)
           let scheduleUpdateCount = 0;
           const scheduleData_filtered = scheduleData.schedule?.filter((item: any) =>
             item.type === 'OPERATING' && item.date && (item.openingTime || item.closingTime)
           ) || [];
 
-          console.log(`📅 Found ${scheduleData_filtered.length} operating schedule entries for ${parkName}`);
+          console.log(`📅 Found ${scheduleData_filtered.length} operating schedule entries for ${parkName} (90-day range)`);
 
           for (const schedule of scheduleData_filtered) {
             try {
