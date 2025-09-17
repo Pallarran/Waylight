@@ -168,7 +168,7 @@ export default function AuthStatus() {
               {syncStatus.lastSync && (
                 <div className="p-3 border-t border-surface-dark">
                   <p className="text-xs text-ink-light">
-                    Last sync: {new Date(syncStatus.lastSync).toLocaleTimeString()}
+                    Last sync: {new Date(syncStatus.lastSync).toLocaleTimeString([], { hour12: false })}
                   </p>
                 </div>
               )}

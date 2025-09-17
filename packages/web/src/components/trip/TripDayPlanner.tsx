@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { format, addDays } from 'date-fns';
-import { Plus, Calendar, Clock, MapPin, ChevronDown, GripVertical, Edit, Save, XCircle, Download, Share, ArrowLeft, Info, Users, Star } from 'lucide-react';
+import { Plus, Calendar, Clock, MapPin, ChevronDown, GripVertical, Edit, Save, XCircle, ArrowLeft, Info, Users, Star } from 'lucide-react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useTripStore } from '../../stores';
@@ -340,7 +340,7 @@ const DraggableItem = ({ item, index, tripId, dayId, moveItem }: DraggableItemPr
       
       {/* Category icon with enhanced styling */}
       <div className={`flex items-center justify-center w-10 h-10 rounded-xl mr-4 text-lg font-medium shadow-sm ${getCategoryColor(item.type).replace('text-', 'bg-')}/20 ${getCategoryColor(item.type)} border border-current/20`}>
-        {getCategoryIcon(item.type)}
+        {getCategoryIcon(item.type, item.name)}
       </div>
       
       <GripVertical className="w-4 h-4 text-ink-light mr-3 cursor-grab active:cursor-grabbing hover:text-ink transition-colors" />
@@ -641,20 +641,21 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
 
   const handleQuickAdd = async (type: ActivityCategory, attractionId?: string, customName?: string) => {
     if (!selectedDay) return;
-    
+
     if (attractionId) {
       // Adding a specific attraction
       const allAttractions = [...getAllDoItems(), ...getAllEatItems()];
       const attraction = allAttractions.find(a => a.id === attractionId);
       if (!attraction) return;
-      
+
       const newItem = {
         type: attraction.type as ActivityCategory,
-        name: attraction.name,
+        name: customName || attraction.name,
         attractionId: attraction.id,
         startTime: '09:00',
         notes: ''
       };
+
       
       try {
         await addItem(trip.id, selectedDay.id, newItem);
@@ -722,98 +723,7 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
     }
   };
 
-  const exportTripAsJSON = () => {
-    const exportData = {
-      trip: {
-        name: trip.name,
-        startDate: trip.startDate,
-        endDate: trip.endDate,
-        days: trip.days?.map(day => ({
-          date: day.date,
-          park: day.parkId ? getParkName(day.parkId) : 'No park selected',
-          items: day.items || []
-        })) || []
-      },
-      exportedAt: new Date().toISOString(),
-      exportedBy: 'Waylight Trip Planner'
-    };
 
-    const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${trip.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_trip.json`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  };
-
-  const exportTripAsText = () => {
-    let text = `${trip.name}\n`;
-    text += `${format(startDate, 'MMMM d, yyyy')} - ${format(endDate, 'MMMM d, yyyy')}\n\n`;
-
-    trip.days?.forEach(day => {
-      text += `${format(new Date(day.date + 'T00:00:00'), 'EEEE, MMMM d, yyyy')}\n`;
-      text += `Park: ${day.parkId ? getParkName(day.parkId) : 'No park selected'}\n`;
-      
-      if (day.items && day.items.length > 0) {
-        text += '\nItinerary:\n';
-        day.items.forEach((item, index) => {
-          text += `${index + 1}. ${item.name}`;
-          if (item.startTime) text += ` (${item.startTime})`;
-          if (item.duration) text += ` - ${item.duration} minutes`;
-          text += `\n`;
-          if (item.notes) text += `   Notes: ${item.notes}\n`;
-        });
-      } else {
-        text += '\nNo activities planned for this day.\n';
-      }
-      text += '\n';
-    });
-
-    text += `\nExported from Waylight Trip Planner on ${format(new Date(), 'MMMM d, yyyy h:mm a')}`;
-
-    const blob = new Blob([text], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${trip.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_trip.txt`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  };
-
-  const shareTrip = async () => {
-    const text = `Check out my ${trip.name} itinerary!\n\n${format(startDate, 'MMMM d, yyyy')} - ${format(endDate, 'MMMM d, yyyy')}\n\nPlanned with Waylight Trip Planner`;
-    
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: `${trip.name} - Disney World Trip`,
-          text: text,
-        });
-      } catch (error) {
-        console.error('Error sharing:', error);
-        // Fallback to clipboard
-        copyToClipboard(text);
-      }
-    } else {
-      // Fallback to clipboard
-      copyToClipboard(text);
-    }
-  };
-
-  const copyToClipboard = async (text: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      // Could add a toast notification here
-      console.log('Trip details copied to clipboard!');
-    } catch (error) {
-      console.error('Failed to copy to clipboard:', error);
-    }
-  };
 
   const handleTripSave = async () => {
     try {
@@ -909,29 +819,6 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
                   title="Edit trip details"
                 >
                   <Edit className="w-4 h-4" />
-                </button>
-              </div>
-              <div className="flex items-center space-x-2">
-                <button
-                  onClick={shareTrip}
-                  className="btn-secondary btn-sm flex items-center"
-                >
-                  <Share className="w-4 h-4 mr-1" />
-                  Share
-                </button>
-                <button
-                  onClick={exportTripAsText}
-                  className="btn-secondary btn-sm flex items-center"
-                >
-                  <Download className="w-4 h-4 mr-1" />
-                  Export Text
-                </button>
-                <button
-                  onClick={exportTripAsJSON}
-                  className="btn-secondary btn-sm flex items-center"
-                >
-                  <Download className="w-4 h-4 mr-1" />
-                  Export JSON
                 </button>
               </div>
             </div>

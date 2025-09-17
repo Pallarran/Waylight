@@ -6,7 +6,7 @@ export default function Settings() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [notifications, setNotifications] = useState(true);
   const [defaultPark, setDefaultPark] = useState('magic-kingdom');
-  const [timeFormat, setTimeFormat] = useState('12h');
+  const [timeFormat, setTimeFormat] = useState('24h');
   
   const { displaySettings, updatePreferences } = useUserPreferencesStore();
 

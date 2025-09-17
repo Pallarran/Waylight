@@ -282,5 +282,56 @@
       "dinner": "4:00 PM - 8:00 PM"
     },
     "reservationWindow": 0
+  },
+  {
+    "id": "friars-nook",
+    "parkId": "magic-kingdom",
+    "name": "Friar's Nook",
+    "description": "Quick service restaurant in Fantasyland specializing in mac and cheese dishes, loaded fries, and comfort food favorites.",
+    "location": "Fantasyland",
+    "type": "quick_service",
+    "serviceType": "quick",
+    "priceLevel": 2,
+    "tips": [
+      {
+        "id": "friars-nook-tip-1",
+        "category": "general",
+        "content": "Famous for creative mac and cheese variations with different toppings",
+        "priority": 5
+      },
+      {
+        "id": "friars-nook-tip-2",
+        "category": "strategy",
+        "content": "Try the loaded fries - they're a hidden gem",
+        "priority": 4
+      },
+      {
+        "id": "friars-nook-tip-3",
+        "category": "strategy",
+        "content": "Located near Seven Dwarfs Mine Train - convenient for Fantasyland touring",
+        "priority": 3
+      }
+    ],
+    "tags": ["mac-and-cheese", "comfort-food", "loaded-fries", "fantasyland"],
+    "features": {
+      "mobileOrder": true,
+      "adrRequired": false,
+      "walkupAvailable": true,
+      "counterService": true,
+      "themedAtmosphere": true,
+      "vegetarianOptions": true,
+      "alcoholServed": false,
+      "kidFriendly": true,
+      "allergyFriendly": true,
+      "healthyOptions": false,
+      "largePortions": true
+    },
+    "cuisineType": "American Comfort Food",
+    "kidFriendly": true,
+    "operatingHours": {
+      "lunch": "11:00 AM - 4:00 PM",
+      "dinner": "4:00 PM - 8:00 PM"
+    },
+    "reservationWindow": 0
   }
 ]

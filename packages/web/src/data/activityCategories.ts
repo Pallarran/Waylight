@@ -23,6 +23,27 @@ export const ACTIVITY_CATEGORIES: ActivityCategoryInfo[] = [
     description: 'Restaurants, quick service, snacks, and beverages'
   },
   {
+    id: 'quick_service',
+    name: 'Quick Service',
+    icon: '🍽️',
+    color: 'text-orange-400',
+    description: 'Quick service restaurants and fast food'
+  },
+  {
+    id: 'table_service',
+    name: 'Table Service',
+    icon: '🍽️',
+    color: 'text-orange-400',
+    description: 'Table service restaurants and fine dining'
+  },
+  {
+    id: 'snack',
+    name: 'Snacks',
+    icon: '🍿',
+    color: 'text-yellow-400',
+    description: 'Snack stands and quick bites'
+  },
+  {
     id: 'meet_greet',
     name: 'Character Meet & Greets',
     icon: '🐭',
@@ -84,7 +105,7 @@ export const getCategoryInfo = (categoryId: string): ActivityCategoryInfo | unde
   return ACTIVITY_CATEGORIES.find(cat => cat.id === categoryId);
 };
 
-export const getCategoryIcon = (categoryId: string): string => {
+export const getCategoryIcon = (categoryId: string, itemName?: string): string => {
   const category = getCategoryInfo(categoryId);
   return category?.icon || '📝';
 };

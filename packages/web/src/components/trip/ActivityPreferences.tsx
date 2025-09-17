@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { Filter, Search, Star, Users, TrendingUp, AlertTriangle, Download, BarChart3 } from 'lucide-react';
+import { Filter, Search, Star, Users, TrendingUp, AlertTriangle, BarChart3 } from 'lucide-react';
 import GroupRatingCard from './GroupRatingCard';
 import SummaryReportModal from './SummaryReportModal';
 import { getAllDoItems, getAllEatItems } from '@waylight/shared';
@@ -234,11 +234,6 @@ export default function ActivityPreferences({ trip }: ActivityPreferencesProps) 
     });
   };
 
-  const exportRatings = () => {
-    // TODO: Implement ratings export functionality
-    console.log('Export ratings for trip:', trip.id);
-  };
-
   const generateSummaryReport = () => {
     setShowSummaryReport(true);
   };
@@ -266,13 +261,6 @@ export default function ActivityPreferences({ trip }: ActivityPreferencesProps) 
           >
             <BarChart3 className="w-4 h-4 mr-2" />
             Summary Report
-          </button>
-          <button
-            onClick={exportRatings}
-            className="btn-secondary btn-sm flex items-center"
-          >
-            <Download className="w-4 h-4 mr-2" />
-            Export Ratings
           </button>
         </div>
       </div>

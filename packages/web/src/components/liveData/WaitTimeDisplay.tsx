@@ -87,7 +87,7 @@ export const WaitTimeDisplay: React.FC<WaitTimeDisplayProps> = ({
             <span className="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full">
               LL
               {attractionData.lightningLane.returnTime && (
-                <span className="ml-1">{new Date(attractionData.lightningLane.returnTime).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}</span>
+                <span className="ml-1">{new Date(attractionData.lightningLane.returnTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })}</span>
               )}
             </span>
           </div>

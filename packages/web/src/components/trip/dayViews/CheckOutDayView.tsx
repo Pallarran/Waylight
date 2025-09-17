@@ -35,7 +35,7 @@ export default function CheckOutDayView({ trip, tripDay, onQuickAdd, onOpenDayTy
   // Helper function to get hotel-specific check-out time
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const getHotelCheckOutTime = (_hotelName: string) => {
-    // All Disney resort hotels have the same 11:00 AM check-out time as of 2025
+    // All Disney resort hotels have the same 11:00 check-out time as of 2025
     // This includes all tiers: Value, Moderate, Deluxe, and DVC (Deluxe Villa)
     return '11:00';
   };
@@ -601,8 +601,8 @@ export default function CheckOutDayView({ trip, tripDay, onQuickAdd, onOpenDayTy
                       })}
                       className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea focus:ring-1 focus:ring-sea/20 transition-colors"
                       placeholder={tripDay.arrivalPlan?.flightType === 'driving'
-                        ? "Driving home, departing at 2:30 PM..."
-                        : "Flight AA123, departing 2:30 PM from LAX..."}
+                        ? "Driving home, departing at 14:30..."
+                        : "Flight AA123, departing 14:30 from LAX..."}
                     />
                   </div>
                   <div className="col-span-10 md:col-span-3">

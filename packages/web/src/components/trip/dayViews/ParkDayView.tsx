@@ -77,10 +77,18 @@ const DraggableScheduleItem = ({ item, index, onUpdate, onDelete, moveItem }: Dr
   };
 
   const getItemIcon = () => {
+    // Check for mobile order specifically
+    if (item.name.includes('Mobile Order:')) {
+      return '📱';
+    }
+
     switch (item.type) {
       case 'ride': return '🎢';
       case 'show': return '🎭';
       case 'dining': return '🍽️';
+      case 'quick_service': return '🍽️';
+      case 'table_service': return '🍽️';
+      case 'snack': return '🍿';
       case 'meet_greet': return '🤝';
       case 'break': return '☕';
       default: return '📍';
@@ -1524,7 +1532,8 @@ const PrioritiesSection = ({ priorities, tripDay, onUpdate, getActivityRating }:
                       <div className="text-xs text-green-400/70 mt-1">
                         ✨ Completed {new Date(priority.completedAt).toLocaleTimeString([], {
                           hour: '2-digit',
-                          minute: '2-digit'
+                          minute: '2-digit',
+                          hour12: false
                         })}
                       </div>
                     )}
@@ -2042,7 +2051,28 @@ const EntertainmentShowsBox = ({ parkId }: any) => {
 
                       {/* Time */}
                       <div className={`text-xl font-bold ${colors.text} mb-1`}>
-                        {entry.time.toLowerCase()}
+                        {(() => {
+                          // Convert 12-hour format to 24-hour format
+                          const time = entry.time.toLowerCase();
+                          if (time.includes('am') || time.includes('pm')) {
+                            try {
+                              const [timePart, period] = time.split(/\s*(am|pm)\s*/);
+                              const [hours, minutes] = timePart.split(':').map(str => str.trim());
+                              let hour24 = parseInt(hours);
+
+                              if (period === 'pm' && hour24 !== 12) {
+                                hour24 += 12;
+                              } else if (period === 'am' && hour24 === 12) {
+                                hour24 = 0;
+                              }
+
+                              return `${hour24.toString().padStart(2, '0')}:${minutes || '00'}`;
+                            } catch {
+                              return time;
+                            }
+                          }
+                          return time;
+                        })()}
                       </div>
 
                       {/* Type label */}
@@ -2105,9 +2135,9 @@ const ArrivalStrategyBox = ({ arrivalPlan, onUpdate, tripDay }: any) => {
     const leaveTime = new Date(arriveAtParkTime.getTime() - (transportTime * 60000));
 
     return {
-      leaveRoom: leaveTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }),
-      security: arriveAtParkTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }),
-      tapIn: tapIn.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }),
+      leaveRoom: leaveTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false }),
+      security: arriveAtParkTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false }),
+      tapIn: tapIn.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false }),
       breakdown: {
         transportTime,
         securityBuffer,
@@ -2480,6 +2510,7 @@ const ParkDayAddActivityModal = ({ trip, tripDay, onClose, onQuickAdd }: any) =>
   const [showCustomForm, setShowCustomForm] = useState(false);
   const [showAdrModal, setShowAdrModal] = useState(false);
   const [showNonAdrModal, setShowNonAdrModal] = useState(false);
+  const [showMobileOrderModal, setShowMobileOrderModal] = useState(false);
   const [adrForm, setAdrForm] = useState({
     restaurantName: '',
     time: '',
@@ -2506,12 +2537,23 @@ const ParkDayAddActivityModal = ({ trip, tripDay, onClose, onQuickAdd }: any) =>
 
     try {
       const attractions = getDoItemsByPark(tripDay.parkId);
-      return attractions.filter(item =>
+      const filtered = attractions.filter(item =>
         item.type === 'ride' ||
         item.type === 'show' ||
         item.type === 'experience' ||
         item.type === 'meet_greet'
       );
+
+      // Sort alphabetically within each category
+      return filtered.sort((a, b) => {
+        // First sort by type to group categories together
+        if (a.type !== b.type) {
+          const typeOrder = ['ride', 'show', 'experience', 'meet_greet'];
+          return typeOrder.indexOf(a.type) - typeOrder.indexOf(b.type);
+        }
+        // Then sort alphabetically within each type
+        return a.name.localeCompare(b.name);
+      });
     } catch {
       return [];
     }
@@ -2535,6 +2577,23 @@ const ParkDayAddActivityModal = ({ trip, tripDay, onClose, onQuickAdd }: any) =>
   };
 
   const availableRestaurants = getAvailableRestaurants();
+
+  // Get restaurants that offer mobile ordering
+  const getMobileOrderRestaurants = () => {
+    if (!tripDay.parkId) return [];
+
+    try {
+      const restaurants = getEatItemsByPark(tripDay.parkId);
+      return restaurants.filter(item =>
+        (item.type === 'quick_service' || item.type === 'snack') &&
+        item.features?.mobileOrder === true
+      );
+    } catch {
+      return [];
+    }
+  };
+
+  const mobileOrderRestaurants = getMobileOrderRestaurants();
 
   const getBreakIcon = (type: string) => {
     switch (type) {
@@ -2614,6 +2673,13 @@ const ParkDayAddActivityModal = ({ trip, tripDay, onClose, onQuickAdd }: any) =>
     onClose();
   };
 
+  const addMobileOrder = (restaurant: any) => {
+    const orderName = `Mobile Order: ${restaurant.name}`;
+    onQuickAdd(restaurant.type as ActivityCategory, restaurant.id, orderName);
+    setShowMobileOrderModal(false);
+    onClose();
+  };
+
   return (
     <>
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
@@ -2690,10 +2756,7 @@ const ParkDayAddActivityModal = ({ trip, tripDay, onClose, onQuickAdd }: any) =>
                 </button>
 
                 <button
-                  onClick={() => {
-                    onQuickAdd('dining', undefined, 'Mobile Order Pickup');
-                    onClose();
-                  }}
+                  onClick={() => setShowMobileOrderModal(true)}
                   className="flex items-start p-4 bg-surface-dark/10 hover:bg-surface-dark/20 rounded-lg border border-surface-dark/20 transition-colors text-left group"
                 >
                   <span className="text-2xl mr-3 group-hover:scale-110 transition-transform">📱</span>
@@ -2778,7 +2841,7 @@ const ParkDayAddActivityModal = ({ trip, tripDay, onClose, onQuickAdd }: any) =>
                   {parkInfo?.name} Attractions
                 </h4>
                 <div className="grid md:grid-cols-3 gap-3">
-                  {availableAttractions.slice(0, 12).map((attraction) => (
+                  {availableAttractions.map((attraction) => (
                     <button
                       key={attraction.id}
                       onClick={() => {
@@ -3241,6 +3304,65 @@ const ParkDayAddActivityModal = ({ trip, tripDay, onClose, onQuickAdd }: any) =>
                 </button>
                 <button
                   onClick={() => setShowRestBreakModal(false)}
+                  className="px-4 py-2 bg-surface-dark hover:bg-surface-dark/80 text-ink rounded-lg transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Order Restaurant Selection Modal */}
+      {showMobileOrderModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-[60]">
+          <div className="bg-surface rounded-xl shadow-xl max-w-md w-full border border-surface-dark/30">
+            <div className="flex items-center justify-between p-4 border-b border-surface-dark/20">
+              <h3 className="text-lg font-semibold text-ink flex items-center">
+                <span className="text-xl mr-2">📱</span>
+                Select Restaurant for Mobile Order
+              </h3>
+              <button
+                onClick={() => setShowMobileOrderModal(false)}
+                className="p-1 rounded-lg hover:bg-surface-dark/10 transition-colors"
+              >
+                <XCircle className="w-5 h-5 text-ink-light" />
+              </button>
+            </div>
+
+            <div className="p-4">
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-ink mb-2">Restaurant</label>
+                  <select
+                    onChange={(e) => {
+                      if (e.target.value) {
+                        const restaurant = mobileOrderRestaurants.find(r => r.id === e.target.value);
+                        if (restaurant) {
+                          addMobileOrder(restaurant);
+                        }
+                      }
+                    }}
+                    className="w-full px-3 py-2 bg-surface border border-surface-dark rounded text-ink"
+                    defaultValue=""
+                  >
+                    <option value="">Select restaurant with mobile ordering...</option>
+                    {mobileOrderRestaurants.map((restaurant) => (
+                      <option key={restaurant.id} value={restaurant.id}>
+                        {restaurant.name} ({restaurant.location})
+                      </option>
+                    ))}
+                  </select>
+                  {mobileOrderRestaurants.length === 0 && (
+                    <p className="text-sm text-ink-light mt-2">No restaurants with mobile ordering available in this park.</p>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex justify-end mt-6">
+                <button
+                  onClick={() => setShowMobileOrderModal(false)}
                   className="px-4 py-2 bg-surface-dark hover:bg-surface-dark/80 text-ink rounded-lg transition-colors"
                 >
                   Cancel

@@ -36,17 +36,17 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
       // Use the actual priceLevel from the database
       switch (hotel.priceLevel) {
         case 'deluxe_villa':
-          return '4:00 PM';
+          return '16:00';
         case 'deluxe':
         case 'moderate':
         case 'value':
         default:
-          return '3:00 PM';
+          return '15:00';
       }
     }
 
     // Fallback for hotels not in database
-    return '3:00 PM';
+    return '15:00';
   };
 
   // Helper function to calculate expected resort arrival time
@@ -666,8 +666,8 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
                           })}
                           className="w-full px-3 py-2 bg-surface border border-surface-dark rounded-lg text-ink text-sm focus:outline-none focus:border-sea focus:ring-1 focus:ring-sea/20 transition-colors"
                           placeholder={tripDay.arrivalPlan?.flightType === 'driving'
-                            ? "Driving to resort, arriving around 2:30 PM..."
-                            : "Flight AA123, departing 8:30 AM from LAX..."}
+                            ? "Driving to resort, arriving around 14:30..."
+                            : "Flight AA123, departing 08:30 from LAX..."}
                         />
                       </div>
                       <div className="col-span-10 md:col-span-3">
@@ -802,7 +802,7 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
                     <div className="px-3 py-2 bg-surface/50 border border-surface-dark/50 rounded-lg text-ink text-sm">
                       {trip.accommodation?.hotelName
                         ? getHotelCheckInTime(trip.accommodation.hotelName)
-                        : '3:00 PM'
+                        : '15:00'
                       }
                     </div>
                   </div>

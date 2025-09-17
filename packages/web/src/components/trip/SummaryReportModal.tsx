@@ -1,9 +1,8 @@
 import { useState, useMemo } from 'react';
-import { X, Download, BarChart3, AlertTriangle, Star, TrendingUp, Calendar, Users, MapPin, ChevronRight, Info, FileText, Share, Copy } from 'lucide-react';
+import { X, BarChart3, AlertTriangle, Star, TrendingUp, Calendar, Users, MapPin, ChevronRight, Info } from 'lucide-react';
 import type { Trip, ActivityRating, ActivityRatingSummary } from '../../types';
 import type { TravelingPartyMember } from '@waylight/shared';
 import { ParkRatingAnalytics, type ParkRatingSummary, type ConflictAnalysis, type TripRecommendations } from '../../services/parkRatingAnalytics';
-import { ReportExportService } from '../../services/reportExportService';
 
 interface SummaryReportModalProps {
   isOpen: boolean;
@@ -26,8 +25,6 @@ export default function SummaryReportModal({
 }: SummaryReportModalProps) {
   const [activeTab, setActiveTab] = useState<TabType>('overview');
   const [activeParkTab, setActiveParkTab] = useState<string>('');
-  const [showExportMenu, setShowExportMenu] = useState(false);
-  const [copySuccess, setCopySuccess] = useState(false);
 
   // Generate analytics data
   const parkSummaries = useMemo(() =>
@@ -62,24 +59,6 @@ export default function SummaryReportModal({
     [parkSummaries, conflicts, trip, attractionEfficiencies]
   );
 
-  const handleExportJSON = () => {
-    ReportExportService.downloadJSONReport(trip, partyMembers, parkSummaries, conflicts, recommendations);
-    setShowExportMenu(false);
-  };
-
-  const handleExportText = () => {
-    ReportExportService.downloadTextReport(trip, partyMembers, parkSummaries, conflicts, recommendations);
-    setShowExportMenu(false);
-  };
-
-  const handleCopyToClipboard = async () => {
-    const success = await ReportExportService.copyTextToClipboard(trip, partyMembers, parkSummaries, conflicts, recommendations);
-    if (success) {
-      setCopySuccess(true);
-      setTimeout(() => setCopySuccess(false), 2000);
-    }
-    setShowExportMenu(false);
-  };
 
   if (!isOpen) return null;
 
@@ -108,43 +87,6 @@ export default function SummaryReportModal({
             </div>
           </div>
           <div className="flex items-center space-x-2">
-            <div className="relative">
-              <button
-                onClick={() => setShowExportMenu(!showExportMenu)}
-                className="btn-secondary btn-sm flex items-center"
-              >
-                <Download className="w-4 h-4 mr-2" />
-                Export Report
-              </button>
-
-              {showExportMenu && (
-                <div className="absolute right-0 top-full mt-2 w-48 bg-surface border border-surface-dark rounded-lg shadow-lg z-50">
-                  <div className="p-1">
-                    <button
-                      onClick={handleExportText}
-                      className="w-full flex items-center px-3 py-2 text-sm text-ink hover:bg-surface-dark/50 rounded-md"
-                    >
-                      <FileText className="w-4 h-4 mr-2" />
-                      Text Report (.txt)
-                    </button>
-                    <button
-                      onClick={handleExportJSON}
-                      className="w-full flex items-center px-3 py-2 text-sm text-ink hover:bg-surface-dark/50 rounded-md"
-                    >
-                      <Download className="w-4 h-4 mr-2" />
-                      JSON Data (.json)
-                    </button>
-                    <button
-                      onClick={handleCopyToClipboard}
-                      className="w-full flex items-center px-3 py-2 text-sm text-ink hover:bg-surface-dark/50 rounded-md"
-                    >
-                      <Copy className="w-4 h-4 mr-2" />
-                      {copySuccess ? 'Copied!' : 'Copy to Clipboard'}
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
             <button
               onClick={onClose}
               className="p-2 text-ink-light hover:text-ink hover:bg-surface-dark/50 rounded-lg transition-colors"

@@ -271,7 +271,7 @@ export default function RestDayView({ trip, tripDay, onQuickAdd, onOpenDayTypeMo
 
     // Pool & Recreation
     if (hasPoolFeature('basic')) {
-      const poolDetails = ['Pool: 7:00 AM - 11:00 PM'];
+      const poolDetails = ['Pool: 07:00 - 23:00'];
 
       if (hasPoolFeature('water_slides')) poolDetails.push('Water slides available');
       if (hasPoolFeature('lazy_river')) poolDetails.push('Lazy river available');
@@ -312,7 +312,7 @@ export default function RestDayView({ trip, tripDay, onQuickAdd, onOpenDayTypeMo
     const wellnessDetails = [];
     if (hasSpaFeature('full_service')) wellnessDetails.push('Spa services (advance booking)');
     if (hasSpaFeature('couples_treatments')) wellnessDetails.push('Couples treatments available');
-    if (hasSpaFeature('fitness_center')) wellnessDetails.push('Fitness center: 5:00 AM - 10:00 PM');
+    if (hasSpaFeature('fitness_center')) wellnessDetails.push('Fitness center: 05:00 - 22:00');
     if (hasSpaFeature('sauna')) wellnessDetails.push('Sauna available');
     if (hasRecreationFeature('golf')) wellnessDetails.push('Golf course access');
     if (wellnessDetails.length === 0) wellnessDetails.push('Wellness amenities available');
@@ -681,7 +681,7 @@ export default function RestDayView({ trip, tripDay, onQuickAdd, onOpenDayTypeMo
                           <span className="font-medium text-ink text-sm">Pool & Recreation</span>
                         </div>
                         <div className="text-xs text-ink-light space-y-1 ml-4">
-                          <p>• Pool: 7:00 AM - 11:00 PM</p>
+                          <p>• Pool: 07:00 - 23:00</p>
                           {hotelInfo.features.amenities.pool.water_slides && <p>• Water slides available</p>}
                           {hotelInfo.features.amenities.pool.lazy_river && <p>• Lazy river available</p>}
                           {hotelInfo.features.amenities.pool.hot_tub && <p>• Hot tubs available</p>}
