@@ -226,11 +226,21 @@ export default function AuthStatus() {
             const allEventTypes = [...new Set(scheduleData.schedule?.map((s: any) => s.type) || [])];
             console.log(`📊 Available event types for ${parkName}:`, allEventTypes);
 
-            const eventsData = scheduleData.schedule?.filter((item: any) =>
-              item.type === 'TICKETED_EVENT' && item.date && (item.openingTime || item.closingTime)
-            ) || [];
+            const eventsData = scheduleData.schedule?.filter((item: any) => {
+              // Only include TICKETED_EVENT with valid times
+              if (item.type !== 'TICKETED_EVENT' || !item.date || (!item.openingTime && !item.closingTime)) {
+                return false;
+              }
 
-            console.log(`🎫 Found ${eventsData.length} ticketed events for ${parkName}`);
+              // Exclude Early Entry and Extended Evening Hours (handled by another table)
+              const description = item.description?.toLowerCase() || '';
+              const isEarlyEntry = description.includes('early entry') || description.includes('early admission');
+              const isExtendedHours = description.includes('extended evening') || description.includes('extended hours');
+
+              return !isEarlyEntry && !isExtendedHours;
+            }) || [];
+
+            console.log(`🎫 Found ${eventsData.length} special ticketed events for ${parkName} (excluding EE/EEH)`);
 
             for (const event of eventsData) {
               try {
