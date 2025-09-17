@@ -222,7 +222,8 @@ export default function AuthStatus() {
             // Update events in database
             let eventUpdateCount = 0;
             const eventsData = scheduleData.schedule?.filter((item: any) =>
-              item.type === 'OPERATING' && item.date && item.openingTime && item.closingTime
+              item.date && (item.openingTime || item.closingTime) &&
+              ['OPERATING', 'TICKETED_EVENT', 'INFO'].includes(item.type)
             ) || [];
 
             for (const event of eventsData) {
@@ -231,15 +232,31 @@ export default function AuthStatus() {
                 const eventDate = event.date; // Already in YYYY-MM-DD format
 
                 // Parse ISO time strings and extract time portion
-                const openTimeMatch = event.openingTime.match(/T(\d{2}:\d{2}:\d{2})/);
-                const closeTimeMatch = event.closingTime.match(/T(\d{2}:\d{2}:\d{2})/);
+                const openTimeMatch = event.openingTime?.match(/T(\d{2}:\d{2}:\d{2})/);
+                const closeTimeMatch = event.closingTime?.match(/T(\d{2}:\d{2}:\d{2})/);
 
                 const openTime = openTimeMatch ? openTimeMatch[1] : null;
                 const closeTime = closeTimeMatch ? closeTimeMatch[1] : null;
 
-                if (!openTime || !closeTime) {
-                  console.warn(`⚠️ Skipping event for ${parkName} on ${eventDate}: invalid time format`);
+                // Skip if neither opening nor closing time is available
+                if (!openTime && !closeTime) {
+                  console.warn(`⚠️ Skipping event for ${parkName} on ${eventDate}: no valid times`);
                   continue;
+                }
+
+                // Determine event details based on type and description
+                let eventName = '';
+                let eventType = 'park_hours';
+
+                if (event.type === 'OPERATING') {
+                  eventName = `${liveData.name} Operating Hours`;
+                  eventType = 'park_hours';
+                } else if (event.type === 'TICKETED_EVENT') {
+                  eventName = event.description || 'Special Event';
+                  eventType = 'special_event';
+                } else if (event.type === 'INFO') {
+                  eventName = event.description || 'Park Information';
+                  eventType = 'info';
                 }
 
                 try {
@@ -249,16 +266,16 @@ export default function AuthStatus() {
                     .delete()
                     .eq('park_id', parkName)
                     .eq('event_date', eventDate)
-                    .eq('event_name', `${liveData.name} Operating Hours`);
+                    .eq('event_name', eventName);
 
                   const { error: eventError } = await supabase.from('live_park_events').insert({
                     park_id: parkName,
                     event_date: eventDate,
-                    event_name: `${liveData.name} Operating Hours`,
-                    event_type: 'park_hours',
+                    event_name: eventName,
+                    event_type: eventType,
                     event_open: openTime,
                     event_close: closeTime,
-                    description: `Regular operating hours for ${liveData.name}`,
+                    description: event.description || `${eventType} for ${liveData.name}`,
                     data_source: 'themeparks_wiki',
                     synced_at: new Date().toISOString()
                   });
