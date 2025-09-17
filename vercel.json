@@ -7,5 +7,10 @@
   ],
   "buildCommand": "pnpm --filter @waylight/shared build && pnpm --filter @waylight/web build",
   "installCommand": "pnpm install",
-  "outputDirectory": "packages/web/dist"
+  "outputDirectory": "packages/web/dist",
+  "functions": {
+    "api/**/*.ts": {
+      "runtime": "@vercel/node"
+    }
+  }
 }
