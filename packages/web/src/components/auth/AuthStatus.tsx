@@ -69,9 +69,14 @@ export default function AuthStatus() {
           // Update park status in database
           const { error: parkError } = await supabase.from('live_parks').upsert({
             park_id: parkName,
+            external_id: parkId,
             name: data.name || parkName,
-            status: data.status || 'Unknown',
-            timezone: data.timezone || 'America/New_York',
+            status: data.status === 'OPERATING' ? 'operating' : 'closed',
+            regular_open: '09:00',  // Default, would need to parse from schedule
+            regular_close: '22:00', // Default, would need to parse from schedule
+            early_entry_open: null,
+            extended_evening_close: null,
+            crowd_level: null,
             last_updated: new Date().toISOString()
           });
 
@@ -83,12 +88,26 @@ export default function AuthStatus() {
           // Update attractions in database
           let attractionUpdateCount = 0;
           for (const attraction of attractionsData) {
+            // Map status from API to database format
+            let dbStatus: 'operating' | 'down' | 'delayed' | 'temporary_closure' = 'operating';
+            if (attraction.status === 'DOWN' || attraction.status === 'CLOSED') {
+              dbStatus = 'down';
+            } else if (attraction.status === 'DELAYED') {
+              dbStatus = 'delayed';
+            } else if (attraction.status === 'TEMPORARY_CLOSURE') {
+              dbStatus = 'temporary_closure';
+            }
+
             const { error: attractionError } = await supabase.from('live_attractions').upsert({
               park_id: parkName,
-              attraction_id: attraction.id,
+              external_id: attraction.id,
               name: attraction.name,
-              status: attraction.status,
-              wait_time: attraction.queue?.STANDBY?.waitTime || null,
+              wait_time: attraction.queue?.STANDBY?.waitTime || -1,
+              status: dbStatus,
+              lightning_lane_available: !!attraction.queue?.LIGHTNING_LANE?.waitTime,
+              lightning_lane_return_time: attraction.queue?.LIGHTNING_LANE?.returnTime || null,
+              single_rider_available: !!attraction.queue?.SINGLE_RIDER?.waitTime,
+              single_rider_wait_time: attraction.queue?.SINGLE_RIDER?.waitTime || null,
               last_updated: new Date().toISOString()
             });
 
