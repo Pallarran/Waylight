@@ -95,16 +95,8 @@ export default function AuthStatus() {
           }
           const liveData = await liveResponse.json();
 
-          console.log(`Fetching schedule data for ${parkName}...`);
-
-          // Add delay between API calls
-          await new Promise(resolve => setTimeout(resolve, 1000)); // 1 second delay
-
-          const scheduleResponse = await fetchWithRetry(`https://api.themeparks.wiki/v1/entity/${parkId}/schedule`);
-          if (!scheduleResponse) {
-            throw new Error(`Failed to fetch schedule data for ${parkName} after retries`);
-          }
-          const scheduleData = await scheduleResponse.json();
+          // Skip schedule API call for now - not using the data
+          console.log(`⏸️ Skipping schedule API call for ${parkName} (not needed for current sync)`);
 
           // Categorize live data
           const attractionsData = liveData.liveData?.filter((item: any) => item.entityType === 'ATTRACTION') || [];
@@ -114,8 +106,7 @@ export default function AuthStatus() {
             name: liveData.name,
             status: liveData.status,
             attractionsCount: attractionsData.length,
-            entertainmentCount: entertainmentData.length,
-            scheduleCount: scheduleData.schedule?.length || 0
+            entertainmentCount: entertainmentData.length
           });
 
           // Update park status in database
@@ -184,50 +175,8 @@ export default function AuthStatus() {
           // Skip entertainment updates for now - table is not populating correctly
           console.log(`⏸️ Skipping ${entertainmentData.length} entertainment shows for ${parkName} (disabled for now)`);
 
-          // Skip schedule updates for now - causing API errors
-          console.log(`⏸️ Skipping ${scheduleData.schedule?.length || 0} schedule entries for ${parkName} (disabled for now)`);
-
-          // Update park events only
-          let eventUpdateCount = 0;
-          for (const scheduleItem of scheduleData.schedule || []) {
-
-            // Update park events for special events
-            if (scheduleItem.type === 'TICKETED_EVENT' || scheduleItem.type === 'INFO') {
-              const eventOpen = scheduleItem.openingTime ?
-                new Date(scheduleItem.openingTime).toLocaleTimeString('en-US', {
-                  hour12: false,
-                  timeZone: scheduleData.timezone || 'America/New_York'
-                }) : null;
-
-              const eventClose = scheduleItem.closingTime ?
-                new Date(scheduleItem.closingTime).toLocaleTimeString('en-US', {
-                  hour12: false,
-                  timeZone: scheduleData.timezone || 'America/New_York'
-                }) : null;
-
-              const { error: eventError } = await supabase.from('live_park_events').upsert({
-                park_id: parkName,
-                event_date: scheduleItem.date,
-                event_name: scheduleItem.description || 'Special Event',
-                event_type: scheduleItem.type,
-                event_open: eventOpen,
-                event_close: eventClose,
-                description: scheduleItem.description,
-                data_source: 'themeparks.wiki',
-                synced_at: new Date().toISOString()
-              }, {
-                onConflict: 'park_id,event_date,event_name'
-              });
-
-              if (eventError) {
-                console.error(`❌ Failed to update event for ${parkName} on ${scheduleItem.date}:`, eventError);
-              } else {
-                eventUpdateCount++;
-              }
-            }
-          }
-
-          console.log(`✅ Updated ${eventUpdateCount} events for ${parkName}`);
+          // Schedule and events updates disabled for now
+          console.log(`⏸️ Schedule and events updates disabled for ${parkName} (focusing on core functionality)`);
           successCount++;
         } catch (error) {
           const errorMsg = `${parkName}: ${error instanceof Error ? error.message : 'Unknown error'}`;
@@ -238,14 +187,14 @@ export default function AuthStatus() {
 
       // Show results
       if (successCount === Object.keys(parkIds).length) {
-        alert(`✅ Database sync successful!\n\nUpdated live data for all ${successCount} parks:\n• Attractions & wait times\n• Special events`);
+        alert(`✅ Database sync successful!\n\nUpdated live data for all ${successCount} parks:\n• Attractions & wait times\n• Park status & info`);
       } else if (successCount > 0) {
         alert(`⚠️ Partial success: Updated ${successCount}/${Object.keys(parkIds).length} parks in database.\n\nErrors:\n${errors.join('\n')}`);
       } else {
         throw new Error(`Failed to update any parks:\n${errors.join('\n')}`);
       }
 
-      console.log(`✅ Database sync completed: ${successCount}/${Object.keys(parkIds).length} parks updated with attractions and events`);
+      console.log(`✅ Database sync completed: ${successCount}/${Object.keys(parkIds).length} parks updated with attractions and park info`);
     } catch (error) {
       console.error('Failed to sync live data:', error);
       alert(`❌ Failed to sync live data to database.\n\n${error instanceof Error ? error.message : 'Unknown error'}`);
@@ -286,7 +235,7 @@ export default function AuthStatus() {
           onClick={handleRefreshParks}
           disabled={isRefreshingParks}
           className="flex items-center gap-1 px-2 py-1 rounded-md hover:bg-surface-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          title="Refresh live database with current park data, wait times, and events"
+          title="Refresh live database with current park data and attraction wait times"
         >
           {isRefreshingParks ? (
             <Loader2 className="h-4 w-4 animate-spin text-sea" />
