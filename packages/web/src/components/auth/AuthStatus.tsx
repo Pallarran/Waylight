@@ -82,7 +82,6 @@ export default function AuthStatus() {
       // Fetch data for each park and update database
       for (const [parkName, parkId] of Object.entries(parkIds)) {
         try {
-          console.log(`🚀 Starting sync for ${parkName}...`);
           console.log(`Fetching live data for ${parkName}...`);
 
           // Add delay between requests to avoid rate limiting
@@ -113,13 +112,9 @@ export default function AuthStatus() {
             monthsToFetch.push({ year, month: month.toString().padStart(2, '0') });
           }
 
-          console.log(`📅 Fetching schedule data for ${monthsToFetch.map(m => `${m.year}/${m.month}`).join(', ')}...`);
-
           let allScheduleData = [];
           for (const { year, month } of monthsToFetch) {
             try {
-              console.log(`📅 Fetching ${year}/${month} schedule for ${parkName}...`);
-
               // Add delay between monthly requests
               await new Promise(resolve => setTimeout(resolve, 500));
 
@@ -131,7 +126,7 @@ export default function AuthStatus() {
                 }
               }
             } catch (error) {
-              console.warn(`⚠️ Failed to fetch ${year}/${month} schedule for ${parkName}:`, error);
+              // Silently continue if monthly schedule fetch fails
             }
           }
 
@@ -216,7 +211,6 @@ export default function AuthStatus() {
           // Skip entertainment updates for now - table is not populating correctly
           console.log(`⏸️ Skipping ${entertainmentData.length} entertainment shows for ${parkName} (disabled for now)`);
 
-          console.log(`🎫 Testing events table access for ${parkName}...`);
 
           // Test RLS policies first with a simple read query
           const { error: rlsTestError } = await supabase
@@ -225,11 +219,8 @@ export default function AuthStatus() {
             .limit(1);
 
           if (rlsTestError && rlsTestError.message.includes('row-level security')) {
-            console.warn(`⚠️ RLS Policy Error: live_park_events table needs proper policies for authenticated users`);
-            console.log(`⏸️ Skipping events table updates for ${parkName} (RLS policies not configured)`);
             errors.push(`${parkName}: Events table RLS policies need configuration for INSERT/DELETE operations`);
           } else {
-            console.log(`✅ Events table access confirmed for ${parkName}, proceeding with updates...`);
 
             // Clean up old events first (older than 30 days)
             const thirtyDaysAgo = new Date();
@@ -243,22 +234,14 @@ export default function AuthStatus() {
               .lt('event_date', cleanupDate);
 
             if (cleanupError) {
-              console.warn(`⚠️ Failed to cleanup old events for ${parkName}:`, cleanupError);
               if (cleanupError.message.includes('row-level security')) {
                 errors.push(`${parkName}: Events table DELETE not allowed - RLS policy needed`);
-                console.log(`⏸️ Skipping events table updates for ${parkName} (DELETE permission denied)`);
                 continue;
               }
-            } else {
-              console.log(`🧹 Cleaned up old events for ${parkName} (before ${cleanupDate})`);
             }
 
             // Update events in database (only special ticketed events)
             let eventUpdateCount = 0;
-
-            // Debug: Show all event types available
-            const allEventTypes = [...new Set(scheduleData.schedule?.map((s: any) => s.type) || [])];
-            console.log(`📊 Available event types for ${parkName}:`, allEventTypes);
 
             const eventsData = scheduleData.schedule?.filter((item: any) => {
               // Only include TICKETED_EVENT with valid times
@@ -273,8 +256,6 @@ export default function AuthStatus() {
 
               return !isEarlyEntry && !isExtendedHours;
             }) || [];
-
-            console.log(`🎫 Found ${eventsData.length} special ticketed events for ${parkName} (excluding EE/EEH)`);
 
             for (const event of eventsData) {
               try {
@@ -320,38 +301,24 @@ export default function AuthStatus() {
                   });
 
                   if (eventError) {
-                    console.error(`❌ Failed to upsert event for ${parkName} on ${eventDate}:`, eventError);
-                    console.error(`❌ Event data that failed:`, {
-                      park_id: parkName,
-                      event_date: eventDate,
-                      event_name: `${liveData.name} Operating Hours`,
-                      event_type: 'park_hours',
-                      event_open: openTime,
-                      event_close: closeTime,
-                      data_source: 'themeparks_wiki'
-                    });
                     if (eventError.message.includes('row-level security')) {
                       errors.push(`${parkName}: Events table INSERT not allowed - RLS policy needed`);
                       break; // Stop trying more events for this park
                     } else {
-                      errors.push(`${parkName} event ${eventDate}: ${eventError.message} | Code: ${eventError.code} | Details: ${eventError.details}`);
+                      errors.push(`${parkName} event ${eventDate}: ${eventError.message}`);
                     }
                   } else {
                     eventUpdateCount++;
                   }
                 } catch (networkError) {
-                  console.error(`❌ Network/HTTP error for ${parkName} event ${eventDate}:`, networkError);
                   errors.push(`${parkName} event ${eventDate}: Network error - ${networkError instanceof Error ? networkError.message : 'Unknown network error'}`);
                 }
               } catch (error) {
-                console.error(`❌ Failed to process event for ${parkName}:`, error);
                 errors.push(`${parkName} event processing: ${error instanceof Error ? error.message : 'Unknown error'}`);
               }
             }
 
-            console.log(`✅ Updated ${eventUpdateCount}/${eventsData.length} events for ${parkName}`);
-
-          console.log(`📅 Starting schedules section for ${parkName}...`);
+          }
 
           // Clean up old schedules first (older than 30 days)
           const scheduleCleanupDate = new Date();
@@ -365,15 +332,10 @@ export default function AuthStatus() {
             .lt('schedule_date', scheduleCleanupDateStr);
 
           if (scheduleCleanupError) {
-            console.warn(`⚠️ Failed to cleanup old schedules for ${parkName}:`, scheduleCleanupError);
             if (scheduleCleanupError.message.includes('row-level security')) {
               errors.push(`${parkName}: Schedules table DELETE not allowed - RLS policy needed`);
-              console.log(`⏸️ Skipping schedules table updates for ${parkName} (DELETE permission denied)`);
-              // Skip to next park instead of continue (which might break nested loops)
               break;
             }
-          } else {
-            console.log(`🧹 Cleaned up old schedules for ${parkName} (before ${scheduleCleanupDateStr})`);
           }
 
           // Update park schedules in database (regular operating hours)
@@ -382,13 +344,8 @@ export default function AuthStatus() {
             item.type === 'OPERATING' && item.date && (item.openingTime || item.closingTime)
           ) || [];
 
-          console.log(`📅 Found ${scheduleData_filtered.length} operating schedule entries for ${parkName} (3-month range)`);
-
-          for (const [index, schedule] of scheduleData_filtered.entries()) {
+          for (const schedule of scheduleData_filtered) {
             try {
-              if (index % 10 === 0) {
-                console.log(`📅 Processing schedule ${index + 1}/${scheduleData_filtered.length} for ${parkName}...`);
-              }
 
               const scheduleDate = schedule.date; // Already in YYYY-MM-DD format
 
@@ -439,53 +396,27 @@ export default function AuthStatus() {
                 });
 
                 if (scheduleError) {
-                  console.error(`❌ Failed to insert schedule for ${parkName} on ${scheduleDate}:`, scheduleError);
                   errors.push(`${parkName} schedule ${scheduleDate}: ${scheduleError.message}`);
                 } else {
                   scheduleUpdateCount++;
                 }
               } catch (networkError) {
-                console.error(`❌ Network/HTTP error for ${parkName} schedule ${scheduleDate}:`, networkError);
                 errors.push(`${parkName} schedule ${scheduleDate}: Network error - ${networkError instanceof Error ? networkError.message : 'Unknown network error'}`);
               }
             } catch (error) {
-              console.error(`❌ Failed to process schedule for ${parkName}:`, error);
               errors.push(`${parkName} schedule processing: ${error instanceof Error ? error.message : 'Unknown error'}`);
             }
           }
 
-          console.log(`✅ Updated ${scheduleUpdateCount}/${scheduleData_filtered.length} schedules for ${parkName}`);
-
-          // Debug: Check if we have any errors accumulated
-          console.log(`🔍 Current errors for ${parkName}:`, errors.length > 0 ? errors : 'No errors');
-
-          // Add info message if no ticketed events were found
-          if (eventUpdateCount === 0) {
-            if (eventsData.length === 0) {
-              console.log(`ℹ️ No ticketed events found for ${parkName} in current schedule period`);
-            } else {
-              errors.push(`${parkName}: No events were successfully updated despite ${eventsData.length} ticketed events in API data`);
-              console.log(`🚨 Forced error message for ${parkName} - check popup`);
-            }
-          }
-          }
-
-          console.log(`✅ Completed sync for ${parkName}!`);
-
           // Only increment success if no errors occurred for this park
           if (errors.length === 0) {
             successCount++;
-          } else {
-            console.log(`⚠️ ${parkName} had errors, not counting as success`);
           }
         } catch (error) {
           const errorMsg = `${parkName}: ${error instanceof Error ? error.message : 'Unknown error'}`;
           errors.push(errorMsg);
-          console.error(`❌ Failed to process ${parkName}:`, error);
         }
       }
-
-      console.log(`🏁 Finished processing all parks. Success count: ${successCount}/${Object.keys(parkIds).length}`);
 
       // Show results
       if (successCount === Object.keys(parkIds).length) {
@@ -496,7 +427,6 @@ export default function AuthStatus() {
         throw new Error(`Failed to update any parks:\n${errors.join('\n')}`);
       }
 
-      console.log(`✅ Database sync completed: ${successCount}/${Object.keys(parkIds).length} parks updated with attractions, park info, events, and schedules`);
     } catch (error) {
       console.error('Failed to sync live data:', error);
       alert(`❌ Failed to sync live data to database.\n\n${error instanceof Error ? error.message : 'Unknown error'}`);
