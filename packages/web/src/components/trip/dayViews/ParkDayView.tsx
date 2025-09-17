@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import {
   Clock, Plus, MapPin, Zap, Calendar, Car, Utensils,
   Star, Edit, Save, X, GripVertical, Target,
@@ -1215,6 +1215,7 @@ const BreakSection = ({ breakPlan, onUpdate }: any) => {
 const PrioritiesSection = ({ priorities, tripDay, onUpdate, getActivityRating }: any) => {
   const [showModal, setShowModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [sortBy, setSortBy] = useState('rating'); // 'rating' or 'alphabetical'
   const [selectedPriorities, setSelectedPriorities] = useState(priorities || []);
   const [celebratingItems, setCelebratingItems] = useState<Set<string>>(new Set());
   const [justCompleted, setJustCompleted] = useState<string | null>(null);
@@ -1267,12 +1268,28 @@ const PrioritiesSection = ({ priorities, tripDay, onUpdate, getActivityRating }:
 
   const availableActivities = getAvailableActivities();
 
-  // Filter activities based on search term and sort alphabetically
-  const filteredActivities = availableActivities
-    .filter(activity =>
-      activity.name.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    .sort((a, b) => a.name.localeCompare(b.name));
+  // Filter activities based on search term and sort by selected criteria using useMemo for proper re-rendering
+  const filteredActivities = useMemo(() => {
+    return availableActivities
+      .filter(activity =>
+        activity.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+      .sort((a, b) => {
+        if (sortBy === 'alphabetical') {
+          return a.name.localeCompare(b.name);
+        } else {
+          // Sort by rating (highest to lowest)
+          const ratingA = getActivityRating(a.id) || 0;
+          const ratingB = getActivityRating(b.id) || 0;
+
+          if (ratingB !== ratingA) {
+            return ratingB - ratingA; // Higher ratings first
+          }
+          // If ratings are equal, fall back to alphabetical
+          return a.name.localeCompare(b.name);
+        }
+      });
+  }, [availableActivities, searchTerm, sortBy, getActivityRating]);
 
   // Toggle completion status with magical effects
   const toggleCompletion = (priorityId: string) => {
@@ -1337,12 +1354,14 @@ const PrioritiesSection = ({ priorities, tripDay, onUpdate, getActivityRating }:
   const openModal = () => {
     setSelectedPriorities([...enhancedPriorities]);
     setSearchTerm('');
+    setSortBy('rating'); // Reset to default sort
     setShowModal(true);
   };
 
   const closeModal = () => {
     setShowModal(false);
     setSearchTerm('');
+    setSortBy('rating');
   };
 
   const addToPriorities = (activity: any) => {
@@ -1566,8 +1585,35 @@ const PrioritiesSection = ({ priorities, tripDay, onUpdate, getActivityRating }:
                     placeholder="Search rides and shows..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full px-3 py-2 bg-surface-dark/20 border border-surface-dark rounded text-ink text-sm focus:border-glow/50 focus:ring-1 focus:ring-glow/20 transition-all"
+                    className="w-full px-3 py-2 mb-3 bg-surface-dark/20 border border-surface-dark rounded text-ink text-sm focus:border-glow/50 focus:ring-1 focus:ring-glow/20 transition-all"
                   />
+
+                  {/* Sort Options */}
+                  <div className="flex items-center space-x-2">
+                    <span className="text-xs text-ink-light">Sort by:</span>
+                    <div className="flex bg-surface-dark/20 rounded p-1">
+                      <button
+                        onClick={() => setSortBy('rating')}
+                        className={`px-3 py-1 text-xs rounded transition-all ${
+                          sortBy === 'rating'
+                            ? 'bg-glow/20 text-glow border border-glow/30'
+                            : 'text-ink-light hover:text-ink'
+                        }`}
+                      >
+                        Rating
+                      </button>
+                      <button
+                        onClick={() => setSortBy('alphabetical')}
+                        className={`px-3 py-1 text-xs rounded transition-all ${
+                          sortBy === 'alphabetical'
+                            ? 'bg-glow/20 text-glow border border-glow/30'
+                            : 'text-ink-light hover:text-ink'
+                        }`}
+                      >
+                        A-Z
+                      </button>
+                    </div>
+                  </div>
                 </div>
                 <div className="space-y-2 overflow-y-auto max-h-80">
                   {filteredActivities.map((activity) => {

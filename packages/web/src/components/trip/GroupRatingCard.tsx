@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Star, StarHalf, Users, AlertTriangle, Ruler, Heart, X, ChevronDown, ChevronUp, MessageCircle } from 'lucide-react';
 import type { ActivityRating, GroupRatingData, TravelingPartyMember, PreferenceType, ConsensusLevel } from '../../types';
 import { getCategoryIcon, getCategoryColor } from '../../data/activityCategories';
@@ -174,12 +174,31 @@ export default function GroupRatingCard({
     return preferenceType ? ratingMap[preferenceType] || 3 : 3;
   };
 
+  // Helper function to check if member meets height requirement
+  const checkHeightRequirement = (member: TravelingPartyMember, heightRequirement: number): boolean => {
+    if (!member.height) return false;
+    const heightInInches = parseFloat(member.height);
+    return !isNaN(heightInInches) && heightInInches >= heightRequirement;
+  };
+
+  // Helper function to check if member is a child
+  const isChild = (member: TravelingPartyMember): boolean => {
+    return member.guestType?.toLowerCase() === 'child';
+  };
+
   const handleRatingUpdate = (partyMemberId: string, updates: Partial<ActivityRating>) => {
     const existingRating = ratingsMap.get(partyMemberId);
+    const member = partyMembers.find(m => m.id === partyMemberId);
 
     // Calculate rating based on preference type
     const newPreferenceType = updates.preferenceType || existingRating?.preferenceType;
     const calculatedRating = getPreferenceRating(newPreferenceType);
+
+    // Auto-calculate height restriction for children
+    let heightRestrictionOk = true; // Default for adults
+    if (member && isChild(member) && hasHeightRequirement) {
+      heightRestrictionOk = checkHeightRequirement(member, hasHeightRequirement);
+    }
 
     onRatingChange?.({
       ...existingRating,
@@ -188,8 +207,8 @@ export default function GroupRatingCard({
       attractionId: attraction.id,
       activityType: getValidActivityType(attraction.type),
       rating: calculatedRating, // Use calculated rating based on preference
-      heightRestrictionOk: true,
-      intensityComfortable: true,
+      heightRestrictionOk: updates.heightRestrictionOk !== undefined ? updates.heightRestrictionOk : heightRestrictionOk,
+      intensityComfortable: true, // Remove intensity checking
       createdAt: existingRating?.createdAt || '',
       updatedAt: existingRating?.updatedAt || '',
       ...updates
@@ -205,12 +224,43 @@ export default function GroupRatingCard({
   const hasHeightRequirement = 'heightRequirement' in attraction && attraction.heightRequirement;
   const isIntenseRide = 'intensity' in attraction && ['high', 'extreme'].includes(attraction.intensity);
 
+
   // Check for refurbishment in description text
   const isRefurbishment = 'description' in attraction &&
     attraction.description &&
     (attraction.description.toLowerCase().includes('currently closed') ||
      attraction.description.toLowerCase().includes('closed for refurbishment') ||
      attraction.description.toLowerCase().includes('temporarily closed'));
+
+  // Auto-calculate height restrictions for children when component loads
+  useEffect(() => {
+    if (!hasHeightRequirement || !partyMembers.length || !onRatingChange) return;
+
+    partyMembers.forEach(member => {
+      if (isChild(member)) {
+        const existingRating = ratingsMap.get(member.id);
+        const currentHeightOk = existingRating?.heightRestrictionOk;
+        const calculatedHeightOk = checkHeightRequirement(member, hasHeightRequirement);
+
+        // Only update if the calculated value differs from current value or no rating exists
+        if (currentHeightOk !== calculatedHeightOk || !existingRating) {
+          onRatingChange({
+            ...existingRating,
+            tripId: existingRating?.tripId || '',
+            partyMemberId: member.id,
+            attractionId: attraction.id,
+            activityType: getValidActivityType(attraction.type),
+            rating: existingRating?.rating || 3,
+            heightRestrictionOk: calculatedHeightOk,
+            intensityComfortable: true,
+            createdAt: existingRating?.createdAt || '',
+            updatedAt: existingRating?.updatedAt || '',
+            preferenceType: existingRating?.preferenceType
+          });
+        }
+      }
+    });
+  }, [partyMembers, hasHeightRequirement, onRatingChange]);
 
   return (
     <div className="bg-surface rounded-xl border border-surface-dark/30 overflow-hidden">
@@ -314,35 +364,34 @@ export default function GroupRatingCard({
                     />
                   </div>
 
-                  {/* Safety Warnings (if applicable) */}
-                  {(hasHeightRequirement || isIntenseRide) && (
-                    <div className="mt-2 flex gap-1">
-                      {hasHeightRequirement && (
-                        <button
-                          onClick={() => handleRatingUpdate(member.id, { heightRestrictionOk: !(memberRating?.heightRestrictionOk ?? true) })}
-                          className={`w-6 h-6 rounded text-xs flex items-center justify-center transition-colors ${
-                            memberRating?.heightRestrictionOk !== false
-                              ? 'bg-green-500/20 text-green-400'
-                              : 'bg-red-500/20 text-red-400'
-                          }`}
-                          title={`Height requirement ${hasHeightRequirement}" - Click to toggle`}
-                        >
-                          {memberRating?.heightRestrictionOk !== false ? '✓' : '✗'}
-                        </button>
-                      )}
-                      {isIntenseRide && (
-                        <button
-                          onClick={() => handleRatingUpdate(member.id, { intensityComfortable: !(memberRating?.intensityComfortable ?? true) })}
-                          className={`w-6 h-6 rounded text-xs flex items-center justify-center transition-colors ${
-                            memberRating?.intensityComfortable !== false
-                              ? 'bg-green-500/20 text-green-400'
-                              : 'bg-red-500/20 text-red-400'
-                          }`}
-                          title="High intensity - Click to toggle comfort level"
-                        >
-                          {memberRating?.intensityComfortable !== false ? '💪' : '😰'}
-                        </button>
-                      )}
+                  {/* Height Warning (only for children with height requirements) */}
+                  {hasHeightRequirement && isChild(member) && (
+                    <div className="mt-2">
+                      {/* Height requirement status */}
+                      <div className="flex items-center gap-2">
+                        {!member.height ? (
+                          /* No height set - show prompt */
+                          <span className="text-xs text-orange-400 bg-orange-500/10 px-2 py-1 rounded flex items-center gap-1">
+                            <span>⚠️</span>
+                            Set height in Overview tab
+                          </span>
+                        ) : (
+                          /* Height set - show status */
+                          <div className="flex items-center gap-2">
+                            {checkHeightRequirement(member, hasHeightRequirement) ? (
+                              <span className="text-xs text-green-400 bg-green-500/10 px-2 py-1 rounded flex items-center gap-1">
+                                <span>✓</span>
+                                Meets {hasHeightRequirement}" requirement
+                              </span>
+                            ) : (
+                              <span className="text-xs text-red-400 bg-red-500/10 px-2 py-1 rounded flex items-center gap-1">
+                                <span>✗</span>
+                                Below {hasHeightRequirement}" requirement ({member.height}")
+                              </span>
+                            )}
+                          </div>
+                        )}
+                      </div>
                     </div>
                   )}
                 </div>

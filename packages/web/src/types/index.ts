@@ -1,4 +1,5 @@
 // Local type definitions to avoid shared package compilation issues
+import type { TravelingPartyMember } from '@waylight/shared';
 
 export interface Park {
   id: string;
@@ -16,6 +17,7 @@ export interface Trip {
   notes?: string;
   createdAt: string;
   updatedAt: string;
+  travelingParty?: TravelingPartyMember[];
   accommodation?: {
     hotelName?: string;
     hotelId?: string;

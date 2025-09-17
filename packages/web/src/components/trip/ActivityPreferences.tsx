@@ -1,10 +1,12 @@
 import { useState, useMemo, useEffect } from 'react';
 import { Filter, Search, Star, Users, TrendingUp, AlertTriangle, Download, BarChart3 } from 'lucide-react';
 import GroupRatingCard from './GroupRatingCard';
+import SummaryReportModal from './SummaryReportModal';
 import { getAllDoItems, getAllEatItems } from '@waylight/shared';
 import { ActivityRatingsService } from '@waylight/shared';
 import { PARKS } from '../../data/parks';
-import type { Trip, ActivityRating, ActivityRatingSummary, GroupRatingData, ActivityCategory, TravelingPartyMember } from '../../types';
+import type { Trip, ActivityRating, ActivityRatingSummary, GroupRatingData, ActivityCategory } from '../../types';
+import type { TravelingPartyMember } from '@waylight/shared';
 
 interface ActivityPreferencesProps {
   trip: Trip;
@@ -20,6 +22,7 @@ export default function ActivityPreferences({ trip }: ActivityPreferencesProps) 
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
   const [showHighPriorityOnly, setShowHighPriorityOnly] = useState(false);
+  const [showSummaryReport, setShowSummaryReport] = useState(false);
 
   // State for ratings data
   const [ratings, setRatings] = useState<ActivityRating[]>([]);
@@ -237,8 +240,7 @@ export default function ActivityPreferences({ trip }: ActivityPreferencesProps) 
   };
 
   const generateSummaryReport = () => {
-    // TODO: Implement summary report generation
-    console.log('Generate summary report for trip:', trip.id);
+    setShowSummaryReport(true);
   };
 
   const filterTabs: { id: FilterTab; label: string; icon: string }[] = [
@@ -492,6 +494,16 @@ export default function ActivityPreferences({ trip }: ActivityPreferencesProps) 
           Showing {sortedData.length} of {filteredAttractions.length} activities
         </div>
       )}
+
+      {/* Summary Report Modal */}
+      <SummaryReportModal
+        isOpen={showSummaryReport}
+        onClose={() => setShowSummaryReport(false)}
+        trip={trip}
+        ratings={ratings}
+        summaries={summaries}
+        partyMembers={getPartyMembers()}
+      />
     </div>
   );
 }
