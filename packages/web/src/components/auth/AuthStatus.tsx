@@ -101,18 +101,42 @@ export default function AuthStatus() {
           // Add delay between API calls
           await new Promise(resolve => setTimeout(resolve, 1000)); // 1 second delay
 
-          // Get schedule data from today to November 27th (last available date on themeparks.wiki)
+          // Get schedule data for next 3 months using monthly endpoints
           const today = new Date();
-          const startDateStr = today.toISOString().split('T')[0];
-          const endDateStr = '2025-11-27'; // Explicit end date based on site availability
+          const currentMonth = today.getMonth() + 1; // getMonth() is 0-based
+          const currentYear = today.getFullYear();
 
-          console.log(`📅 Fetching schedule data from ${startDateStr} to ${endDateStr} (through Nov 27th)...`);
-
-          const scheduleResponse = await fetchWithRetry(`https://api.themeparks.wiki/v1/entity/${parkId}/schedule?startDate=${startDateStr}&endDate=${endDateStr}`);
-          if (!scheduleResponse) {
-            throw new Error(`Failed to fetch schedule data for ${parkName} after retries`);
+          const monthsToFetch = [];
+          for (let i = 0; i < 3; i++) {
+            const month = ((currentMonth - 1 + i) % 12) + 1;
+            const year = currentYear + Math.floor((currentMonth - 1 + i) / 12);
+            monthsToFetch.push({ year, month: month.toString().padStart(2, '0') });
           }
-          const scheduleData = await scheduleResponse.json();
+
+          console.log(`📅 Fetching schedule data for ${monthsToFetch.map(m => `${m.year}/${m.month}`).join(', ')}...`);
+
+          let allScheduleData = [];
+          for (const { year, month } of monthsToFetch) {
+            try {
+              console.log(`📅 Fetching ${year}/${month} schedule for ${parkName}...`);
+
+              // Add delay between monthly requests
+              await new Promise(resolve => setTimeout(resolve, 500));
+
+              const monthlyResponse = await fetchWithRetry(`https://api.themeparks.wiki/v1/entity/${parkId}/schedule/${year}/${month}`);
+              if (monthlyResponse) {
+                const monthlyData = await monthlyResponse.json();
+                if (monthlyData.schedule && Array.isArray(monthlyData.schedule)) {
+                  allScheduleData.push(...monthlyData.schedule);
+                }
+              }
+            } catch (error) {
+              console.warn(`⚠️ Failed to fetch ${year}/${month} schedule for ${parkName}:`, error);
+            }
+          }
+
+          // Create combined schedule data object
+          const scheduleData = { schedule: allScheduleData };
 
           // Categorize live data
           const attractionsData = liveData.liveData?.filter((item: any) => item.entityType === 'ATTRACTION') || [];
@@ -358,7 +382,7 @@ export default function AuthStatus() {
             item.type === 'OPERATING' && item.date && (item.openingTime || item.closingTime)
           ) || [];
 
-          console.log(`📅 Found ${scheduleData_filtered.length} operating schedule entries for ${parkName} (through Nov 27th)`);
+          console.log(`📅 Found ${scheduleData_filtered.length} operating schedule entries for ${parkName} (3-month range)`);
 
           for (const [index, schedule] of scheduleData_filtered.entries()) {
             try {
