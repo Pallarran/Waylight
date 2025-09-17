@@ -7,10 +7,18 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { createClient } from '@supabase/supabase-js';
 
 // Initialize Supabase client
-const supabase = createClient(
-  process.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.VITE_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+const getEnvVar = (keys: string[]): string => {
+  for (const key of keys) {
+    const value = process.env[key];
+    if (value) return value;
+  }
+  throw new Error(`Missing environment variables. Tried: ${keys.join(', ')}`);
+};
+
+const supabaseUrl = getEnvVar(['NEXT_PUBLIC_SUPABASE_URL', 'VITE_SUPABASE_URL']);
+const supabaseKey = getEnvVar(['NEXT_PUBLIC_SUPABASE_ANON_KEY', 'VITE_SUPABASE_ANON_KEY']);
+
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Disney park IDs mapping
 const PARK_IDS = {
@@ -76,7 +84,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const startTime = Date.now();
 
   try {
+    // Validate environment setup first
+    if (!supabaseUrl || !supabaseKey) {
+      throw new Error('Supabase configuration missing');
+    }
+
     console.log('🔧 Manual sync triggered...');
+    console.log('Environment check:', {
+      hasUrl: !!supabaseUrl,
+      hasKey: !!supabaseKey,
+      urlLength: supabaseUrl?.length,
+      keyLength: supabaseKey?.length
+    });
 
     // For Hobby plan: sync only one park to stay within 10-second limit
     const parkSlug = 'magic-kingdom';
