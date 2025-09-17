@@ -219,11 +219,10 @@ export default function AuthStatus() {
               console.log(`🧹 Cleaned up old events for ${parkName} (before ${cleanupDate})`);
             }
 
-            // Update events in database
+            // Update events in database (only special ticketed events)
             let eventUpdateCount = 0;
             const eventsData = scheduleData.schedule?.filter((item: any) =>
-              item.date && (item.openingTime || item.closingTime) &&
-              ['OPERATING', 'TICKETED_EVENT', 'INFO'].includes(item.type)
+              item.type === 'TICKETED_EVENT' && item.date && (item.openingTime || item.closingTime)
             ) || [];
 
             for (const event of eventsData) {
@@ -244,20 +243,9 @@ export default function AuthStatus() {
                   continue;
                 }
 
-                // Determine event details based on type and description
-                let eventName = '';
-                let eventType = 'park_hours';
-
-                if (event.type === 'OPERATING') {
-                  eventName = `${liveData.name} Operating Hours`;
-                  eventType = 'park_hours';
-                } else if (event.type === 'TICKETED_EVENT') {
-                  eventName = event.description || 'Special Event';
-                  eventType = 'special_event';
-                } else if (event.type === 'INFO') {
-                  eventName = event.description || 'Park Information';
-                  eventType = 'info';
-                }
+                // Set event details for ticketed events
+                const eventName = event.description || 'Special Ticketed Event';
+                const eventType = 'special_event';
 
                 try {
                   // Delete existing record first, then insert
@@ -337,14 +325,14 @@ export default function AuthStatus() {
 
       // Show results
       if (successCount === Object.keys(parkIds).length) {
-        alert(`✅ Database sync successful!\n\nUpdated live data for all ${successCount} parks:\n• Attractions & wait times\n• Park status & info\n• Operating hours events (with cleanup)`);
+        alert(`✅ Database sync successful!\n\nUpdated live data for all ${successCount} parks:\n• Attractions & wait times\n• Park status & info\n• Special ticketed events (with cleanup)`);
       } else if (successCount > 0) {
         alert(`⚠️ Partial success: Updated ${successCount}/${Object.keys(parkIds).length} parks in database.\n\nErrors:\n${errors.join('\n')}`);
       } else {
         throw new Error(`Failed to update any parks:\n${errors.join('\n')}`);
       }
 
-      console.log(`✅ Database sync completed: ${successCount}/${Object.keys(parkIds).length} parks updated with attractions, park info, and events`);
+      console.log(`✅ Database sync completed: ${successCount}/${Object.keys(parkIds).length} parks updated with attractions, park info, and special events`);
     } catch (error) {
       console.error('Failed to sync live data:', error);
       alert(`❌ Failed to sync live data to database.\n\n${error instanceof Error ? error.message : 'Unknown error'}`);
