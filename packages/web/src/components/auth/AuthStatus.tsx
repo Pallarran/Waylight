@@ -195,6 +195,8 @@ export default function AuthStatus() {
           // Skip entertainment updates for now - table is not populating correctly
           console.log(`⏸️ Skipping ${entertainmentData.length} entertainment shows for ${parkName} (disabled for now)`);
 
+          console.log(`🎫 Testing events table access for ${parkName}...`);
+
           // Test RLS policies first with a simple read query
           const { error: rlsTestError } = await supabase
             .from('live_park_events')
@@ -328,6 +330,8 @@ export default function AuthStatus() {
 
             console.log(`✅ Updated ${eventUpdateCount}/${eventsData.length} events for ${parkName}`);
 
+          console.log(`📅 Starting schedules section for ${parkName}...`);
+
           // Clean up old schedules first (older than 30 days)
           const scheduleCleanupDate = new Date();
           scheduleCleanupDate.setDate(scheduleCleanupDate.getDate() - 30);
@@ -344,7 +348,8 @@ export default function AuthStatus() {
             if (scheduleCleanupError.message.includes('row-level security')) {
               errors.push(`${parkName}: Schedules table DELETE not allowed - RLS policy needed`);
               console.log(`⏸️ Skipping schedules table updates for ${parkName} (DELETE permission denied)`);
-              continue;
+              // Skip to next park instead of continue (which might break nested loops)
+              break;
             }
           } else {
             console.log(`🧹 Cleaned up old schedules for ${parkName} (before ${scheduleCleanupDateStr})`);
