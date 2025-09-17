@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { LogIn, LogOut, User, RefreshCw, Loader2 } from 'lucide-react';
-import { authService, syncService, type AuthState, type SyncStatus } from '@waylight/shared';
+import { authService, syncService, supabase, type AuthState, type SyncStatus } from '@waylight/shared';
 import AuthModal from './AuthModal';
 
 export default function AuthStatus() {
@@ -47,7 +47,7 @@ export default function AuthStatus() {
       let successCount = 0;
       const errors: string[] = [];
 
-      // Fetch data for each park
+      // Fetch data for each park and update database
       for (const [parkName, parkId] of Object.entries(parkIds)) {
         try {
           console.log(`Fetching data for ${parkName}...`);
@@ -58,33 +58,69 @@ export default function AuthStatus() {
           }
 
           const data = await response.json();
+          const attractionsData = data.liveData?.filter((item: any) => item.entityType === 'ATTRACTION') || [];
+
           console.log(`✅ Successfully fetched data for ${parkName}:`, {
             name: data.name,
             status: data.status,
-            attractionsCount: data.liveData?.filter((item: any) => item.entityType === 'ATTRACTION').length || 0
+            attractionsCount: attractionsData.length
           });
 
+          // Update park status in database
+          const { error: parkError } = await supabase.from('live_parks').upsert({
+            park_id: parkName,
+            name: data.name || parkName,
+            status: data.status || 'Unknown',
+            timezone: data.timezone || 'America/New_York',
+            last_updated: new Date().toISOString()
+          });
+
+          if (parkError) {
+            console.error(`❌ Failed to update park ${parkName} in database:`, parkError);
+            throw new Error(`Database error for ${parkName}: ${parkError.message}`);
+          }
+
+          // Update attractions in database
+          let attractionUpdateCount = 0;
+          for (const attraction of attractionsData) {
+            const { error: attractionError } = await supabase.from('live_attractions').upsert({
+              park_id: parkName,
+              attraction_id: attraction.id,
+              name: attraction.name,
+              status: attraction.status,
+              wait_time: attraction.queue?.STANDBY?.waitTime || null,
+              last_updated: new Date().toISOString()
+            });
+
+            if (attractionError) {
+              console.error(`❌ Failed to update attraction ${attraction.name}:`, attractionError);
+            } else {
+              attractionUpdateCount++;
+            }
+          }
+
+          console.log(`✅ Updated ${attractionUpdateCount}/${attractionsData.length} attractions for ${parkName}`);
           successCount++;
         } catch (error) {
           const errorMsg = `${parkName}: ${error instanceof Error ? error.message : 'Unknown error'}`;
           errors.push(errorMsg);
-          console.error(`❌ Failed to fetch ${parkName}:`, error);
+          console.error(`❌ Failed to process ${parkName}:`, error);
         }
       }
 
       // Show results
       if (successCount === Object.keys(parkIds).length) {
-        alert(`✅ Park hours refreshed successfully!\n\nUpdated data for all ${successCount} parks.`);
+        alert(`✅ Park hours refreshed and database updated successfully!\n\nUpdated data for all ${successCount} parks and their attractions.`);
       } else if (successCount > 0) {
-        alert(`⚠️ Partial success: Updated ${successCount}/${Object.keys(parkIds).length} parks.\n\nErrors:\n${errors.join('\n')}`);
+        alert(`⚠️ Partial success: Updated ${successCount}/${Object.keys(parkIds).length} parks in database.\n\nErrors:\n${errors.join('\n')}`);
       } else {
         throw new Error(`Failed to update any parks:\n${errors.join('\n')}`);
       }
 
-      console.log(`✅ Park refresh completed: ${successCount}/${Object.keys(parkIds).length} parks updated`);
+      console.log(`✅ Park refresh and database update completed: ${successCount}/${Object.keys(parkIds).length} parks updated`);
     } catch (error) {
       console.error('Failed to refresh park hours:', error);
-      alert(`❌ Failed to refresh park hours.\n\n${error instanceof Error ? error.message : 'Unknown error'}\n\nNote: This fetches live data for verification but doesn't update the database.`);
+      alert(`❌ Failed to refresh park hours and update database.\n\n${error instanceof Error ? error.message : 'Unknown error'}`);
     } finally {
       setIsRefreshingParks(false);
     }
