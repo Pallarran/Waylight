@@ -101,15 +101,12 @@ export default function AuthStatus() {
           // Add delay between API calls
           await new Promise(resolve => setTimeout(resolve, 1000)); // 1 second delay
 
-          // Get schedule data for the next 90 days (back to original working range)
+          // Get schedule data from today to November 27th (last available date on themeparks.wiki)
           const today = new Date();
-          const endDate = new Date(today);
-          endDate.setDate(today.getDate() + 90);
-
           const startDateStr = today.toISOString().split('T')[0];
-          const endDateStr = endDate.toISOString().split('T')[0];
+          const endDateStr = '2025-11-27'; // Explicit end date based on site availability
 
-          console.log(`📅 Fetching schedule data from ${startDateStr} to ${endDateStr} (90-day range)...`);
+          console.log(`📅 Fetching schedule data from ${startDateStr} to ${endDateStr} (through Nov 27th)...`);
 
           const scheduleResponse = await fetchWithRetry(`https://api.themeparks.wiki/v1/entity/${parkId}/schedule?startDate=${startDateStr}&endDate=${endDateStr}`);
           if (!scheduleResponse) {
@@ -361,7 +358,7 @@ export default function AuthStatus() {
             item.type === 'OPERATING' && item.date && (item.openingTime || item.closingTime)
           ) || [];
 
-          console.log(`📅 Found ${scheduleData_filtered.length} operating schedule entries for ${parkName} (90-day range)`);
+          console.log(`📅 Found ${scheduleData_filtered.length} operating schedule entries for ${parkName} (through Nov 27th)`);
 
           for (const [index, schedule] of scheduleData_filtered.entries()) {
             try {
