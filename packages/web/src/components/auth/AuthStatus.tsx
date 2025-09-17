@@ -101,9 +101,17 @@ export default function AuthStatus() {
           // Add delay between API calls
           await new Promise(resolve => setTimeout(resolve, 1000)); // 1 second delay
 
-          console.log(`📅 Fetching schedule data (default range)...`);
+          // Get schedule data for the next 90 days (back to original working range)
+          const today = new Date();
+          const endDate = new Date(today);
+          endDate.setDate(today.getDate() + 90);
 
-          const scheduleResponse = await fetchWithRetry(`https://api.themeparks.wiki/v1/entity/${parkId}/schedule`);
+          const startDateStr = today.toISOString().split('T')[0];
+          const endDateStr = endDate.toISOString().split('T')[0];
+
+          console.log(`📅 Fetching schedule data from ${startDateStr} to ${endDateStr} (90-day range)...`);
+
+          const scheduleResponse = await fetchWithRetry(`https://api.themeparks.wiki/v1/entity/${parkId}/schedule?startDate=${startDateStr}&endDate=${endDateStr}`);
           if (!scheduleResponse) {
             throw new Error(`Failed to fetch schedule data for ${parkName} after retries`);
           }
@@ -353,7 +361,7 @@ export default function AuthStatus() {
             item.type === 'OPERATING' && item.date && (item.openingTime || item.closingTime)
           ) || [];
 
-          console.log(`📅 Found ${scheduleData_filtered.length} operating schedule entries for ${parkName} (default range)`);
+          console.log(`📅 Found ${scheduleData_filtered.length} operating schedule entries for ${parkName} (90-day range)`);
 
           for (const [index, schedule] of scheduleData_filtered.entries()) {
             try {
