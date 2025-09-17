@@ -184,15 +184,71 @@ export default function AuthStatus() {
           // Skip entertainment updates for now - table is not populating correctly
           console.log(`⏸️ Skipping ${entertainmentData.length} entertainment shows for ${parkName} (disabled for now)`);
 
-          // Debug schedule data format first
-          console.log(`📊 Schedule data for ${parkName}:`, {
-            scheduleLength: scheduleData.schedule?.length,
-            sampleEvent: scheduleData.schedule?.[0],
-            allEventTypes: [...new Set(scheduleData.schedule?.map((s: any) => s.type) || [])]
-          });
+          // Clean up old events first (older than 30 days)
+          const thirtyDaysAgo = new Date();
+          thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+          const cleanupDate = thirtyDaysAgo.toISOString().split('T')[0]; // YYYY-MM-DD format
 
-          // Skip events table for now - debugging schema issues
-          console.log(`⏸️ Skipping events table updates for ${parkName} (debugging 400 errors)`);
+          const { error: cleanupError } = await supabase
+            .from('live_park_events')
+            .delete()
+            .eq('park_id', parkName)
+            .lt('event_date', cleanupDate);
+
+          if (cleanupError) {
+            console.warn(`⚠️ Failed to cleanup old events for ${parkName}:`, cleanupError);
+          } else {
+            console.log(`🧹 Cleaned up old events for ${parkName} (before ${cleanupDate})`);
+          }
+
+          // Update events in database
+          let eventUpdateCount = 0;
+          const eventsData = scheduleData.schedule?.filter((item: any) =>
+            item.type === 'OPERATING' && item.date && item.openingTime && item.closingTime
+          ) || [];
+
+          for (const event of eventsData) {
+            try {
+              // Parse ISO date/time strings to extract HH:MM:SS format
+              const eventDate = event.date; // Already in YYYY-MM-DD format
+
+              // Parse ISO time strings and extract time portion
+              const openTimeMatch = event.openingTime.match(/T(\d{2}:\d{2}:\d{2})/);
+              const closeTimeMatch = event.closingTime.match(/T(\d{2}:\d{2}:\d{2})/);
+
+              const openTime = openTimeMatch ? openTimeMatch[1] : null;
+              const closeTime = closeTimeMatch ? closeTimeMatch[1] : null;
+
+              if (!openTime || !closeTime) {
+                console.warn(`⚠️ Skipping event for ${parkName} on ${eventDate}: invalid time format`);
+                continue;
+              }
+
+              const { error: eventError } = await supabase.from('live_park_events').upsert({
+                park_id: parkName,
+                event_date: eventDate,
+                event_name: `${liveData.name} Operating Hours`,
+                event_type: 'park_hours',
+                event_open: openTime,
+                event_close: closeTime,
+                description: `Regular operating hours for ${liveData.name}`,
+                data_source: 'themeparks_wiki',
+                synced_at: new Date().toISOString()
+              }, {
+                onConflict: 'park_id,event_date,event_name'
+              });
+
+              if (eventError) {
+                console.error(`❌ Failed to update event for ${parkName} on ${eventDate}:`, eventError);
+              } else {
+                eventUpdateCount++;
+              }
+            } catch (error) {
+              console.error(`❌ Failed to process event for ${parkName}:`, error);
+            }
+          }
+
+          console.log(`✅ Updated ${eventUpdateCount}/${eventsData.length} events for ${parkName}`);
           successCount++;
         } catch (error) {
           const errorMsg = `${parkName}: ${error instanceof Error ? error.message : 'Unknown error'}`;
@@ -203,14 +259,14 @@ export default function AuthStatus() {
 
       // Show results
       if (successCount === Object.keys(parkIds).length) {
-        alert(`✅ Database sync successful!\n\nUpdated live data for all ${successCount} parks:\n• Attractions & wait times\n• Park status & info\n• Schedule data debugging (events disabled)`);
+        alert(`✅ Database sync successful!\n\nUpdated live data for all ${successCount} parks:\n• Attractions & wait times\n• Park status & info\n• Operating hours events (with cleanup)`);
       } else if (successCount > 0) {
         alert(`⚠️ Partial success: Updated ${successCount}/${Object.keys(parkIds).length} parks in database.\n\nErrors:\n${errors.join('\n')}`);
       } else {
         throw new Error(`Failed to update any parks:\n${errors.join('\n')}`);
       }
 
-      console.log(`✅ Database sync completed: ${successCount}/${Object.keys(parkIds).length} parks updated with attractions and park info (events debugging enabled)`);
+      console.log(`✅ Database sync completed: ${successCount}/${Object.keys(parkIds).length} parks updated with attractions, park info, and events`);
     } catch (error) {
       console.error('Failed to sync live data:', error);
       alert(`❌ Failed to sync live data to database.\n\n${error instanceof Error ? error.message : 'Unknown error'}`);
