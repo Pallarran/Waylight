@@ -184,80 +184,104 @@ export default function AuthStatus() {
           // Skip entertainment updates for now - table is not populating correctly
           console.log(`⏸️ Skipping ${entertainmentData.length} entertainment shows for ${parkName} (disabled for now)`);
 
-          // Clean up old events first (older than 30 days)
-          const thirtyDaysAgo = new Date();
-          thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-          const cleanupDate = thirtyDaysAgo.toISOString().split('T')[0]; // YYYY-MM-DD format
-
-          const { error: cleanupError } = await supabase
+          // Test RLS policies first with a simple read query
+          const { error: rlsTestError } = await supabase
             .from('live_park_events')
-            .delete()
-            .eq('park_id', parkName)
-            .lt('event_date', cleanupDate);
+            .select('id')
+            .limit(1);
 
-          if (cleanupError) {
-            console.warn(`⚠️ Failed to cleanup old events for ${parkName}:`, cleanupError);
+          if (rlsTestError && rlsTestError.message.includes('row-level security')) {
+            console.warn(`⚠️ RLS Policy Error: live_park_events table needs proper policies for authenticated users`);
+            console.log(`⏸️ Skipping events table updates for ${parkName} (RLS policies not configured)`);
+            errors.push(`${parkName}: Events table RLS policies need configuration for INSERT/DELETE operations`);
           } else {
-            console.log(`🧹 Cleaned up old events for ${parkName} (before ${cleanupDate})`);
-          }
+            console.log(`✅ Events table access confirmed for ${parkName}, proceeding with updates...`);
 
-          // Update events in database
-          let eventUpdateCount = 0;
-          const eventsData = scheduleData.schedule?.filter((item: any) =>
-            item.type === 'OPERATING' && item.date && item.openingTime && item.closingTime
-          ) || [];
+            // Clean up old events first (older than 30 days)
+            const thirtyDaysAgo = new Date();
+            thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+            const cleanupDate = thirtyDaysAgo.toISOString().split('T')[0]; // YYYY-MM-DD format
 
-          for (const event of eventsData) {
-            try {
-              // Parse ISO date/time strings to extract HH:MM:SS format
-              const eventDate = event.date; // Already in YYYY-MM-DD format
+            const { error: cleanupError } = await supabase
+              .from('live_park_events')
+              .delete()
+              .eq('park_id', parkName)
+              .lt('event_date', cleanupDate);
 
-              // Parse ISO time strings and extract time portion
-              const openTimeMatch = event.openingTime.match(/T(\d{2}:\d{2}:\d{2})/);
-              const closeTimeMatch = event.closingTime.match(/T(\d{2}:\d{2}:\d{2})/);
-
-              const openTime = openTimeMatch ? openTimeMatch[1] : null;
-              const closeTime = closeTimeMatch ? closeTimeMatch[1] : null;
-
-              if (!openTime || !closeTime) {
-                console.warn(`⚠️ Skipping event for ${parkName} on ${eventDate}: invalid time format`);
+            if (cleanupError) {
+              console.warn(`⚠️ Failed to cleanup old events for ${parkName}:`, cleanupError);
+              if (cleanupError.message.includes('row-level security')) {
+                errors.push(`${parkName}: Events table DELETE not allowed - RLS policy needed`);
+                console.log(`⏸️ Skipping events table updates for ${parkName} (DELETE permission denied)`);
                 continue;
               }
-
-              // First try to delete existing event, then insert new one
-              // This avoids conflict resolution issues with the unique constraint
-              await supabase
-                .from('live_park_events')
-                .delete()
-                .eq('park_id', parkName)
-                .eq('event_date', eventDate)
-                .eq('event_name', `${liveData.name} Operating Hours`);
-
-              const { error: eventError } = await supabase.from('live_park_events').insert({
-                park_id: parkName,
-                event_date: eventDate,
-                event_name: `${liveData.name} Operating Hours`,
-                event_type: 'park_hours',
-                event_open: openTime,
-                event_close: closeTime,
-                description: `Regular operating hours for ${liveData.name}`,
-                data_source: 'themeparks_wiki',
-                synced_at: new Date().toISOString()
-              });
-
-              if (eventError) {
-                console.error(`❌ Failed to update event for ${parkName} on ${eventDate}:`, eventError);
-                errors.push(`${parkName} event ${eventDate}: ${eventError.message}`);
-              } else {
-                eventUpdateCount++;
-              }
-            } catch (error) {
-              console.error(`❌ Failed to process event for ${parkName}:`, error);
-              errors.push(`${parkName} event processing: ${error instanceof Error ? error.message : 'Unknown error'}`);
+            } else {
+              console.log(`🧹 Cleaned up old events for ${parkName} (before ${cleanupDate})`);
             }
-          }
 
-          console.log(`✅ Updated ${eventUpdateCount}/${eventsData.length} events for ${parkName}`);
+            // Update events in database
+            let eventUpdateCount = 0;
+            const eventsData = scheduleData.schedule?.filter((item: any) =>
+              item.type === 'OPERATING' && item.date && item.openingTime && item.closingTime
+            ) || [];
+
+            for (const event of eventsData) {
+              try {
+                // Parse ISO date/time strings to extract HH:MM:SS format
+                const eventDate = event.date; // Already in YYYY-MM-DD format
+
+                // Parse ISO time strings and extract time portion
+                const openTimeMatch = event.openingTime.match(/T(\d{2}:\d{2}:\d{2})/);
+                const closeTimeMatch = event.closingTime.match(/T(\d{2}:\d{2}:\d{2})/);
+
+                const openTime = openTimeMatch ? openTimeMatch[1] : null;
+                const closeTime = closeTimeMatch ? closeTimeMatch[1] : null;
+
+                if (!openTime || !closeTime) {
+                  console.warn(`⚠️ Skipping event for ${parkName} on ${eventDate}: invalid time format`);
+                  continue;
+                }
+
+                // First try to delete existing event, then insert new one
+                // This avoids conflict resolution issues with the unique constraint
+                await supabase
+                  .from('live_park_events')
+                  .delete()
+                  .eq('park_id', parkName)
+                  .eq('event_date', eventDate)
+                  .eq('event_name', `${liveData.name} Operating Hours`);
+
+                const { error: eventError } = await supabase.from('live_park_events').insert({
+                  park_id: parkName,
+                  event_date: eventDate,
+                  event_name: `${liveData.name} Operating Hours`,
+                  event_type: 'park_hours',
+                  event_open: openTime,
+                  event_close: closeTime,
+                  description: `Regular operating hours for ${liveData.name}`,
+                  data_source: 'themeparks_wiki',
+                  synced_at: new Date().toISOString()
+                });
+
+                if (eventError) {
+                  console.error(`❌ Failed to insert event for ${parkName} on ${eventDate}:`, eventError);
+                  if (eventError.message.includes('row-level security')) {
+                    errors.push(`${parkName}: Events table INSERT not allowed - RLS policy needed`);
+                    break; // Stop trying more events for this park
+                  } else {
+                    errors.push(`${parkName} event ${eventDate}: ${eventError.message}`);
+                  }
+                } else {
+                  eventUpdateCount++;
+                }
+              } catch (error) {
+                console.error(`❌ Failed to process event for ${parkName}:`, error);
+                errors.push(`${parkName} event processing: ${error instanceof Error ? error.message : 'Unknown error'}`);
+              }
+            }
+
+            console.log(`✅ Updated ${eventUpdateCount}/${eventsData.length} events for ${parkName}`);
+          }
           successCount++;
         } catch (error) {
           const errorMsg = `${parkName}: ${error instanceof Error ? error.message : 'Unknown error'}`;
