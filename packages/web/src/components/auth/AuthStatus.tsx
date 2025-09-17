@@ -326,15 +326,15 @@ export default function AuthStatus() {
             console.log(`✅ Updated ${eventUpdateCount}/${eventsData.length} events for ${parkName}`);
 
           // Clean up old schedules first (older than 30 days)
-          const thirtyDaysAgo = new Date();
-          thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-          const cleanupDate = thirtyDaysAgo.toISOString().split('T')[0]; // YYYY-MM-DD format
+          const scheduleCleanupDate = new Date();
+          scheduleCleanupDate.setDate(scheduleCleanupDate.getDate() - 30);
+          const scheduleCleanupDateStr = scheduleCleanupDate.toISOString().split('T')[0]; // YYYY-MM-DD format
 
           const { error: scheduleCleanupError } = await supabase
             .from('live_park_schedules')
             .delete()
             .eq('park_id', parkName)
-            .lt('schedule_date', cleanupDate);
+            .lt('schedule_date', scheduleCleanupDateStr);
 
           if (scheduleCleanupError) {
             console.warn(`⚠️ Failed to cleanup old schedules for ${parkName}:`, scheduleCleanupError);
@@ -344,7 +344,7 @@ export default function AuthStatus() {
               continue;
             }
           } else {
-            console.log(`🧹 Cleaned up old schedules for ${parkName} (before ${cleanupDate})`);
+            console.log(`🧹 Cleaned up old schedules for ${parkName} (before ${scheduleCleanupDateStr})`);
           }
 
           // Update park schedules in database (regular operating hours)
