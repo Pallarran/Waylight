@@ -55,28 +55,38 @@ export default function AuthStatus() {
       // Fetch data for each park and update database
       for (const [parkName, parkId] of Object.entries(parkIds)) {
         try {
-          console.log(`Fetching data for ${parkName}...`);
-          const response = await fetch(`https://api.themeparks.wiki/v1/entity/${parkId}/live`);
-
-          if (!response.ok) {
-            throw new Error(`Failed to fetch ${parkName}: HTTP ${response.status}`);
+          console.log(`Fetching live data for ${parkName}...`);
+          const liveResponse = await fetch(`https://api.themeparks.wiki/v1/entity/${parkId}/live`);
+          if (!liveResponse.ok) {
+            throw new Error(`Failed to fetch live data for ${parkName}: HTTP ${liveResponse.status}`);
           }
+          const liveData = await liveResponse.json();
 
-          const data = await response.json();
-          const attractionsData = data.liveData?.filter((item: any) => item.entityType === 'ATTRACTION') || [];
+          console.log(`Fetching schedule data for ${parkName}...`);
+          const scheduleResponse = await fetch(`https://api.themeparks.wiki/v1/entity/${parkId}/schedule`);
+          if (!scheduleResponse.ok) {
+            throw new Error(`Failed to fetch schedule data for ${parkName}: HTTP ${scheduleResponse.status}`);
+          }
+          const scheduleData = await scheduleResponse.json();
+
+          // Categorize live data
+          const attractionsData = liveData.liveData?.filter((item: any) => item.entityType === 'ATTRACTION') || [];
+          const entertainmentData = liveData.liveData?.filter((item: any) => item.entityType === 'SHOW') || [];
 
           console.log(`✅ Successfully fetched data for ${parkName}:`, {
-            name: data.name,
-            status: data.status,
-            attractionsCount: attractionsData.length
+            name: liveData.name,
+            status: liveData.status,
+            attractionsCount: attractionsData.length,
+            entertainmentCount: entertainmentData.length,
+            scheduleCount: scheduleData.schedule?.length || 0
           });
 
           // Update park status in database
           const { error: parkError } = await supabase.from('live_parks').upsert({
             park_id: parkName,
             external_id: parkId,
-            name: data.name || parkName,
-            status: data.status === 'OPERATING' ? 'operating' : 'closed',
+            name: liveData.name || parkName,
+            status: liveData.status === 'OPERATING' ? 'operating' : 'closed',
             regular_open: '09:00',  // Default, would need to parse from schedule
             regular_close: '22:00', // Default, would need to parse from schedule
             early_entry_open: null,
@@ -133,6 +143,127 @@ export default function AuthStatus() {
           }
 
           console.log(`✅ Updated ${attractionUpdateCount}/${attractionsData.length} attractions for ${parkName}`);
+
+          // Update entertainment in database
+          let entertainmentUpdateCount = 0;
+          for (const entertainment of entertainmentData) {
+            // Map status from API to database format
+            let dbStatus: 'operating' | 'cancelled' | 'delayed' = 'operating';
+            if (entertainment.status === 'CLOSED' || entertainment.status === 'CANCELLED') {
+              dbStatus = 'cancelled';
+            } else if (entertainment.status === 'DELAYED') {
+              dbStatus = 'delayed';
+            }
+
+            // Extract show times
+            const showTimes = entertainment.showtimes?.map((show: any) => {
+              const startTime = new Date(show.startTime).toLocaleTimeString('en-US', {
+                hour12: false,
+                timeZone: liveData.timezone || 'America/New_York'
+              });
+              return startTime;
+            }) || [];
+
+            // Find next show time
+            const nextShow = entertainment.showtimes?.find((show: any) =>
+              new Date(show.startTime) > new Date()
+            );
+            const nextShowTime = nextShow ? new Date(nextShow.startTime).toISOString() : null;
+
+            const { error: entertainmentError } = await supabase.from('live_entertainment').upsert({
+              park_id: parkName,
+              external_id: entertainment.id,
+              name: entertainment.name,
+              show_times: showTimes,
+              status: dbStatus,
+              next_show_time: nextShowTime,
+              last_updated: new Date().toISOString()
+            }, {
+              onConflict: 'park_id,external_id'
+            });
+
+            if (entertainmentError) {
+              console.error(`❌ Failed to update entertainment ${entertainment.name}:`, entertainmentError);
+            } else {
+              entertainmentUpdateCount++;
+            }
+          }
+
+          console.log(`✅ Updated ${entertainmentUpdateCount}/${entertainmentData.length} entertainment shows for ${parkName}`);
+
+          // Update park schedules in database
+          let scheduleUpdateCount = 0;
+          for (const scheduleItem of scheduleData.schedule || []) {
+            // Only process OPERATING type schedules for regular hours
+            if (scheduleItem.type === 'OPERATING') {
+              const openTime = scheduleItem.openingTime ?
+                new Date(scheduleItem.openingTime).toLocaleTimeString('en-US', {
+                  hour12: false,
+                  timeZone: scheduleData.timezone || 'America/New_York'
+                }).slice(0, 5) : null;
+
+              const closeTime = scheduleItem.closingTime ?
+                new Date(scheduleItem.closingTime).toLocaleTimeString('en-US', {
+                  hour12: false,
+                  timeZone: scheduleData.timezone || 'America/New_York'
+                }).slice(0, 5) : null;
+
+              const { error: scheduleError } = await supabase.from('live_park_schedules').upsert({
+                park_id: parkName,
+                schedule_date: scheduleItem.date,
+                regular_open: openTime,
+                regular_close: closeTime,
+                early_entry_open: null, // Would need additional parsing
+                extended_evening_close: null, // Would need additional parsing
+                data_source: 'themeparks.wiki',
+                is_estimated: false,
+                synced_at: new Date().toISOString()
+              }, {
+                onConflict: 'park_id,schedule_date'
+              });
+
+              if (scheduleError) {
+                console.error(`❌ Failed to update schedule for ${parkName} on ${scheduleItem.date}:`, scheduleError);
+              } else {
+                scheduleUpdateCount++;
+              }
+            }
+
+            // Update park events for special events
+            if (scheduleItem.type === 'TICKETED_EVENT' || scheduleItem.type === 'INFO') {
+              const eventOpen = scheduleItem.openingTime ?
+                new Date(scheduleItem.openingTime).toLocaleTimeString('en-US', {
+                  hour12: false,
+                  timeZone: scheduleData.timezone || 'America/New_York'
+                }) : null;
+
+              const eventClose = scheduleItem.closingTime ?
+                new Date(scheduleItem.closingTime).toLocaleTimeString('en-US', {
+                  hour12: false,
+                  timeZone: scheduleData.timezone || 'America/New_York'
+                }) : null;
+
+              const { error: eventError } = await supabase.from('live_park_events').upsert({
+                park_id: parkName,
+                event_date: scheduleItem.date,
+                event_name: scheduleItem.description || 'Special Event',
+                event_type: scheduleItem.type,
+                event_open: eventOpen,
+                event_close: eventClose,
+                description: scheduleItem.description,
+                data_source: 'themeparks.wiki',
+                synced_at: new Date().toISOString()
+              }, {
+                onConflict: 'park_id,event_date,event_name'
+              });
+
+              if (eventError) {
+                console.error(`❌ Failed to update event for ${parkName} on ${scheduleItem.date}:`, eventError);
+              }
+            }
+          }
+
+          console.log(`✅ Updated ${scheduleUpdateCount} schedule entries for ${parkName}`);
           successCount++;
         } catch (error) {
           const errorMsg = `${parkName}: ${error instanceof Error ? error.message : 'Unknown error'}`;
@@ -143,14 +274,14 @@ export default function AuthStatus() {
 
       // Show results
       if (successCount === Object.keys(parkIds).length) {
-        alert(`✅ Park hours refreshed and database updated successfully!\n\nUpdated data for all ${successCount} parks and their attractions.`);
+        alert(`✅ Complete park data refresh successful!\n\nUpdated all ${successCount} parks with:\n• Attractions & wait times\n• Entertainment shows & schedules  \n• Park schedules & hours\n• Special events`);
       } else if (successCount > 0) {
         alert(`⚠️ Partial success: Updated ${successCount}/${Object.keys(parkIds).length} parks in database.\n\nErrors:\n${errors.join('\n')}`);
       } else {
         throw new Error(`Failed to update any parks:\n${errors.join('\n')}`);
       }
 
-      console.log(`✅ Park refresh and database update completed: ${successCount}/${Object.keys(parkIds).length} parks updated`);
+      console.log(`✅ Complete park data refresh completed: ${successCount}/${Object.keys(parkIds).length} parks updated with attractions, entertainment, schedules, and events`);
     } catch (error) {
       console.error('Failed to refresh park hours:', error);
       alert(`❌ Failed to refresh park hours and update database.\n\n${error instanceof Error ? error.message : 'Unknown error'}`);
@@ -191,7 +322,7 @@ export default function AuthStatus() {
           onClick={handleRefreshParks}
           disabled={isRefreshingParks}
           className="flex items-center gap-1 px-2 py-1 rounded-md hover:bg-surface-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          title="Refresh park hours"
+          title="Refresh park data (attractions, entertainment, schedules, events)"
         >
           {isRefreshingParks ? (
             <Loader2 className="h-4 w-4 animate-spin text-sea" />
@@ -232,7 +363,7 @@ export default function AuthStatus() {
                   ) : (
                     <RefreshCw className="h-4 w-4" />
                   )}
-                  {isRefreshingParks ? 'Refreshing...' : 'Refresh Park Hours'}
+                  {isRefreshingParks ? 'Refreshing...' : 'Refresh Park Data'}
                 </button>
                 
                 <button
