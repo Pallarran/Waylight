@@ -184,43 +184,12 @@ export default function AuthStatus() {
           // Skip entertainment updates for now - table is not populating correctly
           console.log(`⏸️ Skipping ${entertainmentData.length} entertainment shows for ${parkName} (disabled for now)`);
 
-          // Update park schedules in database
-          let scheduleUpdateCount = 0;
+          // Skip schedule updates for now - causing API errors
+          console.log(`⏸️ Skipping ${scheduleData.schedule?.length || 0} schedule entries for ${parkName} (disabled for now)`);
+
+          // Update park events only
+          let eventUpdateCount = 0;
           for (const scheduleItem of scheduleData.schedule || []) {
-            // Only process OPERATING type schedules for regular hours
-            if (scheduleItem.type === 'OPERATING') {
-              const openTime = scheduleItem.openingTime ?
-                new Date(scheduleItem.openingTime).toLocaleTimeString('en-US', {
-                  hour12: false,
-                  timeZone: scheduleData.timezone || 'America/New_York'
-                }).slice(0, 5) : null;
-
-              const closeTime = scheduleItem.closingTime ?
-                new Date(scheduleItem.closingTime).toLocaleTimeString('en-US', {
-                  hour12: false,
-                  timeZone: scheduleData.timezone || 'America/New_York'
-                }).slice(0, 5) : null;
-
-              const { error: scheduleError } = await supabase.from('live_park_schedules').upsert({
-                park_id: parkName,
-                schedule_date: scheduleItem.date,
-                regular_open: openTime,
-                regular_close: closeTime,
-                early_entry_open: null, // Would need additional parsing
-                extended_evening_close: null, // Would need additional parsing
-                data_source: 'themeparks.wiki',
-                is_estimated: false,
-                synced_at: new Date().toISOString()
-              }, {
-                onConflict: 'park_id,schedule_date'
-              });
-
-              if (scheduleError) {
-                console.error(`❌ Failed to update schedule for ${parkName} on ${scheduleItem.date}:`, scheduleError);
-              } else {
-                scheduleUpdateCount++;
-              }
-            }
 
             // Update park events for special events
             if (scheduleItem.type === 'TICKETED_EVENT' || scheduleItem.type === 'INFO') {
@@ -252,11 +221,13 @@ export default function AuthStatus() {
 
               if (eventError) {
                 console.error(`❌ Failed to update event for ${parkName} on ${scheduleItem.date}:`, eventError);
+              } else {
+                eventUpdateCount++;
               }
             }
           }
 
-          console.log(`✅ Updated ${scheduleUpdateCount} schedule entries for ${parkName}`);
+          console.log(`✅ Updated ${eventUpdateCount} events for ${parkName}`);
           successCount++;
         } catch (error) {
           const errorMsg = `${parkName}: ${error instanceof Error ? error.message : 'Unknown error'}`;
@@ -267,14 +238,14 @@ export default function AuthStatus() {
 
       // Show results
       if (successCount === Object.keys(parkIds).length) {
-        alert(`✅ Database sync successful!\n\nUpdated live data for all ${successCount} parks:\n• Attractions & wait times\n• Park schedules & hours\n• Special events`);
+        alert(`✅ Database sync successful!\n\nUpdated live data for all ${successCount} parks:\n• Attractions & wait times\n• Special events`);
       } else if (successCount > 0) {
         alert(`⚠️ Partial success: Updated ${successCount}/${Object.keys(parkIds).length} parks in database.\n\nErrors:\n${errors.join('\n')}`);
       } else {
         throw new Error(`Failed to update any parks:\n${errors.join('\n')}`);
       }
 
-      console.log(`✅ Database sync completed: ${successCount}/${Object.keys(parkIds).length} parks updated with attractions, schedules, and events`);
+      console.log(`✅ Database sync completed: ${successCount}/${Object.keys(parkIds).length} parks updated with attractions and events`);
     } catch (error) {
       console.error('Failed to sync live data:', error);
       alert(`❌ Failed to sync live data to database.\n\n${error instanceof Error ? error.message : 'Unknown error'}`);
@@ -315,7 +286,7 @@ export default function AuthStatus() {
           onClick={handleRefreshParks}
           disabled={isRefreshingParks}
           className="flex items-center gap-1 px-2 py-1 rounded-md hover:bg-surface-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          title="Refresh live database with current park data, wait times, shows, and schedules"
+          title="Refresh live database with current park data, wait times, and events"
         >
           {isRefreshingParks ? (
             <Loader2 className="h-4 w-4 animate-spin text-sea" />
