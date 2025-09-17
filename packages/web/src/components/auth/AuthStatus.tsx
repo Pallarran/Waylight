@@ -283,8 +283,23 @@ export default function AuthStatus() {
             }
 
             console.log(`✅ Updated ${eventUpdateCount}/${eventsData.length} events for ${parkName}`);
+
+          // Debug: Check if we have any errors accumulated
+          console.log(`🔍 Current errors for ${parkName}:`, errors.length > 0 ? errors : 'No errors');
+
+          // Force an error message to test popup display
+          if (eventUpdateCount === 0 && eventsData.length > 0) {
+            errors.push(`${parkName}: No events were successfully updated despite ${eventsData.length} events in API data`);
+            console.log(`🚨 Forced error message for ${parkName} - check popup`);
           }
-          successCount++;
+          }
+
+          // Only increment success if no errors occurred for this park
+          if (errors.length === 0) {
+            successCount++;
+          } else {
+            console.log(`⚠️ ${parkName} had errors, not counting as success`);
+          }
         } catch (error) {
           const errorMsg = `${parkName}: ${error instanceof Error ? error.message : 'Unknown error'}`;
           errors.push(errorMsg);
