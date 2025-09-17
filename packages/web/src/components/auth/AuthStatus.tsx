@@ -242,39 +242,44 @@ export default function AuthStatus() {
                   continue;
                 }
 
-                const { error: eventError } = await supabase.from('live_park_events').upsert({
-                  park_id: parkName,
-                  event_date: eventDate,
-                  event_name: `${liveData.name} Operating Hours`,
-                  event_type: 'park_hours',
-                  event_open: openTime,
-                  event_close: closeTime,
-                  description: `Regular operating hours for ${liveData.name}`,
-                  data_source: 'themeparks_wiki',
-                  synced_at: new Date().toISOString()
-                }, {
-                  onConflict: 'park_id,event_date,event_name'
-                });
-
-                if (eventError) {
-                  console.error(`❌ Failed to upsert event for ${parkName} on ${eventDate}:`, eventError);
-                  console.error(`❌ Event data that failed:`, {
+                try {
+                  const { error: eventError } = await supabase.from('live_park_events').upsert({
                     park_id: parkName,
                     event_date: eventDate,
                     event_name: `${liveData.name} Operating Hours`,
                     event_type: 'park_hours',
                     event_open: openTime,
                     event_close: closeTime,
-                    data_source: 'themeparks_wiki'
+                    description: `Regular operating hours for ${liveData.name}`,
+                    data_source: 'themeparks_wiki',
+                    synced_at: new Date().toISOString()
+                  }, {
+                    onConflict: 'park_id,event_date,event_name'
                   });
-                  if (eventError.message.includes('row-level security')) {
-                    errors.push(`${parkName}: Events table INSERT not allowed - RLS policy needed`);
-                    break; // Stop trying more events for this park
+
+                  if (eventError) {
+                    console.error(`❌ Failed to upsert event for ${parkName} on ${eventDate}:`, eventError);
+                    console.error(`❌ Event data that failed:`, {
+                      park_id: parkName,
+                      event_date: eventDate,
+                      event_name: `${liveData.name} Operating Hours`,
+                      event_type: 'park_hours',
+                      event_open: openTime,
+                      event_close: closeTime,
+                      data_source: 'themeparks_wiki'
+                    });
+                    if (eventError.message.includes('row-level security')) {
+                      errors.push(`${parkName}: Events table INSERT not allowed - RLS policy needed`);
+                      break; // Stop trying more events for this park
+                    } else {
+                      errors.push(`${parkName} event ${eventDate}: ${eventError.message} | Code: ${eventError.code} | Details: ${eventError.details}`);
+                    }
                   } else {
-                    errors.push(`${parkName} event ${eventDate}: ${eventError.message} | Code: ${eventError.code} | Details: ${eventError.details}`);
+                    eventUpdateCount++;
                   }
-                } else {
-                  eventUpdateCount++;
+                } catch (networkError) {
+                  console.error(`❌ Network/HTTP error for ${parkName} event ${eventDate}:`, networkError);
+                  errors.push(`${parkName} event ${eventDate}: Network error - ${networkError instanceof Error ? networkError.message : 'Unknown network error'}`);
                 }
               } catch (error) {
                 console.error(`❌ Failed to process event for ${parkName}:`, error);
