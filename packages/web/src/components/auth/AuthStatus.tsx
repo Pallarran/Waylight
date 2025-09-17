@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { LogIn, LogOut, User, RefreshCw, Loader2 } from 'lucide-react';
 import { authService, syncService, supabase, type AuthState, type SyncStatus } from '@waylight/shared';
+import { createClient } from '@supabase/supabase-js';
 import AuthModal from './AuthModal';
 
 export default function AuthStatus() {
@@ -35,6 +36,10 @@ export default function AuthStatus() {
     setIsRefreshingParks(true);
     try {
       console.log('🔧 Refreshing park hours from ThemeParks.wiki...');
+
+      // Note: Using regular supabase client - RLS policies need to be configured
+      // to allow authenticated users to insert/update live_parks and live_attractions
+      console.log('Current user:', authState.user?.email);
 
       // Disney park IDs for ThemeParks.wiki API
       const parkIds = {
@@ -82,6 +87,11 @@ export default function AuthStatus() {
 
           if (parkError) {
             console.error(`❌ Failed to update park ${parkName} in database:`, parkError);
+
+            if (parkError.message.includes('row-level security')) {
+              throw new Error(`RLS Policy Error: The 'live_parks' table needs RLS policies configured to allow INSERT/UPDATE operations for authenticated users.`);
+            }
+
             throw new Error(`Database error for ${parkName}: ${parkError.message}`);
           }
 
