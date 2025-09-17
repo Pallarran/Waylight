@@ -35,7 +35,7 @@ export default function AuthStatus() {
 
     setIsRefreshingParks(true);
     try {
-      console.log('🔧 Refreshing park hours from ThemeParks.wiki...');
+      console.log('🔧 Syncing live data to database from ThemeParks.wiki...');
 
       // Note: Using regular supabase client - RLS policies need to be configured
       // to allow authenticated users to insert/update live_parks and live_attractions
@@ -274,17 +274,17 @@ export default function AuthStatus() {
 
       // Show results
       if (successCount === Object.keys(parkIds).length) {
-        alert(`✅ Complete park data refresh successful!\n\nUpdated all ${successCount} parks with:\n• Attractions & wait times\n• Entertainment shows & schedules  \n• Park schedules & hours\n• Special events`);
+        alert(`✅ Database sync successful!\n\nUpdated live data for all ${successCount} parks:\n• Attractions & wait times\n• Entertainment shows & schedules  \n• Park schedules & hours\n• Special events`);
       } else if (successCount > 0) {
         alert(`⚠️ Partial success: Updated ${successCount}/${Object.keys(parkIds).length} parks in database.\n\nErrors:\n${errors.join('\n')}`);
       } else {
         throw new Error(`Failed to update any parks:\n${errors.join('\n')}`);
       }
 
-      console.log(`✅ Complete park data refresh completed: ${successCount}/${Object.keys(parkIds).length} parks updated with attractions, entertainment, schedules, and events`);
+      console.log(`✅ Database sync completed: ${successCount}/${Object.keys(parkIds).length} parks updated with attractions, entertainment, schedules, and events`);
     } catch (error) {
-      console.error('Failed to refresh park hours:', error);
-      alert(`❌ Failed to refresh park hours and update database.\n\n${error instanceof Error ? error.message : 'Unknown error'}`);
+      console.error('Failed to sync live data:', error);
+      alert(`❌ Failed to sync live data to database.\n\n${error instanceof Error ? error.message : 'Unknown error'}`);
     } finally {
       setIsRefreshingParks(false);
     }
@@ -322,7 +322,7 @@ export default function AuthStatus() {
           onClick={handleRefreshParks}
           disabled={isRefreshingParks}
           className="flex items-center gap-1 px-2 py-1 rounded-md hover:bg-surface-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          title="Refresh park data (attractions, entertainment, schedules, events)"
+          title="Refresh live database with current park data, wait times, shows, and schedules"
         >
           {isRefreshingParks ? (
             <Loader2 className="h-4 w-4 animate-spin text-sea" />
@@ -363,7 +363,7 @@ export default function AuthStatus() {
                   ) : (
                     <RefreshCw className="h-4 w-4" />
                   )}
-                  {isRefreshingParks ? 'Refreshing...' : 'Refresh Park Data'}
+                  {isRefreshingParks ? 'Updating Database...' : 'Sync Live Data'}
                 </button>
                 
                 <button
