@@ -242,16 +242,7 @@ export default function AuthStatus() {
                   continue;
                 }
 
-                // First try to delete existing event, then insert new one
-                // This avoids conflict resolution issues with the unique constraint
-                await supabase
-                  .from('live_park_events')
-                  .delete()
-                  .eq('park_id', parkName)
-                  .eq('event_date', eventDate)
-                  .eq('event_name', `${liveData.name} Operating Hours`);
-
-                const { error: eventError } = await supabase.from('live_park_events').insert({
+                const { error: eventError } = await supabase.from('live_park_events').upsert({
                   park_id: parkName,
                   event_date: eventDate,
                   event_name: `${liveData.name} Operating Hours`,
@@ -261,6 +252,8 @@ export default function AuthStatus() {
                   description: `Regular operating hours for ${liveData.name}`,
                   data_source: 'themeparks_wiki',
                   synced_at: new Date().toISOString()
+                }, {
+                  onConflict: 'park_id,event_date,event_name'
                 });
 
                 if (eventError) {
