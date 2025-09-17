@@ -95,8 +95,16 @@ export default function AuthStatus() {
           }
           const liveData = await liveResponse.json();
 
-          // Skip schedule API call for now - not using the data
-          console.log(`⏸️ Skipping schedule API call for ${parkName} (not needed for current sync)`);
+          console.log(`Fetching schedule data for ${parkName}...`);
+
+          // Add delay between API calls
+          await new Promise(resolve => setTimeout(resolve, 1000)); // 1 second delay
+
+          const scheduleResponse = await fetchWithRetry(`https://api.themeparks.wiki/v1/entity/${parkId}/schedule`);
+          if (!scheduleResponse) {
+            throw new Error(`Failed to fetch schedule data for ${parkName} after retries`);
+          }
+          const scheduleData = await scheduleResponse.json();
 
           // Categorize live data
           const attractionsData = liveData.liveData?.filter((item: any) => item.entityType === 'ATTRACTION') || [];
@@ -106,7 +114,8 @@ export default function AuthStatus() {
             name: liveData.name,
             status: liveData.status,
             attractionsCount: attractionsData.length,
-            entertainmentCount: entertainmentData.length
+            entertainmentCount: entertainmentData.length,
+            scheduleCount: scheduleData.schedule?.length || 0
           });
 
           // Update park status in database
@@ -175,8 +184,44 @@ export default function AuthStatus() {
           // Skip entertainment updates for now - table is not populating correctly
           console.log(`⏸️ Skipping ${entertainmentData.length} entertainment shows for ${parkName} (disabled for now)`);
 
-          // Schedule and events updates disabled for now
-          console.log(`⏸️ Schedule and events updates disabled for ${parkName} (focusing on core functionality)`);
+          // Update events in database
+          let eventUpdateCount = 0;
+          const eventsData = scheduleData.schedule?.filter((item: any) =>
+            item.type === 'OPERATING' && item.date
+          ) || [];
+
+          for (const event of eventsData) {
+            try {
+              // Parse dates and times carefully to match schema requirements
+              const eventDate = event.date; // Should be YYYY-MM-DD format
+              const openTime = event.openingTime ? event.openingTime.substring(0, 8) : null; // HH:MM:SS format
+              const closeTime = event.closingTime ? event.closingTime.substring(0, 8) : null; // HH:MM:SS format
+
+              const { error: eventError } = await supabase.from('live_park_events').upsert({
+                park_id: parkName,
+                event_date: eventDate,
+                event_name: `${liveData.name} Operating Hours`,
+                event_type: 'park_hours',
+                event_open: openTime,
+                event_close: closeTime,
+                description: `Regular operating hours for ${liveData.name}`,
+                data_source: 'themeparks_wiki',
+                synced_at: new Date().toISOString()
+              }, {
+                onConflict: 'park_id,event_date,event_name'
+              });
+
+              if (eventError) {
+                console.error(`❌ Failed to update event for ${parkName} on ${eventDate}:`, eventError);
+              } else {
+                eventUpdateCount++;
+              }
+            } catch (error) {
+              console.error(`❌ Failed to process event for ${parkName}:`, error);
+            }
+          }
+
+          console.log(`✅ Updated ${eventUpdateCount}/${eventsData.length} events for ${parkName}`);
           successCount++;
         } catch (error) {
           const errorMsg = `${parkName}: ${error instanceof Error ? error.message : 'Unknown error'}`;
@@ -187,14 +232,14 @@ export default function AuthStatus() {
 
       // Show results
       if (successCount === Object.keys(parkIds).length) {
-        alert(`✅ Database sync successful!\n\nUpdated live data for all ${successCount} parks:\n• Attractions & wait times\n• Park status & info`);
+        alert(`✅ Database sync successful!\n\nUpdated live data for all ${successCount} parks:\n• Attractions & wait times\n• Park status & info\n• Operating hours events`);
       } else if (successCount > 0) {
         alert(`⚠️ Partial success: Updated ${successCount}/${Object.keys(parkIds).length} parks in database.\n\nErrors:\n${errors.join('\n')}`);
       } else {
         throw new Error(`Failed to update any parks:\n${errors.join('\n')}`);
       }
 
-      console.log(`✅ Database sync completed: ${successCount}/${Object.keys(parkIds).length} parks updated with attractions and park info`);
+      console.log(`✅ Database sync completed: ${successCount}/${Object.keys(parkIds).length} parks updated with attractions, park info, and events`);
     } catch (error) {
       console.error('Failed to sync live data:', error);
       alert(`❌ Failed to sync live data to database.\n\n${error instanceof Error ? error.message : 'Unknown error'}`);
