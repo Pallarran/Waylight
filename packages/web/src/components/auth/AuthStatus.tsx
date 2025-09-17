@@ -221,9 +221,16 @@ export default function AuthStatus() {
 
             // Update events in database (only special ticketed events)
             let eventUpdateCount = 0;
+
+            // Debug: Show all event types available
+            const allEventTypes = [...new Set(scheduleData.schedule?.map((s: any) => s.type) || [])];
+            console.log(`📊 Available event types for ${parkName}:`, allEventTypes);
+
             const eventsData = scheduleData.schedule?.filter((item: any) =>
               item.type === 'TICKETED_EVENT' && item.date && (item.openingTime || item.closingTime)
             ) || [];
+
+            console.log(`🎫 Found ${eventsData.length} ticketed events for ${parkName}`);
 
             for (const event of eventsData) {
               try {
@@ -303,10 +310,14 @@ export default function AuthStatus() {
           // Debug: Check if we have any errors accumulated
           console.log(`🔍 Current errors for ${parkName}:`, errors.length > 0 ? errors : 'No errors');
 
-          // Force an error message to test popup display
-          if (eventUpdateCount === 0 && eventsData.length > 0) {
-            errors.push(`${parkName}: No events were successfully updated despite ${eventsData.length} events in API data`);
-            console.log(`🚨 Forced error message for ${parkName} - check popup`);
+          // Add info message if no ticketed events were found
+          if (eventUpdateCount === 0) {
+            if (eventsData.length === 0) {
+              console.log(`ℹ️ No ticketed events found for ${parkName} in current schedule period`);
+            } else {
+              errors.push(`${parkName}: No events were successfully updated despite ${eventsData.length} ticketed events in API data`);
+              console.log(`🚨 Forced error message for ${parkName} - check popup`);
+            }
           }
           }
 
