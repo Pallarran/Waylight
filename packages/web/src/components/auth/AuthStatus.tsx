@@ -83,6 +83,8 @@ export default function AuthStatus() {
             extended_evening_close: null,
             crowd_level: null,
             last_updated: new Date().toISOString()
+          }, {
+            onConflict: 'park_id'
           });
 
           if (parkError) {
@@ -119,6 +121,8 @@ export default function AuthStatus() {
               single_rider_available: !!attraction.queue?.SINGLE_RIDER?.waitTime,
               single_rider_wait_time: attraction.queue?.SINGLE_RIDER?.waitTime || null,
               last_updated: new Date().toISOString()
+            }, {
+              onConflict: 'park_id,external_id'
             });
 
             if (attractionError) {
