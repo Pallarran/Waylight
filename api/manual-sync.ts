@@ -6,19 +6,14 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { createClient } from '@supabase/supabase-js';
 
-// Initialize Supabase client
-const getEnvVar = (keys: string[]): string => {
+// Helper to get environment variables safely
+const getEnvVar = (keys: string[]): string | null => {
   for (const key of keys) {
     const value = process.env[key];
     if (value) return value;
   }
-  throw new Error(`Missing environment variables. Tried: ${keys.join(', ')}`);
+  return null;
 };
-
-const supabaseUrl = getEnvVar(['NEXT_PUBLIC_SUPABASE_URL', 'VITE_SUPABASE_URL']);
-const supabaseKey = getEnvVar(['NEXT_PUBLIC_SUPABASE_ANON_KEY', 'VITE_SUPABASE_ANON_KEY']);
-
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Disney park IDs mapping
 const PARK_IDS = {
@@ -84,6 +79,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const startTime = Date.now();
 
   try {
+    // Get environment variables safely
+    const supabaseUrl = getEnvVar(['NEXT_PUBLIC_SUPABASE_URL', 'VITE_SUPABASE_URL']);
+    const supabaseKey = getEnvVar(['NEXT_PUBLIC_SUPABASE_ANON_KEY', 'VITE_SUPABASE_ANON_KEY']);
+
     // Debug environment variables
     const envDebug = {
       NEXT_PUBLIC_SUPABASE_URL: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -108,6 +107,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         message: 'Supabase environment variables not found'
       });
     }
+
+    // Create Supabase client inside the handler
+    const supabase = createClient(supabaseUrl, supabaseKey);
 
     // For Hobby plan: sync only one park to stay within 10-second limit
     const parkSlug = 'magic-kingdom';

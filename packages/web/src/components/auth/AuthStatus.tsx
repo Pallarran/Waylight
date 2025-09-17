@@ -74,7 +74,20 @@ export default function AuthStatus() {
       }
     } catch (error) {
       console.error('Failed to refresh park hours:', error);
-      alert('Failed to refresh park hours. Please try again.');
+
+      // Try to parse error response for debug info
+      if (error instanceof Error && error.message.includes('HTTP')) {
+        try {
+          const response = await fetch('/api/manual-sync', { method: 'POST' });
+          const errorData = await response.json();
+          console.error('API Error Details:', errorData);
+          alert(`Failed to refresh park hours: ${errorData.error || error.message}\n\nCheck console for details.`);
+        } catch (parseError) {
+          alert('Failed to refresh park hours. Please try again.');
+        }
+      } else {
+        alert('Failed to refresh park hours. Please try again.');
+      }
     } finally {
       setIsRefreshingParks(false);
     }
