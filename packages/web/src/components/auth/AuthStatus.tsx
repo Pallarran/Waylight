@@ -257,12 +257,21 @@ export default function AuthStatus() {
                 });
 
                 if (eventError) {
-                  console.error(`❌ Failed to insert event for ${parkName} on ${eventDate}:`, eventError);
+                  console.error(`❌ Failed to upsert event for ${parkName} on ${eventDate}:`, eventError);
+                  console.error(`❌ Event data that failed:`, {
+                    park_id: parkName,
+                    event_date: eventDate,
+                    event_name: `${liveData.name} Operating Hours`,
+                    event_type: 'park_hours',
+                    event_open: openTime,
+                    event_close: closeTime,
+                    data_source: 'themeparks_wiki'
+                  });
                   if (eventError.message.includes('row-level security')) {
                     errors.push(`${parkName}: Events table INSERT not allowed - RLS policy needed`);
                     break; // Stop trying more events for this park
                   } else {
-                    errors.push(`${parkName} event ${eventDate}: ${eventError.message}`);
+                    errors.push(`${parkName} event ${eventDate}: ${eventError.message} | Code: ${eventError.code} | Details: ${eventError.details}`);
                   }
                 } else {
                   eventUpdateCount++;
