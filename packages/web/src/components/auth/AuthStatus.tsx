@@ -34,60 +34,57 @@ export default function AuthStatus() {
 
     setIsRefreshingParks(true);
     try {
-      // Check if we're in development mode (Vite dev server doesn't support API routes)
-      const isDevelopment = import.meta.env.DEV;
+      console.log('🔧 Refreshing park hours from ThemeParks.wiki...');
 
-      if (isDevelopment) {
-        // In development, simulate the refresh and show user feedback
-        console.log('🔧 Development mode: API routes not available in Vite dev server');
-        console.log('💡 To manually refresh park data, run: node scripts/sync-parks.js --days 7');
+      // Disney park IDs for ThemeParks.wiki API
+      const parkIds = {
+        'magic-kingdom': '75ea578a-adc8-4116-a54d-dccb60765ef9',
+        'epcot': '47f90d2c-e191-4239-a466-5892ef59a88b',
+        'hollywood-studios': '288747d1-8b4f-4a64-867e-ea7c9b27bad8',
+        'animal-kingdom': '1c84a229-8862-4648-9c71-378ddd2c7693'
+      };
 
-        // Simulate a short delay to show the loading state
-        await new Promise(resolve => setTimeout(resolve, 1000));
+      let successCount = 0;
+      const errors: string[] = [];
 
-        // Show user-friendly message
-        alert('Development mode: API refresh not available.\n\nTo refresh park data manually, run:\nnode scripts/sync-parks.js --days 7\n\nThis button will work in production deployment.');
-        return;
+      // Fetch data for each park
+      for (const [parkName, parkId] of Object.entries(parkIds)) {
+        try {
+          console.log(`Fetching data for ${parkName}...`);
+          const response = await fetch(`https://api.themeparks.wiki/v1/entity/${parkId}/live`);
+
+          if (!response.ok) {
+            throw new Error(`Failed to fetch ${parkName}: HTTP ${response.status}`);
+          }
+
+          const data = await response.json();
+          console.log(`✅ Successfully fetched data for ${parkName}:`, {
+            name: data.name,
+            status: data.status,
+            attractionsCount: data.liveData?.filter((item: any) => item.entityType === 'ATTRACTION').length || 0
+          });
+
+          successCount++;
+        } catch (error) {
+          const errorMsg = `${parkName}: ${error instanceof Error ? error.message : 'Unknown error'}`;
+          errors.push(errorMsg);
+          console.error(`❌ Failed to fetch ${parkName}:`, error);
+        }
       }
 
-      // Production path - call the API endpoint
-      const response = await fetch('/api/manual-sync', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
-        throw new Error(`HTTP ${response.status}: ${errorData.error || errorData.message || 'Unknown error'}`);
-      }
-
-      const result = await response.json();
-      console.log('Park hours refresh completed:', result);
-
-      // Show success message
-      if (result.success) {
-        alert('Park hours refreshed successfully!');
+      // Show results
+      if (successCount === Object.keys(parkIds).length) {
+        alert(`✅ Park hours refreshed successfully!\n\nUpdated data for all ${successCount} parks.`);
+      } else if (successCount > 0) {
+        alert(`⚠️ Partial success: Updated ${successCount}/${Object.keys(parkIds).length} parks.\n\nErrors:\n${errors.join('\n')}`);
       } else {
-        throw new Error(result.error || result.message || 'Sync failed');
+        throw new Error(`Failed to update any parks:\n${errors.join('\n')}`);
       }
+
+      console.log(`✅ Park refresh completed: ${successCount}/${Object.keys(parkIds).length} parks updated`);
     } catch (error) {
       console.error('Failed to refresh park hours:', error);
-
-      // Try to parse error response for debug info
-      if (error instanceof Error && error.message.includes('HTTP')) {
-        try {
-          const response = await fetch('/api/manual-sync', { method: 'POST' });
-          const errorData = await response.json();
-          console.error('API Error Details:', errorData);
-          alert(`Failed to refresh park hours: ${errorData.error || error.message}\n\nCheck console for details.`);
-        } catch (parseError) {
-          alert('Failed to refresh park hours. Please try again.');
-        }
-      } else {
-        alert('Failed to refresh park hours. Please try again.');
-      }
+      alert(`❌ Failed to refresh park hours.\n\n${error instanceof Error ? error.message : 'Unknown error'}\n\nNote: This fetches live data for verification but doesn't update the database.`);
     } finally {
       setIsRefreshingParks(false);
     }
