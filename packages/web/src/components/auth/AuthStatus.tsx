@@ -317,6 +317,82 @@ export default function AuthStatus() {
 
             console.log(`✅ Updated ${eventUpdateCount}/${eventsData.length} events for ${parkName}`);
 
+          // Update park schedules in database (regular operating hours)
+          let scheduleUpdateCount = 0;
+          const scheduleData_filtered = scheduleData.schedule?.filter((item: any) =>
+            item.type === 'OPERATING' && item.date && (item.openingTime || item.closingTime)
+          ) || [];
+
+          console.log(`📅 Found ${scheduleData_filtered.length} operating schedule entries for ${parkName}`);
+
+          for (const schedule of scheduleData_filtered) {
+            try {
+              const scheduleDate = schedule.date; // Already in YYYY-MM-DD format
+
+              // Parse ISO time strings and extract HH:MM format (not HH:MM:SS)
+              const openTimeMatch = schedule.openingTime?.match(/T(\d{2}:\d{2})/);
+              const closeTimeMatch = schedule.closingTime?.match(/T(\d{2}:\d{2})/);
+
+              const regularOpen = openTimeMatch ? openTimeMatch[1] : null;
+              const regularClose = closeTimeMatch ? closeTimeMatch[1] : null;
+
+              // Look for Early Entry and Extended Evening Hours in the same date
+              const sameDate = scheduleData.schedule?.filter((item: any) => item.date === scheduleDate) || [];
+
+              const earlyEntryEvent = sameDate.find((item: any) =>
+                item.type === 'TICKETED_EVENT' &&
+                item.description?.toLowerCase().includes('early entry')
+              );
+
+              const extendedEvent = sameDate.find((item: any) =>
+                item.type === 'TICKETED_EVENT' &&
+                item.description?.toLowerCase().includes('extended evening')
+              );
+
+              const earlyEntryOpenMatch = earlyEntryEvent?.openingTime?.match(/T(\d{2}:\d{2})/);
+              const extendedCloseMatch = extendedEvent?.closingTime?.match(/T(\d{2}:\d{2})/);
+
+              const earlyEntryOpen = earlyEntryOpenMatch ? earlyEntryOpenMatch[1] : null;
+              const extendedClose = extendedCloseMatch ? extendedCloseMatch[1] : null;
+
+              try {
+                // Delete existing record first, then insert
+                await supabase
+                  .from('live_park_schedules')
+                  .delete()
+                  .eq('park_id', parkName)
+                  .eq('schedule_date', scheduleDate);
+
+                const { error: scheduleError } = await supabase.from('live_park_schedules').insert({
+                  park_id: parkName,
+                  schedule_date: scheduleDate,
+                  regular_open: regularOpen,
+                  regular_close: regularClose,
+                  early_entry_open: earlyEntryOpen,
+                  extended_evening_close: extendedClose,
+                  data_source: 'themeparks_wiki',
+                  is_estimated: false,
+                  synced_at: new Date().toISOString()
+                });
+
+                if (scheduleError) {
+                  console.error(`❌ Failed to insert schedule for ${parkName} on ${scheduleDate}:`, scheduleError);
+                  errors.push(`${parkName} schedule ${scheduleDate}: ${scheduleError.message}`);
+                } else {
+                  scheduleUpdateCount++;
+                }
+              } catch (networkError) {
+                console.error(`❌ Network/HTTP error for ${parkName} schedule ${scheduleDate}:`, networkError);
+                errors.push(`${parkName} schedule ${scheduleDate}: Network error - ${networkError instanceof Error ? networkError.message : 'Unknown network error'}`);
+              }
+            } catch (error) {
+              console.error(`❌ Failed to process schedule for ${parkName}:`, error);
+              errors.push(`${parkName} schedule processing: ${error instanceof Error ? error.message : 'Unknown error'}`);
+            }
+          }
+
+          console.log(`✅ Updated ${scheduleUpdateCount}/${scheduleData_filtered.length} schedules for ${parkName}`);
+
           // Debug: Check if we have any errors accumulated
           console.log(`🔍 Current errors for ${parkName}:`, errors.length > 0 ? errors : 'No errors');
 
@@ -346,14 +422,14 @@ export default function AuthStatus() {
 
       // Show results
       if (successCount === Object.keys(parkIds).length) {
-        alert(`✅ Database sync successful!\n\nUpdated live data for all ${successCount} parks:\n• Attractions & wait times\n• Park status & info\n• Special ticketed events (with cleanup)`);
+        alert(`✅ Database sync successful!\n\nUpdated live data for all ${successCount} parks:\n• Attractions & wait times\n• Park status & info\n• Special ticketed events\n• Daily park schedules with EE/EEH`);
       } else if (successCount > 0) {
         alert(`⚠️ Partial success: Updated ${successCount}/${Object.keys(parkIds).length} parks in database.\n\nErrors:\n${errors.join('\n')}`);
       } else {
         throw new Error(`Failed to update any parks:\n${errors.join('\n')}`);
       }
 
-      console.log(`✅ Database sync completed: ${successCount}/${Object.keys(parkIds).length} parks updated with attractions, park info, and special events`);
+      console.log(`✅ Database sync completed: ${successCount}/${Object.keys(parkIds).length} parks updated with attractions, park info, events, and schedules`);
     } catch (error) {
       console.error('Failed to sync live data:', error);
       alert(`❌ Failed to sync live data to database.\n\n${error instanceof Error ? error.message : 'Unknown error'}`);
