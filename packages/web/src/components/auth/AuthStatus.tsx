@@ -247,11 +247,13 @@ export default function AuthStatus() {
 
               if (eventError) {
                 console.error(`❌ Failed to update event for ${parkName} on ${eventDate}:`, eventError);
+                errors.push(`${parkName} event ${eventDate}: ${eventError.message}`);
               } else {
                 eventUpdateCount++;
               }
             } catch (error) {
               console.error(`❌ Failed to process event for ${parkName}:`, error);
+              errors.push(`${parkName} event processing: ${error instanceof Error ? error.message : 'Unknown error'}`);
             }
           }
 
