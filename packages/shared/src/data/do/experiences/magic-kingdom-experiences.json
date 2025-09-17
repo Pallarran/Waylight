@@ -336,5 +336,87 @@
       "transferRequired": false,
       "rainSafe": false
     }
+  },
+  {
+    "id": "bibbidi-bobbidi-boutique",
+    "parkId": "magic-kingdom",
+    "name": "Bibbidi Bobbidi Boutique",
+    "description": "A magical makeover experience where children ages 3-12 can be transformed into their favorite Disney princess or knight. Professional stylists provide hair, makeup, and costume styling in a fairy tale salon setting.",
+    "location": "Fantasyland",
+    "type": "experience",
+    "duration": 60,
+    "intensity": "low",
+    "accessibility": {
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "serviceAnimalsAllowed": true,
+      "signLanguageAvailable": false
+    },
+    "tips": [
+      {
+        "id": "boutique-tip-1",
+        "category": "reservation",
+        "content": "Advance reservations required - book 60 days ahead as this experience fills up quickly",
+        "priority": 5
+      },
+      {
+        "id": "boutique-tip-2",
+        "category": "planning",
+        "content": "Schedule for mid-day so your child can enjoy the rest of the day in their costume",
+        "priority": 5
+      },
+      {
+        "id": "boutique-tip-3",
+        "category": "photo",
+        "content": "Perfect opportunity for character meet-and-greets and photos throughout the park afterward",
+        "priority": 4
+      },
+      {
+        "id": "boutique-tip-4",
+        "category": "general",
+        "content": "Available for ages 3-12 only - bring comfortable shoes for your child to change into",
+        "priority": 4
+      },
+      {
+        "id": "boutique-tip-5",
+        "category": "budget",
+        "content": "Premium experience with additional costs for packages, photos, and costume accessories",
+        "priority": 3
+      }
+    ],
+    "tags": [
+      "princess",
+      "makeover",
+      "character-experience",
+      "reservations-required",
+      "premium",
+      "ages-3-12",
+      "costume",
+      "fantasy"
+    ],
+    "features": {
+      "multiPass": false,
+      "singlePass": false,
+      "singleRider": false,
+      "riderSwitch": false,
+      "mobileCheckin": false,
+      "photoPass": true,
+      "darkRide": false,
+      "getsWet": false,
+      "spinningMotion": false,
+      "loudSounds": false,
+      "strobeEffects": false,
+      "interactiveElements": true,
+      "characterMeet": false,
+      "livePerformance": false,
+      "airConditioning": true,
+      "outdoorExperience": false,
+      "heightRequirement": false,
+      "motionSensitivity": false,
+      "pregnancyAdvisory": false,
+      "wheelchairAccessible": true,
+      "transferRequired": false,
+      "rainSafe": true
+    }
   }
 ]

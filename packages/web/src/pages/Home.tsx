@@ -38,19 +38,19 @@ export default function Home() {
   };
 
   return (
-    <div className="container-waylight pt-4 pb-8 md:pt-6 md:pb-12 lg:pt-8 lg:pb-16">
+    <div className="container-waylight pt-3 pb-6 md:pt-4 md:pb-8 lg:pt-6 lg:pb-12">
       <div className="text-center">
-        <div className="flex justify-center mb-8">
+        <div className="flex justify-center mb-6">
           <img 
             src={WaylightLogo} 
             alt="Waylight" 
             className="w-24 h-24 rounded-2xl shadow-medium"
           />
         </div>
-        <h1 className="text-4xl font-bold text-ink mb-6">
+        <h1 className="text-4xl font-bold text-ink mb-5">
           Welcome to <span className="gradient-sea bg-clip-text text-transparent">Waylight</span>
         </h1>
-        <p className="text-lg text-ink-light mb-8 max-w-2xl mx-auto text-balance">
+        <p className="text-lg text-ink-light mb-6 max-w-2xl mx-auto text-balance">
           Your magical Walt Disney World planning companion. Create personalized itineraries, 
           discover attractions, and make the most of your theme park adventure.
         </p>
@@ -77,8 +77,8 @@ export default function Home() {
           )}
         </div>
         
-        <div className="mt-16">
-          <h2 className="text-2xl font-semibold text-ink text-center mb-12">Key Features</h2>
+        <div className="mt-12">
+          <h2 className="text-2xl font-semibold text-ink text-center mb-8">Key Features</h2>
           <div className="grid md:grid-cols-3 gap-8">
           <div className="card p-6 text-center">
             <div className="w-12 h-12 bg-sea/10 rounded-xl flex items-center justify-center mx-auto mb-4">

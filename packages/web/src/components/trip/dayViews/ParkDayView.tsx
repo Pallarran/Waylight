@@ -82,6 +82,11 @@ const DraggableScheduleItem = ({ item, index, onUpdate, onDelete, moveItem }: Dr
       return '📱';
     }
 
+    // Check for Bibbidi Bobbidi Boutique specifically
+    if (item.name.includes('Bibbidi Bobbidi Boutique')) {
+      return '👸';
+    }
+
     switch (item.type) {
       case 'ride': return '🎢';
       case 'show': return '🎭';
