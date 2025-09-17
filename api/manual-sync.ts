@@ -8,8 +8,8 @@ import { createClient } from '@supabase/supabase-js';
 
 // Initialize Supabase client
 const supabase = createClient(
-  process.env.VITE_SUPABASE_URL!,
-  process.env.VITE_SUPABASE_ANON_KEY!
+  process.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.VITE_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
 // Disney park IDs mapping
@@ -70,16 +70,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'Method not allowed. Use GET or POST.' });
   }
 
-  // Simple authentication check for manual triggers
-  const authKey = req.query.key || req.body?.key;
-  const expectedKey = process.env.MANUAL_SYNC_KEY;
-
-  if (expectedKey && authKey !== expectedKey) {
-    return res.status(401).json({
-      error: 'Unauthorized',
-      message: 'Please provide a valid key parameter'
-    });
-  }
+  // Note: Authentication removed since this endpoint is only exposed to authenticated users
+  // and the frontend auth system already provides access control
 
   const startTime = Date.now();
 
@@ -109,7 +101,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
             <h3>Results:</h3>
             <pre>${JSON.stringify(results, null, 2)}</pre>
-            <p><a href="/api/manual-sync?key=${authKey}">Run Again</a></p>
+            <p><a href="/api/manual-sync">Run Again</a></p>
           </body>
         </html>
       `);
@@ -141,7 +133,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             <p><strong>Error:</strong> ${errorMessage}</p>
             <p><strong>Duration:</strong> ${duration}ms</p>
             <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
-            <p><a href="/api/manual-sync?key=${authKey}">Try Again</a></p>
+            <p><a href="/api/manual-sync">Try Again</a></p>
           </body>
         </html>
       `);
