@@ -12,22 +12,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'Method not allowed. Use GET or POST.' });
   }
 
-  // Simple authentication check for manual triggers
-  const authKey = req.query.key || req.body?.key;
-  const expectedKey = process.env.MANUAL_SYNC_KEY;
-
-  // Only check auth if environment variable is set
-  if (expectedKey && authKey !== expectedKey) {
-    return res.status(401).json({
-      error: 'Unauthorized',
-      message: 'Please provide a valid key parameter'
-    });
-  }
-
-  // If no expected key is set, allow all requests (for development/testing)
-  if (!expectedKey) {
-    console.log('🔓 No MANUAL_SYNC_KEY set - allowing manual sync request');
-  }
+  // Note: Authentication removed since this endpoint is only exposed to authenticated users
+  // and the frontend auth system already provides access control
 
   const startTime = Date.now();
 
