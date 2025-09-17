@@ -84,18 +84,30 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const startTime = Date.now();
 
   try {
-    // Validate environment setup first
-    if (!supabaseUrl || !supabaseKey) {
-      throw new Error('Supabase configuration missing');
-    }
+    // Debug environment variables
+    const envDebug = {
+      NEXT_PUBLIC_SUPABASE_URL: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+      VITE_SUPABASE_URL: !!process.env.VITE_SUPABASE_URL,
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      VITE_SUPABASE_ANON_KEY: !!process.env.VITE_SUPABASE_ANON_KEY,
+      supabaseUrlDefined: !!supabaseUrl,
+      supabaseKeyDefined: !!supabaseKey,
+      urlLength: supabaseUrl?.length || 0,
+      keyLength: supabaseKey?.length || 0
+    };
 
     console.log('🔧 Manual sync triggered...');
-    console.log('Environment check:', {
-      hasUrl: !!supabaseUrl,
-      hasKey: !!supabaseKey,
-      urlLength: supabaseUrl?.length,
-      keyLength: supabaseKey?.length
-    });
+    console.log('Environment debug:', envDebug);
+
+    // Return debug info if URL is missing
+    if (!supabaseUrl || !supabaseKey) {
+      return res.status(500).json({
+        success: false,
+        error: 'Environment configuration missing',
+        debug: envDebug,
+        message: 'Supabase environment variables not found'
+      });
+    }
 
     // For Hobby plan: sync only one park to stay within 10-second limit
     const parkSlug = 'magic-kingdom';
