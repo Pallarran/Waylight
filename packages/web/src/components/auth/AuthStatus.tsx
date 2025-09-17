@@ -82,6 +82,7 @@ export default function AuthStatus() {
       // Fetch data for each park and update database
       for (const [parkName, parkId] of Object.entries(parkIds)) {
         try {
+          console.log(`🚀 Starting sync for ${parkName}...`);
           console.log(`Fetching live data for ${parkName}...`);
 
           // Add delay between requests to avoid rate limiting
@@ -437,6 +438,8 @@ export default function AuthStatus() {
           }
           }
 
+          console.log(`✅ Completed sync for ${parkName}!`);
+
           // Only increment success if no errors occurred for this park
           if (errors.length === 0) {
             successCount++;
@@ -449,6 +452,8 @@ export default function AuthStatus() {
           console.error(`❌ Failed to process ${parkName}:`, error);
         }
       }
+
+      console.log(`🏁 Finished processing all parks. Success count: ${successCount}/${Object.keys(parkIds).length}`);
 
       // Show results
       if (successCount === Object.keys(parkIds).length) {
