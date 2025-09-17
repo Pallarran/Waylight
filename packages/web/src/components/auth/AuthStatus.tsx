@@ -101,13 +101,15 @@ export default function AuthStatus() {
           // Add delay between API calls
           await new Promise(resolve => setTimeout(resolve, 1000)); // 1 second delay
 
-          // Get schedule data for the next 90 days
+          // Get schedule data for the next 60 days (reduced from 90 to avoid timeouts)
           const today = new Date();
           const endDate = new Date(today);
-          endDate.setDate(today.getDate() + 90);
+          endDate.setDate(today.getDate() + 60);
 
           const startDateStr = today.toISOString().split('T')[0];
           const endDateStr = endDate.toISOString().split('T')[0];
+
+          console.log(`📅 Fetching schedule data from ${startDateStr} to ${endDateStr}...`);
 
           const scheduleResponse = await fetchWithRetry(`https://api.themeparks.wiki/v1/entity/${parkId}/schedule?startDate=${startDateStr}&endDate=${endDateStr}`);
           if (!scheduleResponse) {
@@ -354,10 +356,14 @@ export default function AuthStatus() {
             item.type === 'OPERATING' && item.date && (item.openingTime || item.closingTime)
           ) || [];
 
-          console.log(`📅 Found ${scheduleData_filtered.length} operating schedule entries for ${parkName} (90-day range)`);
+          console.log(`📅 Found ${scheduleData_filtered.length} operating schedule entries for ${parkName} (60-day range)`);
 
-          for (const schedule of scheduleData_filtered) {
+          for (const [index, schedule] of scheduleData_filtered.entries()) {
             try {
+              if (index % 10 === 0) {
+                console.log(`📅 Processing schedule ${index + 1}/${scheduleData_filtered.length} for ${parkName}...`);
+              }
+
               const scheduleDate = schedule.date; // Already in YYYY-MM-DD format
 
               // Parse ISO time strings and extract HH:MM format (not HH:MM:SS)
