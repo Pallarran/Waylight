@@ -1,6 +1,6 @@
 import { format, differenceInDays, isAfter, isBefore } from 'date-fns';
 import { Calendar, MapPin, Clock, MoreVertical, XCircle, Users, Share2 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTripStore } from '../../stores';
 import TripSharingModal from '../collaboration/TripSharingModal';
 import CollaborationIndicator from '../collaboration/CollaborationIndicator';
@@ -17,6 +17,13 @@ export default function TripCard({ trip, isActive = false, onClick }: TripCardPr
   const [showMenu, setShowMenu] = useState(false);
   const [showSharingModal, setShowSharingModal] = useState(false);
   const { setActiveTrip, deleteTripById } = useTripStore();
+
+  // Close menu when modal opens
+  useEffect(() => {
+    if (showSharingModal) {
+      setShowMenu(false);
+    }
+  }, [showSharingModal]);
 
   const startDate = new Date(trip.startDate + 'T00:00:00');
   const endDate = new Date(trip.endDate + 'T00:00:00');
@@ -80,7 +87,10 @@ export default function TripCard({ trip, isActive = false, onClick }: TripCardPr
           </button>
           
           {showMenu && (
-            <div className="absolute right-0 top-10 bg-white rounded-lg shadow-medium border border-surface-dark/50 py-2 z-10 min-w-[140px] animate-slide-down">
+            <div
+              className="absolute right-0 top-10 bg-white rounded-lg shadow-medium border border-surface-dark/50 py-2 z-20 min-w-[140px] animate-slide-down"
+              onClick={(e) => e.stopPropagation()}
+            >
               <button
                 onClick={(e) => {
                   e.stopPropagation();
