@@ -822,14 +822,15 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
                 >
                   <Edit className="w-4 h-4" />
                 </button>
-                <button
-                  onClick={() => setShowSharingModal(true)}
-                  className="p-2 text-ink-light hover:text-ink hover:bg-surface-dark/50 rounded-lg transition-colors"
-                  title="Share trip"
-                >
-                  <Share2 className="w-4 h-4" />
-                </button>
               </div>
+
+              <button
+                onClick={() => setShowSharingModal(true)}
+                className="btn-primary btn-sm"
+              >
+                <Share2 className="w-4 h-4 mr-2" />
+                Share Trip
+              </button>
             </div>
           )}
 
