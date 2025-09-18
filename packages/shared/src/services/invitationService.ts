@@ -400,7 +400,7 @@ export class InvitationService {
     return data;
   }
 
-  private async getExistingCollaborator(tripId: string, email: string): Promise<any> {
+  private async getExistingCollaborator(_tripId: string, _email: string): Promise<any> {
     // For now, just return null since we can't easily check email without profile joins
     // This will be improved when we have proper user profile system
     return null;
