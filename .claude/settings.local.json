@@ -61,7 +61,8 @@
       "Bash(start simple-email-test.html)",
       "Bash(npx supabase functions deploy:*)",
       "Bash(deploy-simple-test.bat)",
-      "Bash(./deploy-simple-test.bat)"
+      "Bash(./deploy-simple-test.bat)",
+      "Bash(./cleanup-test-files.bat)"
     ],
     "deny": [],
     "ask": []
