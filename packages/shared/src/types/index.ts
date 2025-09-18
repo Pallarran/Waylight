@@ -118,6 +118,12 @@ export interface Trip {
   travelingParty?: TravelingPartyMember[];
   createdAt: string;
   updatedAt: string;
+  // Collaboration fields
+  ownerId?: string; // User ID of the trip owner
+  isShared?: boolean; // Whether the trip is shared with others
+  lastModifiedBy?: string; // User ID of last person to modify
+  version?: number; // Version number for conflict resolution
+  collaborators?: TripCollaborator[]; // List of collaborators
 }
 
 export interface TripDay {
@@ -205,6 +211,85 @@ export interface ActivityRatingSummary {
   lastCalculatedAt: string;
   createdAt: string;
   updatedAt: string;
+}
+
+// Collaboration Types
+export type PermissionLevel = 'view' | 'edit' | 'admin';
+export type InvitationStatus = 'pending' | 'accepted' | 'declined' | 'expired';
+export type ActivityActionType = 'created' | 'updated' | 'shared' | 'joined' | 'left' | 'item_added' | 'item_removed' | 'item_updated';
+
+export interface TripCollaborator {
+  id: string;
+  tripId: string;
+  userId: string;
+  userEmail?: string;
+  userFullName?: string;
+  permissionLevel: PermissionLevel;
+  invitedBy: string;
+  joinedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface TripInvitation {
+  id: string;
+  tripId: string;
+  tripName?: string; // For display purposes
+  invitedEmail: string;
+  invitedBy: string;
+  inviterName?: string; // For display purposes
+  permissionLevel: PermissionLevel;
+  invitationToken: string;
+  status: InvitationStatus;
+  expiresAt: string;
+  message?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface TripActivityLogEntry {
+  id: string;
+  tripId: string;
+  userId: string;
+  userName?: string; // For display purposes
+  actionType: ActivityActionType;
+  description: string;
+  metadata?: any; // Additional context for the action
+  createdAt: string;
+}
+
+export interface CollaborationContext {
+  currentUser: {
+    id: string;
+    email: string;
+    fullName?: string;
+  };
+  trip: Trip;
+  userPermission: PermissionLevel;
+  canEdit: boolean;
+  canAdmin: boolean;
+  collaborators: TripCollaborator[];
+  pendingInvitations: TripInvitation[];
+  activityLog: TripActivityLogEntry[];
+}
+
+export interface InvitationRequest {
+  tripId: string;
+  email: string;
+  permissionLevel: PermissionLevel;
+  message?: string;
+  expiresInDays?: number; // Default 7 days
+}
+
+export interface ConflictResolution {
+  tripId: string;
+  conflictType: 'version_mismatch' | 'concurrent_edit' | 'permission_denied';
+  serverVersion: number;
+  localVersion: number;
+  conflictedFields: string[];
+  suggestedResolution: 'accept_server' | 'accept_local' | 'manual_merge';
+  serverData: Partial<Trip>;
+  localData: Partial<Trip>;
 }
 
 // Live Data Types

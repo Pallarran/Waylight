@@ -78,23 +78,41 @@ export class SyncService {
     this.updateStatus({ syncing: true, error: null });
 
     try {
-      // Fetch remote trips
-      const { data: remoteTrips, error } = await supabase
+      // Fetch trips owned by user (use basic fields first, add collaboration fields if they exist)
+      const ownedTripsResult = await supabase
         .from('trips')
         .select('*')
         .eq('user_id', user.id)
         .order('updated_at', { ascending: false });
 
-      if (error) throw error;
+      if (ownedTripsResult.error) {
+        console.error('Error fetching owned trips:', ownedTripsResult.error);
+        throw ownedTripsResult.error;
+      }
 
-      // Get local trips (this will be implemented by the app)
+      // Skip collaboration features entirely until RLS is fixed
+      let sharedTripsResult = { data: [], error: null };
+      console.log('Collaboration features temporarily disabled due to RLS issues');
+
+      // Don't even try to query collaboration tables
+      // sharedTripsResult = await supabase...
+
+      // Combine owned and shared trips
+      const ownedTrips = ownedTripsResult.data || [];
+      const sharedTrips = (sharedTripsResult.data || [])
+        .map((item: any) => item?.trips)
+        .filter((trip: any) => trip !== null);
+
+      const allRemoteTrips = [...ownedTrips, ...sharedTrips];
+
+      // Get local trips
       const localTrips = await this.getLocalTrips();
 
-      // Merge and resolve conflicts
-      const mergedTrips = this.mergeTrips(localTrips, remoteTrips || []);
+      // Merge and resolve conflicts with collaboration awareness
+      const mergedTrips = this.mergeTripsWithCollaboration(localTrips, allRemoteTrips, user.id);
 
       // Save merged trips locally and remotely
-      await this.saveTrips(mergedTrips);
+      await this.saveTripsWithCollaboration(mergedTrips, user.id);
 
       this.updateStatus({
         syncing: false,
@@ -122,6 +140,7 @@ export class SyncService {
 
   private getLocalTripsCallback?: () => Promise<Trip[]>;
   private saveLocalTripsCallback?: (trips: Trip[]) => Promise<void>;
+  private conflictCallback?: (conflictedTrips: Trip[]) => Promise<void>;
 
   setLocalDataCallbacks(
     getLocalTrips: () => Promise<Trip[]>,
@@ -129,6 +148,10 @@ export class SyncService {
   ) {
     this.getLocalTripsCallback = getLocalTrips;
     this.saveLocalTripsCallback = saveLocalTrips;
+  }
+
+  setConflictCallback(conflictHandler: (conflictedTrips: Trip[]) => Promise<void>) {
+    this.conflictCallback = conflictHandler;
   }
 
   startPeriodicSync(intervalMinutes: number = 5): void {
@@ -149,7 +172,8 @@ export class SyncService {
     }
   }
 
-  private mergeTrips(localTrips: Trip[], remoteTrips: any[]): Trip[] {
+
+  private mergeTripsWithCollaboration(localTrips: Trip[], remoteTrips: any[], userId: string): Trip[] {
     const tripMap = new Map<string, Trip>();
 
     // Add local trips
@@ -157,58 +181,107 @@ export class SyncService {
       tripMap.set(trip.id, trip);
     });
 
-    // Merge remote trips (remote wins on conflicts based on updated_at)
+    // Merge remote trips with collaboration awareness
     remoteTrips.forEach(remoteTrip => {
       const localTrip = tripMap.get(remoteTrip.id);
-      
-      if (!localTrip || new Date(remoteTrip.updated_at) > new Date(localTrip.updatedAt)) {
-        // Convert remote trip to local format
-        tripMap.set(remoteTrip.id, {
-          id: remoteTrip.id,
-          name: remoteTrip.name,
-          startDate: remoteTrip.start_date,
-          endDate: remoteTrip.end_date,
-          notes: remoteTrip.notes || '',
-          accommodation: remoteTrip.accommodation || undefined,
-          travelingParty: remoteTrip.traveling_party || undefined,
-          days: remoteTrip.days || [],
-          createdAt: remoteTrip.created_at,
-          updatedAt: remoteTrip.updated_at
-        });
+      const isOwner = remoteTrip.user_id === userId;
+
+      // For shared trips, always prefer server version if it's newer
+      // For owned trips, use version numbers for conflict detection
+      if (!localTrip || this.shouldUseRemoteVersion(localTrip, remoteTrip, isOwner)) {
+        tripMap.set(remoteTrip.id, this.convertRemoteTripToLocal(remoteTrip));
+      } else if (localTrip && this.hasVersionConflict(localTrip, remoteTrip)) {
+        // Mark trip for conflict resolution
+        const conflictedTrip = this.convertRemoteTripToLocal(remoteTrip);
+        conflictedTrip.version = -1; // Special marker for conflicts
+        tripMap.set(remoteTrip.id, conflictedTrip);
       }
     });
 
     return Array.from(tripMap.values());
   }
 
-  private async saveTrips(trips: Trip[]): Promise<void> {
-    const user = authService.getState().user;
-    if (!user) return;
+  private shouldUseRemoteVersion(localTrip: Trip, remoteTrip: any, isOwner: boolean): boolean {
+    // For shared trips (not owner), always prefer remote
+    if (!isOwner) {
+      return new Date(remoteTrip.updated_at) > new Date(localTrip.updatedAt);
+    }
 
-    // Save to Supabase
-    const tripsForSupabase = trips.map(trip => ({
-      id: trip.id,
-      user_id: user.id,
-      name: trip.name,
-      start_date: trip.startDate,
-      end_date: trip.endDate,
-      notes: trip.notes || null,
-      accommodation: trip.accommodation || null,
-      traveling_party: trip.travelingParty || null,
-      days: trip.days,
-      created_at: trip.createdAt,
-      updated_at: trip.updatedAt
-    }));
+    // For owned trips, use version numbers
+    const localVersion = localTrip.version || 0;
+    const remoteVersion = remoteTrip.version || 0;
 
-    const { error } = await supabase
-      .from('trips')
-      .upsert(tripsForSupabase, { onConflict: 'id' });
+    return remoteVersion > localVersion;
+  }
 
-    if (error) throw error;
+  private hasVersionConflict(localTrip: Trip, remoteTrip: any): boolean {
+    const localVersion = localTrip.version || 0;
+    const remoteVersion = remoteTrip.version || 0;
 
-    // Save locally using callback
+    // Conflict if local version is higher than remote (user made changes that weren't synced)
+    return localVersion > remoteVersion;
+  }
+
+  private convertRemoteTripToLocal(remoteTrip: any): Trip {
+    return {
+      id: remoteTrip.id,
+      name: remoteTrip.name,
+      startDate: remoteTrip.start_date,
+      endDate: remoteTrip.end_date,
+      notes: remoteTrip.notes || '',
+      accommodation: remoteTrip.accommodation || undefined,
+      travelingParty: remoteTrip.traveling_party || undefined,
+      days: remoteTrip.days || [],
+      createdAt: remoteTrip.created_at,
+      updatedAt: remoteTrip.updated_at,
+      ownerId: remoteTrip.user_id,
+      isShared: remoteTrip.is_shared,
+      lastModifiedBy: remoteTrip.last_modified_by,
+      version: remoteTrip.version || 0
+    };
+  }
+
+
+  private async saveTripsWithCollaboration(trips: Trip[], userId: string): Promise<void> {
+    // Separate owned trips from shared trips
+    const ownedTrips = trips.filter(trip => trip.ownerId === userId);
+    // Note: sharedTrips are read-only for collaborators
+
+    // Only save owned trips to Supabase (shared trips are read-only for collaborators)
+    if (ownedTrips.length > 0) {
+      const tripsForSupabase = ownedTrips.map(trip => ({
+        id: trip.id,
+        user_id: userId,
+        name: trip.name,
+        start_date: trip.startDate,
+        end_date: trip.endDate,
+        notes: trip.notes || null,
+        accommodation: trip.accommodation || null,
+        traveling_party: trip.travelingParty || null,
+        days: trip.days,
+        is_shared: trip.isShared || false,
+        last_modified_by: trip.lastModifiedBy || null,
+        version: trip.version || 0,
+        created_at: trip.createdAt,
+        updated_at: trip.updatedAt
+      }));
+
+      const { error } = await supabase
+        .from('trips')
+        .upsert(tripsForSupabase, { onConflict: 'id' });
+
+      if (error) throw error;
+    }
+
+    // Save all trips (owned + shared) locally
     if (this.saveLocalTripsCallback) {
       await this.saveLocalTripsCallback(trips);
+    }
+
+    // Notify about conflicts if any trips have version -1
+    const conflictedTrips = trips.filter(trip => trip.version === -1);
+    if (conflictedTrips.length > 0 && this.conflictCallback) {
+      await this.conflictCallback(conflictedTrips);
     }
   }
 
@@ -219,21 +292,29 @@ export class SyncService {
       return;
     }
 
+    // Build the trip object with basic fields first
+    const tripData: any = {
+      id: trip.id,
+      user_id: user.id,
+      name: trip.name,
+      start_date: trip.startDate,
+      end_date: trip.endDate,
+      notes: trip.notes || null,
+      accommodation: trip.accommodation || null,
+      traveling_party: trip.travelingParty || null,
+      days: trip.days,
+      created_at: trip.createdAt,
+      updated_at: new Date().toISOString()
+    };
+
+    // Add collaboration fields if they exist in the trip object
+    if (trip.isShared !== undefined) tripData.is_shared = trip.isShared;
+    if (trip.lastModifiedBy !== undefined) tripData.last_modified_by = trip.lastModifiedBy || user.id;
+    if (trip.version !== undefined) tripData.version = (trip.version || 0) + 1;
+
     const { error } = await supabase
       .from('trips')
-      .upsert({
-        id: trip.id,
-        user_id: user.id,
-        name: trip.name,
-        start_date: trip.startDate,
-        end_date: trip.endDate,
-        notes: trip.notes || null,
-        accommodation: trip.accommodation || null,
-        traveling_party: trip.travelingParty || null,
-        days: trip.days,
-        created_at: trip.createdAt,
-        updated_at: new Date().toISOString()
-      }, { onConflict: 'id' });
+      .upsert(tripData, { onConflict: 'id' });
 
     if (error) throw error;
   }

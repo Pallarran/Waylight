@@ -26,6 +26,8 @@ export * from './services/queueTimesApi';
 export * from './services/crowdPredictionRepository';
 export * from './services/backgroundSyncService';
 export * from './services/activityRatingsService';
+export * from './services/invitationService';
+export * from './services/collaborationService';
 
 // Constants
 export const APP_NAME = 'Waylight';
