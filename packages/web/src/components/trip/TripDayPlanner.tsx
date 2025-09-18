@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { format, addDays } from 'date-fns';
-import { Plus, Calendar, Clock, MapPin, ChevronDown, GripVertical, Edit, Save, XCircle, ArrowLeft, Info, Users, Star, Share2, X } from 'lucide-react';
+import { Plus, Calendar, Clock, MapPin, ChevronDown, GripVertical, Edit, Save, XCircle, ArrowLeft, Info, Users, Star, Share2 } from 'lucide-react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useTripStore } from '../../stores';
@@ -423,7 +423,7 @@ const DraggableItem = ({ item, index, tripId, dayId, moveItem }: DraggableItemPr
                 onClick={handleCancel}
                 className="btn-secondary btn-sm flex items-center"
               >
-                <X className="w-3 h-3 mr-1" />
+                <XCircle className="w-3 h-3 mr-1" />
                 Cancel
               </button>
             </div>
@@ -796,7 +796,7 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
                     onClick={handleTripCancel}
                     className="btn-secondary flex items-center"
                   >
-                    <X className="w-4 h-4 mr-2" />
+                    <XCircle className="w-4 h-4 mr-2" />
                     Cancel
                   </button>
                 </div>
