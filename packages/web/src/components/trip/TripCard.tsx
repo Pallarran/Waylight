@@ -101,17 +101,6 @@ export default function TripCard({ trip, isActive = false, onClick }: TripCardPr
               >
                 Set Active
               </button>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShowSharingModal(true);
-                  setShowMenu(false);
-                }}
-                className="block w-full px-4 py-2 text-left text-sm text-ink hover:bg-surface-dark/50 transition-colors duration-150 flex items-center"
-              >
-                <Share2 className="w-4 h-4 mr-2" />
-                Share Trip
-              </button>
               <hr className="my-1 border-surface-dark/30" />
               <button
                 onClick={(e) => {

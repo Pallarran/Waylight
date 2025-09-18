@@ -53,7 +53,9 @@ const TripSharingModal: React.FC<TripSharingModalProps> = ({
       setInvitations(inviteData.filter(inv => inv.status === 'pending'));
     } catch (error) {
       console.error('Failed to load collaboration data:', error);
-      setError('Failed to load collaboration data');
+      // Don't show error for empty collaboration data - it's normal for new trips
+      setCollaborators([]);
+      setInvitations([]);
     }
   };
 
