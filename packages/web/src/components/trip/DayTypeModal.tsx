@@ -209,17 +209,28 @@ export default function DayTypeModal({
                 </div>
               </div>
 
-              {/* Reset Option */}
-              {tripDay.dayType && (
-                <div className="mt-6 pt-4 border-t border-surface-dark/30">
+              {/* Reset and Remove Options */}
+              <div className="mt-6 pt-4 border-t border-surface-dark/30 space-y-3">
+                {tripDay.dayType && (
                   <button
                     onClick={() => handleDayTypeClick(null)}
                     className="w-full p-3 text-sm text-ink-light hover:text-ink border border-surface-dark rounded-lg hover:bg-surface-dark/50 transition-colors"
                   >
                     Reset to auto-detect ({getDayTypeInfo(detectedDayType).name})
                   </button>
-                </div>
-              )}
+                )}
+
+                <button
+                  onClick={async () => {
+                    await onSelectDayType(null);
+                    onClose();
+                    resetModalState();
+                  }}
+                  className="w-full p-3 text-sm text-red-600 hover:text-red-700 border border-red-200 rounded-lg hover:bg-red-50 transition-colors"
+                >
+                  🗑️ Remove Day Type (Regular Day)
+                </button>
+              </div>
             </>
           )}
 
