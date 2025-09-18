@@ -10,6 +10,13 @@ export interface DayTypeInfo {
 }
 
 export const DAY_TYPE_INFO: Record<DayType, DayTypeInfo> = {
+  'unplanned': {
+    type: 'unplanned',
+    name: 'Unplanned Day',
+    icon: '📝',
+    description: 'Ready to start planning',
+    color: 'text-gray-500'
+  },
   'park-day': {
     type: 'park-day',
     name: 'Park Day',
@@ -215,6 +222,14 @@ export function needsComplexPlanning(dayType: DayType): boolean {
  */
 export function getDayLayoutConfig(dayType: DayType) {
   switch (dayType) {
+    case 'unplanned':
+      return {
+        layout: '1-column',
+        centerWidth: 'lg:col-span-12 max-w-4xl mx-auto',
+        showPlanningTools: false,
+        showLightningLane: false
+      };
+
     case 'park-day':
     case 'park-hopper':
       return {

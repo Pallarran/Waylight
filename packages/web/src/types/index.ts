@@ -132,7 +132,8 @@ export interface CheatSheetData {
   }[];
 }
 
-export type DayType = 
+export type DayType =
+  | 'unplanned'
   | 'park-day'
   | 'park-hopper'
   | 'check-in'

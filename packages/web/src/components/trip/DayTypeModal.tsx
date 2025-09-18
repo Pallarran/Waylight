@@ -85,6 +85,7 @@ export default function DayTypeModal({
   };
 
   const dayTypes: DayType[] = [
+    'unplanned',
     'park-day',
     'park-hopper',
     'check-in',
@@ -222,13 +223,13 @@ export default function DayTypeModal({
 
                 <button
                   onClick={async () => {
-                    await onSelectDayType(null);
+                    await onSelectDayType('unplanned');
                     onClose();
                     resetModalState();
                   }}
-                  className="w-full p-3 text-sm text-red-600 hover:text-red-700 border border-red-200 rounded-lg hover:bg-red-50 transition-colors"
+                  className="w-full p-3 text-sm text-gray-600 hover:text-gray-700 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                 >
-                  🗑️ Remove Day Type (Regular Day)
+                  📝 Set as Unplanned Day
                 </button>
               </div>
             </>

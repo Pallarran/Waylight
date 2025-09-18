@@ -12,6 +12,7 @@ import { detectDayType, getDayIcon, getDayTypeInfo } from '../../utils/dayTypeUt
 import TripOverview from './TripOverview';
 import CheatSheetView from './CheatSheetView';
 import TripSharingModal from '../collaboration/TripSharingModal';
+import UnplannedDayView from './dayViews/UnplannedDayView';
 import RestDayView from './dayViews/RestDayView';
 import CheckInDayView from './dayViews/CheckInDayView';
 import CheckOutDayView from './dayViews/CheckOutDayView';
@@ -946,7 +947,9 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
           const detectedDayType = detectDayType(selectedDay, trip, selectedDayIndex);
 
           // Render specialized day view based on detected type
-          if (detectedDayType === 'rest-day') {
+          if (detectedDayType === 'unplanned') {
+            return <UnplannedDayView trip={trip} tripDay={selectedDay} date={selectedDate!} onOpenDayTypeModal={() => setShowDayTypeModal(true)} />;
+          } else if (detectedDayType === 'rest-day') {
             return <RestDayView trip={trip} tripDay={selectedDay} date={selectedDate!} onQuickAdd={handleQuickAdd} onOpenDayTypeModal={() => setShowDayTypeModal(true)} />;
           } else if (detectedDayType === 'check-in') {
             return <CheckInDayView trip={trip} tripDay={selectedDay} date={selectedDate!} onQuickAdd={handleQuickAdd} onOpenDayTypeModal={() => setShowDayTypeModal(true)} />;
