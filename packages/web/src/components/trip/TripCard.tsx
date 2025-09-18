@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useTripStore } from '../../stores';
 import TripSharingModal from '../collaboration/TripSharingModal';
 import CollaborationIndicator from '../collaboration/CollaborationIndicator';
+import { getPlannedDaysCount } from '../../utils/trip';
 
 import type { Trip } from '../../types';
 
@@ -135,7 +136,7 @@ export default function TripCard({ trip, isActive = false, onClick }: TripCardPr
         <div className="flex items-center text-ink-light">
           <MapPin className="w-4 h-4 mr-3" />
           <span className="text-sm">
-            {duration} day{duration !== 1 ? 's' : ''} trip ({trip.days?.length || 0} planned)
+            {duration} day{duration !== 1 ? 's' : ''} trip ({getPlannedDaysCount(trip)} planned)
           </span>
         </div>
 
