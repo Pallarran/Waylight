@@ -401,13 +401,9 @@ export class InvitationService {
   }
 
   private async getExistingCollaborator(tripId: string, email: string): Promise<any> {
-    const { data } = await supabase
-      .from('trip_collaborators')
-      .select('*, profiles!trip_collaborators_user_id_fkey(email)')
-      .eq('trip_id', tripId)
-      .single();
-
-    return data?.profiles?.email?.toLowerCase() === email.toLowerCase() ? data : null;
+    // For now, just return null since we can't easily check email without profile joins
+    // This will be improved when we have proper user profile system
+    return null;
   }
 
   private async getExistingCollaboratorByUserId(tripId: string, userId: string): Promise<any> {
@@ -484,7 +480,7 @@ export class InvitationService {
       };
 
       // Call the Supabase Edge Function
-      const { data, error } = await supabase.functions.invoke('send-invitation', {
+      const { data, error } = await supabase.functions.invoke('send-invitation-simple', {
         body: emailData,
         headers: {
           Authorization: `Bearer ${session.access_token}`,
