@@ -6,7 +6,7 @@ import Home from './pages/Home';
 const TripBuilderWorking = lazy(() => import('./pages/TripBuilderWorking'));
 const Settings = lazy(() => import('./pages/Settings'));
 const WaypointsWorking = lazy(() => import('./pages/WaypointsWorking'));
-const InviteAcceptance = lazy(() => import('./pages/InviteTest'));
+const InviteAcceptance = lazy(() => import('./pages/InviteAcceptanceSimple'));
 
 // Component to conditionally render with or without Layout
 function AppContent() {
