@@ -59,7 +59,7 @@ export interface Database {
       trips: {
         Row: {
           id: string;
-          user_id: string;
+          user_id: string; // Owner of the trip
           name: string;
           start_date: string;
           end_date: string;
@@ -67,6 +67,9 @@ export interface Database {
           accommodation: any | null; // JSONB for AccommodationDetails
           traveling_party: any | null; // JSONB for TravelingPartyMember[]
           days: any; // JSONB
+          is_shared: boolean; // Whether trip is shared with others
+          last_modified_by: string | null; // User ID of last person to modify
+          version: number; // Version number for conflict resolution
           created_at: string;
           updated_at: string;
         };
@@ -80,6 +83,9 @@ export interface Database {
           accommodation?: any | null;
           traveling_party?: any | null;
           days?: any;
+          is_shared?: boolean;
+          last_modified_by?: string | null;
+          version?: number;
           created_at?: string;
           updated_at?: string;
         };
@@ -93,6 +99,9 @@ export interface Database {
           accommodation?: any | null;
           traveling_party?: any | null;
           days?: any;
+          is_shared?: boolean;
+          last_modified_by?: string | null;
+          version?: number;
           created_at?: string;
           updated_at?: string;
         };
@@ -439,6 +448,108 @@ export interface Database {
           synced_at?: string;
           created_at?: string;
           updated_at?: string;
+        };
+      };
+      trip_collaborators: {
+        Row: {
+          id: string;
+          trip_id: string;
+          user_id: string;
+          permission_level: 'view' | 'edit' | 'admin';
+          invited_by: string; // User ID who sent the invitation
+          joined_at: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          trip_id: string;
+          user_id: string;
+          permission_level: 'view' | 'edit' | 'admin';
+          invited_by: string;
+          joined_at?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          trip_id?: string;
+          user_id?: string;
+          permission_level?: 'view' | 'edit' | 'admin';
+          invited_by?: string;
+          joined_at?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      trip_invitations: {
+        Row: {
+          id: string;
+          trip_id: string;
+          invited_email: string;
+          invited_by: string; // User ID who sent the invitation
+          permission_level: 'view' | 'edit' | 'admin';
+          invitation_token: string;
+          status: 'pending' | 'accepted' | 'declined' | 'expired';
+          expires_at: string;
+          message: string | null; // Optional personal message
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          trip_id: string;
+          invited_email: string;
+          invited_by: string;
+          permission_level: 'view' | 'edit' | 'admin';
+          invitation_token?: string;
+          status?: 'pending' | 'accepted' | 'declined' | 'expired';
+          expires_at?: string;
+          message?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          trip_id?: string;
+          invited_email?: string;
+          invited_by?: string;
+          permission_level?: 'view' | 'edit' | 'admin';
+          invitation_token?: string;
+          status?: 'pending' | 'accepted' | 'declined' | 'expired';
+          expires_at?: string;
+          message?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      trip_activity_log: {
+        Row: {
+          id: string;
+          trip_id: string;
+          user_id: string;
+          action_type: 'created' | 'updated' | 'shared' | 'joined' | 'left' | 'item_added' | 'item_removed' | 'item_updated';
+          description: string;
+          metadata: any | null; // JSONB for additional context
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          trip_id: string;
+          user_id: string;
+          action_type: 'created' | 'updated' | 'shared' | 'joined' | 'left' | 'item_added' | 'item_removed' | 'item_updated';
+          description: string;
+          metadata?: any | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          trip_id?: string;
+          user_id?: string;
+          action_type?: 'created' | 'updated' | 'shared' | 'joined' | 'left' | 'item_added' | 'item_removed' | 'item_updated';
+          description?: string;
+          metadata?: any | null;
+          created_at?: string;
         };
       };
     };

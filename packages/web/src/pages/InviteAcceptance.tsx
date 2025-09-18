@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Users, Calendar, MapPin, Clock, CheckCircle, XCircle, LogIn } from 'lucide-react';
-import { authService, invitationService } from '@waylight/shared';
+import { Users, Calendar, MapPin, Clock, CheckCircle, XCircle } from 'lucide-react';
+import { invitationService, authService } from '@waylight/shared';
 import type { TripInvitation } from '@waylight/shared';
 
-const InviteAcceptanceFull: React.FC = () => {
+const InviteAcceptance: React.FC = () => {
   const { token } = useParams<{ token: string }>();
   const navigate = useNavigate();
   const [invitation, setInvitation] = useState<TripInvitation | null>(null);
@@ -14,8 +14,8 @@ const InviteAcceptanceFull: React.FC = () => {
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
-    checkAuthState();
     loadInvitation();
+    checkAuthState();
   }, [token]);
 
   const checkAuthState = () => {
@@ -43,13 +43,13 @@ const InviteAcceptanceFull: React.FC = () => {
   };
 
   const handleAcceptInvitation = async () => {
-    if (!token || !user || !invitation) return;
+    if (!invitation || !user) return;
 
     try {
       setAccepting(true);
-      await invitationService.acceptInvitation(token);
+      await invitationService.acceptInvitation(invitation.id);
 
-      // Navigate to the trip
+      // Show success message and redirect to the trip
       navigate(`/trip/${invitation.trip_id}`, {
         replace: true,
         state: { message: 'Successfully joined the trip!' }
@@ -63,10 +63,10 @@ const InviteAcceptanceFull: React.FC = () => {
   };
 
   const handleDeclineInvitation = async () => {
-    if (!token) return;
+    if (!invitation) return;
 
     try {
-      await invitationService.declineInvitation(token);
+      await invitationService.declineInvitation(invitation.id);
       setError('Invitation declined');
     } catch (err) {
       console.error('Failed to decline invitation:', err);
@@ -75,11 +75,10 @@ const InviteAcceptanceFull: React.FC = () => {
   };
 
   const handleSignIn = () => {
-    // For demo purposes, just show message
-    alert('Sign in functionality would redirect to authentication. \n\nNote: This is a demo.');
-
-    // In a real implementation:
-    // navigate('/auth/signin', { state: { returnTo: `/invite/${token}` } });
+    // Redirect to sign in with return URL
+    navigate('/auth/signin', {
+      state: { returnTo: `/invite/${token}` }
+    });
   };
 
   if (loading) {
@@ -145,7 +144,7 @@ const InviteAcceptanceFull: React.FC = () => {
         <div className="p-8">
           {/* Trip Information */}
           <div className="bg-slate-50 rounded-lg p-6 mb-6">
-            <h2 className="text-2xl font-bold text-slate-900 mb-2">{invitation.trip?.name || 'Trip Invitation'}</h2>
+            <h2 className="text-2xl font-bold text-slate-900 mb-2">{invitation.trip?.name}</h2>
             <div className="flex items-center text-slate-600 mb-2">
               <Users className="w-4 h-4 mr-2" />
               <span>Invited by <strong>{invitation.inviter?.full_name || 'Trip organizer'}</strong></span>
@@ -173,20 +172,6 @@ const InviteAcceptanceFull: React.FC = () => {
             )}
           </div>
 
-          {/* Token Info for Demo */}
-          <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-            <div className="flex items-center text-green-800 mb-2">
-              <CheckCircle className="w-5 h-5 mr-2" />
-              <span className="font-semibold">✅ Invitation System Working!</span>
-            </div>
-            <p className="text-green-700 text-sm">
-              Token: <code className="bg-green-100 px-2 py-1 rounded">{token}</code>
-            </p>
-            <p className="text-green-700 text-sm mt-1">
-              All systems operational: Email service, routing, and invitation page display.
-            </p>
-          </div>
-
           {/* Expiration Notice */}
           {isExpired ? (
             <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
@@ -194,6 +179,9 @@ const InviteAcceptanceFull: React.FC = () => {
                 <Clock className="w-5 h-5 mr-2" />
                 <span className="font-semibold">This invitation has expired</span>
               </div>
+              <p className="text-red-600 text-sm mt-1">
+                Expired on {new Date(invitation.expires_at).toLocaleDateString()}
+              </p>
             </div>
           ) : (
             <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6">
@@ -214,9 +202,8 @@ const InviteAcceptanceFull: React.FC = () => {
               </p>
               <button
                 onClick={handleSignIn}
-                className="bg-sea text-white px-8 py-3 rounded-lg font-semibold hover:bg-sea-dark transition-colors flex items-center gap-2 mx-auto"
+                className="bg-sea text-white px-8 py-3 rounded-lg font-semibold hover:bg-sea-dark transition-colors"
               >
-                <LogIn className="w-5 h-5" />
                 Sign In to Accept
               </button>
             </div>
@@ -252,9 +239,8 @@ const InviteAcceptanceFull: React.FC = () => {
               <button
                 onClick={handleDeclineInvitation}
                 disabled={accepting}
-                className="bg-slate-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-slate-600 transition-colors disabled:opacity-50 flex items-center gap-2"
+                className="bg-slate-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-slate-600 transition-colors disabled:opacity-50"
               >
-                <XCircle className="w-5 h-5" />
                 Decline
               </button>
             </div>
@@ -262,18 +248,10 @@ const InviteAcceptanceFull: React.FC = () => {
 
           {/* Footer */}
           <div className="mt-8 pt-6 border-t border-slate-200 text-center text-sm text-slate-500">
-            <p>This invitation was sent by Waylight on behalf of {invitation.inviter?.full_name || 'Trip organizer'}</p>
+            <p>This invitation was sent by Waylight on behalf of {invitation.inviter?.full_name}</p>
             <p className="mt-1">
               If you didn't expect this invitation, you can safely ignore it.
             </p>
-
-            {/* Demo Notice */}
-            <div className="mt-4 p-3 bg-blue-50 rounded-lg">
-              <p className="text-blue-800 font-semibold text-sm">🎯 Demo Mode</p>
-              <p className="text-blue-700 text-xs">
-                This is a working demo of the invitation system. Full database integration would connect to real trip data.
-              </p>
-            </div>
           </div>
         </div>
       </div>
@@ -281,4 +259,4 @@ const InviteAcceptanceFull: React.FC = () => {
   );
 };
 
-export default InviteAcceptanceFull;
+export default InviteAcceptance;

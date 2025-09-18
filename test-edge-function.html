@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Waylight Email Service</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f8fafc;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #374151;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        button {
+            background-color: #0ea5a8;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0891b2;
+        }
+        button:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+        }
+        .success {
+            background-color: #d1fae5;
+            border: 1px solid #34d399;
+            color: #065f46;
+        }
+        .error {
+            background-color: #fee2e2;
+            border: 1px solid #f87171;
+            color: #991b1b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test Waylight Email Service</h1>
+        <p>This will test your deployed Edge Function. Make sure you've set the environment variables in Supabase first!</p>
+
+        <form id="testForm">
+            <div class="input-group">
+                <label for="testEmail">Test Email Address:</label>
+                <input type="email" id="testEmail" required placeholder="your-email@example.com">
+            </div>
+
+            <div class="input-group">
+                <label for="inviterName">Your Name:</label>
+                <input type="text" id="inviterName" required placeholder="John Doe">
+            </div>
+
+            <div class="input-group">
+                <label for="tripName">Trip Name:</label>
+                <input type="text" id="tripName" required placeholder="Amazing Disney World Adventure">
+            </div>
+
+            <div class="input-group">
+                <label for="message">Personal Message (optional):</label>
+                <textarea id="message" rows="3" placeholder="Join me for an incredible vacation!"></textarea>
+            </div>
+
+            <button type="submit" id="testButton">🚀 Send Test Email</button>
+        </form>
+
+        <div id="result" style="display: none;"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('testForm');
+        const button = document.getElementById('testButton');
+        const result = document.getElementById('result');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            button.disabled = true;
+            button.textContent = '⏳ Sending...';
+            result.style.display = 'none';
+
+            const testData = {
+                invitationId: 'e4017bf6-a2d8-4be7-be98-f91f896eeca8',
+                invitedEmail: document.getElementById('testEmail').value,
+                inviterName: document.getElementById('inviterName').value,
+                tripName: document.getElementById('tripName').value,
+                invitationToken: 'test_token_199a9f28f9',
+                permissionLevel: 'edit',
+                message: document.getElementById('message').value || undefined,
+                expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
+            };
+
+            try {
+                const response = await fetch('https://zclzhvkoqwelhfxahaly.supabase.co/functions/v1/send-invitation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6IlY4WWtNLzNyaGRRZ0xEL2siLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3pjbHpodmtvcXdlbGhmeGFoYWx5LnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiJhODlhZmIxZi02NTY4LTRmMzYtODdhNS1jN2EwZmIzYmE1ZWEiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU4MTYxODc5LCJpYXQiOjE3NTgxNTgyNzksImVtYWlsIjoidmluY2VudC5qdXRlYXVAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJlbWFpbCI6InZpbmNlbnQuanV0ZWF1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmdWxsX25hbWUiOiJWaW5jZW50IEp1dGVhdSIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwic3ViIjoiYTg5YWZiMWYtNjU2OC00ZjM2LTg3YTUtYzdhMGZiM2JhNWVhIn0sInJvbGUiOiJhdXRoZW50aWNhdGVkIiwiYWFsIjoiYWFsMSIsImFtciI6W3sibWV0aG9kIjoib3RwIiwidGltZXN0YW1wIjoxNzU3NTUzMzA5fV0sInNlc3Npb25faWQiOiI4ZjBhODJlNC1jMDllLTQ0M2EtYmFlMC0xZTJiMjA4NGEwMjYiLCJpc19hbm9ueW1vdXMiOmZhbHNlfQ.aD8DCY73euUnDdB4vOmhhWGvXVw9uSlYZYLSAoGSgag', // You'll need to replace this
+                    },
+                    body: JSON.stringify(testData)
+                });
+
+                const responseData = await response.json();
+
+                if (response.ok) {
+                    result.className = 'result success';
+                    result.innerHTML = `
+                        <h3>✅ Success!</h3>
+                        <p>Test email sent successfully!</p>
+                        <p><strong>Email ID:</strong> ${responseData.emailId || 'N/A'}</p>
+                        <p>Check your inbox (and spam folder) for the invitation email.</p>
+                    `;
+                } else {
+                    throw new Error(responseData.error || 'Unknown error');
+                }
+            } catch (error) {
+                result.className = 'result error';
+                result.innerHTML = `
+                    <h3>❌ Error</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                    <p><strong>Troubleshooting:</strong></p>
+                    <ul>
+                        <li>Make sure you've set RESEND_API_KEY in Supabase</li>
+                        <li>Check that APP_URL is set correctly</li>
+                        <li>Verify your Resend domain is verified</li>
+                        <li>Replace YOUR_USER_JWT_TOKEN_HERE with an actual user token</li>
+                    </ul>
+                `;
+            }
+
+            result.style.display = 'block';
+            button.disabled = false;
+            button.textContent = '🚀 Send Test Email';
+        });
+    </script>
+</body>
+</html>

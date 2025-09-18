@@ -1,7 +1,9 @@
 import { format, differenceInDays, isAfter, isBefore } from 'date-fns';
-import { Calendar, MapPin, Clock, MoreVertical, XCircle } from 'lucide-react';
+import { Calendar, MapPin, Clock, MoreVertical, XCircle, Users, Share2 } from 'lucide-react';
 import { useState } from 'react';
 import { useTripStore } from '../../stores';
+import TripSharingModal from '../collaboration/TripSharingModal';
+import CollaborationIndicator from '../collaboration/CollaborationIndicator';
 
 import type { Trip } from '../../types';
 
@@ -13,6 +15,7 @@ interface TripCardProps {
 
 export default function TripCard({ trip, isActive = false, onClick }: TripCardProps) {
   const [showMenu, setShowMenu] = useState(false);
+  const [showSharingModal, setShowSharingModal] = useState(false);
   const { setActiveTrip, deleteTripById } = useTripStore();
 
   const startDate = new Date(trip.startDate + 'T00:00:00');
@@ -77,7 +80,7 @@ export default function TripCard({ trip, isActive = false, onClick }: TripCardPr
           </button>
           
           {showMenu && (
-            <div className="absolute right-0 top-10 bg-white rounded-lg shadow-medium border border-surface-dark/50 py-2 z-10 min-w-[120px] animate-slide-down">
+            <div className="absolute right-0 top-10 bg-white rounded-lg shadow-medium border border-surface-dark/50 py-2 z-10 min-w-[140px] animate-slide-down">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -88,6 +91,18 @@ export default function TripCard({ trip, isActive = false, onClick }: TripCardPr
               >
                 Set Active
               </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowSharingModal(true);
+                  setShowMenu(false);
+                }}
+                className="block w-full px-4 py-2 text-left text-sm text-ink hover:bg-surface-dark/50 transition-colors duration-150 flex items-center"
+              >
+                <Share2 className="w-4 h-4 mr-2" />
+                Share Trip
+              </button>
+              <hr className="my-1 border-surface-dark/30" />
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -124,6 +139,12 @@ export default function TripCard({ trip, isActive = false, onClick }: TripCardPr
             {trip.days?.length || 0} day{trip.days?.length !== 1 ? 's' : ''} planned
           </span>
         </div>
+
+        {/* Collaboration indicator */}
+        <CollaborationIndicator
+          tripId={trip.id}
+          className="border-t border-surface-dark/50 pt-3 -mb-1"
+        />
       </div>
 
       {trip.notes && (
@@ -137,6 +158,18 @@ export default function TripCard({ trip, isActive = false, onClick }: TripCardPr
           <div className="w-3 h-3 bg-sea rounded-full animate-pulse-soft"></div>
         </div>
       )}
+
+      {/* Trip Sharing Modal */}
+      <TripSharingModal
+        tripId={trip.id}
+        tripName={trip.name}
+        isOpen={showSharingModal}
+        onClose={() => setShowSharingModal(false)}
+        onSuccess={() => {
+          // Optionally refresh trip data or show success message
+          console.log('Trip shared successfully');
+        }}
+      />
     </div>
   );
 }

@@ -49,7 +49,19 @@
       "Bash(psql:*)",
       "WebFetch(domain:github.com)",
       "Bash(git rm:*)",
-      "WebFetch(domain:waylight.whitetowers.org)"
+      "WebFetch(domain:waylight.whitetowers.org)",
+      "Bash(pnpm --filter @waylight/shared type-check)",
+      "Bash(pnpm --filter @waylight/web type-check)",
+      "Bash(supabase:*)",
+      "Bash(winget install:*)",
+      "Bash(npx supabase gen types typescript:*)",
+      "Bash(npx supabase gen types:*)",
+      "Bash(set SUPABASE_ACCESS_TOKEN=sbp_73e761a195ac8d2ce690cd7f5fdccb4d554ac26d)",
+      "Bash(start test-edge-function.html)",
+      "Bash(start simple-email-test.html)",
+      "Bash(npx supabase functions deploy:*)",
+      "Bash(deploy-simple-test.bat)",
+      "Bash(./deploy-simple-test.bat)"
     ],
     "deny": [],
     "ask": []
