@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { format, addDays } from 'date-fns';
-import { Plus, Calendar, Clock, MapPin, ChevronDown, GripVertical, Edit, Save, XCircle, ArrowLeft, Info, Users, Star } from 'lucide-react';
+import { Plus, Calendar, Clock, MapPin, ChevronDown, GripVertical, Edit, Save, XCircle, ArrowLeft, Info, Users, Star, Share2 } from 'lucide-react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useTripStore } from '../../stores';
@@ -11,6 +11,7 @@ import { detectDayType, getDayIcon, getDayTypeInfo } from '../../utils/dayTypeUt
 // import QuickAddBar from './QuickAddBar'; // Temporarily disabled due to syntax error
 import TripOverview from './TripOverview';
 import CheatSheetView from './CheatSheetView';
+import TripSharingModal from '../collaboration/TripSharingModal';
 import RestDayView from './dayViews/RestDayView';
 import CheckInDayView from './dayViews/CheckInDayView';
 import CheckOutDayView from './dayViews/CheckOutDayView';
@@ -565,6 +566,7 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
   const [showDayTypeModal, setShowDayTypeModal] = useState(false);
   const [isEditingTrip, setIsEditingTrip] = useState(false);
   const [showCheatSheet, setShowCheatSheet] = useState(false);
+  const [showSharingModal, setShowSharingModal] = useState(false);
   const [tripEditData, setTripEditData] = useState({
     name: trip.name,
     startDate: trip.startDate,
@@ -819,6 +821,13 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
                   title="Edit trip details"
                 >
                   <Edit className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => setShowSharingModal(true)}
+                  className="p-2 text-ink-light hover:text-ink hover:bg-surface-dark/50 rounded-lg transition-colors"
+                  title="Share trip"
+                >
+                  <Share2 className="w-4 h-4" />
                 </button>
               </div>
             </div>
@@ -1396,6 +1405,18 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
             onSelectDayType={handleDayTypeSelection}
           />
         )}
+
+        {/* Trip Sharing Modal */}
+        <TripSharingModal
+          tripId={trip.id}
+          tripName={trip.name}
+          isOpen={showSharingModal}
+          onClose={() => setShowSharingModal(false)}
+          onSuccess={() => {
+            // Optionally show success message or refresh data
+            console.log('Trip shared successfully from day planner');
+          }}
+        />
       </div>
     </DndProvider>
   );
