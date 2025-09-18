@@ -135,7 +135,7 @@ export default function TripCard({ trip, isActive = false, onClick }: TripCardPr
         <div className="flex items-center text-ink-light">
           <MapPin className="w-4 h-4 mr-3" />
           <span className="text-sm">
-            {trip.days?.length || 0} day{trip.days?.length !== 1 ? 's' : ''} planned
+            {duration} day{duration !== 1 ? 's' : ''} trip ({trip.days?.length || 0} planned)
           </span>
         </div>
 
