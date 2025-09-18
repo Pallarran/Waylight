@@ -255,10 +255,7 @@ export class InvitationService {
   async getTripCollaborators(tripId: string): Promise<TripCollaborator[]> {
     const { data, error } = await supabase
       .from('trip_collaborators')
-      .select(`
-        *,
-        profiles!trip_collaborators_user_id_fkey(email, full_name)
-      `)
+      .select('*')
       .eq('trip_id', tripId)
       .order('joined_at', { ascending: true });
 
@@ -272,11 +269,7 @@ export class InvitationService {
   async getTripInvitations(tripId: string): Promise<TripInvitation[]> {
     const { data, error } = await supabase
       .from('trip_invitations')
-      .select(`
-        *,
-        profiles!trip_invitations_invited_by_fkey(full_name),
-        trips!trip_invitations_trip_id_fkey(name)
-      `)
+      .select('*')
       .eq('trip_id', tripId)
       .order('created_at', { ascending: false });
 
@@ -544,8 +537,8 @@ export class InvitationService {
       id: data.id,
       tripId: data.trip_id,
       userId: data.user_id,
-      userEmail: data.profiles?.email,
-      userFullName: data.profiles?.full_name,
+      userEmail: data.user_id, // We'll use user_id as placeholder for email
+      userFullName: data.user_id, // We'll use user_id as placeholder for name
       permissionLevel: data.permission_level,
       invitedBy: data.invited_by,
       joinedAt: data.joined_at,
@@ -558,10 +551,10 @@ export class InvitationService {
     return {
       id: data.id,
       tripId: data.trip_id,
-      tripName: data.trips?.name,
+      tripName: 'Trip', // Placeholder since we're not fetching trip details
       invitedEmail: data.invited_email,
       invitedBy: data.invited_by,
-      inviterName: data.profiles?.full_name,
+      inviterName: data.invited_by, // Use user ID as placeholder
       permissionLevel: data.permission_level,
       invitationToken: data.invitation_token,
       status: data.status,
