@@ -1,10 +1,9 @@
 import { format, differenceInDays, isAfter, isBefore } from 'date-fns';
-import { Calendar, MapPin, Clock, MoreVertical, XCircle, Users, Share2 } from 'lucide-react';
+import { Calendar, Clock, MoreVertical, XCircle, Users, Share2 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useTripStore } from '../../stores';
 import TripSharingModal from '../collaboration/TripSharingModal';
 import CollaborationIndicator from '../collaboration/CollaborationIndicator';
-import { getPlannedDaysCount } from '../../utils/trip';
 
 import type { Trip } from '../../types';
 
@@ -133,12 +132,6 @@ export default function TripCard({ trip, isActive = false, onClick }: TripCardPr
           </span>
         </div>
 
-        <div className="flex items-center text-ink-light">
-          <MapPin className="w-4 h-4 mr-3" />
-          <span className="text-sm">
-            {duration} day{duration !== 1 ? 's' : ''} trip ({getPlannedDaysCount(trip)} planned)
-          </span>
-        </div>
 
         {/* Collaboration indicator */}
         <CollaborationIndicator
