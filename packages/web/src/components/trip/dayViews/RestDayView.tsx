@@ -29,7 +29,7 @@ interface RestDayViewProps {
   onOpenDayTypeModal?: () => void;
 }
 
-export default function RestDayView({ trip, tripDay, onQuickAdd, onOpenDayTypeModal }: RestDayViewProps) {
+export default function RestDayView({ trip, tripDay, date, onQuickAdd, onOpenDayTypeModal }: RestDayViewProps) {
   const { reorderItems, updateItem, deleteItem } = useTripStore();
   const [showActivityModal, setShowActivityModal] = useState(false);
   const [editingItem, setEditingItem] = useState<string | null>(null);

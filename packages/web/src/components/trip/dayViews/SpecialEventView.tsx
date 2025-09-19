@@ -15,7 +15,7 @@ interface SpecialEventViewProps {
   onOpenDayTypeModal?: () => void;
 }
 
-export default function SpecialEventView({ trip, tripDay, onQuickAdd, onOpenDayTypeModal }: SpecialEventViewProps) {
+export default function SpecialEventView({ trip, tripDay, date, onQuickAdd, onOpenDayTypeModal }: SpecialEventViewProps) {
   const { updateDay, addItem, deleteItem, updateItem, reorderItems } = useTripStore();
   const [showAddActivityModal, setShowAddActivityModal] = useState(false);
   const [showCustomActivityForm, setShowCustomActivityForm] = useState(false);

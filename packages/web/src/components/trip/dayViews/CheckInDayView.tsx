@@ -17,7 +17,7 @@ interface CheckInDayViewProps {
   onOpenDayTypeModal?: () => void;
 }
 
-export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTypeModal }: CheckInDayViewProps) {
+export default function CheckInDayView({ trip, tripDay, date, onQuickAdd, onOpenDayTypeModal }: CheckInDayViewProps) {
   const { updateDay, addItem, deleteItem, updateItem, reorderItems } = useTripStore();
   const [showCustomActivityForm, setShowCustomActivityForm] = useState(false);
   const [customActivity, setCustomActivity] = useState({ name: '', startTime: '', type: 'attraction' as ActivityCategory });

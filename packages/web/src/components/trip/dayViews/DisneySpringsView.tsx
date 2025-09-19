@@ -14,7 +14,7 @@ interface DisneySpringsViewProps {
   onOpenDayTypeModal?: () => void;
 }
 
-export default function DisneySpringsView({ trip, tripDay, onQuickAdd, onOpenDayTypeModal }: DisneySpringsViewProps) {
+export default function DisneySpringsView({ trip, tripDay, date, onQuickAdd, onOpenDayTypeModal }: DisneySpringsViewProps) {
   const { updateDay, deleteItem, updateItem, reorderItems } = useTripStore();
   const [showAddActivityModal, setShowAddActivityModal] = useState(false);
   const [showCustomActivityForm, setShowCustomActivityForm] = useState(false);

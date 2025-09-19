@@ -17,7 +17,7 @@ interface CheckOutDayViewProps {
   onOpenDayTypeModal?: () => void;
 }
 
-export default function CheckOutDayView({ trip, tripDay, onQuickAdd, onOpenDayTypeModal }: CheckOutDayViewProps) {
+export default function CheckOutDayView({ trip, tripDay, date, onQuickAdd, onOpenDayTypeModal }: CheckOutDayViewProps) {
   const { updateDay, deleteItem, updateItem, reorderItems } = useTripStore();
   const [showAddActivityModal, setShowAddActivityModal] = useState(false);
   const [editingItem, setEditingItem] = useState<string | null>(null);
