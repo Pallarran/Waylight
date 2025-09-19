@@ -57,10 +57,10 @@ export default function Home() {
     <div className="container-waylight pt-3 pb-6 md:pt-4 md:pb-8 lg:pt-6 lg:pb-12">
       <div className="text-center">
         <div className="flex justify-center mb-6">
-          <img 
-            src={WaylightLogo} 
-            alt="Waylight" 
-            className="w-24 h-24 rounded-2xl shadow-medium"
+          <img
+            src={WaylightLogo}
+            alt="Waylight"
+            className="w-32 h-32 rounded-2xl shadow-medium"
           />
         </div>
         <h1 className="text-4xl font-bold text-ink mb-5">
