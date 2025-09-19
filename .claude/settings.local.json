@@ -67,7 +67,8 @@
       "Bash(tsc:*)",
       "Bash(pnpm --filter @waylight/web run lint)",
       "Bash(npx supabase:*)",
-      "Bash(dir \"C:\\Users\\vince\\Code\\Waylight\\supabase\")"
+      "Bash(dir \"C:\\Users\\vince\\Code\\Waylight\\supabase\")",
+      "Bash(dir:*)"
     ],
     "deny": [],
     "ask": []
