@@ -41,6 +41,7 @@ interface SimpleTripState {
   clearError: () => void;
   clearSuccess: () => void;
   showSuccess: (message: string) => void;
+  clearAllData: () => void;
 }
 
 
@@ -81,7 +82,9 @@ const useSimpleTripStore = create<SimpleTripState>((set, get) => ({
         get().syncTrips();
         get().startPeriodicSync();
       } else {
+        // User signed out - clear all data and stop sync
         get().stopPeriodicSync();
+        get().clearAllData();
       }
     });
   },
@@ -464,6 +467,19 @@ const useSimpleTripStore = create<SimpleTripState>((set, get) => ({
     setTimeout(() => {
       set({ successMessage: null });
     }, 3000);
+  },
+
+  clearAllData: () => {
+    // Clear local IndexedDB data
+    DatabaseService.clearAllData().catch(console.error);
+    // Clear store state
+    set({
+      trips: [],
+      activeTrip: null,
+      error: null,
+      successMessage: null,
+      isLoading: false
+    });
   }
 }));
 
