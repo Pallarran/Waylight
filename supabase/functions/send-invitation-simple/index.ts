@@ -140,7 +140,7 @@ function generateInvitationEmail({
     admin: 'view, edit, and manage the trip'
   }[permissionLevel] || 'collaborate on'
 
-  // Waylight logo SVG - exact replica of app icon
+  // Waylight logo SVG - updated with correct app logo design
   const logoSvg = `data:image/svg+xml;base64,${btoa(`
     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -152,23 +152,23 @@ function generateInvitationEmail({
       <!-- Rounded square background -->
       <rect x="0" y="0" width="100" height="100" rx="22" ry="22" fill="url(#bgGradient)"/>
 
-      <!-- Sailboat hull - wider, more realistic shape -->
-      <path d="M20 75 Q25 80 50 80 Q75 80 80 75 L77 70 L23 70 Z" fill="#0F172A"/>
+      <!-- Sailboat hull -->
+      <path d="M20 75 Q30 82 50 82 Q70 82 80 75 L75 68 L25 68 Z" fill="#0F172A"/>
 
       <!-- Main mast -->
-      <line x1="50" y1="70" x2="50" y2="25" stroke="#0F172A" stroke-width="2"/>
+      <line x1="50" y1="68" x2="50" y2="20" stroke="#0F172A" stroke-width="2.5"/>
 
-      <!-- Main sail - larger triangular sail -->
-      <path d="M50 25 L25 40 L50 70 Z" fill="#0F172A"/>
+      <!-- Main sail (left side) -->
+      <path d="M50 20 L20 35 L50 68 Z" fill="#0F172A"/>
 
-      <!-- Jib sail - smaller front sail, more turquoise -->
-      <path d="M50 30 L75 42 L50 60 Z" fill="#4ECDC4"/>
+      <!-- Jib sail (right side) -->
+      <path d="M50 25 L80 40 L50 65 Z" fill="#4ECDC4"/>
 
-      <!-- Water line waves -->
-      <path d="M10 82 Q20 85 30 82 Q40 79 50 82 Q60 85 70 82 Q80 79 90 82" stroke="#FFFFFF" stroke-width="1.5" fill="none" opacity="0.7"/>
+      <!-- Water waves -->
+      <path d="M5 85 Q15 88 25 85 Q35 82 45 85 Q55 88 65 85 Q75 82 85 85 Q95 88 105 85" stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.8"/>
 
-      <!-- Sun/light dot -->
-      <circle cx="78" cy="30" r="2.5" fill="#FBBF24"/>
+      <!-- Sun -->
+      <circle cx="80" cy="25" r="3" fill="#FBBF24"/>
     </svg>
   `)}`
 
@@ -214,12 +214,14 @@ function generateInvitationEmail({
             font-weight: 700;
             margin: 0 0 8px 0;
             letter-spacing: -0.025em;
+            color: #FFFFFF !important;
         }
         .header-subtitle {
             margin: 0;
-            opacity: 0.95;
             font-size: 16px;
             font-weight: 400;
+            color: #FFFFFF !important;
+            opacity: 0.95;
         }
         .content {
             padding: 40px 32px;
