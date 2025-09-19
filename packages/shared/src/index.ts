@@ -28,6 +28,8 @@ export * from './services/backgroundSyncService';
 export * from './services/activityRatingsService';
 export * from './services/invitationService';
 export * from './services/collaborationService';
+export * from './services/weatherService';
+export * from './services/weatherRecommendationEngine';
 
 // Constants
 export const APP_NAME = 'Waylight';
