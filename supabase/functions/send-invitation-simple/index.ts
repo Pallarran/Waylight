@@ -32,7 +32,16 @@ serve(async (req) => {
     const resendApiKey = Deno.env.get('RESEND_API_KEY')
     if (!resendApiKey) {
       console.error('❌ RESEND_API_KEY not configured');
-      throw new Error('RESEND_API_KEY not configured')
+      return new Response(
+        JSON.stringify({
+          error: 'RESEND_API_KEY not configured in environment variables',
+          details: 'Please set RESEND_API_KEY in Supabase Edge Function secrets'
+        }),
+        {
+          status: 500,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      )
     }
 
     const appUrl = (Deno.env.get('APP_URL') || 'https://waylight.app').replace(/\/$/, '')
@@ -58,7 +67,7 @@ serve(async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Waylight Test <onboarding@resend.dev>',
+        from: 'Waylight <onboarding@resend.dev>',
         to: [emailData.invitedEmail],
         subject: `🎢 ${emailData.inviterName} invited you to collaborate on "${emailData.tripName}"`,
         html: emailHtml,

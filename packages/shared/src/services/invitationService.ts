@@ -389,13 +389,19 @@ export class InvitationService {
   }
 
   private async getExistingInvitation(tripId: string, email: string): Promise<any> {
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('trip_invitations')
       .select('*')
       .eq('trip_id', tripId)
       .eq('invited_email', email.toLowerCase())
       .eq('status', 'pending')
-      .single();
+      .maybeSingle(); // Use maybeSingle() instead of single() to avoid 406 when no rows found
+
+    // Ignore "no rows" errors, but throw on actual database errors
+    if (error && error.code !== 'PGRST116') {
+      console.error('Database error checking existing invitation:', error);
+      throw error;
+    }
 
     return data;
   }
