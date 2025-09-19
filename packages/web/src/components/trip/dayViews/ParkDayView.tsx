@@ -496,11 +496,13 @@ export default function ParkDayView({ trip, tripDay, date, onQuickAdd, onOpenDay
 
             {/* Photos and Magic Shots */}
             <MagicShotsSection
+              key={`photos-${tripDay.id}`}
               photos={photoOpportunities}
               onUpdate={(photos) => updateTripDayData({ photoOpportunities: photos })}
             />
 
             <BackupPlanSection
+              key={`backup-${tripDay.id}`}
               backupPlan={backupPlan}
               onUpdate={(plan) => updateTripDayData({ backupPlan: plan })}
             />
@@ -1764,6 +1766,14 @@ const MagicShotsSection = ({ photos, onUpdate }: any) => {
     magicShots: photos?.magicShots || ''
   });
 
+  // Update local state when props change (when switching between days)
+  useEffect(() => {
+    setPhotoPlans({
+      familyPhoto: photos?.familyPhoto || '',
+      magicShots: photos?.magicShots || ''
+    });
+  }, [photos]);
+
   const saveChanges = () => {
     onUpdate(photoPlans);
     setIsEditing(false);
@@ -1854,6 +1864,14 @@ const BackupPlanSection = ({ backupPlan, onUpdate }: any) => {
     rainPlan: backupPlan?.rainPlan || '',
     crowdPlan: backupPlan?.crowdPlan || ''
   });
+
+  // Update local state when props change (when switching between days)
+  useEffect(() => {
+    setPlans({
+      rainPlan: backupPlan?.rainPlan || '',
+      crowdPlan: backupPlan?.crowdPlan || ''
+    });
+  }, [backupPlan]);
 
   const saveChanges = () => {
     onUpdate(plans);
