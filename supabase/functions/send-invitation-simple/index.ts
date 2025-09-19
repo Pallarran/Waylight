@@ -140,6 +140,29 @@ function generateInvitationEmail({
     admin: 'view, edit, and manage the trip'
   }[permissionLevel] || 'collaborate on'
 
+  // Waylight logo SVG embedded as data URL
+  const logoSvg = `data:image/svg+xml;base64,${btoa(`
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="lightBeam" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#FBBF24;stop-opacity:0.3" />
+          <stop offset="100%" style="stop-color:#FBBF24;stop-opacity:0.1" />
+        </linearGradient>
+        <linearGradient id="sailGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#E2E8F0;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <path d="M25 25 L75 25 L75 75 L25 75 Z" fill="url(#lightBeam)" opacity="0.2"/>
+      <path d="M25 70 Q35 75 50 75 Q65 75 75 70 L70 65 L30 65 Z" fill="#FFFFFF"/>
+      <line x1="50" y1="65" x2="50" y2="25" stroke="#FFFFFF" stroke-width="2"/>
+      <path d="M50 25 L35 35 L50 65 Z" fill="url(#sailGradient)"/>
+      <path d="M50 30 L65 35 L50 55 Z" fill="#4ECDC4" opacity="0.9"/>
+      <path d="M20 75 Q30 77 40 75 Q50 73 60 75 Q70 77 80 75" stroke="#4ECDC4" stroke-width="1.5" fill="none" opacity="0.8"/>
+      <circle cx="72" cy="32" r="2" fill="#FBBF24" opacity="0.9"/>
+    </svg>
+  `)}`
+
   return `
 <!DOCTYPE html>
 <html lang="en">
@@ -149,10 +172,10 @@ function generateInvitationEmail({
     <title>Trip Collaboration Invitation - Waylight</title>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Inter', 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
-            color: #334155;
-            background-color: #f8fafc;
+            color: #0F172A;
+            background-color: #F8FAFC;
             margin: 0;
             padding: 20px;
         }
@@ -160,94 +183,206 @@ function generateInvitationEmail({
             max-width: 600px;
             margin: 0 auto;
             background-color: white;
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.2);
         }
         .header {
-            background: linear-gradient(135deg, #0ea5a8 0%, #22d3ee 100%);
+            background: linear-gradient(135deg, #0891B2 0%, #4ECDC4 100%);
             color: white;
-            padding: 32px;
+            padding: 40px 32px;
             text-align: center;
+            position: relative;
         }
-        .header h1 {
+        .logo {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 16px auto;
+            display: block;
+        }
+        .brand-name {
+            font-size: 28px;
+            font-weight: 700;
             margin: 0 0 8px 0;
-            font-size: 24px;
-            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+        .header-subtitle {
+            margin: 0;
+            opacity: 0.95;
+            font-size: 16px;
+            font-weight: 400;
         }
         .content {
-            padding: 32px;
+            padding: 40px 32px;
+        }
+        .greeting {
+            font-size: 18px;
+            color: #0F172A;
+            margin-bottom: 24px;
         }
         .trip-info {
-            background-color: #f1f5f9;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 24px 0;
-            border-left: 4px solid #0ea5a8;
+            background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 32px 0;
+            border-left: 4px solid #0891B2;
+            position: relative;
         }
         .trip-name {
-            font-size: 20px;
+            font-size: 22px;
+            font-weight: 700;
+            color: #0F172A;
+            margin: 0 0 12px 0;
+            letter-spacing: -0.025em;
+        }
+        .permission-badge {
+            display: inline-block;
+            background-color: rgba(8, 145, 178, 0.1);
+            color: #0E7490;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
             font-weight: 600;
-            color: #0f172a;
-            margin: 0 0 8px 0;
+            margin-top: 8px;
+        }
+        .cta-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 32px 24px;
+            background: linear-gradient(135deg, rgba(8, 145, 178, 0.05) 0%, rgba(78, 205, 196, 0.05) 100%);
+            border-radius: 12px;
         }
         .cta-button {
             display: inline-block;
-            background-color: #0ea5a8;
+            background: linear-gradient(135deg, #0891B2 0%, #0E7490 100%);
             color: white;
             text-decoration: none;
             padding: 16px 32px;
-            border-radius: 8px;
+            border-radius: 12px;
             font-weight: 600;
             font-size: 16px;
+            box-shadow: 0 4px 25px -5px rgba(8, 145, 178, 0.3);
+            transition: all 0.2s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 35px -5px rgba(8, 145, 178, 0.4);
+        }
+        .message-box {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(251, 191, 36, 0.05) 100%);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+            position: relative;
+        }
+        .message-box::before {
+            content: '💬';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 18px;
+        }
+        .message-content {
+            margin-left: 32px;
+            font-style: italic;
+            color: #0F172A;
+        }
+        .steps-list {
+            background-color: #F8FAFC;
+            border-radius: 12px;
+            padding: 24px;
             margin: 24px 0;
         }
-        .info-notice {
-            background-color: #dbeafe;
-            border: 2px solid #3b82f6;
-            border-radius: 8px;
-            padding: 16px;
-            margin: 20px 0;
+        .steps-list h3 {
+            margin: 0 0 16px 0;
+            color: #0F172A;
+            font-weight: 600;
+        }
+        .steps-list ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .steps-list li {
+            margin-bottom: 8px;
+            color: #475569;
+        }
+        .footer {
+            background-color: #F8FAFC;
+            padding: 24px 32px;
             text-align: center;
+            border-top: 1px solid #E2E8F0;
+        }
+        .footer-text {
+            color: #475569;
+            font-size: 14px;
+            margin: 0;
+        }
+        .expiry-notice {
+            background-color: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 16px 0;
+            font-size: 14px;
+            color: #92400E;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎢 Trip Collaboration Invitation</h1>
-            <p>You're invited to plan an amazing trip together!</p>
+            <img src="${logoSvg}" alt="Waylight" class="logo" />
+            <h1 class="brand-name">Waylight</h1>
+            <p class="header-subtitle">You're invited to plan an amazing trip together!</p>
         </div>
 
         <div class="content">
-            <p>Hi there!</p>
+            <div class="greeting">
+                Hi there! 👋
+            </div>
 
-            <p><strong>${inviterName}</strong> has invited you to collaborate on their trip planning.</p>
+            <p><strong>${inviterName}</strong> has invited you to collaborate on their trip planning with Waylight.</p>
 
             <div class="trip-info">
-                <div class="trip-name">${tripName}</div>
-                <p style="margin: 8px 0;">You'll be able to <strong>${permissionDescription}</strong></p>
+                <div class="trip-name">🎢 ${tripName}</div>
+                <p style="margin: 8px 0; color: #475569;">You'll be able to <strong>${permissionDescription}</strong></p>
+                <span class="permission-badge">${permissionLevel.charAt(0).toUpperCase() + permissionLevel.slice(1)} Access</span>
             </div>
 
             ${message ? `
-            <div style="background-color: #dbeafe; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px; margin: 20px 0; font-style: italic;">
-                <strong>Personal message from ${inviterName}:</strong><br>
-                "${message}"
+            <div class="message-box">
+                <div class="message-content">
+                    <strong>Personal message from ${inviterName}:</strong><br>
+                    "${message}"
+                </div>
             </div>
             ` : ''}
 
-            <div style="text-align: center; margin: 32px 0;">
+            <div class="cta-section">
                 <a href="${invitationUrl}" class="cta-button">
-                    🎢 Accept Invitation
+                    ✨ Accept Invitation
                 </a>
+                <div class="expiry-notice">
+                    ⏰ This invitation expires on ${expiryDate}
+                </div>
             </div>
 
-            <p><strong>What happens next?</strong></p>
-            <ul>
-                <li>✅ Click the button above to accept the invitation</li>
-                <li>✅ Create an account or sign in if you don't have one</li>
-                <li>✅ Start collaborating on the trip planning</li>
-            </ul>
+            <div class="steps-list">
+                <h3>What happens next?</h3>
+                <ul>
+                    <li>✅ Click the button above to accept the invitation</li>
+                    <li>✅ Create an account or sign in if you don't have one</li>
+                    <li>✅ Start collaborating on the trip planning</li>
+                    <li>🎯 Access all the amazing features Waylight offers</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p class="footer-text">
+                Sent with ❤️ by Waylight • Making trip planning collaborative and fun
+            </p>
         </div>
     </div>
 </body>

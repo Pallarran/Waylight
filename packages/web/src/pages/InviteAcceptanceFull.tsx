@@ -45,12 +45,18 @@ const InviteAcceptanceFull: React.FC = () => {
   const handleAcceptInvitation = async () => {
     if (!token || !user || !invitation) return;
 
+    // Check if user email matches invitation email
+    if (user.email !== invitation.invitedEmail) {
+      setError(`This invitation was sent to ${invitation.invitedEmail}, but you're signed in as ${user.email}. Please sign in with the correct account or contact the trip organizer.`);
+      return;
+    }
+
     try {
       setAccepting(true);
       await invitationService.acceptInvitation(token);
 
       // Navigate to the trip
-      navigate(`/trip/${invitation.trip_id}`, {
+      navigate(`/trip/${invitation.tripId}`, {
         replace: true,
         state: { message: 'Successfully joined the trip!' }
       });
@@ -75,11 +81,7 @@ const InviteAcceptanceFull: React.FC = () => {
   };
 
   const handleSignIn = () => {
-    // For demo purposes, just show message
-    alert('Sign in functionality would redirect to authentication. \n\nNote: This is a demo.');
-
-    // In a real implementation:
-    // navigate('/auth/signin', { state: { returnTo: `/invite/${token}` } });
+    navigate('/auth/signin', { state: { returnTo: `/invite/${token}` } });
   };
 
   if (loading) {
@@ -129,7 +131,7 @@ const InviteAcceptanceFull: React.FC = () => {
     );
   }
 
-  const isExpired = new Date(invitation.expires_at) < new Date();
+  const isExpired = new Date(invitation.expiresAt) < new Date();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sea-50 to-mint-50 flex items-center justify-center p-4">
@@ -145,25 +147,16 @@ const InviteAcceptanceFull: React.FC = () => {
         <div className="p-8">
           {/* Trip Information */}
           <div className="bg-slate-50 rounded-lg p-6 mb-6">
-            <h2 className="text-2xl font-bold text-slate-900 mb-2">{invitation.trip?.name || 'Trip Invitation'}</h2>
+            <h2 className="text-2xl font-bold text-slate-900 mb-2">{invitation.tripName || 'Trip Invitation'}</h2>
             <div className="flex items-center text-slate-600 mb-2">
               <Users className="w-4 h-4 mr-2" />
-              <span>Invited by <strong>{invitation.inviter?.full_name || 'Trip organizer'}</strong></span>
+              <span>Invited by <strong>{invitation.inviterName || 'Trip organizer'}</strong></span>
             </div>
 
-            {invitation.trip?.start_date && (
-              <div className="flex items-center text-slate-600 mb-2">
-                <Calendar className="w-4 h-4 mr-2" />
-                <span>
-                  {new Date(invitation.trip.start_date).toLocaleDateString()} - {' '}
-                  {invitation.trip.end_date ? new Date(invitation.trip.end_date).toLocaleDateString() : 'TBD'}
-                </span>
-              </div>
-            )}
 
             <div className="flex items-center text-slate-600 mb-4">
               <MapPin className="w-4 h-4 mr-2" />
-              <span>Permission Level: <strong className="capitalize">{invitation.permission_level}</strong></span>
+              <span>Permission Level: <strong className="capitalize">{invitation.permissionLevel}</strong></span>
             </div>
 
             {invitation.message && (
@@ -173,19 +166,6 @@ const InviteAcceptanceFull: React.FC = () => {
             )}
           </div>
 
-          {/* Token Info for Demo */}
-          <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-            <div className="flex items-center text-green-800 mb-2">
-              <CheckCircle className="w-5 h-5 mr-2" />
-              <span className="font-semibold">✅ Invitation System Working!</span>
-            </div>
-            <p className="text-green-700 text-sm">
-              Token: <code className="bg-green-100 px-2 py-1 rounded">{token}</code>
-            </p>
-            <p className="text-green-700 text-sm mt-1">
-              All systems operational: Email service, routing, and invitation page display.
-            </p>
-          </div>
 
           {/* Expiration Notice */}
           {isExpired ? (
@@ -200,9 +180,23 @@ const InviteAcceptanceFull: React.FC = () => {
               <div className="flex items-center text-amber-800">
                 <Clock className="w-5 h-5 mr-2" />
                 <span className="font-semibold">
-                  Expires on {new Date(invitation.expires_at).toLocaleDateString()}
+                  Expires on {new Date(invitation.expiresAt).toLocaleDateString()}
                 </span>
               </div>
+            </div>
+          )}
+
+          {/* Email Mismatch Warning */}
+          {user && invitation && user.email !== invitation.invitedEmail && (
+            <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-6">
+              <div className="flex items-center text-orange-800">
+                <XCircle className="w-5 h-5 mr-2" />
+                <span className="font-semibold">Email Mismatch</span>
+              </div>
+              <p className="text-orange-700 text-sm mt-1">
+                This invitation was sent to <strong>{invitation.invitedEmail}</strong>, but you're signed in as <strong>{user.email}</strong>.
+                Please sign in with the correct account or contact the trip organizer.
+              </p>
             </div>
           )}
 
@@ -233,7 +227,7 @@ const InviteAcceptanceFull: React.FC = () => {
             <div className="flex gap-4 justify-center">
               <button
                 onClick={handleAcceptInvitation}
-                disabled={accepting}
+                disabled={accepting || (user && invitation && user.email !== invitation.invitedEmail)}
                 className="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
               >
                 {accepting ? (
@@ -262,18 +256,11 @@ const InviteAcceptanceFull: React.FC = () => {
 
           {/* Footer */}
           <div className="mt-8 pt-6 border-t border-slate-200 text-center text-sm text-slate-500">
-            <p>This invitation was sent by Waylight on behalf of {invitation.inviter?.full_name || 'Trip organizer'}</p>
+            <p>This invitation was sent by Waylight on behalf of {invitation.inviterName || 'Trip organizer'}</p>
             <p className="mt-1">
               If you didn't expect this invitation, you can safely ignore it.
             </p>
 
-            {/* Demo Notice */}
-            <div className="mt-4 p-3 bg-blue-50 rounded-lg">
-              <p className="text-blue-800 font-semibold text-sm">🎯 Demo Mode</p>
-              <p className="text-blue-700 text-xs">
-                This is a working demo of the invitation system. Full database integration would connect to real trip data.
-              </p>
-            </div>
           </div>
         </div>
       </div>
