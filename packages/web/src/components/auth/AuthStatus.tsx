@@ -448,8 +448,44 @@ export default function AuthStatus() {
       }
 
       // Show results
+      // Now sync weather data
+      console.log('🌤️ Syncing weather data...');
+      try {
+        const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+        const serviceRoleKey = import.meta.env.VITE_SUPABASE_SERVICE_ROLE_KEY;
+
+        if (!supabaseUrl || !serviceRoleKey) {
+          throw new Error('Weather sync requires Supabase service role key');
+        }
+
+        const weatherResponse = await fetch(`${supabaseUrl}/functions/v1/fetch-weather`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${serviceRoleKey}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        const weatherResult = await weatherResponse.json();
+
+        if (weatherResponse.ok) {
+          console.log('✅ Weather data synced successfully:', weatherResult);
+        } else {
+          console.warn('⚠️ Weather sync failed:', weatherResult);
+          errors.push(`Weather sync: ${weatherResult.details || weatherResult.error || 'Unknown error'}`);
+        }
+      } catch (weatherError) {
+        console.warn('⚠️ Weather sync error:', weatherError);
+        errors.push(`Weather sync: ${weatherError instanceof Error ? weatherError.message : 'Unknown error'}`);
+      }
+
+      // Show results
+      const weatherNote = errors.some(e => e.includes('Weather')) ?
+        '\n\n⚠️ Weather data sync had issues (check console)' :
+        '\n• Weather forecasts';
+
       if (successCount === Object.keys(parkIds).length) {
-        alert(`✅ Database sync successful!\n\nUpdated live data for all ${successCount} parks:\n• Attractions & wait times\n• Park status & info\n• Special ticketed events\n• Daily park schedules with EE/EEH`);
+        alert(`✅ Database sync successful!\n\nUpdated live data for all ${successCount} parks:\n• Attractions & wait times\n• Park status & info\n• Special ticketed events\n• Daily park schedules with EE/EEH${weatherNote}`);
       } else if (successCount > 0) {
         alert(`⚠️ Partial success: Updated ${successCount}/${Object.keys(parkIds).length} parks in database.\n\nErrors:\n${errors.join('\n')}`);
       } else {
@@ -496,7 +532,7 @@ export default function AuthStatus() {
           onClick={handleRefreshParks}
           disabled={isRefreshingParks}
           className="flex items-center gap-1 px-2 py-1 rounded-md hover:bg-surface-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          title="Refresh live database with current park data and attraction wait times"
+          title="Refresh live database with current park data, attraction wait times, and weather forecasts"
         >
           {isRefreshingParks ? (
             <Loader2 className="h-4 w-4 animate-spin text-sea" />
@@ -538,7 +574,7 @@ export default function AuthStatus() {
                   ) : (
                     <RefreshCw className="h-4 w-4" />
                   )}
-                  {isRefreshingParks ? 'Updating Database...' : 'Sync Live Data'}
+                  {isRefreshingParks ? 'Updating Database...' : 'Sync Live Data & Weather'}
                 </button>
                 
                 <button

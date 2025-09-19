@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Sun, Download, Upload, Trash2, Bell, MapPin, Eye } from 'lucide-react';
 import useUserPreferencesStore from '../stores/useUserPreferencesStore';
+import WeatherTestPanel from '../components/debug/WeatherTestPanel';
 
 export default function Settings() {
   const [isDarkMode, setIsDarkMode] = useState(false);

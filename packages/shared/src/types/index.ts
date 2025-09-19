@@ -294,3 +294,6 @@ export interface ConflictResolution {
 
 // Live Data Types
 export * from './liveData';
+
+// Weather Types
+export * from './weather';
