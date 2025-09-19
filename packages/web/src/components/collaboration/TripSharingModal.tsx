@@ -210,7 +210,7 @@ const TripSharingModal: React.FC<TripSharingModalProps> = ({
         </div>
 
         {/* Content */}
-        <div className="p-6 max-h-96 overflow-y-auto">
+        <div className={`p-6 ${activeTab === 'invite' ? 'max-h-[calc(90vh-300px)] overflow-y-auto' : 'max-h-96 overflow-y-auto'}`}>
           {activeTab === 'invite' && (
             <div className="space-y-6">
               {/* Share URL */}
