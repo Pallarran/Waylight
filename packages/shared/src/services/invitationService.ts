@@ -508,7 +508,7 @@ export class InvitationService {
       const emailData = {
         invitationId: invitation.id,
         invitedEmail: invitation.invited_email,
-        inviterName: invitation.inviter_name || inviter.fullName || inviter.email,
+        inviterName: invitation.inviter_name || inviter.fullName || inviter.email || 'Someone',
         tripName: trip?.name || `Trip (${invitation.trip_id.slice(0, 8)})`,
         invitationToken: invitation.invitation_token,
         permissionLevel: invitation.permission_level,
