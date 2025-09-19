@@ -281,34 +281,59 @@ export class InvitationService {
   }
 
   async getInvitationByToken(token: string): Promise<TripInvitation> {
-    const { data, error } = await supabase
+    // First get the invitation
+    const { data: invitation, error: inviteError } = await supabase
       .from('trip_invitations')
-      .select(`
-        *,
-        trip:trips(
-          id,
-          name,
-          start_date,
-          end_date,
-          user_id
-        ),
-        inviter:profiles!trip_invitations_invited_by_fkey(
-          id,
-          full_name,
-          email
-        )
-      `)
+      .select('*')
       .eq('invitation_token', token)
-      .single();
+      .maybeSingle();
 
-    if (error) {
-      if (error.code === 'PGRST116') {
-        throw new Error('Invitation not found or has already been responded to');
-      }
-      throw new Error(`Failed to load invitation: ${error.message}`);
+    if (inviteError) {
+      throw new Error(`Failed to load invitation: ${inviteError.message}`);
     }
 
-    return data as TripInvitation;
+    if (!invitation) {
+      throw new Error('Invitation not found or has already been responded to');
+    }
+
+    // Get trip details separately
+    const { data: trip, error: tripError } = await supabase
+      .from('trips')
+      .select('id, name, start_date, end_date, user_id')
+      .eq('id', invitation.trip_id)
+      .maybeSingle();
+
+    if (tripError) {
+      console.warn('Could not load trip details:', tripError);
+    }
+
+    // Get inviter details separately (optional)
+    const { data: inviter, error: inviterError } = await supabase
+      .from('profiles')
+      .select('id, full_name, email')
+      .eq('id', invitation.invited_by)
+      .maybeSingle();
+
+    if (inviterError) {
+      console.warn('Could not load inviter details:', inviterError);
+    }
+
+    // Format the response
+    return {
+      id: invitation.id,
+      tripId: invitation.trip_id,
+      tripName: trip?.name || 'Trip',
+      invitedEmail: invitation.invited_email,
+      invitedBy: invitation.invited_by,
+      inviterName: inviter?.full_name || inviter?.email || 'Someone',
+      permissionLevel: invitation.permission_level,
+      invitationToken: invitation.invitation_token,
+      status: invitation.status,
+      expiresAt: invitation.expires_at,
+      message: invitation.message,
+      createdAt: invitation.created_at,
+      updatedAt: invitation.updated_at
+    };
   }
 
   async getUserInvitations(email: string): Promise<TripInvitation[]> {
@@ -480,13 +505,21 @@ export class InvitationService {
         throw new Error('No active session for sending email');
       }
 
+      // Get trip details for email
+      console.log('📋 Getting trip details...');
+      const { data: trip } = await supabase
+        .from('trips')
+        .select('name')
+        .eq('id', invitation.trip_id)
+        .maybeSingle();
+
       // Prepare email data
       console.log('📋 Preparing email data...');
       const emailData = {
         invitationId: invitation.id,
         invitedEmail: invitation.invited_email,
         inviterName: inviter.fullName || inviter.email,
-        tripName: invitation.trips?.name || 'Your Trip',
+        tripName: trip?.name || `Trip (${invitation.trip_id.slice(0, 8)})`,
         invitationToken: invitation.invitation_token,
         permissionLevel: invitation.permission_level,
         message: invitation.message,
