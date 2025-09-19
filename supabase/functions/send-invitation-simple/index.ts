@@ -141,7 +141,7 @@ function generateInvitationEmail({
   }[permissionLevel] || 'collaborate on'
 
   // Use the actual PNG image from your deployed app
-  const logoUrl = 'https://waylight.app/assets/waylight-logo-BjT4pG4f.png'
+  const logoUrl = 'https://waylight.whitetowers.org/assets/waylight-logo-BjT4pG4f.png'
 
   return `
 <!DOCTYPE html>
