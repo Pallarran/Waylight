@@ -140,26 +140,35 @@ function generateInvitationEmail({
     admin: 'view, edit, and manage the trip'
   }[permissionLevel] || 'collaborate on'
 
-  // Waylight logo SVG embedded as data URL
+  // Waylight logo SVG embedded as data URL - modern sailboat design
   const logoSvg = `data:image/svg+xml;base64,${btoa(`
     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <linearGradient id="lightBeam" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#FBBF24;stop-opacity:0.3" />
-          <stop offset="100%" style="stop-color:#FBBF24;stop-opacity:0.1" />
-        </linearGradient>
-        <linearGradient id="sailGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#E2E8F0;stop-opacity:1" />
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#4ECDC4;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#0891B2;stop-opacity:1" />
         </linearGradient>
       </defs>
-      <path d="M25 25 L75 25 L75 75 L25 75 Z" fill="url(#lightBeam)" opacity="0.2"/>
-      <path d="M25 70 Q35 75 50 75 Q65 75 75 70 L70 65 L30 65 Z" fill="#FFFFFF"/>
-      <line x1="50" y1="65" x2="50" y2="25" stroke="#FFFFFF" stroke-width="2"/>
-      <path d="M50 25 L35 35 L50 65 Z" fill="url(#sailGradient)"/>
-      <path d="M50 30 L65 35 L50 55 Z" fill="#4ECDC4" opacity="0.9"/>
-      <path d="M20 75 Q30 77 40 75 Q50 73 60 75 Q70 77 80 75" stroke="#4ECDC4" stroke-width="1.5" fill="none" opacity="0.8"/>
-      <circle cx="72" cy="32" r="2" fill="#FBBF24" opacity="0.9"/>
+      <!-- Background rounded rectangle -->
+      <rect x="0" y="0" width="100" height="100" rx="22" ry="22" fill="url(#bgGradient)"/>
+
+      <!-- Sailboat hull -->
+      <path d="M25 72 Q35 77 50 77 Q65 77 75 72 L72 67 L28 67 Z" fill="#0F172A"/>
+
+      <!-- Main mast -->
+      <line x1="50" y1="67" x2="50" y2="28" stroke="#0F172A" stroke-width="2.5"/>
+
+      <!-- Main sail (larger) -->
+      <path d="M50 28 L30 38 L50 67 Z" fill="#0F172A"/>
+
+      <!-- Jib sail (smaller front sail) -->
+      <path d="M50 32 L70 38 L50 58 Z" fill="#0891B2"/>
+
+      <!-- Water waves -->
+      <path d="M15 78 Q25 80 35 78 Q45 76 55 78 Q65 80 75 78 Q85 76 95 78" stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.8"/>
+
+      <!-- Sun/light accent -->
+      <circle cx="75" cy="32" r="3" fill="#FBBF24"/>
     </svg>
   `)}`
 
@@ -255,7 +264,7 @@ function generateInvitationEmail({
         .cta-button {
             display: inline-block;
             background: linear-gradient(135deg, #0891B2 0%, #0E7490 100%);
-            color: white;
+            color: #FFFFFF !important;
             text-decoration: none;
             padding: 16px 32px;
             border-radius: 12px;
@@ -263,10 +272,16 @@ function generateInvitationEmail({
             font-size: 16px;
             box-shadow: 0 4px 25px -5px rgba(8, 145, 178, 0.3);
             transition: all 0.2s ease;
+            border: none;
         }
         .cta-button:hover {
             transform: translateY(-1px);
             box-shadow: 0 8px 35px -5px rgba(8, 145, 178, 0.4);
+            color: #FFFFFF !important;
+            text-decoration: none;
+        }
+        .cta-button:visited {
+            color: #FFFFFF !important;
         }
         .message-box {
             background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(251, 191, 36, 0.05) 100%);
