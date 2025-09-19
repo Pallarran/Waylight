@@ -469,7 +469,7 @@ export default function AuthStatus() {
         const weatherResponse = await fetch(`${supabaseUrl}/functions/v1/fetch-weather`, {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${serviceRoleKey.substring(0, 10)}...`,
+            'Authorization': `Bearer ${serviceRoleKey}`,
             'Content-Type': 'application/json',
           },
         });
