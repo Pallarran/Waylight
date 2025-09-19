@@ -53,6 +53,7 @@ export class InvitationService {
         trip_id: request.tripId,
         invited_email: request.email.toLowerCase(),
         invited_by: currentUser.id,
+        inviter_name: currentUser.fullName || currentUser.email || 'Someone',
         permission_level: request.permissionLevel,
         invitation_token: invitationToken,
         status: 'pending',
@@ -307,25 +308,14 @@ export class InvitationService {
       console.warn('Could not load trip details:', tripError);
     }
 
-    // Get inviter details separately (optional)
-    const { data: inviter, error: inviterError } = await supabase
-      .from('profiles')
-      .select('id, full_name, email')
-      .eq('id', invitation.invited_by)
-      .maybeSingle();
-
-    if (inviterError) {
-      console.warn('Could not load inviter details:', inviterError);
-    }
-
-    // Format the response
+    // Format the response using stored inviter_name field
     return {
       id: invitation.id,
       tripId: invitation.trip_id,
       tripName: trip?.name || 'Trip',
       invitedEmail: invitation.invited_email,
       invitedBy: invitation.invited_by,
-      inviterName: inviter?.full_name || inviter?.email || 'Someone',
+      inviterName: invitation.inviter_name || 'Someone',
       permissionLevel: invitation.permission_level,
       invitationToken: invitation.invitation_token,
       status: invitation.status,
@@ -518,7 +508,7 @@ export class InvitationService {
       const emailData = {
         invitationId: invitation.id,
         invitedEmail: invitation.invited_email,
-        inviterName: inviter.fullName || inviter.email,
+        inviterName: invitation.inviter_name || inviter.fullName || inviter.email,
         tripName: trip?.name || `Trip (${invitation.trip_id.slice(0, 8)})`,
         invitationToken: invitation.invitation_token,
         permissionLevel: invitation.permission_level,

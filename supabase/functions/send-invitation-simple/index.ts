@@ -140,7 +140,7 @@ function generateInvitationEmail({
     admin: 'view, edit, and manage the trip'
   }[permissionLevel] || 'collaborate on'
 
-  // Waylight logo SVG embedded as data URL - modern sailboat design
+  // Waylight logo SVG - exact replica of app icon
   const logoSvg = `data:image/svg+xml;base64,${btoa(`
     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -149,26 +149,26 @@ function generateInvitationEmail({
           <stop offset="100%" style="stop-color:#0891B2;stop-opacity:1" />
         </linearGradient>
       </defs>
-      <!-- Background rounded rectangle -->
+      <!-- Rounded square background -->
       <rect x="0" y="0" width="100" height="100" rx="22" ry="22" fill="url(#bgGradient)"/>
 
-      <!-- Sailboat hull -->
-      <path d="M25 72 Q35 77 50 77 Q65 77 75 72 L72 67 L28 67 Z" fill="#0F172A"/>
+      <!-- Sailboat hull - wider, more realistic shape -->
+      <path d="M20 75 Q25 80 50 80 Q75 80 80 75 L77 70 L23 70 Z" fill="#0F172A"/>
 
       <!-- Main mast -->
-      <line x1="50" y1="67" x2="50" y2="28" stroke="#0F172A" stroke-width="2.5"/>
+      <line x1="50" y1="70" x2="50" y2="25" stroke="#0F172A" stroke-width="2"/>
 
-      <!-- Main sail (larger) -->
-      <path d="M50 28 L30 38 L50 67 Z" fill="#0F172A"/>
+      <!-- Main sail - larger triangular sail -->
+      <path d="M50 25 L25 40 L50 70 Z" fill="#0F172A"/>
 
-      <!-- Jib sail (smaller front sail) -->
-      <path d="M50 32 L70 38 L50 58 Z" fill="#0891B2"/>
+      <!-- Jib sail - smaller front sail, more turquoise -->
+      <path d="M50 30 L75 42 L50 60 Z" fill="#4ECDC4"/>
 
-      <!-- Water waves -->
-      <path d="M15 78 Q25 80 35 78 Q45 76 55 78 Q65 80 75 78 Q85 76 95 78" stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.8"/>
+      <!-- Water line waves -->
+      <path d="M10 82 Q20 85 30 82 Q40 79 50 82 Q60 85 70 82 Q80 79 90 82" stroke="#FFFFFF" stroke-width="1.5" fill="none" opacity="0.7"/>
 
-      <!-- Sun/light accent -->
-      <circle cx="75" cy="32" r="3" fill="#FBBF24"/>
+      <!-- Sun/light dot -->
+      <circle cx="78" cy="30" r="2.5" fill="#FBBF24"/>
     </svg>
   `)}`
 
@@ -263,24 +263,36 @@ function generateInvitationEmail({
         }
         .cta-button {
             display: inline-block;
-            background: linear-gradient(135deg, #0891B2 0%, #0E7490 100%);
+            background-color: #0891B2 !important;
+            background: #0891B2 !important;
             color: #FFFFFF !important;
-            text-decoration: none;
+            text-decoration: none !important;
             padding: 16px 32px;
             border-radius: 12px;
             font-weight: 600;
             font-size: 16px;
-            box-shadow: 0 4px 25px -5px rgba(8, 145, 178, 0.3);
-            transition: all 0.2s ease;
-            border: none;
+            border: 2px solid #0891B2;
+            font-family: inherit;
+            cursor: pointer;
         }
         .cta-button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 8px 35px -5px rgba(8, 145, 178, 0.4);
+            background-color: #0E7490 !important;
+            background: #0E7490 !important;
             color: #FFFFFF !important;
-            text-decoration: none;
+            text-decoration: none !important;
         }
         .cta-button:visited {
+            color: #FFFFFF !important;
+            background-color: #0891B2 !important;
+            background: #0891B2 !important;
+        }
+        .cta-button:active {
+            color: #FFFFFF !important;
+            background-color: #0E7490 !important;
+            background: #0E7490 !important;
+        }
+        /* Ensure email client compatibility */
+        .cta-button span {
             color: #FFFFFF !important;
         }
         .message-box {
@@ -375,8 +387,8 @@ function generateInvitationEmail({
             ` : ''}
 
             <div class="cta-section">
-                <a href="${invitationUrl}" class="cta-button">
-                    ✨ Accept Invitation
+                <a href="${invitationUrl}" class="cta-button" style="background-color: #0891B2 !important; color: #FFFFFF !important; text-decoration: none !important;">
+                    <span style="color: #FFFFFF !important;">✨ Accept Invitation</span>
                 </a>
                 <div class="expiry-notice">
                     ⏰ This invitation expires on ${expiryDate}

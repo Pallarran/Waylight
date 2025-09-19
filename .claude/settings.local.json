@@ -63,7 +63,11 @@
       "Bash(deploy-simple-test.bat)",
       "Bash(./deploy-simple-test.bat)",
       "Bash(./cleanup-test-files.bat)",
-      "Bash(git log:*)"
+      "Bash(git log:*)",
+      "Bash(tsc:*)",
+      "Bash(pnpm --filter @waylight/web run lint)",
+      "Bash(npx supabase:*)",
+      "Bash(dir \"C:\\Users\\vince\\Code\\Waylight\\supabase\")"
     ],
     "deny": [],
     "ask": []

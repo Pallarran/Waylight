@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Users, Calendar, MapPin, Clock, CheckCircle, XCircle, LogIn } from 'lucide-react';
 import { authService, invitationService } from '@waylight/shared';
 import type { TripInvitation } from '@waylight/shared';
+import AuthModal from '../components/auth/AuthModal';
 
 const InviteAcceptanceFull: React.FC = () => {
   const { token } = useParams<{ token: string }>();
@@ -12,11 +13,28 @@ const InviteAcceptanceFull: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [accepting, setAccepting] = useState(false);
   const [user, setUser] = useState<any>(null);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   useEffect(() => {
     checkAuthState();
     loadInvitation();
-  }, [token]);
+
+    // Subscribe to auth changes to automatically process invitation when user signs in
+    const unsubscribe = authService.subscribe((authState) => {
+      setUser(authState.user);
+
+      // If user just signed in and modal is open, close modal and process invitation
+      if (authState.user && showAuthModal) {
+        setShowAuthModal(false);
+        // Small delay to ensure state is updated
+        setTimeout(() => {
+          handleAcceptInvitation();
+        }, 100);
+      }
+    });
+
+    return unsubscribe;
+  }, [token, showAuthModal]);
 
   const checkAuthState = () => {
     const authState = authService.getState();
@@ -81,7 +99,7 @@ const InviteAcceptanceFull: React.FC = () => {
   };
 
   const handleSignIn = () => {
-    navigate('/auth/signin', { state: { returnTo: `/invite/${token}` } });
+    setShowAuthModal(true);
   };
 
   if (loading) {
@@ -264,6 +282,13 @@ const InviteAcceptanceFull: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        mode="signin"
+      />
     </div>
   );
 };
