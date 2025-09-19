@@ -4,6 +4,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TripDay, Trip, ActivityCategory } from '../../../types';
 import { useTripStore } from '../../../stores';
 import { useState } from 'react';
+import WeatherHeader from '../../weather/WeatherHeader';
 
 interface DisneySpringsViewProps {
   trip: Trip;
@@ -261,6 +262,9 @@ export default function DisneySpringsView({ trip, tripDay, onQuickAdd, onOpenDay
               <div>
                 <h2 className="text-xl font-semibold text-ink">Disney Springs Adventure</h2>
                 <p className="text-ink-light">Entertainment, dining, and shopping district</p>
+                <div className="mt-2">
+                  <WeatherHeader date={date} />
+                </div>
               </div>
             </div>
 

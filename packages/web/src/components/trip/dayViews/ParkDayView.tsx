@@ -10,6 +10,7 @@ import { useTripStore } from '../../../stores';
 import { getParkById } from '../../../data/parks';
 import { getDoItemsByPark, getEatItemsByPark, entertainment, getEntertainmentShowTimes, ActivityRatingsService } from '@waylight/shared';
 import { ParkHoursSummary } from '../../liveData';
+import WeatherHeader from '../../weather/WeatherHeader';
 import type {
   Trip, TripDay, ActivityCategory, ItineraryItem,
   PhotoOpportunity, BackupPlan, ActivityRatingSummary
@@ -432,6 +433,9 @@ export default function ParkDayView({ trip, tripDay, date, onQuickAdd, onOpenDay
                 <p className="text-ink-light">
                   {getHeaderInfo().subtitle}
                 </p>
+                <div className="mt-2">
+                  <WeatherHeader date={date} />
+                </div>
               </div>
             </div>
 

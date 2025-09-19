@@ -7,6 +7,7 @@ import { useTripStore } from '../../../stores';
 import { useState } from 'react';
 import { allHotels } from '@waylight/shared';
 import { getCategoryIcon } from '../../../data/activityCategories';
+import WeatherHeader from '../../weather/WeatherHeader';
 
 interface CheckInDayViewProps {
   trip: Trip;
@@ -624,6 +625,9 @@ export default function CheckInDayView({ trip, tripDay, onQuickAdd, onOpenDayTyp
             <div>
               <h2 className="text-xl font-semibold text-ink">Welcome to Your Disney Adventure!</h2>
               <p className="text-ink-light">Arrival day - let's get you settled in</p>
+              <div className="mt-2">
+                <WeatherHeader date={date} />
+              </div>
             </div>
           </div>
 

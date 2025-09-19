@@ -7,6 +7,7 @@ import { useTripStore } from '../../../stores';
 import { useState } from 'react';
 import { allHotels } from '@waylight/shared';
 import { getCategoryIcon } from '../../../data/activityCategories';
+import WeatherHeader from '../../weather/WeatherHeader';
 
 interface CheckOutDayViewProps {
   trip: Trip;
@@ -562,6 +563,9 @@ export default function CheckOutDayView({ trip, tripDay, onQuickAdd, onOpenDayTy
             <div>
               <h2 className="text-xl font-semibold text-ink">Farewell to the Magic</h2>
               <p className="text-ink-light">Departure day - let's wrap up your adventure smoothly</p>
+              <div className="mt-2">
+                <WeatherHeader date={date} />
+              </div>
             </div>
           </div>
 

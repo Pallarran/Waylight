@@ -19,6 +19,7 @@ interface ScheduleItem {
 import { useTripStore } from '../../../stores';
 import { useState } from 'react';
 import { allHotels, getResortDiningByResortId } from '@waylight/shared';
+import WeatherHeader from '../../weather/WeatherHeader';
 
 interface RestDayViewProps {
   trip: Trip;
@@ -543,6 +544,9 @@ export default function RestDayView({ trip, tripDay, onQuickAdd, onOpenDayTypeMo
               <div>
                 <h2 className="text-xl font-semibold text-ink">Rest Day - Take It Easy</h2>
                 <p className="text-ink-light">Relax and recharge at your own pace</p>
+                <div className="mt-2">
+                  <WeatherHeader date={date} />
+                </div>
               </div>
             </div>
 
