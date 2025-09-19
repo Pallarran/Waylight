@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { LogIn, LogOut, User, RefreshCw, Loader2 } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { LogIn, LogOut, User, RefreshCw, Loader2, ChevronDown } from 'lucide-react';
 import { authService, syncService, supabase, type AuthState, type SyncStatus } from '@waylight/shared';
 import { createClient } from '@supabase/supabase-js';
 import AuthModal from './AuthModal';
@@ -10,6 +10,7 @@ export default function AuthStatus() {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [isRefreshingParks, setIsRefreshingParks] = useState(false);
+  const userMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const unsubscribeAuth = authService.subscribe(setAuthState);
@@ -21,12 +22,29 @@ export default function AuthStatus() {
     };
   }, []);
 
+  // Close user menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+        setShowUserMenu(false);
+      }
+    };
+
+    if (showUserMenu) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [showUserMenu]);
+
   const handleSignOut = async () => {
     try {
+      console.log('🔘 User clicked sign out');
       await authService.signOut();
       setShowUserMenu(false);
+      console.log('🔘 Sign out completed, menu closed');
     } catch (error) {
-      console.error('Sign out error:', error);
+      console.error('❌ Sign out error:', error);
+      alert('Failed to sign out. Please try again.');
     }
   };
 
@@ -477,15 +495,16 @@ export default function AuthStatus() {
         </button>
 
         {/* User Menu */}
-        <div className="relative">
+        <div className="relative" ref={userMenuRef}>
           <button
             onClick={() => setShowUserMenu(!showUserMenu)}
-            className="flex items-center gap-2 px-3 py-1.5 text-ink-light hover:text-ink transition-colors"
+            className="flex items-center gap-2 px-3 py-1.5 text-ink-light hover:text-ink transition-colors rounded-md hover:bg-surface-dark/50"
           >
             <User className="h-4 w-4" />
             <span className="text-sm font-medium">
               {authState.user.fullName || authState.user.email}
             </span>
+            <ChevronDown className={`h-3 w-3 transition-transform ${showUserMenu ? 'rotate-180' : ''}`} />
           </button>
 
           {showUserMenu && (

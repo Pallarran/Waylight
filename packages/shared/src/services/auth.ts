@@ -183,8 +183,13 @@ export class AuthService {
   }
 
   async signOut() {
+    console.log('🚪 Signing out...');
     const { error } = await supabase.auth.signOut();
-    if (error) throw error;
+    if (error) {
+      console.error('❌ Sign out error:', error);
+      throw error;
+    }
+    console.log('✅ Sign out successful');
   }
 
   async resetPassword(email: string) {
