@@ -140,24 +140,8 @@ function generateInvitationEmail({
     admin: 'view, edit, and manage the trip'
   }[permissionLevel] || 'collaborate on'
 
-  // Use a simple, reliable logo that will work in emails
-  const logoSvg = `data:image/svg+xml;base64,${btoa(`
-    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#4ECDC4"/>
-          <stop offset="100%" style="stop-color:#0891B2"/>
-        </linearGradient>
-      </defs>
-      <rect x="0" y="0" width="100" height="100" rx="20" fill="url(#bgGrad)"/>
-      <path d="M25 75 Q30 80 50 80 Q70 80 75 75 L70 68 L30 68 Z" fill="white"/>
-      <line x1="50" y1="68" x2="50" y2="25" stroke="white" stroke-width="3"/>
-      <path d="M50 25 L25 40 L50 68 Z" fill="white"/>
-      <path d="M50 30 L75 45 L50 65 Z" fill="#4ECDC4"/>
-      <path d="M10 85 Q25 88 40 85 Q55 82 70 85 Q85 88 100 85" stroke="white" stroke-width="2" fill="none" opacity="0.7"/>
-      <circle cx="75" cy="30" r="3" fill="#FBBF24"/>
-    </svg>
-  `)}`
+  // Use a simple emoji or text-based logo that works reliably in emails
+  const logoUrl = 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/26f5.png' // Sailboat emoji from reliable CDN
 
   return `
 <!DOCTYPE html>
@@ -347,10 +331,10 @@ function generateInvitationEmail({
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <img src="${logoSvg}" alt="Waylight" class="logo" />
-            <h1 class="brand-name" style="color: #FFFFFF !important;">Waylight</h1>
-            <p class="header-subtitle" style="color: #FFFFFF !important;">You're invited to plan an amazing trip together!</p>
+        <div class="header" style="background: linear-gradient(135deg, #0891B2 0%, #4ECDC4 100%); color: white; padding: 40px 32px; text-align: center;">
+            <img src="${logoUrl}" alt="Waylight" class="logo" />
+            <h1 class="brand-name" style="color: white !important; font-size: 28px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -0.025em;">Waylight</h1>
+            <p class="header-subtitle" style="color: white !important; margin: 0; font-size: 16px; font-weight: 400; opacity: 0.95;">You're invited to plan an amazing trip together!</p>
         </div>
 
         <div class="content">
