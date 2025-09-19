@@ -175,8 +175,8 @@ function generateInvitationEmail({
             position: relative;
         }
         .logo {
-            width: 48px;
-            height: 48px;
+            width: 96px;
+            height: 96px;
             margin: 0 auto 16px auto;
             display: block;
         }
@@ -333,7 +333,7 @@ function generateInvitationEmail({
     <div class="container">
         <div class="header" style="background: linear-gradient(135deg, #0891B2 0%, #4ECDC4 100%); color: white; padding: 40px 32px; text-align: center;">
             <img src="${logoUrl}" alt="Waylight" class="logo" />
-            <h1 class="brand-name" style="color: black !important; font-size: 28px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -0.025em;">Waylight</h1>
+            <h1 class="brand-name" style="background: linear-gradient(to right, #0891B2, #4ECDC4) !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; background-clip: text !important; color: #0891B2 !important; font-size: 28px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -0.025em;">Waylight</h1>
             <p class="header-subtitle" style="color: black !important; margin: 0; font-size: 16px; font-weight: 400;">You're invited to plan an amazing trip together!</p>
         </div>
 
