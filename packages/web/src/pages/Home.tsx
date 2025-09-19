@@ -1,14 +1,30 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTripStore } from '../stores';
+import { authService } from '@waylight/shared';
 import WaylightLogo from '../assets/waylight-logo.png';
 
 export default function Home() {
   const { trips, activeTrip, loadTrips, setActiveTrip } = useTripStore();
   const navigate = useNavigate();
-  
+  const [user, setUser] = useState(authService.getState().user);
+
   useEffect(() => {
     loadTrips();
+  }, [loadTrips]);
+
+  useEffect(() => {
+    // Subscribe to auth changes and reload trips when user logs in
+    const unsubscribe = authService.subscribe((authState) => {
+      setUser(authState.user);
+
+      // When user logs in, reload trips to show Continue Planning button
+      if (authState.user && !authState.loading) {
+        loadTrips();
+      }
+    });
+
+    return unsubscribe;
   }, [loadTrips]);
 
   const getTargetTrip = () => {
