@@ -63,8 +63,11 @@ const TripSharingModal: React.FC<TripSharingModalProps> = ({
     e.preventDefault();
     setIsLoading(true);
     setError(null);
+    setSuccessMessage(null);
 
     try {
+      console.log('🎯 Starting invitation process for:', email.trim());
+
       const request: InvitationRequest = {
         tripId,
         email: email.trim(),
@@ -73,9 +76,15 @@ const TripSharingModal: React.FC<TripSharingModalProps> = ({
         expiresInDays: 7
       };
 
+      console.log('📤 Sending invitation request...');
+      const startTime = Date.now();
+
       await invitationService.sendInvitation(request);
 
-      setSuccessMessage(`Invitation sent to ${email}`);
+      const totalTime = Date.now() - startTime;
+      console.log(`✅ Invitation completed successfully in ${totalTime}ms`);
+
+      setSuccessMessage(`✅ Invitation sent to ${email} (took ${totalTime}ms)`);
       setEmail('');
       setMessage('');
       await loadCollaborationData();
@@ -84,7 +93,15 @@ const TripSharingModal: React.FC<TripSharingModalProps> = ({
       // Auto-switch to invitations tab to show the sent invitation
       setActiveTab('invitations');
     } catch (error) {
-      setError(error instanceof Error ? error.message : 'Failed to send invitation');
+      console.error('❌ Invitation failed:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Failed to send invitation';
+      setError(`❌ ${errorMessage}`);
+
+      // If the error mentions that invitation was created but email failed,
+      // still reload collaboration data to show the invitation
+      if (errorMessage.includes('invitation was created')) {
+        await loadCollaborationData();
+      }
     } finally {
       setIsLoading(false);
     }

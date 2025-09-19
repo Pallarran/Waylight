@@ -460,14 +460,22 @@ export class InvitationService {
   }
 
   private async sendInvitationEmail(invitation: any, inviter: any): Promise<void> {
+    console.log('🚀 Starting email send process for:', invitation.invited_email);
+    const startTime = Date.now();
+
     try {
       // Get the current user session for authentication
+      console.log('🔑 Getting user session...');
+      const sessionStart = Date.now();
       const { data: { session } } = await supabase.auth.getSession();
+      console.log(`✅ Session retrieved in ${Date.now() - sessionStart}ms`);
+
       if (!session) {
         throw new Error('No active session for sending email');
       }
 
       // Prepare email data
+      console.log('📋 Preparing email data...');
       const emailData = {
         invitationId: invitation.id,
         invitedEmail: invitation.invited_email,
@@ -478,27 +486,50 @@ export class InvitationService {
         message: invitation.message,
         expiresAt: invitation.expires_at
       };
-
-      // Call the Supabase Edge Function
-      const { data, error } = await supabase.functions.invoke('send-invitation-simple', {
-        body: emailData,
-        headers: {
-          Authorization: `Bearer ${session.access_token}`,
-        },
+      console.log('📧 Email data prepared:', {
+        to: emailData.invitedEmail,
+        tripName: emailData.tripName,
+        permission: emailData.permissionLevel
       });
+
+      // Call the Supabase Edge Function with timeout
+      console.log('🌐 Calling Edge Function...');
+      const edgeFunctionStart = Date.now();
+
+      const { data, error } = await Promise.race([
+        supabase.functions.invoke('send-invitation-simple', {
+          body: emailData,
+          headers: {
+            Authorization: `Bearer ${session.access_token}`,
+          },
+        }),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error('Email sending timeout after 30 seconds')), 30000)
+        )
+      ]) as any;
+
+      const edgeFunctionTime = Date.now() - edgeFunctionStart;
+      console.log(`📤 Edge Function completed in ${edgeFunctionTime}ms`);
 
       if (error) {
         console.error('❌ Email sending failed:', error);
         throw new Error(`Failed to send invitation email: ${error.message}`);
       }
 
-      console.log('✅ Invitation email sent successfully:', {
-        emailId: data.emailId,
-        recipient: invitation.invited_email
+      const totalTime = Date.now() - startTime;
+      console.log(`✅ Invitation email sent successfully in ${totalTime}ms:`, {
+        emailId: data?.emailId,
+        recipient: invitation.invited_email,
+        timing: {
+          session: `${Date.now() - sessionStart}ms`,
+          edgeFunction: `${edgeFunctionTime}ms`,
+          total: `${totalTime}ms`
+        }
       });
 
     } catch (error) {
-      console.error('❌ Error in sendInvitationEmail:', error);
+      const totalTime = Date.now() - startTime;
+      console.error(`❌ Error in sendInvitationEmail after ${totalTime}ms:`, error);
 
       // Fallback: Log the invitation details for manual processing
       console.log('📧 Invitation email details (for manual sending):', {
@@ -511,8 +542,8 @@ export class InvitationService {
         expiresAt: invitation.expires_at
       });
 
-      // Don't throw here - we still want the invitation to be created in the database
-      // The user can manually share the invitation URL if email fails
+      // IMPORTANT: Now we DO throw the error so users get feedback
+      throw new Error(`Email sending failed: ${error instanceof Error ? error.message : 'Unknown error'}. The invitation was created but email delivery failed.`);
     }
   }
 
