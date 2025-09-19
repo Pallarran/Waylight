@@ -450,18 +450,26 @@ export default function AuthStatus() {
       // Show results
       // Now sync weather data
       console.log('🌤️ Syncing weather data...');
+      let weatherStatus = 'success';
+      let weatherDetails = '';
+
       try {
         const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
         const serviceRoleKey = import.meta.env.VITE_SUPABASE_SERVICE_ROLE_KEY;
 
-        if (!supabaseUrl || !serviceRoleKey) {
-          throw new Error('Weather sync requires Supabase service role key');
+        if (!supabaseUrl) {
+          throw new Error('VITE_SUPABASE_URL not found in environment. Check your .env file.');
         }
+        if (!serviceRoleKey) {
+          throw new Error('VITE_SUPABASE_SERVICE_ROLE_KEY not found in environment. This should be set for weather sync to work.');
+        }
+
+        console.log('🌤️ Weather sync: Using Supabase URL:', supabaseUrl.substring(0, 30) + '...');
 
         const weatherResponse = await fetch(`${supabaseUrl}/functions/v1/fetch-weather`, {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${serviceRoleKey}`,
+            'Authorization': `Bearer ${serviceRoleKey.substring(0, 10)}...`,
             'Content-Type': 'application/json',
           },
         });
@@ -470,26 +478,39 @@ export default function AuthStatus() {
 
         if (weatherResponse.ok) {
           console.log('✅ Weather data synced successfully:', weatherResult);
+          weatherDetails = `✅ Weather: ${weatherResult.message || 'Sync completed'}`;
+          if (weatherResult.forecasts) {
+            weatherDetails += ` (${weatherResult.forecasts} forecasts)`;
+          }
         } else {
           console.warn('⚠️ Weather sync failed:', weatherResult);
-          errors.push(`Weather sync: ${weatherResult.details || weatherResult.error || 'Unknown error'}`);
+          weatherStatus = 'error';
+          weatherDetails = `❌ Weather: ${weatherResult.details || weatherResult.error || weatherResult.message || 'Unknown error'}`;
+          if (weatherResponse.status) {
+            weatherDetails += ` (HTTP ${weatherResponse.status})`;
+          }
+          errors.push(`Weather sync failed: ${weatherDetails}`);
         }
       } catch (weatherError) {
         console.warn('⚠️ Weather sync error:', weatherError);
-        errors.push(`Weather sync: ${weatherError instanceof Error ? weatherError.message : 'Unknown error'}`);
+        weatherStatus = 'error';
+        weatherDetails = `❌ Weather: ${weatherError instanceof Error ? weatherError.message : 'Unknown error'}`;
+        errors.push(`Weather sync error: ${weatherDetails}`);
       }
 
-      // Show results
-      const weatherNote = errors.some(e => e.includes('Weather')) ?
-        '\n\n⚠️ Weather data sync had issues (check console)' :
-        '\n• Weather forecasts';
+      // Show results with detailed weather info
+      const weatherNote = weatherStatus === 'error' ?
+        `\n\n${weatherDetails}` :
+        `\n• Weather forecasts ${weatherDetails ? '- ' + weatherDetails.replace('✅ Weather: ', '') : ''}`;
 
       if (successCount === Object.keys(parkIds).length) {
         alert(`✅ Database sync successful!\n\nUpdated live data for all ${successCount} parks:\n• Attractions & wait times\n• Park status & info\n• Special ticketed events\n• Daily park schedules with EE/EEH${weatherNote}`);
       } else if (successCount > 0) {
-        alert(`⚠️ Partial success: Updated ${successCount}/${Object.keys(parkIds).length} parks in database.\n\nErrors:\n${errors.join('\n')}`);
+        const combinedErrors = errors.filter(e => !e.includes('Weather')); // Don't duplicate weather errors
+        alert(`⚠️ Partial success: Updated ${successCount}/${Object.keys(parkIds).length} parks in database.\n\nPark Errors:\n${combinedErrors.join('\n')}${weatherNote}`);
       } else {
-        throw new Error(`Failed to update any parks:\n${errors.join('\n')}`);
+        const combinedErrors = errors.filter(e => !e.includes('Weather')); // Don't duplicate weather errors
+        throw new Error(`Failed to update any parks:\n${combinedErrors.join('\n')}${weatherNote}`);
       }
 
     } catch (error) {
