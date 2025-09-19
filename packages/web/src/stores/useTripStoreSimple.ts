@@ -102,7 +102,18 @@ const useSimpleTripStore = create<SimpleTripState>((set, get) => ({
 
         // Clear local data after sync attempt
         get().clearAllData();
-        console.log('🧹 Local data cleared after logout');
+
+        // Force immediate UI update by resetting all state
+        set({
+          trips: [],
+          activeTrip: null,
+          isLoading: false,
+          error: null,
+          successMessage: null,
+          isSyncing: false
+        });
+
+        console.log('🧹 Local data and UI state cleared after logout');
       }
     });
   },
@@ -130,21 +141,28 @@ const useSimpleTripStore = create<SimpleTripState>((set, get) => ({
   loadTrips: async (skipSync = false) => {
     set({ isLoading: true, error: null });
     try {
+      // Check if user is authenticated first
+      const authState = authService.getState();
+      if (!authState.user && !authState.loading) {
+        // User is not authenticated, don't load any trips
+        set({ trips: [], isLoading: false });
+        return;
+      }
+
       const trips = await DatabaseService.getTrips();
       set({ trips, isLoading: false });
-      
+
       // Only auto-sync on initial load, not on subsequent loads
       if (!skipSync) {
-        const authState = authService.getState();
         if (authState.user && !authState.loading && navigator.onLine) {
           // Don't await sync to avoid blocking the UI
           get().syncTrips().catch(console.error);
         }
       }
     } catch (error) {
-      set({ 
+      set({
         error: error instanceof Error ? error.message : 'Failed to load trips',
-        isLoading: false 
+        isLoading: false
       });
     }
   },

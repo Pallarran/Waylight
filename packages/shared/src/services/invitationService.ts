@@ -46,6 +46,13 @@ export class InvitationService {
     const expiresAt = new Date();
     expiresAt.setDate(expiresAt.getDate() + (request.expiresInDays || 7));
 
+    // Get trip name to store with invitation
+    const { data: tripData } = await supabase
+      .from('trips')
+      .select('name')
+      .eq('id', request.tripId)
+      .single();
+
     // Create invitation in database
     const { data, error } = await supabase
       .from('trip_invitations')
@@ -54,6 +61,7 @@ export class InvitationService {
         invited_email: request.email.toLowerCase(),
         invited_by: currentUser.id,
         inviter_name: currentUser.fullName || currentUser.email || 'Someone',
+        trip_name: tripData?.name || 'Trip',
         permission_level: request.permissionLevel,
         invitation_token: invitationToken,
         status: 'pending',
@@ -297,22 +305,11 @@ export class InvitationService {
       throw new Error('Invitation not found or has already been responded to');
     }
 
-    // Get trip details separately
-    const { data: trip, error: tripError } = await supabase
-      .from('trips')
-      .select('id, name, start_date, end_date, user_id')
-      .eq('id', invitation.trip_id)
-      .maybeSingle();
-
-    if (tripError) {
-      console.warn('Could not load trip details:', tripError);
-    }
-
-    // Format the response using stored inviter_name field
+    // Format the response using stored fields
     return {
       id: invitation.id,
       tripId: invitation.trip_id,
-      tripName: trip?.name || 'Trip',
+      tripName: invitation.trip_name || 'Trip',
       invitedEmail: invitation.invited_email,
       invitedBy: invitation.invited_by,
       inviterName: invitation.inviter_name || 'Someone',
@@ -495,21 +492,13 @@ export class InvitationService {
         throw new Error('No active session for sending email');
       }
 
-      // Get trip details for email
-      console.log('📋 Getting trip details...');
-      const { data: trip } = await supabase
-        .from('trips')
-        .select('name')
-        .eq('id', invitation.trip_id)
-        .maybeSingle();
-
-      // Prepare email data
+      // Prepare email data using stored invitation fields
       console.log('📋 Preparing email data...');
       const emailData = {
         invitationId: invitation.id,
         invitedEmail: invitation.invited_email,
         inviterName: invitation.inviter_name || inviter.fullName || inviter.email || 'Someone',
-        tripName: trip?.name || `Trip (${invitation.trip_id.slice(0, 8)})`,
+        tripName: invitation.trip_name || `Trip (${invitation.trip_id.slice(0, 8)})`,
         invitationToken: invitation.invitation_token,
         permissionLevel: invitation.permission_level,
         message: invitation.message,
