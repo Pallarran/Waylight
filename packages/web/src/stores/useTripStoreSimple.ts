@@ -77,14 +77,32 @@ const useSimpleTripStore = create<SimpleTripState>((set, get) => ({
     });
 
     // Auto-sync when user authenticates and start periodic sync
-    authService.subscribe((authState: AuthState) => {
+    authService.subscribe(async (authState: AuthState) => {
       if (authState.user && !authState.loading) {
         get().syncTrips();
         get().startPeriodicSync();
-      } else {
-        // User signed out - clear all data and stop sync
+      } else if (!authState.loading) {
+        // User signed out - sync any pending changes before clearing data
+        console.log('🔄 User signing out, syncing pending changes...');
         get().stopPeriodicSync();
+
+        try {
+          // Sync all local trips to cloud before clearing (with timeout)
+          await Promise.race([
+            get().syncTrips(),
+            new Promise((_, reject) =>
+              setTimeout(() => reject(new Error('Sync timeout')), 10000)
+            )
+          ]);
+          console.log('✅ Final sync completed before logout');
+        } catch (error) {
+          console.warn('⚠️ Final sync failed before logout:', error);
+          // Continue with clearing even if sync fails to avoid blocking logout
+        }
+
+        // Clear local data after sync attempt
         get().clearAllData();
+        console.log('🧹 Local data cleared after logout');
       }
     });
   },

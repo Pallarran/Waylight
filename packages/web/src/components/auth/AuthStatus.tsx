@@ -10,6 +10,7 @@ export default function AuthStatus() {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [isRefreshingParks, setIsRefreshingParks] = useState(false);
+  const [isSigningOut, setIsSigningOut] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -39,12 +40,22 @@ export default function AuthStatus() {
   const handleSignOut = async () => {
     try {
       console.log('🔘 User clicked sign out');
-      await authService.signOut();
+      setIsSigningOut(true);
       setShowUserMenu(false);
-      console.log('🔘 Sign out completed, menu closed');
+
+      // Note: The actual sync happens in the trip store's auth subscription
+      // We just need to trigger the signOut, which will automatically:
+      // 1. Sync pending changes to cloud
+      // 2. Clear local data
+      // 3. Update auth state
+      await authService.signOut();
+
+      console.log('🔘 Sign out completed');
     } catch (error) {
       console.error('❌ Sign out error:', error);
       alert('Failed to sign out. Please try again.');
+    } finally {
+      setIsSigningOut(false);
     }
   };
 
@@ -532,10 +543,15 @@ export default function AuthStatus() {
                 
                 <button
                   onClick={handleSignOut}
-                  className="w-full flex items-center gap-2 px-3 py-2 text-sm text-ink-light hover:text-ink hover:bg-surface rounded-md transition-colors"
+                  disabled={isSigningOut}
+                  className="w-full flex items-center gap-2 px-3 py-2 text-sm text-ink-light hover:text-ink hover:bg-surface rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <LogOut className="h-4 w-4" />
-                  Sign Out
+                  {isSigningOut ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <LogOut className="h-4 w-4" />
+                  )}
+                  {isSigningOut ? 'Saving & Signing Out...' : 'Sign Out'}
                 </button>
               </div>
 
