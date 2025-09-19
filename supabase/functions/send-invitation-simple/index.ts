@@ -140,37 +140,8 @@ function generateInvitationEmail({
     admin: 'view, edit, and manage the trip'
   }[permissionLevel] || 'collaborate on'
 
-  // Waylight logo SVG - updated with correct app logo design
-  const logoSvg = `data:image/svg+xml;base64,${btoa(`
-    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#4ECDC4;stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#0891B2;stop-opacity:1" />
-        </linearGradient>
-      </defs>
-      <!-- Rounded square background -->
-      <rect x="0" y="0" width="100" height="100" rx="22" ry="22" fill="url(#bgGradient)"/>
-
-      <!-- Sailboat hull -->
-      <path d="M20 75 Q30 82 50 82 Q70 82 80 75 L75 68 L25 68 Z" fill="#0F172A"/>
-
-      <!-- Main mast -->
-      <line x1="50" y1="68" x2="50" y2="20" stroke="#0F172A" stroke-width="2.5"/>
-
-      <!-- Main sail (left side) -->
-      <path d="M50 20 L20 35 L50 68 Z" fill="#0F172A"/>
-
-      <!-- Jib sail (right side) -->
-      <path d="M50 25 L80 40 L50 65 Z" fill="#4ECDC4"/>
-
-      <!-- Water waves -->
-      <path d="M5 85 Q15 88 25 85 Q35 82 45 85 Q55 88 65 85 Q75 82 85 85 Q95 88 105 85" stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.8"/>
-
-      <!-- Sun -->
-      <circle cx="80" cy="25" r="3" fill="#FBBF24"/>
-    </svg>
-  `)}`
+  // Use the actual Waylight logo PNG from the app
+  const logoUrl = 'https://waylight.app/assets/waylight-logo-BjT4pG4f.png'
 
   return `
 <!DOCTYPE html>
@@ -361,7 +332,7 @@ function generateInvitationEmail({
 <body>
     <div class="container">
         <div class="header">
-            <img src="${logoSvg}" alt="Waylight" class="logo" />
+            <img src="${logoUrl}" alt="Waylight" class="logo" />
             <h1 class="brand-name">Waylight</h1>
             <p class="header-subtitle">You're invited to plan an amazing trip together!</p>
         </div>
