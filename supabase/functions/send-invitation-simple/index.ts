@@ -140,8 +140,43 @@ function generateInvitationEmail({
     admin: 'view, edit, and manage the trip'
   }[permissionLevel] || 'collaborate on'
 
-  // Use a simple emoji or text-based logo that works reliably in emails
-  const logoUrl = 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/26f5.png' // Sailboat emoji from reliable CDN
+  // Recreate your exact Waylight logo as SVG for reliable email display
+  const logoSvg = `data:image/svg+xml;base64,${btoa(`
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#4ECDC4"/>
+          <stop offset="100%" style="stop-color:#0891B2"/>
+        </linearGradient>
+      </defs>
+      <!-- Rounded background matching your app icon -->
+      <rect x="0" y="0" width="100" height="100" rx="22" ry="22" fill="url(#bgGradient)"/>
+
+      <!-- Sailboat hull - matches your logo design -->
+      <path d="M20 75 Q25 78 35 78 L65 78 Q75 78 80 75 Q78 72 75 70 L25 70 Q22 72 20 75 Z" fill="#0F172A"/>
+
+      <!-- Main sail (left, larger) -->
+      <path d="M50 22 L22 38 L50 70 Z" fill="#0F172A"/>
+
+      <!-- Jib sail (right, smaller with turquoise) -->
+      <path d="M50 28 L78 42 L50 65 Z" fill="#4ECDC4"/>
+
+      <!-- Mast -->
+      <line x1="50" y1="70" x2="50" y2="22" stroke="#0F172A" stroke-width="2"/>
+
+      <!-- Water waves (dashed line effect) -->
+      <circle cx="15" cy="85" r="1.5" fill="white" opacity="0.8"/>
+      <circle cx="25" cy="88" r="1.5" fill="white" opacity="0.8"/>
+      <circle cx="35" cy="85" r="1.5" fill="white" opacity="0.8"/>
+      <circle cx="45" cy="88" r="1.5" fill="white" opacity="0.8"/>
+      <circle cx="55" cy="85" r="1.5" fill="white" opacity="0.8"/>
+      <circle cx="65" cy="88" r="1.5" fill="white" opacity="0.8"/>
+      <circle cx="75" cy="85" r="1.5" fill="white" opacity="0.8"/>
+
+      <!-- Sun -->
+      <circle cx="78" cy="28" r="3" fill="#FBBF24"/>
+    </svg>
+  `)}`
 
   return `
 <!DOCTYPE html>
@@ -332,7 +367,7 @@ function generateInvitationEmail({
 <body>
     <div class="container">
         <div class="header" style="background: linear-gradient(135deg, #0891B2 0%, #4ECDC4 100%); color: white; padding: 40px 32px; text-align: center;">
-            <img src="${logoUrl}" alt="Waylight" class="logo" />
+            <img src="${logoSvg}" alt="Waylight" class="logo" />
             <h1 class="brand-name" style="color: white !important; font-size: 28px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -0.025em;">Waylight</h1>
             <p class="header-subtitle" style="color: white !important; margin: 0; font-size: 16px; font-weight: 400; opacity: 0.95;">You're invited to plan an amazing trip together!</p>
         </div>
