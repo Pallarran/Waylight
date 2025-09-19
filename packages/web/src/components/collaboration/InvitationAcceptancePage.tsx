@@ -7,6 +7,7 @@ import {
   authService
 } from '@waylight/shared';
 import { MapPin, Calendar, Users, CheckCircle, XCircle, Mail, Clock } from 'lucide-react';
+import AuthModal from '../auth/AuthModal';
 
 const InvitationAcceptancePage: React.FC = () => {
   const { token } = useParams<{ token: string }>();
@@ -17,8 +18,27 @@ const InvitationAcceptancePage: React.FC = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
-  const currentUser = authService.getState().user;
+  const [currentUser, setCurrentUser] = useState(authService.getState().user);
+
+  // Subscribe to auth state changes
+  useEffect(() => {
+    const unsubscribe = authService.subscribe((authState) => {
+      setCurrentUser(authState.user);
+
+      // If user just logged in and modal is open, close it and try to accept invitation
+      if (authState.user && showAuthModal) {
+        setShowAuthModal(false);
+        // Small delay to ensure state is updated
+        setTimeout(() => {
+          processInvitationAcceptance();
+        }, 100);
+      }
+    });
+
+    return unsubscribe;
+  }, [showAuthModal]);
 
   useEffect(() => {
     if (token) {
@@ -31,47 +51,25 @@ const InvitationAcceptancePage: React.FC = () => {
       setIsLoading(true);
       setError(null);
 
-      // We'll need to add a method to get invitation by token
-      // For now, we'll simulate the invitation data structure
-      // In a real implementation, you'd call a service method like:
-      // const invitationData = await invitationService.getInvitationByToken(token!);
+      if (!token) {
+        throw new Error('No invitation token provided');
+      }
 
-      // Placeholder - replace with actual API call
-      setTimeout(() => {
-        setInvitation({
-          id: 'inv_123',
-          tripId: 'trip_456',
-          tripName: 'Disney World Family Trip 2024',
-          invitedEmail: 'user@example.com',
-          invitedBy: 'user123',
-          inviterName: 'John Smith',
-          permissionLevel: 'edit',
-          invitationToken: token!,
-          status: 'pending',
-          expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-          message: 'Come join us for an amazing Disney World adventure!',
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
-        });
-        setIsLoading(false);
-      }, 1000);
+      // Use the real API call to get invitation by token
+      const invitationData = await invitationService.getInvitationByToken(token);
+      setInvitation(invitationData);
 
     } catch (error) {
       console.error('Failed to load invitation:', error);
-      setError('Failed to load invitation details');
+      const errorMessage = error instanceof Error ? error.message : 'Failed to load invitation details';
+      setError(errorMessage);
+    } finally {
       setIsLoading(false);
     }
   };
 
-  const handleAcceptInvitation = async () => {
-    if (!currentUser) {
-      // Redirect to login with return URL
-      const returnUrl = encodeURIComponent(window.location.pathname);
-      navigate(`/auth?redirect=${returnUrl}`);
-      return;
-    }
-
-    if (!token) return;
+  const processInvitationAcceptance = async () => {
+    if (!currentUser || !token) return;
 
     try {
       setIsProcessing(true);
@@ -92,6 +90,16 @@ const InvitationAcceptancePage: React.FC = () => {
     } finally {
       setIsProcessing(false);
     }
+  };
+
+  const handleAcceptInvitation = async () => {
+    if (!currentUser) {
+      // Show authentication modal instead of redirecting
+      setShowAuthModal(true);
+      return;
+    }
+
+    await processInvitationAcceptance();
   };
 
   const handleDeclineInvitation = async () => {
@@ -332,6 +340,12 @@ const InvitationAcceptancePage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Authentication Modal */}
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+      />
     </div>
   );
 };
