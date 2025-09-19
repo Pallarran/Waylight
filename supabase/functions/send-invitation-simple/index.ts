@@ -67,7 +67,7 @@ serve(async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Waylight <onboarding@resend.dev>',
+        from: 'Waylight <noreply@waylight.whitetowers.org>',
         to: [emailData.invitedEmail],
         subject: `🎢 ${emailData.inviterName} invited you to collaborate on "${emailData.tripName}"`,
         html: emailHtml,
@@ -146,7 +146,7 @@ function generateInvitationEmail({
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🧪 Test Email - Trip Collaboration Invitation</title>
+    <title>Trip Collaboration Invitation - Waylight</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -202,9 +202,9 @@ function generateInvitationEmail({
             font-size: 16px;
             margin: 24px 0;
         }
-        .test-notice {
-            background-color: #fef3c7;
-            border: 2px solid #f59e0b;
+        .info-notice {
+            background-color: #dbeafe;
+            border: 2px solid #3b82f6;
             border-radius: 8px;
             padding: 16px;
             margin: 20px 0;
@@ -215,16 +215,11 @@ function generateInvitationEmail({
 <body>
     <div class="container">
         <div class="header">
-            <h1>🧪 TEST EMAIL SUCCESS! 🎉</h1>
-            <p>Your Waylight email service is working!</p>
+            <h1>🎢 Trip Collaboration Invitation</h1>
+            <p>You're invited to plan an amazing trip together!</p>
         </div>
 
         <div class="content">
-            <div class="test-notice">
-                <strong>🧪 This is a test email</strong><br>
-                Your email service configuration is working correctly!
-            </div>
-
             <p>Hi there!</p>
 
             <p><strong>${inviterName}</strong> has invited you to collaborate on their trip planning.</p>
@@ -243,15 +238,15 @@ function generateInvitationEmail({
 
             <div style="text-align: center; margin: 32px 0;">
                 <a href="${invitationUrl}" class="cta-button">
-                    🧪 Test Invitation Link
+                    🎢 Accept Invitation
                 </a>
             </div>
 
-            <p><strong>✅ Email service is working correctly!</strong></p>
+            <p><strong>What happens next?</strong></p>
             <ul>
-                <li>✅ Resend API key is valid</li>
-                <li>✅ Edge Function is deployed</li>
-                <li>✅ Email sending is functional</li>
+                <li>✅ Click the button above to accept the invitation</li>
+                <li>✅ Create an account or sign in if you don't have one</li>
+                <li>✅ Start collaborating on the trip planning</li>
             </ul>
         </div>
     </div>
