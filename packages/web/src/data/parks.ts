@@ -17,14 +17,14 @@ export const PARKS: Park[] = [
   },
   {
     id: 'hollywood-studios',
-    name: "Disney's Hollywood Studios",
+    name: "Hollywood Studios",
     abbreviation: 'HS',
     description: 'Lights, camera, action! Movie magic comes to life',
     icon: '🎬'
   },
   {
     id: 'animal-kingdom',
-    name: "Disney's Animal Kingdom",
+    name: "Animal Kingdom",
     abbreviation: 'AK',
     description: 'A wild adventure awaits in this animal-themed park',
     icon: '🦁'

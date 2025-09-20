@@ -12,14 +12,37 @@ export interface OptimizationConstraint {
   canOptimize?: boolean; // Whether this day type can be optimized
 }
 
+export interface OptimizationAlternative {
+  id: string;
+  name: string;
+  assignment: ParkAssignment[];
+  benefits: AlternativeBenefits;
+  reasoning: string[];
+  score: number;
+}
+
+export interface AlternativeBenefits {
+  crowdReduction: number;
+  activityAlignment: number;
+  energyBalance: number;
+  groupConsensus: number;
+  totalSavings: {
+    waitTimeHours: number;
+    stressReduction: number;
+  };
+  highlights: string[];
+}
+
 export interface OptimizationResult {
   originalAssignment: ParkAssignment[];
-  optimizedAssignment: ParkAssignment[];
-  improvementScore: number;
-  totalCrowdReduction: number;
+  alternatives: OptimizationAlternative[];
   strategy: OptimizationStrategy;
   confidence: number;
-  reasoning: string[];
+  summary: {
+    totalAlternatives: number;
+    bestAlternativeId: string;
+    analysisTime: number;
+  };
 }
 
 export interface ParkAssignment {
@@ -56,6 +79,7 @@ export class TripOptimizationService {
     activityRatings: ActivityRatingSummary[],
     options: OptimizationOptions
   ): Promise<OptimizationResult> {
+    const startTime = Date.now();
 
     // Validate trip dates and structure
     this.validateTripStructure(trip);
@@ -66,53 +90,28 @@ export class TripOptimizationService {
     // Generate original assignment
     const originalAssignment = this.createAssignmentFromTrip(trip, crowdData);
 
-    // Apply optimization strategy
-    let optimizedAssignment: ParkAssignment[];
-    let reasoning: string[] = [];
+    // Generate multiple alternatives based on strategy
+    const alternatives = await this.generateAlternatives(
+      originalAssignment,
+      activityRatings,
+      crowdData,
+      options
+    );
 
-    switch (options.strategy) {
-      case 'crowd_minimization':
-        const crowdResult = await this.optimizeForCrowds(originalAssignment, options.constraints, crowdData);
-        optimizedAssignment = crowdResult.assignment;
-        reasoning = crowdResult.reasoning;
-        break;
-
-      case 'must_do_priority':
-        const mustDoResult = await this.optimizeForMustDos(originalAssignment, activityRatings, crowdData, options.constraints);
-        optimizedAssignment = mustDoResult.assignment;
-        reasoning = mustDoResult.reasoning;
-        break;
-
-      case 'group_consensus':
-        const consensusResult = await this.optimizeForGroupConsensus(originalAssignment, activityRatings, crowdData, options.constraints);
-        optimizedAssignment = consensusResult.assignment;
-        reasoning = consensusResult.reasoning;
-        break;
-
-      case 'energy_management':
-        const energyResult = await this.optimizeForEnergy(originalAssignment, crowdData, options.constraints);
-        optimizedAssignment = energyResult.assignment;
-        reasoning = energyResult.reasoning;
-        break;
-
-      default:
-        optimizedAssignment = originalAssignment;
-        reasoning = ['No optimization strategy applied'];
-    }
-
-    // Calculate improvement metrics
-    const improvementScore = this.calculateImprovementScore(originalAssignment, optimizedAssignment);
-    const totalCrowdReduction = this.calculateCrowdReduction(originalAssignment, optimizedAssignment);
-    const confidence = this.calculateConfidenceScore(optimizedAssignment, options);
+    // Calculate confidence and analysis time
+    const confidence = this.calculateConfidenceScore(alternatives[0]?.assignment || originalAssignment, options);
+    const analysisTime = Date.now() - startTime;
 
     return {
       originalAssignment,
-      optimizedAssignment,
-      improvementScore,
-      totalCrowdReduction,
+      alternatives,
       strategy: options.strategy,
       confidence,
-      reasoning
+      summary: {
+        totalAlternatives: alternatives.length,
+        bestAlternativeId: alternatives[0]?.id || '',
+        analysisTime
+      }
     };
   }
 
@@ -654,6 +653,298 @@ export class TripOptimizationService {
     if (attractionId.includes('ak-') || attractionId.includes('animal')) return 'animal-kingdom';
 
     return 'magic-kingdom'; // Default fallback
+  }
+
+  /**
+   * Generate multiple optimization alternatives based on strategy
+   */
+  private async generateAlternatives(
+    originalAssignment: ParkAssignment[],
+    activityRatings: ActivityRatingSummary[],
+    crowdData: Map<string, Map<string, number>>,
+    options: OptimizationOptions
+  ): Promise<OptimizationAlternative[]> {
+    const alternatives: OptimizationAlternative[] = [];
+
+    // Generate primary alternative based on selected strategy
+    const primaryResult = await this.executeStrategy(originalAssignment, activityRatings, crowdData, options);
+
+    alternatives.push({
+      id: 'primary',
+      name: this.getStrategyName(options.strategy),
+      assignment: primaryResult.assignment,
+      benefits: this.calculateBenefits(originalAssignment, primaryResult.assignment, activityRatings),
+      reasoning: primaryResult.reasoning,
+      score: this.calculateAlternativeScore(originalAssignment, primaryResult.assignment)
+    });
+
+    // Generate secondary alternative with different approach
+    const secondaryResult = await this.generateSecondaryAlternative(
+      originalAssignment,
+      activityRatings,
+      crowdData,
+      options
+    );
+
+    if (secondaryResult) {
+      alternatives.push({
+        id: 'secondary',
+        name: this.getSecondaryStrategyName(options.strategy),
+        assignment: secondaryResult.assignment,
+        benefits: this.calculateBenefits(originalAssignment, secondaryResult.assignment, activityRatings),
+        reasoning: secondaryResult.reasoning,
+        score: this.calculateAlternativeScore(originalAssignment, secondaryResult.assignment)
+      });
+    }
+
+    // Sort by score (highest first)
+    return alternatives.sort((a, b) => b.score - a.score);
+  }
+
+  /**
+   * Execute the primary optimization strategy
+   */
+  private async executeStrategy(
+    originalAssignment: ParkAssignment[],
+    activityRatings: ActivityRatingSummary[],
+    crowdData: Map<string, Map<string, number>>,
+    options: OptimizationOptions
+  ): Promise<{ assignment: ParkAssignment[]; reasoning: string[] }> {
+    switch (options.strategy) {
+      case 'crowd_minimization':
+        return await this.optimizeForCrowds(originalAssignment, options.constraints, crowdData);
+      case 'must_do_priority':
+        return await this.optimizeForMustDos(originalAssignment, activityRatings, crowdData, options.constraints);
+      case 'group_consensus':
+        return await this.optimizeForGroupConsensus(originalAssignment, activityRatings, crowdData, options.constraints);
+      case 'energy_management':
+        return await this.optimizeForEnergy(originalAssignment, crowdData, options.constraints);
+      default:
+        return { assignment: originalAssignment, reasoning: ['No optimization applied'] };
+    }
+  }
+
+  /**
+   * Generate a secondary alternative with a different optimization approach
+   */
+  private async generateSecondaryAlternative(
+    originalAssignment: ParkAssignment[],
+    activityRatings: ActivityRatingSummary[],
+    crowdData: Map<string, Map<string, number>>,
+    options: OptimizationOptions
+  ): Promise<{ assignment: ParkAssignment[]; reasoning: string[] } | null> {
+    // Choose a complementary strategy
+    let secondaryStrategy: OptimizationStrategy;
+
+    switch (options.strategy) {
+      case 'crowd_minimization':
+        secondaryStrategy = 'must_do_priority';
+        break;
+      case 'must_do_priority':
+        secondaryStrategy = 'crowd_minimization';
+        break;
+      case 'group_consensus':
+        secondaryStrategy = 'energy_management';
+        break;
+      case 'energy_management':
+        secondaryStrategy = 'group_consensus';
+        break;
+      default:
+        return null;
+    }
+
+    const secondaryOptions = { ...options, strategy: secondaryStrategy };
+    return await this.executeStrategy(originalAssignment, activityRatings, crowdData, secondaryOptions);
+  }
+
+  /**
+   * Calculate comprehensive benefits for an alternative
+   */
+  private calculateBenefits(
+    original: ParkAssignment[],
+    optimized: ParkAssignment[],
+    activityRatings: ActivityRatingSummary[]
+  ): AlternativeBenefits {
+    const crowdReduction = this.calculateCrowdReduction(original, optimized);
+    const activityAlignment = this.calculateActivityAlignment(optimized, activityRatings);
+    const energyBalance = this.calculateEnergyBalance(optimized);
+    const groupConsensus = this.calculateGroupConsensus(optimized, activityRatings);
+
+    const waitTimeHours = Math.round((crowdReduction / 10) * 2.5 * 100) / 100; // Estimate 2.5h savings per 10% crowd reduction
+    const stressReduction = Math.round(crowdReduction * 0.8); // 80% of crowd reduction as stress reduction
+
+    const highlights = this.generateHighlights(crowdReduction, activityAlignment, energyBalance, groupConsensus);
+
+    return {
+      crowdReduction,
+      activityAlignment,
+      energyBalance,
+      groupConsensus,
+      totalSavings: {
+        waitTimeHours,
+        stressReduction
+      },
+      highlights
+    };
+  }
+
+  /**
+   * Calculate activity alignment score (0-100)
+   */
+  private calculateActivityAlignment(assignments: ParkAssignment[], activityRatings: ActivityRatingSummary[]): number {
+    if (activityRatings.length === 0) return 50; // Neutral score when no ratings available
+
+    // Calculate alignment based on must-do attractions per park
+    const parkMustDoScores = new Map<string, number>();
+
+    for (const rating of activityRatings) {
+      const parkId = this.getParkFromAttraction(rating.attractionId);
+      const mustDoWeight = rating.mustDoCount * (rating.averageRating || 0);
+      parkMustDoScores.set(parkId, (parkMustDoScores.get(parkId) || 0) + mustDoWeight);
+    }
+
+    // Score based on how well parks align with must-do priorities
+    let totalScore = 0;
+    let maxPossibleScore = 0;
+
+    for (const assignment of assignments) {
+      const parkScore = parkMustDoScores.get(assignment.parkId) || 0;
+      const crowdModifier = 1 - ((assignment.crowdLevel || 5) / 10); // Better crowd = higher modifier
+
+      totalScore += parkScore * crowdModifier;
+      maxPossibleScore += parkScore; // Assume perfect crowd conditions
+    }
+
+    return maxPossibleScore > 0 ? Math.round((totalScore / maxPossibleScore) * 100) : 50;
+  }
+
+  /**
+   * Calculate energy balance score (0-100)
+   */
+  private calculateEnergyBalance(assignments: ParkAssignment[]): number {
+    const parkIntensity = new Map([
+      ['magic-kingdom', 4],
+      ['epcot', 2],
+      ['hollywood-studios', 5],
+      ['animal-kingdom', 3]
+    ]);
+
+    // Check if intensive parks are scheduled earlier in the trip
+    const sortedAssignments = assignments.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+    let score = 0;
+    const totalDays = sortedAssignments.length;
+
+    sortedAssignments.forEach((assignment, index) => {
+      const intensity = parkIntensity.get(assignment.parkId) || 3;
+      const positionMultiplier = (totalDays - index) / totalDays; // Earlier = higher multiplier
+
+      // Reward intensive parks being scheduled earlier
+      if (intensity >= 4) {
+        score += positionMultiplier * 25; // Up to 25 points for each high-intensity park scheduled early
+      } else {
+        score += (1 - positionMultiplier) * 15; // Up to 15 points for low-intensity parks scheduled later
+      }
+    });
+
+    return Math.min(100, Math.round(score));
+  }
+
+  /**
+   * Calculate group consensus score (0-100)
+   */
+  private calculateGroupConsensus(assignments: ParkAssignment[], activityRatings: ActivityRatingSummary[]): number {
+    if (activityRatings.length === 0) return 50;
+
+    // Score based on how well assignments avoid high-conflict parks on high-crowd days
+    let consensusScore = 100;
+
+    for (const assignment of assignments) {
+      const parkRatings = activityRatings.filter(rating =>
+        this.getParkFromAttraction(rating.attractionId) === assignment.parkId
+      );
+
+      for (const rating of parkRatings) {
+        if (rating.consensusLevel === 'conflict' && (assignment.crowdLevel || 5) > 6) {
+          consensusScore -= 15; // Penalty for conflict parks on high-crowd days
+        } else if (rating.consensusLevel === 'high' && (assignment.crowdLevel || 5) <= 4) {
+          consensusScore += 5; // Bonus for high-consensus parks on low-crowd days
+        }
+      }
+    }
+
+    return Math.max(0, Math.min(100, consensusScore));
+  }
+
+  /**
+   * Generate benefit highlights
+   */
+  private generateHighlights(
+    crowdReduction: number,
+    activityAlignment: number,
+    energyBalance: number,
+    groupConsensus: number
+  ): string[] {
+    const highlights: string[] = [];
+
+    if (crowdReduction > 15) {
+      highlights.push(`${crowdReduction}% reduction in crowds saves ~${Math.round((crowdReduction / 10) * 2.5)} hours of waiting`);
+    }
+
+    if (activityAlignment > 70) {
+      highlights.push('Excellent alignment with your must-do attractions');
+    }
+
+    if (energyBalance > 75) {
+      highlights.push('Well-balanced energy distribution throughout your trip');
+    }
+
+    if (groupConsensus > 80) {
+      highlights.push('High group satisfaction with minimal conflicts');
+    }
+
+    if (highlights.length === 0) {
+      highlights.push('Optimized based on your selected strategy');
+    }
+
+    return highlights;
+  }
+
+  /**
+   * Calculate overall alternative score
+   */
+  private calculateAlternativeScore(original: ParkAssignment[], optimized: ParkAssignment[]): number {
+    const improvementScore = this.calculateImprovementScore(original, optimized);
+    const crowdReduction = this.calculateCrowdReduction(original, optimized);
+
+    // Weighted combination of improvement and crowd reduction
+    return Math.round((improvementScore * 0.6) + (crowdReduction * 0.4));
+  }
+
+  /**
+   * Get strategy display name
+   */
+  private getStrategyName(strategy: OptimizationStrategy): string {
+    const names = {
+      'crowd_minimization': 'Minimize Crowds',
+      'must_do_priority': 'Must-Do Priority',
+      'group_consensus': 'Group Harmony',
+      'energy_management': 'Energy Management'
+    };
+    return names[strategy] || 'Custom Strategy';
+  }
+
+  /**
+   * Get secondary strategy display name
+   */
+  private getSecondaryStrategyName(primaryStrategy: OptimizationStrategy): string {
+    const secondaryNames = {
+      'crowd_minimization': 'Crowd + Must-Do Balance',
+      'must_do_priority': 'Must-Do + Low Crowds',
+      'group_consensus': 'Harmony + Energy',
+      'energy_management': 'Energy + Consensus'
+    };
+    return secondaryNames[primaryStrategy] || 'Alternative Strategy';
   }
 }
 
