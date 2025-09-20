@@ -106,16 +106,56 @@ export default function LiveDataManagementPanel() {
     setImportingType('weather-data');
     setLastResult(null);
 
-    // Placeholder for weather data import
-    setTimeout(() => {
-      setLastResult({
-        success: true,
-        message: 'Weather data import - Coming soon',
-        recordsImported: 0
+    try {
+      console.log('Importing weather data...');
+
+      const response = await fetch('/api/test-weather-function', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
+
+      if (!response.ok) {
+        const errorResult = await response.json().catch(() => ({
+          error: `HTTP ${response.status}: ${response.statusText}`
+        }));
+
+        console.error('Failed to import weather data:', errorResult);
+        setLastResult({
+          success: false,
+          errors: [errorResult.error || 'Unknown error'],
+          message: 'Weather import failed'
+        });
+        return;
+      }
+
+      const result = await response.json();
+
+      setLastResult({
+        success: result.success,
+        recordsImported: result.data?.forecasts || 0,
+        message: result.success
+          ? `Successfully imported weather forecasts for ${result.data?.location || 'Walt Disney World'}`
+          : 'Weather import failed',
+        dateRange: {
+          start: new Date().toISOString().split('T')[0],
+          end: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
+        },
+        errors: result.success ? undefined : [result.message || 'Unknown error']
+      });
+
+    } catch (error) {
+      console.error('Weather import failed:', error);
+      setLastResult({
+        success: false,
+        errors: [error instanceof Error ? error.message : 'Unknown error'],
+        message: 'Weather import failed'
+      });
+    } finally {
       setIsImporting(false);
       setImportingType(null);
-    }, 2000);
+    }
   };
 
   const handleParkHoursImport = async () => {
@@ -123,16 +163,53 @@ export default function LiveDataManagementPanel() {
     setImportingType('park-hours');
     setLastResult(null);
 
-    // Placeholder for park hours import
-    setTimeout(() => {
-      setLastResult({
-        success: true,
-        message: 'Park hours & events import - Coming soon',
-        recordsImported: 0
+    try {
+      console.log('Importing park hours and events...');
+
+      const response = await fetch('/api/sync-live-data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
+
+      if (!response.ok) {
+        const errorResult = await response.json().catch(() => ({
+          error: `HTTP ${response.status}: ${response.statusText}`
+        }));
+
+        console.error('Failed to import park hours:', errorResult);
+        setLastResult({
+          success: false,
+          errors: [errorResult.error || 'Unknown error'],
+          message: 'Park hours import failed'
+        });
+        return;
+      }
+
+      const result = await response.json();
+
+      setLastResult({
+        success: result.success,
+        recordsImported: result.stats?.totalRecords || 0,
+        parksProcessed: result.config?.enabledParks || [],
+        message: result.success
+          ? `Successfully imported park hours and schedules for ${result.config?.enabledParks?.length || 4} parks`
+          : 'Park hours import failed',
+        errors: result.success ? undefined : [result.error || 'Unknown error']
+      });
+
+    } catch (error) {
+      console.error('Park hours import failed:', error);
+      setLastResult({
+        success: false,
+        errors: [error instanceof Error ? error.message : 'Unknown error'],
+        message: 'Park hours import failed'
+      });
+    } finally {
       setIsImporting(false);
       setImportingType(null);
-    }, 2000);
+    }
   };
 
   const handleWaitTimesImport = async () => {
@@ -140,16 +217,53 @@ export default function LiveDataManagementPanel() {
     setImportingType('wait-times');
     setLastResult(null);
 
-    // Placeholder for wait times import
-    setTimeout(() => {
-      setLastResult({
-        success: true,
-        message: 'Live wait times import - Coming soon',
-        recordsImported: 0
+    try {
+      console.log('Importing live wait times...');
+
+      const response = await fetch('/api/sync-live-data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
+
+      if (!response.ok) {
+        const errorResult = await response.json().catch(() => ({
+          error: `HTTP ${response.status}: ${response.statusText}`
+        }));
+
+        console.error('Failed to import wait times:', errorResult);
+        setLastResult({
+          success: false,
+          errors: [errorResult.error || 'Unknown error'],
+          message: 'Wait times import failed'
+        });
+        return;
+      }
+
+      const result = await response.json();
+
+      setLastResult({
+        success: result.success,
+        recordsImported: result.stats?.totalAttractions || result.stats?.totalRecords || 0,
+        parksProcessed: result.config?.enabledParks || [],
+        message: result.success
+          ? `Successfully imported live wait times for ${result.config?.enabledParks?.length || 4} parks`
+          : 'Wait times import failed',
+        errors: result.success ? undefined : [result.error || 'Unknown error']
+      });
+
+    } catch (error) {
+      console.error('Wait times import failed:', error);
+      setLastResult({
+        success: false,
+        errors: [error instanceof Error ? error.message : 'Unknown error'],
+        message: 'Wait times import failed'
+      });
+    } finally {
       setIsImporting(false);
       setImportingType(null);
-    }, 2000);
+    }
   };
 
   const getStatusIcon = (type: string) => {
@@ -174,94 +288,90 @@ export default function LiveDataManagementPanel() {
         </p>
       </div>
 
-      {/* Crowd Data Import */}
-      <div className="space-y-4">
+      {/* Import Buttons - All in One Row */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        {/* Crowd Data */}
         <div className="bg-gray-50 rounded-lg p-4">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center space-x-3">
-              {getStatusIcon('crowd-data')}
-              <div>
-                <h4 className="font-medium text-ink">Crowd Predictions</h4>
-                <p className="text-sm text-ink-light">Import 3-year crowd data (last year, current year, next year)</p>
-              </div>
+          <div className="flex items-center space-x-3 mb-3">
+            {getStatusIcon('crowd-data')}
+            <div>
+              <h4 className="font-medium text-ink">Crowd Predictions</h4>
+              <p className="text-sm text-ink-light">Import 3-year crowd data</p>
             </div>
-            <button
-              onClick={handleCrowdDataImport}
-              disabled={isImporting}
-              className={`btn-primary flex items-center ${
-                isImporting ? 'opacity-50 cursor-not-allowed' : ''
-              }`}
-            >
-              <TrendingUp className="w-4 h-4 mr-2" />
-              {importingType === 'crowd-data' ? 'Importing...' : 'Import Crowd Data'}
-            </button>
           </div>
+          <button
+            onClick={handleCrowdDataImport}
+            disabled={isImporting}
+            className={`btn-primary w-full flex items-center justify-center ${
+              isImporting ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+          >
+            <TrendingUp className="w-4 h-4 mr-2" />
+            {importingType === 'crowd-data' ? 'Importing...' : 'Import Crowd Data'}
+          </button>
         </div>
 
-        {/* Other Data Types */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {/* Weather Data */}
-          <div className="bg-gray-50 rounded-lg p-4">
-            <div className="flex items-center space-x-3 mb-3">
-              {getStatusIcon('weather-data')}
-              <div>
-                <h4 className="font-medium text-ink">Weather Data</h4>
-                <p className="text-sm text-ink-light">Import weather forecasts</p>
-              </div>
+        {/* Weather Data */}
+        <div className="bg-gray-50 rounded-lg p-4">
+          <div className="flex items-center space-x-3 mb-3">
+            {getStatusIcon('weather-data')}
+            <div>
+              <h4 className="font-medium text-ink">Weather Data</h4>
+              <p className="text-sm text-ink-light">Import weather forecasts</p>
             </div>
-            <button
-              onClick={handleWeatherDataImport}
-              disabled={isImporting}
-              className={`btn-secondary w-full flex items-center justify-center ${
-                isImporting ? 'opacity-50 cursor-not-allowed' : ''
-              }`}
-            >
-              <CloudRain className="w-4 h-4 mr-2" />
-              {importingType === 'weather-data' ? 'Importing...' : 'Import Weather'}
-            </button>
           </div>
+          <button
+            onClick={handleWeatherDataImport}
+            disabled={isImporting}
+            className={`btn-secondary w-full flex items-center justify-center ${
+              isImporting ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+          >
+            <CloudRain className="w-4 h-4 mr-2" />
+            {importingType === 'weather-data' ? 'Importing...' : 'Import Weather'}
+          </button>
+        </div>
 
-          {/* Park Hours */}
-          <div className="bg-gray-50 rounded-lg p-4">
-            <div className="flex items-center space-x-3 mb-3">
-              {getStatusIcon('park-hours')}
-              <div>
-                <h4 className="font-medium text-ink">Park Hours & Events</h4>
-                <p className="text-sm text-ink-light">Import operating hours and special events</p>
-              </div>
+        {/* Park Hours */}
+        <div className="bg-gray-50 rounded-lg p-4">
+          <div className="flex items-center space-x-3 mb-3">
+            {getStatusIcon('park-hours')}
+            <div>
+              <h4 className="font-medium text-ink">Park Hours & Events</h4>
+              <p className="text-sm text-ink-light">Import operating hours and special events</p>
             </div>
-            <button
-              onClick={handleParkHoursImport}
-              disabled={isImporting}
-              className={`btn-secondary w-full flex items-center justify-center ${
-                isImporting ? 'opacity-50 cursor-not-allowed' : ''
-              }`}
-            >
-              <Calendar className="w-4 h-4 mr-2" />
-              {importingType === 'park-hours' ? 'Importing...' : 'Import Hours'}
-            </button>
           </div>
+          <button
+            onClick={handleParkHoursImport}
+            disabled={isImporting}
+            className={`btn-secondary w-full flex items-center justify-center ${
+              isImporting ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+          >
+            <Calendar className="w-4 h-4 mr-2" />
+            {importingType === 'park-hours' ? 'Importing...' : 'Import Hours'}
+          </button>
+        </div>
 
-          {/* Wait Times */}
-          <div className="bg-gray-50 rounded-lg p-4">
-            <div className="flex items-center space-x-3 mb-3">
-              {getStatusIcon('wait-times')}
-              <div>
-                <h4 className="font-medium text-ink">Live Wait Times</h4>
-                <p className="text-sm text-ink-light">Import current attraction wait times</p>
-              </div>
+        {/* Wait Times */}
+        <div className="bg-gray-50 rounded-lg p-4">
+          <div className="flex items-center space-x-3 mb-3">
+            {getStatusIcon('wait-times')}
+            <div>
+              <h4 className="font-medium text-ink">Live Wait Times</h4>
+              <p className="text-sm text-ink-light">Import current attraction wait times</p>
             </div>
-            <button
-              onClick={handleWaitTimesImport}
-              disabled={isImporting}
-              className={`btn-secondary w-full flex items-center justify-center ${
-                isImporting ? 'opacity-50 cursor-not-allowed' : ''
-              }`}
-            >
-              <Clock className="w-4 h-4 mr-2" />
-              {importingType === 'wait-times' ? 'Importing...' : 'Import Wait Times'}
-            </button>
           </div>
+          <button
+            onClick={handleWaitTimesImport}
+            disabled={isImporting}
+            className={`btn-secondary w-full flex items-center justify-center ${
+              isImporting ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+          >
+            <Clock className="w-4 h-4 mr-2" />
+            {importingType === 'wait-times' ? 'Importing...' : 'Import Wait Times'}
+          </button>
         </div>
       </div>
 
