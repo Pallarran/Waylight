@@ -239,14 +239,6 @@ async function fetchCrowdPredictionsForYear(waypointParkId, thrillDataId, year) 
       }
     }
 
-    // If still no predictions found for 2026, return HTML sample for analysis
-    if (predictions.length === 0 && year === 2026) {
-      // Extract a meaningful sample that includes calendar data
-      const calendarStart = html.indexOf('calendar') || html.indexOf('Calendar') || 0;
-      const sampleStart = Math.max(0, calendarStart - 500);
-      const htmlSample = html.substring(sampleStart, sampleStart + 2000);
-      throw new Error(`2026 data analysis - HTML sample: ${htmlSample.replace(/\n/g, '\\n').replace(/\t/g, '\\t')}`);
-    }
 
     // If still no predictions found, log warning but don't throw error
     if (predictions.length === 0) {
@@ -330,8 +322,25 @@ export default async function handler(req, res) {
           continue;
         }
 
+        // Deduplicate predictions by date (in case multiple parsing methods found the same dates)
+        const uniquePredictions = [];
+        const seenDates = new Set();
+        for (const prediction of predictions) {
+          const dateKey = `${prediction.park_id}-${prediction.prediction_date}`;
+          if (!seenDates.has(dateKey)) {
+            seenDates.add(dateKey);
+            uniquePredictions.push(prediction);
+          }
+        }
+
+        if (uniquePredictions.length !== predictions.length) {
+          console.log(`Removed ${predictions.length - uniquePredictions.length} duplicate dates for ${parkMapping.displayName}`);
+        }
+
+        const finalPredictions = uniquePredictions;
+
         // Track date range
-        const dates = predictions.map(p => p.prediction_date).sort();
+        const dates = finalPredictions.map(p => p.prediction_date).sort();
         if (!earliestDate || dates[0] < earliestDate) earliestDate = dates[0];
         if (!latestDate || dates[dates.length - 1] > latestDate) latestDate = dates[dates.length - 1];
 
@@ -339,7 +348,7 @@ export default async function handler(req, res) {
         if (supabase) {
           const { error } = await supabase
             .from('park_crowd_predictions')
-            .upsert(predictions, {
+            .upsert(finalPredictions, {
               onConflict: 'park_id,prediction_date',
               ignoreDuplicates: false
             });
@@ -348,15 +357,15 @@ export default async function handler(req, res) {
             console.error(`❌ Failed to insert ${parkMapping.displayName}:`, error);
             result.errors.push(`${parkMapping.displayName}: Database insert failed - ${error.message}`);
           } else {
-            result.recordsImported += predictions.length;
+            result.recordsImported += finalPredictions.length;
             result.parksProcessed.push(parkMapping.displayName);
-            console.log(`✅ Inserted ${predictions.length} predictions for ${parkMapping.displayName}`);
+            console.log(`✅ Inserted ${finalPredictions.length} predictions for ${parkMapping.displayName}`);
           }
         } else {
           console.warn('Supabase not configured - would insert predictions');
-          result.recordsImported += predictions.length;
+          result.recordsImported += finalPredictions.length;
           result.parksProcessed.push(parkMapping.displayName);
-          console.log(`✅ Simulated insert of ${predictions.length} predictions for ${parkMapping.displayName}`);
+          console.log(`✅ Simulated insert of ${finalPredictions.length} predictions for ${parkMapping.displayName}`);
         }
 
       } catch (error) {
