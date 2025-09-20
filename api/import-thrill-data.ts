@@ -86,12 +86,20 @@ async function fetchCrowdPredictionsForYear(
 function parseCalendarHTML(html: string, year: number): ThrillDataDayPrediction[] {
   const predictions: ThrillDataDayPrediction[] = [];
 
-  // Parse calendar links in format: [Jan 01 31] where 31 is wait time
-  const linkPattern = /\[([A-Z][a-z]{2})\s+(\d{1,2})\s+(\d+)\]/g;
+  // Parse calendar data in actual HTML format:
+  // title='Predicted wait time of 31 minutes on Jan 01'>31</div>
+  const calendarPattern = /title='Predicted wait time of (\d+) minutes on ([A-Z][a-z]{2}) (\d{1,2})'>(\d+)<\/div>/g;
 
   let match;
-  while ((match = linkPattern.exec(html)) !== null) {
-    const [, monthName, dayStr, waitTimeStr] = match;
+  while ((match = calendarPattern.exec(html)) !== null) {
+    const [, waitTimeStr, monthName, dayStr, displayWaitStr] = match;
+
+    // Validate parsed values
+    if (!waitTimeStr || !monthName || !dayStr || !displayWaitStr) {
+      console.warn(`Invalid calendar data: waitTime=${waitTimeStr}, month=${monthName}, day=${dayStr}, display=${displayWaitStr}`);
+      continue;
+    }
+
     const waitTime = parseInt(waitTimeStr, 10);
     const day = parseInt(dayStr, 10);
 
@@ -117,15 +125,29 @@ function parseCalendarHTML(html: string, year: number): ThrillDataDayPrediction[
     });
   }
 
-  // Alternative parsing: look for direct href patterns with dates
+  // Fallback: try alternate pattern with button text
   if (predictions.length === 0) {
-    const hrefPattern = /href="[^"]*\/(\d{2})\/(\d{2})"[^>]*>\s*\[([A-Z][a-z]{2})\s+\d{1,2}\s+(\d+)\]/g;
+    console.warn('Primary pattern failed, trying fallback pattern');
+    const buttonPattern = /<div class='button-set[^>]*title = 'The date ([A-Z][a-z]{2}) (\d{1,2})'>.*?title='Predicted wait time of (\d+) minutes[^>]*>(\d+)<\/div>/gs;
 
-    while ((match = hrefPattern.exec(html)) !== null) {
-      const [, monthStr, dayStr, , waitTimeStr] = match;
+    while ((match = buttonPattern.exec(html)) !== null) {
+      const [, monthName, dayStr, waitTimeStr] = match;
+
+      // Validate parsed values
+      if (!monthName || !dayStr || !waitTimeStr) {
+        continue;
+      }
+
       const waitTime = parseInt(waitTimeStr, 10);
-      const month = parseInt(monthStr, 10);
       const day = parseInt(dayStr, 10);
+
+      const monthMap: Record<string, number> = {
+        'Jan': 1, 'Feb': 2, 'Mar': 3, 'Apr': 4, 'May': 5, 'Jun': 6,
+        'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 10, 'Nov': 11, 'Dec': 12
+      };
+
+      const month = monthMap[monthName];
+      if (!month) continue;
 
       const date = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
 
@@ -176,9 +198,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     console.log('🚀 Starting Thrill Data import...');
+    console.log('Request body:', req.body);
 
     // Get year from request body, default to current year
     const { year = new Date().getFullYear() } = req.body || {};
+    console.log('Using year:', year);
 
     const result: ImportResult = {
       success: true,
@@ -197,11 +221,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
       try {
         // Fetch predictions from Thrill Data
+        console.log(`Fetching from: ${THRILL_DATA_BASE_URL}/${parkMapping.thrillDataId}/calendar/${year}`);
         const predictions = await fetchCrowdPredictionsForYear(
           parkMapping.waypointParkId,
           parkMapping.thrillDataId,
           year
         );
+        console.log(`Fetched ${predictions.length} predictions for ${parkMapping.displayName}`);
 
         if (predictions.length === 0) {
           console.warn(`No predictions found for ${parkMapping.displayName}`);
