@@ -8,6 +8,7 @@ import {
   OptimizationStrategy
 } from '../../services/tripOptimizationService';
 import { getParkName } from '../../data/parks';
+import { DayType, detectDayType, getDayTypeInfo } from '../../utils/dayTypeUtils';
 
 interface TripOptimizationModalProps {
   isOpen: boolean;
@@ -30,25 +31,66 @@ export default function TripOptimizationModal({
   const [isOptimizing, setIsOptimizing] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
 
-  // Initialize constraints from current trip
+  // Filter valid trip days (within date range, no duplicates)
+  const getValidTripDays = (trip: Trip) => {
+    if (!trip || !trip.days) return [];
+
+    const seenDates = new Set<string>();
+    return trip.days.filter(day => {
+      // Normalize date to YYYY-MM-DD format
+      const normalizedDate = day.date.split('T')[0];
+
+      // Check if date is within trip range (inclusive)
+      const isWithinRange = normalizedDate >= trip.startDate && normalizedDate <= trip.endDate;
+
+      // Check for duplicates
+      const isDuplicate = seenDates.has(normalizedDate);
+      seenDates.add(normalizedDate);
+
+      return isWithinRange && !isDuplicate;
+    }).sort((a, b) => a.date.localeCompare(b.date));
+  };
+
+  const validTripDays = getValidTripDays(trip);
+
+  // Initialize constraints from valid trip days only
   useEffect(() => {
-    if (trip) {
-      const initialConstraints: OptimizationConstraint[] = trip.days.map(day => ({
-        dayId: day.id,
-        parkId: day.parkId,
-        isLocked: false
-      }));
+    if (validTripDays.length > 0) {
+      const initialConstraints: OptimizationConstraint[] = validTripDays.map((day, index) => {
+        // Detect day type if not already set
+        const dayType = day.dayType || detectDayType(day, trip, index);
+
+        // Determine if this day type can be optimized
+        const canOptimize = dayType === 'park-day' || dayType === 'park-hopper' || dayType === 'rest-day' || dayType === 'disney-springs' || dayType === 'special-event';
+
+        // Auto-lock check-in/check-out days
+        const isLocked = dayType === 'check-in' || dayType === 'check-out';
+
+        return {
+          dayId: day.id,
+          parkId: day.parkId || '',
+          isLocked,
+          dayType,
+          canOptimize,
+          reason: isLocked ? `${dayType === 'check-in' ? 'Check-in' : 'Check-out'} day cannot be changed` : undefined
+        };
+      });
       setConstraints(initialConstraints);
     }
-  }, [trip]);
+  }, [validTripDays.length]);
 
   const toggleConstraintLock = (dayId: string) => {
     setConstraints(prev =>
-      prev.map(constraint =>
-        constraint.dayId === dayId
-          ? { ...constraint, isLocked: !constraint.isLocked }
-          : constraint
-      )
+      prev.map(constraint => {
+        if (constraint.dayId === dayId) {
+          // Don't allow unlocking of check-in/check-out days
+          if (constraint.dayType === 'check-in' || constraint.dayType === 'check-out') {
+            return constraint;
+          }
+          return { ...constraint, isLocked: !constraint.isLocked };
+        }
+        return constraint;
+      })
     );
   };
 
@@ -86,7 +128,19 @@ export default function TripOptimizationModal({
   const handleOptimize = async () => {
     setIsOptimizing(true);
     try {
-      const result = await tripOptimizationService.optimizeTrip(trip, activityRatings, {
+      // Create a filtered trip with only valid days
+      const filteredTrip = {
+        ...trip,
+        days: validTripDays
+      };
+
+      console.log('Optimizing trip with filtered days:', {
+        originalDayCount: trip.days.length,
+        filteredDayCount: validTripDays.length,
+        validDates: validTripDays.map(d => d.date)
+      });
+
+      const result = await tripOptimizationService.optimizeTrip(filteredTrip, activityRatings, {
         strategy: selectedStrategy,
         constraints: constraints
       });
@@ -197,14 +251,18 @@ export default function TripOptimizationModal({
 
               {/* Constraints */}
               <div>
-                <h3 className="text-lg font-medium text-ink mb-4">Lock Specific Days</h3>
+                <h3 className="text-lg font-medium text-ink mb-4">Day Constraints</h3>
                 <p className="text-sm text-ink-light mb-4">
-                  Lock park assignments that can't be changed (e.g., dinner reservations, special events)
+                  Check-in/out days are automatically fixed. Lock other days that can't be changed (e.g., dinner reservations, special events).
+                  Rest days and park days can receive optimization recommendations.
                 </p>
                 <div className="space-y-3">
-                  {trip.days.map(day => {
+                  {validTripDays.map((day, index) => {
                     const constraint = constraints.find(c => c.dayId === day.id);
                     const isLocked = constraint?.isLocked || false;
+                    const dayType = constraint?.dayType || detectDayType(day, trip, index);
+                    const dayTypeInfo = getDayTypeInfo(dayType);
+                    const canOptimize = constraint?.canOptimize ?? true;
 
                     return (
                       <div
@@ -214,22 +272,39 @@ export default function TripOptimizationModal({
                         }`}
                       >
                         <div className="flex items-center space-x-3">
-                          <div className="text-sm font-medium text-ink">
-                            {formatDateSafe(day.date)}
+                          <div className="flex items-center space-x-2">
+                            <span className="text-sm">{dayTypeInfo.icon}</span>
+                            <div className="text-sm font-medium text-ink">
+                              {formatDateSafe(day.date)}
+                            </div>
                           </div>
                           <div className="text-sm text-ink-light">→</div>
-                          <div className="text-sm text-ink">{getParkName(day.parkId)}</div>
+                          <div className="flex items-center space-x-2">
+                            <div className="text-sm text-ink">{getParkName(day.parkId) || 'No park selected'}</div>
+                            <span className={`text-xs px-2 py-0.5 rounded-full ${dayTypeInfo.color} bg-gray-100`}>
+                              {dayTypeInfo.name}
+                            </span>
+                          </div>
                         </div>
                         <button
                           onClick={() => toggleConstraintLock(day.id)}
+                          disabled={dayType === 'check-in' || dayType === 'check-out'}
+                          title={constraint?.reason || (isLocked ? 'Click to unlock for optimization' : 'Click to lock assignment')}
                           className={`flex items-center space-x-1 text-sm px-3 py-1 rounded-lg transition-colors ${
-                            isLocked
+                            dayType === 'check-in' || dayType === 'check-out'
+                              ? 'text-gray-400 bg-gray-50 cursor-not-allowed'
+                              : isLocked
                               ? 'text-orange-600 bg-orange-100 hover:bg-orange-200'
                               : 'text-gray-600 bg-gray-100 hover:bg-gray-200'
                           }`}
                         >
                           {isLocked ? <Lock className="w-3 h-3" /> : <Unlock className="w-3 h-3" />}
-                          <span>{isLocked ? 'Locked' : 'Unlocked'}</span>
+                          <span>
+                            {dayType === 'check-in' || dayType === 'check-out'
+                              ? 'Fixed'
+                              : isLocked ? 'Locked' : 'Unlocked'
+                            }
+                          </span>
                         </button>
                       </div>
                     );

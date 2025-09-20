@@ -1,11 +1,15 @@
 import { Trip, TripDay, ActivityRatingSummary } from '@waylight/shared';
 import { crowdPredictionRepository } from '@waylight/shared';
+import { DayType } from '../types';
+import { detectDayType } from '../utils/dayTypeUtils';
 
 export interface OptimizationConstraint {
   dayId: string;
   parkId: string;
   isLocked: boolean;
   reason?: string;
+  dayType?: DayType;
+  canOptimize?: boolean; // Whether this day type can be optimized
 }
 
 export interface OptimizationResult {
@@ -113,7 +117,7 @@ export class TripOptimizationService {
   }
 
   /**
-   * Validate trip structure and dates
+   * Validate trip structure and dates, detect day types
    */
   private validateTripStructure(trip: Trip): void {
     if (!trip.days || trip.days.length === 0) {
@@ -123,7 +127,7 @@ export class TripOptimizationService {
     console.log('Validating trip structure:', {
       startDate: trip.startDate,
       endDate: trip.endDate,
-      days: trip.days.map(d => ({ date: d.date, parkId: d.parkId }))
+      days: trip.days.map(d => ({ date: d.date, parkId: d.parkId, dayType: d.dayType }))
     });
 
     // Ensure all dates are within trip range and are unique
@@ -162,9 +166,16 @@ export class TripOptimizationService {
     // Sort days by date to maintain chronological order
     trip.days.sort((a, b) => a.date.localeCompare(b.date));
 
-    console.log('After validation:', {
+    // Detect day types for each day if not already set
+    trip.days.forEach((day, index) => {
+      if (!day.dayType) {
+        day.dayType = detectDayType(day, trip, index);
+      }
+    });
+
+    console.log('After validation and day type detection:', {
       validDays: trip.days.length,
-      dates: trip.days.map(d => d.date)
+      days: trip.days.map(d => ({ date: d.date, parkId: d.parkId, dayType: d.dayType }))
     });
 
     if (trip.days.length === 0) {
