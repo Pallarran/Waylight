@@ -92,11 +92,20 @@ function parseCalendarHTML(html, year) {
     // Create date string in YYYY-MM-DD format using the provided year
     const date = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
 
-    predictions.push({
-      date,
-      waitTime,
-      colorLevel: mapWaitTimeToCrowdLevel(waitTime) > 6 ? 'Higher' : 'Lower'
-    });
+    // Check if date meets database constraints (future dates within 180 days)
+    const predictionDate = new Date(date);
+    const today = new Date();
+    const maxDate = new Date(today);
+    maxDate.setDate(maxDate.getDate() + 180);
+
+    // Only include dates that meet the database constraints
+    if (predictionDate >= today && predictionDate <= maxDate) {
+      predictions.push({
+        date,
+        waitTime,
+        colorLevel: mapWaitTimeToCrowdLevel(waitTime) > 6 ? 'Higher' : 'Lower'
+      });
+    }
   }
 
   console.log(`Parsed ${predictions.length} predictions from Thrill Data calendar for ${year}`);
