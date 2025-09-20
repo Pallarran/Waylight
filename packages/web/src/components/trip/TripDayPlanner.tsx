@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { format, addDays } from 'date-fns';
-import { Plus, Calendar, Clock, MapPin, ChevronDown, GripVertical, Edit, Save, XCircle, ArrowLeft, Info, Users, Star, Share2, Zap } from 'lucide-react';
+import { Plus, Calendar, Clock, MapPin, ChevronDown, GripVertical, Edit, Save, XCircle, ArrowLeft, Info, Users, Star, Share2 } from 'lucide-react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useTripStore } from '../../stores';
@@ -22,7 +22,6 @@ import ParkDayView from './dayViews/ParkDayView';
 import DayTypeModal from './DayTypeModal';
 import ActivityPreferences from './ActivityPreferences';
 import RatingsSummary from './RatingsSummary';
-import { LightningLaneStrategyModal } from '../optimization';
 
 import type { Trip, ItineraryItem, ActivityCategory, TripDay, DayType, ActivityRatingSummary } from '../../types';
 
@@ -569,7 +568,6 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
   const [isEditingTrip, setIsEditingTrip] = useState(false);
   const [showCheatSheet, setShowCheatSheet] = useState(false);
   const [showSharingModal, setShowSharingModal] = useState(false);
-  const [showLightningLaneStrategy, setShowLightningLaneStrategy] = useState(false);
   const [activityRatings, setActivityRatings] = useState<ActivityRatingSummary[]>([]);
   const [tripEditData, setTripEditData] = useState({
     name: trip.name,
@@ -1280,17 +1278,6 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
                         </button>
                       </div>
 
-                      {/* Lightning Lane Strategy Button */}
-                      <div className="mb-4">
-                        <button
-                          onClick={() => setShowLightningLaneStrategy(true)}
-                          className="w-full btn-secondary btn-sm flex items-center justify-center space-x-2 text-sm"
-                          disabled={!selectedDay || selectedDay.dayType !== 'park-day'}
-                        >
-                          <Zap className="w-4 h-4" />
-                          <span>Get Lightning Lane Strategy</span>
-                        </button>
-                      </div>
                       
                       <div className="space-y-3">
                         <div>
@@ -1457,16 +1444,6 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
           }}
         />
 
-        {/* Lightning Lane Strategy Modal */}
-        {selectedDay && (
-          <LightningLaneStrategyModal
-            isOpen={showLightningLaneStrategy}
-            onClose={() => setShowLightningLaneStrategy(false)}
-            tripDay={selectedDay}
-            activityRatings={activityRatings}
-            groupSize={trip.travelingParty?.length || 1}
-          />
-        )}
       </div>
     </DndProvider>
   );
