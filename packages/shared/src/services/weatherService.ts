@@ -22,10 +22,7 @@ export class WeatherService implements WeatherServiceInterface {
     try {
       let query = this.supabase
         .from('weather_forecasts')
-        .select(`
-          *,
-          weather_locations!inner(name, latitude, longitude)
-        `)
+        .select('*')
         .eq('forecast_date', date)
         .order('forecast_time', { ascending: false })
         .limit(1);
@@ -33,17 +30,25 @@ export class WeatherService implements WeatherServiceInterface {
       if (locationId) {
         query = query.eq('location_id', locationId);
       } else {
-        // Default to Disney World location
-        query = query.eq('weather_locations.name', this.defaultLocationName);
+        // Get the default location first
+        const { data: location } = await this.supabase
+          .from('weather_locations')
+          .select('id')
+          .eq('name', this.defaultLocationName)
+          .single();
+
+        if (location) {
+          query = query.eq('location_id', location.id);
+        }
       }
 
-      const { data, error } = await query.single();
+      const { data, error } = await query;
 
-      if (error && error.code !== 'PGRST116') { // PGRST116 is "no rows returned"
+      if (error) {
         throw this.createWeatherError('API_ERROR', `Failed to fetch forecast: ${error.message}`, error);
       }
 
-      return data || null;
+      return data && data.length > 0 ? data[0] : null;
     } catch (error) {
       if (error instanceof Error && error.message.includes('WeatherError')) {
         throw error;
