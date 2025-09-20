@@ -3,6 +3,17 @@
  * Web scraping implementation in JavaScript to avoid TypeScript issues
  */
 
+import { createClient } from '@supabase/supabase-js';
+
+// Initialize Supabase client
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+let supabase = null;
+if (supabaseUrl && supabaseServiceKey) {
+  supabase = createClient(supabaseUrl, supabaseServiceKey);
+}
+
 // Park mappings with Thrill Data IDs
 const PARK_MAPPINGS = [
   { waypointParkId: 'magic-kingdom', thrillDataId: 'magic-kingdom', displayName: 'Magic Kingdom' },
@@ -195,12 +206,29 @@ export default async function handler(req, res) {
         if (!earliestDate || dates[0] < earliestDate) earliestDate = dates[0];
         if (!latestDate || dates[dates.length - 1] > latestDate) latestDate = dates[dates.length - 1];
 
-        // For now, just simulate database insert (no Supabase to avoid dependency issues)
-        console.log(`Would insert ${predictions.length} predictions for ${parkMapping.displayName}`);
+        // Insert into database using upsert
+        if (supabase) {
+          const { error } = await supabase
+            .from('park_crowd_predictions')
+            .upsert(predictions, {
+              onConflict: 'park_id,prediction_date',
+              ignoreDuplicates: false
+            });
 
-        result.recordsImported += predictions.length;
-        result.parksProcessed.push(parkMapping.displayName);
-        console.log(`✅ Processed ${predictions.length} predictions for ${parkMapping.displayName}`);
+          if (error) {
+            console.error(`❌ Failed to insert ${parkMapping.displayName}:`, error);
+            result.errors.push(`${parkMapping.displayName}: Database insert failed - ${error.message}`);
+          } else {
+            result.recordsImported += predictions.length;
+            result.parksProcessed.push(parkMapping.displayName);
+            console.log(`✅ Inserted ${predictions.length} predictions for ${parkMapping.displayName}`);
+          }
+        } else {
+          console.warn('Supabase not configured - would insert predictions');
+          result.recordsImported += predictions.length;
+          result.parksProcessed.push(parkMapping.displayName);
+          console.log(`✅ Simulated insert of ${predictions.length} predictions for ${parkMapping.displayName}`);
+        }
 
       } catch (error) {
         const errorMessage = error.message || 'Unknown error';
