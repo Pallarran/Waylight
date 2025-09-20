@@ -104,14 +104,14 @@ export default function WeatherHeader({ date }: WeatherHeaderProps) {
 
   return (
     <div className="flex items-center text-xs text-ink-light space-x-2">
-      {getWeatherIcon(forecast.weatherCondition)}
+      {getWeatherIcon(forecast.weatherCondition || (forecast as any).weather_condition)}
       <span>
-        {formatTemperature(forecast.temperatureHigh)}/{formatTemperature(forecast.temperatureLow)}
+        {formatTemperature(forecast.temperatureHigh || (forecast as any).temperature_high)}/{formatTemperature(forecast.temperatureLow || (forecast as any).temperature_low)}
       </span>
-      <span className="capitalize">{forecast.weatherCondition || 'Unknown'}</span>
-      {forecast.precipitationProbability && forecast.precipitationProbability > 30 && (
+      <span className="capitalize">{forecast.weatherCondition || (forecast as any).weather_condition || 'Unknown'}</span>
+      {(forecast.precipitationProbability || (forecast as any).precipitation_chance) && (forecast.precipitationProbability || (forecast as any).precipitation_chance) > 30 && (
         <span className="text-blue-500">
-          {forecast.precipitationProbability}% rain
+          {forecast.precipitationProbability || (forecast as any).precipitation_chance}% rain
         </span>
       )}
     </div>
