@@ -1,6 +1,7 @@
-import React from 'react';
-import { Clock, CheckCircle, AlertCircle, XCircle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Clock, CheckCircle, AlertCircle, XCircle, Users } from 'lucide-react';
 import { useParkLiveData, useParkLiveDataForDate } from '../../hooks/useLiveDataStore';
+import { crowdPredictionRepository } from '@waylight/shared';
 
 interface ParkHoursSummaryProps {
   parkId: string;
@@ -21,7 +22,75 @@ export const ParkHoursSummary: React.FC<ParkHoursSummaryProps> = ({
     errors
   } = date ? useParkLiveDataForDate(parkId, date) : useParkLiveData(parkId);
 
+  // Crowd level data state
+  const [crowdData, setCrowdData] = useState<{
+    level: number;
+    description: string;
+    recommendation?: string;
+  } | null>(null);
+  const [crowdLoading, setCrowdLoading] = useState(false);
 
+  // Fetch crowd data for the specific date
+  useEffect(() => {
+    if (!date) return;
+
+    const fetchCrowdData = async () => {
+      setCrowdLoading(true);
+      try {
+        const prediction = await crowdPredictionRepository.getCrowdPredictionForDate(parkId, date);
+        if (prediction) {
+          setCrowdData({
+            level: prediction.crowdLevel,
+            description: prediction.description,
+            recommendation: prediction.recommendation
+          });
+        } else {
+          setCrowdData(null);
+        }
+      } catch (error) {
+        console.warn('Failed to fetch crowd data:', error);
+        setCrowdData(null);
+      } finally {
+        setCrowdLoading(false);
+      }
+    };
+
+    fetchCrowdData();
+  }, [parkId, date]);
+
+  // Helper functions for crowd level visualization
+  const getCrowdLevelColor = (level: number) => {
+    if (level <= 2) return 'text-green-600 bg-green-100';
+    if (level <= 4) return 'text-blue-600 bg-blue-100';
+    if (level <= 6) return 'text-yellow-600 bg-yellow-100';
+    if (level <= 8) return 'text-orange-600 bg-orange-100';
+    return 'text-red-600 bg-red-100';
+  };
+
+  const getCrowdLevelIcon = (level: number) => {
+    const baseProps = "w-3 h-3";
+    if (level <= 2) return <Users className={`${baseProps} text-green-600`} />;
+    if (level <= 4) return <Users className={`${baseProps} text-blue-600`} />;
+    if (level <= 6) return <Users className={`${baseProps} text-yellow-600`} />;
+    if (level <= 8) return <Users className={`${baseProps} text-orange-600`} />;
+    return <Users className={`${baseProps} text-red-600`} />;
+  };
+
+  const getCrowdLevelBars = (level: number) => {
+    const bars = [];
+    for (let i = 1; i <= 5; i++) {
+      const filled = i <= Math.ceil(level / 2);
+      bars.push(
+        <div
+          key={i}
+          className={`w-1 h-3 rounded-sm ${
+            filled ? (getCrowdLevelColor(level).split(' ')[0] || '').replace('text-', 'bg-') : 'bg-gray-200'
+          }`}
+        />
+      );
+    }
+    return <div className="flex space-x-0.5">{bars}</div>;
+  };
 
   const getParkStatusColor = (status: string) => {
     switch (status) {
@@ -173,6 +242,36 @@ export const ParkHoursSummary: React.FC<ParkHoursSummaryProps> = ({
             )}
           </span>
         </div>
+
+        {/* Expected Crowd Level - Priority after Park Hours */}
+        {date && (
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              {crowdLoading ? (
+                <div className="w-3 h-3 bg-gray-300 rounded-full animate-pulse"></div>
+              ) : crowdData ? (
+                getCrowdLevelIcon(crowdData.level)
+              ) : (
+                <Users className="w-3 h-3 text-gray-400" />
+              )}
+              <span className="text-xs font-medium text-gray-700">Expected Crowds</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              {crowdLoading ? (
+                <div className="w-16 h-3 bg-gray-200 rounded animate-pulse"></div>
+              ) : crowdData ? (
+                <>
+                  {getCrowdLevelBars(crowdData.level)}
+                  <span className={`text-xs px-2 py-0.5 rounded-full ${getCrowdLevelColor(crowdData.level)}`}>
+                    {crowdData.description}
+                  </span>
+                </>
+              ) : (
+                <span className="text-xs text-gray-500">No data</span>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Extended Evening Hours - Third Priority */}
         {parkData.hours.extendedEvening && (
