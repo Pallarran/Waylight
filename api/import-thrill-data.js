@@ -83,6 +83,16 @@ function parseCalendarHTML(html, year) {
       if (result) predictions.push(result);
     }
 
+    // Pattern for script-based data (look for data in script tags)
+    if (predictions.length === 0) {
+      const scriptPattern = /"([A-Z][a-z]{2})\s+(\d{1,2})"[^"]*"(\d{2,3})"/g;
+      while ((match = scriptPattern.exec(html)) !== null) {
+        const [, monthName, dayStr, waitTimeStr] = match;
+        const result = parseCalendarEntry(waitTimeStr, monthName, dayStr, year);
+        if (result) predictions.push(result);
+      }
+    }
+
     // Pattern for direct date/wait time pairs in different formats
     if (predictions.length === 0) {
       const altPattern = /([A-Z][a-z]{2})\s+(\d{1,2})[^0-9]*(\d{2,3})/g;
@@ -227,6 +237,15 @@ async function fetchCrowdPredictionsForYear(waypointParkId, thrillDataId, year) 
         predictions = parseCalendarHTML(html, year);
         console.log(`Fallback parsed predictions: ${predictions.length}`);
       }
+    }
+
+    // If still no predictions found for 2026, return HTML sample for analysis
+    if (predictions.length === 0 && year === 2026) {
+      // Extract a meaningful sample that includes calendar data
+      const calendarStart = html.indexOf('calendar') || html.indexOf('Calendar') || 0;
+      const sampleStart = Math.max(0, calendarStart - 500);
+      const htmlSample = html.substring(sampleStart, sampleStart + 2000);
+      throw new Error(`2026 data analysis - HTML sample: ${htmlSample.replace(/\n/g, '\\n').replace(/\t/g, '\\t')}`);
     }
 
     // If still no predictions found, log warning but don't throw error
