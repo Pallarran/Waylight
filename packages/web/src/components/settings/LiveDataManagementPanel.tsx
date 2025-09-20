@@ -286,9 +286,14 @@ export default function LiveDataManagementPanel() {
                   synced_at: new Date().toISOString()
                 };
 
-                const { error: eventError } = await supabase.from('live_park_events').upsert(eventData, {
-                  onConflict: 'park_id,event_date,event_type,event_name'
-                });
+                // Use delete + insert pattern (same as working header button)
+                await supabase.from('live_park_events')
+                  .delete()
+                  .eq('park_id', parkName)
+                  .eq('event_date', targetDate)
+                  .eq('event_name', event.description);
+
+                const { error: eventError } = await supabase.from('live_park_events').insert(eventData);
 
                 if (!eventError) {
                   eventsCount++;
