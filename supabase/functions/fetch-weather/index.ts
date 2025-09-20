@@ -6,30 +6,47 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
-interface OpenWeatherResponse {
-  list: Array<{
+interface OneCallResponse {
+  current: {
     dt: number;
-    main: {
-      temp: number;
-      feels_like: number;
-      temp_min: number;
-      temp_max: number;
-      humidity: number;
-    };
+    temp: number;
+    feels_like: number;
+    humidity: number;
+    uvi: number;
+    visibility: number;
     weather: Array<{
       main: string;
       description: string;
     }>;
-    wind: {
-      speed: number;
-      deg: number;
+    wind_speed: number;
+    wind_deg: number;
+  };
+  daily: Array<{
+    dt: number;
+    temp: {
+      day: number;
+      min: number;
+      max: number;
+      night: number;
+      eve: number;
+      morn: number;
     };
-    visibility: number;
-    pop: number; // probability of precipitation
-    rain?: {
-      '3h': number;
+    feels_like: {
+      day: number;
+      night: number;
+      eve: number;
+      morn: number;
     };
-    uv?: number;
+    humidity: number;
+    wind_speed: number;
+    wind_deg: number;
+    weather: Array<{
+      main: string;
+      description: string;
+    }>;
+    pop: number;
+    rain?: number;
+    uvi: number;
   }>;
 }
 
@@ -84,118 +101,60 @@ serve(async (req) => {
 
     console.log(`Fetching weather for ${location.name} (${location.latitude}, ${location.longitude})`)
 
-    // Fetch 5-day forecast from OpenWeatherMap (free tier)
-    // Using 5 day / 3 hour forecast API
-    const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${location.latitude}&lon=${location.longitude}&appid=${openWeatherApiKey}&units=imperial`
+    // Fetch 8-day forecast from OpenWeatherMap One Call API 3.0
+    // Using One Call API 3.0 for daily forecasts (8 days)
+    const weatherUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${location.latitude}&lon=${location.longitude}&appid=${openWeatherApiKey}&units=imperial&exclude=minutely,hourly,alerts`
 
     const weatherResponse = await fetch(weatherUrl)
     if (!weatherResponse.ok) {
       throw new Error(`OpenWeatherMap API error: ${weatherResponse.status} ${weatherResponse.statusText}`)
     }
 
-    const weatherData: OpenWeatherResponse = await weatherResponse.json()
-    console.log(`Received ${weatherData.list.length} forecast entries`)
+    const weatherData: OneCallResponse = await weatherResponse.json()
+    console.log(`Received ${weatherData.daily.length} daily forecast entries`)
 
-    // Process forecast data - group by date and get daily high/low
-    const dailyForecasts = new Map<string, {
-      date: string;
-      temps: number[];
-      feels_like: number[];
-      humidity: number[];
-      precipitation_chance: number[];
-      precipitation_amount: number[];
-      weather_conditions: Array<{ main: string; description: string }>;
-      wind_speeds: number[];
-      wind_directions: number[];
-      visibility: number[];
-      uv_indices: number[];
-    }>()
-
-    weatherData.list.forEach(entry => {
-      const date = new Date(entry.dt * 1000).toISOString().split('T')[0]
-
-      if (!dailyForecasts.has(date)) {
-        dailyForecasts.set(date, {
-          date,
-          temps: [],
-          feels_like: [],
-          humidity: [],
-          precipitation_chance: [],
-          precipitation_amount: [],
-          weather_conditions: [],
-          wind_speeds: [],
-          wind_directions: [],
-          visibility: [],
-          uv_indices: []
-        })
-      }
-
-      const dayData = dailyForecasts.get(date)!
-      dayData.temps.push(entry.main.temp)
-      dayData.feels_like.push(entry.main.feels_like)
-      dayData.humidity.push(entry.main.humidity)
-      dayData.precipitation_chance.push(Math.round(entry.pop * 100))
-      dayData.precipitation_amount.push(entry.rain ? entry.rain['3h'] : 0)
-      dayData.weather_conditions.push(...entry.weather)
-      dayData.wind_speeds.push(entry.wind.speed)
-      dayData.wind_directions.push(entry.wind.deg)
-      dayData.visibility.push(entry.visibility / 1609.34) // Convert meters to miles
-      dayData.uv_indices.push(entry.uv || 0)
-    })
-
-    // Convert to database format
+    // Process daily forecast data (already organized by day)
     const forecastsToInsert: WeatherForecast[] = []
     const currentTime = new Date().toISOString()
 
-    for (const [date, data] of dailyForecasts) {
-      // Get the most common weather condition for the day
-      const conditionCounts = new Map<string, number>()
-      let mostCommonCondition = 'clear'
-      let mostCommonDescription = 'Clear sky'
+    // Map OpenWeatherMap conditions to our simplified conditions
+    const weatherConditionMap: Record<string, string> = {
+      'clear': 'clear',
+      'clouds': 'clouds',
+      'rain': 'rain',
+      'drizzle': 'rain',
+      'thunderstorm': 'thunderstorm',
+      'snow': 'snow',
+      'mist': 'cloudy',
+      'fog': 'cloudy',
+      'haze': 'cloudy'
+    }
 
-      data.weather_conditions.forEach(condition => {
-        const count = conditionCounts.get(condition.main.toLowerCase()) || 0
-        conditionCounts.set(condition.main.toLowerCase(), count + 1)
-
-        if (count + 1 > (conditionCounts.get(mostCommonCondition) || 0)) {
-          mostCommonCondition = condition.main.toLowerCase()
-          mostCommonDescription = condition.description
-        }
-      })
-
-      // Map OpenWeatherMap conditions to our simplified conditions
-      const weatherConditionMap: Record<string, string> = {
-        'clear': 'clear',
-        'clouds': 'clouds',
-        'rain': 'rain',
-        'drizzle': 'rain',
-        'thunderstorm': 'thunderstorm',
-        'snow': 'snow',
-        'mist': 'cloudy',
-        'fog': 'cloudy',
-        'haze': 'cloudy'
-      }
+    // Process each daily forecast (One Call API 3.0 provides clean daily data)
+    weatherData.daily.forEach(dayData => {
+      const date = new Date(dayData.dt * 1000).toISOString().split('T')[0]
+      const mainCondition = dayData.weather[0]?.main.toLowerCase() || 'clear'
 
       const forecast: WeatherForecast = {
         location_id: location.id,
         forecast_date: date,
         forecast_time: currentTime,
-        temperature_high: Math.round(Math.max(...data.temps)),
-        temperature_low: Math.round(Math.min(...data.temps)),
-        temperature_feels_like: Math.round(data.feels_like.reduce((a, b) => a + b, 0) / data.feels_like.length),
-        humidity: Math.round(data.humidity.reduce((a, b) => a + b, 0) / data.humidity.length),
-        precipitation_chance: Math.max(...data.precipitation_chance),
-        precipitation_amount: Math.round((data.precipitation_amount.reduce((a, b) => a + b, 0) / 25.4) * 100) / 100, // Convert mm to inches
-        weather_condition: weatherConditionMap[mostCommonCondition] || 'clear',
-        weather_description: mostCommonDescription,
-        wind_speed: Math.round(data.wind_speeds.reduce((a, b) => a + b, 0) / data.wind_speeds.length),
-        wind_direction: Math.round(data.wind_directions.reduce((a, b) => a + b, 0) / data.wind_directions.length),
-        uv_index: Math.round(data.uv_indices.reduce((a, b) => a + b, 0) / data.uv_indices.length),
-        visibility: Math.round((data.visibility.reduce((a, b) => a + b, 0) / data.visibility.length) * 10) / 10
+        temperature_high: Math.round(dayData.temp.max),
+        temperature_low: Math.round(dayData.temp.min),
+        temperature_feels_like: Math.round(dayData.feels_like.day),
+        humidity: dayData.humidity,
+        precipitation_chance: Math.round(dayData.pop * 100),
+        precipitation_amount: Math.round(((dayData.rain || 0) / 25.4) * 100) / 100, // Convert mm to inches
+        weather_condition: weatherConditionMap[mainCondition] || 'clear',
+        weather_description: dayData.weather[0]?.description || 'Clear sky',
+        wind_speed: Math.round(dayData.wind_speed),
+        wind_direction: dayData.wind_deg,
+        uv_index: Math.round(dayData.uvi),
+        visibility: Math.round(weatherData.current.visibility / 1609.34 * 10) / 10 // Convert meters to miles
       }
 
       forecastsToInsert.push(forecast)
-    }
+    })
 
     console.log(`Processed ${forecastsToInsert.length} daily forecasts`)
 
@@ -210,17 +169,20 @@ serve(async (req) => {
       throw new Error(`Database upsert error: ${upsertError.message}`)
     }
 
-    // Clean up old forecasts (older than 2 days)
-    const twoDaysAgo = new Date()
-    twoDaysAgo.setDate(twoDaysAgo.getDate() - 2)
+    // Clean up old forecasts (past dates only, keep today and future)
+    const today = new Date()
+    const yesterday = new Date(today)
+    yesterday.setDate(yesterday.getDate() - 1)
 
-    const { error: cleanupError } = await supabaseClient
+    const { error: cleanupError, count: deletedCount } = await supabaseClient
       .from('weather_forecasts')
-      .delete()
-      .lt('forecast_date', twoDaysAgo.toISOString().split('T')[0])
+      .delete({ count: 'exact' })
+      .lt('forecast_date', today.toISOString().split('T')[0])
 
     if (cleanupError) {
       console.warn('Cleanup error (non-fatal):', cleanupError.message)
+    } else {
+      console.log(`Cleaned up ${deletedCount || 0} old weather forecasts`)
     }
 
     return new Response(

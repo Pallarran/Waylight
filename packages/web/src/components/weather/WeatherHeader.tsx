@@ -93,13 +93,13 @@ export default function WeatherHeader({ date }: WeatherHeaderProps) {
     const today = new Date();
     const isToday = date.toDateString() === today.toDateString();
     const isPast = date < today;
-    const isFarFuture = date > new Date(today.getTime() + 5 * 24 * 60 * 60 * 1000);
+    const isFarFuture = date > new Date(today.getTime() + 8 * 24 * 60 * 60 * 1000);
 
     let message = 'No weather data available';
     if (isPast && !isToday) {
       message = 'Weather data not available for past dates';
     } else if (isFarFuture) {
-      message = 'Weather forecast only available 5 days ahead';
+      message = 'Weather forecast only available 8 days ahead';
     }
 
     return (
