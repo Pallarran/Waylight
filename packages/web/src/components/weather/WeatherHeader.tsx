@@ -8,6 +8,8 @@ interface WeatherHeaderProps {
 }
 
 const getWeatherIcon = (condition: string) => {
+  if (!condition) return <Cloud className="w-4 h-4 text-gray-500" />;
+
   switch (condition.toLowerCase()) {
     case 'clear':
       return <Sun className="w-4 h-4 text-yellow-500" />;
@@ -106,7 +108,7 @@ export default function WeatherHeader({ date }: WeatherHeaderProps) {
       <span>
         {formatTemperature(forecast.temperatureHigh)}/{formatTemperature(forecast.temperatureLow)}
       </span>
-      <span className="capitalize">{forecast.weatherCondition}</span>
+      <span className="capitalize">{forecast.weatherCondition || 'Unknown'}</span>
       {forecast.precipitationProbability && forecast.precipitationProbability > 30 && (
         <span className="text-blue-500">
           {forecast.precipitationProbability}% rain
