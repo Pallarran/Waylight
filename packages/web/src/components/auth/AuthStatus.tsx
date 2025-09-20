@@ -237,8 +237,44 @@ export default function AuthStatus() {
 
           console.log(`✅ Updated ${attractionUpdateCount}/${attractionsData.length} attractions for ${parkName}`);
 
-          // Skip entertainment updates for now - table is not populating correctly
-          console.log(`⏸️ Skipping ${entertainmentData.length} entertainment shows for ${parkName} (disabled for now)`);
+          // Update entertainment in database
+          let entertainmentUpdateCount = 0;
+          for (const entertainment of entertainmentData) {
+            // Map status from API to database format
+            let dbStatus: 'operating' | 'cancelled' | 'delayed' = 'operating';
+            if (entertainment.status === 'DOWN' || entertainment.status === 'CLOSED' || entertainment.status === 'REFURBISHMENT') {
+              dbStatus = 'cancelled';
+            } else if (entertainment.status === 'DELAYED') {
+              dbStatus = 'delayed';
+            }
+
+            // Extract show times and find next show
+            const showTimes = entertainment.showtimes?.map((show: any) => show.startTime) || [];
+            const nextShow = showTimes.find((time: string) => {
+              const showTime = new Date(time);
+              return showTime > new Date();
+            });
+
+            const { error: entertainmentError } = await supabase.from('live_entertainment').upsert({
+              park_id: parkName,
+              external_id: entertainment.id,
+              name: entertainment.name,
+              show_times: showTimes,
+              status: dbStatus,
+              next_show_time: nextShow || null,
+              last_updated: new Date().toISOString()
+            }, {
+              onConflict: 'park_id,external_id'
+            });
+
+            if (entertainmentError) {
+              console.error(`❌ Failed to update entertainment ${entertainment.name}:`, entertainmentError);
+            } else {
+              entertainmentUpdateCount++;
+            }
+          }
+
+          console.log(`✅ Updated ${entertainmentUpdateCount}/${entertainmentData.length} entertainment shows for ${parkName}`);
 
 
           // Test RLS policies first with a simple read query
@@ -504,7 +540,7 @@ export default function AuthStatus() {
         `\n• Weather forecasts ${weatherDetails ? '- ' + weatherDetails.replace('✅ Weather: ', '') : ''}`;
 
       if (successCount === Object.keys(parkIds).length) {
-        alert(`✅ Database sync successful!\n\nUpdated live data for all ${successCount} parks:\n• Attractions & wait times\n• Park status & info\n• Special ticketed events\n• Daily park schedules with EE/EEH${weatherNote}`);
+        alert(`✅ Database sync successful!\n\nUpdated live data for all ${successCount} parks:\n• Attractions & wait times\n• Entertainment shows & showtimes\n• Park status & info\n• Special ticketed events\n• Daily park schedules with EE/EEH${weatherNote}`);
       } else if (successCount > 0) {
         const combinedErrors = errors.filter(e => !e.includes('Weather')); // Don't duplicate weather errors
         alert(`⚠️ Partial success: Updated ${successCount}/${Object.keys(parkIds).length} parks in database.\n\nPark Errors:\n${combinedErrors.join('\n')}${weatherNote}`);
