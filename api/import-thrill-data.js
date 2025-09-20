@@ -325,16 +325,36 @@ export default async function handler(req, res) {
         // Deduplicate predictions by date (in case multiple parsing methods found the same dates)
         const uniquePredictions = [];
         const seenDates = new Set();
+        const duplicates = [];
+
         for (const prediction of predictions) {
           const dateKey = `${prediction.park_id}-${prediction.prediction_date}`;
           if (!seenDates.has(dateKey)) {
             seenDates.add(dateKey);
             uniquePredictions.push(prediction);
+          } else {
+            duplicates.push(prediction.prediction_date);
           }
         }
 
         if (uniquePredictions.length !== predictions.length) {
-          console.log(`Removed ${predictions.length - uniquePredictions.length} duplicate dates for ${parkMapping.displayName}`);
+          console.log(`Removed ${predictions.length - uniquePredictions.length} duplicate dates for ${parkMapping.displayName}: ${duplicates.slice(0, 5).join(', ')}${duplicates.length > 5 ? '...' : ''}`);
+        }
+
+        // Additional validation: check for any remaining duplicates in final array
+        const finalDateCheck = new Set();
+        const finalDuplicates = [];
+        for (const prediction of uniquePredictions) {
+          const dateKey = `${prediction.park_id}-${prediction.prediction_date}`;
+          if (finalDateCheck.has(dateKey)) {
+            finalDuplicates.push(dateKey);
+          } else {
+            finalDateCheck.add(dateKey);
+          }
+        }
+
+        if (finalDuplicates.length > 0) {
+          console.error(`Still found duplicates after deduplication: ${finalDuplicates.slice(0, 5).join(', ')}`);
         }
 
         const finalPredictions = uniquePredictions;
@@ -344,22 +364,44 @@ export default async function handler(req, res) {
         if (!earliestDate || dates[0] < earliestDate) earliestDate = dates[0];
         if (!latestDate || dates[dates.length - 1] > latestDate) latestDate = dates[dates.length - 1];
 
-        // Insert into database using upsert
+        // Insert into database using batch inserts to avoid transaction conflicts
         if (supabase) {
-          const { error } = await supabase
-            .from('park_crowd_predictions')
-            .upsert(finalPredictions, {
-              onConflict: 'park_id,prediction_date',
-              ignoreDuplicates: true
-            });
+          let successCount = 0;
+          let errorCount = 0;
 
-          if (error) {
-            console.error(`❌ Failed to insert ${parkMapping.displayName}:`, error);
-            result.errors.push(`${parkMapping.displayName}: Database insert failed - ${error.message}`);
-          } else {
-            result.recordsImported += finalPredictions.length;
+          // Process in smaller batches to avoid conflicts
+          const batchSize = 50;
+          for (let i = 0; i < finalPredictions.length; i += batchSize) {
+            const batch = finalPredictions.slice(i, i + batchSize);
+
+            const { error } = await supabase
+              .from('park_crowd_predictions')
+              .upsert(batch, {
+                onConflict: 'park_id,prediction_date',
+                ignoreDuplicates: false
+              });
+
+            if (error) {
+              console.warn(`Batch ${Math.floor(i/batchSize) + 1} failed for ${parkMapping.displayName}:`, error.message);
+              errorCount += batch.length;
+            } else {
+              successCount += batch.length;
+            }
+          }
+
+          if (errorCount > 0) {
+            console.error(`❌ Failed to insert ${errorCount}/${finalPredictions.length} predictions for ${parkMapping.displayName}`);
+            if (successCount === 0) {
+              result.errors.push(`${parkMapping.displayName}: All batches failed`);
+            } else {
+              result.errors.push(`${parkMapping.displayName}: ${errorCount} predictions failed`);
+            }
+          }
+
+          if (successCount > 0) {
+            result.recordsImported += successCount;
             result.parksProcessed.push(parkMapping.displayName);
-            console.log(`✅ Inserted ${finalPredictions.length} predictions for ${parkMapping.displayName}`);
+            console.log(`✅ Inserted ${successCount} predictions for ${parkMapping.displayName}`);
           }
         } else {
           console.warn('Supabase not configured - would insert predictions');
