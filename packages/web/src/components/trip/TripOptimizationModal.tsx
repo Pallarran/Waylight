@@ -208,21 +208,48 @@ export default function TripOptimizationModal({
     return park?.icon || '🏞️'; // Default park icon
   };
 
-  // Helper function to get crowd level for a specific date
-  const getCrowdLevelForDay = (date: string, parkId?: string): number | null => {
-    // For now, return a mock value since we need to implement async crowd data fetching
-    // This would typically fetch from crowdPredictionRepository.getCrowdPredictionForDate(parkId, date)
-    if (!parkId) return null;
+  // State for crowd data
+  const [crowdData, setCrowdData] = useState<Map<string, Map<string, number>>>(new Map());
 
-    // Mock crowd levels for demonstration - in production this would be async
-    const mockCrowdLevels: { [key: string]: number } = {
-      'magic-kingdom': 7,
-      'epcot': 4,
-      'hollywood-studios': 8,
-      'animal-kingdom': 5
+  // Load crowd data when trip changes
+  useEffect(() => {
+    const loadCrowdData = async () => {
+      const data = new Map<string, Map<string, number>>();
+
+      // Get unique park IDs from trip days
+      const parkIds = [...new Set(validTripDays.map(day => day.parkId).filter(Boolean))];
+
+      for (const parkId of parkIds) {
+        const parkCrowdData = new Map<string, number>();
+
+        for (const day of validTripDays) {
+          try {
+            const prediction = await crowdPredictionRepository.getCrowdPredictionForDate(parkId, day.date);
+            if (prediction) {
+              parkCrowdData.set(day.date, prediction.crowdLevel);
+            }
+          } catch (error) {
+            // Silently fail for missing data
+          }
+        }
+
+        if (parkCrowdData.size > 0) {
+          data.set(parkId, parkCrowdData);
+        }
+      }
+
+      setCrowdData(data);
     };
 
-    return mockCrowdLevels[parkId] || null;
+    if (validTripDays.length > 0) {
+      loadCrowdData();
+    }
+  }, [validTripDays.length]);
+
+  // Helper function to get crowd level for a specific date
+  const getCrowdLevelForDay = (date: string, parkId?: string): number | null => {
+    if (!parkId) return null;
+    return crowdData.get(parkId)?.get(date) || null;
   };
 
   if (!isOpen) return null;

@@ -123,11 +123,6 @@ export class TripOptimizationService {
       throw new Error('Trip must have at least one day');
     }
 
-    console.log('Validating trip structure:', {
-      startDate: trip.startDate,
-      endDate: trip.endDate,
-      days: trip.days.map(d => ({ date: d.date, parkId: d.parkId, dayType: d.dayType }))
-    });
 
     // Ensure all dates are within trip range and are unique
     const seenDates = new Set<string>();
@@ -196,13 +191,6 @@ export class TripOptimizationService {
     const allDisneyParks = ['magic-kingdom', 'epcot', 'hollywood-studios', 'animal-kingdom'];
     const parkIds = [...new Set([...currentParkIds, ...allDisneyParks])];
 
-    console.log('Getting crowd data for optimization:', {
-      currentParks: currentParkIds,
-      allParks: parkIds
-    });
-
-    console.log('Getting crowd data for parks:', parkIds);
-    console.log('Trip days:', trip.days.map(d => ({ date: d.date, parkId: d.parkId })));
 
     for (const parkId of parkIds) {
       const parkCrowdData = new Map<string, number>();
@@ -214,13 +202,10 @@ export class TripOptimizationService {
 
       for (const date of datesForThisPark) {
         try {
-          console.log(`Fetching crowd data for ${parkId} on ${date}`);
           const prediction = await crowdPredictionRepository.getCrowdPredictionForDate(parkId, date);
           if (prediction) {
             parkCrowdData.set(date, prediction.crowdLevel);
-            console.log(`Found crowd level ${prediction.crowdLevel} for ${parkId} on ${date}`);
           } else {
-            console.log(`No crowd data found for ${parkId} on ${date}, using default`);
             // Default to moderate crowd level if no data
             parkCrowdData.set(date, 5);
           }
