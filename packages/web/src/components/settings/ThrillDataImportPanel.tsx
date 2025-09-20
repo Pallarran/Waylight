@@ -219,12 +219,12 @@ export default function ThrillDataImportPanel() {
             {lastResult.success ? (
               <div className="space-y-1">
                 <div className="font-medium text-green-800">
-                  ✅ Successfully imported {lastResult.recordsImported} predictions
+                  ✅ {lastResult.message || `Successfully imported ${lastResult.recordsImported || 0} predictions`}
                 </div>
                 <div className="text-green-700">
-                  Parks: {lastResult.parksProcessed.join(', ')}
+                  Parks: {lastResult.parksProcessed ? lastResult.parksProcessed.join(', ') : 'Test API response - no parks processed'}
                 </div>
-                {lastResult.dateRange.start && (
+                {lastResult.dateRange?.start && (
                   <div className="text-green-700">
                     Date range: {lastResult.dateRange.start} to {lastResult.dateRange.end}
                   </div>
