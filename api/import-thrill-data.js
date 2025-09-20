@@ -171,6 +171,17 @@ export default async function handler(req, res) {
     const { year = new Date().getFullYear() } = req.body || {};
     console.log('Using year:', year);
 
+    // Validate year is reasonable
+    if (year < 2020 || year > 2030) {
+      return res.status(400).json({
+        success: false,
+        errors: [`Invalid year: ${year}. Must be between 2020 and 2030.`],
+        recordsImported: 0,
+        parksProcessed: [],
+        dateRange: { start: '', end: '' }
+      });
+    }
+
     const result = {
       success: true,
       recordsImported: 0,

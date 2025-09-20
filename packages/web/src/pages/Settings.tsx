@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Sun, Download, Upload, Trash2, Bell, MapPin, Eye, Calendar, Database } from 'lucide-react';
 import useUserPreferencesStore from '../stores/useUserPreferencesStore';
 import WeatherTestPanel from '../components/debug/WeatherTestPanel';
-import ThrillDataImportPanel from '../components/settings/ThrillDataImportPanel';
+import LiveDataManagementPanel from '../components/settings/LiveDataManagementPanel';
 
 export default function Settings() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -214,36 +214,43 @@ export default function Settings() {
 
         {/* Data Management */}
         <div className="card p-6">
-          <div className="flex items-center mb-4">
-            <Download className="w-5 h-5 text-glow mr-2" />
+          <div className="flex items-center mb-6">
+            <Database className="w-5 h-5 text-glow mr-2" />
             <h2 className="text-lg font-semibold text-ink">Data Management</h2>
           </div>
-          
-          <div className="space-y-4">
-            <div>
-              <h3 className="font-medium text-ink mb-2">Backup & Restore</h3>
-              <p className="text-sm text-ink-light mb-4">
-                Export your trips and preferences to keep them safe, or import data from another device.
-              </p>
-              <div className="flex space-x-3">
-                <button
-                  onClick={handleExportData}
-                  className="btn-secondary flex items-center"
-                >
-                  <Download className="w-4 h-4 mr-2" />
-                  Export Data
-                </button>
-                <button
-                  onClick={handleImportData}
-                  className="btn-secondary flex items-center"
-                >
-                  <Upload className="w-4 h-4 mr-2" />
-                  Import Data
-                </button>
+
+          <div className="space-y-8">
+            {/* Live Data Management */}
+            <LiveDataManagementPanel />
+
+            {/* Backup & Restore */}
+            <div className="border-t border-surface-dark/50 pt-6">
+              <div>
+                <h3 className="font-medium text-ink mb-2">Personal Data Backup & Restore</h3>
+                <p className="text-sm text-ink-light mb-4">
+                  Export your trips and preferences to keep them safe, or import data from another device.
+                </p>
+                <div className="flex space-x-3">
+                  <button
+                    onClick={handleExportData}
+                    className="btn-secondary flex items-center"
+                  >
+                    <Download className="w-4 h-4 mr-2" />
+                    Export Data
+                  </button>
+                  <button
+                    onClick={handleImportData}
+                    className="btn-secondary flex items-center"
+                  >
+                    <Upload className="w-4 h-4 mr-2" />
+                    Import Data
+                  </button>
+                </div>
               </div>
             </div>
 
-            <div className="border-t border-surface-dark/50 pt-4">
+            {/* Danger Zone */}
+            <div className="border-t border-surface-dark/50 pt-6">
               <h3 className="font-medium text-ink mb-2 text-red-600">Danger Zone</h3>
               <p className="text-sm text-ink-light mb-4">
                 Permanently delete all your trips, preferences, and stored data.
@@ -257,16 +264,6 @@ export default function Settings() {
               </button>
             </div>
           </div>
-        </div>
-
-        {/* Crowd Data Import */}
-        <div className="card p-6">
-          <div className="flex items-center mb-4">
-            <Database className="w-5 h-5 text-glow mr-2" />
-            <h2 className="text-lg font-semibold text-ink">Crowd Data Import</h2>
-          </div>
-
-          <ThrillDataImportPanel />
         </div>
 
         {/* App Information */}
