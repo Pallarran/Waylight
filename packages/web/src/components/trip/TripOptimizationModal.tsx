@@ -114,6 +114,23 @@ export default function TripOptimizationModal({
     setConstraints(prev => prev.map(c => ({ ...c, isLocked: false })));
   };
 
+  // Helper function to format dates without timezone issues
+  const formatDateSafe = (dateString: string) => {
+    try {
+      // Parse as local date to avoid timezone issues
+      const [year, month, day] = dateString.split('-').map(Number);
+      const date = new Date(year, month - 1, day); // month is 0-indexed
+
+      return date.toLocaleDateString('en-US', {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric'
+      });
+    } catch {
+      return dateString;
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -198,11 +215,7 @@ export default function TripOptimizationModal({
                       >
                         <div className="flex items-center space-x-3">
                           <div className="text-sm font-medium text-ink">
-                            {new Date(day.date).toLocaleDateString('en-US', {
-                              weekday: 'short',
-                              month: 'short',
-                              day: 'numeric'
-                            })}
+                            {formatDateSafe(day.date)}
                           </div>
                           <div className="text-sm text-ink-light">→</div>
                           <div className="text-sm text-ink">{getParkName(day.parkId)}</div>
@@ -248,11 +261,7 @@ export default function TripOptimizationModal({
                       {optimizationResult?.originalAssignment.map(assignment => (
                         <div key={assignment.dayId} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                           <span className="text-sm">
-                            {new Date(assignment.date).toLocaleDateString('en-US', {
-                              weekday: 'short',
-                              month: 'short',
-                              day: 'numeric'
-                            })}
+                            {formatDateSafe(assignment.date)}
                           </span>
                           <div className="flex items-center space-x-2">
                             <span className="text-sm font-medium">{getParkName(assignment.parkId)}</span>
@@ -278,11 +287,7 @@ export default function TripOptimizationModal({
                       {optimizationResult?.optimizedAssignment.map(assignment => (
                         <div key={assignment.dayId} className="flex items-center justify-between p-3 bg-sea/5 border border-sea/20 rounded-lg">
                           <span className="text-sm">
-                            {new Date(assignment.date).toLocaleDateString('en-US', {
-                              weekday: 'short',
-                              month: 'short',
-                              day: 'numeric'
-                            })}
+                            {formatDateSafe(assignment.date)}
                           </span>
                           <div className="flex items-center space-x-2">
                             <span className="text-sm font-medium">{getParkName(assignment.parkId)}</span>

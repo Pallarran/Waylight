@@ -53,7 +53,10 @@ export class TripOptimizationService {
     options: OptimizationOptions
   ): Promise<OptimizationResult> {
 
-    // Get crowd predictions for all days
+    // Validate trip dates and structure
+    this.validateTripStructure(trip);
+
+    // Get crowd predictions for all days and parks
     const crowdData = await this.getCrowdDataForTrip(trip);
 
     // Generate original assignment
@@ -65,7 +68,7 @@ export class TripOptimizationService {
 
     switch (options.strategy) {
       case 'crowd_minimization':
-        const crowdResult = await this.optimizeForCrowds(originalAssignment, options.constraints);
+        const crowdResult = await this.optimizeForCrowds(originalAssignment, options.constraints, crowdData);
         optimizedAssignment = crowdResult.assignment;
         reasoning = crowdResult.reasoning;
         break;
@@ -110,29 +113,95 @@ export class TripOptimizationService {
   }
 
   /**
+   * Validate trip structure and dates
+   */
+  private validateTripStructure(trip: Trip): void {
+    if (!trip.days || trip.days.length === 0) {
+      throw new Error('Trip must have at least one day');
+    }
+
+    // Ensure all dates are within trip range and are unique
+    const tripStartDate = new Date(trip.startDate);
+    const tripEndDate = new Date(trip.endDate);
+    const seenDates = new Set<string>();
+
+    for (const day of trip.days) {
+      // Normalize date to YYYY-MM-DD format to avoid timezone issues
+      const dayDate = new Date(day.date);
+      const normalizedDate = dayDate.toISOString().split('T')[0];
+
+      // Check if date is within trip range
+      if (dayDate < tripStartDate || dayDate > tripEndDate) {
+        throw new Error(`Day ${normalizedDate} is outside trip date range ${trip.startDate} to ${trip.endDate}`);
+      }
+
+      // Check for duplicate dates
+      if (seenDates.has(normalizedDate)) {
+        throw new Error(`Duplicate date found: ${normalizedDate}`);
+      }
+
+      seenDates.add(normalizedDate);
+
+      // Update the day date to normalized format to prevent timezone issues
+      day.date = normalizedDate;
+    }
+
+    // Sort days by date to maintain chronological order
+    trip.days.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  }
+
+  /**
    * Get crowd predictions for all days in the trip
    */
   private async getCrowdDataForTrip(trip: Trip): Promise<Map<string, Map<string, number>>> {
     const crowdData = new Map<string, Map<string, number>>();
 
-    // Get unique park IDs
-    const parkIds = [...new Set(trip.days.map(day => day.parkId))];
+    // Get unique park IDs and filter out invalid ones
+    const parkIds = [...new Set(trip.days.map(day => day.parkId))].filter(parkId => parkId && parkId !== 'undefined');
+
+    console.log('Getting crowd data for parks:', parkIds);
+    console.log('Trip days:', trip.days.map(d => ({ date: d.date, parkId: d.parkId })));
 
     for (const parkId of parkIds) {
       const parkCrowdData = new Map<string, number>();
 
-      for (const day of trip.days) {
+      // Only fetch crowd data for each park's assigned dates
+      const datesForThisPark = trip.days
+        .filter(day => day.parkId === parkId)
+        .map(day => day.date);
+
+      for (const date of datesForThisPark) {
         try {
-          const prediction = await crowdPredictionRepository.getCrowdPredictionForDate(parkId, day.date);
+          console.log(`Fetching crowd data for ${parkId} on ${date}`);
+          const prediction = await crowdPredictionRepository.getCrowdPredictionForDate(parkId, date);
           if (prediction) {
-            parkCrowdData.set(day.date, prediction.crowdLevel);
+            parkCrowdData.set(date, prediction.crowdLevel);
+            console.log(`Found crowd level ${prediction.crowdLevel} for ${parkId} on ${date}`);
           } else {
+            console.log(`No crowd data found for ${parkId} on ${date}, using default`);
             // Default to moderate crowd level if no data
-            parkCrowdData.set(day.date, 5);
+            parkCrowdData.set(date, 5);
           }
         } catch (error) {
-          console.warn(`Failed to get crowd data for ${parkId} on ${day.date}:`, error);
-          parkCrowdData.set(day.date, 5); // Default fallback
+          console.warn(`Failed to get crowd data for ${parkId} on ${date}:`, error);
+          parkCrowdData.set(date, 5); // Default fallback
+        }
+      }
+
+      // Also get crowd data for all dates (for optimization possibilities)
+      for (const day of trip.days) {
+        if (!parkCrowdData.has(day.date)) {
+          try {
+            const prediction = await crowdPredictionRepository.getCrowdPredictionForDate(parkId, day.date);
+            if (prediction) {
+              parkCrowdData.set(day.date, prediction.crowdLevel);
+            } else {
+              parkCrowdData.set(day.date, 5);
+            }
+          } catch (error) {
+            console.warn(`Failed to get crowd data for ${parkId} on ${day.date}:`, error);
+            parkCrowdData.set(day.date, 5);
+          }
         }
       }
 
@@ -163,7 +232,8 @@ export class TripOptimizationService {
    */
   private async optimizeForCrowds(
     assignments: ParkAssignment[],
-    constraints: OptimizationConstraint[]
+    constraints: OptimizationConstraint[],
+    crowdData: Map<string, Map<string, number>>
   ): Promise<{ assignment: ParkAssignment[]; reasoning: string[] }> {
 
     const lockedAssignments = constraints.filter(c => c.isLocked);
@@ -171,55 +241,87 @@ export class TripOptimizationService {
       !lockedAssignments.some(locked => locked.dayId === a.dayId)
     );
 
-    // Get all possible park options from the original assignments
+    // Get all available parks and dates
     const availableParks = [...new Set(assignments.map(a => a.parkId))];
+    const availableDates = assignments.map(a => a.date);
 
-    // Sort flexible days by date to maintain trip flow
-    flexibleAssignments.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    // Create matrix of park-date combinations with crowd levels
+    const parkDateMatrix: { parkId: string; date: string; crowdLevel: number; dayId: string }[] = [];
 
-    // For each flexible day, try all parks and pick the one with lowest crowd
-    const optimizedFlexible = flexibleAssignments.map(assignment => {
-      let bestPark = assignment.parkId;
-      let bestCrowdLevel = assignment.crowdLevel || 10;
-
+    for (const assignment of flexibleAssignments) {
       for (const parkId of availableParks) {
-        // Skip if this park is already assigned to a locked day on the same date
-        const isConflicted = lockedAssignments.some(locked =>
-          locked.parkId === parkId && locked.dayId !== assignment.dayId
-        );
-
-        if (!isConflicted) {
-          // Get crowd level for this park on this date (would need crowd data lookup)
-          // For now, using the existing crowd level as baseline
-          const crowdLevel = assignment.crowdLevel || 5;
-
-          if (crowdLevel < bestCrowdLevel) {
-            bestCrowdLevel = crowdLevel;
-            bestPark = parkId;
-          }
-        }
+        const crowdLevel = crowdData.get(parkId)?.get(assignment.date) || 5;
+        parkDateMatrix.push({
+          parkId,
+          date: assignment.date,
+          crowdLevel,
+          dayId: assignment.dayId
+        });
       }
+    }
 
-      return {
-        ...assignment,
-        parkId: bestPark,
-        crowdLevel: bestCrowdLevel,
-        score: 10 - bestCrowdLevel
-      };
-    });
+    // Sort by crowd level (ascending) to prioritize low-crowd combinations
+    parkDateMatrix.sort((a, b) => a.crowdLevel - b.crowdLevel);
 
-    // Combine locked and optimized assignments
+    // Assign parks to dates using greedy algorithm to minimize total crowds
+    const optimizedFlexible: ParkAssignment[] = [];
+    const usedParks = new Set<string>();
+    const usedDates = new Set<string>();
+
+    // First, handle locked assignments to mark their parks/dates as used
     const lockedParkAssignments = assignments.filter(a =>
       lockedAssignments.some(locked => locked.dayId === a.dayId)
     );
 
+    for (const locked of lockedParkAssignments) {
+      usedDates.add(locked.date);
+      // Note: we don't mark parks as used since parks can be visited multiple times
+    }
+
+    // Assign flexible days using lowest crowd combinations
+    for (const combo of parkDateMatrix) {
+      // Skip if this date is already assigned or is locked
+      if (usedDates.has(combo.date)) continue;
+
+      // Find the assignment for this date
+      const assignment = flexibleAssignments.find(a => a.date === combo.date);
+      if (!assignment) continue;
+
+      // Check if this would conflict with a locked assignment (same park, same date)
+      const hasConflict = lockedParkAssignments.some(locked =>
+        locked.parkId === combo.parkId && locked.date === combo.date
+      );
+
+      if (!hasConflict) {
+        optimizedFlexible.push({
+          dayId: assignment.dayId,
+          parkId: combo.parkId,
+          date: combo.date,
+          crowdLevel: combo.crowdLevel,
+          score: 10 - combo.crowdLevel
+        });
+
+        usedDates.add(combo.date);
+      }
+    }
+
+    // Combine locked and optimized assignments
     const finalAssignment = [...lockedParkAssignments, ...optimizedFlexible]
       .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+    // Ensure we have assignments for all days
+    if (finalAssignment.length !== assignments.length) {
+      console.warn('Optimization incomplete - some days may not have assignments');
+    }
+
+    const avgOriginalCrowd = assignments.reduce((sum, a) => sum + (a.crowdLevel || 5), 0) / assignments.length;
+    const avgOptimizedCrowd = finalAssignment.reduce((sum, a) => sum + (a.crowdLevel || 5), 0) / finalAssignment.length;
 
     const reasoning = [
       `Analyzed ${flexibleAssignments.length} flexible days for crowd optimization`,
       `Kept ${lockedAssignments.length} locked park assignments unchanged`,
-      'Prioritized parks with lowest predicted crowd levels for each day'
+      `Reduced average crowd level from ${avgOriginalCrowd.toFixed(1)} to ${avgOptimizedCrowd.toFixed(1)}`,
+      'Used intelligent park-date matching to minimize overall crowd exposure'
     ];
 
     return { assignment: finalAssignment, reasoning };
