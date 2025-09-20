@@ -333,30 +333,52 @@ export class TripOptimizationService {
       // Note: we don't mark parks as used since parks can be visited multiple times
     }
 
-    // Assign flexible days using lowest crowd combinations
-    for (const combo of parkDateMatrix) {
-      // Skip if this date is already assigned or is locked
-      if (usedDates.has(combo.date)) continue;
+    // Assign flexible days using a balanced approach that considers both crowd levels and park diversity
+    const remainingDates = flexibleAssignments
+      .filter(assignment => !usedDates.has(assignment.date))
+      .sort((a, b) => a.date.localeCompare(b.date)); // Sort chronologically
 
-      // Find the assignment for this date
-      const assignment = flexibleAssignments.find(a => a.date === combo.date);
-      if (!assignment) continue;
+    const parkUsageCount = new Map<string, number>();
 
-      // Check if this would conflict with a non-flexible assignment (same park, same date)
-      const hasConflict = nonFlexibleAssignments.some(nonFlexible =>
-        nonFlexible.parkId === combo.parkId && nonFlexible.date === combo.date
-      );
-
-      if (!hasConflict) {
-        optimizedFlexible.push({
+    for (const assignment of remainingDates) {
+      // Get all available park options for this date, sorted by crowd level
+      const parkOptionsForDate = availableParks
+        .map(parkId => ({
+          parkId,
+          crowdLevel: crowdData.get(parkId)?.get(assignment.date) || 5,
+          date: assignment.date,
           dayId: assignment.dayId,
-          parkId: combo.parkId,
-          date: combo.date,
-          crowdLevel: combo.crowdLevel,
-          score: 10 - combo.crowdLevel
+          usageCount: parkUsageCount.get(parkId) || 0
+        }))
+        .filter(option => {
+          // Check if this would conflict with a non-flexible assignment
+          const hasConflict = nonFlexibleAssignments.some(nonFlexible =>
+            nonFlexible.parkId === option.parkId && nonFlexible.date === option.date
+          );
+          return !hasConflict;
+        })
+        // Sort by: 1) usage count (ascending), 2) crowd level (ascending) for diversity + optimization
+        .sort((a, b) => {
+          if (a.usageCount !== b.usageCount) {
+            return a.usageCount - b.usageCount; // Prefer less used parks
+          }
+          return a.crowdLevel - b.crowdLevel; // Then prefer lower crowds
         });
 
-        usedDates.add(combo.date);
+      // Select the best park considering both diversity and crowd levels
+      if (parkOptionsForDate.length > 0) {
+        const selectedPark = parkOptionsForDate[0];
+        optimizedFlexible.push({
+          dayId: selectedPark.dayId,
+          parkId: selectedPark.parkId,
+          date: selectedPark.date,
+          crowdLevel: selectedPark.crowdLevel,
+          score: 10 - selectedPark.crowdLevel
+        });
+
+        // Track park usage for diversity
+        parkUsageCount.set(selectedPark.parkId, (parkUsageCount.get(selectedPark.parkId) || 0) + 1);
+        usedDates.add(assignment.date);
       }
     }
 
@@ -376,7 +398,8 @@ export class TripOptimizationService {
       `Analyzed ${flexibleAssignments.length} flexible days for crowd optimization`,
       `Kept ${lockedAssignments.length} locked park assignments unchanged`,
       `Reduced average crowd level from ${avgOriginalCrowd.toFixed(1)} to ${avgOptimizedCrowd.toFixed(1)}`,
-      'Used intelligent park-date matching to minimize overall crowd exposure'
+      'Used balanced algorithm considering both crowd levels and park diversity',
+      `Distributed recommendations across ${Array.from(new Set(optimizedFlexible.map(a => a.parkId))).length} different parks`
     ];
 
     return { assignment: finalAssignment, reasoning };
