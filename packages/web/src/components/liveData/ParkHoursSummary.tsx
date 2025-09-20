@@ -76,6 +76,14 @@ export const ParkHoursSummary: React.FC<ParkHoursSummaryProps> = ({
     return <Users className={`${baseProps} text-red-600`} />;
   };
 
+  const getCrowdLevelBarColor = (level: number) => {
+    if (level <= 2) return 'bg-green-600';
+    if (level <= 4) return 'bg-blue-600';
+    if (level <= 6) return 'bg-yellow-600';
+    if (level <= 8) return 'bg-orange-600';
+    return 'bg-red-600';
+  };
+
   const getCrowdLevelBars = (level: number) => {
     const bars = [];
     for (let i = 1; i <= 5; i++) {
@@ -84,7 +92,7 @@ export const ParkHoursSummary: React.FC<ParkHoursSummaryProps> = ({
         <div
           key={i}
           className={`w-1 h-3 rounded-sm ${
-            filled ? (getCrowdLevelColor(level).split(' ')[0] || '').replace('text-', 'bg-') : 'bg-gray-200'
+            filled ? getCrowdLevelBarColor(level) : 'bg-gray-200'
           }`}
         />
       );
