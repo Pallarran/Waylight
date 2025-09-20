@@ -110,16 +110,20 @@ export default function WeatherHeader({ date }: WeatherHeaderProps) {
     );
   }
 
+  const weatherCondition = forecast.weatherCondition || (forecast as any).weather_condition || 'Unknown';
+  const precipChance = forecast.precipitationProbability || (forecast as any).precipitation_chance;
+
+
   return (
     <div className="flex items-center text-xs text-ink-light space-x-2">
-      {getWeatherIcon(forecast.weatherCondition || (forecast as any).weather_condition)}
+      {getWeatherIcon(weatherCondition)}
       <span>
         {formatTemperature(forecast.temperatureHigh || (forecast as any).temperature_high, displaySettings.temperatureUnit)}/{formatTemperature(forecast.temperatureLow || (forecast as any).temperature_low, displaySettings.temperatureUnit)}
       </span>
-      <span className="capitalize">{forecast.weatherCondition || (forecast as any).weather_condition || 'Unknown'}</span>
-      {(forecast.precipitationProbability || (forecast as any).precipitation_chance) && (forecast.precipitationProbability || (forecast as any).precipitation_chance) > 30 && (
+      <span className="capitalize">{weatherCondition}</span>
+      {precipChance > 30 && (
         <span className="text-blue-500">
-          {forecast.precipitationProbability || (forecast as any).precipitation_chance}% rain
+          {precipChance}% rain
         </span>
       )}
     </div>

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Users, Activity, Clock, User } from 'lucide-react';
 import {
   CollaborationContext,
-  collaborationService
+  collaborationService,
+  authService
 } from '@waylight/shared';
 
 interface CollaborationIndicatorProps {
@@ -17,18 +18,34 @@ const CollaborationIndicator: React.FC<CollaborationIndicatorProps> = ({
   showActivityFeed = false
 }) => {
   const [context, setContext] = useState<CollaborationContext | null>(null);
+  const [localCollaborators, setLocalCollaborators] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showDetails, setShowDetails] = useState(false);
   const [realtimeUpdates, setRealtimeUpdates] = useState<string[]>([]);
+  const authState = authService.getState();
 
   useEffect(() => {
-    // Temporarily disabled due to RLS/schema issues
-    console.log('CollaborationIndicator temporarily disabled');
-    setIsLoading(false);
-    return;
+    const fetchCollaborationData = async () => {
+      if (!tripId || !authState.user) {
+        setIsLoading(false);
+        return;
+      }
 
-    loadCollaborationContext();
-    setupRealtimeSubscription();
+      try {
+        // For now, just set empty collaborators since we get this from context
+        setLocalCollaborators([]);
+      } catch (error) {
+        console.error('Error fetching collaboration data:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCollaborationData();
+
+    // Temporarily disable these until full schema is available
+    // loadCollaborationContext();
+    // setupRealtimeSubscription();
 
     return () => {
       // Cleanup realtime subscription
@@ -122,8 +139,8 @@ const CollaborationIndicator: React.FC<CollaborationIndicatorProps> = ({
     return null;
   }
 
-  const { trip, collaborators, userPermission, activityLog } = context;
-  const isShared = trip.isShared && collaborators.length > 0;
+  const { trip, collaborators: contextCollaborators, userPermission, activityLog } = context;
+  const isShared = trip.isShared && contextCollaborators.length > 0;
 
   if (!isShared) {
     return (
@@ -147,7 +164,7 @@ const CollaborationIndicator: React.FC<CollaborationIndicatorProps> = ({
           )}
         </div>
         <span className="text-sm font-medium text-gray-700">
-          {collaborators.length + 1} {collaborators.length === 0 ? 'person' : 'people'}
+          {contextCollaborators.length + 1} {contextCollaborators.length === 0 ? 'person' : 'people'}
         </span>
         <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${getPermissionBadgeColor(userPermission)}`}>
           {userPermission}
@@ -182,7 +199,7 @@ const CollaborationIndicator: React.FC<CollaborationIndicatorProps> = ({
               </div>
 
               {/* Collaborators */}
-              {collaborators.map((collaborator) => (
+              {contextCollaborators.map((collaborator) => (
                 <div key={collaborator.id} className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-900">

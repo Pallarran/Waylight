@@ -90,12 +90,20 @@ export class SyncService {
         throw ownedTripsResult.error;
       }
 
-      // Skip collaboration features entirely until RLS is fixed
-      let sharedTripsResult = { data: [], error: null };
-      console.log('Collaboration features temporarily disabled due to RLS issues');
-
-      // Don't even try to query collaboration tables
-      // sharedTripsResult = await supabase...
+      // Query shared trips that user collaborates on
+      let sharedTripsResult: any = { data: [], error: null };
+      try {
+        sharedTripsResult = await supabase
+          .from('trips')
+          .select(`
+            *,
+            trip_collaborators!inner(permission_level)
+          `)
+          .eq('trip_collaborators.user_id', user.id);
+      } catch (error) {
+        console.log('Collaboration features not available (missing schema):', error);
+        // Continue with empty shared trips if collaboration tables don't exist
+      }
 
       // Combine owned and shared trips
       const ownedTrips = ownedTripsResult.data || [];
