@@ -25,7 +25,10 @@ export default function LiveDataManagementPanel() {
 
     try {
       const currentYear = new Date().getFullYear();
-      const years = [currentYear - 1, currentYear, currentYear + 1]; // Last year, current year, next year
+      // Skip 2026 for now as it has JavaScript-rendered content that our scraper can't handle
+      const allYears = [currentYear - 1, currentYear, currentYear + 1];
+      const years = allYears.filter(year => year !== 2026);
+      console.log(`Importing crowd data for years: ${years.join(', ')} (skipping 2026 due to technical limitations)`);
 
       let totalRecords = 0;
       let allParks: string[] = [];
@@ -48,6 +51,7 @@ export default function LiveDataManagementPanel() {
             error: `HTTP ${response.status}: ${response.statusText}`
           }));
 
+          console.error(`Failed to import year ${year}:`, errorResult);
           if (errorResult.debug) {
             console.error('Debug Info:', errorResult.debug);
             allErrors.push(`${year}: ${errorResult.debug.errorMessage}`);
@@ -83,7 +87,7 @@ export default function LiveDataManagementPanel() {
         parksProcessed: allParks,
         errors: allErrors,
         dateRange,
-        message: totalRecords > 0 ? `Successfully imported crowd data for ${years.join(', ')}` : 'No data imported'
+        message: totalRecords > 0 ? `Successfully imported crowd data for ${years.join(', ')}${allYears.includes(2026) ? ' (2026 skipped - requires browser rendering)' : ''}` : 'No data imported'
       });
 
     } catch (error) {
@@ -180,7 +184,7 @@ export default function LiveDataManagementPanel() {
               {getStatusIcon('crowd-data')}
               <div>
                 <h4 className="font-medium text-ink">Crowd Predictions</h4>
-                <p className="text-sm text-ink-light">Import 3-year crowd data (last year, current year, next year)</p>
+                <p className="text-sm text-ink-light">Import crowd data for available years (2024, 2025, 2027+)</p>
               </div>
             </div>
             <button
