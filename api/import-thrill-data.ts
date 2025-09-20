@@ -4,7 +4,32 @@
  */
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { type ImportResult, SUPPORTED_PARK_IDS, crowdPredictionRepository, CrowdPredictionRepository } from '@waylight/shared';
+import { createClient } from '@supabase/supabase-js';
+
+// Define types locally to avoid monorepo dependency issues
+interface ImportResult {
+  success: boolean;
+  recordsImported: number;
+  parksProcessed: string[];
+  errors: string[];
+  dateRange: {
+    start: string;
+    end: string;
+  };
+}
+
+// Park IDs supported by the system
+const SUPPORTED_PARK_IDS = ['magic-kingdom', 'epcot', 'hollywood-studios', 'animal-kingdom'];
+
+// Initialize Supabase client
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+if (!supabaseUrl || !supabaseServiceKey) {
+  throw new Error('Missing Supabase environment variables');
+}
+
+const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -16,7 +41,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     console.log('🚀 Starting Thrill Data import...');
 
-    // For now, create demo data since we can't scrape from client-side
     const result: ImportResult = {
       success: true,
       recordsImported: 0,
@@ -41,29 +65,42 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         const crowdLevel = Math.min(10, Math.max(1, baseLevel + Math.floor(Math.random() * 3) - 1));
 
         const prediction = {
-          parkId,
-          predictionDate: date.toISOString().split('T')[0],
-          crowdLevel,
-          description: getCrowdDescription(crowdLevel),
+          park_id: parkId,
+          prediction_date: date.toISOString().split('T')[0],
+          crowd_level: crowdLevel,
+          crowd_level_description: getCrowdDescription(crowdLevel),
           recommendation: getCrowdRecommendation(crowdLevel),
-          dataSource: 'thrill_data_demo',
-          lastUpdated: new Date().toISOString()
+          data_source: 'thrill_data_demo',
+          synced_at: new Date().toISOString(),
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
         };
 
-        predictions.push(CrowdPredictionRepository.transformPredictionToDb(prediction));
+        predictions.push(prediction);
       }
 
-      // Insert into database
-      await crowdPredictionRepository.upsertCrowdPredictions(predictions);
+      // Insert into database using upsert
+      const { error } = await supabase
+        .from('park_crowd_predictions')
+        .upsert(predictions, {
+          onConflict: 'park_id,prediction_date',
+          ignoreDuplicates: false
+        });
 
-      result.recordsImported += predictions.length;
-      result.parksProcessed.push(parkId);
-
-      console.log(`✅ Imported ${predictions.length} predictions for ${parkId}`);
+      if (error) {
+        console.error(`❌ Failed to import ${parkId}:`, error);
+        result.errors.push(`${parkId}: ${error.message}`);
+      } else {
+        result.recordsImported += predictions.length;
+        result.parksProcessed.push(parkId);
+        console.log(`✅ Imported ${predictions.length} predictions for ${parkId}`);
+      }
     }
 
+    result.success = result.parksProcessed.length > 0;
+
     const duration = Date.now() - startTime;
-    console.log(`✅ Import completed successfully in ${duration}ms`);
+    console.log(`✅ Import completed in ${duration}ms`);
 
     return res.status(200).json({
       ...result,
@@ -119,6 +156,6 @@ function getCrowdRecommendation(level: number): string {
 
 // Export configuration for Vercel
 export const config = {
-  maxDuration: 5 * 60, // 5 minutes should be enough for data generation
+  maxDuration: 300, // 5 minutes
   regions: ['iad1'], // Deploy to US East
 };
