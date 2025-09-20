@@ -9,7 +9,7 @@
   "installCommand": "pnpm install",
   "outputDirectory": "packages/web/dist",
   "functions": {
-    "api/*.ts": {
+    "api/*.{ts,js}": {
       "maxDuration": 300
     }
   },
