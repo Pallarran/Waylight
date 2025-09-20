@@ -189,15 +189,18 @@ export class TripOptimizationService {
   private async getCrowdDataForTrip(trip: Trip): Promise<Map<string, Map<string, number>>> {
     const crowdData = new Map<string, Map<string, number>>();
 
-    // Get unique park IDs and filter out invalid ones
-    let parkIds = [...new Set(trip.days.map(day => day.parkId))]
+    // Always use all Disney World parks for optimization to provide full recommendations
+    // Include any currently assigned parks plus all major Disney World parks
+    const currentParkIds = [...new Set(trip.days.map(day => day.parkId))]
       .filter(parkId => parkId && parkId !== 'undefined' && !parkId.includes('No park'));
 
-    // If no valid parks found, use default Disney World parks for optimization
-    if (parkIds.length === 0) {
-      console.log('No valid parks found in trip, using default Disney World parks for optimization');
-      parkIds = ['magic-kingdom', 'epcot', 'hollywood-studios', 'animal-kingdom'];
-    }
+    const allDisneyParks = ['magic-kingdom', 'epcot', 'hollywood-studios', 'animal-kingdom'];
+    const parkIds = [...new Set([...currentParkIds, ...allDisneyParks])];
+
+    console.log('Getting crowd data for optimization:', {
+      currentParks: currentParkIds,
+      allParks: parkIds
+    });
 
     console.log('Getting crowd data for parks:', parkIds);
     console.log('Trip days:', trip.days.map(d => ({ date: d.date, parkId: d.parkId })));
@@ -285,9 +288,14 @@ export class TripOptimizationService {
              constraint?.dayType !== 'check-out';
     });
 
-    // Get all available parks and dates
-    const availableParks = [...new Set(assignments.map(a => a.parkId))];
+    // Get all available parks from crowd data (not just assigned ones) and dates
+    const availableParks = Array.from(crowdData.keys()).filter(parkId =>
+      parkId && parkId !== 'undefined' && !parkId.includes('No park')
+    );
     const availableDates = assignments.map(a => a.date);
+
+    console.log('Available parks for optimization:', availableParks);
+    console.log('Flexible assignments to optimize:', flexibleAssignments.length);
 
     // Create matrix of park-date combinations with crowd levels
     const parkDateMatrix: { parkId: string; date: string; crowdLevel: number; dayId: string }[] = [];
