@@ -136,11 +136,13 @@ async function fetchCrowdPredictionsForYear(waypointParkId, thrillDataId, year) 
     const html = await response.text();
     console.log(`HTML content length: ${html.length}`);
 
-    // Log first 500 characters for debugging
-    console.log('HTML sample:', html.substring(0, 500));
-
     const predictions = parseCalendarHTML(html, year);
     console.log(`Parsed predictions: ${predictions.length}`);
+
+    // Debug: Return HTML sample for year 2026 to understand the structure
+    if (year === 2026 && predictions.length === 0) {
+      throw new Error(`No 2026 data found. HTML sample: ${html.substring(0, 800)}`);
+    }
 
     return predictions.map(prediction => ({
       park_id: waypointParkId,
