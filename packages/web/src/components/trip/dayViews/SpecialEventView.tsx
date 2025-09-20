@@ -296,13 +296,14 @@ export default function SpecialEventView({ trip, tripDay, date, onQuickAdd, onOp
                 <p className="text-ink-light">
                   {mainEvent.startTime && `Event starts at ${mainEvent.startTime}`}
                 </p>
-                <div className="mt-3">
-                  <WeatherHeader date={date} />
-                </div>
                 <div className="mt-3 inline-flex items-center bg-surface/50 backdrop-blur-sm px-3 py-1.5 rounded-full border border-surface-dark/30">
                   <Star className="w-4 h-4 mr-2 text-yellow-500" />
                   <span className="text-sm text-ink">Special Event Day</span>
                 </div>
+              </div>
+
+              <div className="absolute bottom-4 right-4">
+                <WeatherHeader date={date} />
               </div>
             </div>
 

@@ -541,12 +541,13 @@ export default function RestDayView({ trip, tripDay, date, onQuickAdd, onOpenDay
               <div className="flex items-center justify-center w-12 h-12 mr-4">
                 <span className="text-2xl">🏖️</span>
               </div>
-              <div>
+              <div className="flex-1">
                 <h2 className="text-xl font-semibold text-ink">Rest Day - Take It Easy</h2>
                 <p className="text-ink-light">Relax and recharge at your own pace</p>
-                <div className="mt-2">
-                  <WeatherHeader date={date} />
-                </div>
+              </div>
+
+              <div className="absolute bottom-3 right-3">
+                <WeatherHeader date={date} />
               </div>
             </div>
 
