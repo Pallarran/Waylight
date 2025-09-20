@@ -117,7 +117,9 @@ async function fetchCrowdPredictionsForYear(waypointParkId, thrillDataId, year) 
         'Accept-Encoding': 'gzip, deflate, br',
         'DNT': '1',
         'Connection': 'keep-alive',
-        'Upgrade-Insecure-Requests': '1'
+        'Upgrade-Insecure-Requests': '1',
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache'
       }
     });
 
@@ -139,11 +141,9 @@ async function fetchCrowdPredictionsForYear(waypointParkId, thrillDataId, year) 
     const predictions = parseCalendarHTML(html, year);
     console.log(`Parsed predictions: ${predictions.length}`);
 
-    // Debug: Return HTML sample for any year that has no predictions
+    // If no predictions found, this might be a year with different HTML structure
     if (predictions.length === 0) {
-      // Return a sample in the error message to help debug
-      const htmlSample = html.substring(0, 1000).replace(/\n/g, '\\n').replace(/\t/g, '\\t');
-      throw new Error(`No data found for ${year}. HTML sample (first 1000 chars): ${htmlSample}`);
+      console.warn(`No predictions found for ${waypointParkId} ${year} - might be JS-rendered content`);
     }
 
     return predictions.map(prediction => ({
@@ -257,10 +257,6 @@ export default async function handler(req, res) {
         console.error(`❌ Failed to fetch data for ${parkMapping.displayName}:`, error);
         result.errors.push(`${parkMapping.displayName}: ${errorMessage}`);
 
-        // Special debug for 2026 Magic Kingdom to see the HTML
-        if (year === 2026 && parkMapping.waypointParkId === 'magic-kingdom') {
-          result.errors.push(`Magic Kingdom 2026 Debug - Full Error: ${errorMessage}`);
-        }
       }
     }
 
