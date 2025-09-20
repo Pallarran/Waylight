@@ -10,7 +10,12 @@ import { join } from 'path';
 
 const migrations = [
   '001_create_live_data_tables.sql',
-  '002_add_sync_status_function.sql'
+  '002_add_sync_status_function.sql',
+  '003_create_park_schedules_table.sql',
+  '004_create_park_crowd_predictions_table.sql',
+  '005_create_activity_ratings_table.sql',
+  '006_update_activity_type_constraint.sql',
+  '007_create_live_park_events_table.sql'
 ];
 
 function printMigrations(): void {
@@ -44,6 +49,10 @@ function printMigrations(): void {
   console.log('  - live_attractions');
   console.log('  - live_entertainment');
   console.log('  - live_sync_status');
+  console.log('  - live_park_schedules');
+  console.log('  - park_crowd_predictions');
+  console.log('  - activity_ratings');
+  console.log('  - live_park_events');
   console.log('  - update_sync_status() function');
 }
 
