@@ -209,7 +209,7 @@ export default function TripOptimizationModal({
           </button>
         </div>
 
-        <div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
+        <div className="p-6 overflow-y-auto max-h-[calc(90vh-160px)]">
           {!showPreview ? (
             /* Configuration Phase */
             <div className="space-y-6">
@@ -389,7 +389,7 @@ export default function TripOptimizationModal({
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between p-6 border-t border-gray-200 bg-gray-50">
+        <div className="flex items-center justify-between p-6 border-t border-gray-200 bg-gray-50 min-h-[80px]">
           <div className="flex items-center space-x-3">
             {showPreview && (
               <button

@@ -277,9 +277,13 @@ export class TripOptimizationService {
   ): Promise<{ assignment: ParkAssignment[]; reasoning: string[] }> {
 
     const lockedAssignments = constraints.filter(c => c.isLocked);
-    const flexibleAssignments = assignments.filter(a =>
-      !lockedAssignments.some(locked => locked.dayId === a.dayId)
-    );
+    const flexibleAssignments = assignments.filter(a => {
+      const constraint = constraints.find(c => c.dayId === a.dayId);
+      // Exclude locked assignments AND check-in/out days regardless of lock status
+      return !constraint?.isLocked &&
+             constraint?.dayType !== 'check-in' &&
+             constraint?.dayType !== 'check-out';
+    });
 
     // Get all available parks and dates
     const availableParks = [...new Set(assignments.map(a => a.parkId))];
@@ -308,13 +312,16 @@ export class TripOptimizationService {
     const usedParks = new Set<string>();
     const usedDates = new Set<string>();
 
-    // First, handle locked assignments to mark their parks/dates as used
-    const lockedParkAssignments = assignments.filter(a =>
-      lockedAssignments.some(locked => locked.dayId === a.dayId)
-    );
+    // First, handle all non-flexible assignments (locked + check-in/out days)
+    const nonFlexibleAssignments = assignments.filter(a => {
+      const constraint = constraints.find(c => c.dayId === a.dayId);
+      return constraint?.isLocked ||
+             constraint?.dayType === 'check-in' ||
+             constraint?.dayType === 'check-out';
+    });
 
-    for (const locked of lockedParkAssignments) {
-      usedDates.add(locked.date);
+    for (const nonFlexible of nonFlexibleAssignments) {
+      usedDates.add(nonFlexible.date);
       // Note: we don't mark parks as used since parks can be visited multiple times
     }
 
@@ -327,9 +334,9 @@ export class TripOptimizationService {
       const assignment = flexibleAssignments.find(a => a.date === combo.date);
       if (!assignment) continue;
 
-      // Check if this would conflict with a locked assignment (same park, same date)
-      const hasConflict = lockedParkAssignments.some(locked =>
-        locked.parkId === combo.parkId && locked.date === combo.date
+      // Check if this would conflict with a non-flexible assignment (same park, same date)
+      const hasConflict = nonFlexibleAssignments.some(nonFlexible =>
+        nonFlexible.parkId === combo.parkId && nonFlexible.date === combo.date
       );
 
       if (!hasConflict) {
@@ -345,8 +352,8 @@ export class TripOptimizationService {
       }
     }
 
-    // Combine locked and optimized assignments
-    const finalAssignment = [...lockedParkAssignments, ...optimizedFlexible]
+    // Combine non-flexible and optimized assignments
+    const finalAssignment = [...nonFlexibleAssignments, ...optimizedFlexible]
       .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
     // Ensure we have assignments for all days
@@ -401,7 +408,8 @@ export class TripOptimizationService {
 
     // Sort assignments by must-do score (descending) and assign to lowest crowd days
     const lockedDays = constraints.filter(c => c.isLocked).map(c => c.dayId);
-    const flexibleAssignments = assignments.filter(a => !lockedDays.includes(a.dayId));
+    const fixedDays = constraints.filter(c => c.dayType === 'check-in' || c.dayType === 'check-out').map(c => c.dayId);
+    const flexibleAssignments = assignments.filter(a => !lockedDays.includes(a.dayId) && !fixedDays.includes(a.dayId));
 
     // Sort parks by must-do priority
     const parksByPriority = [...parkMustDoScores.entries()]
@@ -414,8 +422,8 @@ export class TripOptimizationService {
 
     // Assign highest priority parks to lowest crowd days
     const optimizedAssignments = assignments.map(assignment => {
-      if (lockedDays.includes(assignment.dayId)) {
-        return assignment; // Keep locked assignments
+      if (lockedDays.includes(assignment.dayId) || fixedDays.includes(assignment.dayId)) {
+        return assignment; // Keep locked and fixed assignments
       }
 
       const dayIndex = daysByCrowd.findIndex(day => day.dayId === assignment.dayId);
@@ -468,7 +476,8 @@ export class TripOptimizationService {
 
     // Assign parks with most conflicts to lowest crowd days
     const lockedDays = constraints.filter(c => c.isLocked).map(c => c.dayId);
-    const flexibleAssignments = assignments.filter(a => !lockedDays.includes(a.dayId));
+    const fixedDays = constraints.filter(c => c.dayType === 'check-in' || c.dayType === 'check-out').map(c => c.dayId);
+    const flexibleAssignments = assignments.filter(a => !lockedDays.includes(a.dayId) && !fixedDays.includes(a.dayId));
 
     // Sort parks by conflict score (descending)
     const parksByConflict = [...parkConsensusScores.entries()]
@@ -481,7 +490,7 @@ export class TripOptimizationService {
 
     // Assign conflict parks to easier days
     const optimizedAssignments = assignments.map(assignment => {
-      if (lockedDays.includes(assignment.dayId)) {
+      if (lockedDays.includes(assignment.dayId) || fixedDays.includes(assignment.dayId)) {
         return assignment;
       }
 
@@ -523,7 +532,8 @@ export class TripOptimizationService {
     ]);
 
     const lockedDays = constraints.filter(c => c.isLocked).map(c => c.dayId);
-    const flexibleAssignments = assignments.filter(a => !lockedDays.includes(a.dayId));
+    const fixedDays = constraints.filter(c => c.dayType === 'check-in' || c.dayType === 'check-out').map(c => c.dayId);
+    const flexibleAssignments = assignments.filter(a => !lockedDays.includes(a.dayId) && !fixedDays.includes(a.dayId));
 
     // Sort days chronologically
     const daysByDate = flexibleAssignments
@@ -536,7 +546,7 @@ export class TripOptimizationService {
 
     // Assign most intensive parks to earliest days
     const optimizedAssignments = assignments.map(assignment => {
-      if (lockedDays.includes(assignment.dayId)) {
+      if (lockedDays.includes(assignment.dayId) || fixedDays.includes(assignment.dayId)) {
         return assignment;
       }
 
