@@ -350,7 +350,7 @@ export default async function handler(req, res) {
             .from('park_crowd_predictions')
             .upsert(finalPredictions, {
               onConflict: 'park_id,prediction_date',
-              ignoreDuplicates: false
+              ignoreDuplicates: true
             });
 
           if (error) {
