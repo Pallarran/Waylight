@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Sun, Download, Upload, Trash2, Bell, MapPin, Eye } from 'lucide-react';
+import { Sun, Download, Upload, Trash2, Bell, MapPin, Eye, Calendar, Database } from 'lucide-react';
 import useUserPreferencesStore from '../stores/useUserPreferencesStore';
 import WeatherTestPanel from '../components/debug/WeatherTestPanel';
+import ThrillDataImportPanel from '../components/settings/ThrillDataImportPanel';
 
 export default function Settings() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -256,6 +257,16 @@ export default function Settings() {
               </button>
             </div>
           </div>
+        </div>
+
+        {/* Crowd Data Import */}
+        <div className="card p-6">
+          <div className="flex items-center mb-4">
+            <Database className="w-5 h-5 text-glow mr-2" />
+            <h2 className="text-lg font-semibold text-ink">Crowd Data Import</h2>
+          </div>
+
+          <ThrillDataImportPanel />
         </div>
 
         {/* App Information */}

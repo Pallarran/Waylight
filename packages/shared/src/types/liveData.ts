@@ -157,6 +157,7 @@ export interface ParkMapping {
   waypointParkId: string; // Our internal park ID
   themeParksWikiId: string; // ThemeParks.wiki entity ID
   queueTimesId?: string; // Queue-Times park ID
+  thrillDataId?: string; // Thrill Data URL slug
   displayName: string;
 }
 
