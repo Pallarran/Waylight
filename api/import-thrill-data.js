@@ -254,6 +254,11 @@ export default async function handler(req, res) {
         const errorMessage = error.message || 'Unknown error';
         console.error(`❌ Failed to fetch data for ${parkMapping.displayName}:`, error);
         result.errors.push(`${parkMapping.displayName}: ${errorMessage}`);
+
+        // Special debug for 2026 Magic Kingdom to see the HTML
+        if (year === 2026 && parkMapping.waypointParkId === 'magic-kingdom') {
+          result.errors.push(`Magic Kingdom 2026 Debug - Full Error: ${errorMessage}`);
+        }
       }
     }
 
