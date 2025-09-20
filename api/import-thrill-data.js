@@ -139,9 +139,11 @@ async function fetchCrowdPredictionsForYear(waypointParkId, thrillDataId, year) 
     const predictions = parseCalendarHTML(html, year);
     console.log(`Parsed predictions: ${predictions.length}`);
 
-    // Debug: Return HTML sample for year 2026 to understand the structure
-    if (year === 2026 && predictions.length === 0) {
-      throw new Error(`No 2026 data found. HTML sample: ${html.substring(0, 800)}`);
+    // Debug: Return HTML sample for any year that has no predictions
+    if (predictions.length === 0) {
+      // Return a sample in the error message to help debug
+      const htmlSample = html.substring(0, 1000).replace(/\n/g, '\\n').replace(/\t/g, '\\t');
+      throw new Error(`No data found for ${year}. HTML sample (first 1000 chars): ${htmlSample}`);
     }
 
     return predictions.map(prediction => ({
