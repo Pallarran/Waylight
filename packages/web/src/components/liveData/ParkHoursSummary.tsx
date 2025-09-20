@@ -243,36 +243,6 @@ export const ParkHoursSummary: React.FC<ParkHoursSummaryProps> = ({
           </span>
         </div>
 
-        {/* Expected Crowd Level - Priority after Park Hours */}
-        {date && (
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              {crowdLoading ? (
-                <div className="w-3 h-3 bg-gray-300 rounded-full animate-pulse"></div>
-              ) : crowdData ? (
-                getCrowdLevelIcon(crowdData.level)
-              ) : (
-                <Users className="w-3 h-3 text-gray-400" />
-              )}
-              <span className="text-xs font-medium text-gray-700">Expected Crowds</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              {crowdLoading ? (
-                <div className="w-16 h-3 bg-gray-200 rounded animate-pulse"></div>
-              ) : crowdData ? (
-                <>
-                  {getCrowdLevelBars(crowdData.level)}
-                  <span className={`text-xs px-2 py-0.5 rounded-full ${getCrowdLevelColor(crowdData.level)}`}>
-                    {crowdData.description}
-                  </span>
-                </>
-              ) : (
-                <span className="text-xs text-gray-500">No data</span>
-              )}
-            </div>
-          </div>
-        )}
-
         {/* Extended Evening Hours - Third Priority */}
         {parkData.hours.extendedEvening && (
           <div className="flex items-center justify-between">
@@ -302,6 +272,42 @@ export const ParkHoursSummary: React.FC<ParkHoursSummaryProps> = ({
             </span>
           </div>
         ))}
+
+        {/* Expected Crowd Level - Always at bottom with separator */}
+        {date && (
+          <>
+            <div className="border-t border-gray-200 my-3"></div>
+            <div className="space-y-2">
+              <h5 className="text-xs font-semibold text-gray-700 uppercase tracking-wide">Expected Crowds</h5>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  {crowdLoading ? (
+                    <div className="w-3 h-3 bg-gray-300 rounded-full animate-pulse"></div>
+                  ) : crowdData ? (
+                    getCrowdLevelIcon(crowdData.level)
+                  ) : (
+                    <Users className="w-3 h-3 text-gray-400" />
+                  )}
+                  <span className="text-xs text-gray-600">Crowd Level</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  {crowdLoading ? (
+                    <div className="w-16 h-3 bg-gray-200 rounded animate-pulse"></div>
+                  ) : crowdData ? (
+                    <>
+                      {getCrowdLevelBars(crowdData.level)}
+                      <span className={`text-xs px-2 py-0.5 rounded-full ${getCrowdLevelColor(crowdData.level)}`}>
+                        {crowdData.description}
+                      </span>
+                    </>
+                  ) : (
+                    <span className="text-xs text-gray-500">No data</span>
+                  )}
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
