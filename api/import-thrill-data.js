@@ -60,47 +60,105 @@ function getCrowdRecommendation(level) {
 function parseCalendarHTML(html, year) {
   const predictions = [];
 
-  // Parse calendar data in actual HTML format:
+  // Method 1: Parse standard title-based format (works for 2024, 2025, 2027+)
   // title='Predicted wait time of 31 minutes on Jan 01'>31</div>
-  const calendarPattern = /title='Predicted wait time of (\d+) minutes on ([A-Z][a-z]{2}) (\d{1,2})'>(\d+)<\/div>/g;
+  const titlePattern = /title='Predicted wait time of (\d+) minutes on ([A-Z][a-z]{2}) (\d{1,2})'>(\d+)<\/div>/g;
 
   let match;
-  while ((match = calendarPattern.exec(html)) !== null) {
+  while ((match = titlePattern.exec(html)) !== null) {
     const [, waitTimeStr, monthName, dayStr, displayWaitStr] = match;
-
-    // Validate parsed values
-    if (!waitTimeStr || !monthName || !dayStr || !displayWaitStr) {
-      console.warn(`Invalid calendar data: waitTime=${waitTimeStr}, month=${monthName}, day=${dayStr}, display=${displayWaitStr}`);
-      continue;
-    }
-
-    const waitTime = parseInt(waitTimeStr, 10);
-    const day = parseInt(dayStr, 10);
-
-    // Convert month name to number
-    const monthMap = {
-      'Jan': 1, 'Feb': 2, 'Mar': 3, 'Apr': 4, 'May': 5, 'Jun': 6,
-      'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 10, 'Nov': 11, 'Dec': 12
-    };
-
-    const month = monthMap[monthName];
-    if (!month) {
-      console.warn(`Unknown month: ${monthName}`);
-      continue;
-    }
-
-    // Create date string in YYYY-MM-DD format using the provided year
-    const date = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-
-    predictions.push({
-      date,
-      waitTime,
-      colorLevel: mapWaitTimeToCrowdLevel(waitTime) > 6 ? 'Higher' : 'Lower'
-    });
+    const result = parseCalendarEntry(waitTimeStr, monthName, dayStr, year);
+    if (result) predictions.push(result);
   }
 
-  console.log(`Parsed ${predictions.length} predictions from Thrill Data calendar for ${year}`);
+  // Method 2: Fallback for JavaScript-rendered content (alternative patterns)
+  if (predictions.length === 0) {
+    console.log(`No data found with standard pattern, trying fallback methods for ${year}...`);
+
+    // Pattern for markdown-style format: [Jan 01\n\n31\n](link)
+    const markdownPattern = /\[([A-Z][a-z]{2}) (\d{1,2})\s*\n\s*\n\s*(\d+)\s*\n\s*\]/g;
+    while ((match = markdownPattern.exec(html)) !== null) {
+      const [, monthName, dayStr, waitTimeStr] = match;
+      const result = parseCalendarEntry(waitTimeStr, monthName, dayStr, year);
+      if (result) predictions.push(result);
+    }
+
+    // Pattern for direct date/wait time pairs in different formats
+    if (predictions.length === 0) {
+      const altPattern = /([A-Z][a-z]{2})\s+(\d{1,2})[^0-9]*(\d{2,3})/g;
+      while ((match = altPattern.exec(html)) !== null) {
+        const [, monthName, dayStr, waitTimeStr] = match;
+        const waitTime = parseInt(waitTimeStr, 10);
+        // Only accept reasonable wait times (10-80 minutes)
+        if (waitTime >= 10 && waitTime <= 80) {
+          const result = parseCalendarEntry(waitTimeStr, monthName, dayStr, year);
+          if (result) predictions.push(result);
+        }
+      }
+    }
+
+    // Pattern for JSON-like data embedded in the page
+    if (predictions.length === 0) {
+      const jsonPattern = /"date":\s*"([^"]+)"[^}]*"waitTime":\s*(\d+)/g;
+      while ((match = jsonPattern.exec(html)) !== null) {
+        const [, dateStr, waitTimeStr] = match;
+        try {
+          const date = new Date(dateStr);
+          if (date.getFullYear() === year) {
+            predictions.push({
+              date: dateStr,
+              waitTime: parseInt(waitTimeStr, 10),
+              colorLevel: mapWaitTimeToCrowdLevel(parseInt(waitTimeStr, 10)) > 6 ? 'Higher' : 'Lower'
+            });
+          }
+        } catch (e) {
+          // Invalid date format, skip
+        }
+      }
+    }
+  }
+
+  console.log(`Parsed ${predictions.length} predictions from Thrill Data calendar for ${year} using ${predictions.length > 0 ? 'successful' : 'no'} method`);
   return predictions;
+}
+
+// Helper function to parse calendar entry data
+function parseCalendarEntry(waitTimeStr, monthName, dayStr, year) {
+  // Validate parsed values
+  if (!waitTimeStr || !monthName || !dayStr) {
+    console.warn(`Invalid calendar data: waitTime=${waitTimeStr}, month=${monthName}, day=${dayStr}`);
+    return null;
+  }
+
+  const waitTime = parseInt(waitTimeStr, 10);
+  const day = parseInt(dayStr, 10);
+
+  // Convert month name to number
+  const monthMap = {
+    'Jan': 1, 'Feb': 2, 'Mar': 3, 'Apr': 4, 'May': 5, 'Jun': 6,
+    'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 10, 'Nov': 11, 'Dec': 12
+  };
+
+  const month = monthMap[monthName];
+  if (!month) {
+    console.warn(`Unknown month: ${monthName}`);
+    return null;
+  }
+
+  // Validate wait time is reasonable (5-90 minutes)
+  if (waitTime < 5 || waitTime > 90) {
+    console.warn(`Unreasonable wait time: ${waitTime} minutes`);
+    return null;
+  }
+
+  // Create date string in YYYY-MM-DD format using the provided year
+  const date = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+
+  return {
+    date,
+    waitTime,
+    colorLevel: mapWaitTimeToCrowdLevel(waitTime) > 6 ? 'Higher' : 'Lower'
+  };
 }
 
 async function fetchCrowdPredictionsForYear(waypointParkId, thrillDataId, year) {
@@ -108,7 +166,8 @@ async function fetchCrowdPredictionsForYear(waypointParkId, thrillDataId, year) 
   console.log(`Fetching data from: ${url}`);
 
   try {
-    const response = await fetch(url, {
+    // First attempt with standard headers
+    let response = await fetch(url, {
       method: 'GET',
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -135,15 +194,44 @@ async function fetchCrowdPredictionsForYear(waypointParkId, thrillDataId, year) 
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
 
-    const html = await response.text();
+    let html = await response.text();
     console.log(`HTML content length: ${html.length}`);
 
-    const predictions = parseCalendarHTML(html, year);
+    let predictions = parseCalendarHTML(html, year);
     console.log(`Parsed predictions: ${predictions.length}`);
 
-    // If no predictions found, this might be a year with different HTML structure
+    // Fallback: If no predictions found and content seems incomplete, try alternative approach
+    if (predictions.length === 0 && html.length < 10000) {
+      console.log(`Content seems incomplete (${html.length} chars), trying fallback request...`);
+
+      // Wait a moment and try again with different headers
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+          'Accept-Language': 'en-US,en;q=0.9',
+          'Accept-Encoding': 'gzip, deflate, br',
+          'Connection': 'keep-alive',
+          'Sec-Fetch-Dest': 'document',
+          'Sec-Fetch-Mode': 'navigate',
+          'Sec-Fetch-Site': 'none'
+        }
+      });
+
+      if (response.ok) {
+        html = await response.text();
+        console.log(`Fallback request HTML length: ${html.length}`);
+        predictions = parseCalendarHTML(html, year);
+        console.log(`Fallback parsed predictions: ${predictions.length}`);
+      }
+    }
+
+    // If still no predictions found, log warning but don't throw error
     if (predictions.length === 0) {
-      console.warn(`No predictions found for ${waypointParkId} ${year} - might be JS-rendered content`);
+      console.warn(`No predictions found for ${waypointParkId} ${year} - content may be dynamically loaded`);
     }
 
     return predictions.map(prediction => ({
