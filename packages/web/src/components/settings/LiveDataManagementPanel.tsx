@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Download, CheckCircle, XCircle, Clock, Database, CloudRain, Calendar, TrendingUp } from 'lucide-react';
+import { supabase } from '@waylight/shared';
 
 interface ImportResult {
   success: boolean;
@@ -17,6 +18,33 @@ export default function LiveDataManagementPanel() {
   const [isImporting, setIsImporting] = useState(false);
   const [lastResult, setLastResult] = useState<ImportResult | null>(null);
   const [importingType, setImportingType] = useState<string | null>(null);
+
+  // Helper function for API calls with retry logic (same as header button)
+  const fetchWithRetry = async (url: string, maxRetries = 2) => {
+    for (let attempt = 1; attempt <= maxRetries + 1; attempt++) {
+      try {
+        const response = await fetch(url);
+        if (response.ok) return response;
+        if (response.status === 429 || response.status === 503) {
+          // Rate limited or service unavailable - wait longer
+          if (attempt <= maxRetries) {
+            console.log(`Rate limited, waiting ${attempt * 3} seconds before retry ${attempt}/${maxRetries}...`);
+            await new Promise(resolve => setTimeout(resolve, attempt * 3000));
+            continue;
+          }
+        }
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      } catch (error) {
+        if (attempt <= maxRetries) {
+          console.log(`Attempt ${attempt} failed, retrying in ${attempt * 2} seconds...`);
+          await new Promise(resolve => setTimeout(resolve, attempt * 2000));
+          continue;
+        }
+        throw error;
+      }
+    }
+    return null;
+  };
 
   const handleCrowdDataImport = async () => {
     setIsImporting(true);
@@ -172,13 +200,126 @@ export default function LiveDataManagementPanel() {
     try {
       console.log('Importing park hours and events using working header button logic...');
 
-      // Use the same working logic as the header refresh button
-      // This will be implemented by copying the exact working code
+      // Disney park IDs for ThemeParks.wiki API (same as header button)
+      const parkIds = {
+        'magic-kingdom': '75ea578a-adc8-4116-a54d-dccb60765ef9',
+        'epcot': '47f90d2c-e191-4239-a466-5892ef59a88b',
+        'hollywood-studios': '288747d1-8b4f-4a64-867e-ea7c9b27bad8',
+        'animal-kingdom': '1c84a229-8862-4648-9c71-378ddd2c7693'
+      };
+
+      let successCount = 0;
+      const errors: string[] = [];
+      let totalEventsImported = 0;
+
+      // Fetch schedule data for each park (same logic as header button)
+      for (const [parkName, parkId] of Object.entries(parkIds)) {
+        try {
+          console.log(`Fetching schedule data for ${parkName}...`);
+
+          // Add delay between requests to avoid rate limiting
+          if (successCount > 0) {
+            await new Promise(resolve => setTimeout(resolve, 2000));
+          }
+
+          // Get schedule data for next 3 months using monthly endpoints (same as header)
+          const today = new Date();
+          const currentMonth = today.getMonth() + 1;
+          const currentYear = today.getFullYear();
+
+          const monthsToFetch = [];
+          for (let i = 0; i < 3; i++) {
+            const month = ((currentMonth - 1 + i) % 12) + 1;
+            const year = currentYear + Math.floor((currentMonth - 1 + i) / 12);
+            monthsToFetch.push({ year, month: month.toString().padStart(2, '0') });
+          }
+
+          let allScheduleData = [];
+          for (const { year, month } of monthsToFetch) {
+            try {
+              await new Promise(resolve => setTimeout(resolve, 500));
+              const monthlyResponse = await fetchWithRetry(`https://api.themeparks.wiki/v1/entity/${parkId}/schedule/${year}/${month}`);
+              if (monthlyResponse) {
+                const monthlyData = await monthlyResponse.json();
+                if (monthlyData.schedule && Array.isArray(monthlyData.schedule)) {
+                  allScheduleData.push(...monthlyData.schedule);
+                }
+              }
+            } catch (error) {
+              console.warn(`Failed to fetch schedule for ${parkName} ${year}/${month}:`, error);
+            }
+          }
+
+          console.log(`✅ Successfully fetched ${allScheduleData.length} schedule entries for ${parkName}`);
+
+          // Process events from schedule data (same logic as header button)
+          const targetDates = [];
+          for (let i = 0; i < 90; i++) {
+            const date = new Date();
+            date.setDate(date.getDate() + i);
+            targetDates.push(date.toISOString().split('T')[0]);
+          }
+
+          let eventsCount = 0;
+          for (const targetDate of targetDates) {
+            const daySchedule = allScheduleData.filter((s: any) => s.date === targetDate) || [];
+
+            // Find special events (same filtering as header button)
+            const specialEvents = daySchedule.filter((s: any) =>
+              s.type === 'TICKETED_EVENT' &&
+              s.description &&
+              !s.description.toLowerCase().includes('early') &&
+              !s.description.toLowerCase().includes('extended')
+            );
+
+            for (const event of specialEvents) {
+              try {
+                const eventData = {
+                  park_id: parkName,
+                  event_date: targetDate,
+                  event_type: 'special_event',
+                  event_name: event.description,
+                  event_open: event.openingTime || null,
+                  event_close: event.closingTime || null,
+                  description: event.description,
+                  data_source: 'themeparks_api',
+                  synced_at: new Date().toISOString()
+                };
+
+                const { error: eventError } = await supabase.from('live_park_events').upsert(eventData, {
+                  onConflict: 'park_id,event_date,event_type,event_name'
+                });
+
+                if (!eventError) {
+                  eventsCount++;
+                  totalEventsImported++;
+                }
+              } catch (error) {
+                console.warn(`Failed to import event for ${parkName}:`, error);
+              }
+            }
+          }
+
+          console.log(`✅ Imported ${eventsCount} events for ${parkName}`);
+          successCount++;
+
+        } catch (error) {
+          const errorMsg = `${parkName}: ${error instanceof Error ? error.message : 'Unknown error'}`;
+          console.error(`❌ Failed to import park hours for ${parkName}:`, error);
+          errors.push(errorMsg);
+        }
+      }
 
       setLastResult({
-        success: false,
-        message: 'Park hours import - Using header refresh button logic (to be implemented)',
-        errors: ['This will use the exact same working code as the header refresh button']
+        success: successCount > 0,
+        recordsImported: totalEventsImported,
+        parksProcessed: Object.keys(parkIds).slice(0, successCount),
+        message: successCount === Object.keys(parkIds).length
+          ? `Successfully imported park hours and events for all ${successCount} parks`
+          : successCount > 0
+          ? `Partial success: Imported hours for ${successCount}/${Object.keys(parkIds).length} parks`
+          : 'Failed to import park hours for any parks',
+        errors: errors.length > 0 ? errors : undefined
       });
 
     } catch (error) {
@@ -200,39 +341,141 @@ export default function LiveDataManagementPanel() {
     setLastResult(null);
 
     try {
-      console.log('Importing live wait times...');
+      console.log('Importing live wait times using working header button logic...');
 
-      const response = await fetch('/api/sync-live-data', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      // Disney park IDs for ThemeParks.wiki API (same as header button)
+      const parkIds = {
+        'magic-kingdom': '75ea578a-adc8-4116-a54d-dccb60765ef9',
+        'epcot': '47f90d2c-e191-4239-a466-5892ef59a88b',
+        'hollywood-studios': '288747d1-8b4f-4a64-867e-ea7c9b27bad8',
+        'animal-kingdom': '1c84a229-8862-4648-9c71-378ddd2c7693'
+      };
 
-      if (!response.ok) {
-        const errorResult = await response.json().catch(() => ({
-          error: `HTTP ${response.status}: ${response.statusText}`
-        }));
+      let successCount = 0;
+      const errors: string[] = [];
+      let totalAttractionsImported = 0;
+      let totalEntertainmentImported = 0;
 
-        console.error('Failed to import wait times:', errorResult);
-        setLastResult({
-          success: false,
-          errors: [errorResult.error || 'Unknown error'],
-          message: 'Wait times import failed'
-        });
-        return;
+      // Fetch live data for each park (same logic as header button)
+      for (const [parkName, parkId] of Object.entries(parkIds)) {
+        try {
+          console.log(`Fetching live data for ${parkName}...`);
+
+          // Add delay between requests to avoid rate limiting
+          if (successCount > 0) {
+            await new Promise(resolve => setTimeout(resolve, 2000));
+          }
+
+          const liveResponse = await fetchWithRetry(`https://api.themeparks.wiki/v1/entity/${parkId}/live`);
+          if (!liveResponse) {
+            throw new Error(`Failed to fetch live data for ${parkName} after retries`);
+          }
+          const liveData = await liveResponse.json();
+
+          // Categorize live data (same as header button)
+          const attractionsData = liveData.liveData?.filter((item: any) => item.entityType === 'ATTRACTION') || [];
+          const entertainmentData = liveData.liveData?.filter((item: any) => item.entityType === 'SHOW') || [];
+
+          console.log(`Processing ${attractionsData.length} attractions and ${entertainmentData.length} entertainment for ${parkName}`);
+
+          // Update attractions in database (same logic as header button)
+          let attractionUpdateCount = 0;
+          for (const attraction of attractionsData) {
+            try {
+              // Map status from API to database format
+              let dbStatus: 'operating' | 'down' | 'delayed' | 'temporary_closure' = 'operating';
+              if (attraction.status === 'DOWN' || attraction.status === 'CLOSED') {
+                dbStatus = 'down';
+              } else if (attraction.status === 'DELAYED') {
+                dbStatus = 'delayed';
+              } else if (attraction.status === 'TEMPORARY_CLOSURE') {
+                dbStatus = 'temporary_closure';
+              }
+
+              const { error: attractionError } = await supabase.from('live_attractions').upsert({
+                park_id: parkName,
+                external_id: attraction.id,
+                name: attraction.name,
+                wait_time: attraction.queue?.STANDBY?.waitTime || -1,
+                status: dbStatus,
+                lightning_lane_available: !!attraction.queue?.LIGHTNING_LANE?.waitTime,
+                lightning_lane_return_time: attraction.queue?.LIGHTNING_LANE?.returnTime || null,
+                single_rider_available: !!attraction.queue?.SINGLE_RIDER?.waitTime,
+                single_rider_wait_time: attraction.queue?.SINGLE_RIDER?.waitTime || null,
+                last_updated: new Date().toISOString()
+              }, {
+                onConflict: 'park_id,external_id'
+              });
+
+              if (!attractionError) {
+                attractionUpdateCount++;
+                totalAttractionsImported++;
+              }
+            } catch (error) {
+              console.warn(`Failed to update attraction ${attraction.name}:`, error);
+            }
+          }
+
+          // Update entertainment in database (same logic as header button)
+          let entertainmentUpdateCount = 0;
+          for (const entertainment of entertainmentData) {
+            try {
+              // Map status from API to database format
+              let dbStatus: 'operating' | 'cancelled' | 'delayed' = 'operating';
+              if (entertainment.status === 'DOWN' || entertainment.status === 'CLOSED' || entertainment.status === 'REFURBISHMENT') {
+                dbStatus = 'cancelled';
+              } else if (entertainment.status === 'DELAYED') {
+                dbStatus = 'delayed';
+              }
+
+              // Extract show times and find next show
+              const showTimes = entertainment.showtimes?.map((show: any) => show.startTime) || [];
+              const nextShow = showTimes.find((time: string) => {
+                const showTime = new Date(time);
+                return showTime > new Date();
+              });
+
+              const { error: entertainmentError } = await supabase.from('live_entertainment').upsert({
+                park_id: parkName,
+                external_id: entertainment.id,
+                name: entertainment.name,
+                show_times: showTimes,
+                status: dbStatus,
+                next_show_time: nextShow || null,
+                last_updated: new Date().toISOString()
+              }, {
+                onConflict: 'park_id,external_id'
+              });
+
+              if (!entertainmentError) {
+                entertainmentUpdateCount++;
+                totalEntertainmentImported++;
+              }
+            } catch (error) {
+              console.warn(`Failed to update entertainment ${entertainment.name}:`, error);
+            }
+          }
+
+          console.log(`✅ Updated ${attractionUpdateCount} attractions and ${entertainmentUpdateCount} entertainment for ${parkName}`);
+          successCount++;
+
+        } catch (error) {
+          const errorMsg = `${parkName}: ${error instanceof Error ? error.message : 'Unknown error'}`;
+          console.error(`❌ Failed to import wait times for ${parkName}:`, error);
+          errors.push(errorMsg);
+        }
       }
 
-      const result = await response.json();
-
       setLastResult({
-        success: result.success,
-        recordsImported: result.stats?.totalAttractions || result.stats?.totalRecords || 0,
-        parksProcessed: result.config?.enabledParks || [],
-        message: result.success
-          ? `Successfully imported live wait times for ${result.config?.enabledParks?.length || 4} parks`
-          : 'Wait times import failed',
-        errors: result.success ? undefined : [result.error || 'Unknown error']
+        success: successCount > 0,
+        recordsImported: totalAttractionsImported + totalEntertainmentImported,
+        parksProcessed: Object.keys(parkIds).slice(0, successCount),
+        message: successCount === Object.keys(parkIds).length
+          ? `Successfully imported wait times for all ${successCount} parks (${totalAttractionsImported} attractions, ${totalEntertainmentImported} shows)`
+          : successCount > 0
+          ? `Partial success: Imported wait times for ${successCount}/${Object.keys(parkIds).length} parks`
+          : 'Failed to import wait times for any parks',
+        errors: errors.length > 0 ? errors : undefined
       });
 
     } catch (error) {
