@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { format, addDays } from 'date-fns';
-import { Plus, Calendar, Clock, MapPin, ChevronDown, GripVertical, Edit, Save, XCircle, ArrowLeft, Info, Users, Star, Share2 } from 'lucide-react';
+import { Plus, Calendar, Clock, MapPin, ChevronDown, GripVertical, Edit, Save, XCircle, ArrowLeft, Info, Users, Star, Share2, Zap } from 'lucide-react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useTripStore } from '../../stores';
@@ -12,6 +12,7 @@ import { detectDayType, getDayIcon, getDayTypeInfo } from '../../utils/dayTypeUt
 import TripOverview from './TripOverview';
 import CheatSheetView from './CheatSheetView';
 import TripSharingModal from '../collaboration/TripSharingModal';
+import TripOptimizationModal from './TripOptimizationModal';
 import UnplannedDayView from './dayViews/UnplannedDayView';
 import RestDayView from './dayViews/RestDayView';
 import CheckInDayView from './dayViews/CheckInDayView';
@@ -568,6 +569,7 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
   const [isEditingTrip, setIsEditingTrip] = useState(false);
   const [showCheatSheet, setShowCheatSheet] = useState(false);
   const [showSharingModal, setShowSharingModal] = useState(false);
+  const [showOptimizationModal, setShowOptimizationModal] = useState(false);
   const [activityRatings, setActivityRatings] = useState<ActivityRatingSummary[]>([]);
   const [tripEditData, setTripEditData] = useState({
     name: trip.name,
@@ -841,13 +843,22 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
                 </button>
               </div>
 
-              <button
-                onClick={() => setShowSharingModal(true)}
-                className="btn-primary btn-sm"
-              >
-                <Share2 className="w-4 h-4 mr-2" />
-                Share Trip
-              </button>
+              <div className="flex items-center space-x-3">
+                <button
+                  onClick={() => setShowOptimizationModal(true)}
+                  className="btn-secondary btn-sm"
+                >
+                  <Zap className="w-4 h-4 mr-2" />
+                  Optimize
+                </button>
+                <button
+                  onClick={() => setShowSharingModal(true)}
+                  className="btn-primary btn-sm"
+                >
+                  <Share2 className="w-4 h-4 mr-2" />
+                  Share Trip
+                </button>
+              </div>
             </div>
           )}
 
@@ -1441,6 +1452,18 @@ export default function TripDayPlanner({ trip, onBackToTrips }: TripDayPlannerPr
           onSuccess={() => {
             // Optionally show success message or refresh data
             console.log('Trip shared successfully from day planner');
+          }}
+        />
+
+        {/* Trip Optimization Modal */}
+        <TripOptimizationModal
+          isOpen={showOptimizationModal}
+          onClose={() => setShowOptimizationModal(false)}
+          trip={trip}
+          onApplyOptimization={(optimizedDays) => {
+            // TODO: Apply optimization changes to trip
+            console.log('Applying optimization:', optimizedDays);
+            setShowOptimizationModal(false);
           }}
         />
 
