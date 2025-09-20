@@ -7,8 +7,9 @@ export default function ThrillDataImportPanel() {
   const [progress, setProgress] = useState<ImportProgress | null>(null);
   const [lastResult, setLastResult] = useState<ImportResult | null>(null);
   const [stats, setStats] = useState<any>(null);
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 
-  const handleImport2025 = async () => {
+  const handleImportYear = async () => {
     setIsImporting(true);
     setProgress(null);
     setLastResult(null);
@@ -22,12 +23,13 @@ export default function ThrillDataImportPanel() {
         status: 'starting'
       });
 
-      // Call the Vercel API endpoint
+      // Call the Vercel API endpoint with year parameter
       const response = await fetch('/api/import-thrill-data', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ year: selectedYear }),
       });
 
       if (!response.ok) {
@@ -129,11 +131,28 @@ export default function ThrillDataImportPanel() {
   return (
     <div className="space-y-4">
       <div>
-        <h3 className="font-medium text-ink mb-2">2025 Demo Crowd Predictions</h3>
+        <h3 className="font-medium text-ink mb-2">Thrill Data Import</h3>
         <p className="text-sm text-ink-light mb-4">
-          Generate realistic demo crowd level predictions for all Disney World parks.
-          This populates the database with test data for trip planning features.
+          Import crowd level predictions from Thrill Data website for all Disney World parks.
+          This fetches real crowd predictions and populates the database for trip planning.
         </p>
+      </div>
+
+      {/* Year Selection */}
+      <div className="mb-4">
+        <label className="block text-sm font-medium text-ink mb-2">
+          Select Year to Import
+        </label>
+        <select
+          value={selectedYear}
+          onChange={(e) => setSelectedYear(parseInt(e.target.value))}
+          disabled={isImporting}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sea focus:border-transparent disabled:opacity-50"
+        >
+          <option value={2024}>2024</option>
+          <option value={2025}>2025</option>
+          <option value={2026}>2026</option>
+        </select>
       </div>
 
       {/* Import Status */}
@@ -168,14 +187,14 @@ export default function ThrillDataImportPanel() {
 
       {/* Import Button */}
       <button
-        onClick={handleImport2025}
+        onClick={handleImportYear}
         disabled={isImporting}
         className={`btn-primary flex items-center justify-center w-full ${
           isImporting ? 'opacity-50 cursor-not-allowed' : ''
         }`}
       >
         <Download className="w-4 h-4 mr-2" />
-{isImporting ? 'Generating Data...' : 'Generate Demo Data'}
+        {isImporting ? 'Importing Data...' : `Import ${selectedYear} Data`}
       </button>
 
       {/* Last Result */}
@@ -266,12 +285,13 @@ export default function ThrillDataImportPanel() {
 
       {/* Information */}
       <div className="text-xs text-ink-light bg-blue-50 p-3 rounded-lg">
-        <div className="font-medium text-blue-800 mb-1">ℹ️ About Demo Data Import</div>
+        <div className="font-medium text-blue-800 mb-1">ℹ️ About Thrill Data Import</div>
         <ul className="space-y-1 text-blue-700">
-          <li>• Generates realistic demo crowd predictions for 2025</li>
-          <li>• Covers all 4 Disney World parks with 180 days of data</li>
-          <li>• Higher crowds on weekends, lower on weekdays</li>
-          <li>• Populates database for testing trip planning features</li>
+          <li>• Scrapes real crowd predictions from Thrill Data website</li>
+          <li>• Covers all 4 Disney World parks for the selected year</li>
+          <li>• Maps 5-color crowd levels to consistent 1-10 scale</li>
+          <li>• Updates existing predictions with latest data</li>
+          <li>• Data source: thrill_data_scraping</li>
         </ul>
       </div>
     </div>

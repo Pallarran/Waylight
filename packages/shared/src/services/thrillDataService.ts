@@ -27,7 +27,7 @@ export class ThrillDataService {
 
     try {
       const url = `${THRILL_DATA_BASE_URL}/${thrillDataId}/calendar/${year}`;
-      const predictions = await this.scrapeCrowdCalendar(url);
+      const predictions = await this.scrapeCrowdCalendar(url, year);
 
       return predictions.map(prediction => ({
         parkId: waypointParkId,
@@ -49,7 +49,7 @@ export class ThrillDataService {
     }
   }
 
-  private async scrapeCrowdCalendar(url: string): Promise<ThrillDataDayPrediction[]> {
+  private async scrapeCrowdCalendar(url: string, year: number): Promise<ThrillDataDayPrediction[]> {
     const cacheKey = `thrill_data_${url}`;
     const cached = this.cache.get(cacheKey);
 
@@ -74,7 +74,7 @@ export class ThrillDataService {
       }
 
       const html = await response.text();
-      const predictions = this.parseCalendarHTML(html);
+      const predictions = this.parseCalendarHTML(html, year);
 
       this.cache.set(cacheKey, {
         data: predictions,
@@ -98,23 +98,95 @@ export class ThrillDataService {
     }
   }
 
-  private parseCalendarHTML(html: string): ThrillDataDayPrediction[] {
+  private parseCalendarHTML(html: string, year: number): ThrillDataDayPrediction[] {
     const predictions: ThrillDataDayPrediction[] = [];
 
-    // Parse the HTML to extract daily predictions
-    // This will need to be implemented based on the actual HTML structure
-    // For now, we'll use a placeholder that extracts basic data
+    // Parse calendar links in format: [Jan 01 31] where 31 is wait time
+    // These appear as links with href like /research/magic-kingdom/01/01
+    const linkPattern = /\[([A-Z][a-z]{2})\s+(\d{1,2})\s+(\d+)\]/g;
 
-    // Look for calendar data - Thrill Data likely has predictions in data attributes or JavaScript
-    const dataMatches = html.match(/"(\d{4}-\d{2}-\d{2})"\s*:\s*(\d+)/g);
+    let match;
+    while ((match = linkPattern.exec(html)) !== null) {
+      const [, monthName, dayStr, waitTimeStr] = match;
 
-    if (dataMatches) {
-      for (const match of dataMatches) {
-        const [, date, waitTimeStr] = match.match(/"(\d{4}-\d{2}-\d{2})"\s*:\s*(\d+)/) || [];
-        if (date && waitTimeStr) {
-          const waitTime = parseInt(waitTimeStr, 10);
+      // Validate parsed values
+      if (!monthName || !dayStr || !waitTimeStr) {
+        console.warn(`Invalid date data: month=${monthName}, day=${dayStr}, waitTime=${waitTimeStr}`);
+        continue;
+      }
+
+      const waitTime = parseInt(waitTimeStr, 10);
+      const day = parseInt(dayStr, 10);
+
+      // Convert month name to number
+      const monthMap: Record<string, number> = {
+        'Jan': 1, 'Feb': 2, 'Mar': 3, 'Apr': 4, 'May': 5, 'Jun': 6,
+        'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 10, 'Nov': 11, 'Dec': 12
+      };
+
+      const month = monthMap[monthName];
+      if (!month) {
+        console.warn(`Unknown month: ${monthName}`);
+        continue;
+      }
+
+      // Create date string in YYYY-MM-DD format using the provided year
+      const date = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+
+      predictions.push({
+        date,
+        waitTime,
+        colorLevel: this.mapWaitTimeToColorLevel(waitTime)
+      });
+    }
+
+    // Alternative parsing: look for direct href patterns with dates
+    if (predictions.length === 0) {
+      const hrefPattern = /href="[^"]*\/(\d{2})\/(\d{2})"[^>]*>\s*\[([A-Z][a-z]{2})\s+\d{1,2}\s+(\d+)\]/g;
+
+      while ((match = hrefPattern.exec(html)) !== null) {
+        const [, monthStr, dayStr, , waitTimeStr] = match;
+
+        // Validate parsed values
+        if (!monthStr || !dayStr || !waitTimeStr) {
+          console.warn(`Invalid href data: month=${monthStr}, day=${dayStr}, waitTime=${waitTimeStr}`);
+          continue;
+        }
+
+        const waitTime = parseInt(waitTimeStr, 10);
+        const month = parseInt(monthStr, 10);
+        const day = parseInt(dayStr, 10);
+
+        const date = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+
+        predictions.push({
+          date,
+          waitTime,
+          colorLevel: this.mapWaitTimeToColorLevel(waitTime)
+        });
+      }
+    }
+
+    // Fallback: extract any numeric patterns that might be wait times with dates
+    if (predictions.length === 0) {
+      console.warn('No calendar data found with standard patterns, trying fallback parsing');
+
+      // Look for any date-like patterns in the HTML
+      const fallbackPattern = /(\d{4})-(\d{2})-(\d{2})[^>]*>.*?(\d{2,3})/g;
+      while ((match = fallbackPattern.exec(html)) !== null) {
+        const [, year, month, day, waitTimeStr] = match;
+
+        // Validate parsed values
+        if (!year || !month || !day || !waitTimeStr) {
+          continue;
+        }
+
+        const waitTime = parseInt(waitTimeStr, 10);
+
+        // Only accept reasonable wait times (10-60 minutes)
+        if (waitTime >= 10 && waitTime <= 60) {
           predictions.push({
-            date,
+            date: `${year}-${month}-${day}`,
             waitTime,
             colorLevel: this.mapWaitTimeToColorLevel(waitTime)
           });
@@ -122,13 +194,7 @@ export class ThrillDataService {
       }
     }
 
-    // If no structured data found, try to parse from visible elements
-    if (predictions.length === 0) {
-      // This would require more sophisticated HTML parsing
-      // We might need to use a proper HTML parser like cheerio for server-side parsing
-      console.warn('No structured calendar data found, may need enhanced parsing');
-    }
-
+    console.log(`Parsed ${predictions.length} predictions from Thrill Data calendar`);
     return predictions;
   }
 
