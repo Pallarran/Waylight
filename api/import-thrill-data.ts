@@ -54,17 +54,44 @@ async function fetchCrowdPredictionsForYear(
   console.log(`Fetching data from: ${url}`);
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.5',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'DNT': '1',
+        'Connection': 'keep-alive',
+        'Upgrade-Insecure-Requests': '1'
+      }
+    });
+
+    console.log(`Response status: ${response.status} ${response.statusText}`);
 
     if (!response.ok) {
       if (response.status === 429) {
-        throw new Error('Rate limited by Thrill Data API');
+        throw new Error('Rate limited by Thrill Data');
+      }
+      if (response.status === 403 || response.status === 404) {
+        throw new Error(`Access denied or page not found: ${response.status}`);
       }
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
 
     const html = await response.text();
+    console.log(`HTML content length: ${html.length}`);
+    console.log(`HTML preview: ${html.substring(0, 500)}...`);
+
     const predictions = parseCalendarHTML(html, year);
+    console.log(`Parsed predictions: ${predictions.length}`);
+
+    if (predictions.length === 0) {
+      console.warn('No predictions parsed - checking HTML structure');
+      // Log some sample HTML to debug parsing issues
+      const titleMatches = html.match(/title='[^']*'/g);
+      console.log('Found title attributes:', titleMatches?.slice(0, 5));
+    }
 
     return predictions.map(prediction => ({
       park_id: waypointParkId,
@@ -79,6 +106,7 @@ async function fetchCrowdPredictionsForYear(
     }));
   } catch (error) {
     console.error(`Failed to fetch data from ${url}:`, error);
+    console.error(`Error details:`, error);
     throw error;
   }
 }
@@ -203,6 +231,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Get year from request body, default to current year
     const { year = new Date().getFullYear() } = req.body || {};
     console.log('Using year:', year);
+
+    // Test with just Magic Kingdom first
+    const testUrl = `${THRILL_DATA_BASE_URL}/magic-kingdom/calendar/${year}`;
+    console.log('Testing single fetch to:', testUrl);
 
     const result: ImportResult = {
       success: true,
