@@ -120,34 +120,56 @@ export class TripOptimizationService {
       throw new Error('Trip must have at least one day');
     }
 
+    console.log('Validating trip structure:', {
+      startDate: trip.startDate,
+      endDate: trip.endDate,
+      days: trip.days.map(d => ({ date: d.date, parkId: d.parkId }))
+    });
+
     // Ensure all dates are within trip range and are unique
-    const tripStartDate = new Date(trip.startDate);
-    const tripEndDate = new Date(trip.endDate);
     const seenDates = new Set<string>();
 
-    for (const day of trip.days) {
-      // Normalize date to YYYY-MM-DD format to avoid timezone issues
-      const dayDate = new Date(day.date);
-      const normalizedDate = dayDate.toISOString().split('T')[0];
+    // Filter days to only include those within the trip date range
+    const validDays = trip.days.filter(day => {
+      // Normalize date to YYYY-MM-DD format
+      const normalizedDate = day.date.split('T')[0]; // Remove time part if present
 
-      // Check if date is within trip range
-      if (dayDate < tripStartDate || dayDate > tripEndDate) {
-        throw new Error(`Day ${normalizedDate} is outside trip date range ${trip.startDate} to ${trip.endDate}`);
+      // Check if date is within trip range (inclusive)
+      const isWithinRange = normalizedDate >= trip.startDate && normalizedDate <= trip.endDate;
+
+      if (!isWithinRange) {
+        console.warn(`Excluding day ${normalizedDate} - outside trip range ${trip.startDate} to ${trip.endDate}`);
+        return false;
       }
 
       // Check for duplicate dates
       if (seenDates.has(normalizedDate)) {
-        throw new Error(`Duplicate date found: ${normalizedDate}`);
+        console.warn(`Excluding duplicate date: ${normalizedDate}`);
+        return false;
       }
 
       seenDates.add(normalizedDate);
 
       // Update the day date to normalized format to prevent timezone issues
       day.date = normalizedDate;
-    }
+
+      return true;
+    });
+
+    // Update trip days to only include valid ones
+    trip.days = validDays;
 
     // Sort days by date to maintain chronological order
-    trip.days.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    trip.days.sort((a, b) => a.date.localeCompare(b.date));
+
+    console.log('After validation:', {
+      validDays: trip.days.length,
+      dates: trip.days.map(d => d.date)
+    });
+
+    if (trip.days.length === 0) {
+      throw new Error('No valid days found within trip date range');
+    }
   }
 
   /**
@@ -157,7 +179,14 @@ export class TripOptimizationService {
     const crowdData = new Map<string, Map<string, number>>();
 
     // Get unique park IDs and filter out invalid ones
-    const parkIds = [...new Set(trip.days.map(day => day.parkId))].filter(parkId => parkId && parkId !== 'undefined');
+    let parkIds = [...new Set(trip.days.map(day => day.parkId))]
+      .filter(parkId => parkId && parkId !== 'undefined' && !parkId.includes('No park'));
+
+    // If no valid parks found, use default Disney World parks for optimization
+    if (parkIds.length === 0) {
+      console.log('No valid parks found in trip, using default Disney World parks for optimization');
+      parkIds = ['magic-kingdom', 'epcot', 'hollywood-studios', 'animal-kingdom'];
+    }
 
     console.log('Getting crowd data for parks:', parkIds);
     console.log('Trip days:', trip.days.map(d => ({ date: d.date, parkId: d.parkId })));
