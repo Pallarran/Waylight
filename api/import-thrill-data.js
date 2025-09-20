@@ -171,11 +171,15 @@ export default async function handler(req, res) {
     const { year = new Date().getFullYear() } = req.body || {};
     console.log('Using year:', year);
 
-    // Validate year is reasonable
-    if (year < 2020 || year > 2030) {
+    // Validate year is reasonable (allow 10 years in the past and 5 years in the future)
+    const currentYear = new Date().getFullYear();
+    const minYear = currentYear - 10;
+    const maxYear = currentYear + 5;
+
+    if (year < minYear || year > maxYear) {
       return res.status(400).json({
         success: false,
-        errors: [`Invalid year: ${year}. Must be between 2020 and 2030.`],
+        errors: [`Invalid year: ${year}. Must be between ${minYear} and ${maxYear}.`],
         recordsImported: 0,
         parksProcessed: [],
         dateRange: { start: '', end: '' }
