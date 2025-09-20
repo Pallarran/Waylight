@@ -6,5 +6,11 @@
     }
   ],
   "buildCommand": "pnpm --filter @waylight/shared build && pnpm --filter @waylight/web build",
-  "installCommand": "pnpm install"
+  "installCommand": "pnpm install",
+  "rewrites": [
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
+    }
+  ]
 }
