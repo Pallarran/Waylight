@@ -66,6 +66,38 @@ export default function Settings() {
                 />
               </button>
             </div>
+
+            <div className="flex items-center justify-between">
+              <div>
+                <label className="text-ink font-medium">Temperature Unit</label>
+                <p className="text-sm text-ink-light">Display temperatures in Fahrenheit or Celsius</p>
+              </div>
+              <div className="flex items-center space-x-3">
+                <span className={`text-sm ${displaySettings.temperatureUnit === 'fahrenheit' ? 'text-ink font-medium' : 'text-ink-light'}`}>
+                  °F
+                </span>
+                <button
+                  onClick={() => updatePreferences({
+                    displaySettings: {
+                      ...displaySettings,
+                      temperatureUnit: displaySettings.temperatureUnit === 'fahrenheit' ? 'celsius' : 'fahrenheit'
+                    }
+                  })}
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                    displaySettings.temperatureUnit === 'celsius' ? 'bg-sea' : 'bg-surface-dark'
+                  }`}
+                >
+                  <span
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                      displaySettings.temperatureUnit === 'celsius' ? 'translate-x-6' : 'translate-x-1'
+                    }`}
+                  />
+                </button>
+                <span className={`text-sm ${displaySettings.temperatureUnit === 'celsius' ? 'text-ink font-medium' : 'text-ink-light'}`}>
+                  °C
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 

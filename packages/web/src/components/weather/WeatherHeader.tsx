@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Cloud, Sun, CloudRain, Snowflake, CloudLightning, Eye, EyeOff } from 'lucide-react';
 import { createWeatherService } from '@waylight/shared';
 import type { WeatherForecast } from '@waylight/shared';
+import useUserPreferencesStore from '../../stores/useUserPreferencesStore';
 
 interface WeatherHeaderProps {
   date: Date;
@@ -26,12 +27,19 @@ const getWeatherIcon = (condition: string) => {
   }
 };
 
-const formatTemperature = (temp: number) => `${Math.round(temp)}°F`;
+const formatTemperature = (temp: number, unit: 'fahrenheit' | 'celsius') => {
+  if (unit === 'celsius') {
+    const celsius = (temp - 32) * 5 / 9;
+    return `${Math.round(celsius)}°C`;
+  }
+  return `${Math.round(temp)}°F`;
+};
 
 export default function WeatherHeader({ date }: WeatherHeaderProps) {
   const [forecast, setForecast] = useState<WeatherForecast | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { displaySettings } = useUserPreferencesStore();
 
   useEffect(() => {
     const fetchWeather = async () => {
@@ -106,7 +114,7 @@ export default function WeatherHeader({ date }: WeatherHeaderProps) {
     <div className="flex items-center text-xs text-ink-light space-x-2">
       {getWeatherIcon(forecast.weatherCondition || (forecast as any).weather_condition)}
       <span>
-        {formatTemperature(forecast.temperatureHigh || (forecast as any).temperature_high)}/{formatTemperature(forecast.temperatureLow || (forecast as any).temperature_low)}
+        {formatTemperature(forecast.temperatureHigh || (forecast as any).temperature_high, displaySettings.temperatureUnit)}/{formatTemperature(forecast.temperatureLow || (forecast as any).temperature_low, displaySettings.temperatureUnit)}
       </span>
       <span className="capitalize">{forecast.weatherCondition || (forecast as any).weather_condition || 'Unknown'}</span>
       {(forecast.precipitationProbability || (forecast as any).precipitation_chance) && (forecast.precipitationProbability || (forecast as any).precipitation_chance) > 30 && (

@@ -21,6 +21,7 @@ interface UserPreferences {
     compactView: boolean;
     showWaitTimes: boolean;
     showTips: boolean;
+    temperatureUnit: 'fahrenheit' | 'celsius';
   };
 }
 
@@ -50,6 +51,7 @@ const defaultPreferences: UserPreferences = {
     compactView: false,
     showWaitTimes: true,
     showTips: true,
+    temperatureUnit: 'fahrenheit',
   },
 };
 
