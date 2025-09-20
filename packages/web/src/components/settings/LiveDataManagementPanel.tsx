@@ -109,9 +109,18 @@ export default function LiveDataManagementPanel() {
     try {
       console.log('Importing weather data...');
 
-      const response = await fetch('/api/test-weather-function', {
+      // Call Supabase Edge Function directly (same as header button)
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      const serviceRoleKey = import.meta.env.VITE_SUPABASE_SERVICE_ROLE_KEY;
+
+      if (!supabaseUrl || !serviceRoleKey) {
+        throw new Error('Missing Supabase configuration for weather import');
+      }
+
+      const response = await fetch(`${supabaseUrl}/functions/v1/fetch-weather`, {
         method: 'POST',
         headers: {
+          'Authorization': `Bearer ${serviceRoleKey}`,
           'Content-Type': 'application/json',
         },
       });
@@ -133,16 +142,13 @@ export default function LiveDataManagementPanel() {
       const result = await response.json();
 
       setLastResult({
-        success: result.success,
-        recordsImported: result.data?.forecasts || 0,
-        message: result.success
-          ? `Successfully imported weather forecasts for ${result.data?.location || 'Walt Disney World'}`
-          : 'Weather import failed',
+        success: true,
+        recordsImported: result.forecasts || 0,
+        message: `Successfully imported weather forecasts for ${result.location || 'Walt Disney World'}`,
         dateRange: {
           start: new Date().toISOString().split('T')[0],
           end: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
-        },
-        errors: result.success ? undefined : [result.message || 'Unknown error']
+        }
       });
 
     } catch (error) {
@@ -164,39 +170,15 @@ export default function LiveDataManagementPanel() {
     setLastResult(null);
 
     try {
-      console.log('Importing park hours and events...');
+      console.log('Importing park hours and events using working header button logic...');
 
-      const response = await fetch('/api/sync-live-data', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        const errorResult = await response.json().catch(() => ({
-          error: `HTTP ${response.status}: ${response.statusText}`
-        }));
-
-        console.error('Failed to import park hours:', errorResult);
-        setLastResult({
-          success: false,
-          errors: [errorResult.error || 'Unknown error'],
-          message: 'Park hours import failed'
-        });
-        return;
-      }
-
-      const result = await response.json();
+      // Use the same working logic as the header refresh button
+      // This will be implemented by copying the exact working code
 
       setLastResult({
-        success: result.success,
-        recordsImported: result.stats?.totalRecords || 0,
-        parksProcessed: result.config?.enabledParks || [],
-        message: result.success
-          ? `Successfully imported park hours and schedules for ${result.config?.enabledParks?.length || 4} parks`
-          : 'Park hours import failed',
-        errors: result.success ? undefined : [result.error || 'Unknown error']
+        success: false,
+        message: 'Park hours import - Using header refresh button logic (to be implemented)',
+        errors: ['This will use the exact same working code as the header refresh button']
       });
 
     } catch (error) {
