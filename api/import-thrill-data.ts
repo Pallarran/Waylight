@@ -228,6 +228,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     console.log('🚀 Starting Thrill Data import...');
     console.log('Request body:', req.body);
 
+    // Early exit for testing
+    return res.status(200).json({
+      success: true,
+      message: 'API endpoint is working',
+      requestBody: req.body,
+      timestamp: new Date().toISOString(),
+      duration: `${Date.now() - startTime}ms`
+    });
+
     // Get year from request body, default to current year
     const { year = new Date().getFullYear() } = req.body || {};
     console.log('Using year:', year);
@@ -310,6 +319,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   } catch (error) {
     const duration = Date.now() - startTime;
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorStack = error instanceof Error ? error.stack : 'No stack trace';
 
     console.error('❌ Import failed:', error);
 
@@ -324,7 +334,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(500).json({
       ...errorResult,
       duration: `${duration}ms`,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      debug: {
+        errorMessage,
+        errorStack,
+        errorType: error?.constructor?.name || 'Unknown',
+        requestBody: req.body,
+        year: req.body?.year || 'not provided'
+      }
     });
   }
 }

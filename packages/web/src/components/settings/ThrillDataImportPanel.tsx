@@ -33,7 +33,18 @@ export default function ThrillDataImportPanel() {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        const errorResult = await response.json().catch(() => ({
+          error: `HTTP ${response.status}: ${response.statusText}`
+        }));
+
+        // Display detailed error information
+        console.error('API Error Details:', errorResult);
+        if (errorResult.debug) {
+          console.error('Debug Info:', errorResult.debug);
+          alert(`Import failed with detailed error:\n\nError: ${errorResult.debug.errorMessage}\n\nType: ${errorResult.debug.errorType}\n\nCheck console for full stack trace.`);
+        }
+
+        throw new Error(errorResult.debug?.errorMessage || errorResult.error || `HTTP ${response.status}: ${response.statusText}`);
       }
 
       const result = await response.json();
