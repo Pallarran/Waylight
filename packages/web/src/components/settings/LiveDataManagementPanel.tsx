@@ -277,12 +277,12 @@ export default function LiveDataManagementPanel() {
                 const eventData = {
                   park_id: parkName,
                   event_date: targetDate,
-                  event_type: 'special_event',
                   event_name: event.description,
+                  event_type: 'special_event',
                   event_open: event.openingTime || null,
                   event_close: event.closingTime || null,
                   description: event.description,
-                  data_source: 'themeparks_api',
+                  data_source: 'themeparks_wiki',  // Match header button
                   synced_at: new Date().toISOString()
                 };
 
@@ -298,9 +298,17 @@ export default function LiveDataManagementPanel() {
                 if (!eventError) {
                   eventsCount++;
                   totalEventsImported++;
+                } else {
+                  console.error(`❌ Event ${event.description} failed:`, eventError);
+                  if (eventError.message.includes('row-level security')) {
+                    console.warn(`🔒 RLS policy issue for events in ${parkName}`);
+                  }
+                  if (eventError.message.includes('violates')) {
+                    console.warn(`🔒 Constraint violation for events in ${parkName}:`, eventError.message);
+                  }
                 }
               } catch (error) {
-                console.warn(`Failed to import event for ${parkName}:`, error);
+                console.error(`Failed to import event for ${parkName}:`, error);
               }
             }
           }
@@ -415,6 +423,11 @@ export default function LiveDataManagementPanel() {
               if (!attractionError) {
                 attractionUpdateCount++;
                 totalAttractionsImported++;
+              } else {
+                console.error(`❌ Attraction ${attraction.name} failed:`, attractionError);
+                if (attractionError.message.includes('row-level security')) {
+                  console.warn(`🔒 RLS policy issue for attractions in ${parkName}`);
+                }
               }
             } catch (error) {
               console.warn(`Failed to update attraction ${attraction.name}:`, error);
@@ -455,6 +468,11 @@ export default function LiveDataManagementPanel() {
               if (!entertainmentError) {
                 entertainmentUpdateCount++;
                 totalEntertainmentImported++;
+              } else {
+                console.error(`❌ Entertainment ${entertainment.name} failed:`, entertainmentError);
+                if (entertainmentError.message.includes('row-level security')) {
+                  console.warn(`🔒 RLS policy issue for entertainment in ${parkName}`);
+                }
               }
             } catch (error) {
               console.warn(`Failed to update entertainment ${entertainment.name}:`, error);
