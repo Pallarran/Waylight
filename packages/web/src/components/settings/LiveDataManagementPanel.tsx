@@ -223,6 +223,7 @@ export default function LiveDataManagementPanel() {
       let successCount = 0;
       const errors: string[] = [];
       let totalEventsImported = 0;
+      let totalSchedulesImported = 0;
 
       // Fetch schedule data for each park (same logic as header button)
       for (const [parkName, parkId] of Object.entries(parkIds)) {
@@ -263,6 +264,85 @@ export default function LiveDataManagementPanel() {
           }
 
           console.log(`✅ Successfully fetched ${allScheduleData.length} schedule entries for ${parkName}`);
+
+          // Clean up old schedules first (same as header button)
+          const scheduleCleanupDate = new Date();
+          scheduleCleanupDate.setDate(scheduleCleanupDate.getDate() - 30);
+          const scheduleCleanupDateStr = scheduleCleanupDate.toISOString().split('T')[0];
+          const { error: scheduleCleanupError } = await supabase
+            .from('live_park_schedules')
+            .delete()
+            .eq('park_id', parkName)
+            .lt('schedule_date', scheduleCleanupDateStr);
+
+          if (scheduleCleanupError && !scheduleCleanupError.message.includes('row-level security')) {
+            console.warn(`Warning: Could not clean up old schedules for ${parkName}:`, scheduleCleanupError);
+          }
+
+          // Process park schedules (same logic as header button)
+          let schedulesCount = 0;
+          for (const schedule of allScheduleData) {
+            try {
+              const scheduleDate = schedule.date; // Already in YYYY-MM-DD format
+              // Parse ISO time strings and extract HH:MM format (same as header)
+              const openTimeMatch = schedule.openingTime?.match(/T(\d{2}:\d{2})/);
+              const closeTimeMatch = schedule.closingTime?.match(/T(\d{2}:\d{2})/);
+              const regularOpen = openTimeMatch ? openTimeMatch[1] : null;
+              const regularClose = closeTimeMatch ? closeTimeMatch[1] : null;
+
+              // Look for early entry and extended evening hours in the schedule
+              const earlyEntryMatch = schedule.openingTime?.match(/T(\d{2}:\d{2})/) && schedule.type === 'EARLY_ENTRY';
+              const extendedMatch = schedule.closingTime?.match(/T(\d{2}:\d{2})/) && schedule.type === 'EXTENDED_EVENING';
+              const earlyEntryOpen = earlyEntryMatch ? regularOpen : null;
+              const extendedClose = extendedMatch ? regularClose : null;
+
+              try {
+                // Delete existing record first, then insert (same as header)
+                await supabase
+                  .from('live_park_schedules')
+                  .delete()
+                  .eq('park_id', parkName)
+                  .eq('schedule_date', scheduleDate);
+
+                const { error: scheduleError } = await supabase.from('live_park_schedules').insert({
+                  park_id: parkName,
+                  schedule_date: scheduleDate,
+                  regular_open: regularOpen,
+                  regular_close: regularClose,
+                  early_entry_open: earlyEntryOpen,
+                  extended_evening_close: extendedClose,
+                  data_source: 'themeparks_wiki',
+                  is_estimated: false,
+                  synced_at: new Date().toISOString()
+                });
+
+                if (!scheduleError) {
+                  schedulesCount++;
+                  totalSchedulesImported++;
+                }
+              } catch (error) {
+                console.warn(`Failed to insert schedule for ${parkName} on ${scheduleDate}:`, error);
+              }
+            } catch (error) {
+              console.warn(`Failed to process schedule entry for ${parkName}:`, error);
+            }
+          }
+
+          console.log(`✅ Imported ${schedulesCount} schedules for ${parkName}`);
+
+          // Clean up old events first (older than 30 days, same as header button)
+          const thirtyDaysAgo = new Date();
+          thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+          const cleanupDate = thirtyDaysAgo.toISOString().split('T')[0];
+          const { error: cleanupError } = await supabase
+            .from('live_park_events')
+            .delete()
+            .eq('park_id', parkName)
+            .lt('event_date', cleanupDate);
+
+          if (cleanupError && !cleanupError.message.includes('row-level security')) {
+            console.warn(`Warning: Could not clean up old events for ${parkName}:`, cleanupError);
+          }
 
           // Process events from schedule data (same logic as header button)
           const targetDates = [];
@@ -348,10 +428,10 @@ export default function LiveDataManagementPanel() {
 
       setLastResult({
         success: successCount > 0,
-        recordsImported: totalEventsImported,
+        recordsImported: totalEventsImported + totalSchedulesImported,
         parksProcessed: Object.keys(parkIds).slice(0, successCount),
         message: successCount === Object.keys(parkIds).length
-          ? `Successfully imported park hours and events for all ${successCount} parks`
+          ? `Successfully imported park hours and events for all ${successCount} parks (${totalSchedulesImported} schedules, ${totalEventsImported} events)`
           : successCount > 0
           ? `Partial success: Imported hours for ${successCount}/${Object.keys(parkIds).length} parks`
           : 'Failed to import park hours for any parks',
