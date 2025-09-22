@@ -197,6 +197,18 @@ export default function LiveDataManagementPanel() {
     setImportingType('park-hours');
     setLastResult(null);
 
+    // Add timeout protection
+    const timeoutId = setTimeout(() => {
+      console.error('⏰ Park hours import timed out after 5 minutes');
+      setLastResult({
+        success: false,
+        errors: ['Import timed out after 5 minutes'],
+        message: 'Park hours import timed out'
+      });
+      setIsImporting(false);
+      setImportingType(null);
+    }, 5 * 60 * 1000); // 5 minute timeout
+
     try {
       console.log('Importing park hours and events using working header button logic...');
 
@@ -320,6 +332,7 @@ export default function LiveDataManagementPanel() {
           const errorMsg = `${parkName}: ${error instanceof Error ? error.message : 'Unknown error'}`;
           console.error(`❌ Failed to import park hours for ${parkName}:`, error);
           errors.push(errorMsg);
+          // Continue to next park even if this one fails
         }
       }
 
@@ -343,6 +356,7 @@ export default function LiveDataManagementPanel() {
         message: 'Park hours import failed'
       });
     } finally {
+      clearTimeout(timeoutId); // Clear timeout if we finish normally
       setIsImporting(false);
       setImportingType(null);
     }
@@ -436,7 +450,17 @@ export default function LiveDataManagementPanel() {
 
           // Update entertainment in database (same logic as header button)
           let entertainmentUpdateCount = 0;
-          for (const entertainment of entertainmentData) {
+
+          // Test RLS policies for entertainment table first
+          const { error: entertainmentRlsTest } = await supabase
+            .from('live_entertainment')
+            .select('id')
+            .limit(1);
+
+          if (entertainmentRlsTest && entertainmentRlsTest.message.includes('row-level security')) {
+            console.warn(`🔒 Skipping entertainment for ${parkName} - RLS policies need configuration`);
+          } else {
+            for (const entertainment of entertainmentData) {
             try {
               // Map status from API to database format
               let dbStatus: 'operating' | 'cancelled' | 'delayed' = 'operating';
@@ -477,6 +501,7 @@ export default function LiveDataManagementPanel() {
             } catch (error) {
               console.warn(`Failed to update entertainment ${entertainment.name}:`, error);
             }
+          }
           }
 
           console.log(`✅ Updated ${attractionUpdateCount} attractions and ${entertainmentUpdateCount} entertainment for ${parkName}`);
