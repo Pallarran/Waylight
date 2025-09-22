@@ -200,17 +200,17 @@ export default function LiveDataManagementPanel() {
     setImportingType('park-hours');
     setLastResult(null);
 
-    // Add timeout protection (increased to 10 minutes)
-    const timeoutId = setTimeout(() => {
-      console.error('⏰ Park hours import timed out after 10 minutes');
+    // Add timeout protection (increased to 15 minutes for 4 parks)
+    let timeoutId = setTimeout(() => {
+      console.error('⏰ Park hours import timed out after 15 minutes');
       setLastResult({
         success: false,
-        errors: ['Import timed out after 10 minutes'],
+        errors: ['Import timed out after 15 minutes'],
         message: 'Park hours import timed out'
       });
       setIsImporting(false);
       setImportingType(null);
-    }, 10 * 60 * 1000); // 10 minute timeout
+    }, 15 * 60 * 1000); // 15 minute timeout
 
     try {
       console.log('Importing park hours and events using working header button logic...');
@@ -230,14 +230,15 @@ export default function LiveDataManagementPanel() {
 
       // Fetch schedule data for each park (same logic as header button)
       for (const [parkName, parkId] of Object.entries(parkIds)) {
+        console.log(`🏰 Starting to process ${parkName} (${parkId})...`);
         try {
-          console.log(`Fetching schedule data for ${parkName}...`);
-
           // Add delay between parks to avoid rate limiting
           if (successCount > 0) {
-            console.log(`Waiting 3 seconds before processing next park...`);
+            console.log(`⏰ Waiting 3 seconds before processing next park...`);
             await new Promise(resolve => setTimeout(resolve, 3000));
           }
+
+          console.log(`📡 Fetching schedule data for ${parkName}...`);
 
           // Get schedule data for current + next 2 months (3 months total, future-focused)
           const today = new Date();
@@ -308,11 +309,28 @@ export default function LiveDataManagementPanel() {
               const regularOpen = openTimeMatch ? openTimeMatch[1] : null;
               const regularClose = closeTimeMatch ? closeTimeMatch[1] : null;
 
-              // Look for early entry and extended evening hours in the schedule
-              const earlyEntryMatch = schedule.openingTime?.match(/T(\d{2}:\d{2})/) && schedule.type === 'EARLY_ENTRY';
-              const extendedMatch = schedule.closingTime?.match(/T(\d{2}:\d{2})/) && schedule.type === 'EXTENDED_EVENING';
-              const earlyEntryOpen = earlyEntryMatch ? regularOpen : null;
-              const extendedClose = extendedMatch ? regularClose : null;
+              // Look for early entry and extended evening hours from events (same as header)
+              const sameDate = allScheduleData.filter((s: any) => s.date === scheduleDate);
+              const earlyEntryEvent = sameDate.find((item: any) =>
+                item.type === 'TICKETED_EVENT' &&
+                item.description?.toLowerCase().includes('early entry')
+              );
+              const extendedEvent = sameDate.find((item: any) =>
+                item.type === 'TICKETED_EVENT' &&
+                item.description?.toLowerCase().includes('extended evening')
+              );
+              const earlyEntryOpenMatch = earlyEntryEvent?.openingTime?.match(/T(\d{2}:\d{2})/);
+              const extendedCloseMatch = extendedEvent?.closingTime?.match(/T(\d{2}:\d{2})/);
+              const earlyEntryOpen = earlyEntryOpenMatch ? earlyEntryOpenMatch[1] : null;
+              const extendedClose = extendedCloseMatch ? extendedCloseMatch[1] : null;
+
+              // Log early entry/extended hours when found
+              if (earlyEntryOpen) {
+                console.log(`🌅 Found early entry for ${parkName} on ${scheduleDate}: ${earlyEntryOpen}`);
+              }
+              if (extendedClose) {
+                console.log(`🌙 Found extended hours for ${parkName} on ${scheduleDate}: ${extendedClose}`);
+              }
 
               try {
                 // Delete existing record first, then insert (same as header)
@@ -433,16 +451,36 @@ export default function LiveDataManagementPanel() {
             }
           }
 
-          console.log(`✅ Imported ${eventsCount} events for ${parkName}`);
+          console.log(`✅ SUCCESS: ${parkName} - Imported ${schedulesCount} schedules and ${eventsCount} events`);
+          totalSchedulesImported += schedulesCount;
+          totalEventsImported += eventsCount;
           successCount++;
+
+          // Reset timeout after each successful park to give more time for remaining parks
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(() => {
+            console.error('⏰ Park hours import timed out after 15 minutes');
+            setLastResult({
+              success: false,
+              errors: ['Import timed out after 15 minutes'],
+              message: 'Park hours import timed out'
+            });
+            setIsImporting(false);
+            setImportingType(null);
+          }, 15 * 60 * 1000);
 
         } catch (error) {
           const errorMsg = `${parkName}: ${error instanceof Error ? error.message : 'Unknown error'}`;
-          console.error(`❌ Failed to import park hours for ${parkName}:`, error);
+          console.error(`❌ FAILED: ${parkName} - ${errorMsg}`);
+          console.error('Full error details:', error);
           errors.push(errorMsg);
           // Continue to next park even if this one fails
         }
+
+        console.log(`📊 Progress: ${successCount}/${Object.keys(parkIds).length} parks completed`);
       }
+
+      clearTimeout(timeoutId); // Clear timeout since we're finishing normally
 
       setLastResult({
         success: successCount > 0,
