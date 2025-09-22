@@ -286,13 +286,22 @@ export default function LiveDataManagementPanel() {
 
             for (const event of specialEvents) {
               try {
+                // Parse ISO date/time strings to extract HH:MM:SS format (same as header button)
+                const eventDate = targetDate; // Already in YYYY-MM-DD format
+                const openTimeMatch = event.openingTime?.match(/T(\d{2}:\d{2}:\d{2})/);
+                const closeTimeMatch = event.closingTime?.match(/T(\d{2}:\d{2}:\d{2})/);
+                const openTime = openTimeMatch ? openTimeMatch[1] : null;
+                const closeTime = closeTimeMatch ? closeTimeMatch[1] : null;
+                const eventName = event.description || 'Special Ticketed Event';
+                const eventType = 'special_event';
+
                 const eventData = {
                   park_id: parkName,
-                  event_date: targetDate,
-                  event_name: event.description,
-                  event_type: 'special_event',
-                  event_open: event.openingTime || null,
-                  event_close: event.closingTime || null,
+                  event_date: eventDate,
+                  event_name: eventName,
+                  event_type: eventType,
+                  event_open: openTime,
+                  event_close: closeTime,
                   description: event.description,
                   data_source: 'themeparks_wiki',  // Match header button
                   synced_at: new Date().toISOString()
@@ -302,9 +311,10 @@ export default function LiveDataManagementPanel() {
                 await supabase.from('live_park_events')
                   .delete()
                   .eq('park_id', parkName)
-                  .eq('event_date', targetDate)
-                  .eq('event_name', event.description);
+                  .eq('event_date', eventDate)
+                  .eq('event_name', eventName);
 
+                console.log('📅 Inserting event data:', eventData);
                 const { error: eventError } = await supabase.from('live_park_events').insert(eventData);
 
                 if (!eventError) {
