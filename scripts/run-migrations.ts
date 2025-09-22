@@ -15,7 +15,8 @@ const migrations = [
   '004_create_park_crowd_predictions_table.sql',
   '005_create_activity_ratings_table.sql',
   '006_update_activity_type_constraint.sql',
-  '007_create_live_park_events_table.sql'
+  '007_create_live_park_events_table.sql',
+  '008_fix_live_entertainment_rls_policies.sql'
 ];
 
 function printMigrations(): void {

@@ -450,17 +450,7 @@ export default function LiveDataManagementPanel() {
 
           // Update entertainment in database (same logic as header button)
           let entertainmentUpdateCount = 0;
-
-          // Test RLS policies for entertainment table first
-          const { error: entertainmentRlsTest } = await supabase
-            .from('live_entertainment')
-            .select('id')
-            .limit(1);
-
-          if (entertainmentRlsTest && entertainmentRlsTest.message.includes('row-level security')) {
-            console.warn(`🔒 Skipping entertainment for ${parkName} - RLS policies need configuration`);
-          } else {
-            for (const entertainment of entertainmentData) {
+          for (const entertainment of entertainmentData) {
             try {
               // Map status from API to database format
               let dbStatus: 'operating' | 'cancelled' | 'delayed' = 'operating';
@@ -501,7 +491,6 @@ export default function LiveDataManagementPanel() {
             } catch (error) {
               console.warn(`Failed to update entertainment ${entertainment.name}:`, error);
             }
-          }
           }
 
           console.log(`✅ Updated ${attractionUpdateCount} attractions and ${entertainmentUpdateCount} entertainment for ${parkName}`);
