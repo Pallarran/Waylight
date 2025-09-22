@@ -20,25 +20,27 @@ export default function LiveDataManagementPanel() {
   const [importingType, setImportingType] = useState<string | null>(null);
   const [showInfoModal, setShowInfoModal] = useState(false);
 
-  // Helper function for API calls with retry logic (same as header button)
-  const fetchWithRetry = async (url: string, maxRetries = 2) => {
+  // Helper function for API calls with retry logic (improved for better reliability)
+  const fetchWithRetry = async (url: string, maxRetries = 3) => {
     for (let attempt = 1; attempt <= maxRetries + 1; attempt++) {
       try {
         const response = await fetch(url);
         if (response.ok) return response;
         if (response.status === 429 || response.status === 503) {
-          // Rate limited or service unavailable - wait longer
+          // Rate limited or service unavailable - wait longer with exponential backoff
           if (attempt <= maxRetries) {
-            console.log(`Rate limited, waiting ${attempt * 3} seconds before retry ${attempt}/${maxRetries}...`);
-            await new Promise(resolve => setTimeout(resolve, attempt * 3000));
+            const waitTime = Math.min(attempt * 5000, 30000); // Max 30 seconds
+            console.log(`Rate limited, waiting ${waitTime/1000} seconds before retry ${attempt}/${maxRetries}...`);
+            await new Promise(resolve => setTimeout(resolve, waitTime));
             continue;
           }
         }
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       } catch (error) {
         if (attempt <= maxRetries) {
-          console.log(`Attempt ${attempt} failed, retrying in ${attempt * 2} seconds...`);
-          await new Promise(resolve => setTimeout(resolve, attempt * 2000));
+          const waitTime = Math.min(attempt * 3000, 15000); // Max 15 seconds
+          console.log(`Attempt ${attempt} failed, retrying in ${waitTime/1000} seconds...`);
+          await new Promise(resolve => setTimeout(resolve, waitTime));
           continue;
         }
         throw error;
@@ -198,17 +200,17 @@ export default function LiveDataManagementPanel() {
     setImportingType('park-hours');
     setLastResult(null);
 
-    // Add timeout protection
+    // Add timeout protection (increased to 10 minutes)
     const timeoutId = setTimeout(() => {
-      console.error('⏰ Park hours import timed out after 5 minutes');
+      console.error('⏰ Park hours import timed out after 10 minutes');
       setLastResult({
         success: false,
-        errors: ['Import timed out after 5 minutes'],
+        errors: ['Import timed out after 10 minutes'],
         message: 'Park hours import timed out'
       });
       setIsImporting(false);
       setImportingType(null);
-    }, 5 * 60 * 1000); // 5 minute timeout
+    }, 10 * 60 * 1000); // 10 minute timeout
 
     try {
       console.log('Importing park hours and events using working header button logic...');
@@ -231,12 +233,13 @@ export default function LiveDataManagementPanel() {
         try {
           console.log(`Fetching schedule data for ${parkName}...`);
 
-          // Add delay between requests to avoid rate limiting
+          // Add delay between parks to avoid rate limiting
           if (successCount > 0) {
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            console.log(`Waiting 3 seconds before processing next park...`);
+            await new Promise(resolve => setTimeout(resolve, 3000));
           }
 
-          // Get schedule data for next 3 months using monthly endpoints (same as header)
+          // Get schedule data for current + next 2 months (3 months total, future-focused)
           const today = new Date();
           const currentMonth = today.getMonth() + 1;
           const currentYear = today.getFullYear();
@@ -251,16 +254,23 @@ export default function LiveDataManagementPanel() {
           let allScheduleData = [];
           for (const { year, month } of monthsToFetch) {
             try {
-              await new Promise(resolve => setTimeout(resolve, 500));
+              console.log(`Fetching schedule for ${parkName} ${year}/${month}...`);
+              await new Promise(resolve => setTimeout(resolve, 1000)); // Increased delay
               const monthlyResponse = await fetchWithRetry(`https://api.themeparks.wiki/v1/entity/${parkId}/schedule/${year}/${month}`);
               if (monthlyResponse) {
                 const monthlyData = await monthlyResponse.json();
                 if (monthlyData.schedule && Array.isArray(monthlyData.schedule)) {
                   allScheduleData.push(...monthlyData.schedule);
+                  console.log(`✓ Added ${monthlyData.schedule.length} schedule entries for ${parkName} ${year}/${month}`);
+                } else {
+                  console.log(`No schedule data found for ${parkName} ${year}/${month}`);
                 }
+              } else {
+                console.warn(`No response received for ${parkName} ${year}/${month}`);
               }
             } catch (error) {
               console.warn(`Failed to fetch schedule for ${parkName} ${year}/${month}:`, error);
+              // Continue with other months even if one fails
             }
           }
 
@@ -280,11 +290,18 @@ export default function LiveDataManagementPanel() {
             console.warn(`Warning: Could not clean up old schedules for ${parkName}:`, scheduleCleanupError);
           }
 
-          // Process park schedules (same logic as header button)
+          // Process park schedules (future dates only)
           let schedulesCount = 0;
+          const todayStr = new Date().toISOString().split('T')[0]; // Today in YYYY-MM-DD format
+
           for (const schedule of allScheduleData) {
             try {
               const scheduleDate = schedule.date; // Already in YYYY-MM-DD format
+
+              // Skip past dates - only process today and future dates
+              if (scheduleDate < todayStr) {
+                continue;
+              }
               // Parse ISO time strings and extract HH:MM format (same as header)
               const openTimeMatch = schedule.openingTime?.match(/T(\d{2}:\d{2})/);
               const closeTimeMatch = schedule.closingTime?.match(/T(\d{2}:\d{2})/);
