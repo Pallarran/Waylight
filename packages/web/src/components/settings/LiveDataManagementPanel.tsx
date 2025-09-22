@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Download, CheckCircle, XCircle, Clock, Database, CloudRain, Calendar, TrendingUp } from 'lucide-react';
+import { Download, CheckCircle, XCircle, Clock, Database, CloudRain, Calendar, TrendingUp, Info, X } from 'lucide-react';
 import { supabase } from '@waylight/shared';
 
 interface ImportResult {
@@ -18,6 +18,7 @@ export default function LiveDataManagementPanel() {
   const [isImporting, setIsImporting] = useState(false);
   const [lastResult, setLastResult] = useState<ImportResult | null>(null);
   const [importingType, setImportingType] = useState<string | null>(null);
+  const [showInfoModal, setShowInfoModal] = useState(false);
 
   // Helper function for API calls with retry logic (same as header button)
   const fetchWithRetry = async (url: string, maxRetries = 2) => {
@@ -634,7 +635,16 @@ export default function LiveDataManagementPanel() {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="font-medium text-ink mb-2">Live Data Management</h3>
+        <div className="flex items-center space-x-2 mb-2">
+          <h3 className="font-medium text-ink">Live Data Management</h3>
+          <button
+            onClick={() => setShowInfoModal(true)}
+            className="p-1 hover:bg-surface-dark/20 rounded-full transition-colors"
+            title="About Live Data Management"
+          >
+            <Info className="w-4 h-4 text-ink-light hover:text-sea" />
+          </button>
+        </div>
         <p className="text-sm text-ink-light mb-4">
           Import and update real-time park data from various sources to enhance your trip planning experience.
         </p>
@@ -772,17 +782,67 @@ export default function LiveDataManagementPanel() {
         </div>
       )}
 
-      {/* Information */}
-      <div className="text-xs text-ink-light bg-blue-50 p-3 rounded-lg">
-        <div className="font-medium text-blue-800 mb-1">ℹ️ About Live Data Management</div>
-        <ul className="space-y-1 text-blue-700">
-          <li>• <strong>Crowd Data:</strong> Imports 3 years of predictions from Thrill Data (thousands of records)</li>
-          <li>• <strong>Weather:</strong> Real-time weather forecasts for trip planning</li>
-          <li>• <strong>Park Hours:</strong> Operating schedules and special events</li>
-          <li>• <strong>Wait Times:</strong> Live attraction wait times for real-time planning</li>
-          <li>• All data sources integrate seamlessly with your trip planning tools</li>
-        </ul>
-      </div>
+      {/* Info Modal */}
+      {showInfoModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-xl shadow-xl max-w-md w-full">
+            <div className="flex items-center justify-between p-4 border-b border-surface-dark/20">
+              <h3 className="text-lg font-semibold text-ink flex items-center">
+                <Database className="w-5 h-5 mr-2 text-sea" />
+                About Live Data Management
+              </h3>
+              <button
+                onClick={() => setShowInfoModal(false)}
+                className="text-ink-light hover:text-ink"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="p-6">
+              <div className="space-y-4">
+                <div className="flex items-start space-x-3">
+                  <TrendingUp className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <div className="font-medium text-ink">Crowd Data</div>
+                    <div className="text-sm text-ink-light">Imports 3 years of predictions from Thrill Data (thousands of records)</div>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-3">
+                  <CloudRain className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <div className="font-medium text-ink">Weather Data</div>
+                    <div className="text-sm text-ink-light">Real-time weather forecasts for trip planning</div>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-3">
+                  <Calendar className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <div className="font-medium text-ink">Park Hours & Events</div>
+                    <div className="text-sm text-ink-light">Operating schedules and special events</div>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-3">
+                  <Clock className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <div className="font-medium text-ink">Wait Times</div>
+                    <div className="text-sm text-ink-light">Live attraction wait times for real-time planning</div>
+                  </div>
+                </div>
+
+                <div className="pt-3 border-t border-surface-dark/20">
+                  <div className="text-sm text-ink-light">
+                    All data sources integrate seamlessly with your trip planning tools.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
